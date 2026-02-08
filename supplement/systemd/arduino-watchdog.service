@@ -1,0 +1,13 @@
+[Unit]
+Description=Arduino Mega + Node-RED Watchdog
+After=network.target nodered.service
+Wants=nodered.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/arduino-watchdog.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
