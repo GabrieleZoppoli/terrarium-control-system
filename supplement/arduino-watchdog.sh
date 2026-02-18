@@ -1,40 +1,31 @@
 #!/bin/bash
-# Arduino Mega + Node-RED Watchdog v3
+# Arduino Mega + Node-RED Watchdog v7
 #
-# Checks every 60s:
-#   1. /dev/ttyACM0 exists (USB device present)
-#   2. Node-RED process is running
-#   3. Node-RED has the serial port open
-#   4. Firmata is genuinely connected (last log line is "Connected", not timeout)
+# v7: Reboot-first for heartbeat failure.
+#   - NR restarts don't fix serial stall — proven by repeated failures
+#   - Heartbeat dead → reboot directly (skip futile NR restarts)
+#   - NR restart still used for NR-down or serial-not-connected cases
+#   - Diagnostic snapshot logged before reboot for root-cause analysis
 #
-# ioplugin log sequence:
-#   "Available Firmata"  -> board detected on serial
-#   "Connected Firmata"  -> connection established (~5s later)
-#   "timeout occurred"   -> 20s later: if this is the LAST line, connection FAILED
-#                           (GPIO nodes stuck with yellow "waiting" status)
-#   If "Connected Firmata" is the last line -> genuinely healthy
-#
-# Recovery escalation:
-#   Level 1: Restart Node-RED (twice)
-#   Level 2: USB reset + restart Node-RED (twice more)
-#   Level 3: Full system reboot
-#
-# Restart tracking is time-based: if too many restarts in a window, escalate.
+# v6: Replaced Firmata with custom serial protocol.
+# v5: Combined Firmata log + GPIO heartbeat (deploy-tolerant)
+# v4.1: Added GPIO liveness via InfluxDB
+# v4: Removed USB reset, faster escalation, reboot cooldown
 
 DEVICE="/dev/ttyACM0"
 LOGFILE="/var/log/arduino-watchdog.log"
 CHECK_INTERVAL=60
 USB_DEVICE_PATH="/sys/bus/usb/devices/1-1.1"
 
-# After NR starts, wait this long for "Connected Firmata" before declaring failure
-FIRMATA_CONNECT_GRACE=120
+# Grace period before checking GPIO liveness (NR needs time to connect serial + receive heartbeats)
+GPIO_LIVENESS_GRACE=300  # 5 minutes after NR start
 
-# Escalation thresholds (restarts within RESTART_WINDOW seconds)
-RESTART_WINDOW=1800  # 30 minutes
-NR_RESTART_THRESHOLD=2   # after 2 NR restarts, try USB reset
-USB_RESTART_THRESHOLD=4  # after 2 more (4 total), reboot
+# NR restart threshold — only used for non-heartbeat issues (NR down, serial not connected)
+RESTART_WINDOW=1800
+NR_RESTART_THRESHOLD=2
 
-# File to track restart timestamps (survives watchdog restarts, not reboots)
+REBOOT_COOLDOWN=600
+
 RESTART_TIMESTAMPS="/tmp/arduino-watchdog-restarts"
 
 device_missing_since=0
@@ -64,7 +55,6 @@ check_nodered_has_serial() {
     lsof "$DEVICE" 2>/dev/null | grep -q node-red
 }
 
-# Get how many seconds NR has been running
 get_nr_uptime() {
     local nr_start_ts now_ts nr_start_epoch
     nr_start_ts=$(systemctl show nodered -p ActiveEnterTimestamp --value 2>/dev/null)
@@ -77,68 +67,41 @@ get_nr_uptime() {
     echo $(( now_ts - nr_start_epoch ))
 }
 
-# Check if Firmata genuinely connected and stayed connected.
-# Looks at the LAST firmata-related log line in this NR session:
-#   "Connected Firmata"       -> healthy (no timeout followed)
-#   "timeout" or "Error"      -> failed (GPIO nodes dead/waiting)
-#   "Available Firmata" only  -> still connecting (grace period)
-#   nothing                   -> no firmata activity (grace period or stuck)
-check_firmata_healthy() {
-    local nr_pid
-    nr_pid=$(systemctl show nodered -p MainPID --value 2>/dev/null)
-    if [ -z "$nr_pid" ] || [ "$nr_pid" = "0" ]; then
-        return 1
-    fi
-
-    local nr_start
-    nr_start=$(systemctl show nodered -p ActiveEnterTimestamp --value 2>/dev/null)
-    if [ -z "$nr_start" ]; then
-        return 0  # can't determine, assume OK
-    fi
-
-    # Convert NR start timestamp to ISO format for journalctl --since
-    local nr_start_iso
-    nr_start_iso=$(date -d "$nr_start" '+%Y-%m-%d %H:%M:%S' 2>/dev/null)
-    if [ -z "$nr_start_iso" ]; then
-        return 0  # can't parse timestamp, assume OK
-    fi
-
-    # Get the LAST firmata-related log line from this NR session
-    local last_firmata_line
-    last_firmata_line=$(journalctl -u nodered --no-pager --since "$nr_start_iso" 2>/dev/null \
-        | grep -E "Connected Firmata|Available Firmata|timeout.*Board|Device or Firmware Error" \
-        | tail -1)
-
-    if [ -z "$last_firmata_line" ]; then
-        # No firmata log lines yet
-        local uptime
-        uptime=$(get_nr_uptime)
-        if [ "$uptime" -lt "$FIRMATA_CONNECT_GRACE" ]; then
-            return 0  # Still booting
-        fi
-        return 1  # Running too long with no firmata activity
-    fi
-
-    # Last line is "Connected Firmata" -> genuinely healthy
-    if echo "$last_firmata_line" | grep -q "Connected Firmata"; then
-        return 0
-    fi
-
-    # Last line is timeout/error -> connection failed, GPIO nodes dead
-    if echo "$last_firmata_line" | grep -qE "timeout|Error"; then
-        return 1
-    fi
-
-    # Only "Available Firmata" (detected but not yet connected)
-    local uptime
-    uptime=$(get_nr_uptime)
-    if [ "$uptime" -lt "$FIRMATA_CONNECT_GRACE" ]; then
-        return 0  # Still connecting
-    fi
-    return 1  # Stuck in "Available" too long
+get_system_uptime() {
+    awk '{print int($1)}' /proc/uptime
 }
 
-# Count how many restarts happened within RESTART_WINDOW
+# Check GPIO liveness via InfluxDB arduino_status (heartbeat from serial parser)
+# Returns 0 (healthy) if last arduino_status value is 1 within last 3 minutes
+# Returns 1 (unhealthy) if last value is 0 or missing
+check_gpio_alive() {
+    local uptime
+    uptime=$(get_nr_uptime)
+    if [ "$uptime" -lt "$GPIO_LIVENESS_GRACE" ]; then
+        return 0  # Too soon after start, give it time
+    fi
+
+    local result
+    result=$(influx -database highland -execute \
+        "SELECT last(value) FROM arduino_status WHERE time > now() - 3m" \
+        2>/dev/null | tail -1)
+
+    if [ -z "$result" ]; then
+        log "WARN" "Could not query arduino_status from InfluxDB"
+        return 0  # Can't determine, assume OK
+    fi
+
+    # Parse the last value (format: "timestamp   value")
+    local status_val
+    status_val=$(echo "$result" | awk '{print $NF}')
+
+    if [ "$status_val" = "0" ]; then
+        return 1  # GPIO dead
+    fi
+
+    return 0
+}
+
 count_recent_restarts() {
     local cutoff count
     cutoff=$(( $(date +%s) - RESTART_WINDOW ))
@@ -155,7 +118,6 @@ count_recent_restarts() {
 
 record_restart() {
     echo "$(date +%s)" >> "$RESTART_TIMESTAMPS"
-    # Prune entries older than window
     if [ -f "$RESTART_TIMESTAMPS" ]; then
         local cutoff tmpfile
         cutoff=$(( $(date +%s) - RESTART_WINDOW ))
@@ -165,65 +127,68 @@ record_restart() {
     fi
 }
 
-reset_usb() {
-    log "ACTION" "Resetting USB for Arduino at $USB_DEVICE_PATH"
-    if [ -f "$USB_DEVICE_PATH/authorized" ]; then
-        echo 0 > "$USB_DEVICE_PATH/authorized" 2>/dev/null
-        sleep 3
-        echo 1 > "$USB_DEVICE_PATH/authorized" 2>/dev/null
-        sleep 8  # wait for USB re-enumeration and ttyACM0 to reappear
-    else
-        log "WARN" "USB sysfs path not found, trying usbreset"
-        usbreset "2341:0042" 2>/dev/null
-        sleep 5
-    fi
-}
-
 restart_nodered() {
     log "ACTION" "Restarting Node-RED service"
     systemctl restart nodered
     record_restart
-    sleep 45  # wait for NR to fully start and Firmata to connect
+    sleep 45
 }
 
 reboot_system() {
-    log "ACTION" "All recovery failed. Rebooting system."
+    local sys_uptime
+    sys_uptime=$(get_system_uptime)
+    if [ "$sys_uptime" -lt "$REBOOT_COOLDOWN" ]; then
+        log "WARN" "System only up ${sys_uptime}s — skipping reboot (cooldown ${REBOOT_COOLDOWN}s). Will retry next cycle."
+        return 1
+    fi
+    log "ACTION" "Rebooting system (uptime was ${sys_uptime}s)"
     sync
     reboot
 }
 
-# Decide recovery action based on recent restart count
-recover() {
+# Log diagnostic snapshot before rebooting — helps find root cause
+log_diagnostics() {
+    log "DIAG" "--- Diagnostic snapshot before reboot ---"
+    log "DIAG" "NR uptime: $(get_nr_uptime)s, System uptime: $(get_system_uptime)s"
+    log "DIAG" "NR PID: $(pgrep -f 'node-red' | head -1)"
+    log "DIAG" "Serial FDs: $(lsof $DEVICE 2>/dev/null | tail -n +2)"
+    log "DIAG" "NR memory: $(ps -p $(pgrep -f 'node-red' | head -1) -o rss= 2>/dev/null) KB"
+    log "DIAG" "Free memory: $(awk '/MemAvailable/{print $2}' /proc/meminfo) KB"
+    log "DIAG" "Last 3 NR serial lines: $(journalctl -u nodered --no-pager -n 50 2>/dev/null | grep -i serial | tail -3)"
+    log "DIAG" "Last dmesg USB: $(dmesg | grep -i 'ttyACM\|usb.*1-1.1\|cdc_acm' | tail -3)"
+    log "DIAG" "--- End diagnostic snapshot ---"
+}
+
+# Recover from non-heartbeat issues (NR down, serial not connected)
+# These CAN be fixed by NR restart, so use escalation
+recover_nr() {
     local reason="$1"
     local recent
     recent=$(count_recent_restarts)
 
     if [ "$recent" -lt "$NR_RESTART_THRESHOLD" ]; then
-        # Level 1: restart NR
         log "WARN" "$reason — restarting Node-RED (restarts in last 30m: $recent)"
         restart_nodered
-    elif [ "$recent" -lt "$USB_RESTART_THRESHOLD" ]; then
-        # Level 2: USB reset + restart NR
-        log "WARN" "$reason — escalating to USB reset + NR restart (restarts in last 30m: $recent)"
-        systemctl stop nodered
-        sleep 5
-        reset_usb
-        sleep 3
-        systemctl start nodered
-        record_restart
-        sleep 45
     else
-        # Level 3: reboot
-        log "ERROR" "$reason — $recent restarts in last 30m exhausted, rebooting"
+        log "ERROR" "$reason — $recent NR restarts failed, rebooting"
+        log_diagnostics
         reboot_system
     fi
 }
 
+# Recover from heartbeat failure — reboot directly
+# NR restarts don't fix serial stall, skip straight to reboot
+recover_heartbeat() {
+    local reason="$1"
+    log "ERROR" "$reason — serial stall detected, rebooting directly"
+    log_diagnostics
+    reboot_system
+}
+
 # --- Main loop ---
 
-log "INFO" "Watchdog v3 started (device=$DEVICE, interval=${CHECK_INTERVAL}s, connect_grace=${FIRMATA_CONNECT_GRACE}s)"
+log "INFO" "Watchdog v7 started (device=$DEVICE, interval=${CHECK_INTERVAL}s, gpio_grace=${GPIO_LIVENESS_GRACE}s)"
 
-# Wait for Node-RED to finish starting on boot
 sleep 45
 
 while true; do
@@ -234,18 +199,18 @@ while true; do
         now=$(date +%s)
         if [ "$device_missing_since" -eq 0 ]; then
             device_missing_since=$now
-            log "WARN" "Device $DEVICE missing — waiting for USB re-enumeration"
+            log "WARN" "Device $DEVICE missing — waiting for re-enumeration"
         fi
         elapsed=$(( now - device_missing_since ))
 
         if [ "$elapsed" -gt 120 ]; then
-            recover "Device missing for ${elapsed}s"
+            log "ERROR" "Device missing for ${elapsed}s — rebooting (USB stack likely broken)"
+            reboot_system
         fi
         sleep "$CHECK_INTERVAL"
         continue
     fi
 
-    # Device present — reset missing timer
     if [ "$device_missing_since" -ne 0 ]; then
         log "INFO" "Device $DEVICE reappeared"
         device_missing_since=0
@@ -258,7 +223,7 @@ while true; do
         record_restart
         sleep 45
         if ! check_nodered_running; then
-            recover "Node-RED failed to start"
+            recover_nr "Node-RED failed to start"
         else
             log "INFO" "Node-RED started successfully"
         fi
@@ -270,21 +235,16 @@ while true; do
     if ! check_nodered_has_serial; then
         uptime=$(get_nr_uptime)
         if [ "$uptime" -gt 60 ]; then
-            recover "Node-RED running ${uptime}s but serial not connected"
+            recover_nr "Node-RED running ${uptime}s but serial not connected"
         fi
         sleep "$CHECK_INTERVAL"
         continue
     fi
 
-    # Step 4: Check Firmata genuinely connected (not timed out or stuck)
-    if ! check_firmata_healthy; then
-        # Log the last firmata line for debugging
-        nr_start_dbg=$(systemctl show nodered -p ActiveEnterTimestamp --value 2>/dev/null)
-        last_line_dbg=$(journalctl -u nodered --no-pager --since "$nr_start_dbg" 2>/dev/null \
-            | grep -E "Connected Firmata|Available Firmata|timeout.*Board|Device or Firmware Error" \
-            | tail -1)
-        log "DEBUG" "Last firmata log: $last_line_dbg"
-        recover "Firmata unhealthy after $(get_nr_uptime)s (GPIO nodes likely dead)"
+    # Step 4: Check GPIO heartbeat — reboot directly if dead
+    if ! check_gpio_alive; then
+        log "ERROR" "GPIO heartbeat dead — Arduino serial stall (NR up $(get_nr_uptime)s)"
+        recover_heartbeat "GPIO heartbeat dead after $(get_nr_uptime)s"
         sleep "$CHECK_INTERVAL"
         continue
     fi

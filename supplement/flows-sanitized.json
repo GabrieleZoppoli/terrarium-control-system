@@ -298,29 +298,6 @@
     "sessionExpiry": ""
   },
   {
-    "id": "9e6345fe97f9a854",
-    "type": "ioplugin",
-    "name": "",
-    "username": "",
-    "password": "",
-    "boardType": "firmata",
-    "serialportName": "/dev/ttyACM0",
-    "connectionType": "local",
-    "mqttServer": "",
-    "pubTopic": "",
-    "subTopic": "",
-    "tcpHost": "",
-    "tcpPort": "",
-    "sparkId": "",
-    "sparkToken": "",
-    "beanId": "",
-    "impId": "",
-    "uuid": "",
-    "token": "",
-    "sendUuid": "",
-    "samplingInterval": "500"
-  },
-  {
     "id": "d50d0c9f.31e858",
     "type": "tls-config",
     "name": "",
@@ -435,14 +412,14 @@
     "type": "position-config",
     "name": "",
     "isValide": "true",
+    "longitude": "8.944381",
+    "latitude": "5.19485",
     "angleType": "deg",
     "timeZoneOffset": "99",
     "timeZoneDST": "0",
     "stateTimeFormat": "3",
     "stateDateFormat": "12",
-    "contextStore": "",
-    "latitude": "5.19485",
-    "longitude": "8.944381"
+    "contextStore": ""
   },
   {
     "id": "b09451f477162fa8",
@@ -511,7 +488,7 @@
   {
     "id": "22399c9be1c4384d",
     "type": "ngrokauth",
-    "name": "YOUR_USERNAME"
+    "name": "user"
   },
   {
     "id": "ede53811c25278d5",
@@ -528,6 +505,25 @@
     "width": "6",
     "collapse": false,
     "className": ""
+  },
+  {
+    "id": "serial_config_001",
+    "type": "serial-port",
+    "serialport": "/dev/ttyACM0",
+    "serialbaud": "115200",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "waitfor": "",
+    "dtr": "none",
+    "rts": "none",
+    "cts": "none",
+    "dsr": "none",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": "",
+    "responsetimeout": "10000"
   },
   {
     "id": "db9cbd5c.fb547",
@@ -1309,22 +1305,6 @@
     ]
   },
   {
-    "id": "bab69bcbfa3b5654",
-    "type": "gpio out",
-    "z": "79cab81cdecb0e89",
-    "name": "Dimmer",
-    "state": "PWM",
-    "pin": "8",
-    "i2cDelay": "0",
-    "i2cAddress": "",
-    "i2cRegister": "",
-    "outputs": 0,
-    "board": "9e6345fe97f9a854",
-    "x": 1060,
-    "y": 580,
-    "wires": []
-  },
-  {
     "id": "e511b80044c723ef",
     "type": "bigtimer",
     "z": "79cab81cdecb0e89",
@@ -1715,7 +1695,7 @@
     "y": 580,
     "wires": [
       [
-        "bab69bcbfa3b5654"
+        "pin8_writer_001"
       ]
     ]
   },
@@ -2170,7 +2150,7 @@
     "y": 900,
     "wires": [
       [
-        "275ad7605a754791"
+        "f4a4a4a4a4a4a4a4"
       ]
     ]
   },
@@ -2270,7 +2250,7 @@
     "y": 820,
     "wires": [
       [
-        "275ad7605a754791"
+        "f3a3a3a3a3a3a3a3"
       ]
     ]
   },
@@ -2284,6 +2264,13 @@
         "t": "set",
         "p": "payload.dimmer",
         "pt": "flow",
+        "to": "payload",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "payload.current_dimmer_slider",
+        "pt": "global",
         "to": "payload",
         "tot": "msg"
       }
@@ -2301,30 +2288,27 @@
   },
   {
     "id": "b7f27d1dd5437650",
-    "type": "inject",
+    "type": "function",
     "z": "79cab81cdecb0e89",
-    "name": "",
-    "props": [
-      {
-        "p": "payload"
-      },
-      {
-        "p": "topic",
-        "vt": "str"
-      }
-    ],
-    "repeat": "",
-    "crontab": "",
-    "once": true,
-    "onceDelay": "5",
-    "topic": "",
-    "payload": "payload.dimmer",
-    "payloadType": "flow",
+    "name": "Startup brightness",
+    "func": "// Set correct brightness AND trigger ramp if in ramp window\n// Output 1: slider value (immediate brightness)\n// Output 2: dimmer #1 DIM command (dawn/dusk ramps, range 0-40)\n// Output 3: dimmer #2 DIM command (midday ramps, range 40-60)\n//\n// Uses PARTIAL start so ramp finishes on time even after mid-ramp reboot.\n// Dimmer t ranges 0.0-1.0; step=1/steps per tick.\n// Upward ramps: t goes 0\u21921, so start = elapsed fraction\n// Downward ramps: t goes 1\u21920, so start = 1 - elapsed fraction\n\nvar now = new Date();\nvar minutes = now.getHours() * 60 + now.getMinutes();\n\nvar brightness = 0;\nvar dimmer1Msg = null;\nvar dimmer2Msg = null;\n\nif (minutes >= 390 && minutes < 420) {\n    // 06:30-07:00: dawn ramp 0\u219240 (dimmer #1, t: 0\u21921)\n    var elapsed = (minutes - 390) / 30;\n    brightness = Math.round(elapsed * 40);\n    dimmer1Msg = {payload: {command: \"DIM\", target: 1.0, start: elapsed}};\n} else if (minutes >= 420 && minutes < 660) {\n    // 07:00-11:00: stable 40\n    brightness = 40;\n} else if (minutes >= 660 && minutes < 690) {\n    // 11:00-11:30: midday ramp 40\u219260 (dimmer #2, t: 0\u21921)\n    var elapsed = (minutes - 660) / 30;\n    brightness = 40 + Math.round(elapsed * 20);\n    dimmer2Msg = {payload: {command: \"DIM\", target: 1.0, start: elapsed}};\n} else if (minutes >= 690 && minutes < 780) {\n    // 11:30-13:00: stable 60\n    brightness = 60;\n} else if (minutes >= 780 && minutes < 810) {\n    // 13:00-13:30: midday ramp 60\u219240 (dimmer #2, t: 1\u21920)\n    var elapsed = (minutes - 780) / 30;\n    brightness = 60 - Math.round(elapsed * 20);\n    dimmer2Msg = {payload: {command: \"DIM\", target: 0.0, start: 1.0 - elapsed}};\n} else if (minutes >= 810 && minutes < 1170) {\n    // 13:30-19:30: stable 40\n    brightness = 40;\n} else if (minutes >= 1170 && minutes < 1200) {\n    // 19:30-20:00: dusk ramp 40\u21920 (dimmer #1, t: 1\u21920)\n    var elapsed = (minutes - 1170) / 30;\n    brightness = 40 - Math.round(elapsed * 40);\n    dimmer1Msg = {payload: {command: \"DIM\", target: 0.0, start: 1.0 - elapsed}};\n}\n\nnode.warn(\"Startup brightness=\" + brightness + \" (time: \" + now.toLocaleTimeString() + \", min=\" + minutes + \")\" +\n    (dimmer1Msg ? \" + dimmer#1 ramp (start=\" + dimmer1Msg.payload.start.toFixed(3) + \")\" : \"\") +\n    (dimmer2Msg ? \" + dimmer#2 ramp (start=\" + dimmer2Msg.payload.start.toFixed(3) + \")\" : \"\"));\n\nvar sliderMsg = {payload: brightness};\nreturn [sliderMsg, dimmer1Msg, dimmer2Msg];",
+    "outputs": 3,
+    "timeout": "",
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
     "x": 340,
     "y": 940,
     "wires": [
       [
         "a5551fb476eb5e64"
+      ],
+      [
+        "bb3b92aff3788023"
+      ],
+      [
+        "275ad7605a754791"
       ]
     ]
   },
@@ -2424,7 +2408,7 @@
     "y": 620,
     "wires": [
       [
-        "bb3b92aff3788023"
+        "f1a1a1a1a1a1a1a1"
       ]
     ]
   },
@@ -2524,7 +2508,7 @@
     "y": 740,
     "wires": [
       [
-        "bb3b92aff3788023"
+        "f2a2a2a2a2a2a2a2"
       ]
     ]
   },
@@ -2544,8 +2528,7 @@
     "y": 380,
     "wires": [
       []
-    ],
-    "func": "from PyP100 import PyP100\n\nip = \"192.168.1.55\"\nemail = \"YOUR_EMAIL\"\npassword = \"YOUR_PASSWORD\"\n\nplug = PyP100.P100(ip, email, password)\n\n# Attempt to log in to the plug\ntry:\n    plug.handshake()\n    plug.login()\nexcept Exception as e:\n    return {\"error\": str(e)}\n\n# Check if the input payload is 'on' or 'off'\nif msg[\"payload\"] == \"on\":\n    plug.turnOn()\n    return {\"status\": \"Turned On\"}\n\nelif msg[\"payload\"] == \"off\":\n    plug.turnOff()\n    return {\"status\": \"Turned Off\"}\n\nelse:\n    return {\"error\": \"Invalid command\"}"
+    ]
   },
   {
     "id": "c28f06e320a76364",
@@ -2577,7 +2560,7 @@
     "y": 380,
     "wires": [
       [
-        "b85b5b728fbc2659"
+        "light_tapo_gate"
       ]
     ]
   },
@@ -2611,7 +2594,168 @@
     "y": 200,
     "wires": [
       [
+        "light_tapo_gate"
+      ]
+    ]
+  },
+  {
+    "id": "f1a1a1a1a1a1a1a1",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Dawn start=0",
+    "func": "msg.payload = {command: \"DIM\", target: 1.0, start: 0.0};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 265,
+    "y": 620,
+    "wires": [
+      [
+        "bb3b92aff3788023"
+      ]
+    ]
+  },
+  {
+    "id": "f2a2a2a2a2a2a2a2",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Dusk start=1",
+    "func": "msg.payload = {command: \"DIM\", target: 0.0, start: 1.0};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 265,
+    "y": 740,
+    "wires": [
+      [
+        "bb3b92aff3788023"
+      ]
+    ]
+  },
+  {
+    "id": "f3a3a3a3a3a3a3a3",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Midday up start=0",
+    "func": "msg.payload = {command: \"DIM\", target: 1.0, start: 0.0};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 230,
+    "y": 820,
+    "wires": [
+      [
+        "275ad7605a754791"
+      ]
+    ]
+  },
+  {
+    "id": "f4a4a4a4a4a4a4a4",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Midday down start=1",
+    "func": "msg.payload = {command: \"DIM\", target: 0.0, start: 1.0};\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 230,
+    "y": 900,
+    "wires": [
+      [
+        "275ad7605a754791"
+      ]
+    ]
+  },
+  {
+    "id": "b7f27d1dd5437650a1",
+    "type": "inject",
+    "z": "79cab81cdecb0e89",
+    "name": "startup trigger",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "5",
+    "topic": "",
+    "payload": "1",
+    "payloadType": "num",
+    "x": 160,
+    "y": 940,
+    "wires": [
+      [
+        "b7f27d1dd5437650"
+      ]
+    ]
+  },
+  {
+    "id": "pin8_writer_001",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Pin 8 Serial",
+    "func": "// Dimmer serial writer (pin 8) with door safety\nvar val = Math.round(Number(msg.payload));\nif (isNaN(val)) return null;\nif (val < 0) val = 0;\nif (val > 255) val = 255;\n\n// Store intended value for door safety restore\nglobal.set(\"payload.last_dimmer_pwm\", val);\n\n// If doors open, force 60% brightness (PWM 102)\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) {\n    val = 102;\n}\n\nmsg.payload = \"P8,\" + val + \"\\n\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1060,
+    "y": 580,
+    "wires": [
+      [
+        "serial_out_001"
+      ]
+    ]
+  },
+  {
+    "id": "light_tapo_gate",
+    "type": "function",
+    "z": "79cab81cdecb0e89",
+    "name": "Light Tapo Gate",
+    "func": "// Gate light Tapo during door safety\n// \"on\" always passes, \"off\" blocked when doors open\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety && msg.payload === \"off\") {\n    node.status({fill: \"yellow\", shape: \"ring\", text: \"OFF blocked (door open) \" + new Date().toLocaleTimeString()});\n    return null;\n}\nnode.status({fill: \"green\", shape: \"dot\", text: msg.payload + \" \" + new Date().toLocaleTimeString()});\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 940,
+    "y": 380,
+    "wires": [
+      [
         "b85b5b728fbc2659"
+      ]
+    ]
+  },
+  {
+    "id": "link_in_light_tapo",
+    "type": "link in",
+    "z": "79cab81cdecb0e89",
+    "name": "<- Door Safety Light",
+    "links": [
+      "link_out_light_tapo"
+    ],
+    "x": 800,
+    "y": 420,
+    "wires": [
+      [
+        "light_tapo_gate"
       ]
     ]
   },
@@ -3480,6 +3624,7 @@
     "id": "417312cd3bc3867b",
     "type": "time-inject",
     "z": "1bbee654a669e6d5",
+    "d": true,
     "name": "",
     "nameInt": "\u23f2 04:00 = true",
     "positionConfig": "9759eb4cf10775d4",
@@ -3600,7 +3745,7 @@
       {
         "t": "eq",
         "v": "0",
-        "vt": "str"
+        "vt": "num"
       }
     ],
     "checkall": "true",
@@ -3839,6 +3984,7 @@
     "id": "2ed16b8b49fd8e81",
     "type": "time-inject",
     "z": "1bbee654a669e6d5",
+    "d": true,
     "name": "",
     "nameInt": "\u23f2 12:00 = true",
     "positionConfig": "9759eb4cf10775d4",
@@ -3939,6 +4085,7 @@
     "id": "69dfbb4fad9c5c5f",
     "type": "time-inject",
     "z": "1bbee654a669e6d5",
+    "d": true,
     "name": "",
     "nameInt": "\u23f2 18:00 = true",
     "positionConfig": "9759eb4cf10775d4",
@@ -4076,12 +4223,11 @@
     "fnCodePre": "",
     "fnCode": "from PyP100 import PyP100\n\nip = \"192.168.1.199\"\nemail = \"YOUR_EMAIL\"\npassword = \"YOUR_PASSWORD\"\n\nplug = PyP100.P100(ip, email, password)\n\n# Attempt to log in to the plug\ntry:\n    plug.handshake()\n    plug.login()\nexcept Exception as e:\n    return {\"error\": str(e)}\n\n# Check if the input payload is 'on' or 'off'\nif msg[\"payload\"] == \"on\":\n    plug.turnOn()\n    return {\"status\": \"Turned On\"}\n\nelif msg[\"payload\"] == \"off\":\n    plug.turnOff()\n    return {\"status\": \"Turned Off\"}\n\nelse:\n    return {\"error\": \"Invalid command\"}",
     "fnCodePost": "",
-    "x": 990,
-    "y": 160,
+    "x": 1210,
+    "y": 120,
     "wires": [
       []
-    ],
-    "func": "from PyP100 import PyP100\n\nip = \"192.168.1.199\"\nemail = \"YOUR_EMAIL\"\npassword = \"YOUR_PASSWORD\"\n\nplug = PyP100.P100(ip, email, password)\n\n# Attempt to log in to the plug\ntry:\n    plug.handshake()\n    plug.login()\nexcept Exception as e:\n    return {\"error\": str(e)}\n\n# Check if the input payload is 'on' or 'off'\nif msg[\"payload\"] == \"on\":\n    plug.turnOn()\n    return {\"status\": \"Turned On\"}\n\nelif msg[\"payload\"] == \"off\":\n    plug.turnOff()\n    return {\"status\": \"Turned Off\"}\n\nelse:\n    return {\"error\": \"Invalid command\"}"
+    ]
   },
   {
     "id": "1576519cb390dfb9",
@@ -4106,7 +4252,7 @@
     "y": 140,
     "wires": [
       [
-        "63910919047fb384"
+        "mister_tapo_gate"
       ]
     ]
   },
@@ -4133,7 +4279,7 @@
     "y": 180,
     "wires": [
       [
-        "63910919047fb384"
+        "mister_tapo_gate"
       ]
     ]
   },
@@ -4675,6 +4821,42 @@
     "wires": [
       [
         "744b3736137a16ca"
+      ]
+    ]
+  },
+  {
+    "id": "link_in_mister_off",
+    "type": "link in",
+    "z": "1bbee654a669e6d5",
+    "name": "<- Door Safety Mister",
+    "links": [
+      "link_out_mister_off"
+    ],
+    "x": 790,
+    "y": 120,
+    "wires": [
+      [
+        "mister_tapo_gate"
+      ]
+    ]
+  },
+  {
+    "id": "mister_tapo_gate",
+    "type": "function",
+    "z": "1bbee654a669e6d5",
+    "name": "Mister Tapo Gate",
+    "func": "// Gate mister Tapo \"on\" commands during door safety mode\n// \"off\" always passes through, \"on\" blocked when doors open\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety && msg.payload === \"on\") {\n    node.status({fill: \"red\", shape: \"ring\", text: \"BLOCKED (door open) \" + new Date().toLocaleTimeString()});\n    return null;\n}\nnode.status({fill: \"green\", shape: \"dot\", text: msg.payload + \" \" + new Date().toLocaleTimeString()});\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1030,
+    "y": 120,
+    "wires": [
+      [
+        "63910919047fb384"
       ]
     ]
   },
@@ -5381,8 +5563,7 @@
     "y": 540,
     "wires": [
       []
-    ],
-    "func": "from PyP100 import PyP100\n\nip = \"192.168.1.196\"\nemail = \"YOUR_EMAIL\"\npassword = \"YOUR_PASSWORD\"\n\nplug = PyP100.P100(ip, email, password)\n\n# Attempt to log in to the plug\ntry:\n    plug.handshake()\n    plug.login()\nexcept Exception as e:\n    return {\"error\": str(e)}\n\n# Check if the input payload is 'on' or 'off'\nif msg[\"payload\"] == \"on\":\n    plug.turnOn()\n    return {\"status\": \"Turned On\"}\n\nelif msg[\"payload\"] == \"off\":\n    plug.turnOff()\n    return {\"status\": \"Turned Off\"}\n\nelse:\n    return {\"error\": \"Invalid command\"}"
+    ]
   },
   {
     "id": "59332b1911932163",
@@ -5407,7 +5588,7 @@
     "y": 520,
     "wires": [
       [
-        "4615686dbe3aac17"
+        "freezer_tapo_gate"
       ]
     ]
   },
@@ -5434,7 +5615,7 @@
     "y": 560,
     "wires": [
       [
-        "4615686dbe3aac17"
+        "freezer_tapo_gate"
       ]
     ]
   },
@@ -5535,7 +5716,7 @@
     "y": 620,
     "wires": [
       [
-        "4615686dbe3aac17",
+        "freezer_tapo_gate",
         "a2d91c324b9c460c"
       ]
     ]
@@ -5637,7 +5818,7 @@
     "y": 680,
     "wires": [
       [
-        "4615686dbe3aac17",
+        "freezer_tapo_gate",
         "89ab8b230948d484"
       ]
     ]
@@ -5722,52 +5903,40 @@
     ]
   },
   {
-    "id": "94abf7ede1e80308",
-    "type": "gpio out",
-    "z": "9e2ffb1e633fb214",
-    "name": "Outlet fans",
-    "state": "PWM",
-    "pin": "45",
-    "i2cDelay": "0",
-    "i2cAddress": "",
-    "i2cRegister": "",
-    "outputs": 0,
-    "board": "9e6345fe97f9a854",
-    "x": 1610,
-    "y": 360,
-    "wires": []
+    "id": "link_in_freezer_off",
+    "type": "link in",
+    "z": "5927e4ed4fee7f8c",
+    "name": "<- Door Safety Freezer",
+    "links": [
+      "link_out_freezer_off"
+    ],
+    "x": 880,
+    "y": 500,
+    "wires": [
+      [
+        "freezer_tapo_gate"
+      ]
+    ]
   },
   {
-    "id": "c9646f35cfc79f26",
-    "type": "gpio out",
-    "z": "9e2ffb1e633fb214",
-    "name": "Impeller fans",
-    "state": "PWM",
-    "pin": "46",
-    "i2cDelay": "0",
-    "i2cAddress": "",
-    "i2cRegister": "",
-    "outputs": 0,
-    "board": "9e6345fe97f9a854",
-    "x": 1610,
-    "y": 780,
-    "wires": []
-  },
-  {
-    "id": "b60559563ee08d1f",
-    "type": "gpio out",
-    "z": "9e2ffb1e633fb214",
-    "name": "Freezer fans",
-    "state": "PWM",
-    "pin": "44",
-    "i2cDelay": "0",
-    "i2cAddress": "",
-    "i2cRegister": "",
-    "outputs": 0,
-    "board": "9e6345fe97f9a854",
-    "x": 1610,
-    "y": 560,
-    "wires": []
+    "id": "freezer_tapo_gate",
+    "type": "function",
+    "z": "5927e4ed4fee7f8c",
+    "name": "Freezer Tapo Gate",
+    "func": "// Gate freezer Tapo \"on\" commands during door safety mode\n// \"off\" always passes through, \"on\" blocked when doors open\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety && msg.payload === \"on\") {\n    node.status({fill: \"red\", shape: \"ring\", text: \"BLOCKED (door open) \" + new Date().toLocaleTimeString()});\n    return null;\n}\nnode.status({fill: \"green\", shape: \"dot\", text: msg.payload + \" \" + new Date().toLocaleTimeString()});\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 960,
+    "y": 540,
+    "wires": [
+      [
+        "4615686dbe3aac17"
+      ]
+    ]
   },
   {
     "id": "6c385d00b43bf15c",
@@ -5873,7 +6042,7 @@
     "startOffset": 0,
     "startOffsetType": "none",
     "startOffsetMultiplier": 60000,
-    "endTime": "20:00",
+    "endTime": "00:00",
     "endTimeType": "entered",
     "endOffset": 0,
     "endOffsetType": "none",
@@ -5929,7 +6098,7 @@
     "type": "function",
     "z": "9e2ffb1e633fb214",
     "name": "PID Controller for Humidity",
-    "func": "// PID Controller for Humidity-Based Fan Control (Roraima Terrarium)\n//\n// Error convention:\n//   humidityDiff = target - current  (from Humidity tab)\n//   error = -humidityDiff = current - target\n//   Positive error (too humid) \u2192 increase fan speed\n//   Negative error (too dry)   \u2192 decrease fan speed (let mister handle it)\n\nconst manualMode = flow.get('manual_fan_mode');\nif (manualMode !== 'auto' && manualMode !== undefined) {\n    node.status({ fill: \"yellow\", shape: \"ring\", text: \"Manual mode\" });\n    return null;\n}\n\nconst humidityDiff = global.get('payload.difference_humi');\nif (humidityDiff === undefined || humidityDiff === null) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"No humidity data\" });\n    return null;\n}\n\n// PID tuning - adjustable via UI text input (Kp,Ki,Kd)\nconst tuning = flow.get('pid_tuning') || { Kp: 15, Ki: 0.08, Kd: 8 };\n\n// PID state\nlet pid = flow.get('pid_values') || {\n    integral: 0,\n    lastError: 0,\n    lastTime: Date.now(),\n    filteredDeriv: 0\n};\n\nconst now = Date.now();\nconst dt = (now - pid.lastTime) / 1000;\n\n// Guard: skip if dt is zero or unreasonably large (restart/gap)\nif (dt <= 0 || dt > 120) {\n    pid.lastTime = now;\n    flow.set('pid_values', pid);\n    node.status({ fill: \"grey\", shape: \"ring\", text: \"Waiting for next cycle\" });\n    return null;\n}\n\nconst error = -humidityDiff;\n\n// === PROPORTIONAL ===\nconst P = tuning.Kp * error;\n\n// === INTEGRAL with anti-windup ===\npid.integral += error * dt;\n\n// Clamp integral contribution to \u00b1120 PWM worth\nconst I_MAX = 120 / Math.max(tuning.Ki, 0.001);\npid.integral = Math.max(-I_MAX, Math.min(I_MAX, pid.integral));\n\n// Decay integral slowly when error is very small (prevents creep)\nif (Math.abs(error) < 1.0) {\n    pid.integral *= (1 - 0.02 * dt); // ~2% decay per second when near target\n}\n\nconst I = tuning.Ki * pid.integral;\n\n// === DERIVATIVE with exponential low-pass filter ===\nconst rawDeriv = (error - pid.lastError) / dt;\nconst alpha = 0.25; // smoothing: 0=heavy filter, 1=no filter\npid.filteredDeriv = alpha * rawDeriv + (1 - alpha) * (pid.filteredDeriv || 0);\nconst D = tuning.Kd * pid.filteredDeriv;\n\n// === TOTAL PID OUTPUT ===\nconst pidOutput = P + I + D;\n\n// Map to fan speed: base speed (resting circulation) + PID adjustment\n// Base provides gentle airflow when at target humidity\nconst BASE_SPEED = 72;\nlet fanSpeed = BASE_SPEED + pidOutput;\n\n// Clamp to valid PWM range [0, 255]\n// Note: 0 is allowed (fans stop when too dry - let mister handle humidity)\n// Min speed ensures circulation even when dry; Max capped at 204 (80% of 255) for noise\nconst MIN_SPEED = 40;\nconst MAX_SPEED = 204;\nfanSpeed = Math.max(MIN_SPEED, Math.min(MAX_SPEED, Math.round(fanSpeed)));\n\n// Smooth transitions: limit rate of change\nconst lastSpeed = flow.get('last_fan_speed');\nif (lastSpeed !== undefined && lastSpeed !== null) {\n    const maxChange = Math.max(10, Math.abs(error) * 3); // faster changes for larger errors\n    const delta = fanSpeed - lastSpeed;\n    if (Math.abs(delta) > maxChange) {\n        fanSpeed = Math.round(lastSpeed + Math.sign(delta) * maxChange);\n    }\n}\n\n// Store state\nflow.set('last_fan_speed', fanSpeed);\nglobal.set('payload.fan_speed', fanSpeed);\npid.lastError = error;\npid.lastTime = now;\nflow.set('pid_values', pid);\n\n// Node status display (visible in editor)\nconst pct = Math.round((fanSpeed / 255) * 100);\nconst color = Math.abs(humidityDiff) < 2 ? \"green\" :\n              Math.abs(humidityDiff) < 5 ? \"yellow\" : \"red\";\nconst dir = error > 0 ? \"\u25b2\" : error < 0 ? \"\u25bc\" : \"\u25cf\";\nnode.status({\n    fill: color, shape: \"dot\",\n    text: dir + \" \u0394\" + humidityDiff.toFixed(1) + \"% \u2192 \" + pct + \"% [P:\" + P.toFixed(0) + \" I:\" + I.toFixed(0) + \" D:\" + D.toFixed(0) + \"]\"\n});\n\n// Status object for UI display\nconst status = {\n    humidity_diff: +humidityDiff.toFixed(1),\n    error: +error.toFixed(2),\n    P: +P.toFixed(1),\n    I: +I.toFixed(1),\n    D: +D.toFixed(1),\n    output: +pidOutput.toFixed(1),\n    fan_speed: fanSpeed,\n    fan_percent: pct,\n    integral_accum: +pid.integral.toFixed(1)\n};\n\n// Output 0: fan speed to outlet/impeller fans\n// Output 1: status object to UI text\n// Output tuning info for UI display\nconst tuningStr = \"Kp=\" + tuning.Kp + \"  Ki=\" + tuning.Ki + \"  Kd=\" + tuning.Kd;\nreturn [{ payload: fanSpeed, pid_status: status }, { payload: status }, { payload: tuningStr }];",
+    "func": "// PID Controller for Humidity-Based Fan Control (Roraima Terrarium)\n//\n// Error convention:\n//   humidityDiff = target - current  (from Humidity tab)\n//   error = -humidityDiff = current - target\n//   Positive error (too humid) \u2192 increase fan speed\n//   Negative error (too dry)   \u2192 decrease fan speed (let mister handle it)\n//\n// GAIN SCHEDULING: Kp and Kd scale down near target to prevent oscillation.\n//   |error| >= 4%: full gains (aggressive response to large deviations)\n//   |error| <= 1.5%: gains reduced to 15% (smooth, gentle control)\n//   Between: linear interpolation\n\nconst manualMode = flow.get('manual_fan_mode');\nif (manualMode !== 'auto' && manualMode !== undefined) {\n    node.status({ fill: \"yellow\", shape: \"ring\", text: \"Manual mode\" });\n    return null;\n}\n\nconst humidityDiff = global.get('payload.difference_humi');\nif (humidityDiff === undefined || humidityDiff === null) {\n    node.status({ fill: \"red\", shape: \"dot\", text: \"No humidity data\" });\n    return null;\n}\n\n// PID tuning - adjustable via UI text input (Kp,Ki,Kd)\nconst tuning = flow.get('pid_tuning') || { Kp: 15, Ki: 0.08, Kd: 8 };\n\n// PID state\nlet pid = flow.get('pid_values') || {\n    integral: 0,\n    lastError: 0,\n    lastTime: Date.now(),\n    filteredDeriv: 0\n};\n\nconst now = Date.now();\nconst dt = (now - pid.lastTime) / 1000;\n\n// Guard: skip if dt is zero or unreasonably large (restart/gap)\nif (dt <= 0 || dt > 120) {\n    pid.lastTime = now;\n    flow.set('pid_values', pid);\n    node.status({ fill: \"grey\", shape: \"ring\", text: \"Waiting for next cycle\" });\n    return null;\n}\n\nconst error = -humidityDiff;\nconst absError = Math.abs(error);\n\n// === GAIN SCHEDULING ===\n// Scale Kp and Kd based on error magnitude to prevent oscillation near target\nconst NEAR_THRESH = 1.5;  // below this: minimum gain (gentle)\nconst FAR_THRESH = 4.0;   // above this: full gain (aggressive)\nconst MIN_GAIN = 0.15;    // floor: 15% of full gain when near target\nconst gainFactor = Math.min(1.0, Math.max(MIN_GAIN,\n    MIN_GAIN + (1.0 - MIN_GAIN) * (absError - NEAR_THRESH) / (FAR_THRESH - NEAR_THRESH)));\n\n// === PROPORTIONAL (gain-scheduled) ===\nconst P = tuning.Kp * gainFactor * error;\n\n// === INTEGRAL with anti-windup ===\npid.integral += error * dt;\n\n// Clamp integral contribution to \u00b1120 PWM worth\nconst I_MAX = 120 / Math.max(tuning.Ki, 0.001);\npid.integral = Math.max(-I_MAX, Math.min(I_MAX, pid.integral));\n\n// Decay integral when error is small (prevents creep after humidity spike)\nif (absError < 2.0) {\n    pid.integral *= (1 - 0.05 * dt); // 5% decay per second near target\n}\n\nconst I = tuning.Ki * pid.integral;\n\n// === DERIVATIVE with exponential low-pass filter (gain-scheduled) ===\nconst rawDeriv = (error - pid.lastError) / dt;\nconst alpha = 0.12; // heavier filter than before (was 0.25) to reduce noise\npid.filteredDeriv = alpha * rawDeriv + (1 - alpha) * (pid.filteredDeriv || 0);\nconst D = tuning.Kd * gainFactor * pid.filteredDeriv;\n\n// === TOTAL PID OUTPUT ===\nconst pidOutput = P + I + D;\n\n// Map to fan speed: base speed (resting circulation) + PID adjustment\nconst BASE_SPEED = 50;\nlet fanSpeed = BASE_SPEED + pidOutput;\n\n// Clamp to valid PWM range\nconst MIN_SPEED = 40;\nconst MAX_SPEED = 230;\nfanSpeed = Math.max(MIN_SPEED, Math.min(MAX_SPEED, Math.round(fanSpeed)));\n\n// Smooth transitions: limit rate of change\nconst lastSpeed = flow.get('last_fan_speed');\nif (lastSpeed !== undefined && lastSpeed !== null) {\n    const maxChange = Math.min(20, Math.max(8, absError * 2));\n    const delta = fanSpeed - lastSpeed;\n    if (Math.abs(delta) > maxChange) {\n        fanSpeed = Math.round(lastSpeed + Math.sign(delta) * maxChange);\n    }\n}\n\n// Store state\nflow.set('last_fan_speed', fanSpeed);\nglobal.set('payload.fan_speed', fanSpeed);\npid.lastError = error;\npid.lastTime = now;\nflow.set('pid_values', pid);\n\n// Node status display\nconst pct = Math.round((fanSpeed / 255) * 100);\nconst color = absError < 2 ? \"green\" : absError < 5 ? \"yellow\" : \"red\";\nconst dir = error > 0 ? \"\u25b2\" : error < 0 ? \"\u25bc\" : \"\u25cf\";\nnode.status({\n    fill: color, shape: \"dot\",\n    text: dir + \" \u0394\" + humidityDiff.toFixed(1) + \"% \u2192 \" + pct + \"% [P:\" + P.toFixed(0) + \" I:\" + I.toFixed(0) + \" D:\" + D.toFixed(0) + \" g:\" + gainFactor.toFixed(2) + \"]\"\n});\n\nconst status = {\n    humidity_diff: +humidityDiff.toFixed(1),\n    error: +error.toFixed(2),\n    P: +P.toFixed(1),\n    I: +I.toFixed(1),\n    D: +D.toFixed(1),\n    output: +pidOutput.toFixed(1),\n    fan_speed: fanSpeed,\n    fan_percent: pct,\n    integral_accum: +pid.integral.toFixed(1),\n    gain_factor: +gainFactor.toFixed(2)\n};\n\nconst tuningStr = \"Kp=\" + tuning.Kp + \"  Ki=\" + tuning.Ki + \"  Kd=\" + tuning.Kd;\nreturn [{ payload: fanSpeed, pid_status: status }, { payload: status }, { payload: tuningStr }];",
     "outputs": 3,
     "timeout": "",
     "noerr": 0,
@@ -5955,8 +6124,8 @@
     "id": "f9cb3425b86872fd",
     "type": "function",
     "z": "9e2ffb1e633fb214",
-    "name": "Night Mode (A/B Test)",
-    "func": "// A/B Night Test for freezer+fans evaluation\n// Even day-of-year = Night A (fans OFF)\n// Odd day-of-year = Night B (outlet+impeller at 80 PWM)\n// 20-night minimum experiment\n//\n// IMPORTANT: Mode is determined by the EVENING's date, not current date.\n// This prevents the mode from flipping at midnight when day-of-year changes.\n\nconst now = new Date();\nconst hour = now.getHours();\n\n// Use the evening's date to determine the night's mode.\n// If we're in the early AM (before noon), this night started yesterday.\nlet nightDate = new Date(now);\nif (hour < 12) {\n    nightDate.setDate(nightDate.getDate() - 1);\n}\n\nconst startOfYear = new Date(nightDate.getFullYear(), 0, 0);\nconst dayOfYear = Math.floor((nightDate - startOfYear) / 86400000);\nconst isNightB = (dayOfYear % 2 === 1);\n\nconst speed = isNightB ? 80 : 0;\nconst mode = isNightB ? \"B (fans 80)\" : \"A (fans off)\";\n\n// Store for Data Logger\nglobal.set('payload.night_test_mode', isNightB ? 1 : 0);\n\nnode.status({fill: isNightB ? \"blue\" : \"grey\", shape: \"dot\", text: \"Night \" + mode + \" (day \" + dayOfYear + \")\"});\n\nmsg.payload = speed;\nreturn msg;",
+    "name": "Night Mode (A/B Suspended)",
+    "func": "// Night fan mode - runs from midnight to 06:30\n// Fans OFF during this period.\n//\n// A/B EXPERIMENT SUSPENDED 2026-02-18 - to reactivate:\n// 1. Uncomment the A/B block below\n// 2. Change Day/Night Check endTime back to \"20:00\"\n// 3. Comment out the \"always off\" block\n\n// === ALWAYS OFF (active) ===\nglobal.set('payload.night_test_mode', -1);  // -1 = experiment suspended\nnode.status({fill: \"grey\", shape: \"dot\", text: \"Night fans OFF (A/B suspended)\"});\nmsg.payload = 0;\nreturn msg;\n\n/* === A/B EXPERIMENT (suspended) ===\nconst now = new Date();\nconst hour = now.getHours();\n\nlet nightDate = new Date(now);\nif (hour < 12) {\n    nightDate.setDate(nightDate.getDate() - 1);\n}\n\nconst startOfYear = new Date(nightDate.getFullYear(), 0, 0);\nconst dayOfYear = Math.floor((nightDate - startOfYear) / 86400000);\nconst isNightB = (dayOfYear % 2 === 1);\n\nconst speed = isNightB ? 80 : 0;\nconst mode = isNightB ? \"B (fans 80)\" : \"A (fans off)\";\n\nglobal.set('payload.night_test_mode', isNightB ? 1 : 0);\nnode.status({fill: isNightB ? \"blue\" : \"grey\", shape: \"dot\", text: \"Night \" + mode + \" (day \" + dayOfYear + \")\"});\n\nmsg.payload = speed;\nreturn msg;\n=== END A/B EXPERIMENT === */",
     "outputs": 1,
     "timeout": "",
     "noerr": 0,
@@ -5988,7 +6157,7 @@
     "y": 360,
     "wires": [
       [
-        "94abf7ede1e80308",
+        "fan_writer_outlet",
         "44ed2909e3724f9f"
       ]
     ]
@@ -6009,7 +6178,7 @@
     "y": 780,
     "wires": [
       [
-        "c9646f35cfc79f26",
+        "fan_writer_impeller",
         "b5bd62129e204f1a"
       ]
     ]
@@ -6113,8 +6282,9 @@
     "y": 560,
     "wires": [
       [
-        "b60559563ee08d1f",
-        "2722b19ac31347dc"
+        "fan_writer_freezer",
+        "2722b19ac31347dc",
+        "fan_writer_circulation"
       ]
     ]
   },
@@ -6233,11 +6403,9 @@
         "tot": "num"
       },
       {
-        "t": "set",
+        "t": "delete",
         "p": "topic",
-        "pt": "msg",
-        "to": "mister_override",
-        "tot": "str"
+        "pt": "msg"
       }
     ],
     "action": "",
@@ -6471,8 +6639,8 @@
     "type": "function",
     "z": "9e2ffb1e633fb214",
     "name": "Send to All Fans",
-    "func": "// Send manual speed to all three fan outputs\nreturn [\n    msg,  // Outlet fan\n    msg,  // Freezer fan\n    msg   // Impeller fan\n];",
-    "outputs": 3,
+    "func": "// Send manual speed to all four fan outputs\nreturn [\n    msg,  // Outlet fan\n    msg,  // Freezer fan\n    msg,  // Impeller fan\n    msg   // Circulation fan\n];",
+    "outputs": 4,
     "noerr": 0,
     "initialize": "",
     "finalize": "",
@@ -6488,6 +6656,9 @@
       ],
       [
         "7bb1b4db80970806"
+      ],
+      [
+        "fan_writer_circulation"
       ]
     ]
   },
@@ -6511,6 +6682,7 @@
   {
     "id": "937a368f7e04a321",
     "type": "ui_text",
+    "z": "9e2ffb1e633fb214",
     "group": "5c279b66ecb1af55",
     "order": 4,
     "width": 6,
@@ -6526,7 +6698,6 @@
     "color": "#000000",
     "x": 600,
     "y": 1200,
-    "z": "9e2ffb1e633fb214",
     "wires": []
   },
   {
@@ -7003,6 +7174,130 @@
       ],
       [
         "3497074c4d9e346e"
+      ]
+    ]
+  },
+  {
+    "id": "44ed2909e3724f9f",
+    "type": "influxdb out",
+    "z": "9e2ffb1e633fb214",
+    "influxdb": "1ce63f772bfddc6a",
+    "name": "fan_pwm_outlet",
+    "measurement": "fan_pwm_outlet",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "organisation",
+    "bucket": "bucket",
+    "x": 1050,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "b5bd62129e204f1a",
+    "type": "influxdb out",
+    "z": "9e2ffb1e633fb214",
+    "influxdb": "1ce63f772bfddc6a",
+    "name": "fan_pwm_impeller",
+    "measurement": "fan_pwm_impeller",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "organisation",
+    "bucket": "bucket",
+    "x": 1050,
+    "y": 535,
+    "wires": []
+  },
+  {
+    "id": "2722b19ac31347dc",
+    "type": "influxdb out",
+    "z": "9e2ffb1e633fb214",
+    "influxdb": "1ce63f772bfddc6a",
+    "name": "fan_pwm_freezer",
+    "measurement": "fan_pwm_freezer",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "organisation",
+    "bucket": "bucket",
+    "x": 1050,
+    "y": 570,
+    "wires": []
+  },
+  {
+    "id": "9a37dc99775d4335",
+    "type": "comment",
+    "z": "9e2ffb1e633fb214",
+    "name": "=== Fan PWM Logging (InfluxDB) ===",
+    "info": "Logs actual PWM values sent to fan GPIO pins.\nCaptures ALL sources: PID, night mode, manual, mister override.",
+    "x": 1050,
+    "y": 470,
+    "wires": []
+  },
+  {
+    "id": "fan_writer_outlet",
+    "type": "function",
+    "z": "9e2ffb1e633fb214",
+    "name": "Outlet Serial (P45)",
+    "func": "// Outlet fan serial writer (P45) with door safety gate\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) return null;\n\nvar val = Math.round(Number(msg.payload));\nif (isNaN(val)) return null;\nif (val < 0) val = 0;\nif (val > 255) val = 255;\nmsg.payload = \"P45,\" + val + \"\\n\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1610,
+    "y": 360,
+    "wires": [
+      [
+        "serial_out_001"
+      ]
+    ]
+  },
+  {
+    "id": "fan_writer_freezer",
+    "type": "function",
+    "z": "9e2ffb1e633fb214",
+    "name": "Freezer Serial (P44)",
+    "func": "// Freezer fan serial writer (P44) with door safety gate\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) return null;\n\nvar val = Math.round(Number(msg.payload));\nif (isNaN(val)) return null;\nif (val < 0) val = 0;\nif (val > 255) val = 255;\nmsg.payload = \"P44,\" + val + \"\\n\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1610,
+    "y": 560,
+    "wires": [
+      [
+        "serial_out_001"
+      ]
+    ]
+  },
+  {
+    "id": "fan_writer_impeller",
+    "type": "function",
+    "z": "9e2ffb1e633fb214",
+    "name": "Impeller Serial (P46)",
+    "func": "// Impeller fan serial writer (P46) with door safety gate\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) return null;\n\nvar val = Math.round(Number(msg.payload));\nif (isNaN(val)) return null;\nif (val < 0) val = 0;\nif (val > 255) val = 255;\nmsg.payload = \"P46,\" + val + \"\\n\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1610,
+    "y": 780,
+    "wires": [
+      [
+        "serial_out_001"
       ]
     ]
   },
@@ -8032,6 +8327,54 @@
     "wires": []
   },
   {
+    "id": "weather_fallback_inj",
+    "type": "inject",
+    "z": "45da75065060948b",
+    "name": "Every 60s",
+    "props": [
+      {
+        "p": "payload"
+      },
+      {
+        "p": "topic",
+        "vt": "str"
+      }
+    ],
+    "repeat": "60",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "10",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 130,
+    "y": 620,
+    "wires": [
+      [
+        "weather_fallback_fn"
+      ]
+    ]
+  },
+  {
+    "id": "weather_fallback_fn",
+    "type": "function",
+    "z": "45da75065060948b",
+    "name": "Weather Fallback",
+    "func": "// Weather fallback + high-humidity safety (disabled when doors open)\nvar targetHumi = global.get(\"payload.target_humi\");\nvar targetTemp = global.get(\"payload.target_temp\");\n\nvar now = new Date();\nvar hours = now.getHours();\nvar minutes = now.getMinutes();\nvar timeMinutes = hours * 60 + minutes;\nvar isDay = (timeMinutes >= 390 && timeMinutes < 1200);\n\nvar fallbackUsed = false;\n\nif (targetHumi === null || targetHumi === undefined) {\n    targetHumi = isDay ? 85 : 90;\n    global.set(\"payload.target_humi\", targetHumi);\n    fallbackUsed = true;\n}\n\nif (targetTemp === null || targetTemp === undefined) {\n    targetTemp = isDay ? 24 : 14;\n    global.set(\"payload.target_temp\", targetTemp);\n    fallbackUsed = true;\n}\n\nif (fallbackUsed) {\n    node.status({fill: \"yellow\", shape: \"ring\", text: \"FALLBACK T=\" + targetTemp + \" H=\" + targetHumi + \" \" + new Date().toLocaleTimeString()});\n} else {\n    node.status({fill: \"green\", shape: \"dot\", text: \"weather OK T=\" + targetTemp + \" H=\" + targetHumi});\n}\n\n// Skip high-humidity override if doors are open (safety already handling fans)\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) return [null, null];\n\n// If humidity > 90% and fans are off, force minimum circulation\nvar currentHumi = global.get(\"payload.current_humi\");\nvar fanSpeed = global.get(\"payload.fan_speed\");\n\nif (currentHumi !== null && currentHumi !== undefined && currentHumi > 90) {\n    if (fanSpeed === null || fanSpeed === undefined || fanSpeed === 0) {\n        var safetyMsg = {payload: 40};\n        node.warn(\"High humidity safety: \" + currentHumi + \"% > 90%, forcing outlet fan to 40 PWM\");\n        return [null, safetyMsg];\n    }\n}\n\nreturn [null, null];",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 330,
+    "y": 620,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
     "id": "3fd4414b531d45c3",
     "type": "ui_chart",
     "z": "a0a63c9653bdd719",
@@ -8058,8 +8401,8 @@
     "colors": [
       "#0056d6",
       "#e32400",
-      "#ff7f0e",
       "#2ca02c",
+      "#ff7f0e",
       "#98df8a",
       "#d62728",
       "#ff9896",
@@ -8140,8 +8483,8 @@
     "colors": [
       "#0056d6",
       "#e32400",
-      "#ff7f0e",
       "#2ca02c",
+      "#ff7f0e",
       "#98df8a",
       "#d62728",
       "#ff9896",
@@ -8437,7 +8780,7 @@
         "t": "set",
         "p": "topic",
         "pt": "msg",
-        "to": "target temperature",
+        "to": "target",
         "tot": "str"
       }
     ],
@@ -8464,7 +8807,7 @@
         "t": "set",
         "p": "topic",
         "pt": "msg",
-        "to": "current temperature",
+        "to": "current",
         "tot": "str"
       }
     ],
@@ -8491,7 +8834,7 @@
         "t": "set",
         "p": "topic",
         "pt": "msg",
-        "to": "target humidity",
+        "to": "target",
         "tot": "str"
       }
     ],
@@ -8518,7 +8861,7 @@
         "t": "set",
         "p": "topic",
         "pt": "msg",
-        "to": "current humidity",
+        "to": "current",
         "tot": "str"
       }
     ],
@@ -8640,40 +8983,6 @@
     "wires": [
       [
         "874490d913b0ca30"
-      ]
-    ]
-  },
-  {
-    "id": "d0d7d5206995270c",
-    "type": "gpio in",
-    "z": "0ff01249801c9e0e",
-    "name": "Left door",
-    "state": "PULLUP",
-    "pin": "22",
-    "board": "9e6345fe97f9a854",
-    "x": 160,
-    "y": 160,
-    "wires": [
-      [
-        "9b09e7541638c6cd",
-        "7e5994a7ac193ce0"
-      ]
-    ]
-  },
-  {
-    "id": "82aa59fdc4548285",
-    "type": "gpio in",
-    "z": "0ff01249801c9e0e",
-    "name": "Right door",
-    "state": "PULLUP",
-    "pin": "24",
-    "board": "9e6345fe97f9a854",
-    "x": 160,
-    "y": 240,
-    "wires": [
-      [
-        "2daf6b78b67eeb9b",
-        "7e5994a7ac193ce0"
       ]
     ]
   },
@@ -8825,31 +9134,6 @@
         "d4bd5f328abebf5a",
         "c0592c28bd040677"
       ]
-    ]
-  },
-  {
-    "id": "7e5994a7ac193ce0",
-    "type": "change",
-    "z": "0ff01249801c9e0e",
-    "name": "",
-    "rules": [
-      {
-        "t": "set",
-        "p": "payload.doors_status",
-        "pt": "global",
-        "to": "payload",
-        "tot": "msg"
-      }
-    ],
-    "action": "",
-    "property": "",
-    "from": "",
-    "to": "",
-    "reg": false,
-    "x": 470,
-    "y": 80,
-    "wires": [
-      []
     ]
   },
   {
@@ -9281,8 +9565,8 @@
     "id": "4098285c.f730d8",
     "type": "function",
     "z": "0ff01249801c9e0e",
-    "name": "",
-    "func": "var count=context.get('counter') || 0;\nif(msg.topic==\"up\"){\ncount +=1; }        \nif(msg.topic==\"down\"){\ncount -=1; }  \nmsg.payload= parseInt(msg.payload+count);\ncontext.set('counter',count);  \nif(msg.topic==\"reset\"){\ncontext.set('counter',0);\nmsg.payload=0;}\nreturn msg;",
+    "name": "Mist counter",
+    "func": "var count = context.get('counter') || 0;\nif (msg.topic == \"up\") {\n    count += 1;\n}\nif (msg.topic == \"down\") {\n    count -= 1;\n}\nif (msg.topic == \"reset\") {\n    context.set('counter', 0);\n    flow.set('mist_count_today', 0);\n    msg.payload = 0;\n    return msg;\n}\ncontext.set('counter', count);\nflow.set('mist_count_today', count);\nmsg.payload = count;\nreturn msg;",
     "outputs": 1,
     "noerr": 0,
     "initialize": "",
@@ -9407,20 +9691,6 @@
     "wires": []
   },
   {
-    "id": "5059c5f783212ff1",
-    "type": "gpio in",
-    "z": "0ff01249801c9e0e",
-    "name": "Fluximeter",
-    "state": "INPUT",
-    "pin": "30",
-    "board": "9e6345fe97f9a854",
-    "x": 220,
-    "y": 1620,
-    "wires": [
-      []
-    ]
-  },
-  {
     "id": "23d1a7976097d303",
     "type": "ngrok",
     "z": "0ff01249801c9e0e",
@@ -9464,7 +9734,7 @@
         "vt": "str"
       }
     ],
-    "repeat": "300",
+    "repeat": "600",
     "crontab": "",
     "once": true,
     "onceDelay": 0.1,
@@ -9505,9 +9775,9 @@
     "id": "6fade2e6c6384a93",
     "type": "function",
     "z": "0ff01249801c9e0e",
-    "name": "function 1",
-    "func": "let payload = msg.payload;\nlet resultMatch = payload.match(/Instant Power Consumption: (\\d+(\\.\\d+)?)/);\n\nif (resultMatch && resultMatch[1]) {\n    let value = parseFloat(resultMatch[1]).toFixed(1); // Keep one decimal place\n    msg.payload = value + \" W\";\n    return msg;\n}\n",
-    "outputs": 1,
+    "name": "Parse power",
+    "func": "let payload = msg.payload;\nlet resultMatch = payload.match(/Instant Power Consumption: (\\d+(\\.\\d+)?)/);\n\nif (resultMatch && resultMatch[1]) {\n    let value = parseFloat(resultMatch[1]);\n    // Output 1: UI display string\n    var uiMsg = {payload: value.toFixed(1) + \" W\"};\n    // Output 2: numeric value for InfluxDB\n    var dbMsg = {payload: value};\n    return [uiMsg, dbMsg];\n}\nreturn [null, null];",
+    "outputs": 2,
     "timeout": 0,
     "noerr": 0,
     "initialize": "",
@@ -9518,6 +9788,9 @@
     "wires": [
       [
         "9316633adda3bdd3"
+      ],
+      [
+        "power_consumption_influx"
       ]
     ]
   },
@@ -9745,8 +10018,8 @@
     "type": "function",
     "z": "0ff01249801c9e0e",
     "name": "Data Logger",
-    "func": "// Terrarium Data Logger - reads all sensor data from global context\nvar currentTemp = global.get('payload.current_temp');\nvar currentHumi = global.get('payload.current_humi');\nvar vpd = global.get('payload.vpd');\nvar targetTemp = global.get('payload.target_temp');\nvar targetHumi = global.get('payload.target_humi');\nvar diffTemp = global.get('payload.difference_temp');\nvar diffHumi = global.get('payload.difference_humi');\nvar fanSpeed = global.get('payload.fan_speed');\nvar freezerStatus = global.get('payload.freezer_status');\nvar misterStatus = global.get('payload.mister_status');\nvar lightStatus = global.get('payload.light_status');\nvar waterLevel = global.get('payload.water_level');\nvar nightTestMode = global.get('payload.night_test_mode');\n\n// Build output array - one msg per output, null if data unavailable\nvar outputs = [];\nvar values = [currentTemp, currentHumi, vpd, targetTemp, targetHumi, diffTemp, diffHumi, fanSpeed, freezerStatus, misterStatus, lightStatus, waterLevel, nightTestMode];\n\nfor (var i = 0; i < values.length; i++) {\n    var v = values[i];\n    if (v === undefined || v === null) {\n        outputs.push(null);\n    } else {\n        // Convert booleans to 0/1 for InfluxDB\n        if (typeof v === 'boolean') {\n            v = v ? 1 : 0;\n        }\n        outputs.push({payload: v});\n    }\n}\n\n// Status display\nvar active = values.filter(v => v !== undefined && v !== null).length;\nnode.status({fill: active >= 10 ? \"green\" : \"yellow\", shape: \"dot\", text: active + \"/13 metrics logged\"});\n\nreturn outputs;",
-    "outputs": 13,
+    "func": "// Terrarium Data Logger - reads all sensor data from global context\nvar currentTemp = global.get('payload.current_temp');\nvar currentHumi = global.get('payload.current_humi');\nvar vpd = global.get('payload.vpd');\nvar targetTemp = global.get('payload.target_temp');\nvar targetHumi = global.get('payload.target_humi');\nvar diffTemp = global.get('payload.difference_temp');\nvar diffHumi = global.get('payload.difference_humi');\nvar fanSpeed = global.get('payload.fan_speed');\nvar freezerStatus = global.get('payload.freezer_status');\nvar misterStatus = global.get('payload.mister_status');\nvar lightStatus = global.get('payload.light_status');\nvar waterLevel = global.get('payload.water_level');\nvar nightTestMode = global.get('payload.night_test_mode');\n\n// Arduino GPIO health: check heartbeat from analog pin read\nvar lastAlive = global.get('payload.arduino_gpio_alive') || 0;\nvar now = Date.now();\nvar arduinoStatus = (now - lastAlive < 120000) ? 1 : 0;  // 2 min grace\n\n// Build output array - one msg per output, null if data unavailable\nvar outputs = [];\nvar values = [currentTemp, currentHumi, vpd, targetTemp, targetHumi, diffTemp, diffHumi, fanSpeed, freezerStatus, misterStatus, lightStatus, waterLevel, nightTestMode, arduinoStatus];\n\nfor (var i = 0; i < values.length; i++) {\n    var v = values[i];\n    if (v === undefined || v === null) {\n        outputs.push(null);\n    } else {\n        if (typeof v === 'boolean') {\n            v = v ? 1 : 0;\n        }\n        outputs.push({payload: v});\n    }\n}\n\nvar active = values.filter(v => v !== undefined && v !== null).length;\nnode.status({fill: active >= 10 ? \"green\" : \"yellow\", shape: \"dot\", text: active + \"/14 metrics | Arduino: \" + (arduinoStatus ? \"OK\" : \"DEAD\")});\n\nreturn outputs;\n",
+    "outputs": 14,
     "timeout": 0,
     "noerr": 0,
     "initialize": "",
@@ -9793,6 +10066,9 @@
       ],
       [
         "ab_test_influx_out"
+      ],
+      [
+        "a1b2c3d4e5f60003"
       ]
     ]
   },
@@ -10023,70 +10299,6 @@
     "wires": []
   },
   {
-    "id": "44ed2909e3724f9f",
-    "type": "influxdb out",
-    "z": "9e2ffb1e633fb214",
-    "influxdb": "1ce63f772bfddc6a",
-    "name": "fan_pwm_outlet",
-    "measurement": "fan_pwm_outlet",
-    "precision": "",
-    "retentionPolicy": "",
-    "database": "database",
-    "precisionV18FluxV20": "ms",
-    "retentionPolicyV18Flux": "",
-    "org": "organisation",
-    "bucket": "bucket",
-    "x": 1050,
-    "y": 500,
-    "wires": []
-  },
-  {
-    "id": "b5bd62129e204f1a",
-    "type": "influxdb out",
-    "z": "9e2ffb1e633fb214",
-    "influxdb": "1ce63f772bfddc6a",
-    "name": "fan_pwm_impeller",
-    "measurement": "fan_pwm_impeller",
-    "precision": "",
-    "retentionPolicy": "",
-    "database": "database",
-    "precisionV18FluxV20": "ms",
-    "retentionPolicyV18Flux": "",
-    "org": "organisation",
-    "bucket": "bucket",
-    "x": 1050,
-    "y": 535,
-    "wires": []
-  },
-  {
-    "id": "2722b19ac31347dc",
-    "type": "influxdb out",
-    "z": "9e2ffb1e633fb214",
-    "influxdb": "1ce63f772bfddc6a",
-    "name": "fan_pwm_freezer",
-    "measurement": "fan_pwm_freezer",
-    "precision": "",
-    "retentionPolicy": "",
-    "database": "database",
-    "precisionV18FluxV20": "ms",
-    "retentionPolicyV18Flux": "",
-    "org": "organisation",
-    "bucket": "bucket",
-    "x": 1050,
-    "y": 570,
-    "wires": []
-  },
-  {
-    "id": "9a37dc99775d4335",
-    "type": "comment",
-    "z": "9e2ffb1e633fb214",
-    "name": "=== Fan PWM Logging (InfluxDB) ===",
-    "info": "Logs actual PWM values sent to fan GPIO pins.\nCaptures ALL sources: PID, night mode, manual, mister override.",
-    "x": 1050,
-    "y": 470,
-    "wires": []
-  },
-  {
     "id": "ab_test_influx_out",
     "type": "influxdb out",
     "z": "0ff01249801c9e0e",
@@ -10210,6 +10422,340 @@
     "bucket": "",
     "x": 900,
     "y": 540,
+    "wires": []
+  },
+  {
+    "id": "a1b2c3d4e5f60003",
+    "type": "influxdb out",
+    "z": "0ff01249801c9e0e",
+    "influxdb": "1ce63f772bfddc6a",
+    "name": "arduino_status",
+    "measurement": "arduino_status",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "organisation",
+    "bucket": "bucket",
+    "x": 1050,
+    "y": 780,
+    "wires": []
+  },
+  {
+    "id": "a1b2c3d4e5f60011",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Arduino Heartbeat",
+    "func": "// Rate-limited heartbeat: update global timestamp every 30s\n// gpio in fires every 500ms, we only need periodic confirmation\nvar lastUpdate = context.get('lastUpdate') || 0;\nvar now = Date.now();\nif (now - lastUpdate > 30000) {\n    global.set('payload.arduino_gpio_alive', now);\n    context.set('lastUpdate', now);\n    node.status({fill: 'green', shape: 'dot', text: 'alive ' + new Date().toLocaleTimeString()});\n}\nreturn null;\n",
+    "outputs": 0,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 630,
+    "y": 1080,
+    "wires": []
+  },
+  {
+    "id": "serial_in_001",
+    "type": "serial in",
+    "z": "0ff01249801c9e0e",
+    "name": "Arduino Serial In",
+    "serial": "serial_config_001",
+    "x": 100,
+    "y": 820,
+    "wires": [
+      [
+        "serial_parser_001"
+      ]
+    ]
+  },
+  {
+    "id": "serial_parser_001",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Serial Parser",
+    "func": "// Parse Arduino serial messages\n// Output 0: Heartbeat (H,<value>) -> Arduino Heartbeat function\n// Output 1: Left door (D22,<0|1>) -> left door LED + door controller\n// Output 2: Right door (D24,<0|1>) -> right door LED + door controller\n// Output 3: Resend signal (on READY) -> triggers fan/dimmer resend\nvar line = msg.payload.toString().trim();\nif (!line) return [null, null, null, null];\n\nif (line.startsWith(\"H,\")) {\n    var val = parseInt(line.substring(2));\n    if (!isNaN(val)) {\n        return [{payload: val}, null, null, null];\n    }\n} else if (line.startsWith(\"D22,\")) {\n    var val = parseInt(line.substring(4));\n    if (!isNaN(val)) {\n        return [null, {payload: val, topic: \"door_left\"}, null, null];\n    }\n} else if (line.startsWith(\"D24,\")) {\n    var val = parseInt(line.substring(4));\n    if (!isNaN(val)) {\n        return [null, null, {payload: val, topic: \"door_right\"}, null];\n    }\n} else if (line === \"READY\") {\n    node.status({fill: \"green\", shape: \"dot\", text: \"Arduino READY \" + new Date().toLocaleTimeString()});\n    node.warn(\"Arduino sent READY \\u2014 resending all PWM values\");\n    return [null, null, null, {payload: \"resend\"}];\n} else if (line.startsWith(\"OK,\")) {\n    node.status({fill: \"green\", shape: \"dot\", text: line + \" \" + new Date().toLocaleTimeString()});\n} else if (line.startsWith(\"S,\")) {\n    node.status({fill: \"blue\", shape: \"ring\", text: line});\n    node.warn(\"Arduino status: \" + line);\n} else if (line.startsWith(\"ERR,\")) {\n    node.status({fill: \"red\", shape: \"ring\", text: line});\n    node.warn(\"Arduino error: \" + line);\n}\nreturn [null, null, null, null];",
+    "outputs": 4,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 310,
+    "y": 880,
+    "wires": [
+      [
+        "a1b2c3d4e5f60011"
+      ],
+      [
+        "9b09e7541638c6cd",
+        "door_controller_001"
+      ],
+      [
+        "2daf6b78b67eeb9b",
+        "door_controller_001"
+      ],
+      [
+        "resend_pwm_001"
+      ]
+    ]
+  },
+  {
+    "id": "serial_out_001",
+    "type": "serial out",
+    "z": "0ff01249801c9e0e",
+    "name": "Arduino Serial Out",
+    "serial": "serial_config_001",
+    "x": 1200,
+    "y": 700,
+    "wires": []
+  },
+  {
+    "id": "resend_pwm_001",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Resend All PWM",
+    "func": "// On Arduino READY, resend all current PWM values\n// If doors are open, send safe values (fans off, light capped)\n\nvar doorSafety = global.get(\"payload.door_safety_active\");\n\nif (doorSafety) {\n    var lightPWM = global.get(\"payload.last_dimmer_pwm\") || 0;\n    if (lightPWM < 102) lightPWM = 102;\n    var cmds = \"P12,0\\nP45,0\\nP44,0\\nP46,0\\nP8,\" + lightPWM + \"\\n\";\n    node.warn(\"Resending SAFE PWM (doors open): fans off, light capped at \" + lightPWM);\n    msg.payload = cmds;\n    return msg;\n}\n\nvar fan_speed = global.get(\"payload.fan_speed\");\n\nvar now = new Date();\nvar hours = now.getHours();\nvar minutes = now.getMinutes();\nvar timeMinutes = hours * 60 + minutes;\nvar isDay = (timeMinutes >= 390 && timeMinutes < 1200);\n\nvar outletVal = 0;\nvar impellerVal = 0;\nvar freezerVal = 168;\n\nif (isDay && fan_speed !== null && fan_speed !== undefined) {\n    outletVal = fan_speed;\n    impellerVal = fan_speed;\n} else if (!isDay) {\n    var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);\n    if (hours < 12) dayOfYear -= 1;\n    var isNightB = (dayOfYear % 2 === 1);\n    if (isNightB) {\n        outletVal = 80;\n        impellerVal = 80;\n    }\n}\n\nvar freezerStatus = global.get(\"payload.freezer_status\");\nif (freezerStatus) {\n    freezerVal = 255;\n}\n\nvar circulationVal = freezerVal;\n\nvar lightPWM = global.get(\"payload.last_dimmer_pwm\") || 0;\n\nvar cmds = \"P12,\" + circulationVal + \"\\n\" +\n           \"P45,\" + outletVal + \"\\n\" +\n           \"P44,\" + freezerVal + \"\\n\" +\n           \"P46,\" + impellerVal + \"\\n\" +\n           \"P8,\" + lightPWM + \"\\n\";\n\nnode.warn(\"Resending PWM: P12=\" + circulationVal + \" P45=\" + outletVal + \" P44=\" + freezerVal + \" P46=\" + impellerVal + \" P8=\" + lightPWM);\n\nmsg.payload = cmds;\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 810,
+    "y": 740,
+    "wires": [
+      [
+        "serial_out_001"
+      ]
+    ]
+  },
+  {
+    "id": "door_controller_001",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Door Controller",
+    "func": "// Track both doors, compute OR, fire on transitions only\n// 3-second debounce: door must stay open for 3s before safety fires\n// Spurious open/close within 3s is suppressed entirely\n// Set global door_safety_enabled to false to disable\nvar enabled = global.get(\"payload.door_safety_enabled\");\nif (enabled === false) { return [null, null]; }\n\nvar left = flow.get(\"door_left_state\") || 0;\nvar right = flow.get(\"door_right_state\") || 0;\nvar wasOpen = (left || right) ? true : false;\n\nif (msg.topic === \"door_left\") {\n    left = msg.payload;\n    flow.set(\"door_left_state\", left);\n} else if (msg.topic === \"door_right\") {\n    right = msg.payload;\n    flow.set(\"door_right_state\", right);\n} else {\n    return [null, null];\n}\n\nvar isOpen = (left || right) ? true : false;\n\n// Update global context\nglobal.set(\"payload.doors_status\", isOpen ? 1 : 0);\nglobal.set(\"payload.doors_open\", isOpen);\n\nvar ts = new Date().toLocaleTimeString();\nnode.status({\n    fill: isOpen ? \"red\" : \"green\",\n    shape: \"dot\",\n    text: (isOpen ? \"OPEN\" : \"CLOSED\") + \" L=\" + left + \" R=\" + right + \" \" + ts\n});\n\n// --- Debounced transitions ---\nif (isOpen && !wasOpen) {\n    // Door just opened \u2014 start debounce timer\n    var timer = context.get(\"debounce_timer\");\n    if (timer) clearTimeout(timer);\n\n    var newTimer = setTimeout(function() {\n        context.set(\"debounce_timer\", null);\n        context.set(\"safety_fired\", true);\n        node.warn(\"Door opened (confirmed 3s): L=\" + left + \" R=\" + right);\n        node.send([{payload: \"door_opened\", topic: \"door_opened\"}, null]);\n    }, 3000);\n    context.set(\"debounce_timer\", newTimer);\n    return [null, null];\n}\n\nif (!isOpen && wasOpen) {\n    // Door just closed\n    var timer = context.get(\"debounce_timer\");\n    if (timer) {\n        // Closed within 3s \u2014 spurious event, cancel everything\n        clearTimeout(timer);\n        context.set(\"debounce_timer\", null);\n        node.status({fill: \"yellow\", shape: \"ring\", text: \"spurious \" + ts});\n        return [null, null];\n    }\n    // Only fire all_closed if we actually fired door_opened\n    if (context.get(\"safety_fired\")) {\n        context.set(\"safety_fired\", false);\n        node.warn(\"All doors closed\");\n        return [null, {payload: \"all_closed\", topic: \"all_closed\"}];\n    }\n    return [null, null];\n}\n\nreturn [null, null];",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 620,
+    "y": 1020,
+    "wires": [
+      [
+        "door_safety_001"
+      ],
+      [
+        "door_safety_001"
+      ]
+    ]
+  },
+  {
+    "id": "door_safety_001",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Door Safety Controller",
+    "func": "// Door Safety Controller\n// Output 0: serial commands -> serial_out\n// Output 1: freezer Tapo -> link -> freezer gate\n// Output 2: mister Tapo -> link -> mister gate\n// Output 3: light Tapo -> link -> light gate\n\nif (msg.topic === \"door_opened\") {\n    // Save current states for restore on close\n    global.set(\"payload.door_saved_light_state\", global.get(\"payload.light_status\") || 0);\n    global.set(\"payload.door_saved_freezer_state\", global.get(\"payload.freezer_status\") || false);\n    global.set(\"payload.door_safety_active\", true);\n\n    // Stop ALL fans + set light to 60%\n    var serialMsg = {payload: \"P12,0\\nP44,0\\nP45,0\\nP46,0\\nP8,102\\n\"};\n    var freezerOff = {payload: \"off\"};\n    var misterOff = {payload: \"off\"};\n    var lightOn = {payload: \"on\"};\n\n    node.status({fill: \"red\", shape: \"dot\", text: \"SAFETY ON \" + new Date().toLocaleTimeString()});\n    node.warn(\"Door safety: fans OFF, freezer OFF, mister OFF, light ON 60%\");\n\n    return [serialMsg, freezerOff, misterOff, lightOn];\n\n} else if (msg.topic === \"all_closed\") {\n    global.set(\"payload.door_safety_active\", false);\n\n    // --- Restore ALL fan values ---\n    // Freezer + circulation: 255 if freezer on, 168 if off\n    var freezerStatus = global.get(\"payload.freezer_status\");\n    var freezerVal = freezerStatus ? 255 : 168;\n    var circulationVal = freezerVal;\n\n    // Outlet + impeller: PID speed during day, night A/B test value at night\n    var now = new Date();\n    var hours = now.getHours();\n    var minutes = now.getMinutes();\n    var timeMinutes = hours * 60 + minutes;\n    var isDay = (timeMinutes >= 390 && timeMinutes < 1200);\n\n    var outletVal = 0;\n    var impellerVal = 0;\n    if (isDay) {\n        var fan_speed = global.get(\"payload.fan_speed\");\n        if (fan_speed !== null && fan_speed !== undefined) {\n            outletVal = fan_speed;\n            impellerVal = fan_speed;\n        }\n    } else {\n        var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);\n        if (hours < 12) dayOfYear -= 1;\n        var isNightB = (dayOfYear % 2 === 1);\n        if (isNightB) {\n            outletVal = 80;\n            impellerVal = 80;\n        }\n    }\n\n    // Check mister - if mister is active, don't restore fans\n    var misterActive = global.get(\"payload.mister_status\");\n    if (misterActive) {\n        outletVal = 0;\n        impellerVal = 0;\n        freezerVal = 0;\n        circulationVal = 0;\n    }\n\n    // Restore dimmer PWM\n    var lightPWM = global.get(\"payload.last_dimmer_pwm\") || 0;\n\n    var serialMsg = {payload: \"P12,\" + circulationVal + \"\\nP44,\" + freezerVal + \"\\nP45,\" + outletVal + \"\\nP46,\" + impellerVal + \"\\nP8,\" + lightPWM + \"\\n\"};\n\n    // Restore freezer Tapo if it was on before\n    var wasFreezerOn = global.get(\"payload.door_saved_freezer_state\");\n    var freezerCmd = null;\n    if (wasFreezerOn) {\n        freezerCmd = {payload: \"on\"};\n    }\n\n    // Turn light plug off if it was off before (nighttime)\n    var wasLightOn = global.get(\"payload.door_saved_light_state\");\n    var lightCmd = null;\n    if (!wasLightOn) {\n        lightCmd = {payload: \"off\"};\n    }\n\n    node.status({fill: \"green\", shape: \"dot\", text: \"SAFETY OFF \" + new Date().toLocaleTimeString()});\n    node.warn(\"Door safety off: fans restored P12=\" + circulationVal + \" P44=\" + freezerVal + \" P45=\" + outletVal + \" P46=\" + impellerVal + \" P8=\" + lightPWM);\n\n    return [serialMsg, freezerCmd, null, lightCmd];\n}\n\nreturn [null, null, null, null];",
+    "outputs": 4,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 840,
+    "y": 1020,
+    "wires": [
+      [
+        "serial_out_001"
+      ],
+      [
+        "link_out_freezer_off"
+      ],
+      [
+        "link_out_mister_off"
+      ],
+      [
+        "link_out_light_tapo"
+      ]
+    ]
+  },
+  {
+    "id": "link_out_freezer_off",
+    "type": "link out",
+    "z": "0ff01249801c9e0e",
+    "name": "-> Freezer Off",
+    "mode": "link",
+    "links": [
+      "link_in_freezer_off"
+    ],
+    "x": 1010,
+    "y": 780,
+    "wires": []
+  },
+  {
+    "id": "link_out_mister_off",
+    "type": "link out",
+    "z": "0ff01249801c9e0e",
+    "name": "-> Mister Off",
+    "mode": "link",
+    "links": [
+      "link_in_mister_off"
+    ],
+    "x": 1010,
+    "y": 820,
+    "wires": []
+  },
+  {
+    "id": "link_out_light_tapo",
+    "type": "link out",
+    "z": "0ff01249801c9e0e",
+    "name": "-> Light Tapo",
+    "mode": "link",
+    "links": [
+      "link_in_light_tapo"
+    ],
+    "x": 1010,
+    "y": 860,
+    "wires": []
+  },
+  {
+    "id": "fan_writer_circulation",
+    "type": "function",
+    "z": "9e2ffb1e633fb214",
+    "name": "Circulation Serial (P12)",
+    "func": "// Circulation fan serial writer (P12) with door safety gate\nvar doorSafety = global.get(\"payload.door_safety_active\");\nif (doorSafety) return null;\n\nvar val = Math.round(Number(msg.payload));\nif (isNaN(val)) return null;\nif (val < 0) val = 0;\nif (val > 255) val = 255;\nmsg.payload = \"P12,\" + val + \"\\n\";\nreturn msg;",
+    "outputs": 1,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 1610,
+    "y": 460,
+    "wires": [
+      [
+        "serial_out_001"
+      ]
+    ]
+  },
+  {
+    "id": "room_chart_inject_001",
+    "type": "inject",
+    "z": "a0a63c9653bdd719",
+    "name": "Room data every 60s",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "60",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "10",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 340,
+    "wires": [
+      [
+        "room_chart_fn_001"
+      ]
+    ]
+  },
+  {
+    "id": "room_chart_fn_001",
+    "type": "function",
+    "z": "a0a63c9653bdd719",
+    "name": "Room Data for Charts",
+    "func": "var roomTemp = global.get('payload.room_temperature');\nvar roomHumi = global.get('payload.room_humidity');\n\nvar tempMsg = null;\nvar humiMsg = null;\n\nif (roomTemp !== null && roomTemp !== undefined && !isNaN(roomTemp)) {\n    tempMsg = {payload: Number(roomTemp), topic: 'room'};\n}\nif (roomHumi !== null && roomHumi !== undefined && !isNaN(roomHumi)) {\n    humiMsg = {payload: Number(roomHumi), topic: 'room'};\n}\n\nreturn [tempMsg, humiMsg];",
+    "outputs": 2,
+    "timeout": 0,
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 380,
+    "y": 340,
+    "wires": [
+      [
+        "3fd4414b531d45c3"
+      ],
+      [
+        "874490d913b0ca30"
+      ]
+    ]
+  },
+  {
+    "id": "mist_count_startup_inject",
+    "type": "inject",
+    "z": "0ff01249801c9e0e",
+    "name": "Startup mist counts",
+    "props": [
+      {
+        "p": "payload"
+      }
+    ],
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "onceDelay": "2",
+    "topic": "",
+    "payload": "startup",
+    "payloadType": "str",
+    "x": 220,
+    "y": 1060,
+    "wires": [
+      [
+        "mist_count_startup_fn"
+      ]
+    ]
+  },
+  {
+    "id": "mist_count_startup_fn",
+    "type": "function",
+    "z": "0ff01249801c9e0e",
+    "name": "Restore mist counts",
+    "func": "// Restore mist counters on startup from flow context\nvar todayCount = flow.get('mist_count_today') || 0;\nvar ydayCount = flow.get('ycount') || 0;\n\nnode.warn(\"Restoring mist counts: today=\" + todayCount + \", yesterday=\" + ydayCount);\n\nvar todayMsg = {payload: todayCount};\nvar ydayMsg = {ycount: ydayCount, payload: ydayCount};\nreturn [todayMsg, ydayMsg];",
+    "outputs": 2,
+    "timeout": "",
+    "noerr": 0,
+    "initialize": "",
+    "finalize": "",
+    "libs": [],
+    "x": 440,
+    "y": 1060,
+    "wires": [
+      [
+        "9d49b7efe818243e"
+      ],
+      [
+        "b27cea97d4e38e38"
+      ]
+    ]
+  },
+  {
+    "id": "power_consumption_influx",
+    "type": "influxdb out",
+    "z": "0ff01249801c9e0e",
+    "influxdb": "1ce63f772bfddc6a",
+    "name": "power_consumption",
+    "measurement": "power_consumption",
+    "precision": "",
+    "retentionPolicy": "",
+    "database": "database",
+    "precisionV18FluxV20": "ms",
+    "retentionPolicyV18Flux": "",
+    "org": "organisation",
+    "bucket": "bucket",
+    "x": 830,
+    "y": 760,
     "wires": []
   }
 ]

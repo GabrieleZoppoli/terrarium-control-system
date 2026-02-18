@@ -2,7 +2,7 @@
 
 ## Overview
 
-`flows-sanitized.json` contains the complete Node-RED control logic for the highland cloud forest terrarium, organized across 7 flow tabs with 393 nodes. Credentials have been replaced with placeholders.
+`flows-sanitized.json` contains the complete Node-RED control logic for the highland cloud forest terrarium, organized across 7 flow tabs. Credentials have been replaced with placeholders.
 
 ## Before Importing
 
@@ -23,7 +23,6 @@ cd ~/.node-red
 
 npm install \
   node-red-contrib-bigtimer \
-  node-red-contrib-ioplugin \
   node-red-node-openweathermap \
   node-red-contrib-influxdb \
   node-red-node-smooth \
@@ -36,15 +35,18 @@ npm install \
   node-red-contrib-hysteresis \
   node-red-contrib-ui-led \
   node-red-contrib-ui-statetrail \
-  node-red-dashboard
+  node-red-dashboard \
+  node-red-node-serialport
 ```
+
+Note: `node-red-contrib-ioplugin` is no longer required (Firmata protocol was replaced by custom serial).
 
 ### 3. Install Python Dependencies
 
-The Tapo smart plug control uses Python function nodes:
+The Tapo smart plug control uses Python function nodes, and the Meross power monitor uses a standalone script:
 
 ```bash
-pip3 install PyP100
+pip3 install PyP100 meross-iot
 ```
 
 ### 4. Install External Services
@@ -77,9 +79,18 @@ Three Python function nodes contain `YOUR_EMAIL` and `YOUR_PASSWORD` placeholder
 
 1. **Lights tab** → Python function node (controls light plug)
 2. **Humidity tab** → Python function node (controls mister plug)
-3. **Temperature tab** → Python function node (controls freezer plug)
+3. **Temperature tab** → Python function node (controls compressor plug)
 
 Double-click each node, find the `email` and `password` variables, and replace the placeholders. Also update the `ip` variable to match your Tapo plug IP addresses.
+
+### Serial Port
+
+The serial port node is configured for `/dev/ttyACM0` at 115200 baud with newline delimiter. Upload the `arduino-terrarium.ino` sketch to your Arduino Mega via `arduino-cli`:
+
+```bash
+arduino-cli compile --fqbn arduino:avr:mega ~/arduino-terrarium/
+arduino-cli upload --fqbn arduino:avr:mega -p /dev/ttyACM0 ~/arduino-terrarium/
+```
 
 ### InfluxDB Connection
 
@@ -88,10 +99,6 @@ The InfluxDB server node is configured for `localhost:8086`, database `highland`
 ### MQTT Broker
 
 The MQTT broker node is configured for `localhost:1883`. Update if your broker is elsewhere. Also verify the MQTT topic matches your ESP sensor's publish topic.
-
-### Arduino/Firmata
-
-The ioplugin node expects an Arduino Mega on `/dev/ttyACM0` running StandardFirmata. Upload the StandardFirmata sketch to your Arduino via the Arduino IDE before deploying.
 
 ### OpenWeatherMap API
 
@@ -105,18 +112,25 @@ The `position-config` node uses:
 
 Adjust the longitude to your location if astronomical times should reflect your local conditions.
 
+### Meross Power Monitoring (Optional)
+
+The `meross_script.py` requires Meross cloud credentials. Edit the script and replace `YOUR_EMAIL` and `YOUR_PASSWORD` with your Meross account credentials. Also update `PLUG_ID` to match your plug's name. If you don't have a Meross plug, disable the "Get energy" inject node on the Utilities tab.
+
 ## Flow Tab Descriptions
 
 ### Tab 1: Lights
-Controls the photoperiod schedule and LED dimming.
+Controls the photoperiod schedule and LED dimming with sunrise/sunset and midday intensity variation.
 
 **Key nodes**:
 - **BigTimer**: Fixed schedule 06:25–20:05 (times in minutes-since-midnight: starttime=385, endtime=1205)
-- **Dynamic Dimmer**: 30-minute sunrise ramp starting 06:30, 30-minute sunset ramp starting 19:30
-- **Python function**: Tapo P100 plug control for light power
-- **GPIO out (pin 8)**: PWM dimmer signal to Arduino
+- **Dynamic Dimmer #1**: Dawn/dusk ramp (slider 0↔40, 40 steps × 45s = 30 min)
+- **Dynamic Dimmer #2**: Midday ramp (slider 40↔60, 20 steps × 90s = 30 min)
+- **Function nodes**: Dawn/Dusk/Midday start=0/start=1 nodes force explicit ramp direction
+- **Startup brightness**: Detects mid-ramp restarts, issues partial start for on-schedule completion
+- **Pin 8 writer**: Sends `P8,<value>` via serial; door safety gated (forces PWM 102 when doors open)
+- **Python function**: Tapo P100 plug control with door safety gate
 
-**Flow**: BigTimer triggers on/off → Tapo plug powers LEDs → Dimmer ramps PWM for sunrise/sunset effect
+**Flow**: BigTimer triggers on/off → Tapo plug powers LEDs → Dimmer ramps PWM for sunrise/midday/sunset effect
 
 ### Tab 2: Humidity
 Ingests sensor data, calculates VPD, manages mister.
@@ -127,29 +141,33 @@ Ingests sensor data, calculates VPD, manages mister.
 - **Target humidity**: Derived from Colombian weather data, clamped to 70–90% RH
 - **Humidity difference**: target − actual, feeds PID controller on Fans tab
 - **Hysteresis**: Controls mister on/off around target humidity
-- **Python function**: Tapo P100 plug control for mister
+- **Python function**: Tapo P100 plug control for mister (with door safety gate)
+- **Mist counter**: Tracks daily mist events with persistence across reboots
 
 ### Tab 3: Temperature
-Manages freezer-based cooling.
+Manages compressor-based cooling.
 
 **Key nodes**:
 - **Target temperature**: Derived from Colombian weather data, clamped to 12–24°C
 - **Temperature difference**: target − actual
-- **Hysteresis**: Controls freezer on/off based on temperature error
-- **Python function**: Tapo P100 plug control for freezer
-- **GPIO out (pin 46)**: Freezer fan PWM (always 255 when freezer is on)
+- **Hysteresis**: Controls compressor on/off based on temperature error
+- **Python function**: Tapo P100 plug control for compressor (with door safety gate)
 
 ### Tab 4: Fans
-Core PID controller and fan management.
+Core PID controller, door safety, and fan management.
 
 **Key nodes**:
-- **PID Controller** (function): Humidity-based fan speed calculation (Kp=15, Ki=0.08, Kd=8)
-- **Day/Night Check**: Within-time-switch, 06:30–20:00
-- **Night A/B Test** (function): Alternating night protocol (even day=fans off, odd day=fans 80 PWM)
-- **Mister Interlock** (function): Stops fans when mister is active
+- **PID Controller** (function): Gain-scheduled humidity-based fan speed (Kp=50, Ki=0.5, Kd=10)
+- **Day/Night Check**: Within-time-switch, 06:30–00:00 (midnight)
+- **Night Mode (A/B Suspended)**: Always outputs 0. A/B code preserved in comments with reactivation instructions
+- **Mister Interlock** (function): Stops all fans when mister is active (deletes topic to avoid RBE conflicts)
 - **Manual Override**: Dashboard slider, bypasses all automatic control
-- **GPIO out (pins 44, 45)**: Outlet and impeller fan PWM outputs
+- **Fan writers**: 4 serial output nodes — outlet (P45), impeller (P46), freezer (P44), circulation (P12), all door-safety gated
 - **RBE nodes**: Report-by-exception logging for fan PWM changes
+- **Door controller**: OR-tracks both doors, 3-second debounce
+- **Door safety**: 4 outputs — fans off, compressor gate, mister gate, lights to 60%
+- **Tapo gates**: Block inappropriate Tapo commands during door safety (compressor on, mister on, lights off)
+- **High-humidity safety**: Forces outlet fan to 40 PWM when humidity > 90% and fans are 0
 
 ### Tab 5: Weather
 Fetches and processes Colombian highland weather data.
@@ -158,6 +176,7 @@ Fetches and processes Colombian highland weather data.
 - **OpenWeatherMap** (×4): Chinchiná, Medellín, Bogotá, Sonsón
 - **Aggregator/Smooth**: 30-minute averaging window
 - **Position config**: Astronomical calculations for dawn/dusk reference
+- **Weather fallback**: Default setpoints (day T=24/H=85, night T=14/H=90) if API unreachable
 
 The 15-hour time shift between Colombia (UTC−5) and Italy (UTC+1) means Colombian daytime weather maps to Italian nighttime conditions, producing natural diurnal variation.
 
@@ -166,51 +185,39 @@ Node-RED Dashboard UI for local monitoring.
 
 **Key nodes**:
 - **Gauges**: Temperature, humidity, VPD
-- **Charts**: Time-series of environmental conditions
+- **Charts**: Time-series with 3 series each — current (blue), target (red), room (green)
 - **LEDs**: Status indicators for actuators
 - **State trails**: Historical on/off visualization
+- **Room data inject**: 60s repeat, pushes room sensor data to charts
+- **Chart persistence**: Save/restore via flow context for data survival across restarts
 
 Access at: `http://<your-pi-ip>:1880/ui`
 
 ### Tab 7: Utilities
-Data logging and system diagnostics.
+Data logging, serial communication, power monitoring, and system diagnostics.
 
 **Key nodes**:
-- **Data Logger** (function): 13 outputs, reads global context every 60 seconds
-- **InfluxDB out** (×13): One per measurement, writing to `highland` database
-- **Inject** (60s interval): Triggers the data logger
-
-## Node Type Reference
-
-| Node Type | Package | Count | Purpose |
-|-----------|---------|-------|---------|
-| `function` | core | ~25 | Custom JavaScript logic |
-| `change` | core | ~20 | Set/modify message properties |
-| `switch` | core | ~15 | Route messages by condition |
-| `inject` | core | ~10 | Timed triggers |
-| `debug` | core | ~10 | Development/troubleshooting |
-| `bigtimer` | node-red-contrib-bigtimer | 3 | Schedule control with astronomical times |
-| `influxdb out` | node-red-contrib-influxdb | 16 | Write to InfluxDB |
-| `influxdb in` | node-red-contrib-influxdb | 2 | Read from InfluxDB |
-| `mqtt in` | core | 2 | Receive MQTT messages |
-| `openweathermap` | node-red-node-openweathermap | 4 | Weather API |
-| `gpio out` | node-red-contrib-ioplugin | 4 | Arduino PWM outputs |
-| `python-function-ps` | node-red-contrib-python-function-ps | 3 | Tapo plug control |
-| `hysteresis` | node-red-contrib-hysteresis | 2 | Bang-bang control |
-| `dynamic-dimmer` | node-red-contrib-dynamic-dimmer | 1 | LED sunrise/sunset ramp |
-| `rbe` | node-red-node-rbe | 3 | Report-by-exception |
-| `smooth` | node-red-node-smooth | 4 | Moving average |
-| `aggregator` | node-red-contrib-aggregator | 2 | Multi-input averaging |
-| `ui_*` | node-red-dashboard | ~40 | Dashboard UI components |
+- **Serial config**: 115200 baud, newline delimiter, `/dev/ttyACM0`
+- **Serial parser**: Routes incoming serial data — heartbeat (→ arduino_status), doors (→ door controller)
+- **Data Logger** (function): 14 outputs, reads global context every 60 seconds
+- **InfluxDB out** (×14+): One per measurement, writing to `highland` database
+- **Meross power monitoring**: 600s inject → exec meross_script.py → parse → UI text + InfluxDB
+- **Mist counter persistence**: Startup inject → restore function → UI text nodes
+- **Resend PWM**: Periodic re-send of current fan states to prevent stale serial
+- **Send to All Fans**: Manual 4-output node for debugging (outlet, impeller, freezer, circulation)
 
 ## Troubleshooting
 
-**Nodes show "missing type"**: Install the required npm package for that node type (see table above).
+**Nodes show "missing type"**: Install the required npm package for that node type (see installation section).
 
 **InfluxDB write errors**: Verify InfluxDB is running (`systemctl status influxdb`) and the `highland` database exists.
 
-**Arduino not connecting**: Check `/dev/ttyACM0` exists, StandardFirmata is uploaded, and no other process holds the serial port.
+**Arduino not connecting**: Check `/dev/ttyACM0` exists, the `arduino-terrarium.ino` sketch is uploaded, and no other process holds the serial port. Never open `/dev/ttyACM0` manually while Node-RED is running.
 
 **Weather nodes show errors**: Verify your OpenWeatherMap API key is configured and the free tier hasn't been rate-limited.
 
 **Tapo plug control fails**: Ensure `PyP100` is installed, credentials are correct, and the plug IPs are reachable from the Pi.
+
+**Door safety won't deactivate**: Check both reed switches — `door_safety_active` stays true until both D22 and D24 read HIGH (closed). The debounce requires doors to be stably closed.
+
+**Fans stuck at 0 after misting**: This was a known RBE topic bug, now fixed. Ensure the "Stop All Fans" function deletes `msg.topic` rather than setting it to `"mister_override"`.

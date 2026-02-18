@@ -1,16 +1,16 @@
 # Highland Cloud Forest Terrarium Control System
 
-An open-source environmental control system for simulating tepui (highland cloud forest) climates in enclosed terrariums, using real-time Colombian weather data and PID-based humidity management.
+An open-source environmental control system for simulating tepui (highland cloud forest) climates in enclosed terrariums, using real-time Colombian weather data, gain-scheduled PID humidity management, and compressor-based cooling.
 
 ## Overview
 
-This system maintains approximately 120 cloud forest plant species (*Heliamphora*, *Dracula*, *Sophronitis*, highland *Nepenthes*, New Guinea *Dendrobium*, and more) in a 1.5 × 0.6 × 1.1 m terrarium located in Genoa, Italy. It achieves 13.5–24.3°C temperature range and 75–98% relative humidity by integrating weather data from four Colombian highland cities with a PID controller for fan-based humidity management.
+This system maintains approximately 120 cloud forest plant species (*Heliamphora*, *Dracula*, *Sophronitis*, highland *Nepenthes*, New Guinea *Dendrobium*, and more) in a 1.5 × 0.6 × 1.1 m terrarium located in Genoa, Italy. It achieves 13.5–24.3°C temperature range and 75–98% relative humidity by integrating weather data from four Colombian highland cities with a gain-scheduled PID controller for fan-based humidity management and a Vitrifrigo ND50 compressor for active cooling.
 
 ## Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                     MONITORING LAYER                         │
+│                     MONITORING LAYER                          │
 │  ┌────────────────────┐    ┌─────────────────────────────┐   │
 │  │   Grafana v10.2    │    │    Node-RED Dashboard UI    │   │
 │  │    (port 3000)     │    │       (port 1880/ui)        │   │
@@ -21,7 +21,7 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
 │           │        STORAGE LAYER      │                       │
 │  ┌────────▼───────────────────────────▼──────────────────┐   │
 │  │              InfluxDB v1.8.10 (port 8086)             │   │
-│  │         Database: "highland" — 26 measurements        │   │
+│  │         Database: "highland" — 27 measurements        │   │
 │  │            1-year retention, 60s write interval        │   │
 │  └───────────────────────┬───────────────────────────────┘   │
 │                          │                                    │
@@ -32,33 +32,37 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
 │  │                                                        │   │
 │  │  ┌─────────┐ ┌──────────┐ ┌─────────┐ ┌───────────┐  │   │
 │  │  │ Lights  │ │ Humidity │ │  Temp   │ │   Fans    │  │   │
-│  │  │ BigTimer│ │ VPD calc │ │ Freezer │ │ PID ctrl  │  │   │
-│  │  │ Dimmer  │ │ Mister   │ │ Hyster. │ │ Night A/B │  │   │
+│  │  │ BigTimer│ │ VPD calc │ │ Compres.│ │ PID ctrl  │  │   │
+│  │  │ Dimmer  │ │ Mister   │ │ Hyster. │ │ Door safe │  │   │
 │  │  └─────────┘ └──────────┘ └─────────┘ └───────────┘  │   │
 │  │  ┌─────────┐ ┌──────────┐ ┌──────────────────────┐   │   │
 │  │  │ Weather │ │  Charts  │ │     Utilities        │   │   │
-│  │  │ 4 cities│ │  Gauges  │ │ Data Logger (13 out) │   │   │
+│  │  │ 4 cities│ │  3-series│ │ Logger + Serial +    │   │   │
+│  │  │ fallback│ │  + room  │ │ Meross + Mist count  │   │   │
 │  │  └─────────┘ └──────────┘ └──────────────────────┘   │   │
 │  └───────────────────────────────────────────────────────┘   │
 │                                                               │
 ├───────────────────────────────────────────────────────────────┤
 │                   HARDWARE INTERFACE LAYER                     │
 │                                                               │
-│  ┌──────────┐    ┌─────────────────┐    ┌─────────────────┐  │
-│  │   MQTT   │    │    Firmata      │    │    PyP100       │  │
-│  │  :1883   │    │  USB serial     │    │   TCP/IP        │  │
-│  └────┬─────┘    └───────┬─────────┘    └───────┬─────────┘  │
-│       │                  │                      │             │
-├───────┼──────────────────┼──────────────────────┼─────────────┤
-│       │           PHYSICAL LAYER                │             │
-│  ┌────▼─────┐    ┌───────▼─────────┐    ┌───────▼─────────┐  │
-│  │  ESP +   │    │  Arduino Mega   │    │ Tapo P100 ×3    │  │
-│  │  SHT35   │    │  2560           │    │                 │  │
-│  │  sensor  │    │  Pin 44: Outlet │    │ .55:  Lights    │  │
-│  │          │    │  Pin 45: Impel. │    │ .199: Mister    │  │
-│  │          │    │  Pin 46: Freezer│    │ .196: Freezer   │  │
-│  │          │    │  Pin 8:  Dimmer │    │                 │  │
-│  └──────────┘    └─────────────────┘    └─────────────────┘  │
+│  ┌──────────┐  ┌────────────────┐  ┌──────────┐  ┌────────┐ │
+│  │   MQTT   │  │ Custom Serial  │  │  PyP100  │  │ Meross │ │
+│  │  :1883   │  │ USB 115200     │  │  TCP/IP  │  │ Cloud  │ │
+│  └────┬─────┘  └───────┬────────┘  └────┬─────┘  └───┬────┘ │
+│       │                │               │             │       │
+├───────┼────────────────┼───────────────┼─────────────┼───────┤
+│       │         PHYSICAL LAYER         │             │       │
+│  ┌────▼─────┐  ┌───────▼────────┐  ┌──▼──────────┐  ┌▼─────┐│
+│  │  ESP +   │  │  Arduino Mega  │  │ Tapo P100×3 │  │MSS310││
+│  │  SHT35   │  │  2560          │  │             │  │power ││
+│  │  sensor  │  │  P8:  Dimmer   │  │ .55: Lights │  │meter ││
+│  │  + water │  │  P12: Circ.    │  │ .199: Mist  │  │      ││
+│  │  level   │  │  P44: Freezer  │  │ .196: Comp. │  │      ││
+│  │          │  │  P45: Outlet   │  │             │  │      ││
+│  │          │  │  P46: Impeller │  │             │  │      ││
+│  │          │  │  D22: Door L   │  │             │  │      ││
+│  │          │  │  D24: Door R   │  │             │  │      ││
+│  └──────────┘  └────────────────┘  └─────────────┘  └──────┘│
 └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -68,12 +72,15 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
 |------|-------------|
 | `flows-sanitized.json` | Node-RED flows with credentials removed |
 | `flows-README.md` | Flow import guide and tab descriptions |
-| `arduino-watchdog.sh` | Watchdog script for Arduino/Firmata health |
+| `arduino-terrarium.ino` | Arduino Mega firmware — custom serial protocol |
+| `arduino-watchdog.sh` | Watchdog v7 script for serial health monitoring |
+| `meross_script.py` | Meross MSS310 power monitoring (credentials sanitized) |
 | `systemd/arduino-watchdog.service` | systemd service unit for watchdog |
 | `grafana/*.json` | Exported Grafana dashboard definitions |
-| `schema.md` | InfluxDB measurement schema (26 measurements) |
+| `schema.md` | InfluxDB measurement schema (27 measurements) |
 | `architecture.md` | Detailed system architecture documentation |
-| `pid-controller.md` | PID algorithm documentation with equations |
+| `pid-controller.md` | PID algorithm documentation with gain scheduling |
+| `statistical-analysis/` | A/B experiment analysis scripts (OLS, IV/2SLS) |
 | `LICENSE` | MIT License |
 
 ## Quick Start
@@ -81,7 +88,7 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
 ### Prerequisites
 
 - Raspberry Pi (or any Linux system) with Node.js 18+
-- Arduino Mega 2560 with StandardFirmata sketch uploaded
+- Arduino Mega 2560 with `arduino-terrarium.ino` sketch uploaded
 - InfluxDB 1.8.x
 - Grafana 10.x
 - MQTT broker (e.g., Mosquitto)
@@ -94,19 +101,25 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
    sudo systemctl enable nodered
    ```
 
-2. **Install required Node-RED nodes** (see `flows-README.md` for complete list):
+2. **Flash Arduino firmware**:
+   ```bash
+   arduino-cli compile --fqbn arduino:avr:mega arduino-terrarium/
+   arduino-cli upload --fqbn arduino:avr:mega -p /dev/ttyACM0 arduino-terrarium/
+   ```
+
+3. **Install required Node-RED nodes** (see `flows-README.md` for complete list):
    ```bash
    cd ~/.node-red
    npm install node-red-contrib-bigtimer \
-               node-red-contrib-ioplugin \
                node-red-node-openweathermap \
                node-red-contrib-influxdb \
                node-red-node-smooth \
                node-red-contrib-python-function-ps \
-               node-red-contrib-dynamic-dimmer
+               node-red-contrib-dynamic-dimmer \
+               node-red-node-serialport
    ```
 
-3. **Install InfluxDB 1.8**:
+4. **Install InfluxDB 1.8**:
    ```bash
    sudo apt install influxdb
    sudo systemctl enable influxdb
@@ -114,19 +127,19 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
    influx -execute "CREATE RETENTION POLICY standard_highland_retention ON highland DURATION 365d REPLICATION 1 DEFAULT"
    ```
 
-4. **Install Grafana**:
+5. **Install Grafana**:
    ```bash
    sudo apt install grafana
    sudo systemctl enable grafana-server
    ```
 
-5. **Import Node-RED flows**: See `flows-README.md` for detailed instructions.
+6. **Import Node-RED flows**: See `flows-README.md` for detailed instructions.
 
-6. **Import Grafana dashboards**: Import the JSON files from `grafana/` via the Grafana UI (Dashboards → Import → Upload JSON file).
+7. **Import Grafana dashboards**: Import the JSON files from `grafana/` via the Grafana UI (Dashboards → Import → Upload JSON file).
 
-7. **Configure credentials**: Update the three Python function nodes in the flows with your TP-Link Tapo account credentials and smart plug IP addresses.
+8. **Configure credentials**: Update the three Python function nodes in the flows with your TP-Link Tapo account credentials and smart plug IP addresses.
 
-8. **Install watchdog** (optional):
+9. **Install watchdog** (optional):
    ```bash
    sudo cp arduino-watchdog.sh /usr/local/bin/
    sudo chmod +x /usr/local/bin/arduino-watchdog.sh
@@ -148,10 +161,12 @@ This system maintains approximately 120 cloud forest plant species (*Heliamphora
 ## Key Design Decisions
 
 - **Weather-based setpoints** instead of fixed values — produces naturalistic climate variation
-- **PID controller** for humidity/fan management — smoother than bang-bang control
+- **Gain-scheduled PID controller** for humidity/fan management — smoother than bang-bang, eliminates near-setpoint oscillation
+- **Custom serial protocol** replacing Firmata — more reliable, debuggable, supports door sensors
+- **Door safety mode** — automatic protection during maintenance (fans off, compressor off, lights to 60%)
 - **Safety interlocks** — fans stop during misting to prevent fog dispersal
-- **Comprehensive logging** — 26 measurements for long-term analysis and experimentation
-- **Automatic recovery** — watchdog handles Arduino disconnections without human intervention
+- **Comprehensive logging** — 27 measurements for long-term analysis and experimentation
+- **Automatic recovery** — watchdog v7 handles serial stall with direct reboot
 
 ## License
 
