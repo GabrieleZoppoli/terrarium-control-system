@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Living Collection — Phylogenetic Dendrogram</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Crimson+Pro:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: radial-gradient(ellipse at center, #111318 0%, #090a0d 50%, #050607 100%);
+    color: #e0e0e0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden; user-select: none;
+  }
+  #chart { width: 100vw; height: 100vh; cursor: grab; }
+  #chart:active { cursor: grabbing; }
+
+  .link {
+    fill: none; stroke-opacity: 0.8; stroke-width: 1.5px;
+    transition: stroke-opacity 0.4s ease, stroke-width 0.4s ease;
+  }
+  .link.highlighted { stroke-opacity: 0.95; stroke-width: 1.8px; }
+  .link.dimmed { stroke-opacity: 0.18; }
+
+  .node circle {
+    transition: r 0.35s ease, fill-opacity 0.35s ease, filter 0.35s ease;
+    cursor: pointer;
+  }
+  .node:hover circle { filter: drop-shadow(0 0 3px currentColor); }
+  .node text { transition: fill-opacity 0.35s ease, opacity 0.35s ease; pointer-events: none; }
+  .branch-label { pointer-events: auto; cursor: pointer; }
+
+  /* ── Progressive label disclosure ── */
+  /* Order labels: faint at rest, visible on zoom or interaction */
+  .branch-label-order { opacity: 1; transition: opacity 0.3s ease; }
+  /* Family labels: subtle at rest */
+  .branch-label-family { opacity: 1; transition: opacity 0.3s ease; }
+  /* Genus labels: clearly visible */
+  .branch-label-genus { opacity: 1; transition: opacity 0.3s ease; }
+  /* All branch labels brighten on hover/focus */
+  .node:hover .branch-label, .node.show-label .branch-label { opacity: 1; }
+
+  /* Leaf labels: hidden at rest, shown on hover/focus/zoom */
+  .leaf-label { opacity: 1; transition: opacity 0.3s ease; }
+  .node:hover .leaf-label { opacity: 1; }
+  .node.show-label .leaf-label { opacity: 1; }
+  /* Zoom-triggered: at genus-level zoom, all visible leaves show labels */
+  body.zoom-leaves .leaf-label { opacity: 0.75; }
+  body.zoom-leaves .node:hover .leaf-label { opacity: 1; }
+  body.zoom-leaves .node.show-label .leaf-label { opacity: 1; }
+  /* At deep zoom, family/order labels also fully visible */
+  body.zoom-branches .branch-label-order,
+  body.zoom-branches .branch-label-family { opacity: 0.7; }
+
+  .node.dimmed circle { fill-opacity: 0.3; stroke-opacity: 0.3; }
+  .node.dimmed text { fill-opacity: 0.25; opacity: 0.25 !important; }
+  .node.dimmed .status-icon { opacity: 0.25 !important; }
+
+  .status-icon { font-size: 10px; pointer-events: none; opacity: 0.5; }
+
+  /* ── Title ── */
+  #title {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 10; pointer-events: none;
+  }
+  #title h1 {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 22px; font-weight: 300; letter-spacing: 4px;
+    text-transform: uppercase; color: #c8c8c8;
+    text-shadow: 0 0 40px rgba(120,120,120,0.15);
+  }
+  #title .sub {
+    font-size: 11px; color: #555; margin-top: 4px; letter-spacing: 1.2px;
+    font-weight: 300;
+  }
+
+  /* ── Search ── */
+  #search-box {
+    position: fixed; top: 18px; right: 20px; z-index: 20;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #search {
+    background: rgba(20,22,28,0.85); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 24px; padding: 8px 16px; color: #ddd; font-size: 13px;
+    width: 230px; outline: none; backdrop-filter: blur(12px);
+    font-family: 'Inter', sans-serif; font-weight: 300;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  #search:focus {
+    border-color: rgba(142,36,170,0.5);
+    box-shadow: 0 0 20px rgba(142,36,170,0.1);
+  }
+  #search::placeholder { color: #444; }
+  #search-count { font-size: 11px; color: #666; font-weight: 300; }
+
+  /* ── Breadcrumb ── */
+  #breadcrumb {
+    position: fixed; top: 68px; left: 50%; transform: translateX(-50%);
+    z-index: 10; font-size: 11px; color: #555; display: flex;
+    gap: 4px; align-items: center; font-weight: 300;
+  }
+  #breadcrumb span { cursor: pointer; transition: color 0.2s; }
+  #breadcrumb span:hover { color: #eee; }
+  #breadcrumb .sep { color: #333; cursor: default; }
+
+  /* ── Info Panel ── */
+  #info {
+    position: fixed; bottom: 20px; right: 20px; z-index: 20;
+    background: rgba(14,16,20,0.92);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px; padding: 20px 24px; width: 320px;
+    display: none; backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  #info .close {
+    position: absolute; top: 10px; right: 14px; cursor: pointer;
+    color: #555; font-size: 18px; transition: color 0.2s;
+  }
+  #info .close:hover { color: #eee; }
+  #info .taxon {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-size: 18px; font-weight: 400; margin-bottom: 2px;
+  }
+  #info .rank {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+    color: #666; margin-bottom: 10px; font-weight: 500;
+  }
+  #info .detail {
+    font-size: 12px; color: #888; margin: 4px 0; font-weight: 300;
+    line-height: 1.5;
+  }
+  #info .detail b { color: #aaa; font-weight: 500; }
+
+  /* Photo slideshow in info panel */
+  #info-photos {
+    margin-top: 12px; display: none;
+  }
+  #info-photos .slideshow {
+    position: relative; width: 100%; overflow: hidden; border-radius: 8px;
+    cursor: pointer;
+  }
+  #info-photos .slideshow img {
+    width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px;
+    display: block; transition: opacity 0.5s ease;
+  }
+  #info-photos .slideshow img.slide-hidden { display: none; }
+  #info-photos .slideshow:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  #info-photos .slide-dots {
+    display: flex; justify-content: center; gap: 5px; margin-top: 8px;
+  }
+  #info-photos .slide-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #444;
+    cursor: pointer; transition: background 0.25s;
+  }
+  #info-photos .slide-dot.active { background: #bbb; }
+  #info-photos .photo-hint {
+    font-size: 10px; color: #555; margin-top: 6px;
+    text-align: center; font-weight: 300;
+  }
+  .has-photo-indicator {
+    font-size: 9px; fill: #FFD54F; pointer-events: none; opacity: 0.7;
+  }
+
+  /* Lightbox */
+  #lightbox {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(0,0,0,0.92); display: none;
+    justify-content: center; align-items: center;
+    backdrop-filter: blur(8px);
+  }
+  #lightbox img {
+    max-width: 85vw; max-height: 85vh; border-radius: 8px;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.6);
+    cursor: default;
+  }
+  #lightbox .lb-close {
+    position: absolute; top: 24px; right: 32px;
+    font-size: 28px; color: #888; cursor: pointer;
+    transition: color 0.2s; z-index: 102;
+  }
+  #lightbox .lb-close:hover { color: #fff; }
+  #lightbox .lb-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    font-size: 36px; color: #888; cursor: pointer;
+    transition: color 0.2s; z-index: 102; user-select: none;
+    padding: 16px;
+  }
+  #lightbox .lb-arrow:hover { color: #fff; }
+  #lightbox .lb-prev { left: 16px; }
+  #lightbox .lb-next { right: 16px; }
+  #lightbox .lb-counter {
+    position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+    font-size: 12px; color: #666; font-weight: 300; letter-spacing: 1px;
+  }
+  #lightbox .lb-bg {
+    position: absolute; inset: 0; cursor: zoom-out;
+  }
+
+  #info .children-list {
+    margin-top: 10px; max-height: 200px; overflow-y: auto;
+  }
+  #info .children-list .child {
+    font-size: 11px; color: #777; padding: 3px 0; cursor: pointer;
+    transition: color 0.2s; font-weight: 300;
+  }
+  #info .children-list .child:hover { color: #eee; }
+  #info .children-list::-webkit-scrollbar { width: 3px; }
+  #info .children-list::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+  /* ── Legend ── */
+  #legend {
+    position: fixed; bottom: 20px; left: 20px; z-index: 20;
+    background: rgba(14,16,20,0.92);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px; padding: 14px 18px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  #legend .section-title {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 2px;
+    color: #444; margin: 10px 0 5px; font-weight: 500;
+  }
+  #legend .section-title:first-child { margin-top: 0; }
+  .legend-item {
+    display: flex; align-items: center; margin: 3px 0; font-size: 11px;
+    color: #888; cursor: pointer; transition: color 0.2s; font-weight: 300;
+  }
+  .legend-item:hover { color: #eee; }
+  .legend-item.muted { opacity: 0.15; }
+  .legend-swatch {
+    width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; flex-shrink: 0;
+  }
+  .legend-symbol { margin-right: 6px; font-size: 12px; min-width: 16px; text-align: center; }
+
+  /* ── Controls hint ── */
+  #controls {
+    position: fixed; top: 68px; right: 20px; z-index: 10;
+    font-size: 10px; color: #333; text-align: right; line-height: 1.7;
+    font-weight: 300;
+  }
+
+
+  /* ── Subtle vignette overlay ── */
+  #vignette {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1;
+    background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.4) 100%);
+  }
+
+  /* ── Text outline replaces removed #text-halo filter ── */
+  .branch-label, .leaf-label {
+    paint-order: stroke;
+    stroke: #090a0d;
+    stroke-width: 3px;
+    stroke-linejoin: round;
+    stroke-opacity: 0.92;
+  }
+/* Hover photo preview */
+#hover-preview {
+  position: fixed;
+  display: none;
+  pointer-events: none;
+  z-index: 40;
+  background: rgba(15, 16, 20, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px 8px 10px;
+  max-width: 276px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+#hover-preview.visible { display: block; }
+#hover-preview .hover-preview-caption {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #c8c8c8;
+  margin-bottom: 6px;
+  padding: 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#hover-preview .hover-preview-caption.leaf {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 11px;
+  color: #ddd;
+}
+#hover-preview .hover-preview-grid {
+  display: grid;
+  grid-auto-rows: 80px;
+  gap: 4px;
+}
+#hover-preview .hover-preview-grid img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 3px;
+  background: #111;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<div id="vignette"></div>
+
+<div id="title">
+  <div class="sub">375 accessions · 87 genera · 25 families</div>
+</div>
+
+<div id="breadcrumb"></div>
+
+
+<div id="search-box">
+  <input id="search" type="text" placeholder="Search plants..." autocomplete="off" />
+  <span id="search-count"></span>
+</div>
+
+<div id="controls">
+  scroll to zoom &middot; drag to pan<br>
+  click node to focus &middot; click center to reset<br>
+  Esc to clear
+</div>
+
+<div id="chart"></div>
+
+<div id="info">
+  <div class="close" onclick="closeInfo()">&times;</div>
+  <div class="rank" id="info-rank"></div>
+  <div class="taxon" id="info-taxon"></div>
+  <div id="info-details"></div>
+  <div id="info-photos">
+    <div class="slideshow" id="slideshow"></div>
+    <div class="slide-dots" id="slide-dots"></div>
+    <div class="photo-hint">Click photo to enlarge</div>
+  </div>
+  <div class="children-list" id="info-children"></div>
+</div>
+
+<div id="hover-preview" aria-hidden="true">
+  <div class="hover-preview-caption"></div>
+  <div class="hover-preview-grid"></div>
+</div>
+
+<div id="lightbox">
+  <div class="lb-bg" onclick="closeLightbox()"></div>
+  <div class="lb-close" onclick="closeLightbox()">&times;</div>
+  <div class="lb-arrow lb-prev" onclick="lbNav(-1, event)">&#x2039;</div>
+  <img id="lightbox-img" src="" alt="" />
+  <div class="lb-arrow lb-next" onclick="lbNav(1, event)">&#x203A;</div>
+  <div class="lb-counter" id="lb-counter"></div>
+</div>
+
+<div id="legend">
+  <div class="section-title">Evolutionary Groups</div>
+  <div id="legend-items"></div>
+  <div class="section-title" style="margin-top:14px">Status</div>
+  <div style="display:flex;flex-direction:column;gap:3px">
+    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#4CAF50">&#x25CF;</span> Alive</div>
+    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#C62828">&#x271D;</span> Dead</div>
+    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#7E57C2">&#x1F381;</span> Gave away</div>
+    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#FFD54F">&#x25C6;</span> Has photo</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const data = {"name":"Collection","children":[{"name":"Algae","children":[{"name":"Cladophorales","children":[{"name":"Cladophoraceae","children":[{"name":"Cladophora","children":[{"name":"aegagropila","size":1,"vendor":"Vivai le Georgiche","status":"dead"}]}]}]}]},{"name":"Bryophytes","children":[{"name":"Sphagnales","children":[{"name":"Sphagnaceae","children":[{"name":"Sphagnum","children":[{"name":"fallax","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"girgensohnii","size":1,"vendor":"Gartenbau Carow","status":"dead"},{"name":"papillosum","size":1,"vendor":"Gartenbau Carow","status":"alive"}]}]}]},{"name":"Dicranales","children":[{"name":"Leucobryaceae","children":[{"name":"Leucobryum","children":[{"name":"glaucum","size":1,"vendor":"From growlist (May 2020)","status":"dead"}]}]}]}]},{"name":"Ferns","children":[{"name":"Polypodiales","children":[{"name":"Davalliaceae","children":[{"name":"Davallia","children":[{"name":"fejeensis","size":1,"vendor":"From growlist (May 2020)","status":"dead"},{"name":"repens","size":1,"vendor":"Klein Carnivors","status":"dead"}]}]},{"name":"Polypodiaceae","children":[{"name":"Lecanopteris","children":[{"name":"lomarioides","size":1,"vendor":"Klein Carnivors","status":"dead"}]},{"name":"Platycerium","children":[{"name":"bifurcatum","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"veitchii","size":1,"vendor":"From growlist (May 2020)","status":"alive"}]},{"name":"Pyrrosia","children":[{"name":"nummularifolia","size":1,"vendor":"From growlist (May 2020)","status":"dead"}]}]}]},{"name":"Salviniales","children":[{"name":"Salviniaceae","children":[{"name":"Azolla","children":[{"name":"filiculoides","size":1,"vendor":"Water Plants Italy","status":"dead"},{"name":"filiculoides","size":1,"vendor":"Water Plants Italy","status":"dead"},{"name":"filiculoides","size":1,"vendor":"Eta Beta Vivaio","status":"alive"}]},{"name":"Salvinia","children":[{"name":"auriculata","size":1,"vendor":"Water Plants Italy","status":"alive"}]}]}]}]},{"name":"Gymnosperms","children":[{"name":"Pinales","children":[{"name":"Pinaceae","children":[{"name":"Picea","children":[{"name":"pungens 'Glauca Globosa'","size":1,"vendor":"Vivai le Georgiche","status":"alive"}]}]}]}]},{"name":"Basal Angiosperms","children":[{"name":"Nymphaeales","children":[{"name":"Nymphaeaceae","children":[{"name":"Nymphaea","children":[{"name":"'Indiana'","size":1,"vendor":"Arborea Farm","status":"alive"},{"name":"'Perry's Baby Red'","size":1,"vendor":"Water Plants Italy","status":"dead"},{"name":"'Perry's Baby Red'","size":1,"vendor":"Eta Beta Vivaio","status":"alive"},{"name":"pygmaea 'Helvola'","size":1,"vendor":"Vivai le Georgiche","status":"alive"},{"name":"× 'Snow Princess'","size":1,"vendor":"From growlist (May 2020)","status":"dead"}]}]}]},{"name":"Ceratophyllales","children":[{"name":"Ceratophyllaceae","children":[{"name":"Ceratophyllum","children":[{"name":"demersum","size":1,"vendor":"Eta Beta Vivaio","status":"dead"}]}]}]}]},{"name":"Monocots","children":[{"name":"Alismatales","children":[{"name":"Araceae","children":[{"name":"Lemna","children":[{"name":"minor","size":1,"vendor":"Vivai le Georgiche","status":"dead"}]}]},{"name":"Hydrocharitaceae","children":[{"name":"Elodea","children":[{"name":"crispa","size":1,"vendor":"Vivai le Georgiche","status":"dead"}]}]}]},{"name":"Poales","children":[{"name":"Cyperaceae","children":[{"name":"Cyperus","children":[{"name":"papyrus","size":1,"vendor":"","status":"alive"}]},{"name":"Eleocharis","children":[{"name":"acicularis","size":1,"vendor":"From growlist (May 2020)","status":"alive"}]}]},{"name":"Bromeliaceae","children":[{"name":"Catopsis","children":[{"name":"berteroniana","size":1,"vendor":"Araflora","status":"dead"}]},{"name":"Tillandsia","children":[{"name":"'Curly Slim'","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"'Houston Cotton Candy'","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"aeranthos","size":1,"vendor":"","status":"alive"},{"name":"albertiana","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"araujei","size":1,"vendor":"","status":"alive"},{"name":"arizae-juliae","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"bandensis","size":1,"vendor":"Unknown","status":"alive"},{"name":"bartramii","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"bartramii","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"bergeri","size":1,"vendor":"Unknown","status":"alive"},{"name":"burle-marxii","size":1,"vendor":"","status":"alive"},{"name":"cacticola","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"caerulea","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"capitata var. yellow","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"caput-medusae","size":1,"vendor":"Unknown","status":"alive"},{"name":"chaetophylla","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"chusgonensis","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"crocata","size":1,"vendor":"","status":"alive"},{"name":"duratii","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"funckiana","size":1,"vendor":"Dötterer Pflanzen","status":"dead"},{"name":"funckiana","size":1,"vendor":"","status":"alive"},{"name":"fuchsii var. fuchsii","size":1,"vendor":"Unknown","status":"alive"},{"name":"gilliesii var. gilliesii","size":1,"vendor":"","status":"alive"},{"name":"glabrior","size":1,"vendor":"","status":"alive"},{"name":"harrisii","size":1,"vendor":"Unknown","status":"alive"},{"name":"heteromorpha","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"hirta f. minor","size":1,"vendor":"","status":"alive"},{"name":"ionantha","size":1,"vendor":"Unknown","status":"alive"},{"name":"ionantha 'Fuego'","size":1,"vendor":"Unknown","status":"alive"},{"name":"kammii","size":1,"vendor":"Dötterer Pflanzen","status":"dead"},{"name":"kautskyi","size":1,"vendor":"","status":"alive"},{"name":"landbeckii","size":1,"vendor":"","status":"alive"},{"name":"loliacea","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"magnusiana","size":1,"vendor":"Unknown","status":"alive"},{"name":"paleacea","size":1,"vendor":"Unknown","status":"alive"},{"name":"pohliana","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"pruinosa","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"pueblensis","size":1,"vendor":"","status":"alive"},{"name":"rectifolia","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"recurvata","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"reitenbachii","size":1,"vendor":"","status":"alive"},{"name":"santiagoensis f. adpressa","size":1,"vendor":"","status":"alive"},{"name":"schiedeana var. major","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"seleriana","size":1,"vendor":"","status":"alive"},{"name":"setiformis","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"sphaerocephala","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"stellifera","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"stelliflora","size":1,"vendor":"","status":"alive"},{"name":"straminea","size":1,"vendor":"Unknown","status":"alive"},{"name":"streptocarpa","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"streptophylla","size":1,"vendor":"Unknown","status":"alive"},{"name":"tectorum 'Snow'","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"tectorum","size":1,"vendor":"Unknown","status":"alive"},{"name":"tenuifolia","size":1,"vendor":"","status":"alive"},{"name":"tricholepis","size":1,"vendor":"","status":"alive"},{"name":"usneoides 'Silber Grob'","size":1,"vendor":"Dötterer Pflanzen","status":"alive"},{"name":"vicentina","size":1,"vendor":"Michieli Floricoltura","status":"alive"},{"name":"xerographica","size":1,"vendor":"Michieli Floricoltura","status":"dead"}]},{"name":"Brocchinia","children":[{"name":"reducta","size":1,"vendor":"eBay","status":"alive","photos":["../img/collection/brocchinia/brocchinia-reducta.jpg"]}]}]}]},{"name":"Asparagales","children":[{"name":"Iridaceae","children":[{"name":"Iris","children":[{"name":"louisiana 'Bout Midnight'","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/iris/iris-louisiana-bout-midnight.jpg","../img/collection/iris/iris-louisiana-bout-midnight-2.jpg"]},{"name":"versicolor","size":1,"vendor":"Water Plants Italy","status":"alive"}]}]},{"name":"Orchidaceae","children":[{"name":"Nageliella","children":[{"name":"purpurea","size":1,"vendor":"Orchids & more","status":"alive"}]},{"name":"Paphiopedilum","children":[{"name":"delenatii vinicolor","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/paphiopedilum/paphiopedilum-delenatii-vinicolor.jpg"]},{"name":"micranthum x self","size":1,"vendor":"Celandroni Orchidee","status":"dead"},{"name":"sanderianum","size":1,"vendor":"From growlist (May 2020)","status":"dead"}]},{"name":"Pogonia","children":[{"name":"ophioglossoides","size":1,"vendor":"eBay (westcornwallcarnivores)","status":"alive"}]},{"name":"Spiranthes","children":[{"name":"cernua var. odorata 'Chadds Ford'","size":1,"vendor":"Gartenbau Carow","status":"alive"}]},{"name":"Calopogon","children":[{"name":"tuberosus","size":1,"vendor":"Gartenbau Carow","status":"alive","photos":["../img/collection/calopogon/calopogon-tuberosus.jpg"]}]},{"name":"Habenaria","children":[{"name":"radiata","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/habenaria/habenaria-radiata.jpg"]}]},{"name":"Dendrobium","children":[{"name":"'Berry Oda'","size":1,"vendor":"Re di Fiori Vivai","status":"alive"},{"name":"Betty Goto f. coerulea","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/dendrobium/dendrobium-betty-goto-f-coerulea.jpg"]},{"name":"cuthbertsonii","size":1,"vendor":"Großräschener Orchideen","status":"dead"},{"name":"cuthbertsonii 'Yellow'","size":1,"vendor":"Claessen Orchids & Plants","status":"alive","photos":["../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg","../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-2.jpg","../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-3.jpg","../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-4.jpg","../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-5.jpg","../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-6.jpg"]},{"name":"cyanocentrum 'Blau'","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/dendrobium/dendrobium-cyanocentrum-blau.jpg","../img/collection/dendrobium/dendrobium-cyanocentrum-blau-2.jpg","../img/collection/dendrobium/dendrobium-cyanocentrum-blau-3.jpg"]},{"name":"hellwigianum","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/dendrobium/dendrobium-hellwigianum.jpg","../img/collection/dendrobium/dendrobium-hellwigianum-2.jpg","../img/collection/dendrobium/dendrobium-hellwigianum-3.jpg"]},{"name":"jenkinsii","size":1,"vendor":"Großräschener Orchideen","status":"alive"},{"name":"lamyaiae","size":1,"vendor":"Currlin Orchideen","status":"alive"},{"name":"loddigesii","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/dendrobium/dendrobium-loddigesii.jpg","../img/collection/dendrobium/dendrobium-loddigesii-2.jpg","../img/collection/dendrobium/dendrobium-loddigesii-3.jpg","../img/collection/dendrobium/dendrobium-loddigesii-4.jpg","../img/collection/dendrobium/dendrobium-loddigesii-5.jpg","../img/collection/dendrobium/dendrobium-loddigesii-6.jpg","../img/collection/dendrobium/dendrobium-loddigesii-7.jpg"]},{"name":"speciosum","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"trantuanii","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"victoriae-reginae","size":1,"vendor":"Orchis Mundi","status":"alive","photos":["../img/collection/dendrobium/dendrobium-victoriae-reginae.jpg","../img/collection/dendrobium/dendrobium-victoriae-reginae-2.jpg"]}]},{"name":"Bulbophyllum","children":[{"name":"makoyanum","size":1,"vendor":"","status":"alive","photos":["../img/collection/bulbophyllum/bulbophyllum-makoyanum.jpg","../img/collection/bulbophyllum/bulbophyllum-makoyanum-2.jpg"]},{"name":"moniliforme","size":1,"vendor":"Celandroni Orchidee","status":"dead"},{"name":"thiurum","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/bulbophyllum/bulbophyllum-thiurum.jpg","../img/collection/bulbophyllum/bulbophyllum-thiurum-2.jpg"]}]},{"name":"Coelogyne","children":[{"name":"schilleriana","size":1,"vendor":"Currlin Orchideen","status":"dead"}]},{"name":"Mediocalcar","children":[{"name":"bifolium","size":1,"vendor":"Großräschener Orchideen","status":"dead"},{"name":"decoratum","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/mediocalcar/mediocalcar-decoratum.jpg","../img/collection/mediocalcar/mediocalcar-decoratum-2.jpg","../img/collection/mediocalcar/mediocalcar-decoratum-3.jpg"]}]},{"name":"Cattleya","children":[{"name":"aclandiae ('Black Hole' x Black Rock) x select","size":1,"vendor":"Großräschener Orchideen","status":"alive"},{"name":"walkeriana coerulea 'Blu Monarch' x 'ABC'","size":1,"vendor":"Lo Scrigno di Nebbia","status":"alive"},{"name":"walkeriana f. semialba 'Tokyo No.1' AM/AOS","size":1,"vendor":"Claessen Orchids & Plants","status":"alive"}]},{"name":"Laelia","children":[{"name":"briegeri","size":1,"vendor":"Ecuagenera.com","status":"dead"},{"name":"ghillanyi","size":1,"vendor":"Großräschener Orchideen","status":"alive"},{"name":"lundii coerulea","size":1,"vendor":"Nardotto e Capello","status":"alive"},{"name":"milleri","size":1,"vendor":"eBay","status":"alive"}]},{"name":"Sophronitis","children":[{"name":"brevipedunculata","size":1,"vendor":"Lo Scrigno di Nebbia","status":"alive","photos":["../img/collection/sophronitis/sophronitis-brevipedunculata.jpg","../img/collection/sophronitis/sophronitis-brevipedunculata-2.jpg"]},{"name":"coccinea f. aurea ('Atsumi' x 'Perfection')","size":1,"vendor":"Celandroni Orchidee","status":"alive"},{"name":"coccinea 4N","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/sophronitis/sophronitis-coccinea-4n.jpg","../img/collection/sophronitis/sophronitis-coccinea-4n-2.jpg","../img/collection/sophronitis/sophronitis-coccinea-4n-3.jpg","../img/collection/sophronitis/sophronitis-coccinea-4n-4.jpg","../img/collection/sophronitis/sophronitis-coccinea-4n-5.jpg"]},{"name":"pygmaea","size":1,"vendor":"Großräschener Orchideen","status":"dead","photos":["../img/collection/sophronitis/sophronitis-pygmaea.jpg"]},{"name":"pygmaea","size":1,"vendor":"Großräschener Orchideen","status":"dead"},{"name":"wittigiana rosea","size":1,"vendor":"Lo Scrigno di Nebbia","status":"alive"}]},{"name":"Leptotes","children":[{"name":"bicolor","size":1,"vendor":"Orchideria di Morosolo","status":"alive","photos":["../img/collection/leptotes/leptotes-bicolor.jpg","../img/collection/leptotes/leptotes-bicolor-2.jpg","../img/collection/leptotes/leptotes-bicolor-3.jpg","../img/collection/leptotes/leptotes-bicolor-4.jpg"]}]},{"name":"Isabelia","children":[{"name":"pulchella","size":1,"vendor":"Varesina Orchidee","status":"alive"}]},{"name":"Oerstedella","children":[{"name":"centradenia","size":1,"vendor":"Orchids & more","status":"alive","photos":["../img/collection/oerstedella/oerstedella-centradenia.jpg","../img/collection/oerstedella/oerstedella-centradenia-2.jpg"]}]},{"name":"Oncidium","children":[{"name":"cheirophorum","size":1,"vendor":"Varesina Orchidee","status":"alive","photos":["../img/collection/oncidium/oncidium-cheirophorum.jpg","../img/collection/oncidium/oncidium-cheirophorum-2.jpg"]},{"name":"eurycline","size":1,"vendor":"Orchideria di Morosolo","status":"dead","photos":["../img/collection/oncidium/oncidium-eurycline.jpg"]}]},{"name":"Tolumnia","children":[{"name":"hawkesiana","size":1,"vendor":"Orchideria di Morosolo","status":"alive","photos":["../img/collection/tolumnia/tolumnia-hawkesiana.jpg"]}]},{"name":"Comparetia","children":[{"name":"falcata","size":1,"vendor":"Orchids & more","status":"alive","photos":["../img/collection/comparetia/comparetia-falcata.jpg","../img/collection/comparetia/comparetia-falcata-2.jpg","../img/collection/comparetia/comparetia-falcata-3.jpg"]}]},{"name":"Macroclinium","children":[{"name":"manabinum","size":1,"vendor":"Orchids & more","status":"alive","photos":["../img/collection/macroclinium/macroclinium-manabinum.jpg","../img/collection/macroclinium/macroclinium-manabinum-2.jpg","../img/collection/macroclinium/macroclinium-manabinum-3.jpg","../img/collection/macroclinium/macroclinium-manabinum-4.jpg"]}]},{"name":"Ornithocephalus","children":[{"name":"estradae","size":1,"vendor":"Varesina Orchidee","status":"dead"}]},{"name":"Fernandezia","children":[{"name":"subbiflora","size":1,"vendor":"Großräschener Orchideen","status":"dead"}]},{"name":"Chytroglossa","children":[{"name":"aurata","size":1,"vendor":"Großräschener Orchideen","status":"dead"}]},{"name":"Phymatidium","children":[{"name":"tillandsioides","size":1,"vendor":"Orchideria di Morosolo","status":"alive"}]},{"name":"Cymbidium","children":[{"name":"Kiwi Midnight 'Geyserland'","size":1,"vendor":"Celandroni Orchidee","status":"gave"}]},{"name":"Fredclarkeara","children":[{"name":"After Dark","size":1,"vendor":"Celandroni Orchidee","status":"dead","photos":["../img/collection/fredclarkeara/fredclarkeara-after-dark.jpg"]}]},{"name":"Maxillaria","children":[{"name":"sophronitis","size":1,"vendor":"Orchids & more","status":"alive","photos":["../img/collection/maxillaria/maxillaria-sophronitis.jpg"]},{"name":"tenuifolia","size":1,"vendor":"","status":"alive","photos":["../img/collection/maxillaria/maxillaria-tenuifolia.jpg","../img/collection/maxillaria/maxillaria-tenuifolia-2.jpg","../img/collection/maxillaria/maxillaria-tenuifolia-3.jpg","../img/collection/maxillaria/maxillaria-tenuifolia-4.jpg"]}]},{"name":"Masdevallia","children":[{"name":"Devil's Heart","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/masdevallia/masdevallia-devils-heart.jpg","../img/collection/masdevallia/masdevallia-devils-heart-2.jpg","../img/collection/masdevallia/masdevallia-devils-heart-3.jpg","../img/collection/masdevallia/masdevallia-devils-heart-4.jpg","../img/collection/masdevallia/masdevallia-devils-heart-5.jpg","../img/collection/masdevallia/masdevallia-devils-heart-6.jpg"]},{"name":"caudata 'Gigi'","size":1,"vendor":"Ecuagenera","status":"alive"},{"name":"coccinea 'Anchota'","size":1,"vendor":"Ecuagenera Europe","status":"dead"},{"name":"decumana","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/masdevallia/masdevallia-decumana.jpg","../img/collection/masdevallia/masdevallia-decumana-2.jpg","../img/collection/masdevallia/masdevallia-decumana-3.jpg","../img/collection/masdevallia/masdevallia-decumana-4.jpg","../img/collection/masdevallia/masdevallia-decumana-5.jpg"]},{"name":"glandulosa","size":1,"vendor":"Großräschener Orchideen","status":"dead","photos":["../img/collection/masdevallia/masdevallia-glandulosa.jpg","../img/collection/masdevallia/masdevallia-glandulosa-2.jpg","../img/collection/masdevallia/masdevallia-glandulosa-3.jpg"]},{"name":"lucernula","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/masdevallia/masdevallia-lucernula.jpg","../img/collection/masdevallia/masdevallia-lucernula-2.jpg"]},{"name":"xanthina red","size":1,"vendor":"Großräschener Orchideen","status":"alive"}]},{"name":"Dracula","children":[{"name":"'Fake' hirsuta 'Yellow'","size":1,"vendor":"Ecuagenera Europe","status":"alive"},{"name":"lotax","size":1,"vendor":"Großräschener Orchideen","status":"alive","photos":["../img/collection/dracula/dracula-lotax.jpg","../img/collection/dracula/dracula-lotax-2.jpg","../img/collection/dracula/dracula-lotax-3.jpg","../img/collection/dracula/dracula-lotax-4.jpg","../img/collection/dracula/dracula-lotax-5.jpg","../img/collection/dracula/dracula-lotax-6.jpg"]},{"name":"pholeodytes","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/dracula/dracula-pholeodytes.jpg","../img/collection/dracula/dracula-pholeodytes-2.jpg","../img/collection/dracula/dracula-pholeodytes-3.jpg","../img/collection/dracula/dracula-pholeodytes-4.jpg","../img/collection/dracula/dracula-pholeodytes-5.jpg","../img/collection/dracula/dracula-pholeodytes-6.jpg","../img/collection/dracula/dracula-pholeodytes-7.jpg","../img/collection/dracula/dracula-pholeodytes-8.jpg"]},{"name":"Raven 'Jet'","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/dracula/dracula-raven-jet-5.jpg","../img/collection/dracula/dracula-raven-jet-6.jpg","../img/collection/dracula/dracula-raven-jet.jpg","../img/collection/dracula/dracula-raven-jet-2.jpg","../img/collection/dracula/dracula-raven-jet-3.jpg","../img/collection/dracula/dracula-raven-jet-4.jpg","../img/collection/dracula/dracula-raven-jet-7.jpg"]},{"name":"simia","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/dracula/dracula-simia.jpg","../img/collection/dracula/dracula-simia-2.jpg"]},{"name":"vlad-tepes","size":1,"vendor":"Großräschener Orchideen","status":"alive"}]},{"name":"Pleurothallis","children":[{"name":"leptotifolia","size":1,"vendor":"Orchideria di Morosolo","status":"alive"}]},{"name":"Platystele","children":[{"name":"baqueroi","size":1,"vendor":"Ecuagenera Europe","status":"alive","photos":["../img/collection/platystele/platystele-baqueroi.jpg","../img/collection/platystele/platystele-baqueroi-2.jpg","../img/collection/platystele/platystele-baqueroi-3.jpg","../img/collection/platystele/platystele-baqueroi-4.jpg"]}]},{"name":"Lepanthopsis","children":[{"name":"astrophora","size":1,"vendor":"Varesina Orchidee","status":"alive"}]},{"name":"Phalaenopsis","children":[{"name":"braceana","size":1,"vendor":"From growlist (May 2020)","status":"dead"},{"name":"finleyi","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/phalaenopsis/phalaenopsis-finleyi.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-2.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-3.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-4.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-5.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-6.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-7.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-8.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-9.jpg","../img/collection/phalaenopsis/phalaenopsis-finleyi-10.jpg"]},{"name":"gibbosa","size":1,"vendor":"Celandroni Orchidee","status":"alive"},{"name":"lowii","size":1,"vendor":"Celandroni Orchidee","status":"alive"},{"name":"parishii","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"stobartiana","size":1,"vendor":"Claessen Orchids","status":"alive"},{"name":"wilsonii","size":1,"vendor":"Celandroni Orchidee","status":"alive"}]},{"name":"Vanda","children":[{"name":"'Chocolate Brown'","size":1,"vendor":"From growlist (May 2020)","status":"dead"},{"name":"coerulescens","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/vanda/vanda-coerulescens.jpg","../img/collection/vanda/vanda-coerulescens-2.jpg"]},{"name":"coerulescens","size":1,"vendor":"Currlin Orchideen","status":"dead"},{"name":"nana","size":1,"vendor":"Claessen Orchids & Plants","status":"alive","photos":["../img/collection/vanda/vanda-nana.jpg"]}]},{"name":"Vandachostylis","children":[{"name":"Sasicha","size":1,"vendor":"Celandroni Orchidee","status":"dead"}]},{"name":"Holcoglossum","children":[{"name":"amesianum","size":1,"vendor":"Claessen Orchids & Plants","status":"alive","photos":["../img/collection/holcoglossum/holcoglossum-amesianum.jpg","../img/collection/holcoglossum/holcoglossum-amesianum-2.jpg","../img/collection/holcoglossum/holcoglossum-amesianum-3.jpg","../img/collection/holcoglossum/holcoglossum-amesianum-4.jpg","../img/collection/holcoglossum/holcoglossum-amesianum-5.jpg"]},{"name":"flavescens","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/holcoglossum/holcoglossum-flavescens.jpg"]},{"name":"quasispinifolium","size":1,"vendor":"Nardotto e Capello","status":"dead"},{"name":"tsii","size":1,"vendor":"Orchids & more","status":"alive"}]},{"name":"Neofinetia","children":[{"name":"falcata","size":1,"vendor":"Großräschener Orchideen","status":"alive"},{"name":"falcata 'Akausagi' (赤兎)","size":1,"vendor":"Negie Orchids","status":"alive","photos":["../img/collection/neofinetia/neofinetia-falcata-akausagi.jpg","../img/collection/neofinetia/neofinetia-falcata-akausagi-2.jpg","../img/collection/neofinetia/neofinetia-falcata-akausagi-3.jpg","../img/collection/neofinetia/neofinetia-falcata-akausagi-4.jpg"]},{"name":"falcata 'Benitengu' 紅天狗","size":1,"vendor":"Celandroni Orchidee","status":"alive"}]},{"name":"Neostylis","children":[{"name":"Lou Sneary","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/neostylis/neostylis-lou-sneary.jpg","../img/collection/neostylis/neostylis-lou-sneary-2.jpg","../img/collection/neostylis/neostylis-lou-sneary-3.jpg","../img/collection/neostylis/neostylis-lou-sneary-4.jpg","../img/collection/neostylis/neostylis-lou-sneary-5.jpg","../img/collection/neostylis/neostylis-lou-sneary-6.jpg","../img/collection/neostylis/neostylis-lou-sneary-7.jpg"]}]},{"name":"Darwinara","children":[{"name":"Charm 'Blue Moon'","size":1,"vendor":"Claessen Orchids & Plants","status":"alive"},{"name":"Charm 'Blue Star'","size":1,"vendor":"Celandroni Orchidee","status":"dead"}]},{"name":"Aerangis","children":[{"name":"mystacidii","size":1,"vendor":"Celandroni Orchidee","status":"dead"},{"name":"somalensis","size":1,"vendor":"Celandroni Orchidee","status":"alive"}]},{"name":"Angraecum","children":[{"name":"didieri","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/angraecum/angraecum-didieri.jpg"]},{"name":"viguieri","size":1,"vendor":"Celandroni Orchidee","status":"dead"}]},{"name":"Gastrochilus","children":[{"name":"japonicus","size":1,"vendor":"Varesina Orchidee","status":"alive"}]},{"name":"Chiloschista","children":[{"name":"himalaica","size":1,"vendor":"Orchids & more","status":"alive"},{"name":"lunifera","size":1,"vendor":"Orchids & more","status":"dead","photos":["../img/collection/chiloschista/chiloschista-lunifera.jpg"]}]},{"name":"Schoenorchis","children":[{"name":"pachyacris","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/schoenorchis/schoenorchis-pachyacris.jpg","../img/collection/schoenorchis/schoenorchis-pachyacris-2.jpg","../img/collection/schoenorchis/schoenorchis-pachyacris-3.jpg","../img/collection/schoenorchis/schoenorchis-pachyacris-4.jpg","../img/collection/schoenorchis/schoenorchis-pachyacris-5.jpg"]}]},{"name":"Cleisostoma","children":[{"name":"arietinum","size":1,"vendor":"Orchids & more","status":"alive"}]},{"name":"Ceratochilus","children":[{"name":"biglandulosus","size":1,"vendor":"Großräschener Orchideen","status":"alive"}]},{"name":"Seidenfadenia","children":[{"name":"mitrata","size":1,"vendor":"Celandroni Orchidee","status":"dead","photos":["../img/collection/seidenfadenia/seidenfadenia-mitrata.jpg","../img/collection/seidenfadenia/seidenfadenia-mitrata-2.jpg"]}]},{"name":"Stereochilus","children":[{"name":"pachyphyllus","size":1,"vendor":"Orchids & more","status":"dead"}]},{"name":"Papilionanthe","children":[{"name":"teres","size":1,"vendor":"Celandroni Orchidee","status":"alive","photos":["../img/collection/papilionanthe/papilionanthe-teres.jpg","../img/collection/papilionanthe/papilionanthe-teres-2.jpg","../img/collection/papilionanthe/papilionanthe-teres-3.jpg"]}]},{"name":"Stelis","children":[{"name":"sp.","size":1,"vendor":"Ecuagenera.com","status":"alive","photos":["../img/collection/stelis/stelis-sp.jpg","../img/collection/stelis/stelis-sp-2.jpg","../img/collection/stelis/stelis-sp-3.jpg"]}]},{"name":"Restrepia","children":[{"name":"vasquezii","size":1,"vendor":"Ecuagenera","status":"alive","photos":["../img/collection/restrepia/restrepia-vasquezii.jpg","../img/collection/restrepia/restrepia-vasquezii-2.jpg"]}]}]}]}]},{"name":"Eudicots","children":[{"name":"Caryophyllales","children":[{"name":"Drosophyllaceae","children":[{"name":"Drosophyllum","children":[{"name":"lusitanicum","size":1,"vendor":"Rita Corino","status":"dead"}]}]},{"name":"Droseraceae","children":[{"name":"Aldrovanda","children":[{"name":"vesiculosa","size":1,"vendor":"Un Angolo di Deserto","status":"alive"}]},{"name":"Dionaea","children":[{"name":"muscipula 'Akai Ryu'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'Alien'","size":1,"vendor":"Carnivoria.eu","status":"alive","photos":["../img/collection/dionaea/dionaea-muscipula-alien.jpg"]},{"name":"muscipula 'All Red Giant Form'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'B52'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'BCP Clone H25'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Bimbo'","size":1,"vendor":"Paolo Mattevi","status":"dead"},{"name":"muscipula 'Black Star'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Charlie Mandon Spotted'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Clayton Volcanic Red'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Coquillage'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"muscipula 'Crocodile'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'DC XL'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Dracula'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'Feather Tooth'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Freaky Star'","size":1,"vendor":"Andrea Fontana","status":"alive"},{"name":"muscipula 'Funnel Trap'","size":1,"vendor":"Alessandro Ferri","status":"alive"},{"name":"muscipula 'Fused Teeth'","size":1,"vendor":"Andrea Fontana","status":"alive"},{"name":"muscipula 'G5 Hellcat'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'GJ Giant Cudo'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Galaxy'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Gold Strike'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'Great Line'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"muscipula 'H25 BCP'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Jaw Smiley x Big DM'","size":1,"vendor":"Paolo Mattevi","status":"dead"},{"name":"muscipula 'Kim Jong Un'","size":1,"vendor":"Paolo Mattevi","status":"dead"},{"name":"muscipula 'La Grosse à GuiGui'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"muscipula 'Long Snapper'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Miss Pimbeche'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Miss Pimbèche'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Periscope'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Petite Dragon'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"muscipula 'Phalanx'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Pluto'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'SD Kronos'","size":1,"vendor":"Luca Gambini","status":"alive"},{"name":"muscipula 'Spider'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"muscipula 'Trevis Red Dentate'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Triton'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula 'Werewolf'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Whip Long Lash'","size":1,"vendor":"Diflora","status":"alive"},{"name":"muscipula 'Yellow Orange'","size":1,"vendor":"Paolo Mattevi","status":"alive"},{"name":"muscipula da seme (seedling)","size":1,"vendor":"","status":"alive"},{"name":"muscipula \"Pom Pom\"","size":1,"vendor":"friend","status":"alive","photos":["../img/collection/dionaea/dionaea-muscipula-pom-pom.jpg"]}]},{"name":"Drosera","children":[{"name":"capensis 'Bainskloof'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"capensis 'Broad Leaf'","size":1,"vendor":"Gartenbau Carow","status":"alive"},{"name":"capensis 'Giant Form'","size":1,"vendor":"Diflora","status":"gave"},{"name":"capensis 'Hairy Form'","size":1,"vendor":"Diflora","status":"alive"},{"name":"capensis 'Red'","size":1,"vendor":"Gartenbau Carow","status":"alive"},{"name":"capensis (typical)","size":1,"vendor":"","status":"alive"},{"name":"capensis alba","size":1,"vendor":"Giardino Carnivoro","status":"gave"},{"name":"capensis var. alba","size":1,"vendor":"Diflora","status":"dead"},{"name":"cistiflora","size":1,"vendor":"Diflora","status":"dead"},{"name":"falconeri 'Wangi form'","size":1,"vendor":"Carnivoria.eu","status":"dead"},{"name":"filiformis 'Florida Giant'","size":1,"vendor":"","status":"alive"},{"name":"gigantea","size":1,"vendor":"Gartenbau Carow","status":"dead"},{"name":"macrantha subsp. eremaea","size":1,"vendor":"Allen Lowrie","status":"alive"},{"name":"ordensis","size":1,"vendor":"Carnivoria.eu","status":"dead"},{"name":"regia","size":1,"vendor":"Gartenbau Carow","status":"alive"},{"name":"regia","size":1,"vendor":"Diflora","status":"dead"},{"name":"tubaestylis 'Large'","size":1,"vendor":"Allen Lowrie","status":"alive"},{"name":"zonaria 'Large'","size":1,"vendor":"Allen Lowrie","status":"alive"},{"name":"× Solaris","size":1,"vendor":"Giacomo Mehle / Drosera Solaris","status":"dead"}]}]},{"name":"Nepenthaceae","children":[{"name":"Nepenthes","children":[{"name":"'Fake Pitopangii'","size":1,"vendor":"Andreas Wistuba","status":"alive"},{"name":"ampullaria 'Lime Twist'","size":1,"vendor":"Carnivoria.eu","status":"gave"},{"name":"argentii","size":1,"vendor":"Giardino Carnivoro","status":"alive","photos":["../img/collection/nepenthes/nepenthes-argentii.jpg"]},{"name":"aristolochioides (Sumatra) Clone:NM03","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03.jpg","../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-2.jpg","../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-3.jpg","../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-4.jpg"]},{"name":"glabrata","size":1,"vendor":"Karnivores.com","status":"alive","photos":["../img/collection/nepenthes/nepenthes-glabrata.jpg","../img/collection/nepenthes/nepenthes-glabrata-2.jpg","../img/collection/nepenthes/nepenthes-glabrata-3.jpg","../img/collection/nepenthes/nepenthes-glabrata-4.jpg","../img/collection/nepenthes/nepenthes-glabrata-5.jpg"]},{"name":"inermis (Gunung Gadut)","size":1,"vendor":"Andreas Wistuba","status":"alive"},{"name":"jamban","size":1,"vendor":"Giardino Carnivoro","status":"alive","photos":["../img/collection/nepenthes/nepenthes-jamban.jpg"]},{"name":"micramphora","size":1,"vendor":"Giardino Carnivoro","status":"alive"},{"name":"pitopangii 'Ivory Colored Form' Clone:01","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01.jpg"]},{"name":"tenuis 'Reddish Leaves' (West Sumatra)","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/nepenthes/nepenthes-tenuis-reddish-leaves-west-sumatra.jpg","../img/collection/nepenthes/nepenthes-tenuis-reddish-leaves-west-sumatra-2.jpg","../img/collection/nepenthes/nepenthes-tenuis-reddish-leaves-west-sumatra-3.jpg","../img/collection/nepenthes/nepenthes-tenuis-reddish-leaves-west-sumatra-4.jpg"]}]}]}]},{"name":"Oxalidales","children":[{"name":"Cephalotaceae","children":[{"name":"Cephalotus","children":[{"name":"f. 'Eden Black'","size":1,"vendor":"Nature et Paysages","status":"dead","photos":["../img/collection/cephalotus/cephalotus-f-eden-black.jpg","../img/collection/cephalotus/cephalotus-f-eden-black-2.jpg"]},{"name":"f. 'Eden Black'","size":1,"vendor":"Taudan & Plants","status":"dead"},{"name":"f. 'Hummer's Giant'","size":1,"vendor":"David Maccioni","status":"alive"},{"name":"follicularis","size":1,"vendor":"Giardino Carnivoro","status":"alive","photos":["../img/collection/cephalotus/cephalotus-follicularis.jpg"]}]}]}]},{"name":"Rosales","children":[{"name":"Rosaceae","children":[{"name":"Rosa","children":[{"name":"'Sorbet Fruité'","size":1,"vendor":"Meilland (Yacht & Garden, Genoa)","status":"alive","photos":["../img/collection/rosa/rosa-sorbet-fruite.jpg","../img/collection/rosa/rosa-sorbet-fruite-2.jpg"]}]}]},{"name":"Moraceae","children":[{"name":"Ficus","children":[{"name":"microcarpa","size":1,"vendor":"friend","status":"alive","photos":["../img/collection/ficus/ficus-microcarpa.jpg"]}]}]}]},{"name":"Ericales","children":[{"name":"Roridulaceae","children":[{"name":"Roridula","children":[{"name":"gorgonias","size":1,"vendor":"Gartenbau Carow","status":"dead"}]}]},{"name":"Sarraceniaceae","children":[{"name":"Darlingtonia","children":[{"name":"californica","size":1,"vendor":"Giardino Carnivoro","status":"dead"},{"name":"californica","size":1,"vendor":"Gartenbau Carow","status":"dead"},{"name":"californica","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"californica","size":1,"vendor":"Andrea Fontana","status":"dead"}]},{"name":"Heliamphora","children":[{"name":"'Godzilla'","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-godzilla.jpg","../img/collection/heliamphora/heliamphora-godzilla-2.jpg"]},{"name":"ionasi 'Elegance'","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-ionasi-elegance-3.jpg","../img/collection/heliamphora/heliamphora-ionasi-elegance.jpg","../img/collection/heliamphora/heliamphora-ionasi-elegance-2.jpg"]},{"name":"macdonaldae (Cerro Duida) ISC","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-macdonaldae.jpg","../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg","../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg","../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-3.jpg"]},{"name":"minor 'Burgundy Black'","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-minor-burgundy-black.jpg"]},{"name":"minor Clone 4","size":1,"vendor":"Andreas Wistuba","status":"alive"},{"name":"minor var. pilosa (Auyan) Clone 3","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3-3.jpg","../img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3-4.jpg","../img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3.jpg","../img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3-2.jpg"]},{"name":"pulchella (Akopan Tepui)","size":1,"vendor":"Andreas Wistuba","status":"alive"},{"name":"pulchella (Amuri Tepui)","size":1,"vendor":"Andreas Wistuba","status":"alive"},{"name":"purpurascens × ionasii (Red Giant)","size":1,"vendor":"Andreas Wistuba","status":"alive","photos":["../img/collection/heliamphora/heliamphora-purpurascens-x-ionasii-red-giant.jpg","../img/collection/heliamphora/heliamphora-purpurascens-x-ionasii-red-giant-2.jpg","../img/collection/heliamphora/heliamphora-purpurascens-x-ionasii-red-giant-3.jpg"]}]},{"name":"Sarracenia","children":[{"name":"'Hurricane Creek White' clone F","size":1,"vendor":"Luca Gambini","status":"alive","photos":["../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg"]},{"name":"'Judith Hindle'","size":1,"vendor":"Nature et Paysages","status":"alive"},{"name":"'Juthatip Soper'","size":1,"vendor":"Novaflora","status":"gave"},{"name":"'Kimber Red Ruffles'","size":1,"vendor":"Luca Cappon","status":"alive"},{"name":"'Orange Sunset'","size":1,"vendor":"Luca Cappon","status":"alive"},{"name":"'Scarlet Belle'","size":1,"vendor":"Nature et Paysages","status":"gave"},{"name":"'Waccamaw'","size":1,"vendor":"eBay (secret_garden_carnivores)","status":"alive"},{"name":"'Wilkerson's White Knight'","size":1,"vendor":"Davide Tavecchio","status":"alive"},{"name":"alata 'Black tubes, pubescent form'","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"alata 'Red Lid' × flava H17 MK","size":1,"vendor":"Alessandro Ferri","status":"gave"},{"name":"alata var. nigropurpurea","size":1,"vendor":"Angelo Ossino","status":"gave"},{"name":"areolata L28MK × A28MK","size":1,"vendor":"","status":"alive"},{"name":"cv. 'Leviathan'","size":1,"vendor":"Hewitt-Cooper Carnivorous Plants","status":"alive"},{"name":"flava var. flava 'Dahlia Bog'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"flava var. flava 'Goldie'","size":1,"vendor":"Luca Cappon","status":"alive","photos":["../img/collection/sarracenia/sarracenia-flava-var-flava-goldie.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-2.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-3.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-4.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-5.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-6.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-7.jpg","../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-8.jpg"]},{"name":"flava var. ornata 'Filiformis' (FO6)","size":1,"vendor":"Stefano Polleschi","status":"alive"},{"name":"flava var. rubricorpora 'Burgundy'","size":1,"vendor":"Klein Carnivors","status":"gave"},{"name":"flava var. rubricorpora 'Burgundy'","size":1,"vendor":"Davide Tavecchio","status":"dead"},{"name":"flava var. rubricorpora 'Giant Red Tube'","size":1,"vendor":"Davide Tavecchio","status":"alive"},{"name":"leucophylla 'Big Bulbous Pink Pitchers'","size":1,"vendor":"","status":"alive"},{"name":"leucophylla 'Helmut's Delight'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"leucophylla 'Large Pink Lip'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"leucophylla (Titan × Self)","size":1,"vendor":"Angelo Ossino","status":"dead"},{"name":"minor var. okefenokeensis 'Reading University Clone'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"minor var. okefenokeensis 'Red Eyes'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"minor var. okefenokeensis 'Watchtower'","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"psittacina var. okefenokeensis Clone 1","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"purpurea ssp. purpurea","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"purpurea ssp. purpurea 'Veinless Plant'","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"purpurea ssp. venosa (Reedy Creek, Caroline Co.)","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"purpurea ssp. venosa var. pallidiflora","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"× 'Glider'","size":1,"vendor":"Luca Cappon","status":"alive"},{"name":"× 'Llama'","size":1,"vendor":"Roberto Restelli","status":"alive"},{"name":"× 'Snow White'","size":1,"vendor":"Angelo Ossino","status":"gave"},{"name":"× Saurus","size":1,"vendor":"eBay (semiraridalmondo)","status":"alive"},{"name":"× alata 'Night' × leucophylla × alata Night","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"× alata AF","size":1,"vendor":"","status":"alive"},{"name":"× catesbaei","size":1,"vendor":"Marco Oliosi","status":"gave"},{"name":"× courtii","size":1,"vendor":"Karnivores.com","status":"gave"},{"name":"× moorei 'Brook's Hybrid'","size":1,"vendor":"Luca Cappon","status":"gave"},{"name":"× moorei 'Leah Wilkerson'","size":1,"vendor":"FreakyPlants (Marco)","status":"alive","photos":["../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson.jpg","../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-2.jpg","../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-3.jpg","../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-4.jpg"]},{"name":"flava var. ornata FO6 \"Filiformis\" (V. Bordin), aberrant form","size":1,"vendor":"unknown","status":"alive","photos":["../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form.jpg","../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-2.jpg","../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-3.jpg"]}]}]}]},{"name":"Lamiales","children":[{"name":"Byblidaceae","children":[{"name":"Byblis","children":[{"name":"gigantea","size":1,"vendor":"eBay (killerblume)","status":"dead"},{"name":"liniflora 'Kingston Rest'","size":1,"vendor":"eBay (killerblume)","status":"dead"}]}]},{"name":"Lentibulariaceae","children":[{"name":"Genlisea","children":[{"name":"africana","size":1,"vendor":"eBay (heliamphorina)","status":"alive","photos":["../img/collection/genlisea/genlisea-africana.jpg"]},{"name":"aurea (Chapada dos Guimarães, MG)","size":1,"vendor":"eBay (heliamphorina)","status":"dead"},{"name":"flexuosa","size":1,"vendor":"eBay (heliamphorina)","status":"dead"},{"name":"violacea","size":1,"vendor":"eBay (heliamphorina)","status":"dead"}]},{"name":"Pinguicula","children":[{"name":"'Apasionada' (gigantea alba x moctezumae)","size":1,"vendor":"Giardino Carnivoro","status":"alive"},{"name":"'Marciano' (heterophylla × 'Weser')","size":1,"vendor":"","status":"alive","photos":["../img/collection/pinguicula/pinguicula-marciano-heterophylla-x-weser.jpg"]},{"name":"agnata","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"agnata x gypsicola","size":1,"vendor":"Giardino Carnivoro","status":"alive","photos":["../img/collection/pinguicula/pinguicula-agnata-x-gypsicola.jpg"]},{"name":"calderoniae","size":1,"vendor":"Giardino Carnivoro","status":"dead"},{"name":"cyclosecta","size":1,"vendor":"","status":"dead"},{"name":"ehlersiae","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"esseriana","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"gigantea","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"gigantea","size":1,"vendor":"Un Angolo di Deserto","status":"dead"},{"name":"gracilis x emarginata","size":1,"vendor":"Giardino Carnivoro","status":"alive"},{"name":"gypsicola × moctezumae","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"immaculata","size":1,"vendor":"Diflora","status":"alive"},{"name":"jaumavensis x cyclosecta","size":1,"vendor":"Giardino Carnivoro","status":"alive","photos":["../img/collection/pinguicula/pinguicula-jaumavensis-x-cyclosecta.jpg","../img/collection/pinguicula/pinguicula-jaumavensis-x-cyclosecta-2.jpg","../img/collection/pinguicula/pinguicula-jaumavensis-x-cyclosecta-3.jpg"]},{"name":"laueana","size":1,"vendor":"Giardino Carnivoro","status":"dead"},{"name":"laueana 'Crimson Flower'","size":1,"vendor":"Diflora","status":"alive"},{"name":"medusina","size":1,"vendor":"Un Angolo di Deserto","status":"dead"},{"name":"moranensis","size":1,"vendor":"Diflora","status":"alive"},{"name":"primuliflora","size":1,"vendor":"Nature et Paysages","status":"dead"},{"name":"primuliflora 'Rose'","size":1,"vendor":"From growlist (May 2020)","status":"dead"},{"name":"rectifolia","size":1,"vendor":"Un Angolo di Deserto","status":"alive","photos":["../img/collection/pinguicula/pinguicula-rectifolia.jpg"]},{"name":"reticulata","size":1,"vendor":"Carnivoria.eu","status":"alive"},{"name":"rotundiflora","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"sp. 'Lautner 92/52' × gypsicola 'Buenavista'","size":1,"vendor":"Un Angolo di Deserto","status":"alive"},{"name":"× 'Sethos'","size":1,"vendor":"Un Angolo di Deserto","status":"dead"},{"name":"× Red Starfish","size":1,"vendor":"Giardino Carnivoro","status":"alive"}]},{"name":"Utricularia","children":[{"name":"alpina","size":1,"vendor":"Gartenbau Carow","status":"dead","photos":["../img/collection/utricularia/utricularia-alpina.jpg","../img/collection/utricularia/utricularia-alpina-2.jpg"]},{"name":"bisquamata 'Big Purple Flower'","size":1,"vendor":"Klein Carnivors","status":"gave"},{"name":"blanchetii 'Violet' (Pico del Almos)","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"calycifida 'Asenath White'","size":1,"vendor":"Klein Carnivors","status":"alive"},{"name":"dichotoma (Blue Flower)","size":1,"vendor":"Klein Carnivors","status":"gave"},{"name":"fulva","size":1,"vendor":"Carnivoria.eu","status":"gave"},{"name":"longifolia","size":1,"vendor":"From growlist (May 2020)","status":"alive"},{"name":"prehensilis","size":1,"vendor":"Klein Carnivors","status":"gave","photos":["../img/collection/utricularia/utricularia-prehensilis.jpg"]},{"name":"sandersonii (white)","size":1,"vendor":"From growlist (May 2020)","status":"alive","photos":["../img/collection/utricularia/utricularia-sandersonii-white.jpg"]},{"name":"uniflora L-Type","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"welwitschii","size":1,"vendor":"Klein Carnivors","status":"dead"},{"name":"× nelumbifolia × reniformis","size":1,"vendor":"Klein Carnivors","status":"alive","photos":["../img/collection/utricularia/utricularia-x-nelumbifolia-x-reniformis.jpg","../img/collection/utricularia/utricularia-x-nelumbifolia-x-reniformis-2.jpg","../img/collection/utricularia/utricularia-x-nelumbifolia-x-reniformis-3.jpg"]}]}]}]}]}]};
+
+const cladeColors = {
+  "Algae": "#607D8B", "Bryophytes": "#8D6E63", "Ferns": "#66BB6A",
+  "Gymnosperms": "#2E7D32", "Basal Angiosperms": "#5C6BC0",
+  "Monocots": "#AB47BC", "Eudicots": "#EF5350", "Unknown": "#9E9E9E"
+};
+const orderColorsMap = {
+  "Poales": "#00897B", "Asparagales": "#AB47BC", "Alismatales": "#26A69A",
+  "Caryophyllales": "#EF5350", "Ericales": "#FF8F00", "Lamiales": "#42A5F5",
+  "Oxalidales": "#43A047", "Rosales": "#EC407A"
+};
+
+let width = window.innerWidth;
+let height = window.innerHeight;
+const radius = Math.min(width, height) * 0.8 - 60;
+
+let activeStatuses = new Set(['alive', 'dead', 'gave']);
+let focusedNode = null;
+let searchTerm = '';
+let initialFitTransform = null;
+
+const svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+const g = svg.append("g").attr("transform", `translate(${width/2},${height/2})`);
+
+// Invisible background to capture pointer events in the "area" between nodes.
+// Must be FIRST child of g so it sits behind nodes and links in render order.
+// Large negative-offset bounds comfortably cover the radial layout at any zoom.
+const proximityOverlay = g.append("rect")
+  .attr("class", "proximity-overlay")
+  .attr("x", -2000).attr("y", -2000)
+  .attr("width", 4000).attr("height", 4000)
+  .attr("fill", "transparent")
+  .style("cursor", "crosshair")
+  .style("pointer-events", "all");
+
+let currentZoom = 1;
+const zoomBehavior = d3.zoom().scaleExtent([0.2, 14])
+  .on("zoom", (e) => {
+    g.attr("transform",
+      `translate(${e.transform.x+width/2},${e.transform.y+height/2}) scale(${e.transform.k})`);
+    // Progressive label disclosure based on zoom level
+    const k = e.transform.k;
+    if (k !== currentZoom) {
+      currentZoom = k;
+      document.body.classList.toggle('zoom-branches', k >= 1.8);
+      document.body.classList.toggle('zoom-leaves', k >= 3);
+    }
+  });
+svg.call(zoomBehavior);
+// Disable d3-zoom's default double-click-to-zoom; we use dblclick for zoom-to-subtree instead.
+svg.on("dblclick.zoom", null);
+
+const cluster = d3.cluster().size([360, radius])
+  .separation((a, b) => {
+    if (a.parent == b.parent) return 1;
+    // More space between different families/orders
+    if (a.depth <= 2) return 3;
+    return 2 / a.depth;
+  });
+
+const root = d3.hierarchy(data);
+cluster(root);
+
+// ── Helpers ──
+function getClade(d) { let n=d; while(n.depth>1)n=n.parent; return n?n.data.name:'Unknown'; }
+function getOrder(d) { let n=d; while(n.depth>2)n=n.parent; return n?n.data.name:''; }
+function getColor(d) { const o=getOrder(d); return orderColorsMap[o]||cladeColors[getClade(d)]||'#555'; }
+function getAncestors(d) { const p=[]; let c=d; while(c){p.push(c);c=c.parent;} return p; }
+function getDescendants(d) { const desc=[]; function r(n){desc.push(n);if(n.children)n.children.forEach(r);} r(d); return desc; }
+function leafCount(d) { if(!d.children)return 1; return d.children.reduce((s,c)=>s+leafCount(c),0); }
+
+// Collect up to `max` representative photo paths for the hover preview.
+// - For a leaf: that leaf's own photos, truncated to max.
+// - For an internal node: DFS in JSON order, taking photo[0] from each photo'd descendant leaf, stopping at max.
+function collectPreviewPhotos(d, max) {
+  if (!d.children) {
+    return (d.data.photos || []).slice(0, max);
+  }
+  const out = [];
+  function walk(n) {
+    if (out.length >= max) return;
+    if (!n.children) {
+      const p = n.data.photos;
+      if (p && p.length > 0) out.push(p[0]);
+      return;
+    }
+    for (const c of n.children) {
+      if (out.length >= max) break;
+      walk(c);
+    }
+  }
+  walk(d);
+  return out;
+}
+
+function radialLink(d) {
+  const sa=(d.source.x-90)*Math.PI/180, sr=d.source.y;
+  const ta=(d.target.x-90)*Math.PI/180, tr=d.target.y;
+  return `M${sr*Math.cos(sa)},${sr*Math.sin(sa)}C${(sr+tr)/2*Math.cos(sa)},${(sr+tr)/2*Math.sin(sa)} ${(sr+tr)/2*Math.cos(ta)},${(sr+tr)/2*Math.sin(ta)} ${tr*Math.cos(ta)},${tr*Math.sin(ta)}`;
+}
+function radialPoint(x,y) { const a=(x-90)*Math.PI/180; return [y*Math.cos(a),y*Math.sin(a)]; }
+function rankName(depth) { return ['Collection','Clade','Order','Family','Genus','Species'][depth]||''; }
+
+// Proximity index: map any cursor coordinate (in g-space) to the nearest
+// internal node at depth 2–4 (orders, families, genera). Species leaves are
+// excluded — their small circles already handle precise hover/click.
+const proximityCandidates = root.descendants().filter(n => n.depth >= 2 && n.depth <= 4);
+const proximityPoints = proximityCandidates.map(n => radialPoint(n.x, n.y));
+const proximityDelaunay = d3.Delaunay.from(proximityPoints);
+
+// ── Draw links ──
+const linkGroup = g.append("g");
+const links = linkGroup.selectAll(".link").data(root.links()).join("path")
+  .attr("class","link").attr("d",radialLink).attr("stroke",d=>getColor(d.target));
+
+// ── Hover photo preview ──
+const HOVER_DELAY_MS = 200;
+const HOVER_MAX_PHOTOS = 6;
+const hoverPreviewEl = document.getElementById('hover-preview');
+const hoverPreviewCaptionEl = hoverPreviewEl.querySelector('.hover-preview-caption');
+const hoverPreviewGridEl = hoverPreviewEl.querySelector('.hover-preview-grid');
+let hoverPreviewTimer = null;
+let hoverPreviewVisible = false;
+
+function schedulePreview(event, d) {
+  clearTimeout(hoverPreviewTimer);
+  if (focusedNode) return;
+  if (d.depth < 2) return;
+  const x = event.clientX, y = event.clientY;
+  hoverPreviewTimer = setTimeout(() => renderHoverPreview(d, x, y), HOVER_DELAY_MS);
+}
+
+function pickPreviewTier(n) {
+  // Given raw photo-count n, return {cols, max} of the grid that fills cleanly.
+  if (n >= 6) return { cols: 3, max: 6 };
+  if (n >= 4) return { cols: 2, max: 4 };
+  if (n >= 2) return { cols: 2, max: 2 };
+  return { cols: 1, max: 1 };
+}
+
+function renderHoverPreview(d, x, y) {
+  const raw = collectPreviewPhotos(d, HOVER_MAX_PHOTOS);
+  if (raw.length === 0) { hideHoverPreview(); return; }
+  const { cols, max } = pickPreviewTier(raw.length);
+  const photos = raw.slice(0, max);
+  hoverPreviewCaptionEl.textContent = d.data.name;
+  hoverPreviewCaptionEl.classList.toggle('leaf', !d.children);
+  hoverPreviewGridEl.style.gridTemplateColumns = `repeat(${cols}, 80px)`;
+  hoverPreviewGridEl.innerHTML = photos
+    .map(p => `<img src="${p}" alt="" onerror="this.style.visibility='hidden'" />`)
+    .join('');
+  hoverPreviewEl.classList.add('visible');
+  hoverPreviewVisible = true;
+  positionHoverPreview(x, y);
+}
+
+function positionHoverPreview(x, y) {
+  const rect = hoverPreviewEl.getBoundingClientRect();
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const offset = 16;
+  let left = x + offset, top = y + offset;
+  if (left + rect.width > vw - 8) left = x - offset - rect.width;
+  if (top + rect.height > vh - 8) top = y - offset - rect.height;
+  if (left < 8) left = 8;
+  if (top < 8) top = 8;
+  hoverPreviewEl.style.left = `${left}px`;
+  hoverPreviewEl.style.top = `${top}px`;
+}
+
+function clearHoverPreview() {
+  clearTimeout(hoverPreviewTimer);
+  hideHoverPreview();
+}
+
+function hideHoverPreview() {
+  hoverPreviewEl.classList.remove('visible');
+  hoverPreviewVisible = false;
+  hoverPreviewGridEl.innerHTML = '';
+}
+
+// ── Draw nodes ──
+const nodeGroup = g.append("g");
+const nodes = nodeGroup.selectAll(".node").data(root.descendants()).join("g")
+  .attr("class","node")
+  .attr("transform",d=>`rotate(${d.x-90}) translate(${d.y},0)`)
+  .on("click",(e,d)=>{e.stopPropagation();onNodeClick(d);})
+  .on("dblclick",(e,d)=>{ e.stopPropagation(); e.preventDefault(); onNodeClick(d); if (d.depth>=2 && d.depth<=4) zoomToSubtree(d); })
+  .on("mouseover",(e,d)=>{ onNodeHover(d); schedulePreview(e, d); })
+  .on("mousemove",(e)=>{ if (hoverPreviewVisible) positionHoverPreview(e.clientX, e.clientY); })
+  .on("mouseout",()=>{ clearHighlight(); clearHoverPreview(); });
+
+// Proximity event handlers — resolve cursor to nearest internal node
+// and dispatch to the existing hover/click machinery.
+// Key UX invariants:
+//  - onNodeHover/schedulePreview only fire when the candidate CHANGES, not per pixel
+//    (otherwise the subtree dim/highlight re-applies on every mousemove and the tree flickers)
+//  - if the nearest candidate is too far from the cursor (dead center of the tree), do nothing
+const PROX_MAX_DIST_SQ = 180 * 180;  // g-space pixels; beyond this, not close enough to trigger
+let lastProximityCandidate = null;
+
+function resolveProximity(event) {
+  const [mx, my] = d3.pointer(event, g.node());
+  const idx = proximityDelaunay.find(mx, my);
+  const candidate = proximityCandidates[idx];
+  if (!candidate) return null;
+  const [cx, cy] = proximityPoints[idx];
+  const dx = mx - cx, dy = my - cy;
+  if (dx * dx + dy * dy > PROX_MAX_DIST_SQ) return null;
+  return candidate;
+}
+
+proximityOverlay
+  .on("mousemove", (event) => {
+    const candidate = resolveProximity(event);
+    if (!candidate) {
+      if (lastProximityCandidate) {
+        clearHighlight(); clearHoverPreview();
+        lastProximityCandidate = null;
+      }
+      return;
+    }
+    if (candidate !== lastProximityCandidate) {
+      onNodeHover(candidate);
+      schedulePreview(event, candidate);
+      lastProximityCandidate = candidate;
+    }
+    if (hoverPreviewVisible) positionHoverPreview(event.clientX, event.clientY);
+  })
+  .on("mouseleave", () => {
+    clearHighlight(); clearHoverPreview();
+    lastProximityCandidate = null;
+  })
+  .on("click", (event) => {
+    const candidate = resolveProximity(event);
+    if (!candidate) return;
+    event.stopPropagation();
+    onNodeClick(candidate);   // single-click: focus only (info panel + highlight), no zoom
+  })
+  .on("dblclick", (event) => {
+    const candidate = resolveProximity(event);
+    if (!candidate) return;
+    event.stopPropagation();
+    event.preventDefault();
+    onNodeClick(candidate);
+    zoomToSubtree(candidate); // double-click: commit and zoom in
+  });
+
+// Circles
+nodes.append("circle")
+  .attr("r", d => {
+    if(d.depth===0) return 5;
+    if(d.depth<=2) return 2;
+    if(d.depth===3) return 1.8;
+    if(d.depth===4) return 1.5;
+    return d.data.photos ? 2.2 : 1.5;
+  })
+  .attr("fill", d => {
+    if(d.depth===0) return '#181a1f';
+    if(d.children) return '#0f1014';
+    const st=d.data.status;
+    if(st==='dead') return '#C62828';
+    if(st==='gave') return '#7E57C2';
+    return getColor(d);
+  })
+  .attr("stroke", d => getColor(d))
+  .attr("stroke-width", d => {
+    if(d.depth===0) return 1.5;
+    if(d.children) return 0.8;
+    return d.data.photos ? 1 : 0.4;
+  });
+
+// Replacement for removed #glow filter: outer ring around photo'd alive leaves
+nodes.filter(d => !d.children && d.data.status==='alive' && d.data.photos && d.data.photos.length > 0)
+  .insert("circle", ":first-child")
+  .attr("class", "leaf-ring")
+  .attr("r", d => (d.data.photos ? 2.2 : 1.5) + 1.5)
+  .attr("fill", "none")
+  .attr("stroke", d => getColor(d))
+  .attr("stroke-opacity", 0.35)
+  .attr("stroke-width", 1.5);
+
+// Photo indicator (small diamond) for leaves with photos
+nodes.filter(d => !d.children && d.data.photos && d.data.photos.length > 0)
+  .append("text")
+  .attr("class","has-photo-indicator")
+  .attr("dy","-0.6em")
+  .attr("x",0)
+  .attr("text-anchor","middle")
+  .attr("transform", d => d.x >= 180 ? "rotate(180)" : null)
+  .text("\u25C6");
+
+// Status icons
+nodes.filter(d=>!d.children&&d.data.status==='dead')
+  .append("text").attr("class","status-icon").attr("dy","0.35em")
+  .attr("x",d=>(d.x>=180?1:-1)*2).attr("text-anchor","middle")
+  .attr("transform",d=>d.x>=180?"rotate(180)":null)
+  .style("font-size","10px").style("fill","#ef9a9a")
+  .text("\u271D");
+
+nodes.filter(d=>!d.children&&d.data.status==='gave')
+  .append("text").attr("class","status-icon").attr("dy","0.35em")
+  .attr("x",d=>(d.x>=180?1:-1)*2).attr("text-anchor","middle")
+  .attr("transform",d=>d.x>=180?"rotate(180)":null)
+  .style("font-size","10px").style("fill","#b39ddb")
+  .text("\u1F381");
+
+// ── Labels ──
+// Branch labels with depth-based classes for progressive disclosure
+nodes.filter(d=>d.children&&d.depth>=2)
+  .append("text")
+  .attr("class", d => {
+    if(d.depth===2) return "branch-label branch-label-order";
+    if(d.depth===3) return "branch-label branch-label-family";
+    return "branch-label branch-label-genus";
+  })
+  .attr("dy","0.31em")
+  .attr("x",d=>(d.x>=180?-1:1)*7)
+  .attr("text-anchor",d=>d.x>=180?"end":"start")
+  .attr("transform",d=>d.x>=180?"rotate(180)":null)
+  .text(d=>d.data.name)
+  .style("font-size",d=>d.depth===4?"14px":d.depth===3?"16px":"18px")
+  .style("font-weight",d=>d.depth===4?"500":"300")
+  .style("fill",d=>getColor(d))
+  .style("font-family","'Inter', sans-serif");
+
+// Leaf labels
+nodes.filter(d=>!d.children)
+  .append("text").attr("class","leaf-label").attr("dy","0.31em")
+  .attr("x",d=>(d.x>=180?-1:1)*9)
+  .attr("text-anchor",d=>d.x>=180?"end":"start")
+  .attr("transform",d=>d.x>=180?"rotate(180)":null)
+  .text(d => {
+    const n=d.data.name;
+    const st=d.data.status;
+    const icon = st==='dead'?' \u271D':st==='gave'?' \u1F381':'';
+    const photo = d.data.photos ? ' \u25C6':'';
+    const label = n.length>28 ? n.substring(0,25)+'...' : n;
+    return label + icon + photo;
+  })
+  .style("font-size","11px")
+  .style("font-style","italic")
+  .style("font-family","'Crimson Pro', Georgia, serif")
+  .style("fill", d => {
+    if(d.data.status==='dead') return '#d08888';
+    if(d.data.status==='gave') return '#a088cc';
+    return '#aaa';
+  })
+  .style("text-decoration",d=>d.data.status==='dead'?"line-through":"none");
+
+// ── Label repulsion for crowded areas ──
+(function repelLabels() {
+  const items = [];
+  g.selectAll('.branch-label').each(function(d) {
+    const fs = d.depth === 4 ? 14 : d.depth === 3 ? 16 : 18;
+    items.push({ el: this, d, angle: d.x, r: d.y, fs, dy: 0 });
+  });
+  g.selectAll('.leaf-label').each(function(d) {
+    items.push({ el: this, d, angle: d.x, r: d.y, fs: 11, dy: 0 });
+  });
+  if (items.length < 2) return;
+  items.sort((a, b) => a.angle - b.angle);
+
+  for (let iter = 0; iter < 30; iter++) {
+    let moved = false;
+    for (let i = 0; i < items.length - 1; i++) {
+      for (let j = i + 1; j < Math.min(i + 8, items.length); j++) {
+        const a = items[i], b = items[j];
+        if (Math.abs(a.r - b.r) > 50) continue;
+        const avgR = (a.r + b.r) / 2;
+        const effA = a.angle + a.dy / avgR * 180 / Math.PI;
+        const effB = b.angle + b.dy / avgR * 180 / Math.PI;
+        const sepDeg = effB - effA;
+        if (sepDeg > 3) break;
+        const sepPx = avgR * sepDeg * Math.PI / 180;
+        const minPx = Math.max(a.fs, b.fs) * 1.3;
+        if (sepPx < minPx) {
+          const push = (minPx - sepPx) / 2;
+          a.dy -= push;
+          b.dy += push;
+          moved = true;
+        }
+      }
+    }
+    // Wraparound: last ↔ first
+    if (items.length > 1) {
+      const a = items[items.length - 1], b = items[0];
+      if (Math.abs(a.r - b.r) <= 50) {
+        const avgR = (a.r + b.r) / 2;
+        const effA = a.angle + a.dy / avgR * 180 / Math.PI;
+        const effB = b.angle + b.dy / avgR * 180 / Math.PI + 360;
+        const sepDeg = effB - effA;
+        const sepPx = avgR * sepDeg * Math.PI / 180;
+        const minPx = Math.max(a.fs, b.fs) * 1.3;
+        if (sepPx < minPx) {
+          const push = (minPx - sepPx) / 2;
+          a.dy -= push;
+          b.dy += push;
+          moved = true;
+        }
+      }
+    }
+    if (!moved) break;
+  }
+
+  items.forEach(item => {
+    if (Math.abs(item.dy) < 0.3) return;
+    const rot = item.d.x >= 180 ? ' rotate(180)' : '';
+    d3.select(item.el).attr('transform', `translate(0,${item.dy})${rot}`);
+  });
+})();
+
+// ── Clade arcs ──
+const cladeArcs = g.append("g").attr("class","clade-arcs");
+root.children && root.children.forEach(clade => {
+  const leaves = clade.leaves();
+  if(!leaves.length) return;
+  const minAngle = Math.min(...leaves.map(l=>l.x));
+  const maxAngle = Math.max(...leaves.map(l=>l.x));
+  const midAngle = (minAngle+maxAngle)/2;
+  // Place arc beyond the leaf labels so it frames rather than crosses them
+  const arcRadius = radius + 130;
+  const arcG = cladeArcs.append("g");
+
+  const startA = (minAngle-1.5-90)*Math.PI/180;
+  const endA = (maxAngle+1.5-90)*Math.PI/180;
+  const arc = d3.arc().innerRadius(arcRadius-0.5).outerRadius(arcRadius+0.5)
+    .startAngle(startA+Math.PI/2).endAngle(endA+Math.PI/2);
+
+  arcG.append("path").attr("d",arc())
+    .attr("fill",cladeColors[clade.data.name]||'#555').attr("opacity",0.15);
+
+  const labelAngle = midAngle-90;
+  const [lx,ly] = [
+    (arcRadius+20)*Math.cos(labelAngle*Math.PI/180),
+    (arcRadius+20)*Math.sin(labelAngle*Math.PI/180)
+  ];
+
+  arcG.append("text").attr("x",lx).attr("y",ly)
+    .attr("text-anchor","middle").attr("dominant-baseline","central")
+    .attr("transform",`rotate(${labelAngle+(midAngle>180?-90:90)},${lx},${ly})`)
+    .style("font-size","16px").style("font-weight","300")
+    .style("letter-spacing","2px").style("text-transform","uppercase")
+    .style("fill",cladeColors[clade.data.name]||'#555')
+    .style("opacity",0.8)
+    .style("font-family","'Inter', sans-serif")
+    .text(clade.data.name);
+});
+
+// ── INTERACTIONS ──
+function onNodeHover(d) {
+  if(focusedNode) return;
+  const anc=new Set(getAncestors(d));
+  const desc=new Set(getDescendants(d));
+  const related=new Set([...anc,...desc]);
+  nodes.classed("dimmed",n=>!related.has(n)).classed("highlighted",n=>related.has(n));
+  nodes.classed("show-label",n=>related.has(n));
+  links.classed("dimmed",l=>!related.has(l.source)||!related.has(l.target))
+       .classed("highlighted",l=>related.has(l.source)&&related.has(l.target));
+}
+
+function clearHighlight() {
+  if(focusedNode) return;
+  nodes.classed("dimmed",false).classed("highlighted",false).classed("show-label",false);
+  links.classed("dimmed",false).classed("highlighted",false);
+  applyStatusFilter();
+}
+
+function onNodeClick(d) {
+  clearHoverPreview();
+  if(d.depth===0){resetFocus();return;}
+  focusedNode=d;
+  const anc=new Set(getAncestors(d));
+  const desc=new Set(getDescendants(d));
+  const related=new Set([...anc,...desc]);
+  nodes.classed("dimmed",n=>!related.has(n)).classed("highlighted",n=>related.has(n));
+  nodes.classed("show-label",n=>related.has(n));
+  links.classed("dimmed",l=>!related.has(l.source)||!related.has(l.target))
+       .classed("highlighted",l=>related.has(l.source)&&related.has(l.target));
+
+  const descs=getDescendants(d);
+  let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity;
+  descs.forEach(n=>{
+    const[px,py]=radialPoint(n.x,n.y);
+    minX=Math.min(minX,px);maxX=Math.max(maxX,px);
+    minY=Math.min(minY,py);maxY=Math.max(maxY,py);
+  });
+  const cx=(minX+maxX)/2,cy=(minY+maxY)/2;
+  const span=Math.max(maxX-minX,maxY-minY,80);
+  // Deeper nodes zoom in more: leaves get very close
+  const minScale = d.children ? 0.5 : 4;
+  const maxScale = d.children ? 8 : 12;
+  const padding = d.children ? 180 : 60;
+  const scale=Math.min(Math.max(Math.min(width,height)/(span+padding),minScale),maxScale);
+  svg.transition().duration(750).ease(d3.easeCubicInOut)
+    .call(zoomBehavior.transform,d3.zoomIdentity.translate(-cx*scale,-cy*scale).scale(scale));
+
+  showInfo(d);
+  updateBreadcrumb(d);
+}
+
+function resetFocus() {
+  clearHoverPreview();
+  focusedNode=null;
+  nodes.classed("dimmed",false).classed("highlighted",false).classed("show-label",false);
+  links.classed("dimmed",false).classed("highlighted",false);
+  svg.transition().duration(750).ease(d3.easeCubicInOut)
+    .call(zoomBehavior.transform, initialFitTransform || d3.zoomIdentity);
+  closeInfo(); d3.select("#breadcrumb").html('');
+  applyStatusFilter();
+}
+
+// Zoom the view to fit the subtree rooted at `d` (its descendant leaves' bbox).
+// Leaves use radialPoint(x, y). A minimum span prevents near-zero bboxes from
+// producing runaway scale factors.
+function zoomToSubtree(d) {
+  const descs = getDescendants(d).filter(n => !n.children);
+  const points = (descs.length > 0 ? descs : [d]).map(n => radialPoint(n.x, n.y));
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+  for (const [px, py] of points) {
+    if (px < minX) minX = px;
+    if (px > maxX) maxX = px;
+    if (py < minY) minY = py;
+    if (py > maxY) maxY = py;
+  }
+  const MIN_SPAN = 300;                    // larger floor → gentler max-zoom
+  const padding = 80;
+  const spanX = Math.max(maxX - minX + padding * 2, MIN_SPAN);
+  const spanY = Math.max(maxY - minY + padding * 2, MIN_SPAN);
+  const cx = (minX + maxX) / 2;
+  const cy = (minY + maxY) / 2;
+  const scale = Math.min(width / spanX, height / spanY, 4);   // cap at 4x (was 14)
+  const transform = d3.zoomIdentity.translate(-cx * scale, -cy * scale).scale(scale);
+  svg.transition().duration(750).ease(d3.easeCubicInOut)
+    .call(zoomBehavior.transform, transform);
+}
+
+// ── Fit-to-viewport ──
+// The radial tree extends well beyond the viewport (content diameter > window
+// height). Compute the actual rendered bbox and apply a zoom transform so the
+// whole diagram fits on first load, on reset, and after window resize.
+function fitToViewport(animate) {
+  // Use nodeGroup (circles + labels) for the bbox, not g — g contains the
+  // proximity overlay rect which is deliberately oversized and would dominate.
+  const bbox = nodeGroup.node().getBBox();
+  if (!bbox.width || !bbox.height) return;
+  const cx = bbox.x + bbox.width / 2;
+  const cy = bbox.y + bbox.height / 2;
+  const margin = 12;
+  const scale = Math.min(
+    (width  - margin * 2) / bbox.width,
+    (height - margin * 2) / bbox.height
+  );
+  const transform = d3.zoomIdentity.translate(-cx * scale, -cy * scale).scale(scale);
+  initialFitTransform = transform;
+  if (animate) {
+    svg.transition().duration(600).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform, transform);
+  } else {
+    svg.call(zoomBehavior.transform, transform);
+  }
+}
+
+// Run fit once after fonts load (so text bboxes are correct), then again on
+// resize. Fonts.ready resolves immediately if fonts are already loaded.
+if (document.fonts && document.fonts.ready) {
+  document.fonts.ready.then(() => fitToViewport(false));
+} else {
+  fitToViewport(false);
+}
+
+window.addEventListener('resize', () => {
+  width  = window.innerWidth;
+  height = window.innerHeight;
+  svg.attr("width", width).attr("height", height);
+  if (!focusedNode) fitToViewport(false);
+});
+
+function showInfo(d) {
+  const rank=rankName(d.depth);
+  document.getElementById('info-rank').textContent=rank;
+  const taxon=document.getElementById('info-taxon');
+  const photoSection=document.getElementById('info-photos');
+
+  if(!d.children) {
+    const genus=d.parent?d.parent.data.name:'';
+    const st=d.data.status;
+    const stLabel=st==='dead'?' \u271D':st==='gave'?' \u1F381':'';
+    taxon.innerHTML=`<i>${genus} ${d.data.name}</i>${stLabel}`;
+    const vendor=d.data.vendor||'';
+    let details='';
+    if(vendor) details+=`<div class="detail"><b>Source:</b> ${vendor}</div>`;
+    details+=`<div class="detail"><b>Status:</b> ${st==='dead'?'Deceased \u271D':st==='gave'?'Gave away \u1F381':'Alive'}</div>`;
+    document.getElementById('info-details').innerHTML=details;
+    document.getElementById('info-children').innerHTML='';
+
+    // Show photos if available
+    if(d.data.photos && d.data.photos.length>0) {
+      startSlideshow(d.data.photos, `${genus} ${d.data.name}`);
+      photoSection.style.display='block';
+    } else {
+      stopSlideshow();
+      photoSection.style.display='none';
+    }
+  } else {
+    taxon.textContent=d.data.name;
+    const total=leafCount(d);
+    const aliveCount=getDescendants(d).filter(n=>!n.children&&n.data.status==='alive').length;
+    const deadCount=getDescendants(d).filter(n=>!n.children&&n.data.status==='dead').length;
+    const gaveCount=getDescendants(d).filter(n=>!n.children&&n.data.status==='gave').length;
+    const photoCount=getDescendants(d).filter(n=>!n.children&&n.data.photos&&n.data.photos.length>0).length;
+    let html=`<div class="detail"><b>Total accessions:</b> ${total}</div>`;
+    html+=`<div class="detail" style="color:#66BB6A"><b>Alive:</b> ${aliveCount}</div>`;
+    if(deadCount) html+=`<div class="detail" style="color:#ef9a9a"><b>Dead:</b> ${deadCount}</div>`;
+    if(gaveCount) html+=`<div class="detail" style="color:#b39ddb"><b>Gave away:</b> ${gaveCount}</div>`;
+    if(photoCount) html+=`<div class="detail" style="color:#FFD54F"><b>With photos:</b> ${photoCount}</div>`;
+    document.getElementById('info-details').innerHTML=html;
+    stopSlideshow();
+    photoSection.style.display='none';
+
+    if(d.children) {
+      const listHtml=d.children.map(c=>{
+        const n=leafCount(c);
+        const hasPhotos=getDescendants(c).some(x=>!x.children&&x.data.photos&&x.data.photos.length>0);
+        const photoIcon=hasPhotos?' <span style="color:#FFD54F">\u25C6</span>':'';
+        const label=c.children?`${c.data.name} (${n})${photoIcon}`:
+          `<i>${c.data.name}</i>${c.data.status==='dead'?' \u271D':c.data.status==='gave'?' \u1F381':''}${c.data.photos?' <span style="color:#FFD54F">\u25C6</span>':''}`;
+        return `<div class="child" data-name="${c.data.name}">${label}</div>`;
+      }).join('');
+      document.getElementById('info-children').innerHTML=listHtml;
+      document.querySelectorAll('#info-children .child').forEach(el=>{
+        el.addEventListener('click',()=>{
+          const target=d.children.find(c=>c.data.name===el.dataset.name);
+          if(target) onNodeClick(target);
+        });
+      });
+    }
+  }
+  taxon.style.color=getColor(d);
+  document.getElementById('info').style.display='block';
+}
+
+function closeInfo() {
+  document.getElementById('info').style.display='none';
+  document.getElementById('info-photos').style.display='none';
+  stopSlideshow();
+}
+
+// ── SLIDESHOW ──
+let slidePhotos = [];
+let slideIndex = 0;
+let slideTimer = null;
+
+function startSlideshow(photos, alt) {
+  stopSlideshow();
+  slidePhotos = photos;
+  slideIndex = 0;
+  const container = document.getElementById('slideshow');
+  const dots = document.getElementById('slide-dots');
+  container.innerHTML = photos.map((p, i) =>
+    `<img src="${p}" alt="${alt}" class="${i > 0 ? 'slide-hidden' : ''}" onerror="this.style.display='none'" />`
+  ).join('');
+  container.onclick = () => openLightbox(slideIndex);
+  dots.innerHTML = photos.length > 1 ? photos.map((_, i) =>
+    `<div class="slide-dot${i === 0 ? ' active' : ''}" onclick="event.stopPropagation();goToSlide(${i})"></div>`
+  ).join('') : '';
+  if (photos.length > 1) {
+    slideTimer = setInterval(() => goToSlide((slideIndex + 1) % slidePhotos.length), 5000);
+  }
+}
+
+function goToSlide(i) {
+  slideIndex = i;
+  const imgs = document.querySelectorAll('#slideshow img');
+  imgs.forEach((img, j) => img.classList.toggle('slide-hidden', j !== i));
+  document.querySelectorAll('.slide-dot').forEach((d, j) => d.classList.toggle('active', j === i));
+  // Reset timer
+  if (slideTimer) { clearInterval(slideTimer); slideTimer = setInterval(() => goToSlide((slideIndex + 1) % slidePhotos.length), 5000); }
+}
+
+function stopSlideshow() {
+  if (slideTimer) { clearInterval(slideTimer); slideTimer = null; }
+  slidePhotos = []; slideIndex = 0;
+}
+
+// ── LIGHTBOX ──
+let lbPhotos = [];
+let lbIndex = 0;
+
+function openLightbox(idx) {
+  lbPhotos = slidePhotos;
+  lbIndex = typeof idx === 'number' ? idx : 0;
+  showLbPhoto();
+  document.getElementById('lightbox').style.display = 'flex';
+}
+
+function showLbPhoto() {
+  document.getElementById('lightbox-img').src = lbPhotos[lbIndex];
+  const counter = document.getElementById('lb-counter');
+  counter.textContent = lbPhotos.length > 1 ? `${lbIndex + 1} / ${lbPhotos.length}` : '';
+  document.querySelector('.lb-prev').style.display = lbPhotos.length > 1 ? '' : 'none';
+  document.querySelector('.lb-next').style.display = lbPhotos.length > 1 ? '' : 'none';
+}
+
+function lbNav(dir, e) {
+  if(e) e.stopPropagation();
+  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+  showLbPhoto();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+function updateBreadcrumb(d) {
+  const path=getAncestors(d).reverse();
+  const bc=d3.select("#breadcrumb"); bc.html('');
+  path.forEach((node,i)=>{
+    if(i>0) bc.append("span").attr("class","sep").text(" \u203A ");
+    bc.append("span")
+      .text(node.depth===0?"All":node.data.name)
+      .style("color",i===path.length-1?getColor(node):'#555')
+      .on("click",()=>node.depth===0?resetFocus():onNodeClick(node));
+  });
+}
+
+// ── STATUS FILTER ──
+function applyStatusFilter() {}
+
+// ── SEARCH ──
+const searchInput=document.getElementById('search');
+const searchCount=document.getElementById('search-count');
+searchInput.addEventListener('input',()=>{
+  searchTerm=searchInput.value.trim().toLowerCase();
+  if(!searchTerm){
+    searchCount.textContent='';
+    if(!focusedNode) clearHighlight();
+    return;
+  }
+  const matches=root.leaves().filter(d=>{
+    const full=(d.parent?d.parent.data.name+' ':'')+d.data.name;
+    return full.toLowerCase().includes(searchTerm)||(d.data.vendor||'').toLowerCase().includes(searchTerm);
+  });
+  searchCount.textContent=`${matches.length} found`;
+  if(!matches.length){
+    nodes.classed("dimmed",true).classed("highlighted",false);
+    links.classed("dimmed",true).classed("highlighted",false);
+    return;
+  }
+  const related=new Set();
+  matches.forEach(m=>getAncestors(m).forEach(a=>related.add(a)));
+  nodes.classed("dimmed",n=>!related.has(n)).classed("highlighted",n=>matches.includes(n))
+       .classed("show-label",n=>matches.includes(n));
+  links.classed("dimmed",l=>!related.has(l.source)||!related.has(l.target))
+       .classed("highlighted",l=>related.has(l.source)&&related.has(l.target));
+  if(matches.length===1){
+    focusedNode=matches[0]; showInfo(matches[0]); updateBreadcrumb(matches[0]);
+    const[px,py]=radialPoint(matches[0].x,matches[0].y);
+    svg.transition().duration(750).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform,d3.zoomIdentity.translate(-px*6,-py*6).scale(6));
+  }
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('lightbox').style.display==='flex') { closeLightbox(); return; }
+    searchInput.value=''; searchTerm=''; searchCount.textContent='';
+    resetFocus();
+  }
+  if(document.getElementById('lightbox').style.display==='flex') {
+    if(e.key==='ArrowLeft') lbNav(-1);
+    if(e.key==='ArrowRight') lbNav(1);
+  }
+});
+
+svg.on("click",()=>{ if(focusedNode) resetFocus(); });
+
+// ── LEGEND ──
+const cladeCounts={};
+root.leaves().forEach(d=>{ const c=getClade(d); cladeCounts[c]=(cladeCounts[c]||0)+1; });
+const cladeOrder=["Algae","Bryophytes","Ferns","Gymnosperms","Basal Angiosperms","Monocots","Eudicots"];
+const legendItems=d3.select("#legend-items");
+cladeOrder.forEach(clade=>{
+  const count=cladeCounts[clade];
+  if(!count) return;
+  const color=cladeColors[clade]||'#555';
+  const item=legendItems.append("div").attr("class","legend-item").attr("data-clade",clade)
+    .on("click",()=>{
+      const cladeNode=root.children.find(c=>c.data.name===clade);
+      if(cladeNode) onNodeClick(cladeNode);
+    });
+  item.append("div").attr("class","legend-swatch").style("background",color);
+  item.append("span").text(`${clade} (${count})`);
+});
+</script>
+</body>
+</html>
