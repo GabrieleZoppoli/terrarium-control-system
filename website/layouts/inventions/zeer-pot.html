@@ -18,26 +18,21 @@
 
   {{ $url := "zeer-pot/" | absURL }}
   <div class="embed-shell" data-src="{{ $url }}">
-    <div class="embed-actions">
-      <a class="dendro-action" href="{{ $url }}" target="_blank" rel="noopener">
-        <span class="dendro-action__label">Open fullscreen</span>
-        <span class="dendro-action__icon" aria-hidden="true">↗</span>
-      </a>
-    </div>
     <div class="embed-frame-wrap">
       <iframe class="embed-frame" src="{{ $url }}" title="Zeer pot build documentation" loading="lazy"></iframe>
     </div>
+    <p class="embed-hint small muted">Wiring, firmware, BOM, and assembly sequence — scroll the tabs above · <a href="{{ $url }}">open in its own tab</a>.</p>
   </div>
 </section>
 
 <style>
   .embed-shell { margin: 2.5rem 0 1rem; }
-  .embed-actions { display:flex; justify-content:flex-end; margin-bottom:0.6rem; }
   .embed-frame-wrap {
     position: relative;
     width: 100%;
-    height: min(calc(100vh - var(--nav-height) - 7rem), 960px);
-    min-height: 640px;
+    height: calc(100vh - var(--nav-height) - 4rem);
+    min-height: 720px;
+    max-height: 1200px;
     border: 1px solid var(--border-subtle);
     border-radius: var(--r-4);
     overflow: hidden;
@@ -51,5 +46,7 @@
     display: block;
     background: transparent;
   }
+  .embed-hint { margin-top: 0.8rem; text-align: center; }
+  .embed-hint a { color: var(--text-2); }
 </style>
 {{ end }}
