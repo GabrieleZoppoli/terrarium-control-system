@@ -149,6 +149,18 @@ Once a camera is installed:
 - Node-RED HTTP endpoint at `http://pi-tailscale-name/api/conditions.json`
 - Static JS on the dashboard page polls this and updates a "current conditions" widget
 
+### Node-RED UI snapshot (added 2026-04-16 by Mac-Claude)
+User asked for a near-live public view of the control UI. Mac-Claude built `content/highland/live/` + `layouts/highland/live.html` — the page embeds a static PNG that auto-refreshes every 60 s and falls back gracefully when unreachable. **Pi-side setup is pending**:
+
+1. Headless capture every 60 s. Suggested: `chromium --headless=new --no-sandbox --window-size=1440,900 --screenshot=/var/www/highland/ui-latest.png --virtual-time-budget=3000 http://localhost:1880/ui/` in a systemd timer. Atomic write (`... -.part && mv`) so the serving webserver never reads a half-written file.
+2. Expose publicly via Tailscale Funnel. Single command on the Pi:
+   ```
+   tailscale funnel --bg --https=443 --set-path=/highland/ui-latest.png file:///var/www/highland/ui-latest.png
+   ```
+   (Or serve a tiny directory via nginx + `tailscale funnel 443 http://127.0.0.1:8080` if Funnel's file mode is too restrictive.)
+3. Once the Funnel URL is known, paste it into `content/highland/live/_index.md` under `snapshotURL`. Optional: also set `liveURL` to the internal Node-RED address for the tailnet-only deeplink.
+4. Cache-control: serve the PNG with `Cache-Control: no-cache` or `max-age=10` so browsers don't pin a stale copy. The site already adds a `?t=` cache-buster every refresh as belt-and-braces.
+
 These are documented but not yet wired up.
 
 ---
