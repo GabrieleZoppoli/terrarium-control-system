@@ -1,0 +1,71 @@
+baseURL = "https://gabrielezoppoli.github.io/terrarium-control-system/"
+languageCode = "en"
+title = "Highland Cloud Forest Terrarium"
+theme = "blowfish"
+
+[params]
+  colorScheme = "ocean"
+  defaultAppearance = "dark"
+  autoSwitchAppearance = true
+  enableSearch = true
+  enableCodeCopy = true
+
+  [params.homepage]
+    layout = "background"
+    homepageImage = "img/hero.jpg"
+    showRecent = true
+    recentLimit = 5
+
+  [params.article]
+    showDate = true
+    showReadingTime = true
+    showTableOfContents = true
+
+  [params.header]
+    layout = "basic"
+
+  [params.footer]
+    showCopyright = true
+    showThemeAttribution = true
+
+  [params.author]
+    name = "[USER INPUT NEEDED]"
+    headline = "Highland cloud forest terrarium builder"
+    bio = "[USER INPUT NEEDED] — Brief bio about your background and interest in cloud forest cultivation."
+    links = [
+      { github = "https://github.com/GabrieleZoppoli/terrarium-control-system" },
+    ]
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  genus = "genera"
+
+[menu]
+  [[menu.main]]
+    name = "Highland"
+    pageRef = "highland"
+    weight = 10
+  [[menu.main]]
+    name = "Inventions"
+    pageRef = "inventions"
+    weight = 20
+  [[menu.main]]
+    name = "Collection"
+    pageRef = "collection"
+    weight = 30
+  [[menu.main]]
+    name = "About"
+    pageRef = "about"
+    weight = 40
+  [[menu.main]]
+    name = "Blog"
+    pageRef = "blog"
+    weight = 50
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
