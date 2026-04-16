@@ -5,7 +5,8 @@
 <meta name="theme-color" content="#0a0b0e">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
 {{- with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-{{- with .Site.Params.author.name }}<meta name="author" content="{{ . }}">{{ end }}
+{{- $author := .Site.Params.author.name }}
+{{- if and $author (not (in $author "USER INPUT")) }}<meta name="author" content="{{ $author }}">{{ end }}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
