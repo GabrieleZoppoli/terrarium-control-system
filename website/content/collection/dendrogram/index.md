@@ -1,20 +1,10 @@
 ---
 title: "Collection Dendrogram"
-description: "Phylogenetic tree of all 356 plants with photos at each tip"
+description: "Phylogenetic tree of all 375 plants with photos at each tip"
+layout: "dendrogram"
+weight: 5
 ---
 
-A phylogenetic dendrogram of the entire collection, with a representative photo at each tip. Built by an offline tool (run on the Mac side) that consumes the species list and per-species photos.
+A radial phylogenetic dendrogram of the entire collection, clade → order → family → genus → species. Each leaf carries source, status, and (where photographed) a slideshow that unfolds on hover. The tree is built offline and published here as a self-contained artifact; drag to pan, scroll to zoom, click anywhere to focus, Esc to clear.
 
-## How to view
-
-The interactive dendrogram is embedded below. Hover (or tap) a tip to see the species name, source, status, and a larger photo.
-
-<!-- DENDROGRAM_EMBED_HERE -->
-
-*Embed not yet present. See [HANDOFF.md](https://github.com/GabrieleZoppoli/terrarium-control-system/blob/main/website/HANDOFF.md) for the asset placement convention.*
-
-## Underlying data
-
-- Species list: `data/collection.csv` (one row per acquisition: taxon, genus, source, price, status, date)
-- Photos: `static/img/collection/{genus}/{species-slug}.jpg`
-- Tree topology: `static/data/dendrogram.json` (Newick or D3-hierarchy JSON)
+Built around [D3.js](https://d3js.org/). Dataset is generated from the master Excel inventory and watermarked with CC BY-SA 4.0 on every photograph.

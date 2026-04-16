@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darlingtonia Zeer Pot — Canonical Li-ion Build</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0b0e;
+    --bg-card: rgba(14, 16, 20, 0.72);
+    --bg-card-alt: rgba(20, 22, 28, 0.55);
+    --accent: #b06dd1;
+    --accent-dim: #8e4bb3;
+    --accent-glow: rgba(176, 109, 209, 0.45);
+    --water: #6fa7c4;
+    --water-dim: #3d6f8a;
+    --warm: #cf9a68;
+    --warm-dim: #8a6540;
+    --text: #e0e0e0;
+    --text-dim: #8a8a8a;
+    --text-bright: #ededed;
+    --border: rgba(255, 255, 255, 0.12);
+    --sand: #c4a86a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  .noise {
+    position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px;
+  }
+
+  header {
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #1e2618 0%, var(--bg) 100%);
+  }
+
+  header h1 {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--text-bright);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.4rem;
+  }
+
+  header h1 span { color: var(--accent); }
+
+  header .subtitle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+  .tabs {
+    display: flex; gap: 0; margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border);
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 0.75rem 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .panel { display: none; animation: fadeIn 0.3s ease; }
+  .panel.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.45rem;
+    color: var(--text-bright);
+    margin-bottom: 0.3rem;
+  }
+
+  .card h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1.4rem 0 0.6rem;
+  }
+
+  .card h3:first-of-type { margin-top: 0.8rem; }
+  .card p { margin-bottom: 0.7rem; font-size: 0.95rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 0.5rem;
+  }
+
+  th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    text-align: left;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid #2a3020;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(125,184,86,0.04); }
+
+  .part-cat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-dim);
+  }
+
+  .diagram-wrap {
+    background: var(--bg-card-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .diagram-wrap svg { display: block; margin: 0 auto; }
+
+  .code-block {
+    background: #181c14;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.2rem 1.4rem;
+    margin: 0.8rem 0;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: var(--text);
+    white-space: pre;
+  }
+
+  .code-block .kw { color: var(--accent); }
+  .code-block .cm { color: var(--text-dim); font-style: italic; }
+  .code-block .str { color: var(--sand); }
+  .code-block .num { color: var(--water); }
+  .code-block .fn { color: #c8a0d8; }
+  .code-block .pp { color: var(--warm); }
+
+  .code-label {
+    position: absolute;
+    top: 0.5rem; right: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .callout {
+    border-left: 3px solid var(--accent-dim);
+    padding: 0.8rem 1.2rem;
+    margin: 1rem 0;
+    background: rgba(125,184,86,0.05);
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+  }
+
+  .callout-water { border-left-color: var(--water-dim); background: rgba(74,158,190,0.05); }
+  .callout-warn { border-left-color: var(--warm); background: rgba(196,122,58,0.05); }
+  .callout-fill { border-left-color: var(--fill); background: rgba(176,96,64,0.07); }
+  .callout strong { color: var(--text-bright); }
+
+  .wiring-list { list-style: none; padding: 0; }
+  .wiring-list li {
+    padding: 0.35rem 0;
+    font-size: 0.88rem;
+    font-family: 'JetBrains Mono', monospace;
+    display: flex; gap: 0.6rem; align-items: baseline;
+  }
+  .wiring-list .pin { min-width: 5.5rem; color: var(--accent); font-weight: 600; }
+  .wiring-list .arrow { color: var(--text-dim); }
+  .wiring-list .dest { color: var(--text); font-weight: 400; }
+
+  .fix-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.15em 0.5em;
+    border-radius: 3px;
+    background: #3a2a1a;
+    color: var(--warm);
+    margin-right: 0.4rem;
+    vertical-align: middle;
+    letter-spacing: 0.04em;
+  }
+
+  .fix-badge-v4 {
+    background: #2a1a1a;
+    color: var(--fill);
+  }
+
+  .fix-badge-v5 {
+    background: #1a2a20;
+    color: #7ac;
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.6rem; height: 1.6rem;
+    border-radius: 50%;
+    background: var(--accent-dim);
+    color: #e8f0d8;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.8rem;
+  }
+
+  .step p { margin-bottom: 0; }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 700px) {
+    .container { padding: 1.2rem 1rem; }
+    .card { padding: 1.2rem; }
+    .tab { padding: 0.6rem 1rem; font-size: 0.72rem; }
+  }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<header>
+  <h1>Darlingtonia <span>Zeer Pot</span> <small style="font-size:0.5em;color:var(--text-dim)">canonical Li-ion build</small></h1>
+  <div class="subtitle">Solar Recirculating Evaporative Cooling — ESP32 Controlled</div>
+</header>
+
+<div class="container">
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-panel="concept">Concept</button>
+    <button class="tab" data-panel="schematic">Schematic</button>
+    <button class="tab" data-panel="drain">Drain Assembly</button>
+    <button class="tab" data-panel="parts">Parts List</button>
+    <button class="tab" data-panel="wiring">Wiring</button>
+    <button class="tab" data-panel="circuit">Circuit</button>
+    <button class="tab" data-panel="wiring-diagram">Wiring Diagram</button>
+    <button class="tab" data-panel="code">ESP32 Code</button>
+    <button class="tab" data-panel="build">Build Notes</button>
+  </div>
+
+  <!-- ==================== CONCEPT ==================== -->
+  <div class="panel active" id="concept">
+    <div class="card">
+      <h2>Design Overview</h2>
+      <p><em>Darlingtonia californica</em> grows beside cold mountain streams in northern California and Oregon. The single biggest cultivation challenge is keeping roots cool (ideally below ~25°C, with 15–22°C being the sweet spot) while the plant enjoys full sun. A zeer pot — the ancient pot-in-pot evaporative cooler — is a passive-first solution: evaporation from wet fill between two terracotta pots drops the inner pot's temperature by 5–12°C below ambient.</p>
+      <p>This build uses a wide, low 35 cm outer pot with a 25 cm inner pot (5 cm gap on the sides, level rims, ~10 cm of fill below the inner pot). The inner pot sits on a deep bed of sand — the fill wraps the inner pot on all sides <em>and</em> below, cooling through both the walls and the sealed base. A solar-charged ESP32-C3 SuperMini controls a 5V pump that re-wets the fill on demand via a ring drip tube sitting on the fill surface between the two level rims. Two waterproof DS18B20 probes — one at root depth, one in ambient shade — measure the delta-T: the real metric of cooling performance, while a capacitive moisture probe adds root-zone telemetry.</p>
+
+      <h3>Design Principles</h3>
+
+      <div class="callout callout-warn">
+        <strong>Pump wets the fill, never the plant.</strong> Water is delivered via a ring drip tube into the gap between pots. The Darlingtonia's substrate receives moisture only by capillary wicking through the unglazed terracotta walls — pre-cooled by evaporation. Warm reservoir water never contacts roots directly.
+      </div>
+
+      <div class="callout">
+        <strong>Inner pot side drain at 2 cm — "Dutch pot" reserve.</strong> Original bottom hole sealed. A new side drain at ~2 cm from the inner pot's base provides free drainage above (top-watering, rain) while maintaining a permanent moisture reserve below. With the level-rim configuration, this drain exits straight into the deep fill bed — water draining from the inner pot adds to the fill's evaporative mass. Drain uses a barbed hose fitting through the wall with a mesh cap on the inside to retain substrate.
+      </div>
+
+      <div class="callout-fill callout">
+        <strong>Thermally optimized fill: well-graded quartz sand (0.5–3 mm).</strong> The wide grading means fine grains nest into the voids between coarse ones — tighter packing, fewer air gaps, better thermal contact than any uniform grade. Excellent capillary wicking and thermal conductivity (~2–3 W/mK wet), chemically inert (TDS-safe for Darlingtonia), and costs almost nothing.
+      </div>
+
+      <div class="callout callout-water">
+        <strong>Solar charges Li-ion; battery powers system 24/7.</strong> 5W USB-C panel → TP4056 USB-C charger (with DW01 protection) → 18650 Li-ion cell (3.7V nom) → ESP32-C3 SuperMini via 5V pin (onboard LDO → 3.3V). Pump runs through an IRLZ44N MOSFET to a 5V water pump, with MT3608 kept only as an optional add-on if your chosen pump will not start reliably from the raw battery rail. Two separate IP65 enclosures still make sense: one for electronics (dry), one for the pump side. The two DS18B20 probes track root-vs-ambient cooling, and a capacitive moisture probe adds extra telemetry from the root zone.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Water Paths</h2>
+      <h3>Cooling Loop (pump-driven)</h3>
+      <p><strong>Reservoir</strong> → pump → feed tube → <strong>ring drip tube in fill gap</strong> → water saturates sand → evaporates from outer pot surface (= cooling) → excess drains from outer pot side drain via barbed fitting → back to <strong>reservoir</strong>.</p>
+      <h3>Root Zone Moisture (passive capillary)</h3>
+      <p><strong>Cold wet fill</strong> → wicks through <strong>unglazed inner pot walls</strong> → into sphagnum substrate. The terracotta acts as both thermal bridge and moisture delivery system. Sand packed tight against the pot walls makes excellent thermal contact.</p>
+      <h3>Top-watering &amp; Rain (direct gravity)</h3>
+      <p>Water poured onto sphagnum or rain → percolates down → excess exits through <strong>inner pot side drain at 2 cm</strong> (barbed fitting + mesh cap) → into fill gap → helps keep fill wet → overflows via outer pot drain → reservoir. Below the 2 cm hole: permanent moisture reserve (Dutch pot buffer).</p>
+    </div>
+
+    <div class="card">
+      <h2>Why Sand</h2>
+      <h3>What the fill must do</h3>
+      <p>Three jobs simultaneously: <strong>conduct heat</strong> from the inner pot walls and base to the outer pot wall (thermal bridge on all sides), <strong>hold water</strong> in its mass between pump cycles (reservoir), and <strong>wick water</strong> upward to the outer pot surface for evaporation (capillary engine). With ~10 cm of fill below the inner pot, the sealed terracotta base becomes an additional cooling surface — heat is drawn out downward as well as laterally. The fill must also be chemically inert for Darlingtonia's zero-mineral requirement.</p>
+
+      <h3>Sand — well-graded quartz, 0.5–3 mm</h3>
+      <p>Well-graded quartz sand (0.5–3 mm) is the ideal fill. The wide grading is key: fine grains nest into the voids between coarse ones, giving tighter packing than any uniform grade — fewer air gaps means better thermal conductivity and capillary continuity. The fine fraction holds water and wicks, the coarse fraction keeps drainage channels open. Effective wet thermal conductivity ~2–3 W/mK. SiO2 is completely inert (TDS-safe for Darlingtonia). Sold in 25 kg sacks at any building/pool supply — one sack is more than enough (~16 L, you need ~8 L). Rinse well before use to remove dust.</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== SCHEMATIC ==================== -->
+  <div class="panel" id="schematic">
+    <div class="diagram-wrap">
+      <svg viewBox="0 0 800 720" width="800" height="720" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+        <rect width="800" height="720" fill="#1e2419" rx="6"/>
+        <text x="400" y="30" text-anchor="middle" fill="#8a9478" font-size="10" letter-spacing="1.5">CROSS-SECTION — CANONICAL BUILD — LEVEL RIMS — 35cm / 25cm POTS</text>
+
+        <defs>
+          <marker id="arrowBlue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6" fill="none" stroke="#4a9ebe" stroke-width="1"/>
+          </marker>
+          <marker id="arrowWater" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <path d="M0,0 L7,3.5 L0,7" fill="none" stroke="#4a9ebe" stroke-width="1.5"/>
+          </marker>
+          <marker id="arrowWick" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+            <path d="M0,0 L5,2.5 L0,5" fill="none" stroke="#6aaa4a" stroke-width="1"/>
+          </marker>
+          <!-- Sand fill pattern -->
+          <pattern id="sandPat" width="18" height="18" patternUnits="userSpaceOnUse">
+            <rect width="18" height="18" fill="none"/>
+            <circle cx="5" cy="5" r="3" fill="#6a4030" opacity="0.25"/>
+            <circle cx="14" cy="12" r="2.5" fill="#6a4030" opacity="0.2"/>
+            <circle cx="9" cy="16" r="1.5" fill="#7a5540" opacity="0.15"/>
+            <rect x="1" y="11" width="3" height="2" rx="1" fill="#6a4030" opacity="0.15"/>
+          </pattern>
+        </defs>
+
+        <!-- Outer pot (wider, lower) -->
+        <path d="M140,165 L140,420 Q140,455 175,455 L585,455 Q620,455 620,420 L620,165"
+              fill="none" stroke="#a0704a" stroke-width="9" stroke-linecap="round"/>
+        <text x="640" y="230" fill="#a0704a" font-size="10" font-weight="600">OUTER POT</text>
+        <text x="640" y="243" fill="#a0704a" font-size="9" opacity="0.7">35cm Ø, low/wide</text>
+        <text x="640" y="256" fill="#a0704a" font-size="9" opacity="0.7">unglazed terracotta</text>
+
+        <!-- ===== FILL — wraps inner pot on all sides + below ===== -->
+        <!-- Left fill column (rim to bottom) -->
+        <rect x="145" y="172" width="87" height="279" fill="url(#sandPat)" rx="2"/>
+        <rect x="145" y="172" width="87" height="279" fill="#5a4020" opacity="0.15" rx="2"/>
+        <!-- Right fill column (rim to bottom) -->
+        <rect x="528" y="172" width="87" height="279" fill="url(#sandPat)" rx="2"/>
+        <rect x="528" y="172" width="87" height="279" fill="#5a4020" opacity="0.15" rx="2"/>
+        <!-- Bottom fill under inner pot -->
+        <rect x="232" y="325" width="296" height="126" fill="url(#sandPat)" rx="2"/>
+        <rect x="232" y="325" width="296" height="126" fill="#5a4020" opacity="0.15" rx="2"/>
+
+        <text x="103" y="310" fill="#b06040" font-size="8" text-anchor="middle" transform="rotate(-90,103,310)">SAND FILL</text>
+
+        <!-- Evaporation arrows (full height outer walls) -->
+        <g stroke="#4a9ebe" stroke-width="1" opacity="0.4" fill="none">
+          <path d="M132,210 L115,192" marker-end="url(#arrowBlue)"/>
+          <path d="M132,260 L110,248" marker-end="url(#arrowBlue)"/>
+          <path d="M132,310 L115,292" marker-end="url(#arrowBlue)"/>
+          <path d="M132,360 L110,348" marker-end="url(#arrowBlue)"/>
+          <path d="M132,410 L115,392" marker-end="url(#arrowBlue)"/>
+          <path d="M628,210 L645,192" marker-end="url(#arrowBlue)"/>
+          <path d="M628,260 L650,248" marker-end="url(#arrowBlue)"/>
+          <path d="M628,310 L645,292" marker-end="url(#arrowBlue)"/>
+          <path d="M628,360 L650,348" marker-end="url(#arrowBlue)"/>
+          <path d="M628,410 L645,392" marker-end="url(#arrowBlue)"/>
+        </g>
+        <text x="658" y="220" fill="#4a9ebe" font-size="8" opacity="0.5">evaporation</text>
+
+        <!-- Inner pot (level rims, shorter, sitting on fill bed) -->
+        <path d="M235,165 L235,300 Q235,322 258,322 L502,322 Q525,322 525,300 L525,165"
+              fill="none" stroke="#c49070" stroke-width="6" stroke-linecap="round"/>
+
+        <!-- Inner pot labels at top -->
+        <text x="380" y="155" text-anchor="middle" fill="#c49070" font-size="10" font-weight="600">INNER POT 25cm Ø</text>
+        <text x="380" y="145" text-anchor="middle" fill="#c49070" font-size="7" opacity="0.6">rims level</text>
+
+        <!-- Sealed bottom hole -->
+        <g transform="translate(380,324)">
+          <line x1="-8" y1="0" x2="8" y2="0" stroke="#c47a3a" stroke-width="2.5"/>
+          <line x1="-5" y1="-3" x2="5" y2="3" stroke="#c47a3a" stroke-width="1" opacity="0.5"/>
+          <line x1="-5" y1="3" x2="5" y2="-3" stroke="#c47a3a" stroke-width="1" opacity="0.5"/>
+        </g>
+        <text x="400" y="338" fill="#c47a3a" font-size="7">bottom sealed</text>
+
+        <!-- ===== DIMENSION: ~10cm fill below inner pot ===== -->
+        <line x1="540" y1="325" x2="540" y2="448" stroke="#8a9478" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <line x1="535" y1="325" x2="545" y2="325" stroke="#8a9478" stroke-width="0.8"/>
+        <line x1="535" y1="448" x2="545" y2="448" stroke="#8a9478" stroke-width="0.8"/>
+        <text x="552" y="390" fill="#8a9478" font-size="8" transform="rotate(-90,552,390)">~10cm fill bed</text>
+
+        <!-- ===== DIMENSION: 5cm gap side ===== -->
+        <line x1="233" y1="162" x2="145" y2="162" stroke="#8a9478" stroke-width="0.5" stroke-dasharray="2,2"/>
+        <text x="189" y="158" text-anchor="middle" fill="#8a9478" font-size="7">5cm</text>
+
+        <!-- ===== INNER POT SIDE DRAIN — barbed fitting at 2cm from inner pot base ===== -->
+        <g transform="translate(235,305)">
+          <rect x="-14" y="-5" width="20" height="10" rx="2" fill="#8a8a70" stroke="#6a6a50" stroke-width="1"/>
+          <line x1="-14" y1="-3" x2="-18" y2="-4" stroke="#6a6a50" stroke-width="1"/>
+          <line x1="-14" y1="3" x2="-18" y2="4" stroke="#6a6a50" stroke-width="1"/>
+          <rect x="6" y="-7" width="10" height="14" rx="2" fill="none" stroke="#9a9a80" stroke-width="1" stroke-dasharray="2,1"/>
+          <text x="11" y="0" text-anchor="middle" fill="#9a9a80" font-size="5">mesh</text>
+        </g>
+        <line x1="221" y1="305" x2="200" y2="305" stroke="#4a9ebe" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <g transform="translate(110,295)">
+          <rect x="0" y="-8" width="92" height="28" rx="4" fill="#1a2a30" stroke="#4a9ebe" stroke-width="1" opacity="0.8"/>
+          <text x="46" y="4" text-anchor="middle" fill="#4a9ebe" font-size="8" font-weight="600">INNER DRAIN 2cm</text>
+          <text x="46" y="14" text-anchor="middle" fill="#4a9ebe" font-size="7" opacity="0.7">Dutch pot reserve</text>
+        </g>
+
+        <!-- Dutch pot reserve zone inside inner pot -->
+        <rect x="241" y="307" width="278" height="12" fill="#2d6e8a" opacity="0.15" rx="2"/>
+        <text x="380" y="316" text-anchor="middle" fill="#4a9ebe" font-size="7" opacity="0.6">moisture reserve (Dutch pot)</text>
+
+        <!-- ===== OUTER POT DRAIN — barbed fitting at 2cm from outer pot base ===== -->
+        <g transform="translate(145,437)">
+          <rect x="-20" y="-5" width="22" height="10" rx="2" fill="#8a8a70" stroke="#6a6a50" stroke-width="1"/>
+          <line x1="-20" y1="-3" x2="-24" y2="-4" stroke="#6a6a50" stroke-width="1"/>
+          <line x1="-20" y1="3" x2="-24" y2="4" stroke="#6a6a50" stroke-width="1"/>
+          <rect x="2" y="-7" width="12" height="14" rx="2" fill="none" stroke="#9a9a80" stroke-width="1" stroke-dasharray="2,1"/>
+          <text x="8" y="0" text-anchor="middle" fill="#9a9a80" font-size="5">mesh</text>
+        </g>
+        <text x="90" y="435" fill="#4a9ebe" font-size="7" text-anchor="end">outer drain ~2cm</text>
+        <text x="90" y="444" fill="#4a9ebe" font-size="7" text-anchor="end" opacity="0.6">wicking reserve below</text>
+
+        <!-- Outer pot water reserve zone below drain -->
+        <rect x="148" y="439" width="82" height="12" fill="#2d6e8a" opacity="0.15" rx="1"/>
+        <rect x="530" y="439" width="82" height="12" fill="#2d6e8a" opacity="0.15" rx="1"/>
+        <rect x="232" y="443" width="296" height="8" fill="#2d6e8a" opacity="0.1" rx="1"/>
+        <text x="380" y="463" text-anchor="middle" fill="#4a9ebe" font-size="6" opacity="0.5">outer reserve — sustains wicking between pump cycles</text>
+
+        <!-- ===== WICKING ARROWS ===== -->
+        <!-- Through inner pot side walls -->
+        <g stroke="#6aaa4a" stroke-width="1.2" opacity="0.55" fill="none" stroke-dasharray="3,3">
+          <path d="M235,230 L258,230" marker-end="url(#arrowWick)"/>
+          <path d="M235,270 L258,270" marker-end="url(#arrowWick)"/>
+          <path d="M525,230 L502,230" marker-end="url(#arrowWick)"/>
+          <path d="M525,270 L502,270" marker-end="url(#arrowWick)"/>
+          <!-- Through inner pot BASE — new cooling path -->
+          <path d="M330,322 L330,305" marker-end="url(#arrowWick)"/>
+          <path d="M430,322 L430,305" marker-end="url(#arrowWick)"/>
+          <path d="M380,322 L380,305" marker-end="url(#arrowWick)"/>
+        </g>
+        <text x="262" y="222" fill="#6aaa4a" font-size="7" opacity="0.7">wick →</text>
+        <text x="498" y="222" fill="#6aaa4a" font-size="7" opacity="0.7" text-anchor="end">← wick</text>
+        <text x="455" y="335" fill="#6aaa4a" font-size="7" opacity="0.6">↑ wick through base</text>
+
+        <!-- Sphagnum inside inner pot -->
+        <rect x="241" y="195" width="278" height="105" fill="#2a4020" opacity="0.3" rx="4"/>
+        <g fill="#4a7030" opacity="0.3">
+          <circle cx="270" cy="210" r="6"/><circle cx="300" cy="200" r="5"/>
+          <circle cx="350" cy="215" r="7"/><circle cx="410" cy="205" r="6"/>
+          <circle cx="460" cy="212" r="5"/><circle cx="490" cy="200" r="6"/>
+          <circle cx="280" cy="260" r="5"/><circle cx="370" cy="255" r="6"/>
+          <circle cx="440" cy="260" r="7"/><circle cx="500" cy="250" r="5"/>
+        </g>
+        <text x="380" y="245" text-anchor="middle" fill="#6aaa4a" font-size="10" font-weight="600">SPHAGNUM</text>
+        <text x="380" y="258" text-anchor="middle" fill="#6aaa4a" font-size="8" opacity="0.6">long-fibre sphagnum</text>
+
+        <!-- Ring drip tube on fill surface between rims -->
+        <g transform="translate(180,172)">
+          <rect x="0" y="-4" width="52" height="8" rx="4" fill="#2d6e8a" stroke="#4a9ebe" stroke-width="1"/>
+          <text x="26" y="3" text-anchor="middle" fill="#b8dce8" font-size="5.5">drip tube</text>
+        </g>
+        <g transform="translate(528,172)">
+          <rect x="0" y="-4" width="52" height="8" rx="4" fill="#2d6e8a" stroke="#4a9ebe" stroke-width="1"/>
+          <text x="26" y="3" text-anchor="middle" fill="#b8dce8" font-size="5.5">drip tube</text>
+        </g>
+
+        <!-- DS18B20 ① root zone probe -->
+        <g transform="translate(495,260)">
+          <rect x="0" y="-3" width="28" height="14" rx="3" fill="#2a2020" stroke="#c47a3a" stroke-width="1.2"/>
+          <text x="14" y="7" text-anchor="middle" fill="#c47a3a" font-size="5.5" font-weight="600">DS① root</text>
+          <line x1="28" y1="4" x2="42" y2="4" stroke="#c47a3a" stroke-width="1.5" stroke-dasharray="3,2"/>
+        </g>
+
+        <!-- DS18B20 ② ambient probe (outside zeer pot, in shade) -->
+        <g transform="translate(30,260)">
+          <rect x="0" y="-3" width="28" height="14" rx="3" fill="#2a2020" stroke="#c47a3a" stroke-width="1.2"/>
+          <text x="14" y="7" text-anchor="middle" fill="#c47a3a" font-size="5.5" font-weight="600">DS② amb</text>
+          <line x1="28" y1="4" x2="50" y2="4" stroke="#c47a3a" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <text x="14" y="22" text-anchor="middle" fill="#c47a3a" font-size="5" opacity="0.5">in shade</text>
+        </g>
+
+        <!-- Darlingtonia pitchers -->
+        <g opacity="0.4" fill="none" stroke="#5a8a3a" stroke-width="2">
+          <path d="M320,195 Q318,140 325,105 Q330,90 340,90 Q345,85 342,95 Q340,100 335,105"/>
+          <path d="M380,195 Q376,125 380,80 Q385,60 395,55 Q400,48 397,60 Q395,68 390,75"/>
+          <path d="M440,195 Q443,150 438,110 Q435,95 425,92 Q420,87 423,97 Q425,102 430,107"/>
+        </g>
+
+        <!-- Feed tube from pump up to drip ring -->
+        <path d="M230,560 L230,520 L165,520 L165,172"
+              fill="none" stroke="#4a9ebe" stroke-width="2.5" marker-end="url(#arrowWater)"/>
+        <text x="150" y="510" fill="#4a9ebe" font-size="7" transform="rotate(-90,150,510)">feed tube</text>
+
+        <!-- Outer drain return -->
+        <path d="M121,437 L90,437 L90,550 L200,550"
+              fill="none" stroke="#4a9ebe" stroke-width="2" stroke-dasharray="5,3" opacity="0.5"/>
+        <text x="68" y="495" fill="#4a9ebe" font-size="7" transform="rotate(-90,68,495)">drain return</text>
+
+        <!-- Reservoir -->
+        <rect x="180" y="535" width="390" height="80" rx="6" fill="#1a2a30" stroke="#4a9ebe" stroke-width="2"/>
+        <text x="375" y="568" text-anchor="middle" fill="#4a9ebe" font-size="11" font-weight="600">RESERVOIR 3–5 L</text>
+        <text x="375" y="583" text-anchor="middle" fill="#4a9ebe" font-size="9" opacity="0.7">shaded, opaque, lidded</text>
+        <line x1="190" y1="596" x2="560" y2="596" stroke="#4a9ebe" stroke-width="1" opacity="0.2" stroke-dasharray="6,4"/>
+
+        <!-- Pump -->
+        <rect x="210" y="567" width="40" height="24" rx="4" fill="#2d6e8a" stroke="#4a9ebe" stroke-width="1.5"/>
+        <text x="230" y="583" text-anchor="middle" fill="#b8dce8" font-size="7" font-weight="600">PUMP</text>
+        <path d="M230,567 L230,560" stroke="#4a9ebe" stroke-width="2" fill="none"/>
+
+        <!-- ===== POWER CHAIN ===== -->
+
+        <!-- Solar -->
+        <rect x="645" y="52" width="110" height="52" rx="4" fill="#2a3040" stroke="#4a6a9e" stroke-width="2"/>
+        <g transform="translate(700,78)">
+          <line x1="-35" y1="0" x2="35" y2="0" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+          <line x1="-35" y1="-9" x2="35" y2="-9" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+          <line x1="-35" y1="9" x2="35" y2="9" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+          <line x1="-17" y1="-17" x2="-17" y2="17" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+          <line x1="0" y1="-17" x2="0" y2="17" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+          <line x1="17" y1="-17" x2="17" y2="17" stroke="#4a6a9e" stroke-width="0.5" opacity="0.4"/>
+        </g>
+        <text x="700" y="45" text-anchor="middle" fill="#7a9abe" font-size="10" font-weight="600">5W USB-C SOLAR</text>
+
+        <!-- Sun -->
+        <circle cx="700" cy="22" r="6" fill="#c4a86a" opacity="0.5"/>
+        <g stroke="#c4a86a" stroke-width="1" opacity="0.3">
+          <line x1="700" y1="12" x2="700" y2="6"/>
+          <line x1="691" y1="15" x2="687" y2="10"/>
+          <line x1="709" y1="15" x2="713" y2="10"/>
+        </g>
+
+        <!-- D1 -->
+        <g transform="translate(700,120)">
+          <rect x="-28" y="-10" width="56" height="20" rx="3" fill="#2a2020" stroke="#c47a3a" stroke-width="1.2"/>
+          <text x="0" y="4" text-anchor="middle" fill="#c47a3a" font-size="7.5" font-weight="600">USB-C</text>
+        </g>
+        <line x1="700" y1="104" x2="700" y2="110" stroke="#4a6a9e" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="760" y="122" fill="#c47a3a" font-size="7" opacity="0.8">OV + reverse</text>
+
+        <!-- TP4056 -->
+        <rect x="665" y="148" width="70" height="26" rx="4" fill="#2a3520" stroke="#7db856" stroke-width="1.5"/>
+        <text x="700" y="165" text-anchor="middle" fill="#7db856" font-size="8" font-weight="600">TP4056</text>
+        <line x1="700" y1="130" x2="700" y2="148" stroke="#4a6a9e" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <!-- Li-ion 18650 -->
+        <rect x="660" y="190" width="80" height="32" rx="4" fill="#2a3520" stroke="#7db856" stroke-width="2"/>
+        <text x="700" y="205" text-anchor="middle" fill="#7db856" font-size="9" font-weight="600">Li-ion</text>
+        <text x="700" y="216" text-anchor="middle" fill="#7db856" font-size="7.5" opacity="0.7">3.7V / VTC6 3.1Ah</text>
+        <line x1="700" y1="174" x2="700" y2="190" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <!-- Raw rail to pump -->
+        <path d="M740,206 L758,206 L758,580 L250,580" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <text x="768" y="400" fill="#7db856" font-size="7" opacity="0.6" transform="rotate(90,768,400)">MOSFET → 12V pump</text>
+
+        <!-- MOSFET -->
+        <rect x="590" y="375" width="32" height="20" rx="3" fill="#2a3520" stroke="#7db856" stroke-width="1"/>
+        <text x="606" y="389" text-anchor="middle" fill="#7db856" font-size="7">MOSFET</text>
+
+        <!-- MOSFET drain → pump GND -->
+        <path d="M606,395 L606,570 L250,570" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+        <text x="420" y="565" text-anchor="middle" fill="#7db856" font-size="6" opacity="0.6">drain → pump GND</text>
+
+        <!-- MOSFET source → common GND -->
+        <path d="M590,385 L575,385 L575,610" stroke="#7db856" stroke-width="1" stroke-dasharray="3,2" fill="none" opacity="0.5"/>
+        <text x="565" y="600" fill="#7db856" font-size="6" opacity="0.5" text-anchor="end">source → GND</text>
+
+        <!-- D2 -->
+        <g transform="translate(700,240)">
+          <rect x="-28" y="-10" width="56" height="20" rx="3" fill="#2a2020" stroke="#c47a3a" stroke-width="1.2"/>
+          <text x="0" y="4" text-anchor="middle" fill="#c47a3a" font-size="7.5" font-weight="600">→ 5V pin</text>
+        </g>
+        <line x1="700" y1="222" x2="700" y2="230" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="760" y="242" fill="#c47a3a" font-size="7" opacity="0.8">verify your board's 5V pin path</text>
+
+        <!-- ESP32 -->
+        <rect x="660" y="268" width="80" height="38" rx="4" fill="#2a3520" stroke="#7db856" stroke-width="2"/>
+        <text x="700" y="288" text-anchor="middle" fill="#7db856" font-size="10" font-weight="600">ESP32</text>
+        <text x="700" y="300" text-anchor="middle" fill="#7db856" font-size="7.5" opacity="0.7">→ 5V pin → LDO → 3V3</text>
+        <line x1="700" y1="250" x2="700" y2="268" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+        <!-- ESP to sensor -->
+        <path d="M660,282 L560,282 L560,278 L550,278" stroke="#c47a3a" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+
+        <!-- ESP to MOSFET -->
+        <path d="M660,298 L606,298 L606,375" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3" fill="none"/>
+
+        <!-- Night label -->
+        <g transform="translate(700,325)">
+          <rect x="-50" y="0" width="100" height="28" rx="4" fill="#1a2020" stroke="#4a6a9e" stroke-width="1" opacity="0.6"/>
+          <text x="0" y="12" text-anchor="middle" fill="#7a9abe" font-size="7.5" font-weight="600">☾ 24/7 from battery</text>
+          <text x="0" y="22" text-anchor="middle" fill="#7a9abe" font-size="7" opacity="0.6">USB-C solar charges</text>
+        </g>
+
+        <!-- Legend -->
+        <g transform="translate(30,665)">
+          <text x="0" y="0" fill="#8a9478" font-size="9" font-weight="600" letter-spacing="1">LEGEND</text>
+          <line x1="0" y1="16" x2="20" y2="16" stroke="#4a9ebe" stroke-width="2.5"/>
+          <text x="26" y="20" fill="#8a9478" font-size="8">Water flow</text>
+          <g stroke="#6aaa4a" stroke-width="1.2" opacity="0.7" stroke-dasharray="3,3"><line x1="100" y1="16" x2="120" y2="16"/></g>
+          <text x="126" y="20" fill="#8a9478" font-size="8">Capillary wick</text>
+          <line x1="220" y1="16" x2="240" y2="16" stroke="#c47a3a" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="246" y="20" fill="#8a9478" font-size="8">Sensor</text>
+          <line x1="290" y1="16" x2="310" y2="16" stroke="#7db856" stroke-width="1.5" stroke-dasharray="4,3"/>
+          <text x="316" y="20" fill="#8a9478" font-size="8">Power</text>
+          <rect x="360" y="10" width="14" height="10" fill="url(#sandPat)" rx="1"/>
+          <rect x="360" y="10" width="14" height="10" fill="#5a4020" opacity="0.15" rx="1"/>
+          <text x="380" y="20" fill="#8a9478" font-size="8">Sand fill</text>
+          <rect x="505" y="10" width="14" height="10" fill="#2d6e8a" opacity="0.15" rx="1"/>
+          <text x="525" y="20" fill="#8a9478" font-size="8">Reserve</text>
+          <rect x="580" y="10" width="20" height="10" rx="2" fill="#8a8a70" stroke="#6a6a50" stroke-width="0.8"/>
+          <text x="606" y="20" fill="#8a9478" font-size="8">Barbed fitting</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ==================== DRAIN ASSEMBLY ==================== -->
+  <div class="panel" id="drain">
+    <div class="card">
+      <h2>Drain Assembly Detail</h2>
+      <p>Both pots use the same approach: a barbed hose fitting through the wall at ~2 cm from the base, sealed with silicone, with a mesh cap on the inside to prevent fill/substrate from clogging the drain. Two assemblies total — one for the outer pot (returns excess water to reservoir while maintaining a saturated reserve below for sustained wicking) and one for the inner pot (the Dutch pot drain with a moisture reserve below for the plant).</p>
+
+      <h3>Components per drain</h3>
+      <p>One 8 mm barbed hose fitting (plastic or brass, straight or 90°), a tube of aquarium-safe silicone, and a ~3 cm square of stainless steel mesh or perlon filter wool, secured with a small cable tie or wrap of stainless wire.</p>
+
+      <h3>Outer Pot Drain — At 2 cm (Wicking Reserve)</h3>
+      <div class="step"><span class="step-num">1</span><p><strong>Seal the original bottom hole</strong> with a terracotta shard and aquarium-safe silicone, inside and out. Let cure 24h.</p></div>
+      <div class="step"><span class="step-num">2</span><p><strong>Drill a side hole at ~2 cm from the base.</strong> Use a 8–10 mm masonry/tile bit at low speed with water cooling. Go slow to avoid cracking — terracotta is forgiving but impatient drilling isn't. The hole should match or slightly exceed the barbed fitting's outer diameter.</p></div>
+      <div class="step"><span class="step-num">3</span><p><strong>Push the barbed fitting through from the outside.</strong> The barbed (ridged) end faces out — that's where the drain tube connects. The smooth inner nub protrudes 1–2 cm into the pot interior.</p></div>
+      <div class="step"><span class="step-num">4</span><p><strong>Seal both faces</strong> with a generous ring of aquarium-safe silicone around the fitting, on both the outside and inside pot surfaces. This waterproofs the fit and anchors the fitting.</p></div>
+      <div class="step"><span class="step-num">5</span><p><strong>Mesh cap on the inner nub.</strong> Wrap a small piece of stainless mesh or perlon over the protruding inner end. Secure with a cable tie cinched tight around the nub. This prevents sand from entering the fitting.</p></div>
+      <div class="step"><span class="step-num">6</span><p><strong>Let cure 24h.</strong> Then connect an 8 mm silicone drain tube to the barbed end outside. Route to reservoir.</p></div>
+
+      <div class="callout">
+        <strong>Both drains at 2 cm — same height, different purposes.</strong> The outer pot's reserve keeps the bottom fill permanently saturated between pump cycles, sustaining capillary wicking to feed evaporation from the pot walls even when the pump hasn't run for hours. If the reservoir empties or the pump fails during a heat wave, this reserve buys you hours of continued passive cooling. The inner pot's reserve keeps the sphagnum's bottom layer moist via wicking through the terracotta walls — the Dutch pot effect. Same geometry, same height, no hydrostatic shortcut between them (equal water levels = equilibrium).
+      </div>
+
+      <h3>Inner Pot Drain — At 2 cm (Dutch Pot Reserve)</h3>
+      <div class="step"><span class="step-num">1</span><p><strong>Seal the original bottom hole</strong> — same method as outer pot.</p></div>
+      <div class="step"><span class="step-num">2</span><p><strong>Drill a side hole at ~2 cm from the base.</strong> Same bit, same patience. Slightly smaller hole is fine here (6–8 mm) since flow rate is lower.</p></div>
+      <div class="step"><span class="step-num">3</span><p><strong>Barbed fitting from outside</strong> (the "outside" of the inner pot faces the sand gap). Barbed end points into the fill gap; smooth nub protrudes into the sphagnum.</p></div>
+      <div class="step"><span class="step-num">4</span><p><strong>Silicone seal both faces.</strong></p></div>
+      <div class="step"><span class="step-num">5</span><p><strong>Mesh cap on the inner nub</strong> to keep sphagnum from washing out.</p></div>
+      <div class="step"><span class="step-num">6</span><p><strong>No tube needed</strong> on the barbed end — it drains directly into the surrounding fill gap. Water exiting the inner pot goes straight into the sand fill, which is a bonus: it helps keep the fill wet from the inside too.</p></div>
+
+      <div class="callout callout-water">
+        <strong>The inner pot barbed end has no tube</strong> — it's just an open nub sticking into the sand gap. Water flows out freely when you top-water the plant or when rain overfills the inner pot. It joins the fill, adds to the evaporative mass, and eventually exits via the outer pot drain. Elegant and simple.
+      </div>
+
+      <h3>Drain Cross-Section</h3>
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 600 200" width="600" height="200" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+          <rect width="600" height="200" fill="#1e2419" rx="4"/>
+
+          <!-- Pot wall -->
+          <rect x="240" y="30" width="30" height="140" fill="#a0704a" opacity="0.5" rx="2"/>
+          <text x="255" y="25" text-anchor="middle" fill="#a0704a" font-size="9">pot wall</text>
+
+          <!-- Fitting body -->
+          <rect x="200" y="85" width="110" height="24" rx="4" fill="#8a8a70" stroke="#6a6a50" stroke-width="1.5"/>
+
+          <!-- Barb ridges (outside, left) -->
+          <g stroke="#6a6a50" stroke-width="1.5">
+            <path d="M200,89 L192,86 L192,108 L200,105" fill="#8a8a70"/>
+            <path d="M192,89 L185,86 L185,108 L192,105" fill="#8a8a70"/>
+            <line x1="200" y1="97" x2="185" y2="97"/>
+          </g>
+
+          <!-- Silicone seal rings -->
+          <ellipse cx="240" cy="97" rx="4" ry="18" fill="#c4c4a0" opacity="0.3"/>
+          <ellipse cx="270" cy="97" rx="4" ry="18" fill="#c4c4a0" opacity="0.3"/>
+          <text x="240" y="75" text-anchor="middle" fill="#c4c4a0" font-size="7">silicone</text>
+          <text x="270" y="75" text-anchor="middle" fill="#c4c4a0" font-size="7">silicone</text>
+
+          <!-- Mesh cap (inside, right) -->
+          <rect x="310" y="78" width="24" height="38" rx="4" fill="none" stroke="#9a9a80" stroke-width="1.5" stroke-dasharray="3,2"/>
+          <g stroke="#9a9a80" stroke-width="0.5" opacity="0.5">
+            <line x1="314" y1="82" x2="314" y2="112"/>
+            <line x1="320" y1="82" x2="320" y2="112"/>
+            <line x1="326" y1="82" x2="326" y2="112"/>
+            <line x1="312" y1="88" x2="332" y2="88"/>
+            <line x1="312" y1="97" x2="332" y2="97"/>
+            <line x1="312" y1="106" x2="332" y2="106"/>
+          </g>
+
+          <!-- Cable tie -->
+          <rect x="308" y="93" width="3" height="8" rx="1" fill="#6a8a50"/>
+          <text x="340" y="100" fill="#9a9a80" font-size="8" font-weight="600">mesh cap</text>
+          <text x="340" y="112" fill="#9a9a80" font-size="7" opacity="0.7">cable tie</text>
+
+          <!-- Labels -->
+          <text x="120" y="100" text-anchor="middle" fill="#4a9ebe" font-size="9" font-weight="600">OUTSIDE</text>
+          <text x="120" y="113" text-anchor="middle" fill="#4a9ebe" font-size="8" opacity="0.7">tube connects here</text>
+          <path d="M155,105 L185,97" stroke="#4a9ebe" stroke-width="1" marker-end="url(#arrowBlue)" fill="none"/>
+
+          <text x="470" y="100" text-anchor="middle" fill="#b06040" font-size="9" font-weight="600">INSIDE (fill side)</text>
+          <text x="470" y="113" text-anchor="middle" fill="#b06040" font-size="8" opacity="0.7">fill presses against mesh</text>
+          <path d="M430,105 L340,97" stroke="#b06040" stroke-width="1" fill="none"/>
+
+          <!-- Flow arrow through fitting -->
+          <path d="M330,97 L290,97 L220,97 L180,97" stroke="#4a9ebe" stroke-width="1.5" marker-end="url(#arrowWater)" opacity="0.6" fill="none"/>
+          <text x="255" y="140" text-anchor="middle" fill="#4a9ebe" font-size="8" opacity="0.6">water flow →</text>
+
+          <!-- Dimension: 2cm from base -->
+          <line x1="560" y1="170" x2="560" y2="97" stroke="#8a9478" stroke-width="0.8" stroke-dasharray="3,3"/>
+          <line x1="555" y1="170" x2="565" y2="170" stroke="#8a9478" stroke-width="0.8"/>
+          <line x1="555" y1="97" x2="565" y2="97" stroke="#8a9478" stroke-width="0.8"/>
+          <text x="572" y="137" fill="#8a9478" font-size="8" transform="rotate(-90,572,137)">~2cm</text>
+          <text x="560" y="185" text-anchor="middle" fill="#8a9478" font-size="7" opacity="0.7">from pot base</text>
+          <text x="560" y="195" text-anchor="middle" fill="#8a9478" font-size="6.5" opacity="0.5">(both pots)</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PARTS ==================== -->
+  <div class="panel" id="parts">
+    <div class="card">
+      <h2>Bill of Materials</h2>
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Specification</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="part-cat">POT</span><br>Outer terracotta pot</td>
+            <td>35 cm Ø, low/wide, unglazed</td>
+            <td>Seal original bottom hole. Drill side drain at ~2 cm from base.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POT</span><br>Inner terracotta pot</td>
+            <td>25 cm Ø, unglazed</td>
+            <td>Seal original bottom hole. Drill side drain at ~2 cm from base (Dutch pot reserve). 5 cm side gap, level rims with outer pot, ~10 cm fill below.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POT</span><br>Inner pot supports</td>
+            <td>3× terracotta feet or flat stones, ~10 cm tall</td>
+            <td>Set inner pot at correct height for level rims. Fill packs around and below them. Or: build up compacted fill bed to ~8 cm, place inner pot on it, continue filling around sides.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">DRAIN</span><br>Barbed hose fittings ×2</td>
+            <td>8 mm, plastic or brass</td>
+            <td>One per pot. Straight or 90°. Push through drilled holes.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">DRAIN</span><br>Stainless mesh or perlon ×2</td>
+            <td>~3 cm squares</td>
+            <td>Mesh caps on inner nubs. Secured with cable ties.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">DRAIN</span><br>Aquarium-safe silicone</td>
+            <td>1 tube, clear</td>
+            <td>Seals fittings, plugs original bottom holes. Must be 100% silicone (no anti-mould additives).</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">FILL</span><br>Sand</td>
+            <td>Well-graded quartz sand, 0.5–3 mm, 25 kg sack</td>
+            <td>Wide grading (fines nest into coarse voids) gives tight packing, good capillary retention, and drainage. One 25 kg sack (~16 L) is more than enough — budget ~8 L. Rinse 2–3× with RO water before use.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MEDIA</span><br>Long-fiber sphagnum</td>
+            <td>Pure long-fibre sphagnum</td>
+            <td>Inner pot substrate. Retains moisture, wicks cold from terracotta walls, zero minerals.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">WATER</span><br>Reservoir</td>
+            <td>3–5 L, opaque, lidded</td>
+            <td>Shaded. Receives drain return from outer pot.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">WATER</span><br>12V water pump</td>
+            <td>R385 DC 12V diaphragm pump, low-duty cooling loop</td>
+            <td>Powered from the MT3608 boost converter (set to 12V) through the MOSFET low-side switch. Draws ~450 mA at 12V.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">WATER</span><br>Ring drip tube</td>
+            <td>6 mm silicone, ring shape</td>
+            <td>Sits in fill gap between pot rims. Needle-punched holes every 3–4 cm.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">WATER</span><br>Feed tube</td>
+            <td>6 mm silicone, ~1 m</td>
+            <td>Pump to ring tube.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">WATER</span><br>Drain tube</td>
+            <td>8 mm silicone, short</td>
+            <td>Outer pot fitting to reservoir.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">ELECTRONICS</span><br>ESP32-C3 SuperMini</td>
+            <td>USB-C, RISC-V 160 MHz, WiFi + BLE 5.0</td>
+            <td>Deep sleep ~43 µA (desolder red LED → ~5 µA). Powered via 5V pin from the Li-ion cell, subject to board-by-board verification. Native USB-CDC for programming.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">ELECTRONICS</span><br>DS18B20 waterproof ×2</td>
+            <td>1 m cable, stainless steel probe</td>
+            <td>Both share the same OneWire bus on GPIO4. One sits at root depth in sphagnum, the other outside the zeer pot in shade for ambient reference.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">ELECTRONICS</span><br>Capacitive moisture probe</td>
+            <td>3.3V analog output type</td>
+            <td>Telemetry input on GPIO2/ADC. Useful for calibration and logging; not the primary pump decision input in the default firmware.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">ELECTRONICS</span><br>IRLZ44N MOSFET</td>
+            <td>Logic-level N-channel</td>
+            <td>Low-side pump switching from GPIO3.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">ELECTRONICS</span><br>Schottky flyback diode</td>
+            <td>Across pump terminals</td>
+            <td>Cathode to pump positive, anode to pump negative.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POWER</span><br>Solar panel</td>
+            <td>5W / 5V USB-C, IP65</td>
+            <td>Monocrystalline, outdoor-rated, with direct USB-C lead into the TP4056 module.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POWER</span><br>TP4056 USB-C</td>
+            <td>5V 1A Li-ion charger + protection</td>
+            <td>4.2V charge cutoff, over-discharge protection, B+/B- to battery and OUT+/OUT- to the system rail.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POWER</span><br>Li-ion 18650 cell</td>
+            <td>3.7V nominal, around 3000 mAh</td>
+            <td>In a holder with spring contacts. Feeds the ESP32 5V pin and the MT3608 boost converter input.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">POWER</span><br>MT3608 boost converter</td>
+            <td>2A, adjustable output</td>
+            <td>Standard. Boosts the 3.0–4.2V Li-ion rail to 12V for the R385 pump. Adjust trimpot to 12V before connecting the pump.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MISC</span><br>4.7 kΩ resistor</td>
+            <td>DS18B20 pull-up</td>
+            <td>One resistor for the whole OneWire bus.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MISC</span><br>10 kΩ resistor</td>
+            <td>MOSFET gate pull-down + float pull-up</td>
+            <td>Use two total in the canonical wiring.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MISC</span><br>IP65 enclosure (electronics)</td>
+            <td>~100×68×50 mm</td>
+            <td>ESP32, TP4056, battery holder, connectors, and breadboard. Shade-mounted and kept dry.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MISC</span><br>IP65 enclosure (pump side)</td>
+            <td>~100×68×50 mm or similar</td>
+            <td>Pump wiring and MT3608 boost converter. Keep water fittings isolated from the controller enclosure.</td>
+          </tr>
+          <tr>
+            <td><span class="part-cat">MISC</span><br>Float switch</td>
+            <td>NC elbow float switch</td>
+            <td>Mounted through the side of the reservoir bucket. NC float switch: float up (water present) → switch opens → GPIO5 = HIGH → pump OK. Float down (low water) → switch closes → GPIO5 = LOW → pump blocked.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== WIRING ==================== -->
+  <div class="panel" id="wiring">
+    <div class="card">
+      <h2>Wiring</h2>
+
+      <h3>Power Path</h3>
+      <ul class="wiring-list">
+        <li><span class="pin">5W USB solar panel</span> <span class="arrow">→</span> <span class="dest">TP4056 USB-C input</span></li>
+        <li><span class="pin">TP4056 B+</span> <span class="arrow">→</span> <span class="dest">18650 holder +</span></li>
+        <li><span class="pin">TP4056 B−</span> <span class="arrow">→</span> <span class="dest">18650 holder −</span></li>
+        <li><span class="pin">TP4056 OUT+</span> <span class="arrow">→</span> <span class="dest">VBAT rail / ESP32 5V pin / MT3608 VIN+</span></li>
+        <li><span class="pin">TP4056 OUT−</span> <span class="arrow">→</span> <span class="dest">Common GND</span></li>
+      </ul>
+      <p style="font-size:0.85em; opacity:0.7; margin-top:0.3em;">This project is now standardized on a single Li-ion 18650, not LiFePO4. Feeding the ESP32-C3 SuperMini from the raw Li-ion rail into its 5V pin is still board-dependent, so verify your exact clone before sealing the enclosure.</p>
+
+      <h3>DS18B20 Probes (shared OneWire bus)</h3>
+      <ul class="wiring-list">
+        <li><span class="pin">VCC (both)</span> <span class="arrow">→</span> <span class="dest">ESP32 3.3V rail</span></li>
+        <li><span class="pin">GND (both)</span> <span class="arrow">→</span> <span class="dest">Common GND</span></li>
+        <li><span class="pin">DATA (both)</span> <span class="arrow">→</span> <span class="dest">ESP32 GPIO 4</span></li>
+        <li><span class="pin">4.7kΩ resistor</span> <span class="arrow">→</span> <span class="dest">DATA ↔ 3.3V rail (one pull-up for the whole bus)</span></li>
+      </ul>
+      <p style="font-size:0.85em; opacity:0.7; margin-top:0.3em;">Both probes are off-board waterproof cable sensors. In the Fritzing view they are shown as DS18B20 package stand-ins so the harness routing is easy to read. SHT35/SHT4x-style breakout boards are great ambient sensors, but they are poor substitutes here because they are not waterproof insertion probes and long outdoor I2C runs are fussier than a single OneWire cable. If you want a higher-end temperature sensor, look at a waterproof 10k NTC or PT1000 probe instead. If you know the 64-bit addresses of each DS18B20 probe, paste them into the sketch and skip the cooler-probe auto-identification fallback.</p>
+
+      <h3>Capacitive Soil Moisture Probe</h3>
+      <ul class="wiring-list">
+        <li><span class="pin">VCC</span> <span class="arrow">→</span> <span class="dest">ESP32 3.3V rail</span></li>
+        <li><span class="pin">GND</span> <span class="arrow">→</span> <span class="dest">Common GND</span></li>
+        <li><span class="pin">SIG / AO</span> <span class="arrow">→</span> <span class="dest">ESP32 GPIO 2 (ADC)</span></li>
+      </ul>
+      <p style="font-size:0.85em; opacity:0.7; margin-top:0.3em;">The moisture probe is telemetry-only by default. It is useful for calibration, logging, and spotting unexpected drying, but the pump logic still keys primarily off root temperature and the float-switch interlock. Use a capacitive 3.3V analog probe here, not a resistive fork sensor.</p>
+
+      <h3>Pump Control</h3>
+      <ul class="wiring-list">
+        <li><span class="pin">GPIO 3</span> <span class="arrow">→</span> <span class="dest">MOSFET gate</span></li>
+        <li><span class="pin">10kΩ resistor</span> <span class="arrow">→</span> <span class="dest">Gate ↔ GND (pull-down)</span></li>
+        <li><span class="pin">MOSFET source</span> <span class="arrow">→</span> <span class="dest">Common GND</span></li>
+        <li><span class="pin">MOSFET drain</span> <span class="arrow">→</span> <span class="dest">Pump negative lead</span></li>
+        <li><span class="pin">MT3608 VIN+</span> <span class="arrow">→</span> <span class="dest">VBAT rail</span></li>
+        <li><span class="pin">MT3608 GND</span> <span class="arrow">→</span> <span class="dest">GND rail (input and output ground shared on module)</span></li>
+        <li><span class="pin">MT3608 VOUT+</span> <span class="arrow">→</span> <span class="dest">Pump positive lead (set trimpot to 12V)</span></li>
+        <li><span class="pin">Schottky diode</span> <span class="arrow">→</span> <span class="dest">Cathode to pump +, anode to pump − (flyback protection)</span></li>
+      </ul>
+      <p style="font-size:0.85em; opacity:0.7; margin-top:0.3em;">The MT3608 boost converter provides a stable 12V to the R385 pump from the 3.0–4.2V Li-ion rail. Adjust the trimpot until a multimeter reads 12V on VOUT before connecting the pump.</p>
+
+      <h3>Float Switch (NC, side-mount, on reservoir bucket)</h3>
+      <ul class="wiring-list">
+        <li><span class="pin">Float terminal</span> <span class="arrow">→</span> <span class="dest">ESP32 GPIO 5</span></li>
+        <li><span class="pin">Float terminal</span> <span class="arrow">→</span> <span class="dest">GND</span></li>
+        <li><span class="pin">10kΩ resistor</span> <span class="arrow">→</span> <span class="dest">GPIO 5 ↔ 3.3V rail (pull-up)</span></li>
+      </ul>
+      <p style="font-size:0.85em; opacity:0.7; margin-top:0.3em;">Float up (water present) → switch opens → GPIO5 = HIGH → pump runs. Float down (low water) → switch closes → GPIO5 = LOW → pump blocked. Note: firmware should use <code>waterOk = (digitalRead(5) == HIGH)</code>.</p>
+    </div>
+  </div>
+
+  <!-- ==================== CIRCUIT DIAGRAM ==================== -->
+  <div class="panel" id="circuit">
+    <div class="card">
+      <h2>Canonical Electrical Layout</h2>
+      <p>The current canonical build is: <strong>5W USB solar panel → TP4056 → 18650 Li-ion → ESP32-C3 SuperMini</strong>, with an MT3608 boost converter providing stable 12V to the R385 pump, switched by a logic-level MOSFET (low-side). Two waterproof DS18B20 probes share GPIO4, the capacitive moisture probe feeds GPIO2/ADC, and the NC float switch lands on GPIO5.</p>
+      <p>The primary circuit reference is the <a href="schematic-sections.pdf" style="color: var(--accent);">6-page sectioned schematic (PDF)</a>, which covers power supply, sensors, pump driver, and pin reference with full annotations.</p>
+      <p>Project files: <a href="schematic-sections.pdf" style="color: var(--accent);">schematic-sections.pdf</a> · <a href="zeer-pot-v24.fzz" style="color: var(--accent);">zeer-pot-v24.fzz</a> (Fritzing) · <a href="darlingtonia-zeer-pot.ino" style="color: var(--accent);">darlingtonia-zeer-pot.ino</a> · <a href="platformio.ini" style="color: var(--accent);">platformio.ini</a> · <a href="WIRING-GUIDE.md" style="color: var(--accent);">WIRING-GUIDE.md</a></p>
+    </div>
+  </div>
+
+  <!-- ==================== WIRING DIAGRAM (Fritzing-style) ==================== -->
+  <div class="panel" id="wiring-diagram">
+    <div class="card">
+      <h2>Wiring Diagram</h2>
+      <p>For the full annotated circuit, see the <a href="schematic-sections.pdf" style="color: var(--accent);">6-page sectioned schematic PDF</a> — it covers power supply, temperature sensors, pump driver, float switch, moisture sensor, and a complete pin reference with component table.</p>
+      <p>The Fritzing breadboard view below shows the physical layout with all off-board components (probes, TP4056, battery, pump, MT3608).</p>
+    </div>
+    <div class="diagram-wrap" style="background: #f8f8f0; border-radius: 8px; padding: 1rem; margin: 1rem;">
+      <p style="text-align: center; font-size: 0.9rem; color: var(--text-dim);">Editable Fritzing project: <a href="zeer-pot-v24.fzz" style="color: var(--accent);">zeer-pot-v24.fzz</a> · Detailed step-by-step: <a href="WIRING-GUIDE.md" style="color: var(--accent);">WIRING-GUIDE.md</a></p>
+    </div>
+  </div>
+
+  <!-- ==================== CODE ==================== -->
+  <div class="panel" id="code">
+    <div class="card">
+      <h2>ESP32-C3 SuperMini Firmware</h2>
+      <p>The project now includes a real sketch file in the folder: <a href="darlingtonia-zeer-pot.ino" style="color: var(--accent);">darlingtonia-zeer-pot.ino</a>. The firmware keeps pump decisions tied to root temperature, treats the capacitive moisture probe as telemetry-only by default, and publishes root/ambient delta, low-water state, and moisture readings over MQTT.</p>
+      <p>If you know the exact 64-bit ROM addresses of your two DS18B20 probes, paste them into the sketch. If you leave the manual address arrays at zero, the code falls back to a first-boot heuristic that assumes the cooler probe is the root probe.</p>
+
+      <div class="code-block">
+        <span class="code-label">darlingtonia-zeer-pot.ino</span>
+<code>// ESP32-C3 SuperMini pin map
+const int PIN_DS18B20  = 4;
+const int PIN_PUMP     = 3;
+const int PIN_FLOAT_SW = 5;
+const int PIN_MOISTURE = 2;
+
+// Moisture probe is telemetry-only by default.
+const int MOISTURE_DRY_RAW = 3000;
+const int MOISTURE_WET_RAW = 1500;
+
+// Optional manual DS18B20 addresses.
+const DeviceAddress ROOT_ADDR_MANUAL = {0,0,0,0,0,0,0,0};
+const DeviceAddress AMB_ADDR_MANUAL  = {0,0,0,0,0,0,0,0};</code>
+      </div>
+
+      <p style="font-size:0.9em; opacity:0.85;">Supporting project files: <a href="darlingtonia-zeer-pot.ino" style="color: var(--accent);">darlingtonia-zeer-pot.ino</a> · <a href="platformio.ini" style="color: var(--accent);">platformio.ini</a> · <a href="zeer-pot-v24.fzz" style="color: var(--accent);">zeer-pot-v24.fzz</a></p>
+
+      <h3>platformio.ini</h3>
+      <div class="code-block">
+        <span class="code-label">platformio.ini</span>
+<code>[env:esp32-c3-supermini]
+platform = espressif32
+board = esp32-c3-devkitm-1
+framework = arduino
+lib_deps =
+    paulstoffregen/OneWire@^2.3.8
+    milesburton/DallasTemperature@^3.11.0
+    knolleary/PubSubClient@^2.8
+monitor_speed = 115200</code>
+      </div>
+    </div>
+  </div>
+  <!-- ==================== BUILD NOTES ==================== -->
+  <div class="panel" id="build">
+    <div class="card">
+      <h2>Build &amp; Cultivation Notes</h2>
+
+      <h3>Pot Preparation (Do First, 48h Before Assembly)</h3>
+      <p>Both pots need their bottom holes sealed and new side drains drilled. Do all the silicone work at once and let everything cure for 24–48 hours before any water contact.</p>
+      <p>Drilling terracotta: use a 8–10 mm diamond or carbide masonry bit. Tape an X of masking tape over the drill point to prevent skipping. Start at low RPM with light pressure. Keep the bit wet — a spray bottle or a friend dripping water works. Don't rush. Terracotta is soft but brittle — let the bit do the work. For the inner pot (25 cm), a 6–8 mm hole is sufficient.</p>
+
+      <h3>Preparing the Sand</h3>
+      <p>Use well-graded quartz sand (0.5–3 mm) — sold in 25 kg sacks at building and pool supply shops. The wide grading packs tighter than uniform pool-filter grades because fines fill the voids between coarse grains. Rinse it 2–3 times with distilled or RO water to wash out dust and fines — tip the sand into a bucket, flood with water, stir vigorously, pour off the cloudy water, repeat until the rinse water runs mostly clear. Then pre-wet thoroughly before packing: the sand should feel heavy and uniformly damp with no dry pockets. You need roughly 8 litres (one 25 kg sack gives ~16 L, so you'll have plenty left over for topping up after settling).</p>
+
+      <h3>Assembly Sequence</h3>
+
+      <div class="step"><span class="step-num">1</span><p>Install barbed fitting in outer pot side drain at 2 cm. Silicone seal. Let cure.</p></div>
+      <div class="step"><span class="step-num">2</span><p>Install barbed fitting in inner pot side drain. Silicone seal. Mesh cap on inside nub. Let cure.</p></div>
+      <div class="step"><span class="step-num">3</span><p>Fill outer pot with pre-wetted sand to ~8 cm, compacting gently. This is the base bed.</p></div>
+      <div class="step"><span class="step-num">4</span><p>Place inner pot supports (terracotta feet or flat stones) on the fill bed, then set the inner pot on them so the rims are level. Alternatively, just compact the fill bed firmly and sit the inner pot directly on it.</p></div>
+      <div class="step"><span class="step-num">5</span><p>Centre the inner pot — 5 cm gap all around. Pack pre-wetted sand into the side gap, tamping gently every few centimetres. Leave the top 2 cm free for the drip tube.</p></div>
+      <div class="step"><span class="step-num">6</span><p>Place the ring drip tube in the top 2 cm of the gap. Connect feed tube.</p></div>
+      <div class="step"><span class="step-num">7</span><p>Connect outer pot drain fitting → 8 mm tube → reservoir.</p></div>
+      <div class="step"><span class="step-num">8</span><p>Place the R385 12V pump in the reservoir and connect the feed tube. The MT3608 boost converter must be set to 12V (adjust trimpot, verify with multimeter) before connecting the pump.</p></div>
+      <div class="step"><span class="step-num">9</span><p>Fill inner pot with pure long-fibre sphagnum. Plant Darlingtonia. Insert the DS18B20 root probe at root depth in sphagnum, place the ambient DS18B20 outside the zeer pot in a shaded spot, and insert the capacitive moisture probe into the root zone where it will stay damp but not submerged. At the electronics end, both DS18B20 probes share the same OneWire bus (VCC+VCC, GND+GND, DATA+DATA), while the moisture probe gets its own 3.3V, GND, and GPIO2/ADC line.</p></div>
+      <div class="step"><span class="step-num">10</span><p>Saturate the fill by pouring water into the gap from above. Let stabilise 24h before powering on the system.</p></div>
+
+      <h3>Water Quality</h3>
+      <p>Rainwater, distilled, or RO only. TDS &lt; 50 ppm. Top up reservoir as evaporation depletes it — expect 0.5–1.5 L/day in peak summer depending on conditions and the 35 cm pot's larger evaporative surface.</p>
+
+      <h3>Placement</h3>
+      <p>Full air exposure on all sides of the outer pot. The 35 cm pot has significantly more evaporative surface than a 30 cm — this is an advantage. East-facing for morning sun, shaded from ~14:00 in July/August. Don't push the pot against walls or into corners.</p>
+
+      <h3>Power Budget</h3>
+      <p>With realistic 21°C thresholds, the pump runs mainly during the hottest 4–5 hours of a peak August day rather than all 10. The R385 pump draws ~450 mA at 12V, which translates to ~1.7A from the 3.7V Li-ion cell through the MT3608. At 20-second bursts every 2–5 minutes during hot hours, daily pump energy is modest. The ESP32 + sensors remain a small load compared with the pump, and a 5W USB solar panel still gives you a comfortable margin through a Ligurian summer as long as the pump duty cycle stays modest.</p>
+
+      <h3>Winterization</h3>
+      <p>Drain reservoir, disconnect pump, let fill dry. The inner pot's side drain ensures winter rain exits rather than drowning the dormant crown. Resume in late April.</p>
+
+      <h3>Node-RED / MQTT</h3>
+      <div class="code-block">
+<code>Topic: zeer/darlingtonia/status
+{ "root": 18.3, "ambient": 29.1, "delta": 10.8,
+  "pump": true, "water": true, "sleep_min": 2, "boot": 412 }</code>
+      </div>
+      <p>Delta = ambient − root = the zeer pot's cooling performance in °C. Expect 5–12°C on a hot Ligurian afternoon with wet fill. Messages arrive only when something happened: pump activity, temperature shift &gt;1°C, low water alarm, or a ~30-minute heartbeat. Feed into InfluxDB + Grafana for root vs. ambient over time, delta-T trends, pump duty cycle, and water level.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Darlingtonia Zeer Pot — Canonical Li-ion build with level rims, deep fill bed, and base cooling
+</footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
