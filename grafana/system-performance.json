@@ -2,7 +2,6 @@
   "description": "Equipment operation, PID controller behavior, and system correlations for the terrarium",
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "id": 3,
   "links": [],
   "liveNow": true,
   "panels": [
@@ -477,7 +476,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 22
       },
       "id": 302,
       "title": "Correlations",
@@ -530,7 +529,7 @@
               },
               {
                 "id": "custom.axisLabel",
-                "value": "Temperature (\u00b0C)"
+                "value": "Temperature (°C)"
               },
               {
                 "id": "unit",
@@ -587,7 +586,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 18
+        "y": 23
       },
       "id": 34,
       "options": {
@@ -737,7 +736,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 18
+        "y": 23
       },
       "id": 35,
       "options": {
@@ -789,7 +788,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 35
+        "y": 40
       },
       "id": 303,
       "title": "Fan PWM Signals (Actual GPIO Output)",
@@ -862,6 +861,21 @@
                 }
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Circulation (pin 12)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
           }
         ]
       },
@@ -869,7 +883,7 @@
         "h": 10,
         "w": 24,
         "x": 0,
-        "y": 36
+        "y": 41
       },
       "id": 40,
       "options": {
@@ -921,9 +935,198 @@
           "rawQuery": true,
           "refId": "C",
           "resultFormat": "time_series"
+        },
+        {
+          "alias": "Circulation (pin 12)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "fan_pwm_circulation",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
         }
       ],
       "title": "Fan PWM Values (Actual Signals to GPIO)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 51
+      },
+      "id": 304,
+      "panels": [],
+      "title": "Power Consumption",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#F2495C",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisSoftMin": 0,
+            "drawStyle": "line",
+            "fillOpacity": 20,
+            "gradientMode": "scheme",
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 4,
+            "showPoints": "auto",
+            "spanNulls": true
+          },
+          "decimals": 1,
+          "min": 0,
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 52
+      },
+      "id": 50,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "mean",
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Total Power (W)",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"
+          },
+          "query": "SELECT mean(\"value\") FROM \"power_consumption\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "Power Consumption (Meross MSS310)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"
+      },
+      "description": "Accurate count of mist cycles per day from event-driven mist_event measurement (since 2026-02-24). Unlike polled mister_status which can miss short cycles.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "semi-dark-green",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "barAlignment": 0,
+            "drawStyle": "bars",
+            "fillOpacity": 80,
+            "lineWidth": 1,
+            "pointSize": 5,
+            "showPoints": "never"
+          },
+          "decimals": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 36,
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Mist cycles",
+          "datasource": {
+            "type": "influxdb",
+            "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"
+          },
+          "query": "SELECT count(\"value\") AS \"Mist cycles\" FROM \"mist_event\" WHERE $timeFilter GROUP BY time(1d) fill(0)",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "Daily Mist Count (Event-Driven)",
       "type": "timeseries"
     }
   ],
@@ -942,6 +1145,5 @@
   },
   "timezone": "browser",
   "title": "System Performance",
-  "uid": "system-performance",
-  "version": 2
+  "uid": "system-performance"
 }

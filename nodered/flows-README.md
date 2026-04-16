@@ -138,7 +138,7 @@ Ingests sensor data, calculates VPD, manages mister.
 **Key nodes**:
 - **MQTT In**: Receives SHT35 temperature + humidity from ESP
 - **VPD Calculator** (function): Computes Vapor Pressure Deficit using Magnus formula
-- **Target humidity**: Derived from Colombian weather data, clamped to 70–90% RH
+- **Target humidity**: Derived from Colombian weather data (upper cap 95% RH)
 - **Humidity difference**: target − actual, feeds PID controller on Fans tab
 - **Hysteresis**: Controls mister on/off around target humidity
 - **Python function**: Tapo P100 plug control for mister (with door safety gate)
@@ -148,7 +148,7 @@ Ingests sensor data, calculates VPD, manages mister.
 Manages compressor-based cooling.
 
 **Key nodes**:
-- **Target temperature**: Derived from Colombian weather data, clamped to 12–24°C
+- **Target temperature**: Derived from Colombian weather data (clamped 12--24°C)
 - **Temperature difference**: target − actual
 - **Hysteresis**: Controls compressor on/off based on temperature error
 - **Python function**: Tapo P100 plug control for compressor (with door safety gate)
@@ -158,7 +158,7 @@ Core PID controller, door safety, and fan management.
 
 **Key nodes**:
 - **PID Controller** (function): Gain-scheduled humidity-based fan speed (Kp=50, Ki=0.5, Kd=10)
-- **Day/Night Check**: Within-time-switch, 06:30–00:00 (midnight)
+- **Day/Night Check**: Within-time-switch, 04:00–00:00 (midnight)
 - **Night Mode (A/B Suspended)**: Always outputs 0. A/B code preserved in comments with reactivation instructions
 - **Mister Interlock** (function): Stops all fans when mister is active (deletes topic to avoid RBE conflicts)
 - **Manual Override**: Dashboard slider, bypasses all automatic control
@@ -174,9 +174,10 @@ Fetches and processes Colombian highland weather data.
 
 **Key nodes**:
 - **OpenWeatherMap** (×4): Chinchiná, Medellín, Bogotá, Sonsón
-- **Aggregator/Smooth**: 30-minute averaging window
+- **Aggregator/Smooth**: 30-minute InfluxDB window + 15-minute rolling mean (count=60 across 4 cities)
 - **Position config**: Astronomical calculations for dawn/dusk reference
-- **Weather fallback**: Default setpoints (day T=24/H=85, night T=14/H=90) if API unreachable
+- **Weather fallback**: Historical 14-day daily curve (288 slots, two-pass smoothed) replaces flat defaults; ultimate fallback (day T=24/H=85, night T=14/H=90) if no historical data available
+- **Historical curve builder**: Queries all 4 cities' InfluxDB data every 6 hours, builds smoothed diurnal profile with 15-hour time shift
 
 The 15-hour time shift between Colombia (UTC−5) and Italy (UTC+1) means Colombian daytime weather maps to Italian nighttime conditions, producing natural diurnal variation.
 
@@ -201,7 +202,7 @@ Data logging, serial communication, power monitoring, and system diagnostics.
 - **Serial parser**: Routes incoming serial data — heartbeat (→ arduino_status), doors (→ door controller)
 - **Data Logger** (function): 14 outputs, reads global context every 60 seconds
 - **InfluxDB out** (×14+): One per measurement, writing to `highland` database
-- **Meross power monitoring**: 600s inject → exec meross_script.py → parse → UI text + InfluxDB
+- **Meross power monitoring**: 120s inject → exec meross_script.py → parse → UI text + InfluxDB
 - **Mist counter persistence**: Startup inject → restore function → UI text nodes
 - **Resend PWM**: Periodic re-send of current fan states to prevent stale serial
 - **Send to All Fans**: Manual 4-output node for debugging (outlet, impeller, freezer, circulation)

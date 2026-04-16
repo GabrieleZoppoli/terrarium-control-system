@@ -1,0 +1,27 @@
+# Hugo build output
+website/public/
+website/resources/
+# Blowfish theme is a git submodule, don't ignore it
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+
+# Grafana snapshots (auto-committed by cron)
+# website/content/dashboard/snapshots/ is tracked
+
+# Credentials
+.env

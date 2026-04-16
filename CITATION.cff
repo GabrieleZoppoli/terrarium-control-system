@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: "Highland Cloud Forest Terrarium Control System"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: "[USER INPUT NEEDED]"
+    given-names: "[USER INPUT NEEDED]"
+    email: "[USER INPUT NEEDED]"
+    orcid: "[USER INPUT NEEDED — optional]"
+repository-code: "https://github.com/GabrieleZoppoli/terrarium-control-system"
+url: "https://gabrielezoppoli.github.io/terrarium-control-system/"
+license: CERN-OHL-S-2.0
+keywords:
+  - cloud forest
+  - terrarium
+  - weather simulation
+  - PID controller
+  - Node-RED
+  - open-source horticulture
+  - convergent evolution
+  - Heliamphora
+  - highland Nepenthes
+  - Dracula orchids
+abstract: >-
+  An open-source environmental control system for simulating tropical
+  highland cloud forest climates in enclosed terrariums. Uses real-time
+  Colombian weather data with a 15-hour time shift, a gain-scheduled
+  PID controller, marine compressor cooling, and dynamic photoperiod
+  to maintain ~120 cloud forest species from five continents.

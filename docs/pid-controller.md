@@ -43,7 +43,7 @@ fan_speed = BASE_SPEED + P + I + D
 | **Kd** | 10 | Derivative gain — dampens oscillation, reacts to rate of change |
 | **BASE_SPEED** | 50 | Resting fan speed at zero error (~20% duty cycle) |
 | **MIN_SPEED** | 40 | Minimum fan PWM (~16%) — ensures continuous air circulation |
-| **MAX_SPEED** | 230 | Maximum fan PWM (~90%) — headroom for high-humidity events |
+| **MAX_SPEED** | 230/255 | Time-of-day cap: 255 (04:00–07:00 morning blast), then weekday/weekend caps (see below) |
 
 These gains are stored in flow context (persists across Node-RED restarts) and are adjustable at runtime via the Node-RED Dashboard UI text input (format: `Kp,Ki,Kd`).
 
@@ -127,10 +127,15 @@ The maximum change is capped at 20 PWM per cycle to protect the serial communica
 ```
 raw_output = BASE_SPEED + P + I + D
 fan_speed  = clamp(round(raw_output), MIN_SPEED, MAX_SPEED)
-           = clamp(round(raw_output), 40, 230)
+           = clamp(round(raw_output), 40, MAX_SPEED)
+
+MAX_SPEED schedule:
+  04:00–07:00 (all days):  255  (morning humidity blast)
+  Weekday after 07:00:     06:30–08:00 → 180, 08:00–17:00 → 255, else → 230
+  Weekend after 07:00:     07:00–10:00 → 180, 10:00–17:00 → 255, else → 230
 ```
 
-The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) simultaneously via serial commands (`P45,<value>` and `P46,<value>`). The freezer fan (pin 44) and circulation fan (pin 12) operate independently based on compressor hysteresis control.
+The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) simultaneously via serial commands (`P45,<value>` and `P46,<value>`). The evaporator fan (pin 44) and circulation fan (pin 12) operate independently based on compressor hysteresis control.
 
 ## Guard Conditions
 
@@ -139,7 +144,7 @@ The PID controller output is blocked (returns null) when:
 1. **Door safety active** — all fans are forced to 0 by the door safety controller
 2. **Manual mode is active** — operator has set a fixed fan speed via the Dashboard UI
 3. **Mister is ON** — safety interlock stops all fans during misting
-4. **Night mode** — fans off from midnight to 06:30 (PID active 06:30–00:00)
+4. **Night mode** — fans off from midnight to 04:00 (PID active 04:00–00:00)
 5. **No data** — humidity difference is undefined (sensor offline)
 6. **Time gap** — dt > 120s (NR restart, prevents integral spike from stale timestamps)
 
@@ -149,11 +154,11 @@ The PID controller output is blocked (returns null) when:
 Priority 0 (highest): Door safety        → all fans stop (0 PWM)
 Priority 1:           Manual override     → fixed user-set speed
 Priority 2:           Mister interlock    → all fans stop (0 PWM)
-Priority 3:           Night mode          → fans off (midnight to 06:30)
+Priority 3:           Night mode          → fans off (midnight to 04:00)
 Priority 4 (lowest):  PID automatic       → computed fan speed
 ```
 
-Note: The A/B night experiment is suspended — Night Mode always outputs 0 during midnight–06:30. The A/B code is preserved in the function node as a comment block with reactivation instructions.
+Note: The A/B night experiment is suspended — Night Mode always outputs 0 during midnight–04:00. The A/B code is preserved in the function node as a comment block with reactivation instructions.
 
 ## Typical Behavior
 

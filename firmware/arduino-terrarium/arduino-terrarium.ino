@@ -11,12 +11,20 @@
 //     D22,<0|1>        Left door state change (+ periodic every 10s)
 //     D24,<0|1>        Right door state change (+ periodic every 10s)
 //     OK,P<pin>,<value>  PWM command acknowledged
-//     S,P8=<v>,P12=<v>,P44=<v>,P45=<v>,P46=<v>  Full status (response to Q)
+//     S,P8=<v>,P12=<v>,P44=<v>,P45=<v>,P46=<v>,R=<c>/<f>/<o>/<i>  Full status (response to Q)
+//     R,<circ>,<freeze>,<outlet>,<impeller>  Fan RPM (every 2s)
 //
 // PWM frequencies:
 //   Pin 8 (Timer 4): default ~490 Hz (fine for LED dimmer)
 //   Pin 12 (Timer 1): 25 kHz (internal circulation fans, Noctua 4-pin PWM)
 //   Pins 44,45,46 (Timer 5): 25 kHz (freezer/outlet/impeller fans)
+//
+// Tachometer inputs (external 4.7kΩ pull-ups to 5V required):
+//   Pin 2 (INT4): circulation fan tach
+//   Pin 3 (INT5): freezer fan tach
+//   Pin 18 (INT3): outlet fan tach
+//   Pin 19 (INT2): impeller fan tach
+//   All fans: 2 pulses/rev, FALLING edge interrupts
 
 // --- Pin definitions ---
 const uint8_t PIN_DIMMER      = 8;
@@ -27,6 +35,12 @@ const uint8_t PIN_IMPELLER    = 46;
 const uint8_t PIN_HEARTBEAT   = A0;
 const uint8_t PIN_DOOR_LEFT   = 22;
 const uint8_t PIN_DOOR_RIGHT  = 24;
+
+// Tachometer pins (hardware interrupt capable)
+const uint8_t PIN_TACH_CIRC     = 2;   // INT4
+const uint8_t PIN_TACH_FREEZER  = 3;   // INT5
+const uint8_t PIN_TACH_OUTLET   = 18;  // INT3
+const uint8_t PIN_TACH_IMPELLER = 19;  // INT2
 
 // --- Timer config for 25 kHz ---
 // Phase-correct PWM, ICRn as TOP
@@ -41,17 +55,44 @@ const uint8_t pwmPins[5] = {PIN_DIMMER, PIN_CIRCULATION, PIN_FREEZER, PIN_OUTLET
 uint8_t lastDoorLeft  = HIGH;  // pullup: HIGH = closed
 uint8_t lastDoorRight = HIGH;
 
+// --- Tachometer ---
+// ISR pulse counters (volatile, accessed from interrupts)
+volatile uint16_t tachCount[4] = {0, 0, 0, 0};  // circ, freezer, outlet, impeller
+
+// Computed RPM values (updated every 1s from tachCount)
+uint16_t rpm[4] = {0, 0, 0, 0};
+
+// ISRs — minimal: just increment counter
+void isrTachCirc()     { tachCount[0]++; }
+void isrTachFreezer()  { tachCount[1]++; }
+void isrTachOutlet()   { tachCount[2]++; }
+void isrTachImpeller() { tachCount[3]++; }
+
 // --- Timing ---
 unsigned long lastHeartbeat = 0;
 unsigned long lastDoorPoll  = 0;
 unsigned long lastDoorReport = 0;
+unsigned long lastRpmCalc   = 0;
+unsigned long lastRpmReport = 0;
 const unsigned long HEARTBEAT_INTERVAL = 2000;   // 2s
 const unsigned long DOOR_POLL_INTERVAL = 100;     // 100ms debounce
 const unsigned long DOOR_REPORT_INTERVAL = 10000; // 10s periodic
+const unsigned long RPM_CALC_INTERVAL  = 1000;    // 1s — count pulses over 1s window
+const unsigned long RPM_REPORT_INTERVAL = 2000;   // 2s — send R, line
 
 // --- Serial buffer ---
 char cmdBuf[32];
 uint8_t cmdLen = 0;
+
+// --- TX buffer guard ---
+// Minimum free bytes in TX buffer before we'll attempt a print.
+// Prevents loop() from blocking when 16U2 USB bridge stalls.
+const uint8_t TX_MIN_FREE = 16;
+
+// Returns true if TX buffer has enough room for a short message
+bool txReady() {
+  return Serial.availableForWrite() >= TX_MIN_FREE;
+}
 
 // Map pin number to pwmValues index, returns 255 if invalid
 uint8_t pinToIndex(uint8_t pin) {
@@ -63,18 +104,48 @@ uint8_t pinToIndex(uint8_t pin) {
 
 // Set PWM for Timer 1 pin 12 (OC1B) using direct register access
 // Maps 0-255 input to 0-TIMER_TOP_25K range
+// When value=0: disconnect output compare and force pin LOW to avoid
+// narrow pulse at BOTTOM of phase-correct PWM keeping MOSFET gate charged
 void setTimer1PWM(uint8_t value) {
-  OCR1B = ((uint16_t)value * TIMER_TOP_25K) / 255;
+  if (value == 0) {
+    TCCR1A &= ~(1 << COM1B1);  // Disconnect OC1B
+    digitalWrite(12, LOW);       // Force pin LOW
+    OCR1B = 0;
+  } else {
+    TCCR1A |= (1 << COM1B1);   // Reconnect OC1B
+    OCR1B = ((uint32_t)value * TIMER_TOP_25K) / 255;
+  }
 }
 
 // Set PWM for Timer 5 pins (44, 45, 46) using direct register access
 // Maps 0-255 input to 0-TIMER_TOP_25K range
+// When value=0: disconnect output compare and force pin LOW to avoid
+// narrow pulse at BOTTOM of phase-correct PWM keeping MOSFET gate charged
 void setTimer5PWM(uint8_t pin, uint8_t value) {
-  uint16_t mapped = ((uint16_t)value * TIMER_TOP_25K) / 255;
-  switch (pin) {
-    case 44: OCR5C = mapped; break;  // Pin 44 = OC5C
-    case 45: OCR5B = mapped; break;  // Pin 45 = OC5B
-    case 46: OCR5A = mapped; break;  // Pin 46 = OC5A
+  if (value == 0) {
+    switch (pin) {
+      case 44: TCCR5A &= ~(1 << COM5C1); break;  // Disconnect OC5C
+      case 45: TCCR5A &= ~(1 << COM5B1); break;  // Disconnect OC5B
+      case 46: TCCR5A &= ~(1 << COM5A1); break;  // Disconnect OC5A
+    }
+    digitalWrite(pin, LOW);  // Force pin LOW
+    switch (pin) {
+      case 44: OCR5C = 0; break;
+      case 45: OCR5B = 0; break;
+      case 46: OCR5A = 0; break;
+    }
+  } else {
+    switch (pin) {
+      case 44: TCCR5A |= (1 << COM5C1); break;  // Reconnect OC5C
+      case 45: TCCR5A |= (1 << COM5B1); break;  // Reconnect OC5B
+      case 46: TCCR5A |= (1 << COM5A1); break;  // Reconnect OC5A
+    }
+    uint16_t mapped = ((uint32_t)value * TIMER_TOP_25K) / 255;
+    switch (pin) {
+      case 44: OCR5C = mapped; break;
+      case 45: OCR5B = mapped; break;
+      case 46: OCR5A = mapped; break;
+    }
   }
 }
 
@@ -168,6 +239,17 @@ void setup() {
   pinMode(PIN_DOOR_LEFT, INPUT_PULLUP);
   pinMode(PIN_DOOR_RIGHT, INPUT_PULLUP);
 
+  // Tachometer inputs — using internal pull-ups (~20-50kΩ)
+  // Upgrade to external 4.7kΩ pull-ups if readings are noisy
+  pinMode(PIN_TACH_CIRC, INPUT_PULLUP);
+  pinMode(PIN_TACH_FREEZER, INPUT_PULLUP);
+  pinMode(PIN_TACH_OUTLET, INPUT_PULLUP);
+  pinMode(PIN_TACH_IMPELLER, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(PIN_TACH_CIRC),     isrTachCirc,     FALLING);
+  attachInterrupt(digitalPinToInterrupt(PIN_TACH_FREEZER),  isrTachFreezer,  FALLING);
+  attachInterrupt(digitalPinToInterrupt(PIN_TACH_OUTLET),   isrTachOutlet,   FALLING);
+  attachInterrupt(digitalPinToInterrupt(PIN_TACH_IMPELLER), isrTachImpeller, FALLING);
+
   // Read initial door states
   lastDoorLeft  = digitalRead(PIN_DOOR_LEFT);
   lastDoorRight = digitalRead(PIN_DOOR_RIGHT);
@@ -198,7 +280,15 @@ void processCommand() {
     Serial.print(",P45=");
     Serial.print(pwmValues[3]);
     Serial.print(",P46=");
-    Serial.println(pwmValues[4]);
+    Serial.print(pwmValues[4]);
+    Serial.print(",R=");
+    Serial.print(rpm[0]);
+    Serial.print("/");
+    Serial.print(rpm[1]);
+    Serial.print("/");
+    Serial.print(rpm[2]);
+    Serial.print("/");
+    Serial.println(rpm[3]);
   }
   else if (cmdBuf[0] == 'P') {
     // Parse P<pin>,<value>
@@ -259,7 +349,7 @@ void readSerial() {
       } else {
         // Buffer overflow — discard
         cmdLen = 0;
-        Serial.println("ERR,OVERFLOW");
+        if (txReady()) Serial.println("ERR,OVERFLOW");
       }
     }
   }
@@ -268,10 +358,43 @@ void readSerial() {
 void sendHeartbeat() {
   unsigned long now = millis();
   if (now - lastHeartbeat >= HEARTBEAT_INTERVAL) {
+    if (!txReady()) return;  // Skip this cycle, retry next loop iteration
     lastHeartbeat = now;
     int a0 = analogRead(PIN_HEARTBEAT);
     Serial.print("H,");
     Serial.println(a0);
+  }
+}
+
+void calcRpm() {
+  unsigned long now = millis();
+  if (now - lastRpmCalc >= RPM_CALC_INTERVAL) {
+    lastRpmCalc = now;
+    // Atomic read and reset of each counter
+    for (uint8_t i = 0; i < 4; i++) {
+      cli();
+      uint16_t count = tachCount[i];
+      tachCount[i] = 0;
+      sei();
+      // 2 pulses/rev, counted over 1s → RPM = count * 30
+      rpm[i] = (uint16_t)(count * 30);
+    }
+  }
+}
+
+void reportRpm() {
+  unsigned long now = millis();
+  if (now - lastRpmReport >= RPM_REPORT_INTERVAL) {
+    if (!txReady()) return;
+    lastRpmReport = now;
+    Serial.print("R,");
+    Serial.print(rpm[0]);
+    Serial.print(",");
+    Serial.print(rpm[1]);
+    Serial.print(",");
+    Serial.print(rpm[2]);
+    Serial.print(",");
+    Serial.println(rpm[3]);
   }
 }
 
@@ -288,21 +411,25 @@ void checkDoors() {
 
     if (left != lastDoorLeft) {
       lastDoorLeft = left;
-      Serial.print("D22,");
-      Serial.println(left);
+      if (txReady()) {
+        Serial.print("D22,");
+        Serial.println(left);
+      }
       changed = true;
     }
 
     if (right != lastDoorRight) {
       lastDoorRight = right;
-      Serial.print("D24,");
-      Serial.println(right);
+      if (txReady()) {
+        Serial.print("D24,");
+        Serial.println(right);
+      }
       changed = true;
     }
 
     if (now - lastDoorReport >= DOOR_REPORT_INTERVAL) {
       lastDoorReport = now;
-      if (!changed) {
+      if (!changed && txReady()) {
         Serial.print("D22,");
         Serial.println(lastDoorLeft);
         Serial.print("D24,");
@@ -316,4 +443,6 @@ void loop() {
   readSerial();
   sendHeartbeat();
   checkDoors();
+  calcRpm();
+  reportRpm();
 }

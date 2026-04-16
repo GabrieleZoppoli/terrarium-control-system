@@ -52,7 +52,7 @@ Switched mains power for high-current loads, controlled via the PyP100 Python li
 
 ### Meross MSS310 Smart Plug
 
-Energy-monitoring plug at 192.168.1.92 on the master power line. Reports instantaneous power consumption via the Meross cloud API (iotx-eu.meross.com) every 10 minutes. Used for tracking total system power draw.
+Energy-monitoring plug at 192.168.1.92 on the master power line. A persistent Python daemon (`meross_daemon.py`) maintains a single authenticated session to the Meross cloud API (iotx-eu.meross.com) and publishes instantaneous power readings to the local MQTT broker (`meross/power/watts`) every 2 seconds. This replaced an earlier approach that spawned a new process every 120 seconds, each performing a full login/discover/logout cycle. The daemon also accepts on/off commands via MQTT (`meross/power/command`), enabling sub-second response to the dashboard panic button. It runs as a systemd service (`meross-daemon`) with automatic restart on failure.
 
 ### Door Reed Switches (×2)
 
@@ -69,45 +69,46 @@ Magnetic reed switches on both sliding front panels, wired to Arduino D22 (left)
 Seven flow tabs organize the control logic:
 
 #### Lights Tab
-- **BigTimer** node: Fixed schedule 06:25–20:05 (starttime=385, endtime=1205 in minutes-since-midnight)
-- **Dynamic Dimmer #1**: 30-minute PWM ramp at sunrise (06:30) and sunset (19:30), slider 0↔40
-- **Dynamic Dimmer #2**: 30-minute midday ramp (11:00–11:30 up, 13:00–13:30 down), slider 40↔60
-- **Function nodes**: Force explicit `start` parameter for each ramp to work around dimmer reset bug
-- **Startup brightness**: Detects ramp-window restarts, issues partial-start for on-schedule completion
+- **Photoperiod Calculator** (function): Computes day length for Chinchiná (4.98°N) using solar declination. Clamped 10–14h, centered on 13:15 Genoa time. Fires at startup (5s delay) and daily at 00:05.
+- **Unified Light Scheduler** (function): Receives 1-minute ticks, reads computed photoperiod globals. Controls Tapo on/off and dimmer ramp triggers at dynamically calculated times.
+- **Dynamic Dimmer #1**: 30-minute PWM ramp at dawn/dusk, slider 0↔40
+- **Dynamic Dimmer #2**: 30-minute midday ramp (proportional to day length), slider 40↔60
+- **Startup brightness**: Detects ramp-window restarts using dynamic photoperiod times, issues partial-start for on-schedule completion
 - **Pin 8 writer**: Sends `P8,<value>` via serial; stores `last_dimmer_pwm`, forces PWM 102 during door safety
 - **Python function**: Tapo P100 control for light plug (with door safety gate)
-- BigTimer special codes: 5000–5006 represent astronomical events (dawn, sunrise, etc.)
+- *Disabled*: BigTimer (fixed schedule), 4 time-inject nodes, 4 ramp function nodes — replaced by dynamic scheduler
 
 #### Humidity Tab
 - **MQTT In**: Receives SHT35 temperature + humidity from ESP
 - **VPD Calculator** (function): Computes Vapor Pressure Deficit using Magnus formula
-- **Target humidity**: Derived from Colombian weather data, clamped to 70–90% RH
+- **Target humidity**: Derived from Colombian weather data (upper cap 95% RH)
 - **Humidity difference**: target − actual, feeds PID controller on Fans tab
 - **Hysteresis**: Controls mister on/off around target humidity
 - **Python function**: Tapo P100 plug control for mister (with door safety gate)
 
 #### Temperature Tab
-- **Target temperature**: Derived from Colombian weather data, clamped to 12–24°C
+- **Target temperature**: Derived from Colombian weather data (clamped 12--24°C)
 - **Temperature difference**: target − actual
 - **Hysteresis**: Controls compressor on/off based on temperature error
 - **Python function**: Tapo P100 plug control for compressor (with door safety gate)
 
 #### Fans Tab
-- **PID Controller** (function): Gain-scheduled humidity-based fan speed calculation (Kp=50, Ki=0.5, Kd=10)
-- **Day/Night Check**: Within-time-switch, 06:30–00:00 (midnight)
+- **PID Controller** (function): Three-regime gain-scheduled fan speed control (Kp=50, Ki=0.5, Kd=10). Normal mode (T<24°C): humidity PID. Warm mode (24–25°C, freezer off): temperature PID for evaporative cooling. Hot mode (≥25°C): humidity PID with freezer active.
+- **Day/Night Check**: Within-time-switch, 04:00–00:00 (midnight)
 - **Night Mode (A/B Suspended)**: Always outputs 0 (A/B code preserved in comments for reactivation)
 - **Mister Interlock** (function): Stops all fans when mister is active
 - **Manual Override**: Dashboard slider, highest priority control
-- **Fan writers**: 4 serial output nodes (outlet pin 45, impeller pin 46, freezer pin 44, circulation pin 12), all door-safety gated
-- **RBE nodes**: Report-by-exception logging for fan PWM changes (septopics mode)
+- **Fan writers**: 4 serial output nodes (outlet pin 45, impeller pin 46, evaporator pin 44, circulation pin 12), all door-safety gated
+- **RBE nodes**: Report-by-exception logging for fan PWM changes
 - **Door safety controller**: OR-tracks both doors, 3s debounce, triggers safety mode
 - **Door safety outputs**: 4 outputs (serial fan stop, compressor off, mister off, lights to 60%)
 
 #### Weather Tab
 - **OpenWeatherMap** nodes: Four instances for Chinchiná, Medellín, Bogotá, Sonsón
-- **Aggregator/Smooth**: Averages and smooths weather values (30-min window)
+- **Aggregator/Smooth**: Averages and smooths weather values (30-min InfluxDB window + 15-min rolling mean across 4 cities)
 - **Position config**: lat=5.19485 (tepui reference), lon=8.944381 (Genoa) for astronomical calculations
-- **Weather fallback**: Default setpoints (day T=24/H=85, night T=14/H=90) when API is unreachable
+- **Weather fallback**: Historical 14-day daily curve (288 slots, two-pass smoothed) when API is unreachable; ultimate fallback (day T=24/H=85, night T=14/H=90) if no historical data
+- **Historical curve builder**: Rebuilds every 6 hours from InfluxDB; applies 15-hour time shift baked into curve slots
 
 #### Charts Tab
 - **Dashboard UI** components: Gauges (temp, humidity, VPD), time-series charts, status LEDs
@@ -117,12 +118,12 @@ Seven flow tabs organize the control logic:
 - Real-time and historical visualization within the Node-RED Dashboard
 
 #### Utilities Tab
-- **Data Logger**: Function node with 14 outputs, triggered every 60 seconds
+- **Data Logger**: Function node with 16 outputs, triggered every 60 seconds
 - Each output connects to an individual InfluxDB out node
 - Reads all global context variables and writes to the `highland` database
 - **Serial config**: Serial port node at 115200 baud, \n delimiter
 - **Serial parser**: Parses heartbeat (H,val), door states (D22/D24), error messages
-- **Meross power monitoring**: 600s inject → exec python3 meross_script.py → parse → UI + InfluxDB
+- **Meross power monitoring**: MQTT subscription (`meross/power/watts`) from persistent daemon → parse → UI + InfluxDB (2s updates)
 - **Mist counter persistence**: Saves/restores today's and yesterday's mist counts across reboots
 - **Resend PWM**: Periodically re-sends current fan speeds to prevent stale serial state
 
@@ -155,7 +156,7 @@ Note: `node-red-contrib-ioplugin` is no longer required (Firmata removed).
 **Port**: 8086
 **Database**: `highland`
 **Retention**: 365 days (`standard_highland_retention`)
-**Measurements**: 27 (see `schema.md`)
+**Measurements**: 32 (see `schema.md`)
 
 Query interface:
 ```bash

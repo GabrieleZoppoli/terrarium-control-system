@@ -1,12 +1,13 @@
 import asyncio
 import json
+import os
 import sys
 from meross_iot.http_api import MerossHttpClient
 from meross_iot.manager import MerossManager
 
-EMAIL = "YOUR_EMAIL"
-PASSWORD = "YOUR_PASSWORD"
-PLUG_ID = "roraima_plug"
+EMAIL = os.environ.get("MEROSS_EMAIL", "your_email@example.com")
+PASSWORD = os.environ.get("MEROSS_PASSWORD", "your_password")
+PLUG_ID = os.environ.get("MEROSS_PLUG_ID", "your_plug_name")
 
 async def control_plug_or_fetch_energy(action):
     manager = None
@@ -63,3 +64,4 @@ if __name__ == "__main__":
         print(result)
     else:
         print(json.dumps({"error": "No action specified"}))
+
