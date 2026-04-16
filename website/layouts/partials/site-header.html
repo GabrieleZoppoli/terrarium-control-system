@@ -1,0 +1,26 @@
+<header class="site-header">
+  <a class="brand" href="{{ site.Home.RelPermalink }}">
+    <span class="mark">{{ .Site.Title }}</span>
+    {{- with .Site.Params.tagline }}<span class="sub">{{ . }}</span>{{ end }}
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-toggle="nav">Menu</button>
+  <nav id="primary-nav" class="site-nav" aria-label="Primary">
+    {{- range .Site.Menus.main }}
+      {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
+      {{- $href := "" }}
+      {{- with .Page }}{{ $href = .RelPermalink }}{{ else }}{{ $href = .URL | default (printf "/%s/" .PageRef) | relURL }}{{ end }}
+      <a href="{{ $href }}"{{ if $active }} aria-current="true"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+  </nav>
+</header>
+<script>
+  (function () {
+    var toggle = document.querySelector('[data-toggle="nav"]');
+    var nav = document.getElementById('primary-nav');
+    if (!toggle || !nav) return;
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+  })();
+</script>

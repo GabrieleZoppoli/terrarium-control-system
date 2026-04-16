@@ -1,0 +1,36 @@
+{{ define "main" }}
+<section class="page">
+  {{- if and (not .IsHome) (gt (len .Ancestors) 1) }}
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    {{- range (.Ancestors.Reverse) }}
+      {{- if not .IsHome }}
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a><span class="sep">·</span>
+      {{- end }}
+    {{- end }}
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+  {{- end }}
+  <header class="page-hero">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
+
+  {{- $children := .Pages }}
+  {{- if $children }}
+  <div class="card-grid">
+    {{- range $children.ByWeight }}
+    <a class="card" href="{{ .RelPermalink }}">
+      {{- with .Params.kicker }}<span class="kicker">{{ . }}</span>{{ end }}
+      <h2 class="title">{{ .LinkTitle }}</h2>
+      {{- with .Description }}<p class="body">{{ partial "endstop.html" . }}</p>{{ end }}
+      {{- with .Params.meta }}<span class="meta">{{ . }}</span>{{ end }}
+    </a>
+    {{- end }}
+  </div>
+  {{- end }}
+</section>
+{{ end }}

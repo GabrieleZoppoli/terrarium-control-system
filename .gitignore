@@ -1,6 +1,7 @@
 # Hugo build output
 website/public/
 website/resources/
+website/.hugo_build.lock
 # Blowfish theme is a git submodule, don't ignore it
 
 # OS files

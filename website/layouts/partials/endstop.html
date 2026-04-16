@@ -1,0 +1,14 @@
+{{- /*
+  endstop: adds a single period to the input string if it doesn't already end
+  in terminal punctuation. Intended for fields like .Description that mix
+  fragments with complete sentences.
+*/ -}}
+{{- $d := trim . " \t\n\r" -}}
+{{- if $d -}}
+  {{- $last := substr $d -1 1 -}}
+  {{- if in (slice "." "!" "?" "…" ":" ";" ")" "”") $last -}}
+    {{- $d -}}
+  {{- else -}}
+    {{- printf "%s." $d -}}
+  {{- end -}}
+{{- end -}}

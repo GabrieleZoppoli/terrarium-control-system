@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="page">
+  <div class="home-hero">
+    <span class="kicker">Open-source highland cloud forest · Living botanical collection</span>
+    <h1>Climate, invention, and a <em>living collection</em> in three overlapping worlds.</h1>
+    <p class="lede">{{ .Site.Params.heroLede | default "A highland cloud-forest terrarium driven by Node-RED and PID humidity control, the standalone inventions built around it, and the plant collection it shelters — documented end to end." }}</p>
+  </div>
+
+  <div class="home-sections">
+    {{- range $i, $ref := slice "highland" "inventions" "collection" }}
+      {{- with site.GetPage $ref }}
+      <a class="home-section" href="{{ .RelPermalink }}">
+        <div class="num">{{ printf "%02d" (add $i 1) }} /</div>
+        <h2 class="title">{{ .LinkTitle }}</h2>
+        <p class="body">{{ partial "endstop.html" .Description }}</p>
+      </a>
+      {{- end }}
+    {{- end }}
+  </div>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max); margin-top: 4rem;">{{ . }}</div>
+  {{- end }}
+</section>
+{{ end }}

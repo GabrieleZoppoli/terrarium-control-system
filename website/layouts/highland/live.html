@@ -1,0 +1,207 @@
+{{ define "main" }}
+{{ $snapshot := .Params.snapshotURL | default "" }}
+{{ $live     := .Params.liveURL | default "" }}
+{{ $interval := .Params.snapshotInterval | default 60 }}
+<section class="page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ "/" | relURL }}">Home</a><span class="sep">·</span>
+    <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+
+  <header class="page-hero">
+    <span class="kicker">{{ .Parent.LinkTitle }}</span>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
+
+  <div class="live-shell stack-lg" style="margin-top:2.5rem"
+       data-snapshot="{{ $snapshot }}"
+       data-live="{{ $live }}"
+       data-interval="{{ $interval }}">
+    <div class="live-shell__status" aria-live="polite">
+      <span class="live-dot" aria-hidden="true"></span>
+      <span class="live-label">
+        {{- if $snapshot }}Waiting for first snapshot…{{ else }}Snapshot URL not yet configured{{ end -}}
+      </span>
+      <span class="live-meta mono" aria-hidden="true"></span>
+    </div>
+
+    <div class="live-frame-wrap">
+      {{- if $snapshot }}
+      <img class="live-img" src="{{ $snapshot }}" alt="Latest snapshot of the highland control UI" loading="lazy">
+      {{- else }}
+      <div class="live-placeholder">
+        <p>The snapshot endpoint is not set up yet. See <a href="https://github.com/GabrieleZoppoli/terrarium-control-system/blob/master/website/HANDOFF.md">HANDOFF.md</a> for the Pi-side capture job that publishes <code>ui-latest.png</code> over Tailscale Funnel.</p>
+      </div>
+      {{- end }}
+    </div>
+
+    {{- if $live }}
+    <details class="live-deepview">
+      <summary>Open full control UI (Tailscale only)</summary>
+      <p>If you're on the tailnet, the interactive Node-RED dashboard is at <a href="{{ $live }}" target="_blank" rel="noopener">{{ $live }}</a>. Outside the tailnet this link won't resolve.</p>
+    </details>
+    {{- end }}
+  </div>
+</section>
+
+<style>
+  .live-shell__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.45rem 1rem;
+    background: var(--surface-veil);
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    font-size: var(--step-xs);
+    color: var(--text-3);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+  }
+  .live-meta {
+    color: var(--text-4);
+    letter-spacing: 0.08em;
+    text-transform: none;
+    padding-left: 0.5em;
+    border-left: 1px solid var(--border-hair);
+  }
+  .live-meta:empty { display: none; }
+
+  .live-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--text-4);
+    transition: background 240ms var(--ease-out), box-shadow 240ms var(--ease-out);
+  }
+  .live-shell.is-live .live-dot {
+    background: var(--status-alive);
+    box-shadow: 0 0 0 0 rgba(143, 185, 122, 0.6);
+    animation: live-pulse 2.2s ease-in-out infinite;
+  }
+  .live-shell.is-stale .live-dot  { background: var(--highlight); }
+  .live-shell.is-offline .live-dot { background: var(--status-lost); }
+
+  @keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(143, 185, 122, 0.55); }
+    50%      { box-shadow: 0 0 0 8px rgba(143, 185, 122, 0); }
+  }
+
+  .live-frame-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    min-height: 420px;
+    background: var(--surface-solid);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-4);
+    overflow: hidden;
+    box-shadow: var(--elev-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .live-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #0c0d11;
+    display: block;
+    transition: opacity 300ms var(--ease-out);
+  }
+  .live-shell.is-refreshing .live-img { opacity: 0.75; }
+  .live-shell.is-offline .live-img { opacity: 0.15; filter: grayscale(0.8); }
+
+  .live-placeholder {
+    color: var(--text-3);
+    font-family: var(--font-display);
+    font-style: italic;
+    padding: 2rem 2.4rem;
+    text-align: center;
+    max-width: 48ch;
+  }
+  .live-placeholder a { color: var(--text-1); }
+
+  .live-deepview {
+    color: var(--text-3);
+    font-size: var(--step-sm);
+  }
+  .live-deepview summary {
+    cursor: pointer;
+    color: var(--text-2);
+    font-family: var(--font-sans);
+    font-size: var(--step-xs);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.4em 0;
+  }
+  .live-deepview summary::marker { color: var(--text-4); }
+  .live-deepview a { color: var(--text-1); }
+</style>
+
+<script>
+  (function () {
+    var shell = document.querySelector('.live-shell');
+    if (!shell) return;
+    var img = shell.querySelector('.live-img');
+    if (!img) return;
+
+    var baseURL = shell.dataset.snapshot;
+    if (!baseURL) return;
+
+    var label = shell.querySelector('.live-label');
+    var meta = shell.querySelector('.live-meta');
+    var interval = parseInt(shell.dataset.interval, 10) * 1000 || 60000;
+    var lastOK = null;
+
+    function setState(state, msg) {
+      shell.classList.remove('is-live', 'is-stale', 'is-offline', 'is-refreshing');
+      if (state) shell.classList.add(state);
+      if (label && msg) label.textContent = msg;
+    }
+
+    function humanAgo(ts) {
+      var s = Math.max(0, Math.round((Date.now() - ts) / 1000));
+      if (s < 90) return s + 's ago';
+      var m = Math.round(s / 60);
+      if (m < 60) return m + ' min ago';
+      var h = (m / 60).toFixed(1);
+      return h + ' h ago';
+    }
+
+    function refresh() {
+      shell.classList.add('is-refreshing');
+      var sep = baseURL.indexOf('?') > -1 ? '&' : '?';
+      var next = baseURL + sep + 't=' + Date.now();
+      var probe = new Image();
+      probe.onload = function () {
+        img.src = next;
+        lastOK = Date.now();
+        setState('is-live', 'Live · auto-refreshed');
+      };
+      probe.onerror = function () {
+        if (lastOK && Date.now() - lastOK < interval * 3) {
+          setState('is-stale', 'Snapshot stale');
+        } else {
+          setState('is-offline', 'Snapshot unreachable');
+        }
+      };
+      probe.src = next;
+    }
+
+    function tickMeta() {
+      if (!meta) return;
+      meta.textContent = lastOK ? humanAgo(lastOK) : '';
+    }
+
+    refresh();
+    setInterval(refresh, interval);
+    setInterval(tickMeta, 5000);
+  })();
+</script>
+{{ end }}

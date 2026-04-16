@@ -1,0 +1,6 @@
+{{- $level := .Level }}
+{{- $anchor := .Anchor }}
+<h{{ $level }} id="{{ $anchor }}">
+  <a class="heading-anchor" href="#{{ $anchor }}" aria-hidden="true">#</a>
+  {{ .Text | safeHTML }}
+</h{{ $level }}>

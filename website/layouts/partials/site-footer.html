@@ -1,0 +1,9 @@
+<footer class="site-footer">
+  <div class="page">
+    <div>
+      {{- with .Site.Params.author.name }}© {{ now.Format "2006" }} · {{ . }}{{ end }}
+      {{- with .Site.Params.repoURL }} · <a href="{{ . }}">source</a>{{ end }}
+    </div>
+    <div class="hushed">Living collection · highland terrarium · bespoke open hardware</div>
+  </div>
+</footer>

@@ -1,0 +1,55 @@
+{{ define "main" }}
+<section class="page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ "/" | relURL }}">Home</a><span class="sep">·</span>
+    <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+
+  <header class="page-hero">
+    <span class="kicker">{{ .Parent.LinkTitle }}</span>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
+
+  {{ $url := "/zeer-pot/" | relURL }}
+  <div class="embed-shell" data-src="{{ $url }}">
+    <div class="embed-actions">
+      <a class="dendro-action" href="{{ $url }}" target="_blank" rel="noopener">
+        <span class="dendro-action__label">Open fullscreen</span>
+        <span class="dendro-action__icon" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <div class="embed-frame-wrap">
+      <iframe class="embed-frame" src="{{ $url }}" title="Zeer pot build documentation" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<style>
+  .embed-shell { margin: 2.5rem 0 1rem; }
+  .embed-actions { display:flex; justify-content:flex-end; margin-bottom:0.6rem; }
+  .embed-frame-wrap {
+    position: relative;
+    width: 100%;
+    height: min(calc(100vh - var(--nav-height) - 7rem), 960px);
+    min-height: 640px;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--r-4);
+    overflow: hidden;
+    background: var(--bg-0);
+    box-shadow: var(--elev-3);
+  }
+  .embed-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    background: transparent;
+  }
+</style>
+{{ end }}

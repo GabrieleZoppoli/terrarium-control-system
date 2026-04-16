@@ -1,0 +1,24 @@
+{{ define "main" }}
+<article class="page page--prose">
+  {{- if gt (len .Ancestors) 1 }}
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    {{- range (.Ancestors.Reverse) }}
+      {{- if not .IsHome }}
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a><span class="sep">·</span>
+      {{- end }}
+    {{- end }}
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+  {{- end }}
+  <header class="page-hero">
+    {{- with .Parent }}
+      {{- if not .IsHome }}<span class="kicker">{{ .LinkTitle }}</span>{{ end }}
+    {{- end }}
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+  <div class="prose">
+    {{ .Content }}
+  </div>
+</article>
+{{ end }}
