@@ -17,28 +17,13 @@ genera: ["Dracula", "Masdevallia"]
 
 Cork bark with a sphagnum moss pad. *Dracula* mounted with inflorescences able to hang freely below.
 
-## Dracula (4 species, 0 losses)
+## Dracula
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *D. simia* (selected) | Grossraschener Orchideen | EUR 35.00 | Mounted when available | Alive |
-| 2 | *D. lotax* | Klein Carnivors | — | Very small form | Alive |
-| 3 | *D. vlad-tepes* | Grossraschener Orchideen | EUR 17.50 | — | Alive |
-| 4 | *D. pholeodytes* | Ecuagenera Europe | EUR 51.40 | — | Alive |
+{{< collection-species "Dracula" >}}
 
-## Masdevallia (7 acquired, 5 alive, 2 lost)
+## Masdevallia
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *M. decumana* | Grossraschener Orchideen | EUR 28.00 | — | Alive |
-| 2 | *M. xanthina* (red form) | Grossraschener Orchideen | EUR 28.00 | Red form | Alive |
-| 3 | *M. lucernula* | Grossraschener Orchideen | EUR 25.00 | — | Alive |
-| 4 | *M.* Devil's Heart | Ecuagenera Europe | EUR 15.32 | Hybrid | Alive |
-| 5 | *M. caudata* 'Gigi' | Ecuagenera | — | — | Alive |
-| 6 | *M. glandulosa* | Grossraschener Orchideen | EUR 23.95 | — | Lost |
-| 7 | *M. coccinea* 'Anchota' | Ecuagenera Europe | EUR 27.04 | — | Lost |
-
-**Total invested**: ~EUR 251
+{{< collection-species "Masdevallia" >}}
 
 ## Cultivation Notes (3+ years)
 

@@ -1,7 +1,7 @@
 {{ define "main" }}
 <section class="page">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="{{ "/" | relURL }}">Home</a><span class="sep">·</span>
+    <a href="{{ site.Home.RelPermalink }}">Home</a><span class="sep">·</span>
     <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
     <span>{{ .LinkTitle }}</span>
   </nav>
@@ -16,7 +16,7 @@
   <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
   {{- end }}
 
-  {{ $dendroURL := "/dendrogram/" | relURL }}
+  {{ $dendroURL := "dendrogram/" | absURL }}
   <div class="dendro-shell" data-src="{{ $dendroURL }}">
     <div class="dendro-actions">
       <a class="dendro-action" href="{{ $dendroURL }}" target="_blank" rel="noopener">

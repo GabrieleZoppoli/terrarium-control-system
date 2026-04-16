@@ -19,22 +19,7 @@ Akadama + long-fiber sphagnum, topped with a living *Sphagnum* moss layer. No st
 
 ## Species in Collection
 
-All 10 plants sourced from Andreas Wistuba (Mudau, Germany). **100% survival rate** -- no losses in 3+ years.
-
-| # | Taxon | Price | Notes | Status |
-|---|-------|-------|-------|--------|
-| 1 | *H. minor* var. *pilosa* (Auyan-tepui) Clone 3 | EUR 205.61 | Adult pitchers, young plant | Alive |
-| 2 | *H. ionasi* 'Elegance' | EUR 82.24 | Adult pitchers, young plant | Alive |
-| 3 | *H. macdonaldae* (Cerro Duida) ISC | EUR 123.36 | Adult pitchers, young plant | Alive |
-| 4 | *H. pulchella* (Akopan-tepui) | EUR 20.00 | Was temporarily unavailable; eventually shipped | Alive |
-| 5 | *H. purpurascens* x *ionasii* (Red Giant) | EUR 100.00 | Adult pitchers; first shipment was juvenile, replaced free | Alive |
-| 6 | *H. minor* Clone 4 | EUR 30.00 | Adult pitchers | Alive |
-| 7 | *H. pulchella* (Amuri-tepui) | EUR 25.00 | Separate provenance from Akopan | Alive |
-| 8 | *H. minor* 'Burgundy Black' | EUR 45.00 | Adult pitchers; anthocyanin-rich form | Alive |
-| 9 | *H. macdonaldae* | EUR 250.00 | Adult leaves; ~1 yr on waiting list | Alive |
-| 10 | *H.* 'Godzilla' | EUR 100.00 | Juvenile | Alive |
-
-**Total invested**: ~EUR 981
+{{< collection-species "Heliamphora" >}}
 
 ## Cultivation Notes (3+ years)
 

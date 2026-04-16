@@ -19,22 +19,7 @@ Kanuma + long-fiber sphagnum. No saucers or moisture trays -- the terrarium's 80
 
 ## Species in Collection
 
-**100% survival rate** for highland species. One lowland species (*N. ampullaria*) was given away as incompatible.
-
-| # | Taxon | Vendor | Price | Origin | Status |
-|---|-------|--------|-------|--------|--------|
-| 1 | *N. aristolochioides* (Clone NM03) | Andreas Wistuba | EUR 61.68 | Sumatra | Alive |
-| 2 | *N. inermis* | Andreas Wistuba | EUR 20.00 | Gunung Gadut, Sumatra | Alive |
-| 3 | *N. tenuis* 'Reddish Leaves' | Andreas Wistuba | EUR 80.00 | West Sumatra | Alive |
-| 4 | *N. pitopangii* 'Ivory Colored Form' Clone:01 | Andreas Wistuba | EUR 51.40 | Sulawesi | Alive |
-| 5 | *N.* 'Fake Pitopangii' | Andreas Wistuba | EUR 80.00 | Originally sold as *N. pitopangii* | Alive |
-| 6 | *N. argentii* | Giardino Carnivoro | EUR 42.90 | Sibuyan, Philippines | Alive |
-| 7 | *N. micramphora* | Giardino Carnivoro | EUR 34.90 | Mt. Hamiguitan, Mindanao | Alive |
-| 8 | *N. jamban* | Giardino Carnivoro | EUR 34.90 | Barisan Mountains, Sumatra | Alive |
-| 9 | *N. glabrata* | Karnivores.com | — | Sulawesi | Alive |
-| 10 | *N. ampullaria* 'Lime Twist' | Carnivoria.eu | EUR 28.00 | Lowland species | Given away |
-
-**Total invested**: ~EUR 434
+{{< collection-species "Nepenthes" >}}
 
 ## Cultivation Notes (3+ years)
 

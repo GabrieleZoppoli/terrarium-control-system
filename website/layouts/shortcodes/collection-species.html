@@ -1,0 +1,98 @@
+{{- /*
+  collection-species — filters static/data/collection.csv by genus and renders
+  the live acquisition list with status pills, price, source, and notes.
+
+  Usage:
+    {{< collection-species "Heliamphora" >}}
+    {{< collection-species genus="Heliamphora" show="alive" >}}     all | alive | lost | given  (default: all)
+*/ -}}
+{{- $genus := .Get "genus" -}}
+{{- if not $genus -}}{{- $genus = .Get 0 -}}{{- end -}}
+{{- $show := .Get "show" | default "all" -}}
+
+{{- $raw := os.ReadFile "static/data/collection.csv" -}}
+{{- $rows := transform.Unmarshal (dict "delimiter" ",") $raw -}}
+{{- $data := after 1 $rows -}}
+
+{{- $matches := slice -}}
+{{- range $data -}}
+  {{- if eq (lower (index . 2)) (lower $genus) -}}
+    {{- $row := dict
+        "id"     (index . 0)
+        "taxon"  (index . 1)
+        "source" (index . 5)
+        "price"  (index . 6)
+        "date"   (index . 7)
+        "status" (index . 8)
+        "notes"  (index . 10)
+    -}}
+    {{- if or (eq $show "all") (eq $show $row.status) -}}
+      {{- $matches = $matches | append $row -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Stable sort: first by taxon alphabetically, then by status (alive → given → lost so active first) */ -}}
+{{- $matches = sort $matches "taxon" "asc" -}}
+{{- $rankByStatus := dict "alive" 0 "given" 1 "lost" 2 "" 3 -}}
+{{- $ranked := slice -}}
+{{- range $matches -}}
+  {{- $rank := index $rankByStatus .status | default 3 -}}
+  {{- $ranked = $ranked | append (merge . (dict "rank" $rank)) -}}
+{{- end -}}
+{{- $matches = sort $ranked "rank" "asc" -}}
+
+{{- $n := len $matches -}}
+{{- $nAlive := len (where $matches "status" "alive") -}}
+{{- $nLost  := len (where $matches "status" "lost") -}}
+{{- $nGiven := len (where $matches "status" "given") -}}
+{{- $totalSpent := 0.0 -}}
+{{- range $matches -}}
+  {{- $p := .price -}}
+  {{- if and $p (findRE "^[0-9]" $p) -}}
+    {{- $totalSpent = add $totalSpent (float $p) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $matches }}
+<p class="species-meta small">
+  <strong>{{ $n }}</strong> acquired
+  {{- if gt $nAlive 0 }} · <span class="status status--alive">{{ $nAlive }} alive</span>{{ end }}
+  {{- if gt $nLost 0 }} · <span class="status status--lost">{{ $nLost }} lost</span>{{ end }}
+  {{- if gt $nGiven 0 }} · <span class="status status--given">{{ $nGiven }} given</span>{{ end }}
+  {{- if gt $totalSpent 0.0 }} · ~€{{ printf "%.0f" $totalSpent }} invested{{ end }}
+</p>
+
+<div class="species-table-wrap">
+<table class="species-table">
+  <thead>
+    <tr>
+      <th>Taxon</th>
+      <th>Source</th>
+      <th class="num">Price</th>
+      <th>Acquired</th>
+      <th>Status</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+  {{- range $matches }}
+    <tr class="row--{{ .status }}">
+      <td><em>{{ .taxon }}</em></td>
+      <td>{{ .source }}</td>
+      <td class="num">
+        {{- with .price -}}
+          {{- if findRE "^[0-9]" . -}}€{{ . }}{{- else -}}<span class="muted">{{ . }}</span>{{- end -}}
+        {{- end -}}
+      </td>
+      <td class="mono small">{{ .date }}</td>
+      <td>{{- with .status -}}<span class="status status--{{ . }}">{{ . }}</span>{{- end -}}</td>
+      <td class="small">{{ .notes }}</td>
+    </tr>
+  {{- end }}
+  </tbody>
+</table>
+</div>
+{{- else -}}
+<p class="muted"><code>collection.csv</code> has no rows for genus <em>{{ $genus }}</em>.</p>
+{{- end -}}

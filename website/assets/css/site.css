@@ -235,6 +235,27 @@ tbody tr { border-top: 1px solid var(--border-hair); }
 tbody tr:first-child { border-top: none; }
 tbody tr:hover { background: rgba(176, 109, 209, 0.04); }
 
+/* Species-list shortcode */
+.species-meta {
+  color: var(--text-3);
+  margin: 0.5em 0 1.3em;
+  letter-spacing: 0.02em;
+}
+.species-meta strong { color: var(--text-1); font-weight: 500; }
+.species-meta .status { margin-left: 0.15em; font-size: 0.62rem; }
+
+.species-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 0 1.5em; }
+.species-table {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  min-width: 640px;
+}
+.species-table th.num, .species-table td.num { text-align: right; white-space: nowrap; }
+.species-table tr.row--lost  em { color: var(--text-4); }
+.species-table tr.row--lost  td { color: var(--text-4); }
+.species-table tr.row--given em { color: var(--text-2); }
+.species-table tr.row--alive em { color: var(--text-1); }
+
 /* Status pills for the collection / wishlist tables */
 .status {
   display: inline-block;

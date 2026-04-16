@@ -19,21 +19,7 @@ The collection also includes miniature *Dendrobium* from Southeast Asia and Viet
 
 ## Species in Collection (9 acquired, 8 alive, 1 lost)
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *D. victoriae-reginae* | Orchis Mundi | EUR 35.00 | Sect. *Oxyglossum*; blue-purple flowers | Alive |
-| 2 | *D. cuthbertsonii* 'Yellow' | Claessen Orchids & Plants | EUR 39.95 | Sect. *Oxyglossum*; 5.5 cm | Alive |
-| 3 | *D. cuthbertsonii* | Grossraschener Orchideen | EUR 28.00 | Sect. *Oxyglossum*; mounted | Lost |
-| 4 | *D. hellwigianum* | Ecuagenera Europe | EUR 31.56 | PNG highlands | Alive |
-| 5 | *D. cyanocentrum* 'Blau' | Grossraschener Orchideen | EUR 95.00 | Blue form | Alive |
-| 6 | *D. jenkinsii* | Grossraschener Orchideen | EUR 18.00 | Miniature; South/SE Asia | Alive |
-| 7 | *D. lamyaiae* | Currlin Orchideen | EUR 18.22 | Thai miniature | Alive |
-| 8 | *D. Betty Goto* f. coerulea | Celandroni Orchidee | EUR 22.00 | Miniature hybrid | Alive |
-| 9 | *D. trantuanii* | Growlist | — | Vietnamese miniature | Alive |
-
-**Note**: Three additional *Dendrobium* are grown outside the terrarium: *D. speciosum* (too large), *D. loddigesii* (intermediate conditions), and *D.* 'Berry Oda' (hybrid, intermediate). These are not included in the terrarium species count.
-
-**Total invested**: ~EUR 288
+{{< collection-species "Dendrobium" >}}
 
 ## Cultivation Notes (3+ years)
 

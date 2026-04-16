@@ -4,7 +4,7 @@
 {{ $interval := .Params.snapshotInterval | default 60 }}
 <section class="page">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="{{ "/" | relURL }}">Home</a><span class="sep">·</span>
+    <a href="{{ site.Home.RelPermalink }}">Home</a><span class="sep">·</span>
     <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
     <span>{{ .LinkTitle }}</span>
   </nav>

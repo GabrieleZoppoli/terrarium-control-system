@@ -17,32 +17,17 @@ The former genera *Sophronitis* and *Laelia* (now subsumed into *Cattleya* sensu
 
 Cork bark mounts. The compact rosette habit and wiry roots adapt well to mounted culture.
 
-## Cattleya (3 alive, 0 losses)
+## Cattleya
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *C. aclandiae* (selected cross) | Grossraschener Orchideen | EUR 25.00 | — | Alive |
-| 2 | *C. walkeriana* f. semialba 'Tokyo No.1' AM/AOS | Claessen Orchids & Plants | EUR 79.95 | 10 cm | Alive |
-| 3 | *C. walkeriana* coerulea 'Blu Monarch' x 'ABC' | Lo Scrigno di Nebbia | EUR 70.00 | — | Alive |
+{{< collection-species "Cattleya" >}}
 
-## Sophronitis (5 acquired, 3 alive, 2 lost)
+## Sophronitis
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *S. coccinea* f. aurea ('Atsumi' x 'Perfection') | Celandroni Orchidee | EUR 150.00 | SM/JOGA Japan Selection | Alive |
-| 2 | *S. brevipedunculata* | Lo Scrigno di Nebbia | EUR 25.00 | — | Alive |
-| 3 | *S. wittigiana* rosea | Lo Scrigno di Nebbia | EUR 32.00 | — | Alive |
-| 4 | *S. pygmaea* | Grossraschener Orchideen | EUR 35.00 | — | Lost |
-| 5 | *S. pygmaea* | Grossraschener Orchideen | EUR 35.00 | Second attempt | Lost |
+{{< collection-species "Sophronitis" >}}
 
-## Laelia (4 acquired, 3 alive, 1 lost)
+## Laelia
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *L. ghillanyi* | Grossraschener Orchideen | EUR 23.00 | — | Alive |
-| 2 | *L. milleri* | eBay | — | — | Alive |
-| 3 | *L. lundii* coerulea | Nardotto e Capello | — | — | Alive |
-| 4 | *L. briegeri* | Ecuagenera | EUR 20.68 | CITES import | Lost |
+{{< collection-species "Laelia" >}}
 
 ## Additional Brazilian Miniatures
 

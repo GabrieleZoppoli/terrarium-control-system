@@ -1,7 +1,7 @@
 {{ define "main" }}
 <section class="page">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="{{ "/" | relURL }}">Home</a><span class="sep">·</span>
+    <a href="{{ site.Home.RelPermalink }}">Home</a><span class="sep">·</span>
     <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
     <span>{{ .LinkTitle }}</span>
   </nav>
@@ -16,7 +16,7 @@
   <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
   {{- end }}
 
-  {{ $url := "/zeer-pot/" | relURL }}
+  {{ $url := "zeer-pot/" | absURL }}
   <div class="embed-shell" data-src="{{ $url }}">
     <div class="embed-actions">
       <a class="dendro-action" href="{{ $url }}" target="_blank" rel="noopener">
