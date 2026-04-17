@@ -1,6 +1,7 @@
 {{- /*
   collection-species — filters static/data/collection.csv by genus and renders
-  the live acquisition list with status pills, price, source, and notes.
+  the live acquisition list with status pills, price, source, notes, and an
+  inline thumbnail when a photo exists in data/photo_manifest.json.
 
   Usage:
     {{< collection-species "Heliamphora" >}}
@@ -9,22 +10,34 @@
 {{- $genus := .Get "genus" -}}
 {{- if not $genus -}}{{- $genus = .Get 0 -}}{{- end -}}
 {{- $show := .Get "show" | default "all" -}}
+{{- $genusSlug := lower $genus -}}
 
 {{- $raw := os.ReadFile "static/data/collection.csv" -}}
 {{- $rows := transform.Unmarshal (dict "delimiter" ",") $raw -}}
 {{- $data := after 1 $rows -}}
 
+{{- /* Build a taxon → photo-entry map for this genus. */ -}}
+{{- $photoByTaxon := dict -}}
+{{- $manifest := .Site.Data.photo_manifest -}}
+{{- $photoEntries := index $manifest $genusSlug -}}
+{{- range $photoEntries -}}
+  {{- $photoByTaxon = merge $photoByTaxon (dict .taxon .) -}}
+{{- end -}}
+
 {{- $matches := slice -}}
 {{- range $data -}}
   {{- if eq (lower (index . 2)) (lower $genus) -}}
+    {{- $taxon := index . 1 -}}
+    {{- $photo := index $photoByTaxon $taxon -}}
     {{- $row := dict
         "id"     (index . 0)
-        "taxon"  (index . 1)
+        "taxon"  $taxon
         "source" (index . 5)
         "price"  (index . 6)
         "date"   (index . 7)
         "status" (index . 8)
         "notes"  (index . 10)
+        "photo"  $photo
     -}}
     {{- if or (eq $show "all") (eq $show $row.status) -}}
       {{- $matches = $matches | append $row -}}
@@ -32,7 +45,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- /* Stable sort: first by taxon alphabetically, then by status (alive → given → lost so active first) */ -}}
+{{- /* Stable sort: alphabetical by taxon, then by status (alive → given → lost) */ -}}
 {{- $matches = sort $matches "taxon" "asc" -}}
 {{- $rankByStatus := dict "alive" 0 "given" 1 "lost" 2 "" 3 -}}
 {{- $ranked := slice -}}
@@ -46,6 +59,8 @@
 {{- $nAlive := len (where $matches "status" "alive") -}}
 {{- $nLost  := len (where $matches "status" "lost") -}}
 {{- $nGiven := len (where $matches "status" "given") -}}
+{{- $nPhotos := 0 -}}
+{{- range $matches -}}{{- if .photo -}}{{- $nPhotos = add $nPhotos 1 -}}{{- end -}}{{- end -}}
 {{- $totalSpent := 0.0 -}}
 {{- range $matches -}}
   {{- $p := .price -}}
@@ -61,12 +76,14 @@
   {{- if gt $nLost 0 }} · <span class="status status--lost">{{ $nLost }} lost</span>{{ end }}
   {{- if gt $nGiven 0 }} · <span class="status status--given">{{ $nGiven }} given</span>{{ end }}
   {{- if gt $totalSpent 0.0 }} · ~€{{ printf "%.0f" $totalSpent }} invested{{ end }}
+  {{- if gt $nPhotos 0 }} · {{ $nPhotos }} photographed{{ end }}
 </p>
 
 <div class="species-table-wrap">
 <table class="species-table">
   <thead>
     <tr>
+      <th class="species-table__photo-col" aria-label="Photo"></th>
       <th>Taxon</th>
       <th>Source</th>
       <th class="num">Price</th>
@@ -78,6 +95,16 @@
   <tbody>
   {{- range $matches }}
     <tr class="row--{{ .status }}">
+      <td class="species-table__photo">
+        {{- with .photo -}}
+          {{- $src := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
+          <a href="{{ $src }}" target="_blank" rel="noopener"
+             title="Open photo of {{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
+            <img src="{{ $src }}" alt="" loading="lazy">
+            {{- with .extras }}<span class="species-table__photo-count">+{{ len . }}</span>{{ end -}}
+          </a>
+        {{- end -}}
+      </td>
       <td><em>{{ .taxon }}</em></td>
       <td>{{ .source }}</td>
       <td class="num">

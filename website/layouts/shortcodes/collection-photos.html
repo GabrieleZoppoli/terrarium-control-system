@@ -16,7 +16,7 @@
 {{- if $entries -}}
 <div class="photo-grid">
 {{- range $entries }}
-  {{- $primary := printf "/img/collection/%s/%s" $genusSlug .primary | relURL -}}
+  {{- $primary := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
   <a class="photo-tile" href="{{ $primary }}" target="_blank" rel="noopener"
      title="{{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
     <img src="{{ $primary }}" alt="{{ .taxon }}" loading="lazy">

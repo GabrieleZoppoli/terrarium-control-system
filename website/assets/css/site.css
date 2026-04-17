@@ -312,6 +312,46 @@ tbody tr:hover { background: rgba(176, 109, 209, 0.04); }
 .species-table tr.row--given em { color: var(--text-2); }
 .species-table tr.row--alive em { color: var(--text-1); }
 
+.species-table__photo-col { width: 58px; padding: 0.7em 0.3em 0.7em 1em; }
+.species-table__photo { width: 58px; padding: 0.35em 0.3em 0.35em 1em; vertical-align: middle; }
+.species-table__photo a {
+  position: relative;
+  display: block;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--r-2);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-2);
+  transition: border-color 180ms var(--ease-out), transform 180ms var(--ease-out);
+}
+.species-table__photo a:hover {
+  border-color: var(--accent-glow);
+  transform: scale(1.08);
+}
+.species-table__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.species-table__photo-count {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  background: var(--surface-solid);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 500;
+  padding: 0.12em 0.4em;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  letter-spacing: 0.04em;
+}
+.row--lost .species-table__photo a { opacity: 0.55; }
+.row--lost .species-table__photo img { filter: grayscale(0.6); }
+
 /* Status pills for the collection / wishlist tables */
 .status {
   display: inline-block;
