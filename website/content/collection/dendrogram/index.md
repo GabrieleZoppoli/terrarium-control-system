@@ -1,6 +1,6 @@
 ---
 title: "Collection Dendrogram"
-description: "Phylogenetic tree of all 375 plants with photos at each tip"
+description: "Phylogenetic tree of every plant in the collection, with photos at each tip"
 layout: "dendrogram"
 weight: 5
 ogImage: "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg"

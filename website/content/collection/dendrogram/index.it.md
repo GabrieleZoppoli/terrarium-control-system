@@ -1,6 +1,6 @@
 ---
 title: "Dendrogramma della collezione"
-description: "Albero filogenetico di tutte le 375 piante, con foto a ogni estremità"
+description: "Albero filogenetico di ogni pianta della collezione, con foto a ogni estremità"
 layout: "dendrogram"
 weight: 5
 ogImage: "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg"

@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Gabriele Zoppoli — translational oncologist at the University of Genoa, and, after hours, keeper of a 375-accession cloud-forest collection."
+description: "Gabriele Zoppoli — translational oncologist at the University of Genoa, and, after hours, keeper of a 380-accession cloud-forest collection."
 keywords: ["Gabriele Zoppoli", "oncologist Genoa", "translational genomics", "liquid biopsy", "SLFN11", "cloud forest terrarium", "carnivorous plants grower"]
 ogImage: "img/author.jpg"
 showTableOfContents: false
@@ -22,7 +22,7 @@ Associate Professor of Internal Medicine at the University of Genoa and Molecula
 
 ## How it started
 
-It began with a single *Dionaea muscipula* on a windowsill. Then *Nepenthes* — plants that spent the first year convinced they would die, before deciding not to. Then *Heliamphora*, *Dracula*, miniature *Dendrobium*: species I'd only ever seen in books, sent by small growers across Europe who still pack their plants by hand. A few years in, it was clear the ad-hoc windowsill arrangement was the bottleneck, not the plants themselves — and the [highland cabinet](../highland/) came out of that mismatch. Three years later the census is 375 acquisitions across 86 genera, about 270 still alive.
+It began with a single *Dionaea muscipula* on a windowsill. Then *Nepenthes* — plants that spent the first year convinced they would die, before deciding not to. Then *Heliamphora*, *Dracula*, miniature *Dendrobium*: species I'd only ever seen in books, sent by small growers across Europe who still pack their plants by hand. A few years in, it was clear the ad-hoc windowsill arrangement was the bottleneck, not the plants themselves — and the [highland cabinet](../highland/) came out of that mismatch. Three years later the census is over 380 acquisitions across 89 genera, about 280 still alive.
 
 <figure class="moment">
   <img src="/img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg" alt="Gabriele on the balcony at night, holding Sarracenia × moorei 'Leah Wilkerson' with Genova city lights behind" loading="lazy">

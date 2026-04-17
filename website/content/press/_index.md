@@ -11,13 +11,13 @@ Everything on this site that I made — the photographs, the text, the phylogene
 ## Bios — copy-ready
 
 **One line.**
-> Gabriele Zoppoli is a translational oncologist in Genoa who keeps a 375-accession cloud-forest collection of carnivorous plants, miniature orchids, and *Tillandsia* under a self-built, open-source highland terrarium.
+> Gabriele Zoppoli is a translational oncologist in Genoa who keeps a 380-accession cloud-forest collection of carnivorous plants, miniature orchids, and *Tillandsia* under a self-built, open-source highland terrarium.
 
 **Two sentences.**
-> Gabriele Zoppoli is Associate Professor of Internal Medicine at the University of Genoa and a clinician-scientist at IRCCS Ospedale Policlinico San Martino, with research in liquid biopsy for breast cancer. Outside the hospital he maintains a 375-accession living collection of highland carnivorous plants, miniature orchids, and *Tillandsia*, and has built an open-source cloud-forest terrarium — documented [here](/).
+> Gabriele Zoppoli is Associate Professor of Internal Medicine at the University of Genoa and a clinician-scientist at IRCCS Ospedale Policlinico San Martino, with research in liquid biopsy for breast cancer. Outside the hospital he maintains a 380-accession living collection of highland carnivorous plants, miniature orchids, and *Tillandsia*, and has built an open-source cloud-forest terrarium — documented [here](/).
 
 **~60 words.**
-> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy — cell-free DNA and single-molecule sequencing — for breast cancer. He grows 375 accessions of carnivorous plants, miniature orchids, and *Tillandsia* in Genoa.
+> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy — cell-free DNA and single-molecule sequencing — for breast cancer. He grows over 380 accessions of carnivorous plants, miniature orchids, and *Tillandsia* in Genoa.
 
 ## Portrait
 

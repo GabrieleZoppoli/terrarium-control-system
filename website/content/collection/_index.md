@@ -1,9 +1,9 @@
 ---
 title: "Plant Collection"
-description: "375 accessions across 86 genera — terrarium, outdoor, and invention-housed"
+description: "Over 380 accessions across 89 genera — terrarium, outdoor, and invention-housed"
 ogImage: "img/collection/heliamphora/heliamphora-macdonaldae.jpg"
 ---
 
-The collection logs every plant I have ever acquired — 375 accessions across 86 genera. About 270 are alive today; the rest were lost to cultivation mistakes, to transport, or were traded away. Three years of cultivation data, 72% overall survival, with near-100% survival in *Heliamphora*, highland *Nepenthes*, and *Dracula*.
+The collection logs every plant I have ever acquired — over 380 accessions across 89 genera. About 280 are alive today; the rest were lost to cultivation mistakes, to transport, or were traded away. Three years of cultivation data, ~73% overall survival, with near-100% survival in *Heliamphora*, highland *Nepenthes*, and *Dracula*.
 
 Browse it the way that suits you best.

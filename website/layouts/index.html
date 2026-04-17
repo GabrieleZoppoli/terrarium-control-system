@@ -12,11 +12,13 @@
     </a>
   </div>
 
+  {{- /* Auto-updated from scripts/compute_stats.py (rerun at every /add-plant sync). */ -}}
+  {{- $s := site.Data.stats -}}
   <dl class="home-stats" aria-label="Collection and system at a glance">
-    <div><dt>{{ i18n "stat_accessions" }}</dt><dd>375</dd></div>
-    <div><dt>{{ i18n "stat_alive_today" }}</dt><dd>~270</dd></div>
-    <div><dt>{{ i18n "stat_genera" }}</dt><dd>86</dd></div>
-    <div><dt>{{ i18n "stat_species_photo" }}</dt><dd>82</dd></div>
+    <div><dt>{{ i18n "stat_accessions" }}</dt><dd>{{ $s.accessions }}</dd></div>
+    <div><dt>{{ i18n "stat_alive_today" }}</dt><dd>{{ $s.alive }}</dd></div>
+    <div><dt>{{ i18n "stat_genera" }}</dt><dd>{{ $s.genera }}</dd></div>
+    <div><dt>{{ i18n "stat_species_photo" }}</dt><dd>{{ $s.species_photographed }}</dd></div>
     <div><dt>{{ i18n "stat_volume" }}</dt><dd>1,000 <small style="font-size:0.6em;color:var(--text-3)">L</small></dd></div>
     <div><dt>{{ i18n "stat_logging" }}</dt><dd>60 <small style="font-size:0.6em;color:var(--text-3)">s</small></dd></div>
     <div><dt>{{ i18n "stat_operational" }}</dt><dd>2023</dd></div>

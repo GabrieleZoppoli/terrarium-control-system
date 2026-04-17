@@ -1,6 +1,6 @@
 ---
 title: "Chi sono"
-description: "Gabriele Zoppoli — oncologo traslazionale all'Università di Genova e, fuori dall'ospedale, custode di una collezione di 375 esemplari di foresta nebulosa."
+description: "Gabriele Zoppoli — oncologo traslazionale all'Università di Genova e, fuori dall'ospedale, custode di una collezione di oltre 380 esemplari di foresta nebulosa."
 keywords: ["Gabriele Zoppoli", "oncologo Genova", "genomica traslazionale", "biopsia liquida", "SLFN11", "terrario cloud forest", "coltivatore piante carnivore"]
 ogImage: "img/author.jpg"
 showTableOfContents: false
@@ -22,7 +22,7 @@ Sono Professore Associato di Medicina Interna all'Università di Genova e coordi
 
 ## Come è cominciata
 
-È cominciata con una singola *Dionaea muscipula* su un davanzale. Poi i *Nepenthes* — piante che per un anno intero sono sembrate decise a morire, prima di cambiare idea. Poi *Heliamphora*, *Dracula*, *Dendrobium* miniatura: specie che avevo visto solo sui libri, spedite da piccoli vivaisti europei che imballano ancora le piante a mano. Dopo qualche anno era chiaro che il collo di bottiglia era la sistemazione improvvisata sul davanzale, non le piante; il [terrario d'alta quota](../highland/) è nato da lì. Tre anni dopo, il censimento è di 375 piante in 86 generi, di cui circa 270 ancora vive.
+È cominciata con una singola *Dionaea muscipula* su un davanzale. Poi i *Nepenthes* — piante che per un anno intero sono sembrate decise a morire, prima di cambiare idea. Poi *Heliamphora*, *Dracula*, *Dendrobium* miniatura: specie che avevo visto solo sui libri, spedite da piccoli vivaisti europei che imballano ancora le piante a mano. Dopo qualche anno era chiaro che il collo di bottiglia era la sistemazione improvvisata sul davanzale, non le piante; il [terrario d'alta quota](../highland/) è nato da lì. Tre anni dopo, il censimento è di oltre 380 piante in 89 generi, di cui circa 280 ancora vive.
 
 <figure class="moment">
   <img src="/img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg" alt="Gabriele sul balcone di notte, con una Sarracenia × moorei 'Leah Wilkerson' in mano, Genova sullo sfondo" loading="lazy">
