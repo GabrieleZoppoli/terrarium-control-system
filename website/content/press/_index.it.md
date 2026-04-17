@@ -11,7 +11,7 @@ Tutto ciò che su questo sito è mio — le fotografie, i testi, il dataset filo
 ## Bio — pronte da copiare
 
 **Una riga.**
-> Gabriele Zoppoli è un oncologo traslazionale di Genova che coltiva una collezione di oltre 380 piante carnivore d'alta quota, orchidee miniatura e *Tillandsia* in un terrario di foresta nebulosa open-source, costruito da lui.
+> Gabriele Zoppoli è un medico-ricercatore a Genova che coltiva una collezione di oltre 380 piante carnivore d'alta quota, orchidee miniatura e *Tillandsia* in un terrario di foresta nebulosa open-source, costruito da lui.
 
 **Due frasi.**
 > Gabriele Zoppoli è Professore Associato di Medicina Interna all'Università di Genova e clinico-ricercatore all'IRCCS Ospedale Policlinico San Martino, con ricerca sulla biopsia liquida nel tumore della mammella. Fuori dall'ospedale cura una collezione di oltre 380 piante carnivore d'alta quota, orchidee miniatura e *Tillandsia*, e un terrario open-source che riproduce il clima delle foreste nebulose — documentato [qui](/).

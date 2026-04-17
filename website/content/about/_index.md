@@ -1,6 +1,6 @@
 ---
 title: "About"
-description: "Gabriele Zoppoli — translational oncologist at the University of Genoa, and, after hours, keeper of a 380-accession cloud-forest collection."
+description: "Gabriele Zoppoli — physician scientist at the University of Genoa, and, after hours, keeper of a 380-accession cloud-forest collection."
 keywords: ["Gabriele Zoppoli", "oncologist Genoa", "translational genomics", "liquid biopsy", "SLFN11", "cloud forest terrarium", "carnivorous plants grower"]
 ogImage: "img/author.jpg"
 showTableOfContents: false

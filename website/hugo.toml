@@ -95,8 +95,8 @@ enableEmoji = false
 
   [params.author]
     name = "Gabriele Zoppoli"
-    headline = "Translational oncologist · highland cloud-forest grower"
-    bio = "MD, PhD. Associate Professor of Internal Medicine at the University of Genoa and consultant at IRCCS Ospedale Policlinico San Martino. Outside the hospital: a 375-accession living collection of carnivorous plants, miniature orchids, and Tillandsia, plus an open-source cloud-forest terrarium."
+    headline = "Physician scientist · highland cloud-forest grower"
+    bio = "MD, PhD. Associate Professor of Internal Medicine at the University of Genoa and consultant at IRCCS Ospedale Policlinico San Martino. Outside the hospital: a 380-accession living collection of carnivorous plants, miniature orchids, and Tillandsia, plus an open-source cloud-forest terrarium."
     image = "img/author.jpg"
     orcid = "https://orcid.org/0000-0002-1619-1708"
     email = "gabriele.zoppoli@unige.it"

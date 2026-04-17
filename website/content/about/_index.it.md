@@ -1,6 +1,6 @@
 ---
 title: "Chi sono"
-description: "Gabriele Zoppoli — oncologo traslazionale all'Università di Genova e, fuori dall'ospedale, custode di una collezione di oltre 380 esemplari di foresta nebulosa."
+description: "Gabriele Zoppoli — medico-ricercatore all'Università di Genova e, fuori dall'ospedale, custode di una collezione di oltre 380 esemplari di foresta nebulosa."
 keywords: ["Gabriele Zoppoli", "oncologo Genova", "genomica traslazionale", "biopsia liquida", "SLFN11", "terrario cloud forest", "coltivatore piante carnivore"]
 ogImage: "img/author.jpg"
 showTableOfContents: false

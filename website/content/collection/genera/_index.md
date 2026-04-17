@@ -1,6 +1,6 @@
 ---
 title: "By Genus"
-description: "375 accessions across 86 genera — terrarium, outdoor, windowsill, and invention-housed"
+description: "Over 380 accessions across 89 genera — terrarium, outdoor, windowsill, and invention-housed"
 cascade:
   wide: true
 ---
@@ -13,4 +13,4 @@ The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland 
 
 ## Full collection
 
-375 acquisitions across 86 genera total — the terrarium's cloud-forest residents plus outdoor *Sarracenia* and *Dionaea*, windowsill *Tillandsia*, aquatic plants in the *Nymphaea* tub, and various orchids in intermediate conditions. The pages below drill into each genus with live acquisition data, sources, prices, and photos.
+Over 380 acquisitions across 89 genera total — the terrarium's cloud-forest residents plus outdoor *Sarracenia* and *Dionaea*, windowsill *Tillandsia*, aquatic plants in the *Nymphaea* tub, and various orchids in intermediate conditions. The pages below drill into each genus with live acquisition data, sources, prices, and photos.
