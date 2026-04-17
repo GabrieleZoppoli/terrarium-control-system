@@ -153,7 +153,7 @@ Major sources for the orchid collection:
 
 {{< collection-photos "Mediocalcar" >}}
 
-{{< collection-photos genus="Comparettia" slug="comparetia" >}}
+{{< collection-photos "Comparettia" >}}
 
 {{< collection-photos "Oerstedella" >}}
 

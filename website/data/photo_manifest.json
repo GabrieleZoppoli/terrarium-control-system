@@ -1,4 +1,12 @@
 {
+  "aldrovanda": [
+    {
+      "taxon": "Aldrovanda vesiculosa",
+      "slug": "aldrovanda-vesiculosa",
+      "primary": "aldrovanda-vesiculosa.jpg",
+      "extras": []
+    }
+  ],
   "angraecum": [
     {
       "taxon": "Angraecum didieri",
@@ -65,14 +73,14 @@
       "extras": []
     }
   ],
-  "comparetia": [
+  "comparettia": [
     {
       "taxon": "Comparettia falcata",
-      "slug": "comparetia-falcata",
-      "primary": "comparetia-falcata.jpg",
+      "slug": "comparettia-falcata",
+      "primary": "comparettia-falcata.jpg",
       "extras": [
-        "comparetia-falcata-2.jpg",
-        "comparetia-falcata-3.jpg"
+        "comparettia-falcata-2.jpg",
+        "comparettia-falcata-3.jpg"
       ]
     }
   ],
@@ -143,6 +151,12 @@
       "extras": []
     },
     {
+      "taxon": "Dionaea muscipula 'Dracula'",
+      "slug": "dionaea-muscipula-dracula",
+      "primary": "dionaea-muscipula-dracula.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Dionaea muscipula Pom Pom",
       "slug": "dionaea-muscipula-pom-pom",
       "primary": "dionaea-muscipula-pom-pom.jpg",
@@ -196,6 +210,20 @@
       "extras": [
         "dracula-simia-2.jpg"
       ]
+    },
+    {
+      "taxon": "Dracula vlad-tepes",
+      "slug": "dracula-vlad-tepes",
+      "primary": "dracula-vlad-tepes.jpg",
+      "extras": []
+    }
+  ],
+  "drosophyllum": [
+    {
+      "taxon": "Drosophyllum lusitanicum",
+      "slug": "drosophyllum-lusitanicum",
+      "primary": "drosophyllum-lusitanicum.jpg",
+      "extras": []
     }
   ],
   "ficus": [
@@ -328,6 +356,12 @@
         "leptotes-bicolor-3.jpg",
         "leptotes-bicolor-4.jpg"
       ]
+    },
+    {
+      "taxon": "Leptotes unicolor",
+      "slug": "leptotes-unicolor",
+      "primary": "leptotes-unicolor.jpg",
+      "extras": []
     }
   ],
   "macroclinium": [
@@ -421,7 +455,10 @@
       "extras": [
         "neofinetia-falcata-akausagi-2.jpg",
         "neofinetia-falcata-akausagi-3.jpg",
-        "neofinetia-falcata-akausagi-4.jpg"
+        "neofinetia-falcata-akausagi-4.jpg",
+        "neofinetia-falcata-akausagi-5.jpg",
+        "neofinetia-falcata-akausagi-6.jpg",
+        "neofinetia-falcata-akausagi-7.jpg"
       ]
     }
   ],
@@ -491,6 +528,20 @@
       ]
     }
   ],
+  "nymphaea": [
+    {
+      "taxon": "Nymphaea 'Indiana'",
+      "slug": "nymphaea-indiana",
+      "primary": "nymphaea-indiana.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Nymphaea pygmaea 'Helvola'",
+      "slug": "nymphaea-pygmaea-helvola",
+      "primary": "nymphaea-pygmaea-helvola.jpg",
+      "extras": []
+    }
+  ],
   "oerstedella": [
     {
       "taxon": "Oerstedella centradenia",
@@ -514,6 +565,14 @@
       "taxon": "Oncidium eurycline",
       "slug": "oncidium-eurycline",
       "primary": "oncidium-eurycline.jpg",
+      "extras": []
+    }
+  ],
+  "ornitophora": [
+    {
+      "taxon": "Ornitophora radicans",
+      "slug": "ornitophora-radicans",
+      "primary": "ornitophora-radicans.jpg",
       "extras": []
     }
   ],
@@ -552,6 +611,12 @@
         "phalaenopsis-finleyi-9.jpg",
         "phalaenopsis-finleyi-10.jpg"
       ]
+    },
+    {
+      "taxon": "Phalaenopsis lobbii",
+      "slug": "phalaenopsis-lobbii",
+      "primary": "phalaenopsis-lobbii.jpg",
+      "extras": []
     }
   ],
   "pinguicula": [
@@ -652,7 +717,8 @@
       "extras": [
         "sarracenia-x-moorei-leah-wilkerson-2.jpg",
         "sarracenia-x-moorei-leah-wilkerson-3.jpg",
-        "sarracenia-x-moorei-leah-wilkerson-4.jpg"
+        "sarracenia-x-moorei-leah-wilkerson-4.jpg",
+        "sarracenia-x-moorei-leah-wilkerson-5.jpg"
       ]
     }
   ],
@@ -675,7 +741,8 @@
       "slug": "seidenfadenia-mitrata",
       "primary": "seidenfadenia-mitrata.jpg",
       "extras": [
-        "seidenfadenia-mitrata-2.jpg"
+        "seidenfadenia-mitrata-2.jpg",
+        "seidenfadenia-mitrata-3.jpg"
       ]
     }
   ],
@@ -703,7 +770,10 @@
       "taxon": "Sophronitis pygmaea",
       "slug": "sophronitis-pygmaea",
       "primary": "sophronitis-pygmaea.jpg",
-      "extras": []
+      "extras": [
+        "sophronitis-pygmaea-2.jpg",
+        "sophronitis-pygmaea-3.jpg"
+      ]
     }
   ],
   "stelis": [

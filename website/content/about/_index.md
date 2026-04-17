@@ -24,6 +24,11 @@ Associate Professor of Internal Medicine at the University of Genoa and Molecula
 
 It began with a single *Dionaea muscipula* on a windowsill. Then *Nepenthes* — plants that spent the first year convinced they would die, before deciding not to. Then *Heliamphora*, *Dracula*, miniature *Dendrobium*: species I'd only ever seen in books, sent by small growers across Europe who still pack their plants by hand. A few years in, it was clear the ad-hoc windowsill arrangement was the bottleneck, not the plants themselves — and the [highland cabinet](../highland/) came out of that mismatch. Three years later the census is 375 acquisitions across 86 genera, about 270 still alive.
 
+<figure class="moment">
+  <img src="/img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg" alt="Gabriele on the balcony at night, holding Sarracenia × moorei 'Leah Wilkerson' with Genova city lights behind" loading="lazy">
+  <figcaption><em>Sarracenia × moorei</em> 'Leah Wilkerson' on the balcony, Genova, 2026 — three years in, the pitchers taller than my arm. One of the quiet milestones.</figcaption>
+</figure>
+
 ## The hands behind the glass
 
 The collection is mine on paper but two-handed in practice. **My mother-in-law** covers mist cycles and hand-watering when I'm at the hospital, lends her name to orders from vendors who only ship to one country, and is responsible for roughly half of the plants still alive three years in.

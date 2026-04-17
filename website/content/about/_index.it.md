@@ -24,6 +24,11 @@ Sono Professore Associato di Medicina Interna all'Università di Genova e coordi
 
 È cominciata con una singola *Dionaea muscipula* su un davanzale. Poi i *Nepenthes* — piante che per un anno intero sono sembrate decise a morire, prima di cambiare idea. Poi *Heliamphora*, *Dracula*, *Dendrobium* miniatura: specie che avevo visto solo sui libri, spedite da piccoli vivaisti europei che imballano ancora le piante a mano. Dopo qualche anno era chiaro che il collo di bottiglia era la sistemazione improvvisata sul davanzale, non le piante; il [terrario d'alta quota](../highland/) è nato da lì. Tre anni dopo, il censimento è di 375 piante in 86 generi, di cui circa 270 ancora vive.
 
+<figure class="moment">
+  <img src="/img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg" alt="Gabriele sul balcone di notte, con una Sarracenia × moorei 'Leah Wilkerson' in mano, Genova sullo sfondo" loading="lazy">
+  <figcaption><em>Sarracenia × moorei</em> 'Leah Wilkerson' sul balcone, Genova, 2026 — tre anni dopo, le brocche più alte del mio braccio. Uno dei traguardi silenziosi.</figcaption>
+</figure>
+
 ## Le mani dietro al vetro
 
 La collezione è mia sulla carta, ma a quattro mani nella pratica. **Mia suocera** si occupa dei cicli di nebulizzazione e delle annaffiature quando sono in ospedale, firma gli ordini dei vivai che spediscono solo a un nome alla volta, ed è responsabile di circa metà delle piante ancora vive al terzo anno.

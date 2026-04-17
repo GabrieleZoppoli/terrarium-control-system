@@ -63,7 +63,7 @@ enableEmoji = false
       { src = "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg", alt = "Dendrobium cuthbertsonii yellow", taxon = "Dendrobium cuthbertsonii 'Yellow'", tepui = "New Guinea highlands", href = "/collection/genera/dendrobium/" },
       { src = "img/collection/masdevallia/masdevallia-decumana.jpg", alt = "Masdevallia decumana", taxon = "Masdevallia decumana", tepui = "Andean cloud forest", href = "/collection/genera/other-orchids/" },
       { src = "img/collection/utricularia/utricularia-alpina.jpg", alt = "Utricularia alpina", taxon = "Utricularia alpina", tepui = "Guayana highlands, epiphyte", href = "/collection/genera/other-genera/" },
-      { src = "img/collection/comparetia/comparetia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", href = "/collection/genera/other-orchids/" },
+      { src = "img/collection/comparettia/comparettia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", href = "/collection/genera/other-orchids/" },
       { src = "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg", alt = "Heliamphora ionasi Elegance", taxon = "Heliamphora ionasi 'Elegance'", tepui = "Ilu-Tepui, Venezuela", href = "/collection/genera/heliamphora/" },
     ]
     # Species kept outside the highland cabinet (outdoor bed / balcony)

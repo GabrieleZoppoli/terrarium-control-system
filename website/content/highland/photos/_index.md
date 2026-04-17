@@ -1,17 +1,62 @@
 ---
 title: "Terrarium Photos"
-description: "Build photos and growth progression"
+description: "A chronological timeline of the Highland cabinet, from foil-wrapped build stage to mature cloud-forest ecosystem."
+ogImage: "img/highland/interior/interior_2023-06-24_20230624_122929.jpg"
 ---
 
-*Photo gallery not yet populated. Drop photos in `static/img/highland/` and reference them here.*
+A chronological record of the cabinet — not curated for composition, just the accumulating evidence that the plants, the hardware, and the three-way collaboration between grower, mother-in-law, and machine are all still working.
 
-## Planned subsections
+Each image is CC BY-SA 4.0, watermarked accordingly. Click any photo to open it full-resolution in a new tab.
 
-- **Build** — Construction photos: enclosure assembly, evaporator install, light array, electronics
-- **Interior overviews** — Wide shots showing the three growing zones
-- **Detail shots** — Close-ups of mature *Heliamphora*, hanging *Nepenthes*, *Dracula* in flower
-- **Time-lapse / progression** — Same view across months or years, showing plant growth and moss colonisation
+<ul class="interior-timeline">
+  <li>
+    <a href="/img/highland/interior/interior_2022-05-10_20220510_100623.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2022-05-10_20220510_100623.jpg" alt="Highland cabinet, May 2022 — foil-wrapped walls, first plants in place" loading="lazy">
+    </a>
+    <p><strong>May 2022.</strong> The build-stage interior — foil insulation still exposed, first wave of plants installed. The second (smaller) cabinet next to it is visible through the glass on the right.</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2023-01-05_20230105_181548.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2023-01-05_20230105_181548.jpg" alt="Highland cabinet interior, January 2023 — upper shelf taking shape" loading="lazy">
+    </a>
+    <p><strong>January 2023.</strong> Eight months in. The upper shelf has filled, a pair of hanging <em>Nepenthes</em>, moss starting to establish in the lower trays.</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2023-03-15_20230315_070203.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2023-03-15_20230315_070203.jpg" alt="Highland cabinet interior, March 2023 — full frontal view with Heliamphora visible" loading="lazy">
+    </a>
+    <p><strong>March 2023.</strong> The first <em>Heliamphora</em> pitchers starting to catch the light — upper-right shelf. The radiator is visible on the left (room at ~22&nbsp;°C during the night cycle).</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2023-04-11_20230411_175451.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2023-04-11_20230411_175451.jpg" alt="Highland cabinet interior, April 2023 — wider view" loading="lazy">
+    </a>
+    <p><strong>April 2023.</strong> Phalaenopsis in bloom on the right (outside the cabinet) for scale.</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2023-04-11_20230411_175639.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2023-04-11_20230411_175639.jpg" alt="Highland cabinet top-down view, April 2023 — dense plant arrangement on the lower shelf" loading="lazy">
+    </a>
+    <p><strong>April 2023.</strong> Top-down shot of the lower shelf — pump-and-plumbing visible on the left, mist nozzle at centre-top, epiphytes scattered across the grid.</p>
+  </li>
+  <li class="featured">
+    <a href="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" alt="Heliamphora pitchers glowing under the grow lights, June 2023" loading="lazy">
+    </a>
+    <p><strong>June 2023.</strong> <em>Heliamphora</em> pitchers under the LED puck — the shot that became the homepage hero. Thirteen months in and the colouration is the full red-to-yellow gradient you'd want from a tepui plant.</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2024-01-07_IMG-20240107-WA0009.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2024-01-07_IMG-20240107-WA0009.jpg" alt="Highland cabinet, January 2024 — Christmas garland and books on top" loading="lazy">
+    </a>
+    <p><strong>January 2024.</strong> Twenty months in. Christmas garland still up, bookshelf on top packed solid — the cabinet has become a piece of the apartment rather than an intrusion into it.</p>
+  </li>
+  <li>
+    <a href="/img/highland/interior/interior_2025-02-15_IMG_0391.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2025-02-15_IMG_0391.jpg" alt="Highland cabinet at night, February 2025 — plants glowing under low light" loading="lazy">
+    </a>
+    <p><strong>February 2025.</strong> Night view, room lights off. The two shelves are now full top-to-bottom; mosses have migrated onto the inside of the glass; the <em>Heliamphora</em> on the right have pitcher stems pushing through the neighbours. Thirty-three months in.</p>
+  </li>
+</ul>
 
-## File naming convention
-
-`build_2024-09_evaporator-install.jpg`, `interior_2026-04_overview.jpg`, `detail_heliamphora-minor.jpg`. See [HANDOFF.md](https://github.com/GabrieleZoppoli/terrarium-control-system/blob/main/website/HANDOFF.md) for the full convention.
+Photographs are *not* chronologically exhaustive — these are the eight shots I happened to take that survived the filter of "still tells the story". More regular documentation planned once the Pi-side webcam goes live.

@@ -248,7 +248,10 @@
                       "name": "'Indiana'",
                       "size": 1,
                       "vendor": "Arborea Farm",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/nymphaea/nymphaea-indiana.jpg"
+                      ]
                     },
                     {
                       "name": "'Perry's Baby Red'",
@@ -266,7 +269,10 @@
                       "name": "pygmaea 'Helvola'",
                       "size": 1,
                       "vendor": "Vivai le Georgiche",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/nymphaea/nymphaea-pygmaea-helvola.jpg"
+                      ]
                     },
                     {
                       "name": "× 'Snow Princess'",
@@ -1142,7 +1148,9 @@
                       "vendor": "Großräschener Orchideen",
                       "status": "dead",
                       "photos": [
-                        "../img/collection/sophronitis/sophronitis-pygmaea.jpg"
+                        "../img/collection/sophronitis/sophronitis-pygmaea.jpg",
+                        "../img/collection/sophronitis/sophronitis-pygmaea-2.jpg",
+                        "../img/collection/sophronitis/sophronitis-pygmaea-3.jpg"
                       ]
                     },
                     {
@@ -1172,6 +1180,15 @@
                         "../img/collection/leptotes/leptotes-bicolor-2.jpg",
                         "../img/collection/leptotes/leptotes-bicolor-3.jpg",
                         "../img/collection/leptotes/leptotes-bicolor-4.jpg"
+                      ]
+                    },
+                    {
+                      "name": "unicolor",
+                      "size": 1,
+                      "vendor": "Orchids For You",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/leptotes/leptotes-unicolor.jpg"
                       ]
                     }
                   ]
@@ -1249,9 +1266,9 @@
                       "vendor": "Orchids & more",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/comparetia/comparetia-falcata.jpg",
-                        "../img/collection/comparetia/comparetia-falcata-2.jpg",
-                        "../img/collection/comparetia/comparetia-falcata-3.jpg"
+                        "../img/collection/comparettia/comparettia-falcata.jpg",
+                        "../img/collection/comparettia/comparettia-falcata-2.jpg",
+                        "../img/collection/comparettia/comparettia-falcata-3.jpg"
                       ]
                     }
                   ]
@@ -1507,7 +1524,10 @@
                       "name": "vlad-tepes",
                       "size": 1,
                       "vendor": "Großräschener Orchideen",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/dracula/dracula-vlad-tepes.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1606,6 +1626,15 @@
                       "size": 1,
                       "vendor": "Celandroni Orchidee",
                       "status": "alive"
+                    },
+                    {
+                      "name": "lobbii",
+                      "size": 1,
+                      "vendor": "unknown",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/phalaenopsis/phalaenopsis-lobbii.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1713,7 +1742,10 @@
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-2.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-3.jpg",
-                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-4.jpg"
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-4.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-6.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-7.jpg"
                       ]
                     },
                     {
@@ -1879,7 +1911,8 @@
                       "status": "dead",
                       "photos": [
                         "../img/collection/seidenfadenia/seidenfadenia-mitrata.jpg",
-                        "../img/collection/seidenfadenia/seidenfadenia-mitrata-2.jpg"
+                        "../img/collection/seidenfadenia/seidenfadenia-mitrata-2.jpg",
+                        "../img/collection/seidenfadenia/seidenfadenia-mitrata-3.jpg"
                       ]
                     }
                   ]
@@ -1964,6 +1997,20 @@
                       "status": "alive"
                     }
                   ]
+                },
+                {
+                  "name": "Ornitophora",
+                  "children": [
+                    {
+                      "name": "radicans",
+                      "size": 1,
+                      "vendor": "Großräschener Orchideen",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/ornitophora/ornitophora-radicans.jpg"
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1987,7 +2034,10 @@
                       "name": "lusitanicum",
                       "size": 1,
                       "vendor": "Rita Corino",
-                      "status": "dead"
+                      "status": "dead",
+                      "photos": [
+                        "../img/collection/drosophyllum/drosophyllum-lusitanicum.jpg"
+                      ]
                     }
                   ]
                 }
@@ -2003,7 +2053,10 @@
                       "name": "vesiculosa",
                       "size": 1,
                       "vendor": "Un Angolo di Deserto",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/aldrovanda/aldrovanda-vesiculosa.jpg"
+                      ]
                     }
                   ]
                 },
@@ -2089,7 +2142,10 @@
                       "name": "muscipula 'Dracula'",
                       "size": 1,
                       "vendor": "Carnivoria.eu",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/dionaea/dionaea-muscipula-dracula.jpg"
+                      ]
                     },
                     {
                       "name": "muscipula 'Feather Tooth'",
@@ -2985,7 +3041,8 @@
                         "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson.jpg",
                         "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-2.jpg",
                         "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-3.jpg",
-                        "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-4.jpg"
+                        "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-4.jpg",
+                        "../img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg"
                       ]
                     },
                     {
