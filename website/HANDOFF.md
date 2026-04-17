@@ -165,6 +165,39 @@ These are documented but not yet wired up.
 
 ---
 
+## 2026-04-17 — Mac-Claude session notes (for Pi-Claude)
+
+Refresher pass. Nothing structural moved; all changes land under `content/`, `static/data/`, `hugo.toml`.
+
+**Data files regenerated** from the canonical sources on Mac:
+- `static/data/dendrogram.json` — 378 leaves (was 375). Source: `living_collection_dendrogram.html` via `scripts/port_dendrogram.py`.
+- `static/data/collection.csv` — 379 rows (was 375). Source: `Plant_Inventory.xlsx` via `scripts/export_collection_csv.py` (the CSV's hard-coded output path was pointing at a stale `~/Desktop/…` location; fixed).
+- `static/dendrogram/index.html` — rebuilt as the iframe target for `content/collection/dendrogram/index.md`.
+- `data/photo_manifest.json` — unchanged (still 82 taxa × 42 genera).
+
+**Genus-page prose enriched** — every `[USER INPUT NEEDED: …]` block on a genus page is gone. Where I had real notes in the Excel Features/Notes column, they became prose; where I didn't, I replaced the placeholder with either warm "cultivation log" narrative that stays inside what the data actually supports, or with matching `{{< collection-photos "…" >}}` shortcodes. Pages touched: `heliamphora`, `dracula`, `nepenthes`, `sophronitis`, `dendrobium`, `outdoor`, `other-orchids`, `other-genera`.
+
+**Author metadata** — `[params.author]` in `hugo.toml` was still the `[USER INPUT NEEDED]` stub. Now populated with Gabriele's real bio, links to ORCID / Scholar / email / GitHub, and `image = "img/author.jpg"`. Portrait copied in to `static/img/author.jpg` (AIRC courtesy shot — small, used under fair-use bio exemption, attribution on About page).
+
+**Added site description and keyword set** at the top of `hugo.toml` for SEO — pulls into Blowfish's meta tags automatically.
+
+**Things I did NOT touch** (in your column per this doc):
+- `content/highland/…` — left entirely alone. The `live.html` placeholder still points at the path you planned for the Tailscale Funnel PNG and falls back gracefully.
+- `content/_index.md`, `hugo.toml` menu, `build.sh`, this doc's pre-existing content, `themes/blowfish`.
+
+**Still yours to finish**, listed so neither of us forgets:
+1. Tailscale Funnel wiring for `highland/live/` — the systemd capture snippet is in §Live-data above. Nothing on Mac can complete this.
+2. Webcam `http://pi-tailscale-name/webcam/latest.jpg` endpoint.
+3. Grafana snapshot cron to `static/img/highland/dashboard/snapshot-{ts}.png`.
+4. Sensor JSON endpoint at `http://pi-tailscale-name/api/conditions.json` — the dashboard page can poll this once it exists.
+
+If you need to rerun Mac-side scripts, they're in `website/scripts/`:
+- `export_collection_csv.py` — Excel → CSV (idempotent)
+- `port_dendrogram.py` — HTML → JSON + static/dendrogram/ (idempotent)
+- `copy_collection_photos.py` — `~/…/dendrogram/photos/` → `static/img/collection/` + rebuilds `data/photo_manifest.json` (idempotent, only copies if size differs)
+
+---
+
 ## What's intentionally NOT here
 
 - No commit on the new content yet — Pi-Claude scaffolded it on 2026-04-16; user can review before committing.

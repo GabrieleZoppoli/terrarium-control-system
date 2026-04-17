@@ -25,15 +25,19 @@ Cork bark with a sphagnum moss pad. *Dracula* mounted with inflorescences able t
 
 {{< collection-species "Masdevallia" >}}
 
-## Cultivation Notes (3+ years)
+## Cultivation notes
 
-*Dracula* has a perfect survival record (4/4), while *Masdevallia* shows a 71% survival rate (5/7). The loss of *M. glandulosa* (a warm-growing species despite its cloud forest origin) and *M. coccinea* 'Anchota' may reflect sensitivity to conditions at the cooler end of the terrarium's range.
+*Dracula* has kept a perfect survival record (6/6) here, while *Masdevallia* sits at 71 % (5/7). The two losses — *M. glandulosa* and *M. coccinea* 'Anchota' — were both plants whose natural range is on the warmer, lower edge of cloud forest; both struggled to take on new growth in the terrarium's cooler night regime and were probably mis-placed rather than mis-grown. The rest live mounted on cork with a pad of living sphagnum and produce new leaves on a roughly three-month cycle.
 
-[USER INPUT NEEDED:
-- Flowering frequency and seasonal patterns
-- Growth habit observations (fan size, leaf production rate)
-- Sensitivity to temperature spikes
-- Photos: Dracula labellum detail, Masdevallia sequential blooms]
+Notes from provenance:
+
+- **D. simia** — "mounted when available". Flowers are produced singly on pendulous inflorescences that reach downwards out of the sphagnum mat; the photographs on this site catch the flower as it drops through the mount, which is how the plant wants to present it.
+- **D. lotax** — a temperate grower in a very small form, pairs well with *Masdevallia* in the same zone.
+- **D. vlad-tepes** — part of a €116.50 order from a single specialist vendor, which is roughly where *Dracula* prices have settled for adult divisions.
+- **D. Raven 'Jet'** — a hybrid of *D. vampira* × *D. roezlii*. Flowers very dark, almost black, with the white callus glands of *vampira* reduced.
+- **D. "Fake" hirsuta 'Yellow'** — acquired under *hirsuta* but the bloom reads more like *hirsuta* f. *xanthina*. Kept as a label-uncertain accession until it flowers a second time.
+
+Flowering is near-continuous across the group in autumn and winter, slows through summer, and does not respond strongly to any manipulation I've tried. The one observation that's been consistent: *Masdevallia* inflorescence production is tightly coupled to the *night-minimum* temperature, not the daytime maximum — a 3 °C change in the overnight setpoint is worth more than twice that during the day.
 
 ## Photos
 

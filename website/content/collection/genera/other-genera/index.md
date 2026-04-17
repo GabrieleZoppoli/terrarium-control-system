@@ -132,4 +132,10 @@ Major sources for the carnivorous plant collection:
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of Utricularia flowers, Pinguicula rosettes, and the moss/fern carpet.]
+{{< collection-photos "Utricularia" >}}
+
+{{< collection-photos "Pinguicula" >}}
+
+{{< collection-photos "Cephalotus" >}}
+
+{{< collection-photos "Genlisea" >}}

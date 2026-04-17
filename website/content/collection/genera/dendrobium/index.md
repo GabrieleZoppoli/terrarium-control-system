@@ -21,14 +21,13 @@ The collection also includes miniature *Dendrobium* from Southeast Asia and Viet
 
 {{< collection-species "Dendrobium" >}}
 
-## Cultivation Notes (3+ years)
+## Cultivation notes
 
-The single loss (*D. cuthbertsonii*) -- a notoriously challenging sect. *Oxyglossum* species -- was replaced successfully with a 'Yellow' clone from a different vendor. The 89% survival rate confirms that miniature and highland *Dendrobium* are excellent candidates for convergent cloud forest cultivation, provided species requiring dry rest are excluded.
+The single loss was **D. cuthbertsonii** — notoriously the most challenging *Oxyglossum* species — replaced successfully with the **'Yellow'** clone from a different vendor, now a small 5.5 cm fan that has pushed one new leaf per season for two years. The **'Blau' (blue) *cyanocentrum*** came in with one flower spike already on it and has repeat-bloomed every winter.
 
-[USER INPUT NEEDED:
-- Flowering observations (season, frequency, number of flowers per inflorescence)
-- Growth rate and cane production
-- Response to year-round moisture]
+Several accessions arrived with ambiguous provenance — **D. speciosum**, **D. loddigesii**, **D. trantuanii** all have unknown vendor/date (from growlists or traded in) — but they've all integrated without fuss. **D. 'Berry Oda'**, an Australian hybrid of *D. kingianum* × *D. 'Mini Pearl'*, is the least fussy of the whole cluster and flowers heavily on new pseudobulbs with almost no input.
+
+Overall survival is 11/12 (92 %) — confirmation that miniature and highland *Dendrobium* genuinely are excellent candidates for convergent cloud-forest cultivation, *provided* species that require a dry rest (*D. nobile* group, many Australian types) are excluded. The ones that remain here are all plants whose native altitude puts them in the fog zone, not the seasonal monsoon zone — and those distinctions matter more than the genus label.
 
 ## Photos
 

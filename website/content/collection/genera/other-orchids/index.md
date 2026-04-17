@@ -113,4 +113,54 @@ Major sources for the orchid collection:
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos for each genus section above.]
+{{< collection-photos "Phalaenopsis" >}}
+
+{{< collection-photos "Bulbophyllum" >}}
+
+{{< collection-photos "Paphiopedilum" >}}
+
+{{< collection-photos "Neofinetia" >}}
+
+{{< collection-photos "Neostylis" >}}
+
+{{< collection-photos "Holcoglossum" >}}
+
+{{< collection-photos "Vanda" >}}
+
+{{< collection-photos "Oncidium" >}}
+
+{{< collection-photos "Maxillaria" >}}
+
+{{< collection-photos "Restrepia" >}}
+
+{{< collection-photos "Stelis" >}}
+
+{{< collection-photos "Platystele" >}}
+
+{{< collection-photos "Macroclinium" >}}
+
+{{< collection-photos "Leptotes" >}}
+
+{{< collection-photos "Angraecum" >}}
+
+{{< collection-photos "Schoenorchis" >}}
+
+{{< collection-photos "Chiloschista" >}}
+
+{{< collection-photos "Seidenfadenia" >}}
+
+{{< collection-photos "Papilionanthe" >}}
+
+{{< collection-photos "Mediocalcar" >}}
+
+{{< collection-photos "Comparetia" >}}
+
+{{< collection-photos "Oerstedella" >}}
+
+{{< collection-photos "Fredclarkeara" >}}
+
+{{< collection-photos "Habenaria" >}}
+
+{{< collection-photos "Tolumnia" >}}
+
+{{< collection-photos "Calopogon" >}}

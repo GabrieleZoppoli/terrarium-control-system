@@ -80,4 +80,10 @@ genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of outdoor collection, aquatic setup, and any other non-terrarium plants.]
+{{< collection-photos "Sarracenia" >}}
+
+{{< collection-photos "Dionaea" >}}
+
+{{< collection-photos "Rosa" >}}
+
+{{< collection-photos "Iris" >}}

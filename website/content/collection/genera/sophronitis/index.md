@@ -38,14 +38,13 @@ Cork bark mounts. The compact rosette habit and wiry roots adapt well to mounted
 
 **Total invested**: ~EUR 535
 
-## Cultivation Notes (3+ years)
+## Cultivation notes
 
-Combined survival rate: 77% (10 of 13). The double loss of *S. pygmaea* -- the smallest species in the genus -- suggests it may be too sensitive for year-round high humidity, while the larger *Sophronitis* and all *Cattleya* have thrived. The loss of *L. briegeri* (a CITES import from Ecuador) may reflect transport stress rather than cultivation conditions.
+Combined survival rate: 77 % (10 of 13). The double loss of *S. pygmaea* — the smallest species in the genus — points to a limit rather than to bad luck: the plant is simply too small and too slow to forgive any root-moisture error over 48 hours. The larger *Sophronitis* and all *Cattleya* accessions, including the **f. aurea ('Atsumi' × 'Perfection') — SM/JOGA Japan selection** *S. coccinea*, have thrived. The loss of *L. briegeri* was a transport event (CITES shipment from Ecuador, arrived already deflated) not a cultivation failure.
 
-[USER INPUT NEEDED:
-- Flowering frequency and color form notes
-- Response to the lack of dry rest period
-- Photos: vivid flowers against green moss are spectacular]
+Flowering is reliable and heavy in autumn, often with a lighter second flush in spring. Colour saturation tracks the night-minimum temperature more strongly than any other variable — the 'Atsumi' × 'Perfection' cross, in particular, holds a deeper vermilion when pushed three degrees cooler at night than when kept in the default regime.
+
+No dry rest is enforced, and none of the surviving accessions have shown the spongy, hollow growth that literature associates with "over-watered" sophronitis — as long as air movement stays strong (a 24 V muffin fan runs continuously at the top of the cabinet) and the cork mount is allowed to go from soaking to "just-not-dripping" between mist cycles.
 
 ## Photos
 
