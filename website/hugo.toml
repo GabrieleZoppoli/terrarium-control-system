@@ -13,6 +13,8 @@ keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthe
   autoSwitchAppearance = true
   enableSearch = true
   enableCodeCopy = true
+  # Read-only terrarium conditions JSON served via Tailscale Funnel (CORS *, refresh >=60s).
+  liveConditionsURL = "https://rei1.tail7cc014.ts.net/api/conditions.json"
 
   [params.homepage]
     layout = "background"

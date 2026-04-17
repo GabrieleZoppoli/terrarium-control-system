@@ -132,36 +132,36 @@ Hugo extended is required (Blowfish uses Sass).
 
 ---
 
-## Live-data integration (Pi-Claude TODO)
+## Live-data integration — status
 
-### Webcam
+### Node-RED UI snapshot, Grafana snapshots, conditions JSON — **done 2026-04-17 by Pi-Claude**
+
+All three data surfaces are live over Tailscale Funnel on `rei1.tail7cc014.ts.net`:
+
+| Public URL | Source | Cadence |
+|---|---|---|
+| `https://rei1.tail7cc014.ts.net/highland/ui-latest.png`           | Node-RED `/ui/` headless render (900×1400@2x) | 15 min |
+| `https://rei1.tail7cc014.ts.net/highland/grafana-latest-desktop.png` | Grafana `snapshot-desktop` dashboard (1600×900)  | 15 min |
+| `https://rei1.tail7cc014.ts.net/highland/grafana-latest-mobile.png`  | Grafana `snapshot-mobile` dashboard (1200×5600)  | 15 min |
+| `https://rei1.tail7cc014.ts.net/api/conditions.json`               | InfluxDB `last()` on 4 measurements, CORS `*`    | on request, 60 s cache |
+
+Wiring:
+- **Generator**: `/home/pi/grafana_snapshot_dashboards.py` builds the two Grafana boards (palette `#050607` bg / `#b06dd1` accent, amber target, green room). Run it to regenerate.
+- **Renderer**: `/home/pi/snap-renderer/render.js` (puppeteer-core + system Chromium) produces the Grafana PNGs. `/home/pi/snap-renderer/render-ui.js` renders the Node-RED UI.
+- **Cron**: `*/15 * * * * /home/pi/snap-renderer/run-render.sh` — renders both Grafana layouts + UI into a temp dir, then atomic-moves into `/home/pi/snapshots/`. Log at `/home/pi/snapshots/render.log`.
+- **HTTP surface**: `/home/pi/snap-renderer/conditions-server.py` on `127.0.0.1:8787` serves `/api/conditions.json` (InfluxDB query, cached 60 s) and the three whitelisted PNGs from `/home/pi/snapshots/`. Service: `conditions-server.service` (systemd, enabled).
+- **Funnel**: `tailscale funnel --bg http://127.0.0.1:8787` (one root route — the local server does path routing internally so nothing else is reachable from the public internet).
+
+Frontmatter / config wired:
+- `content/highland/live/_index.md` has `snapshotURL` + `liveURL`.
+- `content/highland/dashboard/_index.md` rewritten to embed the `<picture>` with a mobile/desktop `<source>` split at 500 px.
+- `hugo.toml` has `params.liveConditionsURL` pointing at the JSON endpoint.
+
+### Webcam (still TODO)
 Once a camera is installed:
 - Stream still images to `http://pi-tailscale-name/webcam/latest.jpg` refreshed every N seconds
 - Embed in `content/highland/webcam/_index.md` via `<img src="..." onload="setTimeout(()=>this.src='...?t='+Date.now(), 5000)">`
 - Or expose an MJPEG endpoint via Tailscale Funnel for true live view
-
-### Grafana snapshots
-- Cron job on Pi exports PNGs from Grafana every 6 hours
-- Push to `static/img/highland/dashboard/snapshot-{timestamp}.png`
-- Dashboard page lists the most recent N
-
-### Sensor JSON endpoint
-- Node-RED HTTP endpoint at `http://pi-tailscale-name/api/conditions.json`
-- Static JS on the dashboard page polls this and updates a "current conditions" widget
-
-### Node-RED UI snapshot (added 2026-04-16 by Mac-Claude)
-User asked for a near-live public view of the control UI. Mac-Claude built `content/highland/live/` + `layouts/highland/live.html` — the page embeds a static PNG that auto-refreshes every 60 s and falls back gracefully when unreachable. **Pi-side setup is pending**:
-
-1. Headless capture every 60 s. Suggested: `chromium --headless=new --no-sandbox --window-size=1440,900 --screenshot=/var/www/highland/ui-latest.png --virtual-time-budget=3000 http://localhost:1880/ui/` in a systemd timer. Atomic write (`... -.part && mv`) so the serving webserver never reads a half-written file.
-2. Expose publicly via Tailscale Funnel. Single command on the Pi:
-   ```
-   tailscale funnel --bg --https=443 --set-path=/highland/ui-latest.png file:///var/www/highland/ui-latest.png
-   ```
-   (Or serve a tiny directory via nginx + `tailscale funnel 443 http://127.0.0.1:8080` if Funnel's file mode is too restrictive.)
-3. Once the Funnel URL is known, paste it into `content/highland/live/_index.md` under `snapshotURL`. Optional: also set `liveURL` to the internal Node-RED address for the tailnet-only deeplink.
-4. Cache-control: serve the PNG with `Cache-Control: no-cache` or `max-age=10` so browsers don't pin a stale copy. The site already adds a `?t=` cache-buster every refresh as belt-and-braces.
-
-These are documented but not yet wired up.
 
 ---
 
