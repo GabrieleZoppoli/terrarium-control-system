@@ -1,7 +1,11 @@
 baseURL = "https://gabrielezoppoli.github.io/terrarium-control-system/"
 languageCode = "en"
-title = "Highland Cloud Forest Terrarium"
+title = "Highland Cloud Forest · Gabriele Zoppoli"
 theme = "blowfish"
+
+# Short description used by Blowfish/SEO where .Description is empty.
+description = "An open-source weather-mimicking cloud-forest terrarium, a living botanical collection organised as a phylogenetic tree, and a small set of carnivorous-plant inventions. By Gabriele Zoppoli, Genova."
+keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthes", "Tillandsia", "highland orchid", "carnivorous plants", "phylogenetic dendrogram", "Node-RED", "PID humidity control", "Genova"]
 
 [params]
   colorScheme = "ocean"
@@ -29,11 +33,15 @@ theme = "blowfish"
     showThemeAttribution = true
 
   [params.author]
-    name = "[USER INPUT NEEDED]"
-    headline = "Highland cloud forest terrarium builder"
-    bio = "[USER INPUT NEEDED] — Brief bio about your background and interest in cloud forest cultivation."
+    name = "Gabriele Zoppoli"
+    headline = "Translational oncologist · highland cloud-forest grower"
+    bio = "MD, PhD. Associate Professor of Internal Medicine at the University of Genoa and Assistant Medical Director at IRCCS Policlinico San Martino. Outside the hospital: a 380-plant collection, miniature orchids, carnivorous plants, and an open-source weather-mimicking terrarium."
+    image = "img/author.jpg"
     links = [
+      { email = "mailto:gabriele.zoppoli@unige.it" },
       { github = "https://github.com/GabrieleZoppoli/terrarium-control-system" },
+      { orcid = "https://orcid.org/0000-0002-1619-1708" },
+      { "google-scholar" = "https://scholar.google.com/citations?user=Q5DfyqQAAAAJ" },
     ]
 
 [taxonomies]
