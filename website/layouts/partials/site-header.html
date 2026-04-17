@@ -1,15 +1,32 @@
 <header class="site-header">
-  <a class="brand" href="{{ site.Home.RelPermalink }}">
-    <span class="mark">{{ .Site.Title }}</span>
+  <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+    <span class="mark">{{ .Site.Params.shortTitle | default .Site.Title }}</span>
     {{- with .Site.Params.tagline }}<span class="sub">{{ . }}</span>{{ end }}
   </a>
-  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-toggle="nav">Menu</button>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" data-toggle="nav">{{ i18n "menu_toggle" }}</button>
   <nav id="primary-nav" class="site-nav" aria-label="Primary">
     {{- range .Site.Menus.main }}
       {{- $active := or ($.IsMenuCurrent "main" .) ($.HasMenuCurrent "main" .) }}
       {{- $href := "" }}
-      {{- with .Page }}{{ $href = .RelPermalink }}{{ else }}{{ $href = .URL | default (printf "/%s/" .PageRef) | relURL }}{{ end }}
+      {{- with .Page }}{{ $href = .RelPermalink }}{{ else }}{{ $href = .URL | default (printf "/%s/" .PageRef) | relLangURL }}{{ end }}
       <a href="{{ $href }}"{{ if $active }} aria-current="true"{{ end }}>{{ .Name }}</a>
+    {{- end }}
+    {{- if gt (len hugo.Sites) 1 }}
+    <span class="site-nav__lang" role="group" aria-label="{{ i18n "lang_switch_label" }}">
+      {{- range hugo.Sites }}
+        {{- $langSite := . }}
+        {{- $current := eq $langSite.Language.Lang $.Language.Lang -}}
+        {{- $href := $langSite.Home.RelPermalink }}
+        {{- if $current }}
+          {{- $href = $.RelPermalink }}
+        {{- else }}
+          {{- range $.AllTranslations }}
+            {{- if eq .Language.Lang $langSite.Language.Lang }}{{ $href = .RelPermalink }}{{ end }}
+          {{- end }}
+        {{- end }}
+        <a href="{{ $href }}" hreflang="{{ $langSite.Language.Lang }}" lang="{{ $langSite.Language.Lang }}"{{ if $current }} aria-current="true"{{ end }}>{{ $langSite.Language.Lang | upper }}</a>
+      {{- end }}
+    </span>
     {{- end }}
   </nav>
 </header>

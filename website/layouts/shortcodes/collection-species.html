@@ -105,16 +105,16 @@
           </a>
         {{- end -}}
       </td>
-      <td><em>{{ .taxon }}</em></td>
-      <td>{{ .source }}</td>
-      <td class="num">
+      <td data-label="Taxon"><em>{{ .taxon }}</em></td>
+      <td data-label="Source">{{ .source }}</td>
+      <td class="num" data-label="Price">
         {{- with .price -}}
           {{- if findRE "^[0-9]" . -}}€{{ . }}{{- else -}}<span class="muted">{{ . }}</span>{{- end -}}
         {{- end -}}
       </td>
-      <td class="mono small">{{ .date }}</td>
-      <td>{{- with .status -}}<span class="status status--{{ . }}">{{ . }}</span>{{- end -}}</td>
-      <td class="small">{{ .notes }}</td>
+      <td class="mono small" data-label="Acquired">{{ .date }}</td>
+      <td data-label="Status">{{- with .status -}}<span class="status status--{{ . }}">{{ . }}</span>{{- end -}}</td>
+      <td class="small" data-label="Notes">{{ .notes }}</td>
     </tr>
   {{- end }}
   </tbody>

@@ -1,26 +1,85 @@
 {{ define "main" }}
 <section class="page">
-  <div class="home-hero">
-    <span class="kicker">Open-source highland cloud forest · Living botanical collection</span>
-    <h1>Climate, invention, and a <em>living collection</em> in three overlapping worlds.</h1>
-    <p class="lede">{{ .Site.Params.heroLede | default "A highland cloud-forest terrarium driven by Node-RED and PID humidity control, the standalone inventions built around it, and the plant collection it shelters — documented end to end." }}</p>
+  <div class="home-hero home-hero--split">
+    <div class="home-hero__text">
+      <span class="kicker">{{ i18n "home_kicker" }}</span>
+      <h1>{{ i18n "home_title" | safeHTML }}</h1>
+      <p class="lede">{{ .Site.Params.heroLede }}</p>
+    </div>
+    <a class="home-hero__figure" href="{{ "/collection/genera/heliamphora/" | relLangURL }}" aria-label="Heliamphora macdonaldae">
+      <img src="{{ "img/collection/heliamphora/heliamphora-macdonaldae.jpg" | relURL }}" alt="Heliamphora macdonaldae — Cerro Duida, Venezuela" loading="eager" decoding="async">
+      <figcaption><em>Heliamphora macdonaldae</em> · Cerro Duida</figcaption>
+    </a>
   </div>
+
+  <dl class="home-stats" aria-label="Collection and system at a glance">
+    <div><dt>{{ i18n "stat_accessions" }}</dt><dd>375</dd></div>
+    <div><dt>{{ i18n "stat_alive_today" }}</dt><dd>~270</dd></div>
+    <div><dt>{{ i18n "stat_genera" }}</dt><dd>86</dd></div>
+    <div><dt>{{ i18n "stat_species_photo" }}</dt><dd>82</dd></div>
+    <div><dt>{{ i18n "stat_volume" }}</dt><dd>1,000 <small style="font-size:0.6em;color:var(--text-3)">L</small></dd></div>
+    <div><dt>{{ i18n "stat_logging" }}</dt><dd>60 <small style="font-size:0.6em;color:var(--text-3)">s</small></dd></div>
+    <div><dt>{{ i18n "stat_operational" }}</dt><dd>2023</dd></div>
+  </dl>
+
+  {{- with .Site.Params.homepage.featuredMosaic }}
+  <section class="home-mosaic" aria-label="Featured species from the collection">
+    <header class="home-mosaic__head">
+      <span class="kicker">{{ i18n "mosaic_kicker" }}</span>
+      <h2>{{ i18n "mosaic_title" }}</h2>
+    </header>
+    <div class="home-mosaic__grid">
+      {{- range . }}
+      <a class="mosaic-tile" href="{{ .href | relLangURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+        <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
+        <div class="mosaic-tile__caption">
+          <span class="taxon"><em>{{ .taxon }}</em></span>
+          <span class="provenance">{{ .tepui }}</span>
+        </div>
+      </a>
+      {{- end }}
+    </div>
+    <p class="home-mosaic__foot">
+      <a href="{{ "/collection/dendrogram/" | relLangURL }}" class="home-mosaic__link">{{ i18n "mosaic_cta" }} <span aria-hidden="true">→</span></a>
+    </p>
+  </section>
+  {{- end }}
+
+  {{- with .Site.Params.homepage.featuredMosaicOutdoor }}
+  <section class="home-mosaic home-mosaic--outdoor" aria-label="Outdoor species">
+    <header class="home-mosaic__head">
+      <span class="kicker">{{ i18n "mosaic_outdoor_kicker" }}</span>
+      <h2>{{ i18n "mosaic_outdoor_title" }}</h2>
+    </header>
+    <div class="home-mosaic__grid home-mosaic__grid--outdoor">
+      {{- range . }}
+      <a class="mosaic-tile" href="{{ .href | relLangURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+        <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
+        <div class="mosaic-tile__caption">
+          <span class="taxon"><em>{{ .taxon }}</em></span>
+          <span class="provenance">{{ .tepui }}</span>
+        </div>
+      </a>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
 
   {{ $featured := dict
     "highland"   (slice
-      (dict "label" "Live UI"       "url" "/highland/live/")
-      (dict "label" "Grafana"       "url" "/highland/dashboard/")
-      (dict "label" "Architecture"  "url" "/highland/docs/architecture/")
+      (dict "label" (i18n "feat_live_ui")      "url" "/highland/live/")
+      (dict "label" (i18n "feat_grafana")      "url" "/highland/dashboard/")
+      (dict "label" (i18n "feat_architecture") "url" "/highland/docs/architecture/")
     )
     "inventions" (slice
-      (dict "label" "Zeer pot"      "url" "/inventions/zeer-pot-darlingtonia/")
-      (dict "label" "Drosera regia" "url" "/inventions/drosera-regia/")
-      (dict "label" "Easier enclosures" "url" "/inventions/easier-environments/")
+      (dict "label" (i18n "feat_zeer_pot")     "url" "/inventions/zeer-pot-darlingtonia/")
+      (dict "label" (i18n "feat_drosera_regia") "url" "/inventions/drosera-regia/")
+      (dict "label" (i18n "feat_easier")       "url" "/inventions/easier-environments/")
     )
     "collection" (slice
-      (dict "label" "Dendrogram"    "url" "/collection/dendrogram/")
-      (dict "label" "By genus"      "url" "/collection/genera/")
-      (dict "label" "Wishlists"     "url" "/collection/wishlists/")
+      (dict "label" (i18n "feat_dendrogram")   "url" "/collection/dendrogram/")
+      (dict "label" (i18n "feat_by_genus")     "url" "/collection/genera/")
+      (dict "label" (i18n "feat_wishlists")    "url" "/collection/wishlists/")
     )
   }}
 
@@ -35,7 +94,7 @@
         </a>
         <ul class="home-section__links">
           {{- range index $featured $ref }}
-          <li><a href="{{ .url | relURL }}"><span class="arrow" aria-hidden="true">→</span> {{ .label }}</a></li>
+          <li><a href="{{ .url | relLangURL }}"><span class="arrow" aria-hidden="true">→</span> {{ .label }}</a></li>
           {{- end }}
         </ul>
       </div>

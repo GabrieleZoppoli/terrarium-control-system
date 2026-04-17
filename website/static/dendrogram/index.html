@@ -477,10 +477,19 @@ function rankName(depth) { return ['Collection','Clade','Order','Family','Genus'
 
 // Proximity index: map any cursor coordinate (in g-space) to the nearest
 // internal node at depth 2–4 (orders, families, genera). Species leaves are
-// excluded — their small circles already handle precise hover/click.
+// excluded from THIS index — they have a separate, tighter proximity index
+// below so clicks near a species label focus the species, not its genus.
 const proximityCandidates = root.descendants().filter(n => n.depth >= 2 && n.depth <= 4);
 const proximityPoints = proximityCandidates.map(n => radialPoint(n.x, n.y));
 const proximityDelaunay = d3.Delaunay.from(proximityPoints);
+
+// Separate leaf proximity — species leaves have tiny circles (1.5–2.2 px)
+// that are nearly impossible to hit on a trackpad. Allow clicks within a
+// smaller radius of the leaf's radial point to focus the leaf itself.
+const leafCandidates = root.descendants().filter(n => !n.children);
+const leafPoints = leafCandidates.map(n => radialPoint(n.x, n.y));
+const leafDelaunay = leafCandidates.length ? d3.Delaunay.from(leafPoints) : null;
+const LEAF_PROX_MAX_DIST_SQ = 40 * 40; // 40 px in g-space — roughly covers a label
 
 // ── Draw links ──
 const linkGroup = g.append("g");
@@ -583,6 +592,27 @@ function resolveProximity(event) {
   return candidate;
 }
 
+// Leaf-first proximity: returns the nearest species leaf when the cursor is
+// within LEAF_PROX_MAX_DIST_SQ of its radial point. Used by click/dblclick to
+// make "click near a leaf label" focus the species, not its genus.
+function resolveLeafProximity(event) {
+  if (!leafDelaunay) return null;
+  const [mx, my] = d3.pointer(event, g.node());
+  const idx = leafDelaunay.find(mx, my);
+  const candidate = leafCandidates[idx];
+  if (!candidate) return null;
+  const [cx, cy] = leafPoints[idx];
+  const dx = mx - cx, dy = my - cy;
+  if (dx * dx + dy * dy > LEAF_PROX_MAX_DIST_SQ) return null;
+  return candidate;
+}
+
+// Combined: prefer a nearby leaf; otherwise fall back to the internal-node
+// proximity index.
+function resolveClickTarget(event) {
+  return resolveLeafProximity(event) || resolveProximity(event);
+}
+
 proximityOverlay
   .on("mousemove", (event) => {
     const candidate = resolveProximity(event);
@@ -605,18 +635,18 @@ proximityOverlay
     lastProximityCandidate = null;
   })
   .on("click", (event) => {
-    const candidate = resolveProximity(event);
+    const candidate = resolveClickTarget(event);
     if (!candidate) return;
     event.stopPropagation();
     onNodeClick(candidate);   // single-click: focus only (info panel + highlight), no zoom
   })
   .on("dblclick", (event) => {
-    const candidate = resolveProximity(event);
+    const candidate = resolveClickTarget(event);
     if (!candidate) return;
     event.stopPropagation();
     event.preventDefault();
     onNodeClick(candidate);
-    zoomToSubtree(candidate); // double-click: commit and zoom in
+    if (candidate.depth >= 2 && candidate.depth <= 4) zoomToSubtree(candidate);
   });
 
 // Circles

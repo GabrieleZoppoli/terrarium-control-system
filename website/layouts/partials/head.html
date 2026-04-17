@@ -1,20 +1,129 @@
 {{- $siteCSS := resources.Get "css/site.css" | fingerprint "sha256" -}}
+{{- $baseURL := .Site.BaseURL | absURL -}}
+{{- $ogImage := .Params.ogImage | default .Site.Params.ogImage -}}
+{{- if $ogImage }}{{ $ogImage = $ogImage | absURL }}{{ end -}}
+{{- $title := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) -}}
+{{- $desc := .Description | default .Site.Params.description -}}
+{{- $author := .Site.Params.author.name -}}
+{{- $hasAuthor := and $author (not (in $author "USER INPUT")) -}}
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0a0b0e">
-<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
-{{- with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-{{- $author := .Site.Params.author.name }}
-{{- if and $author (not (in $author "USER INPUT")) }}<meta name="author" content="{{ $author }}">{{ end }}
+<title>{{ $title }}</title>
+{{- with $desc }}
+<meta name="description" content="{{ . }}">
+{{- end }}
+{{- with .Site.Params.keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{- end }}
+{{- if $hasAuthor }}
+<meta name="author" content="{{ $author }}">
+{{- end }}
+<meta name="generator" content="Hugo + Blowfish (custom layouts)">
+<meta name="robots" content="{{ .Params.robots | default "index,follow,max-image-preview:large" }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}">
+{{- /* rel=me for identity discovery across IndieWeb / Mastodon / WebFinger */}}
+{{- with .Site.Params.author.orcid }}<link rel="me" href="{{ . }}">{{ end }}
+{{- with .Site.Params.repoURL }}<link rel="me" href="{{ . }}">{{ end }}
+<link rel="me" href="https://scholar.google.com/citations?user=Q5DfyqQAAAAJ">
+<link rel="me" href="https://www.linkedin.com/in/gabriele-zoppoli">
+<link rel="author" href="{{ "about/" | absURL }}">
+
+{{- /* Favicons — SVG-only, renders crisp at every size */}}
+<link rel="icon" type="image/svg+xml" href="{{ "favicon.svg" | relURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"></noscript>
 
 <link rel="stylesheet" href="{{ $siteCSS.RelPermalink }}" integrity="{{ $siteCSS.Data.Integrity }}">
 
-<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
-<meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+{{- /* Open Graph */}}
+<meta property="og:title" content="{{ cond .IsHome .Site.Title .Title }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:type" content="{{ if .IsHome }}website{{ else if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-{{- with .Description }}<meta property="og:description" content="{{ . }}">{{ end }}
+<meta property="og:locale" content="{{ replace .Site.LanguageCode "-" "_" | default "en_US" }}">
+{{- with $desc }}<meta property="og:description" content="{{ . }}">{{ end }}
+{{- with $ogImage }}
+<meta property="og:image" content="{{ . }}">
+<meta property="og:image:alt" content="{{ cond $.IsHome $.Site.Title $.Title }}">
+{{- end }}
+{{- if .IsPage }}
+{{- with .PublishDate }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+{{- if $hasAuthor }}<meta property="article:author" content="{{ $author }}">{{ end }}
+{{- end }}
+
+{{- /* Twitter / X card */}}
+<meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:title" content="{{ cond .IsHome .Site.Title .Title }}">
+{{- with $desc }}<meta name="twitter:description" content="{{ . }}">{{ end }}
+{{- with $ogImage }}<meta name="twitter:image" content="{{ . }}">{{ end }}
+{{- with .Site.Params.twitter }}<meta name="twitter:creator" content="@{{ . }}">{{ end }}
+
+{{- /* JSON-LD structured data */}}
+{{- if .IsHome }}
+  {{- $author_obj := dict "@type" "Person" "name" $author -}}
+  {{- with .Site.Params.author.orcid }}{{ $author_obj = merge $author_obj (dict "identifier" .) }}{{ end -}}
+  {{- with .Site.Params.author.sameAs }}{{ $author_obj = merge $author_obj (dict "sameAs" .) }}{{ end -}}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "WebSite"
+      "name" .Site.Title
+      "url" .Permalink
+      "inLanguage" (.Site.LanguageCode | default "en")
+      "author" $author_obj
+  -}}
+  {{- with $desc }}{{ $ld = merge $ld (dict "description" .) }}{{ end -}}
+<script type="application/ld+json">{{ $ld | jsonify (dict "noHTMLEscape" true) | safeJS }}</script>
+{{- end }}
+{{- if hasSuffix .RelPermalink "/about/" }}
+  {{- $person := dict
+      "@context" "https://schema.org"
+      "@type" "Person"
+      "name" $author
+      "jobTitle" "Associate Professor of Internal Medicine"
+      "url" .Permalink
+      "worksFor" (slice
+        (dict "@type" "Organization" "name" "University of Genoa" "url" "https://unige.it")
+        (dict "@type" "Hospital" "name" "IRCCS Ospedale Policlinico San Martino" "url" "https://www.ospedalesanmartino.it"))
+      "alumniOf" (slice
+        (dict "@type" "CollegeOrUniversity" "name" "University of Genoa")
+        (dict "@type" "CollegeOrUniversity" "name" "Université Libre de Bruxelles")
+        (dict "@type" "ResearchOrganization" "name" "National Institutes of Health, Bethesda"))
+      "address" (dict "@type" "PostalAddress" "addressLocality" "Genoa" "addressCountry" "IT")
+      "knowsAbout" (slice "oncology" "translational genomics" "liquid biopsy" "SLFN11" "breast cancer" "carnivorous plants" "cloud forest terrariums" "miniature orchids" "Tillandsia" "PID control" "Node-RED")
+  -}}
+  {{- with $ogImage }}{{ $person = merge $person (dict "image" .) }}{{ end -}}
+  {{- with .Site.Params.author.orcid }}{{ $person = merge $person (dict "identifier" .) }}{{ end -}}
+  {{- with .Site.Params.author.sameAs }}{{ $person = merge $person (dict "sameAs" .) }}{{ end -}}
+<script type="application/ld+json">{{ $person | jsonify (dict "noHTMLEscape" true) | safeJS }}</script>
+{{- end }}
+{{- if hasSuffix .RelPermalink "/collection/dendrogram/" }}
+  {{- $creator := dict "@type" "Person" "name" $author -}}
+  {{- with .Site.Params.author.orcid }}{{ $creator = merge $creator (dict "identifier" .) }}{{ end -}}
+  {{- $dataset := dict
+      "@context" "https://schema.org"
+      "@type" "Dataset"
+      "name" "Highland Cloud Forest Living Collection"
+      "description" "Phylogenetic census of 375 cultivated accessions (86 genera) of highland carnivorous plants, miniature orchids, and Tillandsia kept under a single controlled cloud-forest regime in Genoa, Italy. Each tip carries vendor provenance, acquisition date, life/loss status, and — where photographed — CC BY-SA 4.0 imagery."
+      "url" .Permalink
+      "keywords" (slice "phylogenetic dendrogram" "living collection" "cultivated plants" "carnivorous plants" "Heliamphora" "Dracula orchids" "Nepenthes" "Tillandsia" "horticulture dataset")
+      "license" "https://creativecommons.org/licenses/by-sa/4.0/"
+      "isAccessibleForFree" true
+      "inLanguage" "en"
+      "creator" $creator
+      "spatialCoverage" (dict "@type" "Place" "name" "Genoa, Italy" "geo" (dict "@type" "GeoCoordinates" "latitude" 44.4 "longitude" 8.9))
+      "temporalCoverage" "2021/.."
+      "distribution" (slice
+        (dict "@type" "DataDownload" "encodingFormat" "application/json" "contentUrl" ("data/dendrogram.json" | absURL) "name" "Dendrogram (JSON, D3 hierarchy)")
+        (dict "@type" "DataDownload" "encodingFormat" "text/csv"         "contentUrl" ("data/collection.csv"   | absURL) "name" "Flat inventory (CSV)"))
+  -}}
+<script type="application/ld+json">{{ $dataset | jsonify (dict "noHTMLEscape" true) | safeJS }}</script>
+{{- end }}

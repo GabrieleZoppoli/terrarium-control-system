@@ -1,26 +1,76 @@
 baseURL = "https://gabrielezoppoli.github.io/terrarium-control-system/"
-languageCode = "en"
 title = "Highland Cloud Forest · Gabriele Zoppoli"
 theme = "blowfish"
 
-# Short description used by Blowfish/SEO where .Description is empty.
-description = "An open-source weather-mimicking cloud-forest terrarium, a living botanical collection organised as a phylogenetic tree, and a small set of carnivorous-plant inventions. By Gabriele Zoppoli, Genova."
-keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthes", "Tillandsia", "highland orchid", "carnivorous plants", "phylogenetic dendrogram", "Node-RED", "PID humidity control", "Genova"]
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+
+enableRobotsTXT = true
+enableEmoji = false
+
+[languages]
+  [languages.en]
+    languageCode  = "en"
+    languageName  = "English"
+    weight        = 1
+    title         = "Highland Cloud Forest · Gabriele Zoppoli"
+    description   = "An open-source weather-mimicking cloud-forest terrarium, a living botanical collection organised as a phylogenetic tree, and a small set of carnivorous-plant inventions. By Gabriele Zoppoli, Genova."
+    [languages.en.params]
+      shortTitle = "Highland Cloud Forest"
+      tagline    = "Gabriele Zoppoli · Genova"
+      heroLede   = "A highland cloud-forest terrarium cooled by a marine compressor and orchestrated by Node-RED, the standalone inventions built around it, and the plant collection it shelters — documented end to end."
+      keywords   = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthes", "Tillandsia", "highland orchid", "carnivorous plants", "phylogenetic dendrogram", "Node-RED", "marine compressor cooling", "Genova"]
+
+  [languages.it]
+    languageCode  = "it"
+    languageName  = "Italiano"
+    weight        = 2
+    title         = "Foresta Nebulosa · Gabriele Zoppoli"
+    description   = "Un terrario open-source che riproduce il clima delle foreste nebulose di alta quota, una collezione botanica vivente ordinata come albero filogenetico, e un piccolo catalogo di invenzioni dedicate alle piante carnivore. Di Gabriele Zoppoli, Genova."
+    [languages.it.params]
+      shortTitle = "Foresta Nebulosa"
+      tagline    = "Gabriele Zoppoli · Genova"
+      heroLede   = "Un terrario che riproduce il clima di una foresta nebulosa d'alta quota — raffreddato da un compressore marino, orchestrato con Node-RED — le invenzioni che ci sono nate intorno, e la collezione di piante che ospita. Tutto documentato, dall'inizio alla fine."
+      keywords   = ["terrario cloud forest", "Heliamphora", "Dracula", "Nepenthes", "Tillandsia", "orchidee d'alta quota", "piante carnivore", "dendrogramma filogenetico", "Node-RED", "compressore marino", "Genova"]
 
 [params]
   colorScheme = "ocean"
   defaultAppearance = "dark"
-  autoSwitchAppearance = true
+  autoSwitchAppearance = false
   enableSearch = true
   enableCodeCopy = true
   # Read-only terrarium conditions JSON served via Tailscale Funnel (CORS *, refresh >=60s).
+  # Returns { temperature_c, humidity_rh, vpd_kpa, compressor, updatedAt }. Empty string disables the live block.
   liveConditionsURL = "https://rei1.tail7cc014.ts.net/api/conditions.json"
+  # Default OG card used site-wide; individual pages may override via .Params.ogImage.
+  ogImage = "img/og/og-default.jpg"
+  repoURL = "https://github.com/GabrieleZoppoli/terrarium-control-system"
+  twitter = ""
 
   [params.homepage]
     layout = "background"
     homepageImage = "img/hero.jpg"
     showRecent = true
     recentLimit = 5
+    # Curated featured-photo mosaic on the homepage. Each entry renders as a tile
+    # linking to the matching genus page. Paths are relative to static/.
+    featuredMosaic = [
+      { src = "img/collection/heliamphora/heliamphora-macdonaldae.jpg", alt = "Heliamphora macdonaldae", taxon = "Heliamphora macdonaldae", tepui = "Venezuelan tepuis", href = "/collection/genera/heliamphora/" },
+      { src = "img/collection/dracula/dracula-pholeodytes.jpg", alt = "Dracula pholeodytes", taxon = "Dracula pholeodytes", tepui = "Colombian Andes", href = "/collection/genera/dracula/" },
+      { src = "img/collection/nepenthes/nepenthes-argentii.jpg", alt = "Nepenthes argentii", taxon = "Nepenthes argentii", tepui = "Mindanao, 2,300 m", href = "/collection/genera/nepenthes/" },
+      { src = "img/collection/sophronitis/sophronitis-coccinea-4n.jpg", alt = "Sophronitis coccinea 4N", taxon = "Sophronitis coccinea 4N", tepui = "Brazilian campos rupestres", href = "/collection/genera/sophronitis/" },
+      { src = "img/collection/cephalotus/cephalotus-f-eden-black.jpg", alt = "Cephalotus follicularis Eden Black", taxon = "Cephalotus f. 'Eden Black'", tepui = "SW Australia", href = "/collection/genera/other-genera/" },
+      { src = "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg", alt = "Dendrobium cuthbertsonii yellow", taxon = "Dendrobium cuthbertsonii 'Yellow'", tepui = "New Guinea highlands", href = "/collection/genera/dendrobium/" },
+      { src = "img/collection/masdevallia/masdevallia-decumana.jpg", alt = "Masdevallia decumana", taxon = "Masdevallia decumana", tepui = "Andean cloud forest", href = "/collection/genera/other-orchids/" },
+      { src = "img/collection/utricularia/utricularia-alpina.jpg", alt = "Utricularia alpina", taxon = "Utricularia alpina", tepui = "Guayana highlands, epiphyte", href = "/collection/genera/other-genera/" },
+      { src = "img/collection/comparetia/comparetia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", href = "/collection/genera/other-orchids/" },
+      { src = "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg", alt = "Heliamphora ionasi Elegance", taxon = "Heliamphora ionasi 'Elegance'", tepui = "Ilu-Tepui, Venezuela", href = "/collection/genera/heliamphora/" },
+    ]
+    # Species kept outside the highland cabinet (outdoor bed / balcony)
+    featuredMosaicOutdoor = [
+      { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", href = "/collection/genera/sarracenia/" },
+      { src = "img/collection/dionaea/dionaea-muscipula-alien.jpg", alt = "Dionaea muscipula Alien", taxon = "Dionaea muscipula 'Alien'", tepui = "Carolina bog · outdoor bed", href = "/collection/genera/dionaea/" },
+    ]
 
   [params.article]
     showDate = true
@@ -37,13 +87,24 @@ keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthe
   [params.author]
     name = "Gabriele Zoppoli"
     headline = "Translational oncologist · highland cloud-forest grower"
-    bio = "MD, PhD. Associate Professor of Internal Medicine at the University of Genoa and Assistant Medical Director at IRCCS Policlinico San Martino. Outside the hospital: a 380-plant collection, miniature orchids, carnivorous plants, and an open-source weather-mimicking terrarium."
+    bio = "MD, PhD. Associate Professor of Internal Medicine at the University of Genoa and consultant at IRCCS Ospedale Policlinico San Martino. Outside the hospital: a 375-accession living collection of carnivorous plants, miniature orchids, and Tillandsia, plus an open-source cloud-forest terrarium."
     image = "img/author.jpg"
+    orcid = "https://orcid.org/0000-0002-1619-1708"
+    email = "gabriele.zoppoli@unige.it"
+    sameAs = [
+      "https://orcid.org/0000-0002-1619-1708",
+      "https://scholar.google.com/citations?user=Q5DfyqQAAAAJ",
+      "https://github.com/GabrieleZoppoli",
+      "https://www.linkedin.com/in/gabriele-zoppoli",
+      "https://www.researchgate.net/profile/Gabriele-Zoppoli",
+    ]
     links = [
       { email = "mailto:gabriele.zoppoli@unige.it" },
       { github = "https://github.com/GabrieleZoppoli/terrarium-control-system" },
       { orcid = "https://orcid.org/0000-0002-1619-1708" },
       { "google-scholar" = "https://scholar.google.com/citations?user=Q5DfyqQAAAAJ" },
+      { linkedin = "https://www.linkedin.com/in/gabriele-zoppoli" },
+      { researchgate = "https://www.researchgate.net/profile/Gabriele-Zoppoli" },
     ]
 
 [taxonomies]
@@ -51,26 +112,48 @@ keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthe
   category = "categories"
   genus = "genera"
 
-[menu]
-  [[menu.main]]
+[languages.en.menus]
+  [[languages.en.menus.main]]
     name = "Highland"
     pageRef = "highland"
     weight = 10
-  [[menu.main]]
+  [[languages.en.menus.main]]
     name = "Inventions"
     pageRef = "inventions"
     weight = 20
-  [[menu.main]]
+  [[languages.en.menus.main]]
     name = "Collection"
     pageRef = "collection"
     weight = 30
-  [[menu.main]]
+  [[languages.en.menus.main]]
     name = "About"
     pageRef = "about"
     weight = 40
-  [[menu.main]]
-    name = "Blog"
-    pageRef = "blog"
+  [[languages.en.menus.main]]
+    name = "Contact"
+    pageRef = "contact"
+    weight = 50
+
+[languages.it.menus]
+  [[languages.it.menus.main]]
+    name = "Terrario"
+    pageRef = "highland"
+    weight = 10
+  [[languages.it.menus.main]]
+    name = "Invenzioni"
+    pageRef = "inventions"
+    weight = 20
+  [[languages.it.menus.main]]
+    name = "Collezione"
+    pageRef = "collection"
+    weight = 30
+  [[languages.it.menus.main]]
+    name = "Chi sono"
+    pageRef = "about"
+    weight = 40
+  [[languages.it.menus.main]]
+    name = "Contatti"
+    pageRef = "contact"
     weight = 50
 
 [markup]
@@ -79,3 +162,12 @@ keywords = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthe
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.7
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]

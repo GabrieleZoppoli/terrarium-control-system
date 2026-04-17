@@ -3,6 +3,7 @@ title: "Nepenthes (Highland)"
 description: "Tropical pitcher plants from the mountains of Borneo, Sumatra, the Philippines, and Sulawesi"
 tags: ["carnivorous", "nepenthaceae", "borneo", "sumatra", "philippines"]
 genera: ["Nepenthes"]
+ogImage: "img/collection/nepenthes/nepenthes-argentii.jpg"
 ---
 
 ## Overview

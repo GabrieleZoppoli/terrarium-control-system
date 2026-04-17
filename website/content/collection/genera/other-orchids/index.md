@@ -70,7 +70,7 @@ Species-form *Phalaenopsis* -- all miniatures, very different from commercial hy
 | 1 | *Platystele baqueroi* | Ecuagenera Europe | EUR 24.26 | — | Alive |
 | 2 | *Pleurothallis leptotifolia* | Orchideria di Morosolo | EUR 15.00 | Mounted | Alive |
 | 3 | *Lepanthopsis astrophora* | Varesina Orchidee | EUR 22.00 | — | Alive |
-| 4 | *Comparetia falcata* | Orchids & more | EUR 12.00 | — | Alive |
+| 4 | *Comparettia falcata* | Orchids & more | EUR 12.00 | — | Alive |
 | 5 | *Macroclinium manabinum* | Orchids & more | EUR 12.00 | — | Alive |
 | 6 | *Phymatidium tillandsioides* | Orchideria di Morosolo | EUR 15.00 | Mounted | Alive |
 | 7 | *Ornithocephalus estradae* | Varesina Orchidee | EUR 30.00 | Rare species; mounted | Lost |
@@ -153,7 +153,7 @@ Major sources for the orchid collection:
 
 {{< collection-photos "Mediocalcar" >}}
 
-{{< collection-photos "Comparetia" >}}
+{{< collection-photos genus="Comparettia" slug="comparetia" >}}
 
 {{< collection-photos "Oerstedella" >}}
 

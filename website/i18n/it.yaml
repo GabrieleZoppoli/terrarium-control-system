@@ -1,0 +1,65 @@
+# Site chrome — Italiano
+home_kicker:           "Foresta nebulosa open-source · Collezione botanica vivente"
+home_title:            "Clima, invenzioni e una <em>collezione che vive</em>, in tre mondi che si intrecciano."
+
+# Home stats strip
+stat_accessions:       "Piante acquistate"
+stat_alive_today:      "Vive oggi"
+stat_genera:           "Generi"
+stat_species_photo:    "Specie fotografate"
+stat_volume:           "Volume del terrario"
+stat_logging:          "Frequenza di log"
+stat_operational:      "In funzione dal"
+
+# Home mosaic
+mosaic_kicker:         "Una selezione · clicca per aprire la pagina del genere"
+mosaic_title:          "Un atlante vivo di altopiani convergenti."
+mosaic_cta:            "Scopri il dendrogramma filogenetico completo"
+mosaic_outdoor_kicker: "Fuori dal terrario"
+mosaic_outdoor_title:  "Specie che preferiscono stare sul balcone."
+
+# Site chrome
+menu_toggle:           "Menu"
+breadcrumb_home:       "Home"
+
+# Footer
+footer_rss:            "RSS"
+footer_press:          "Stampa & riuso"
+footer_github:         "GitHub"
+footer_email:          "Email"
+footer_meta:           "Collezione vivente · terrario d'alta quota · hardware aperto su misura"
+footer_rss_title:      "Feed RSS — nuove specie, note di costruzione, post"
+footer_cc_title:       "Tutti i contenuti originali sono pubblicati con licenza Creative Commons Attribution-ShareAlike 4.0 International"
+
+# Language switcher
+lang_switch_label:     "Lingua"
+lang_en:               "English"
+lang_it:               "Italiano"
+
+# Dendrogram mobile CTA
+dendro_mobile_title:   "Avvicina due dita per ingrandire · tocca il pulsante per schermo intero."
+dendro_mobile_body:    "378 etichette di specie attorno a un albero radiale non entrano in uno schermo da telefono. Aprilo a tutto schermo — zoom con due dita, tocca un nodo per centrarlo, tocca il centro per tornare alla vista d'insieme."
+dendro_mobile_button:  "Schermo intero"
+dendro_mobile_meta_1:  "Oppure sfoglia la collezione"
+dendro_mobile_meta_2:  "per genere"
+dendro_mobile_meta_3:  "— funziona bene anche su mobile."
+dendro_hint:           "Al meglio su desktop · rotella per lo zoom, trascina per muoverti, passa sopra una foglia per le foto · "
+dendro_hint_open:      "apri in una scheda dedicata"
+
+# Highland live sensor block
+live_label:            "In diretta dal terrario"
+live_temperature:      "Temperatura"
+live_humidity:         "Umidità"
+live_vpd:              "VPD"
+live_compressor:       "Compressore"
+
+# Home featured-links (per-section quick access)
+feat_live_ui:          "Interfaccia live"
+feat_grafana:          "Grafana"
+feat_architecture:     "Architettura"
+feat_zeer_pot:         "Zeer pot"
+feat_drosera_regia:    "Drosera regia"
+feat_easier:           "Contenitori più semplici"
+feat_dendrogram:       "Dendrogramma"
+feat_by_genus:         "Per genere"
+feat_wishlists:        "Wishlist"

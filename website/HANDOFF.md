@@ -198,9 +198,9 @@ If you need to rerun Mac-side scripts, they're in `website/scripts/`:
 
 ---
 
-## What's intentionally NOT here
+## Follow-ups (not blocking)
 
-- No commit on the new content yet — Pi-Claude scaffolded it on 2026-04-16; user can review before committing.
-- No real images — Mac-Claude will add them.
-- No `about/` content beyond what already exists — user/Mac-Claude can fill in.
-- The `paper/` link on the homepage points to GitHub for now; we may surface paper drafts as their own Hugo pages later.
+- **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
+- **Webcam** — not live yet. Placeholder at `content/highland/webcam/_index.md`. Hardware TBD.
+- **Italian translations for deep pages** — landing pages are bilingual as of 2026-04-17 but genus / doc / wishlist / invention sub-pages stay English-only. Language switcher falls back to `/it/` home for those.
+- **paper/** — still GitHub-linked; no per-page rendering yet.

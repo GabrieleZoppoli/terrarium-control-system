@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block large generated asset trees that are not useful search surfaces.
+Disallow: /data/
+Disallow: /dendrogram/
+
+# Sitemap (Hugo auto-generates this at build time).
+Sitemap: https://gabrielezoppoli.github.io/terrarium-control-system/sitemap.xml

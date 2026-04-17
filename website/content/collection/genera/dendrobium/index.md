@@ -3,6 +3,7 @@ title: "Dendrobium"
 description: "Highland orchids from Papua New Guinea, Southeast Asia, and Vietnam"
 tags: ["orchid", "dendrobium", "papua-new-guinea", "southeast-asia"]
 genera: ["Dendrobium"]
+ogImage: "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg"
 ---
 
 ## Overview

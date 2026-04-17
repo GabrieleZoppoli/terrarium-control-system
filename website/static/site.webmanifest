@@ -1,0 +1,12 @@
+{
+  "name": "Highland Cloud Forest · Gabriele Zoppoli",
+  "short_name": "Highland",
+  "description": "Open-source cloud-forest terrarium, a 375-accession living collection organised as a phylogenetic tree, and carnivorous-plant inventions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050607",
+  "theme_color": "#0a0b0e",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any maskable" }
+  ]
+}

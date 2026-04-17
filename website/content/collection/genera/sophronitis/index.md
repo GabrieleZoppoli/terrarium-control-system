@@ -3,6 +3,7 @@ title: "Cattleya, Sophronitis & Laelia"
 description: "Miniature rupicolous orchids from the Brazilian Atlantic Forest highlands"
 tags: ["orchid", "cattleya", "sophronitis", "laelia", "brazil"]
 genera: ["Cattleya", "Sophronitis", "Laelia"]
+ogImage: "img/collection/sophronitis/sophronitis-coccinea-4n.jpg"
 ---
 
 ## Overview

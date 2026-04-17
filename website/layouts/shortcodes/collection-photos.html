@@ -8,7 +8,8 @@
 */ -}}
 {{- $genus := .Get "genus" -}}
 {{- if not $genus -}}{{- $genus = .Get 0 -}}{{- end -}}
-{{- $genusSlug := lower $genus -}}
+{{- $genusSlug := .Get "slug" -}}
+{{- if not $genusSlug -}}{{- $genusSlug = lower $genus -}}{{- end -}}
 {{- $manifest := .Site.Data.photo_manifest -}}
 {{- $entries := index $manifest $genusSlug -}}
 

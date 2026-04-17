@@ -1,6 +1,8 @@
 ---
 title: "By Genus"
 description: "375 accessions across 86 genera — terrarium, outdoor, windowsill, and invention-housed"
+cascade:
+  wide: true
 ---
 
 ## Cloud forest terrarium

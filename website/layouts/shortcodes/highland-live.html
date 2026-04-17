@@ -1,0 +1,77 @@
+{{- $url := .Site.Params.liveConditionsURL | default "" -}}
+{{- if $url -}}
+<section class="highland-live" data-endpoint="{{ $url }}" data-poll-seconds="10" hidden aria-label="Live conditions inside the terrarium">
+  <header class="highland-live__head">
+    <span class="highland-live__dot" aria-hidden="true"></span>
+    <span class="highland-live__label">{{ i18n "live_label" }}</span>
+    <span class="highland-live__updated"><time data-field="updatedAt">—</time></span>
+  </header>
+  <dl class="highland-live__grid">
+    <div><dt>{{ i18n "live_temperature" }}</dt><dd data-field="temperature_c">—</dd></div>
+    <div><dt>{{ i18n "live_humidity" }}</dt><dd data-field="humidity_rh">—</dd></div>
+    <div><dt>{{ i18n "live_vpd" }}</dt><dd data-field="vpd_kpa">—</dd></div>
+    <div><dt>{{ i18n "live_compressor" }}</dt><dd data-field="compressor">—</dd></div>
+  </dl>
+</section>
+<script>
+(function () {
+  var root = document.querySelector('.highland-live');
+  if (!root) return;
+  var endpoint = root.getAttribute('data-endpoint');
+  var intervalMs = Math.max(5, parseInt(root.getAttribute('data-poll-seconds') || '10', 10)) * 1000;
+  if (!endpoint) return;
+
+  var setters = {
+    temperature_c: function (v) { return typeof v === 'number' ? v.toFixed(1) + ' °C' : null; },
+    humidity_rh:   function (v) { return typeof v === 'number' ? v.toFixed(0) + ' % RH' : null; },
+    vpd_kpa:       function (v) { return typeof v === 'number' ? v.toFixed(2) + ' kPa' : null; },
+    compressor:    function (v) { return v ? String(v).toUpperCase() : null; },
+    updatedAt:     function (v) {
+      if (!v) return null;
+      try {
+        var d = new Date(v);
+        if (isNaN(d.getTime())) return null;
+        var diff = Math.round((Date.now() - d.getTime()) / 1000);
+        if (diff < 60) return diff + ' s ago';
+        if (diff < 3600) return Math.round(diff / 60) + ' min ago';
+        return d.toLocaleTimeString();
+      } catch (_) { return null; }
+    }
+  };
+
+  function paint(data) {
+    if (!data || typeof data !== 'object') return false;
+    var any = false;
+    Object.keys(setters).forEach(function (key) {
+      var el = root.querySelector('[data-field="' + key + '"]');
+      if (!el) return;
+      var out = setters[key](data[key]);
+      if (out !== null) { el.textContent = out; any = true; }
+    });
+    return any;
+  }
+
+  var failCount = 0;
+  function tick() {
+    fetch(endpoint, { cache: 'no-store', credentials: 'omit' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (data) {
+        if (paint(data)) {
+          root.hidden = false;
+          root.removeAttribute('data-stale');
+          failCount = 0;
+        }
+      })
+      .catch(function () {
+        failCount++;
+        // Mark stale after 3 consecutive failures; hide after 10.
+        if (failCount >= 10) { root.hidden = true; }
+        else if (failCount >= 3) { root.setAttribute('data-stale', 'true'); }
+      });
+  }
+
+  tick();
+  setInterval(tick, intervalMs);
+})();
+</script>
+{{- end -}}

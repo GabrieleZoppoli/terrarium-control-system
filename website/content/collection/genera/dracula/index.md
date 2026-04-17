@@ -3,6 +3,7 @@ title: "Dracula & Masdevallia"
 description: "Cloud forest orchids from the Colombian and Ecuadorian Andes"
 tags: ["orchid", "pleurothallidinae", "andes"]
 genera: ["Dracula", "Masdevallia"]
+ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 
 ## Overview

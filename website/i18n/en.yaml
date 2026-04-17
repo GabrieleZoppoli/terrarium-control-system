@@ -1,0 +1,65 @@
+# Site chrome — English
+home_kicker:           "Open-source highland cloud forest · Living botanical collection"
+home_title:            "Climate, invention, and a <em>living collection</em> in three overlapping worlds."
+
+# Home stats strip
+stat_accessions:       "Accessions"
+stat_alive_today:      "Alive today"
+stat_genera:           "Genera"
+stat_species_photo:    "Species photographed"
+stat_volume:           "Terrarium volume"
+stat_logging:          "Logging cadence"
+stat_operational:      "Operational since"
+
+# Home mosaic
+mosaic_kicker:         "Selected species · click through to the genus page"
+mosaic_title:          "A living atlas of convergent highlands."
+mosaic_cta:            "Explore the full phylogenetic dendrogram"
+mosaic_outdoor_kicker: "Outside the Highland terrarium"
+mosaic_outdoor_title:  "Species that prefer the open balcony."
+
+# Site chrome
+menu_toggle:           "Menu"
+breadcrumb_home:       "Home"
+
+# Footer
+footer_rss:            "RSS"
+footer_press:          "Press & re-use"
+footer_github:         "GitHub"
+footer_email:          "Email"
+footer_meta:           "Living collection · highland terrarium · bespoke open hardware"
+footer_rss_title:      "RSS feed — new species, build logs, and posts"
+footer_cc_title:       "All original content licensed under Creative Commons Attribution-ShareAlike 4.0 International"
+
+# Language switcher
+lang_switch_label:     "Language"
+lang_en:               "English"
+lang_it:               "Italiano"
+
+# Dendrogram mobile CTA
+dendro_mobile_title:   "Pinch to zoom · tap the button for full-screen."
+dendro_mobile_body:    "378 species labels around a radial tree doesn't fit a phone screen. Open it full-screen — pinch to zoom, tap a node to focus, tap the centre to reset."
+dendro_mobile_button:  "Full screen"
+dendro_mobile_meta_1:  "Or browse the collection"
+dendro_mobile_meta_2:  "by genus"
+dendro_mobile_meta_3:  "— works great on mobile."
+dendro_hint:           "Best explored on desktop · scroll to zoom, drag to pan, hover a tip for photos · "
+dendro_hint_open:      "open in its own tab"
+
+# Highland live sensor block
+live_label:            "Live inside the cabinet"
+live_temperature:      "Temperature"
+live_humidity:         "Humidity"
+live_vpd:              "VPD"
+live_compressor:       "Compressor"
+
+# Home featured-links (per-section quick access)
+feat_live_ui:          "Live UI"
+feat_grafana:          "Grafana"
+feat_architecture:     "Architecture"
+feat_zeer_pot:         "Zeer pot"
+feat_drosera_regia:    "Drosera regia"
+feat_easier:           "Easier enclosures"
+feat_dendrogram:       "Dendrogram"
+feat_by_genus:         "By genus"
+feat_wishlists:        "Wishlists"

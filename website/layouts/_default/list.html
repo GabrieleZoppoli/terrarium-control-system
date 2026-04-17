@@ -1,5 +1,6 @@
 {{ define "main" }}
-<section class="page">
+{{- $narrow := .Params.narrow | default false -}}
+<section class="page{{ if $narrow }} page--prose{{ end }}">
   {{- if and (not .IsHome) (gt (len .Ancestors) 1) }}
   <nav class="breadcrumb" aria-label="Breadcrumb">
     {{- range (.Ancestors.Reverse) }}
@@ -16,7 +17,7 @@
   </header>
 
   {{- with .Content }}
-  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  <div class="prose"{{ if not $narrow }} style="max-width: var(--page-max);"{{ end }}>{{ . }}</div>
   {{- end }}
 
   {{- $children := .Pages }}

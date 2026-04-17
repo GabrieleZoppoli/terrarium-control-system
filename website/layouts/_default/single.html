@@ -1,5 +1,6 @@
 {{ define "main" }}
-<article class="page page--prose">
+{{- $wide := .Params.wide | default false -}}
+<article class="page{{ if not $wide }} page--prose{{ end }}">
   {{- if gt (len .Ancestors) 1 }}
   <nav class="breadcrumb" aria-label="Breadcrumb">
     {{- range (.Ancestors.Reverse) }}
@@ -17,7 +18,7 @@
     <h1>{{ .Title }}</h1>
     {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
   </header>
-  <div class="prose">
+  <div class="prose"{{ if $wide }} style="max-width: var(--page-max);"{{ end }}>
     {{ .Content }}
   </div>
 </article>
