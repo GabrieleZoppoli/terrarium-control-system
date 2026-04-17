@@ -28,12 +28,33 @@ Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce 
   <div><dt>In funzione</dt><dd>dal 2023</dd></div>
 </dl>
 
+## Dentro al terrario
+
+<figure class="moment">
+  <a href="/highland/photos/"><img src="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" alt="Heliamphora sotto le luci di crescita, giugno 2023" loading="lazy"></a>
+  <figcaption>Giugno 2023 — tredici mesi dall'accensione. La <a href="/highland/photos/">timeline completa</a> racconta tutto il percorso.</figcaption>
+</figure>
+
+## Chi ci vive
+
+Una piccola selezione dei generi ospitati nel terrario. Ogni tessera porta alla rispettiva pagina con provenienza, fornitori e galleria fotografica completa.
+
+<ul class="highland-residents">
+  <li><a href="/collection/genera/heliamphora/"><img src="/img/collection/heliamphora/heliamphora-macdonaldae.jpg" alt="Heliamphora macdonaldae" loading="lazy"><span><em>Heliamphora</em><small>pianta-brocca dei tepui</small></span></a></li>
+  <li><a href="/collection/genera/dracula/"><img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes" loading="lazy"><span><em>Dracula</em><small>orchidee delle Ande</small></span></a></li>
+  <li><a href="/collection/genera/nepenthes/"><img src="/img/collection/nepenthes/nepenthes-argentii.jpg" alt="Nepenthes argentii" loading="lazy"><span><em>Nepenthes</em><small>pianta-brocca tropicale d'alta quota</small></span></a></li>
+  <li><a href="/collection/genera/sophronitis/"><img src="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg" alt="Sophronitis coccinea 4N" loading="lazy"><span><em>Sophronitis</em><small>miniature rupicole del Brasile</small></span></a></li>
+  <li><a href="/collection/genera/dendrobium/"><img src="/img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg" alt="Dendrobium cuthbertsonii" loading="lazy"><span><em>Dendrobium</em><small>orchidee d'altura della Nuova Guinea</small></span></a></li>
+  <li><a href="/collection/genera/other-orchids/"><img src="/img/collection/masdevallia/masdevallia-decumana.jpg" alt="Masdevallia decumana" loading="lazy"><span><em>Masdevallia</em><small>miniature andine</small></span></a></li>
+</ul>
+
 ## Sezioni
 
-- **[Documentazione](docs/)** — Architettura, controller PID, schema InfluxDB, flussi Node-RED *(in inglese)*
-- **[Dashboard](dashboard/)** — Snapshot dei pannelli Grafana e condizioni correnti *(in inglese)*
+- **[Foto →](photos/)** — Timeline cronologica dell'interno, otto scatti dallo stadio di costruzione al terrario maturo
+- **[Documentazione →](docs/)** — Architettura, controller PID, schema InfluxDB, flussi Node-RED *(in inglese)*
+- **[Dashboard →](dashboard/)** — Pannelli Grafana (mobile + desktop) e condizioni correnti *(in inglese)*
+- **[Interfaccia live →](live/)** — Vista ravvicinata del pannello di controllo Node-RED, aggiornato ogni 15 minuti *(in inglese)*
 - **[Webcam](webcam/)** — Vista dal vivo dentro al terrario *(in arrivo)*
-- **[Foto](photos/)** — Foto di costruzione e di crescita *(in arrivo)*
 
 ## Il paper
 

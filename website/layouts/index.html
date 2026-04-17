@@ -6,9 +6,9 @@
       <h1>{{ i18n "home_title" | safeHTML }}</h1>
       <p class="lede">{{ .Site.Params.heroLede }}</p>
     </div>
-    <a class="home-hero__figure" href="{{ "/highland/" | relLangURL }}" aria-label="Inside the Highland cabinet, June 2023">
-      <img src="{{ "img/highland/interior/interior_2023-06-24_20230624_122929.jpg" | relURL }}" alt="Heliamphora pitchers glowing under the grow lights inside the Highland terrarium, June 2023" loading="eager" decoding="async">
-      <figcaption>Inside the cabinet · <em>Heliamphora</em> in June 2023</figcaption>
+    <a class="home-hero__figure" href="{{ "/collection/genera/heliamphora/" | relURL }}" aria-label="Heliamphora macdonaldae">
+      <img src="{{ "img/collection/heliamphora/heliamphora-macdonaldae.jpg" | relURL }}" alt="Heliamphora macdonaldae — Cerro Duida, Venezuela" loading="eager" decoding="async">
+      <figcaption><em>Heliamphora macdonaldae</em> · Cerro Duida</figcaption>
     </a>
   </div>
 
@@ -32,7 +32,7 @@
     </header>
     <div class="home-mosaic__grid">
       {{- range . }}
-      <a class="mosaic-tile" href="{{ .href | relLangURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+      <a class="mosaic-tile" href="{{ .href | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
         <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
         <div class="mosaic-tile__caption">
           <span class="taxon"><em>{{ .taxon }}</em></span>
@@ -55,7 +55,7 @@
     </header>
     <div class="home-mosaic__grid home-mosaic__grid--outdoor">
       {{- range . }}
-      <a class="mosaic-tile" href="{{ .href | relLangURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+      <a class="mosaic-tile" href="{{ .href | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
         <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
         <div class="mosaic-tile__caption">
           <span class="taxon"><em>{{ .taxon }}</em></span>
@@ -96,7 +96,7 @@
         </a>
         <ul class="home-section__links">
           {{- range index $featured $ref }}
-          <li><a href="{{ .url | relLangURL }}"><span class="arrow" aria-hidden="true">→</span> {{ .label }}</a></li>
+          <li><a href="{{ .url | relURL }}"><span class="arrow" aria-hidden="true">→</span> {{ .label }}</a></li>
           {{- end }}
         </ul>
       </div>

@@ -5,6 +5,11 @@ theme = "blowfish"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
+# Rewrite root-relative URLs (/img/..., /collection/..., etc.) in rendered
+# HTML so they resolve correctly on the /terrarium-control-system/ subdirectory
+# deploy. Without this, raw HTML <img src="/img/X"> in markdown 404s.
+canonifyURLs = true
+
 enableRobotsTXT = true
 enableEmoji = false
 
@@ -66,10 +71,14 @@ enableEmoji = false
       { src = "img/collection/comparettia/comparettia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", href = "/collection/genera/other-orchids/" },
       { src = "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg", alt = "Heliamphora ionasi Elegance", taxon = "Heliamphora ionasi 'Elegance'", tepui = "Ilu-Tepui, Venezuela", href = "/collection/genera/heliamphora/" },
     ]
-    # Species kept outside the highland cabinet (outdoor bed / balcony)
+    # Species kept outside the highland cabinet (outdoor bed / balcony / aquatic)
     featuredMosaicOutdoor = [
       { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", href = "/collection/genera/sarracenia/" },
+      { src = "img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg", alt = "Sarracenia moorei Leah Wilkerson on the balcony at night", taxon = "Sarracenia × moorei 'Leah Wilkerson'", tepui = "Outdoor bed · balcony, Genova", href = "/collection/genera/sarracenia/" },
       { src = "img/collection/dionaea/dionaea-muscipula-alien.jpg", alt = "Dionaea muscipula Alien", taxon = "Dionaea muscipula 'Alien'", tepui = "Carolina bog · outdoor bed", href = "/collection/genera/dionaea/" },
+      { src = "img/collection/dionaea/dionaea-muscipula-dracula.jpg", alt = "Dionaea muscipula Dracula", taxon = "Dionaea muscipula 'Dracula'", tepui = "Red-throated cultivar · outdoor bed", href = "/collection/genera/dionaea/" },
+      { src = "img/collection/aldrovanda/aldrovanda-vesiculosa.jpg", alt = "Aldrovanda vesiculosa", taxon = "Aldrovanda vesiculosa", tepui = "Aquatic carnivore · outdoor bowl", href = "/collection/genera/outdoor/" },
+      { src = "img/collection/nymphaea/nymphaea-pygmaea-helvola.jpg", alt = "Nymphaea pygmaea Helvola", taxon = "Nymphaea pygmaea 'Helvola'", tepui = "Miniature water lily · outdoor pond", href = "/collection/genera/outdoor/" },
     ]
 
   [params.article]
