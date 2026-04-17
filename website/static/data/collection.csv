@@ -96,7 +96,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 140,Dracula lotax,Dracula,lotax,,Großräschener Orchideen,See notes,Mar 2016,alive,,"Orchid; temperate grower, very small form"
 195,Dracula vlad-tepes,Dracula,vlad-tepes,,Großräschener Orchideen,17.5,2016,alive,,Part of €116.50 order
 252,Dracula pholeodytes,Dracula,pholeodytes,,Ecuagenera Europe,51.4,Mar 2023,alive,,
-396,Dracula Raven 'Jet',Dracula,Raven,'Jet',Ecuagenera Europe,,,alive,,Hybrid: D. vampira × D. roezlii
+396,Dracula Raven 'Jet',Dracula,Raven,'Jet',Ecuagenera,,,alive,,Hybrid: D. vampira × D. roezlii
 397,Dracula 'Fake' hirsuta 'Yellow',Dracula,,'Fake' hirsuta 'Yellow',Ecuagenera Europe,,,alive,,Uncertain ID; possibly hirsuta f. xanthina
 20,Drosera capensis alba,Drosera,capensis alba,,Giardino Carnivoro,6,Nov 2019,given,,
 31,Drosera capensis 'Red',Drosera,capensis,'Red',Gartenbau Carow,7.2,May 2019,alive,,
@@ -374,3 +374,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 416,Bulbophyllum thiurum,Bulbophyllum,thiurum,,Großräschener Orchideen,,,alive,,
 417,"Sarracenia flava var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",Sarracenia,flava,"var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",unknown,,,alive,,
 418,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,,,alive,,
+419,Restrepia vasquezii,Restrepia,vasquezii,,Ecuagenera,20.4,Nov 2022,alive,,
+420,Phragmipedium kovachii,Phragmipedium,kovachii,,Ecuagenera,114.24,Nov 2022,alive,,
+421,Restrepia sanguinea,Restrepia,sanguinea,,Ecuagenera,24.48,Nov 2022,alive,,Ecuagenera batch 002263
+422,Restrepia trichoglossa var. xanthina,Restrepia,trichoglossa,var. xanthina,Ecuagenera,21.6,Nov 2022,alive,,yellow form

@@ -12,7 +12,7 @@ from pathlib import Path
 import openpyxl
 
 EXCEL = Path("/Users/gabrielezoppoli/Documents/documenti personali/botanica/dendrogram/Plant_Inventory.xlsx")
-CSV = Path("/Users/gabrielezoppoli/Desktop/terrarium-paper/website/static/data/collection.csv")
+CSV = Path("/Users/gabrielezoppoli/Documents/documenti personali/my website/terrarium-paper/website/static/data/collection.csv")
 
 STATUS = {"✓": "alive", "†": "lost", "➜": "given"}
 

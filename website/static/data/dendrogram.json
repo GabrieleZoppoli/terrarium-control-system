@@ -1481,7 +1481,7 @@
                     {
                       "name": "Raven 'Jet'",
                       "size": 1,
-                      "vendor": "Ecuagenera Europe",
+                      "vendor": "Ecuagenera",
                       "status": "alive",
                       "photos": [
                         "../img/collection/dracula/dracula-raven-jet-5.jpg",
@@ -1939,6 +1939,29 @@
                         "../img/collection/restrepia/restrepia-vasquezii.jpg",
                         "../img/collection/restrepia/restrepia-vasquezii-2.jpg"
                       ]
+                    },
+                    {
+                      "name": "sanguinea",
+                      "size": 1,
+                      "vendor": "Ecuagenera",
+                      "status": "alive"
+                    },
+                    {
+                      "name": "trichoglossa var. xanthina",
+                      "size": 1,
+                      "vendor": "Ecuagenera",
+                      "status": "alive"
+                    }
+                  ]
+                },
+                {
+                  "name": "Phragmipedium",
+                  "children": [
+                    {
+                      "name": "kovachii",
+                      "size": 1,
+                      "vendor": "Ecuagenera",
+                      "status": "alive"
                     }
                   ]
                 }
