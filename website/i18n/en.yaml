@@ -53,6 +53,38 @@ live_humidity:         "Humidity"
 live_vpd:              "VPD"
 live_compressor:       "Compressor"
 
+# Home ledger — 3-year rough totals, playful equivalents
+ledger_kicker:         "Side-effects of running a small cloud forest"
+ledger_title:          "Three years of running weather, rounded."
+ledger_intro:          "Back-of-envelope totals since May 2023 — from duty-cycle math and the running InfluxDB log. Precise figures will land on the dashboard page as we wire them."
+
+ledger_mist_label:     "Mist cycles"
+ledger_mist_value:     "~60,000"
+ledger_mist_caption:   "≈ 3 m³ of water blown as fog — about sixty bathtubs, or 9,000 soda cans."
+
+ledger_kwh_label:      "Electricity"
+ledger_kwh_value:      "~2,500"
+ledger_kwh_unit:       "kWh"
+ledger_kwh_caption:    "≈ Milan → Tokyo one-way in a Tesla Model 3 (~18,000 km). Roughly 30% of a typical Italian household's yearly draw, for three years."
+
+ledger_cost_label:     "Electricity bill"
+ledger_cost_value:     "~€750"
+ledger_cost_caption:   "At Italian residential rates — roughly the price of one rare Heliamphora clone."
+
+ledger_co2_label:      "CO₂ quietly scrubbed"
+ledger_co2_value:      "~100"
+ledger_co2_unit:       "kg"
+ledger_co2_caption:    "≈ one Milan ↔ Rome round-trip flight for a single passenger, cancelled out by the plants."
+
+ledger_data_label:     "Sensor readings"
+ledger_data_value:     "~50"
+ledger_data_unit:      "million"
+ledger_data_caption:   "32 signals × 1 per minute × 1,100 days, all in InfluxDB."
+
+ledger_fog_label:      "Hours near-saturated"
+ledger_fog_value:      "~15,000"
+ledger_fog_caption:    "Cumulative time at ≥ 95% RH. Roughly 630 days spent inside cloud."
+
 # Home featured-links (per-section quick access)
 feat_live_ui:          "Live UI"
 feat_grafana:          "Grafana"

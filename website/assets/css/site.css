@@ -268,8 +268,8 @@ tbody tr:hover { background: rgba(176, 109, 209, 0.04); }
 .photo-tile__caption {
   position: absolute;
   left: 0; right: 0; bottom: 7%; /* clear the CC BY-SA 4.0 watermark bar */
-  padding: 1.8rem 0.8rem 0.5rem;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.88));
+  padding: 0.9rem 0.8rem 0.4rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.5) 35%, rgba(0, 0, 0, 0.88) 100%);
   color: var(--text-1);
   font-family: var(--font-display);
   font-style: italic;
@@ -1087,6 +1087,96 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
   color: var(--text-2);
 }
 
+/* ----- Ledger — home rough 3-year totals with playful equivalents ----- */
+
+.home-ledger {
+  margin: 2.6rem 0 2.8rem;
+  padding: 2rem 2.2rem 2.4rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-4);
+  background:
+    linear-gradient(180deg, rgba(143, 185, 122, 0.04), rgba(14, 16, 20, 0.55)),
+    var(--surface-veil);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.home-ledger__head { margin-bottom: 1.6rem; max-width: 62ch; }
+.home-ledger__head .kicker {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-4);
+  margin-bottom: 0.6rem;
+}
+.home-ledger__head h2 {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  color: var(--text-1);
+  letter-spacing: -0.005em;
+}
+.home-ledger__head .lede {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text-3);
+}
+
+.home-ledger__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+  margin: 0;
+}
+.home-ledger__grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1rem 1.2rem 1.1rem;
+  background: var(--surface-veil);
+  border: 1px solid var(--border-hair);
+  border-radius: var(--r-3);
+}
+.home-ledger__grid dt {
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-4);
+  margin: 0;
+}
+.home-ledger__grid dd {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: var(--text-1);
+  margin: 0;
+  line-height: 1;
+  font-feature-settings: "tnum", "lnum";
+}
+.home-ledger__grid dd small {
+  font-family: var(--font-sans);
+  font-size: 0.55em;
+  color: var(--text-3);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-left: 0.25rem;
+}
+.home-ledger__grid p {
+  margin: 0.3rem 0 0;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--text-3);
+  font-family: var(--font-display);
+  font-weight: 300;
+}
+
 /* ----- Highland residents grid (featured genera on /highland/) ----- */
 
 .highland-residents {
@@ -1566,8 +1656,8 @@ figure.moment figcaption {
 .mosaic-tile__caption {
   position: absolute;
   left: 0; right: 0; bottom: 7%; /* clear the CC BY-SA 4.0 watermark bar */
-  padding: 2rem 0.9rem 0.65rem;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.92));
+  padding: 0.9rem 0.9rem 0.5rem;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.55) 35%, rgba(0, 0, 0, 0.92) 100%);
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
@@ -1703,7 +1793,7 @@ figure.moment figcaption {
   /* Home mosaic: 2 columns looks sharper than 1-big on mobile */
   .home-mosaic__grid { grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
   .home-mosaic__grid--outdoor { grid-template-columns: repeat(2, 1fr); }
-  .mosaic-tile__caption { padding: 1.4rem 0.7rem 0.65rem; }
+  .mosaic-tile__caption { padding: 0.7rem 0.7rem 0.45rem; }
   .mosaic-tile__caption .taxon { font-size: 0.82rem; }
   .mosaic-tile__caption .provenance { font-size: 0.66rem; }
 

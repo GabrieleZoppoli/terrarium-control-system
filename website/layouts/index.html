@@ -67,6 +67,24 @@
   </section>
   {{- end }}
 
+  {{- /* Ledger — back-of-envelope 3-year totals, playful equivalents */}}
+  <section class="home-ledger" aria-label="{{ i18n "ledger_title" }}">
+    <header class="home-ledger__head">
+      <span class="kicker">{{ i18n "ledger_kicker" }}</span>
+      <h2>{{ i18n "ledger_title" }}</h2>
+      <p class="lede">{{ i18n "ledger_intro" }}</p>
+    </header>
+    <dl class="home-ledger__grid">
+      {{- range $key := slice "mist" "kwh" "cost" "co2" "data" "fog" }}
+      <div>
+        <dt>{{ i18n (printf "ledger_%s_label" $key) }}</dt>
+        <dd>{{ i18n (printf "ledger_%s_value" $key) | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $key)) }} <small>{{ . }}</small>{{ end }}</dd>
+        <p>{{ i18n (printf "ledger_%s_caption" $key) | safeHTML }}</p>
+      </div>
+      {{- end }}
+    </dl>
+  </section>
+
   {{ $featured := dict
     "highland"   (slice
       (dict "label" (i18n "feat_live_ui")      "url" "/highland/live/")

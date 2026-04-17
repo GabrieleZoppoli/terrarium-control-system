@@ -53,6 +53,38 @@ live_humidity:         "Umidità"
 live_vpd:              "VPD"
 live_compressor:       "Compressore"
 
+# Home ledger — totali approssimativi dei primi 3 anni
+ledger_kicker:         "Effetti collaterali di una piccola foresta nebulosa"
+ledger_title:          "Tre anni di clima artificiale, arrotondati."
+ledger_intro:          "Stime approssimative da maggio 2023 — calcolate dai duty-cycle e dal log InfluxDB in funzione. I numeri precisi arriveranno sulla pagina dashboard man mano che li colleghiamo."
+
+ledger_mist_label:     "Cicli di nebulizzazione"
+ledger_mist_value:     "~60.000"
+ledger_mist_caption:   "≈ 3 m³ d'acqua spruzzata come nebbia — una sessantina di vasche da bagno, o 9.000 lattine di bibite."
+
+ledger_kwh_label:      "Elettricità"
+ledger_kwh_value:      "~2.500"
+ledger_kwh_unit:       "kWh"
+ledger_kwh_caption:    "≈ Milano → Tokyo in una Tesla Model 3 (~18.000 km). Circa il 30% del consumo elettrico annuale di una famiglia italiana tipo, per tre anni."
+
+ledger_cost_label:     "Bolletta elettrica"
+ledger_cost_value:     "~€750"
+ledger_cost_caption:   "A prezzi italiani residenziali — all'incirca quanto costa un unico clone raro di Heliamphora."
+
+ledger_co2_label:      "CO₂ silenziosamente assorbita"
+ledger_co2_value:      "~100"
+ledger_co2_unit:       "kg"
+ledger_co2_caption:    "≈ un volo Milano ↔ Roma a/r per un passeggero, compensato dalle piante."
+
+ledger_data_label:     "Letture dei sensori"
+ledger_data_value:     "~50"
+ledger_data_unit:      "milioni"
+ledger_data_caption:   "32 segnali × 1 al minuto × 1.100 giorni, tutto dentro InfluxDB."
+
+ledger_fog_label:      "Ore di quasi-saturazione"
+ledger_fog_value:      "~15.000"
+ledger_fog_caption:    "Tempo cumulativo a ≥ 95% UR. All'incirca 630 giorni dentro la nube."
+
 # Home featured-links (per-section quick access)
 feat_live_ui:          "Interfaccia live"
 feat_grafana:          "Grafana"
