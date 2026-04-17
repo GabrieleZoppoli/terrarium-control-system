@@ -49,4 +49,9 @@ Combined survival rate: 77% (10 of 13). The double loss of *S. pygmaea* -- the s
 
 ## Photos
 
-[USER INPUT NEEDED: These are among the most colorful species in the terrarium. Close-ups of the vivid flowers against the green moss background are recommended.]
+{{< collection-photos "Cattleya" >}}
+
+{{< collection-photos "Sophronitis" >}}
+
+{{< collection-photos "Laelia" >}}
+

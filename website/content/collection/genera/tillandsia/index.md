@@ -15,4 +15,5 @@ genera: ["Tillandsia"]
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of the Tillandsia collection.]
+{{< collection-photos "Tillandsia" >}}
+

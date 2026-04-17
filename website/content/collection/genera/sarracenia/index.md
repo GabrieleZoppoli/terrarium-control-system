@@ -23,4 +23,5 @@ genera: ["Sarracenia"]
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of the outdoor Sarracenia collection.]
+{{< collection-photos "Sarracenia" >}}
+

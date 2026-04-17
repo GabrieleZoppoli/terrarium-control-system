@@ -24,4 +24,5 @@ genera: ["Dionaea"]
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of the Dionaea collection, especially unusual cultivars.]
+{{< collection-photos "Dionaea" >}}
+

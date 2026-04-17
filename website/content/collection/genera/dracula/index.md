@@ -37,4 +37,7 @@ Cork bark with a sphagnum moss pad. *Dracula* mounted with inflorescences able t
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of flowers and growth habit. Dracula flowers are among the most photogenic orchids -- close-ups of the labellum detail are recommended.]
+{{< collection-photos "Dracula" >}}
+
+{{< collection-photos "Masdevallia" >}}
+

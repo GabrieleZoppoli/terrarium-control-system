@@ -33,4 +33,5 @@ The collection emphasizes Sumatran endemics (*N. aristolochioides*, *N. inermis*
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos showing pitcher diversity and growth habit. Lower and upper pitchers from the same species are particularly interesting for comparison.]
+{{< collection-photos "Nepenthes" >}}
+

@@ -1,0 +1,31 @@
+{{- /*
+  collection-photos — grid of primary photos for a given genus, sourced from
+  site.Data.photo_manifest (written by scripts/copy_collection_photos.py).
+
+  Usage:
+    {{< collection-photos "Heliamphora" >}}
+    {{< collection-photos genus="Heliamphora" >}}
+*/ -}}
+{{- $genus := .Get "genus" -}}
+{{- if not $genus -}}{{- $genus = .Get 0 -}}{{- end -}}
+{{- $genusSlug := lower $genus -}}
+{{- $manifest := .Site.Data.photo_manifest -}}
+{{- $entries := index $manifest $genusSlug -}}
+
+
+{{- if $entries -}}
+<div class="photo-grid">
+{{- range $entries }}
+  {{- $primary := printf "/img/collection/%s/%s" $genusSlug .primary | relURL -}}
+  <a class="photo-tile" href="{{ $primary }}" target="_blank" rel="noopener"
+     title="{{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
+    <img src="{{ $primary }}" alt="{{ .taxon }}" loading="lazy">
+    <span class="photo-tile__caption"><em>{{ .taxon }}</em></span>
+    {{- with .extras }}<span class="photo-tile__count">+{{ len . }}</span>{{ end -}}
+  </a>
+{{- end }}
+</div>
+<p class="small muted">{{ len $entries }} taxa photographed in <em>{{ $genus }}</em>. Click any tile to open the full-size photo — every image is watermarked CC&nbsp;BY-SA&nbsp;4.0.</p>
+{{- else -}}
+<p class="muted small">No photos logged yet for <em>{{ $genus }}</em>.</p>
+{{- end -}}

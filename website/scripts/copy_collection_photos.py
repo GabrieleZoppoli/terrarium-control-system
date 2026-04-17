@@ -9,9 +9,14 @@ Per website/HANDOFF.md:
   Multiple photos of same taxon → suffix `-2`, `-3`, …
 
 We don't re-encode (keeps watermark + CC BY-SA EXIF intact).
+
+Also emits website/data/photo_manifest.json for Hugo to pick up as
+site.Data.photo_manifest — used by the collection-photos shortcode to render
+per-genus galleries without scanning the filesystem at template time.
 """
 from __future__ import annotations
 
+import json
 import re
 import shutil
 import sys
@@ -19,7 +24,9 @@ import unicodedata
 from pathlib import Path
 
 SRC = Path("/Users/gabrielezoppoli/Documents/documenti personali/botanica/dendrogram/photos")
-DST = Path("/Users/gabrielezoppoli/Documents/documenti personali/my website/terrarium-paper/website/static/img/collection")
+WEB = Path("/Users/gabrielezoppoli/Documents/documenti personali/my website/terrarium-paper/website")
+DST = WEB / "static/img/collection"
+MANIFEST = WEB / "data/photo_manifest.json"
 
 QUOTE_CHARS = "'\u2018\u2019\u201C\u201D\""
 
@@ -42,6 +49,8 @@ def main() -> int:
     taxa = [p for p in sorted(SRC.iterdir()) if p.is_dir() and not p.name.startswith("_")]
     copied = 0
     skipped_empty = 0
+    manifest: dict[str, list[dict]] = {}
+
     for folder in taxa:
         taxon = folder.name
         genus = taxon.split()[0]
@@ -54,15 +63,38 @@ def main() -> int:
             skipped_empty += 1
             continue
         out_dir.mkdir(parents=True, exist_ok=True)
+        entry_files: list[str] = []
         for i, src in enumerate(photos, start=1):
             suffix = "" if i == 1 else f"-{i}"
-            dst = out_dir / f"{taxon_slug}{suffix}.jpg"
+            name = f"{taxon_slug}{suffix}.jpg"
+            dst = out_dir / name
+            entry_files.append(name)
             if dst.exists() and dst.stat().st_size == src.stat().st_size:
                 continue
             shutil.copy2(src, dst)
             copied += 1
+        manifest.setdefault(genus_slug, []).append({
+            "taxon": taxon,
+            "slug": taxon_slug,
+            "primary": entry_files[0],
+            "extras": entry_files[1:],
+        })
+
+    # Stable order within each genus: alphabetical by taxon
+    for entries in manifest.values():
+        entries.sort(key=lambda e: e["taxon"].lower())
+
+    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    MANIFEST.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+    genera_with_photos = len(manifest)
+    taxa_with_photos = sum(len(v) for v in manifest.values())
     print(f"copied {copied} files into {DST}")
     print(f"skipped {skipped_empty} empty folders")
+    print(f"manifest: {taxa_with_photos} taxa across {genera_with_photos} genera → {MANIFEST}")
     return 0
 
 

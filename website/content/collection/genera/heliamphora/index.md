@@ -32,4 +32,5 @@ Akadama + long-fiber sphagnum, topped with a living *Sphagnum* moss layer. No st
 
 ## Photos
 
-[USER INPUT NEEDED: Add photos of individual species and the Heliamphora section of the terrarium. Recommended: at least one close-up of pitcher detail and one overview shot.]
+{{< collection-photos "Heliamphora" >}}
+

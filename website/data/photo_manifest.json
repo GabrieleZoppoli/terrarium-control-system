@@ -1,0 +1,775 @@
+{
+  "angraecum": [
+    {
+      "taxon": "Angraecum didieri",
+      "slug": "angraecum-didieri",
+      "primary": "angraecum-didieri.jpg",
+      "extras": []
+    }
+  ],
+  "brocchinia": [
+    {
+      "taxon": "Brocchinia reducta",
+      "slug": "brocchinia-reducta",
+      "primary": "brocchinia-reducta.jpg",
+      "extras": []
+    }
+  ],
+  "bulbophyllum": [
+    {
+      "taxon": "Bulbophyllum makoyanum",
+      "slug": "bulbophyllum-makoyanum",
+      "primary": "bulbophyllum-makoyanum.jpg",
+      "extras": [
+        "bulbophyllum-makoyanum-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Bulbophyllum thiurum",
+      "slug": "bulbophyllum-thiurum",
+      "primary": "bulbophyllum-thiurum.jpg",
+      "extras": [
+        "bulbophyllum-thiurum-2.jpg"
+      ]
+    }
+  ],
+  "calopogon": [
+    {
+      "taxon": "Calopogon tuberosus",
+      "slug": "calopogon-tuberosus",
+      "primary": "calopogon-tuberosus.jpg",
+      "extras": []
+    }
+  ],
+  "cephalotus": [
+    {
+      "taxon": "Cephalotus f. 'Eden Black'",
+      "slug": "cephalotus-f-eden-black",
+      "primary": "cephalotus-f-eden-black.jpg",
+      "extras": [
+        "cephalotus-f-eden-black-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Cephalotus follicularis",
+      "slug": "cephalotus-follicularis",
+      "primary": "cephalotus-follicularis.jpg",
+      "extras": []
+    }
+  ],
+  "chiloschista": [
+    {
+      "taxon": "Chiloschista lunifera",
+      "slug": "chiloschista-lunifera",
+      "primary": "chiloschista-lunifera.jpg",
+      "extras": []
+    }
+  ],
+  "comparetia": [
+    {
+      "taxon": "Comparetia falcata",
+      "slug": "comparetia-falcata",
+      "primary": "comparetia-falcata.jpg",
+      "extras": [
+        "comparetia-falcata-2.jpg",
+        "comparetia-falcata-3.jpg"
+      ]
+    }
+  ],
+  "dendrobium": [
+    {
+      "taxon": "Dendrobium Betty Goto f. coerulea",
+      "slug": "dendrobium-betty-goto-f-coerulea",
+      "primary": "dendrobium-betty-goto-f-coerulea.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Dendrobium cuthbertsonii 'Yellow'",
+      "slug": "dendrobium-cuthbertsonii-yellow",
+      "primary": "dendrobium-cuthbertsonii-yellow.jpg",
+      "extras": [
+        "dendrobium-cuthbertsonii-yellow-2.jpg",
+        "dendrobium-cuthbertsonii-yellow-3.jpg",
+        "dendrobium-cuthbertsonii-yellow-4.jpg",
+        "dendrobium-cuthbertsonii-yellow-5.jpg",
+        "dendrobium-cuthbertsonii-yellow-6.jpg"
+      ]
+    },
+    {
+      "taxon": "Dendrobium cyanocentrum 'Blau'",
+      "slug": "dendrobium-cyanocentrum-blau",
+      "primary": "dendrobium-cyanocentrum-blau.jpg",
+      "extras": [
+        "dendrobium-cyanocentrum-blau-2.jpg",
+        "dendrobium-cyanocentrum-blau-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Dendrobium hellwigianum",
+      "slug": "dendrobium-hellwigianum",
+      "primary": "dendrobium-hellwigianum.jpg",
+      "extras": [
+        "dendrobium-hellwigianum-2.jpg",
+        "dendrobium-hellwigianum-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Dendrobium loddigesii",
+      "slug": "dendrobium-loddigesii",
+      "primary": "dendrobium-loddigesii.jpg",
+      "extras": [
+        "dendrobium-loddigesii-2.jpg",
+        "dendrobium-loddigesii-3.jpg",
+        "dendrobium-loddigesii-4.jpg",
+        "dendrobium-loddigesii-5.jpg",
+        "dendrobium-loddigesii-6.jpg",
+        "dendrobium-loddigesii-7.jpg"
+      ]
+    },
+    {
+      "taxon": "Dendrobium victoriae-reginae",
+      "slug": "dendrobium-victoriae-reginae",
+      "primary": "dendrobium-victoriae-reginae.jpg",
+      "extras": [
+        "dendrobium-victoriae-reginae-2.jpg"
+      ]
+    }
+  ],
+  "dionaea": [
+    {
+      "taxon": "Dionaea muscipula 'Alien'",
+      "slug": "dionaea-muscipula-alien",
+      "primary": "dionaea-muscipula-alien.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Dionaea muscipula Pom Pom",
+      "slug": "dionaea-muscipula-pom-pom",
+      "primary": "dionaea-muscipula-pom-pom.jpg",
+      "extras": []
+    }
+  ],
+  "dracula": [
+    {
+      "taxon": "Dracula lotax",
+      "slug": "dracula-lotax",
+      "primary": "dracula-lotax.jpg",
+      "extras": [
+        "dracula-lotax-2.jpg",
+        "dracula-lotax-3.jpg",
+        "dracula-lotax-4.jpg",
+        "dracula-lotax-5.jpg",
+        "dracula-lotax-6.jpg"
+      ]
+    },
+    {
+      "taxon": "Dracula pholeodytes",
+      "slug": "dracula-pholeodytes",
+      "primary": "dracula-pholeodytes.jpg",
+      "extras": [
+        "dracula-pholeodytes-2.jpg",
+        "dracula-pholeodytes-3.jpg",
+        "dracula-pholeodytes-4.jpg",
+        "dracula-pholeodytes-5.jpg",
+        "dracula-pholeodytes-6.jpg",
+        "dracula-pholeodytes-7.jpg",
+        "dracula-pholeodytes-8.jpg"
+      ]
+    },
+    {
+      "taxon": "Dracula Raven 'Jet'",
+      "slug": "dracula-raven-jet",
+      "primary": "dracula-raven-jet.jpg",
+      "extras": [
+        "dracula-raven-jet-2.jpg",
+        "dracula-raven-jet-3.jpg",
+        "dracula-raven-jet-4.jpg",
+        "dracula-raven-jet-5.jpg",
+        "dracula-raven-jet-6.jpg",
+        "dracula-raven-jet-7.jpg"
+      ]
+    },
+    {
+      "taxon": "Dracula simia",
+      "slug": "dracula-simia",
+      "primary": "dracula-simia.jpg",
+      "extras": [
+        "dracula-simia-2.jpg"
+      ]
+    }
+  ],
+  "ficus": [
+    {
+      "taxon": "Ficus microcarpa",
+      "slug": "ficus-microcarpa",
+      "primary": "ficus-microcarpa.jpg",
+      "extras": []
+    }
+  ],
+  "fredclarkeara": [
+    {
+      "taxon": "Fredclarkeara After Dark",
+      "slug": "fredclarkeara-after-dark",
+      "primary": "fredclarkeara-after-dark.jpg",
+      "extras": []
+    }
+  ],
+  "genlisea": [
+    {
+      "taxon": "Genlisea africana",
+      "slug": "genlisea-africana",
+      "primary": "genlisea-africana.jpg",
+      "extras": []
+    }
+  ],
+  "habenaria": [
+    {
+      "taxon": "Habenaria radiata",
+      "slug": "habenaria-radiata",
+      "primary": "habenaria-radiata.jpg",
+      "extras": []
+    }
+  ],
+  "heliamphora": [
+    {
+      "taxon": "Heliamphora 'Godzilla'",
+      "slug": "heliamphora-godzilla",
+      "primary": "heliamphora-godzilla.jpg",
+      "extras": [
+        "heliamphora-godzilla-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Heliamphora ionasi 'Elegance'",
+      "slug": "heliamphora-ionasi-elegance",
+      "primary": "heliamphora-ionasi-elegance.jpg",
+      "extras": [
+        "heliamphora-ionasi-elegance-2.jpg",
+        "heliamphora-ionasi-elegance-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Heliamphora macdonaldae",
+      "slug": "heliamphora-macdonaldae",
+      "primary": "heliamphora-macdonaldae.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Heliamphora macdonaldae (Cerro Duida) ISC",
+      "slug": "heliamphora-macdonaldae-cerro-duida-isc",
+      "primary": "heliamphora-macdonaldae-cerro-duida-isc.jpg",
+      "extras": [
+        "heliamphora-macdonaldae-cerro-duida-isc-2.jpg",
+        "heliamphora-macdonaldae-cerro-duida-isc-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Heliamphora minor 'Burgundy Black'",
+      "slug": "heliamphora-minor-burgundy-black",
+      "primary": "heliamphora-minor-burgundy-black.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Heliamphora minor var. pilosa (Auyan) Clone 3",
+      "slug": "heliamphora-minor-var-pilosa-auyan-clone-3",
+      "primary": "heliamphora-minor-var-pilosa-auyan-clone-3.jpg",
+      "extras": [
+        "heliamphora-minor-var-pilosa-auyan-clone-3-2.jpg",
+        "heliamphora-minor-var-pilosa-auyan-clone-3-3.jpg",
+        "heliamphora-minor-var-pilosa-auyan-clone-3-4.jpg"
+      ]
+    },
+    {
+      "taxon": "Heliamphora purpurascens × ionasii (Red Giant)",
+      "slug": "heliamphora-purpurascens-x-ionasii-red-giant",
+      "primary": "heliamphora-purpurascens-x-ionasii-red-giant.jpg",
+      "extras": [
+        "heliamphora-purpurascens-x-ionasii-red-giant-2.jpg",
+        "heliamphora-purpurascens-x-ionasii-red-giant-3.jpg"
+      ]
+    }
+  ],
+  "holcoglossum": [
+    {
+      "taxon": "Holcoglossum amesianum",
+      "slug": "holcoglossum-amesianum",
+      "primary": "holcoglossum-amesianum.jpg",
+      "extras": [
+        "holcoglossum-amesianum-2.jpg",
+        "holcoglossum-amesianum-3.jpg",
+        "holcoglossum-amesianum-4.jpg",
+        "holcoglossum-amesianum-5.jpg"
+      ]
+    },
+    {
+      "taxon": "Holcoglossum flavescens",
+      "slug": "holcoglossum-flavescens",
+      "primary": "holcoglossum-flavescens.jpg",
+      "extras": []
+    }
+  ],
+  "iris": [
+    {
+      "taxon": "Iris louisiana 'Bout Midnight'",
+      "slug": "iris-louisiana-bout-midnight",
+      "primary": "iris-louisiana-bout-midnight.jpg",
+      "extras": [
+        "iris-louisiana-bout-midnight-2.jpg"
+      ]
+    }
+  ],
+  "leptotes": [
+    {
+      "taxon": "Leptotes bicolor",
+      "slug": "leptotes-bicolor",
+      "primary": "leptotes-bicolor.jpg",
+      "extras": [
+        "leptotes-bicolor-2.jpg",
+        "leptotes-bicolor-3.jpg",
+        "leptotes-bicolor-4.jpg"
+      ]
+    }
+  ],
+  "macroclinium": [
+    {
+      "taxon": "Macroclinium manabinum",
+      "slug": "macroclinium-manabinum",
+      "primary": "macroclinium-manabinum.jpg",
+      "extras": [
+        "macroclinium-manabinum-2.jpg",
+        "macroclinium-manabinum-3.jpg",
+        "macroclinium-manabinum-4.jpg"
+      ]
+    }
+  ],
+  "masdevallia": [
+    {
+      "taxon": "Masdevallia decumana",
+      "slug": "masdevallia-decumana",
+      "primary": "masdevallia-decumana.jpg",
+      "extras": [
+        "masdevallia-decumana-2.jpg",
+        "masdevallia-decumana-3.jpg",
+        "masdevallia-decumana-4.jpg",
+        "masdevallia-decumana-5.jpg"
+      ]
+    },
+    {
+      "taxon": "Masdevallia Devil's Heart",
+      "slug": "masdevallia-devils-heart",
+      "primary": "masdevallia-devils-heart.jpg",
+      "extras": [
+        "masdevallia-devils-heart-2.jpg",
+        "masdevallia-devils-heart-3.jpg",
+        "masdevallia-devils-heart-4.jpg",
+        "masdevallia-devils-heart-5.jpg",
+        "masdevallia-devils-heart-6.jpg"
+      ]
+    },
+    {
+      "taxon": "Masdevallia glandulosa",
+      "slug": "masdevallia-glandulosa",
+      "primary": "masdevallia-glandulosa.jpg",
+      "extras": [
+        "masdevallia-glandulosa-2.jpg",
+        "masdevallia-glandulosa-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Masdevallia lucernula",
+      "slug": "masdevallia-lucernula",
+      "primary": "masdevallia-lucernula.jpg",
+      "extras": [
+        "masdevallia-lucernula-2.jpg"
+      ]
+    }
+  ],
+  "maxillaria": [
+    {
+      "taxon": "Maxillaria sophronitis",
+      "slug": "maxillaria-sophronitis",
+      "primary": "maxillaria-sophronitis.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Maxillaria tenuifolia",
+      "slug": "maxillaria-tenuifolia",
+      "primary": "maxillaria-tenuifolia.jpg",
+      "extras": [
+        "maxillaria-tenuifolia-2.jpg",
+        "maxillaria-tenuifolia-3.jpg",
+        "maxillaria-tenuifolia-4.jpg"
+      ]
+    }
+  ],
+  "mediocalcar": [
+    {
+      "taxon": "Mediocalcar decoratum",
+      "slug": "mediocalcar-decoratum",
+      "primary": "mediocalcar-decoratum.jpg",
+      "extras": [
+        "mediocalcar-decoratum-2.jpg",
+        "mediocalcar-decoratum-3.jpg"
+      ]
+    }
+  ],
+  "neofinetia": [
+    {
+      "taxon": "Neofinetia falcata 'Akausagi' (赤兎)",
+      "slug": "neofinetia-falcata-akausagi",
+      "primary": "neofinetia-falcata-akausagi.jpg",
+      "extras": [
+        "neofinetia-falcata-akausagi-2.jpg",
+        "neofinetia-falcata-akausagi-3.jpg",
+        "neofinetia-falcata-akausagi-4.jpg"
+      ]
+    }
+  ],
+  "neostylis": [
+    {
+      "taxon": "Neostylis Lou Sneary",
+      "slug": "neostylis-lou-sneary",
+      "primary": "neostylis-lou-sneary.jpg",
+      "extras": [
+        "neostylis-lou-sneary-2.jpg",
+        "neostylis-lou-sneary-3.jpg",
+        "neostylis-lou-sneary-4.jpg",
+        "neostylis-lou-sneary-5.jpg",
+        "neostylis-lou-sneary-6.jpg",
+        "neostylis-lou-sneary-7.jpg"
+      ]
+    }
+  ],
+  "nepenthes": [
+    {
+      "taxon": "Nepenthes argentii",
+      "slug": "nepenthes-argentii",
+      "primary": "nepenthes-argentii.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Nepenthes aristolochioides (Sumatra) CloneNM03",
+      "slug": "nepenthes-aristolochioides-sumatra-clonenm03",
+      "primary": "nepenthes-aristolochioides-sumatra-clonenm03.jpg",
+      "extras": [
+        "nepenthes-aristolochioides-sumatra-clonenm03-2.jpg",
+        "nepenthes-aristolochioides-sumatra-clonenm03-3.jpg",
+        "nepenthes-aristolochioides-sumatra-clonenm03-4.jpg"
+      ]
+    },
+    {
+      "taxon": "Nepenthes glabrata",
+      "slug": "nepenthes-glabrata",
+      "primary": "nepenthes-glabrata.jpg",
+      "extras": [
+        "nepenthes-glabrata-2.jpg",
+        "nepenthes-glabrata-3.jpg",
+        "nepenthes-glabrata-4.jpg",
+        "nepenthes-glabrata-5.jpg"
+      ]
+    },
+    {
+      "taxon": "Nepenthes jamban",
+      "slug": "nepenthes-jamban",
+      "primary": "nepenthes-jamban.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Nepenthes pitopangii 'Ivory Colored Form' Clone01",
+      "slug": "nepenthes-pitopangii-ivory-colored-form-clone01",
+      "primary": "nepenthes-pitopangii-ivory-colored-form-clone01.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Nepenthes tenuis 'Reddish Leaves' (West Sumatra)",
+      "slug": "nepenthes-tenuis-reddish-leaves-west-sumatra",
+      "primary": "nepenthes-tenuis-reddish-leaves-west-sumatra.jpg",
+      "extras": [
+        "nepenthes-tenuis-reddish-leaves-west-sumatra-2.jpg",
+        "nepenthes-tenuis-reddish-leaves-west-sumatra-3.jpg",
+        "nepenthes-tenuis-reddish-leaves-west-sumatra-4.jpg"
+      ]
+    }
+  ],
+  "oerstedella": [
+    {
+      "taxon": "Oerstedella centradenia",
+      "slug": "oerstedella-centradenia",
+      "primary": "oerstedella-centradenia.jpg",
+      "extras": [
+        "oerstedella-centradenia-2.jpg"
+      ]
+    }
+  ],
+  "oncidium": [
+    {
+      "taxon": "Oncidium cheirophorum",
+      "slug": "oncidium-cheirophorum",
+      "primary": "oncidium-cheirophorum.jpg",
+      "extras": [
+        "oncidium-cheirophorum-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Oncidium eurycline",
+      "slug": "oncidium-eurycline",
+      "primary": "oncidium-eurycline.jpg",
+      "extras": []
+    }
+  ],
+  "paphiopedilum": [
+    {
+      "taxon": "Paphiopedilum delenatii vinicolor",
+      "slug": "paphiopedilum-delenatii-vinicolor",
+      "primary": "paphiopedilum-delenatii-vinicolor.jpg",
+      "extras": []
+    }
+  ],
+  "papilionanthe": [
+    {
+      "taxon": "Papilionanthe teres",
+      "slug": "papilionanthe-teres",
+      "primary": "papilionanthe-teres.jpg",
+      "extras": [
+        "papilionanthe-teres-2.jpg",
+        "papilionanthe-teres-3.jpg"
+      ]
+    }
+  ],
+  "phalaenopsis": [
+    {
+      "taxon": "Phalaenopsis finleyi",
+      "slug": "phalaenopsis-finleyi",
+      "primary": "phalaenopsis-finleyi.jpg",
+      "extras": [
+        "phalaenopsis-finleyi-2.jpg",
+        "phalaenopsis-finleyi-3.jpg",
+        "phalaenopsis-finleyi-4.jpg",
+        "phalaenopsis-finleyi-5.jpg",
+        "phalaenopsis-finleyi-6.jpg",
+        "phalaenopsis-finleyi-7.jpg",
+        "phalaenopsis-finleyi-8.jpg",
+        "phalaenopsis-finleyi-9.jpg",
+        "phalaenopsis-finleyi-10.jpg"
+      ]
+    }
+  ],
+  "pinguicula": [
+    {
+      "taxon": "Pinguicula 'Marciano' (heterophylla × 'Weser')",
+      "slug": "pinguicula-marciano-heterophylla-x-weser",
+      "primary": "pinguicula-marciano-heterophylla-x-weser.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Pinguicula agnata x gypsicola",
+      "slug": "pinguicula-agnata-x-gypsicola",
+      "primary": "pinguicula-agnata-x-gypsicola.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Pinguicula jaumavensis x cyclosecta",
+      "slug": "pinguicula-jaumavensis-x-cyclosecta",
+      "primary": "pinguicula-jaumavensis-x-cyclosecta.jpg",
+      "extras": [
+        "pinguicula-jaumavensis-x-cyclosecta-2.jpg",
+        "pinguicula-jaumavensis-x-cyclosecta-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Pinguicula rectifolia",
+      "slug": "pinguicula-rectifolia",
+      "primary": "pinguicula-rectifolia.jpg",
+      "extras": []
+    }
+  ],
+  "platystele": [
+    {
+      "taxon": "Platystele baqueroi",
+      "slug": "platystele-baqueroi",
+      "primary": "platystele-baqueroi.jpg",
+      "extras": [
+        "platystele-baqueroi-2.jpg",
+        "platystele-baqueroi-3.jpg",
+        "platystele-baqueroi-4.jpg"
+      ]
+    }
+  ],
+  "restrepia": [
+    {
+      "taxon": "Restrepia vasquezii",
+      "slug": "restrepia-vasquezii",
+      "primary": "restrepia-vasquezii.jpg",
+      "extras": [
+        "restrepia-vasquezii-2.jpg"
+      ]
+    }
+  ],
+  "rosa": [
+    {
+      "taxon": "Rosa 'Sorbet Fruité'",
+      "slug": "rosa-sorbet-fruite",
+      "primary": "rosa-sorbet-fruite.jpg",
+      "extras": [
+        "rosa-sorbet-fruite-2.jpg"
+      ]
+    }
+  ],
+  "sarracenia": [
+    {
+      "taxon": "Sarracenia 'Hurricane Creek White' clone F",
+      "slug": "sarracenia-hurricane-creek-white-clone-f",
+      "primary": "sarracenia-hurricane-creek-white-clone-f.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Sarracenia flava var. flava 'Goldie'",
+      "slug": "sarracenia-flava-var-flava-goldie",
+      "primary": "sarracenia-flava-var-flava-goldie.jpg",
+      "extras": [
+        "sarracenia-flava-var-flava-goldie-2.jpg",
+        "sarracenia-flava-var-flava-goldie-3.jpg",
+        "sarracenia-flava-var-flava-goldie-4.jpg",
+        "sarracenia-flava-var-flava-goldie-5.jpg",
+        "sarracenia-flava-var-flava-goldie-6.jpg",
+        "sarracenia-flava-var-flava-goldie-7.jpg",
+        "sarracenia-flava-var-flava-goldie-8.jpg"
+      ]
+    },
+    {
+      "taxon": "Sarracenia flava var. ornata FO6 Filiformis (V. Bordin), aberrant form",
+      "slug": "sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form",
+      "primary": "sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form.jpg",
+      "extras": [
+        "sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-2.jpg",
+        "sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Sarracenia × moorei 'Leah Wilkerson'",
+      "slug": "sarracenia-x-moorei-leah-wilkerson",
+      "primary": "sarracenia-x-moorei-leah-wilkerson.jpg",
+      "extras": [
+        "sarracenia-x-moorei-leah-wilkerson-2.jpg",
+        "sarracenia-x-moorei-leah-wilkerson-3.jpg",
+        "sarracenia-x-moorei-leah-wilkerson-4.jpg"
+      ]
+    }
+  ],
+  "schoenorchis": [
+    {
+      "taxon": "Schoenorchis pachyacris",
+      "slug": "schoenorchis-pachyacris",
+      "primary": "schoenorchis-pachyacris.jpg",
+      "extras": [
+        "schoenorchis-pachyacris-2.jpg",
+        "schoenorchis-pachyacris-3.jpg",
+        "schoenorchis-pachyacris-4.jpg",
+        "schoenorchis-pachyacris-5.jpg"
+      ]
+    }
+  ],
+  "seidenfadenia": [
+    {
+      "taxon": "Seidenfadenia mitrata",
+      "slug": "seidenfadenia-mitrata",
+      "primary": "seidenfadenia-mitrata.jpg",
+      "extras": [
+        "seidenfadenia-mitrata-2.jpg"
+      ]
+    }
+  ],
+  "sophronitis": [
+    {
+      "taxon": "Sophronitis brevipedunculata",
+      "slug": "sophronitis-brevipedunculata",
+      "primary": "sophronitis-brevipedunculata.jpg",
+      "extras": [
+        "sophronitis-brevipedunculata-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Sophronitis coccinea 4N",
+      "slug": "sophronitis-coccinea-4n",
+      "primary": "sophronitis-coccinea-4n.jpg",
+      "extras": [
+        "sophronitis-coccinea-4n-2.jpg",
+        "sophronitis-coccinea-4n-3.jpg",
+        "sophronitis-coccinea-4n-4.jpg",
+        "sophronitis-coccinea-4n-5.jpg"
+      ]
+    },
+    {
+      "taxon": "Sophronitis pygmaea",
+      "slug": "sophronitis-pygmaea",
+      "primary": "sophronitis-pygmaea.jpg",
+      "extras": []
+    }
+  ],
+  "stelis": [
+    {
+      "taxon": "Stelis sp.",
+      "slug": "stelis-sp",
+      "primary": "stelis-sp.jpg",
+      "extras": [
+        "stelis-sp-2.jpg",
+        "stelis-sp-3.jpg"
+      ]
+    }
+  ],
+  "tolumnia": [
+    {
+      "taxon": "Tolumnia hawkesiana",
+      "slug": "tolumnia-hawkesiana",
+      "primary": "tolumnia-hawkesiana.jpg",
+      "extras": []
+    }
+  ],
+  "utricularia": [
+    {
+      "taxon": "Utricularia alpina",
+      "slug": "utricularia-alpina",
+      "primary": "utricularia-alpina.jpg",
+      "extras": [
+        "utricularia-alpina-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Utricularia prehensilis",
+      "slug": "utricularia-prehensilis",
+      "primary": "utricularia-prehensilis.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Utricularia sandersonii (white)",
+      "slug": "utricularia-sandersonii-white",
+      "primary": "utricularia-sandersonii-white.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Utricularia × nelumbifolia × reniformis",
+      "slug": "utricularia-x-nelumbifolia-x-reniformis",
+      "primary": "utricularia-x-nelumbifolia-x-reniformis.jpg",
+      "extras": [
+        "utricularia-x-nelumbifolia-x-reniformis-2.jpg",
+        "utricularia-x-nelumbifolia-x-reniformis-3.jpg"
+      ]
+    }
+  ],
+  "vanda": [
+    {
+      "taxon": "Vanda coerulescens",
+      "slug": "vanda-coerulescens",
+      "primary": "vanda-coerulescens.jpg",
+      "extras": [
+        "vanda-coerulescens-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Vanda nana",
+      "slug": "vanda-nana",
+      "primary": "vanda-nana.jpg",
+      "extras": []
+    }
+  ]
+}

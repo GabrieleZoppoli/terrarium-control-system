@@ -32,4 +32,5 @@ The single loss (*D. cuthbertsonii*) -- a notoriously challenging sect. *Oxyglos
 
 ## Photos
 
-[USER INPUT NEEDED: The blue-purple flowers of section Oxyglossum are exceptional photographic subjects. Include both flower close-ups and whole-plant shots on their mounts.]
+{{< collection-photos "Dendrobium" >}}
+
