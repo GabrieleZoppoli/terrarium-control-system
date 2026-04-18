@@ -34,7 +34,6 @@ Notes from provenance:
 
 - **D. simia** — "mounted when available". Flowers are produced singly on pendulous inflorescences that reach downwards out of the sphagnum mat; the photographs on this site catch the flower as it drops through the mount, which is how the plant wants to present it.
 - **D. lotax** — a temperate grower in a very small form, pairs well with *Masdevallia* in the same zone.
-- **D. vlad-tepes** — part of a €116.50 order from a single specialist vendor, which is roughly where *Dracula* prices have settled for adult divisions.
 - **D. Raven 'Jet'** — a hybrid of *D. vampira* × *D. roezlii*. Flowers very dark, almost black, with the white callus glands of *vampira* reduced.
 - **D. "Fake" hirsuta 'Yellow'** — acquired under *hirsuta* but the bloom reads more like *hirsuta* f. *xanthina*. Kept as a label-uncertain accession until it flowers a second time.
 
