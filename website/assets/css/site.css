@@ -1627,14 +1627,18 @@ figure.moment figcaption {
   letter-spacing: -0.005em;
 }
 
+/* Explicit column counts that divide the photo counts cleanly:
+   - Indoor mosaic has 10 photos → 5 cols = 2 clean rows
+   - Outdoor mosaic has 6 photos → 3 cols = 2 clean rows
+   (auto-fit with minmax left a cliffhanger last row of 2 tiles.) */
 .home-mosaic__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 0.8rem;
 }
 .home-mosaic__grid--outdoor {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  max-width: 680px;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: none;
 }
 .home-mosaic--outdoor { margin-top: 2rem; }
 .home-mosaic--outdoor .home-mosaic__head .kicker { color: var(--text-3); }
