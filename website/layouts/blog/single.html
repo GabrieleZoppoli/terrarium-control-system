@@ -1,0 +1,49 @@
+{{ define "main" }}
+<article class="page blog-post">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ site.Home.RelPermalink }}">{{ i18n "breadcrumb_home" }}</a><span class="sep">·</span>
+    <a href="{{ .Parent.RelPermalink }}">{{ .Parent.LinkTitle }}</a><span class="sep">·</span>
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+
+  <header class="page-hero blog-post__head">
+    <time datetime="{{ .Date.Format "2006-01-02" }}" class="blog-post__date">
+      {{ .Date.Format "January 2, 2006" }}
+    </time>
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{- if and .Params.showReadingTime .ReadingTime }}
+    <p class="blog-post__meta">{{ .ReadingTime }} min read</p>
+    {{- end }}
+  </header>
+
+  <div class="prose blog-post__body" style="max-width: var(--page-max);">
+    {{ .Content }}
+  </div>
+
+  {{- with .Params.tags }}
+  <ul class="blog-post__tags">
+    {{- range . }}<li>{{ . }}</li>{{ end }}
+  </ul>
+  {{- end }}
+
+  <nav class="blog-post__nav" aria-label="Post navigation">
+    {{- with .PrevInSection }}
+    <a class="blog-post__nav-link" href="{{ .RelPermalink }}">
+      <span class="blog-post__nav-dir">← Previous</span>
+      <span class="blog-post__nav-title">{{ .Title }}</span>
+    </a>
+    {{- end }}
+    {{- with .NextInSection }}
+    <a class="blog-post__nav-link blog-post__nav-link--next" href="{{ .RelPermalink }}">
+      <span class="blog-post__nav-dir">Next →</span>
+      <span class="blog-post__nav-title">{{ .Title }}</span>
+    </a>
+    {{- end }}
+  </nav>
+
+  <p class="blog-post__back small muted">
+    <a href="{{ .Parent.RelPermalink }}">← All posts</a>
+  </p>
+</article>
+{{ end }}

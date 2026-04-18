@@ -1,0 +1,27 @@
+{{- /*
+  figure — captioned image for blog posts and other prose.
+
+  Usage in markdown:
+    {{< figure src="flower.jpg" caption="Heliamphora macdonaldae in bloom" >}}
+    {{< figure src="flower.jpg" caption="..." alt="descriptive alt text" >}}
+
+  If `src` is a bare filename, it's resolved relative to the page bundle
+  (so the image can sit next to index.md). Absolute paths and URLs work
+  too — the shortcode doesn't rewrite them.
+*/ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default (.Get "caption") -}}
+{{- $caption := .Get "caption" -}}
+
+{{- /* Resolve relative filenames against the page bundle. */ -}}
+{{- $imgURL := $src -}}
+{{- if and (not (hasPrefix $src "/")) (not (hasPrefix $src "http")) -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $imgURL = .RelPermalink -}}
+  {{- end -}}
+{{- end -}}
+
+<figure>
+  <img src="{{ $imgURL }}" alt="{{ $alt }}" loading="lazy">
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

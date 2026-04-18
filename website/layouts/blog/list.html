@@ -1,0 +1,44 @@
+{{ define "main" }}
+<section class="page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ site.Home.RelPermalink }}">{{ i18n "breadcrumb_home" }}</a><span class="sep">·</span>
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+
+  <header class="page-hero">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
+
+  {{- $posts := where .Pages "Section" "blog" }}
+  {{- $posts = $posts.ByDate.Reverse }}
+  {{- if $posts }}
+  <ul class="blog-index">
+    {{- range $posts }}
+    <li class="blog-index__item">
+      <a href="{{ .RelPermalink }}" class="blog-index__link">
+        <time datetime="{{ .Date.Format "2006-01-02" }}" class="blog-index__date">
+          {{ .Date.Format "January 2, 2006" }}
+        </time>
+        <h2 class="blog-index__title">{{ .Title }}</h2>
+        {{- with .Description }}
+        <p class="blog-index__lede">{{ . }}</p>
+        {{- end }}
+        {{- with .Params.tags }}
+        <ul class="blog-index__tags">
+          {{- range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+        {{- end }}
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+  {{- else }}
+  <p class="muted" style="margin-top: 2rem;"><em>No posts yet — come back soon.</em></p>
+  {{- end }}
+</section>
+{{ end }}

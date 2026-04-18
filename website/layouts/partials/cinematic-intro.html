@@ -1,0 +1,147 @@
+{{- /*
+  Cinematic home intro — runs once per browser session on the homepage.
+  Full-screen black overlay fades in the site title + subtitle, holds,
+  then dissolves to reveal the homepage. ~3 seconds total.
+
+  Skipped when: sessionStorage flag is already set, prefers-reduced-motion
+  is on, or the user clicks / presses Esc to bypass.
+*/ -}}
+<div id="cinematic-intro" aria-hidden="true" role="presentation">
+  <div class="intro-stage">
+    <div class="intro-title">{{ site.Params.shortTitle | default site.Title }}</div>
+    <div class="intro-sub">{{ site.Params.tagline | default "" }}</div>
+    <div class="intro-glyph" aria-hidden="true">· · ·</div>
+  </div>
+  <button type="button" class="intro-skip" aria-label="Skip intro">Skip</button>
+</div>
+
+<style>
+  #cinematic-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #06070a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    pointer-events: auto;
+    will-change: opacity;
+  }
+  #cinematic-intro.is-gone {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1100ms cubic-bezier(0.33, 0, 0.2, 1);
+  }
+  #cinematic-intro.is-skipped {
+    display: none;
+  }
+
+  .intro-stage {
+    text-align: center;
+    color: #e6e6e6;
+    padding: 0 1.5rem;
+    max-width: 90vw;
+  }
+
+  .intro-title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 4.5vw, 2.8rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: intro-fade 1200ms cubic-bezier(0.23, 1, 0.32, 1) 250ms forwards;
+  }
+
+  .intro-sub {
+    margin-top: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: #9a9a9a;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: intro-fade 1000ms cubic-bezier(0.23, 1, 0.32, 1) 900ms forwards;
+  }
+
+  .intro-glyph {
+    margin-top: 1.4rem;
+    color: #4a4a4a;
+    font-size: 0.9rem;
+    letter-spacing: 0.6em;
+    opacity: 0;
+    animation: intro-fade 800ms cubic-bezier(0.23, 1, 0.32, 1) 1700ms forwards;
+  }
+
+  .intro-skip {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.8rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #888;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    animation: intro-fade 600ms ease 800ms forwards;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .intro-skip:hover { color: #ddd; border-color: rgba(255,255,255,0.4); }
+
+  @keyframes intro-fade {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cinematic-intro { display: none; }
+  }
+</style>
+
+<script>
+(function () {
+  const SESSION_KEY = 'hcf-intro-seen';
+  const intro = document.getElementById('cinematic-intro');
+  if (!intro) return;
+
+  // Respect "reduce motion" + already-shown flag.
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const already = sessionStorage.getItem(SESSION_KEY);
+  if (reduced || already) {
+    intro.classList.add('is-skipped');
+    return;
+  }
+
+  // Lock scroll while intro is on screen.
+  document.documentElement.style.overflow = 'hidden';
+
+  function finish() {
+    intro.classList.add('is-gone');
+    sessionStorage.setItem(SESSION_KEY, '1');
+    setTimeout(() => {
+      intro.classList.add('is-skipped');
+      document.documentElement.style.overflow = '';
+    }, 1200);
+  }
+
+  // Auto-dismiss after total intro timeline (~3.2 s).
+  const autoDismiss = setTimeout(finish, 3200);
+
+  // Skip triggers — click, Esc, or the Skip button.
+  function skip(e) {
+    if (e.type === 'keydown' && e.key !== 'Escape') return;
+    clearTimeout(autoDismiss);
+    finish();
+  }
+  intro.addEventListener('click', skip);
+  document.addEventListener('keydown', skip);
+})();
+</script>

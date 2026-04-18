@@ -135,6 +135,10 @@ enableEmoji = false
     pageRef = "collection"
     weight = 30
   [[languages.en.menus.main]]
+    name = "Blog"
+    pageRef = "blog"
+    weight = 35
+  [[languages.en.menus.main]]
     name = "About"
     pageRef = "about"
     weight = 40
@@ -156,6 +160,10 @@ enableEmoji = false
     name = "Collezione"
     pageRef = "collection"
     weight = 30
+  [[languages.it.menus.main]]
+    name = "Blog"
+    pageRef = "blog"
+    weight = 35
   [[languages.it.menus.main]]
     name = "Chi sono"
     pageRef = "about"
