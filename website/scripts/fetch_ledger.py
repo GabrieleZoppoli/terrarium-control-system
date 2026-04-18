@@ -10,6 +10,7 @@ import json
 import ssl
 import sys
 import urllib.request
+from datetime import datetime
 from pathlib import Path
 
 URL = "https://rei1.tail7cc014.ts.net/api/ledger.json"
@@ -17,6 +18,29 @@ OUT = Path(__file__).resolve().parents[1] / "data/ledger.json"
 TIMEOUT_S = 10
 REQUIRED_KEYS = ("since", "as_of", "mist_cycles", "electricity",
                  "cost_eur", "co2_scrubbed", "data_points", "fog_hours")
+DAYS_PER_MONTH = 30.4375
+
+
+def _iso(s: str) -> datetime:
+    return datetime.fromisoformat(s.replace("Z", "+00:00"))
+
+
+def _enrich(data: dict) -> dict:
+    """Add ``monthly`` block with rates per month for every numeric counter."""
+    days = (_iso(data["as_of"]) - _iso(data["since"])).total_seconds() / 86400
+    if days <= 0:
+        return data
+    scale = DAYS_PER_MONTH / days
+    data["monthly"] = {
+        "days_elapsed": round(days, 1),
+        "mist_cycles":   round(data["mist_cycles"]["count"] * scale),
+        "electricity":   round(data["electricity"]["kwh"] * scale, 1),
+        "cost_eur":      round(data["cost_eur"]["value"] * scale, 1),
+        "co2_scrubbed":  round(data["co2_scrubbed"]["kg"] * scale, 2),
+        "data_points":   round(data["data_points"]["count"] * scale),
+        "fog_hours":     round(data["fog_hours"]["hours"] * scale, 1),
+    }
+    return data
 
 
 def main() -> int:
@@ -37,13 +61,15 @@ def main() -> int:
               file=sys.stderr)
         return 1
 
+    data = _enrich(data)
     OUT.write_text(json.dumps(data, indent=2) + "\n")
     print(f"wrote -> {OUT.relative_to(OUT.parents[2])}")
     print(f"  since: {data['since']}")
     print(f"  as_of: {data['as_of']}")
-    print(f"  mist:  {data['mist_cycles']['count']:>10} cycles")
-    print(f"  kwh:   {data['electricity']['kwh']:>10.2f}")
-    print(f"  data:  {data['data_points']['count']:>10}")
+    print(f"  window: {data['monthly']['days_elapsed']} days")
+    print(f"  mist:  {data['mist_cycles']['count']:>10} total · {data['monthly']['mist_cycles']:>6}/month")
+    print(f"  kwh:   {data['electricity']['kwh']:>10.2f} total · {data['monthly']['electricity']:>6.1f}/month")
+    print(f"  cost:  €{data['cost_eur']['value']:>9.2f} total · €{data['monthly']['cost_eur']:>5.1f}/month")
     return 0
 
 

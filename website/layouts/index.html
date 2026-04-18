@@ -77,13 +77,14 @@
   {{- else }}
     {{- $sinceLabel = $since.Format "January 2, 2006" }}
   {{- end }}
+  {{- $m := .monthly }}
   {{- $cards := slice
-    (dict "key" "mist" "value" (lang.FormatNumber 0 .mist_cycles.count))
-    (dict "key" "kwh"  "value" (lang.FormatNumber 0 .electricity.kwh))
-    (dict "key" "cost" "value" (printf "€%s" (lang.FormatNumber 0 .cost_eur.value)))
-    (dict "key" "co2"  "value" (lang.FormatNumber 1 .co2_scrubbed.kg))
-    (dict "key" "data" "value" (lang.FormatNumber 2 (div .data_points.count 1000000.0)))
-    (dict "key" "fog"  "value" (lang.FormatNumber 0 .fog_hours.hours))
+    (dict "key" "mist" "value" (lang.FormatNumber 0 .mist_cycles.count)          "rate" (lang.FormatNumber 0 $m.mist_cycles))
+    (dict "key" "kwh"  "value" (lang.FormatNumber 0 .electricity.kwh)             "rate" (lang.FormatNumber 0 $m.electricity))
+    (dict "key" "cost" "value" (printf "€%s" (lang.FormatNumber 0 .cost_eur.value)) "rate" (printf "€%s" (lang.FormatNumber 0 $m.cost_eur)))
+    (dict "key" "co2"  "value" (lang.FormatNumber 1 .co2_scrubbed.kg)              "rate" (lang.FormatNumber 1 $m.co2_scrubbed))
+    (dict "key" "data" "value" (lang.FormatNumber 2 (div .data_points.count 1000000.0))  "rate" (lang.FormatNumber 2 (div $m.data_points 1000000.0)))
+    (dict "key" "fog"  "value" (lang.FormatNumber 0 .fog_hours.hours)              "rate" (lang.FormatNumber 0 $m.fog_hours))
   }}
   <section class="home-ledger" aria-label="{{ i18n "ledger_title" }}">
     <header class="home-ledger__head">
@@ -96,6 +97,7 @@
       <div>
         <dt>{{ i18n (printf "ledger_%s_label" $c.key) }}</dt>
         <dd>{{ $c.value | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }}</dd>
+        <dd class="rate">{{ $c.rate | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }} <small class="per">{{ i18n "ledger_per_month" }}</small></dd>
         <p>{{ i18n (printf "ledger_%s_caption" $c.key) | safeHTML }}</p>
       </div>
       {{- end }}
