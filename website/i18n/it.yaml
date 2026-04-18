@@ -64,7 +64,7 @@ ledger_mist_caption:   "Ogni ciclo rilascia qualche secondo di nebbia fine. Il v
 
 ledger_kwh_label:      "Elettricità"
 ledger_kwh_unit:       "kWh"
-ledger_kwh_caption:    "Presa smart Meross MSS310, integrata in continuo — ≈ qualche punto percentuale del consumo annuale di una famiglia italiana tipo."
+ledger_kwh_caption:    "Meross MSS310 sull'intera ciabatta — compressore, 4× luci ChilLED, ventole, Pi, sensori. Media ~110 W continui: 60–90 W di notte, picco 170–180 W a mezzogiorno."
 
 ledger_cost_label:     "Bolletta elettrica"
 ledger_cost_caption:   "A prezzi italiani residenziali (~€0,30/kWh) — all'incirca un mese di cappuccini quotidiani."

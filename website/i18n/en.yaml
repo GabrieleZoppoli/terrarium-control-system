@@ -64,7 +64,7 @@ ledger_mist_caption:   "Each cycle releases a few seconds of fine fog. Water vol
 
 ledger_kwh_label:      "Electricity"
 ledger_kwh_unit:       "kWh"
-ledger_kwh_caption:    "Meross MSS310 smart plug, integrated continuously — ≈ a few percent of a typical Italian household's yearly draw."
+ledger_kwh_caption:    "Meross MSS310 on the whole power strip — compressor, 4× ChilLED grow lights, fans, Pi, sensors. Mean ~110 W continuous: 60–90 W overnight, 170–180 W midday peak."
 
 ledger_cost_label:     "Electricity bill"
 ledger_cost_caption:   "At Italian residential rates (~€0.30/kWh) — about a month of daily cappuccinos."
