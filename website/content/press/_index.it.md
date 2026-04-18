@@ -30,12 +30,12 @@ Ritagli ulteriori (quadrato, 3:2 orizzontale, 16:9) disponibili su richiesta —
 
 ## Fotografie hero
 
-Cinque fotografie che rappresentano bene la collezione a dimensione copertina o stampa. Tutte sotto licenza CC BY-SA 4.0 e con filigrana corrispondente. Clicca per aprire il JPEG a piena risoluzione.
+Sei fotografie che rappresentano bene la collezione a dimensione copertina o stampa. Tutte sotto licenza CC BY-SA 4.0 e con filigrana corrispondente. Clicca per aprire il JPEG a piena risoluzione.
 
 <ul class="press-hero-list">
   <li>
     <a href="/img/collection/heliamphora/heliamphora-ionasi-elegance.jpg"><img src="/img/collection/heliamphora/heliamphora-ionasi-elegance.jpg" alt="Heliamphora ionasii 'Elegance'" loading="lazy"></a>
-    <p><em>Heliamphora ionasii</em> 'Elegance' · Ilu-Tepui, Venezuela · pianta-brocca endemica delle sommità dei tepui.</p>
+    <p><em>Heliamphora ionasii</em> 'Elegance' · Ilu-Tepui, Venezuela · pianta carnivora endemica delle sommità dei tepui.</p>
   </li>
   <li>
     <a href="/img/collection/heliamphora/heliamphora-macdonaldae.jpg"><img src="/img/collection/heliamphora/heliamphora-macdonaldae.jpg" alt="Heliamphora macdonaldae" loading="lazy"></a>
@@ -52,6 +52,10 @@ Cinque fotografie che rappresentano bene la collezione a dimensione copertina o 
   <li>
     <a href="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg"><img src="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg" alt="Sophronitis coccinea tetraploide" loading="lazy"></a>
     <p><em>Sophronitis coccinea</em> 4N · <em>campos rupestres</em> brasiliani · forma tetraploide indotta.</p>
+  </li>
+  <li>
+    <a href="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg"><img src="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg" alt="Vanda falcata 'Akausagi' in vaso cloisonné" loading="lazy"></a>
+    <p><em>Vanda falcata</em> 'Akausagi' · cultivar giapponese tradizionale fūkiran (富貴蘭) · presentata in vaso cloisonné su lacca rossa.</p>
   </li>
 </ul>
 

@@ -62,6 +62,6 @@ Per **richieste di scambio** — includi la specie, il nome del cultivar/clone q
 
 ## Dove
 
-Genova, Italia. Il terrario vive a casa in Via San Fruttuoso; le vasche all'aperto di *Sarracenia* e *Dionaea* sono sullo stesso balcone. Il laboratorio è all'Università di Genova — Balbi 5, 16126 Genova — e la clinica all'[IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
+Genova, Italia. Il terrario vive a casa in Corso Monte Grappa; le vasche all'aperto di *Sarracenia* e *Dionaea* sono sullo stesso balcone. Il laboratorio è all'Università di Genova — Viale Benedetto XV, 6, 16132 Genova — e la clinica all'[IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
 
 Per qualsiasi altra cosa, una mail è il canale migliore.

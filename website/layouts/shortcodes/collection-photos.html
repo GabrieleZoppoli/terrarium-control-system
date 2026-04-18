@@ -2,6 +2,10 @@
   collection-photos — grid of primary photos for a given genus, sourced from
   site.Data.photo_manifest (written by scripts/copy_collection_photos.py).
 
+  Clicking a tile opens an in-page lightbox (no new tab). For plants with
+  multiple photos (entries with .extras), arrow buttons step through them;
+  ESC or the × closes.
+
   Usage:
     {{< collection-photos "Heliamphora" >}}
     {{< collection-photos genus="Heliamphora" >}}
@@ -15,18 +19,106 @@
 
 
 {{- if $entries -}}
-<div class="photo-grid">
+<div class="photo-grid" data-lightbox-group>
 {{- range $entries }}
   {{- $primary := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
-  <a class="photo-tile" href="{{ $primary }}" target="_blank" rel="noopener"
-     title="{{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
+  {{- $photos := slice $primary -}}
+  {{- range .extras -}}
+    {{- $photos = $photos | append (printf "img/collection/%s/%s" $genusSlug . | relURL) -}}
+  {{- end -}}
+  <button type="button" class="photo-tile"
+          data-photos="{{ $photos | jsonify }}"
+          data-taxon="{{ .taxon }}"
+          title="{{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
     <img src="{{ $primary }}" alt="{{ .taxon }}" loading="lazy">
     <span class="photo-tile__caption"><em>{{ .taxon }}</em></span>
     {{- with .extras }}<span class="photo-tile__count">+{{ len . }}</span>{{ end -}}
-  </a>
+  </button>
 {{- end }}
 </div>
-<p class="small muted">{{ len $entries }} taxa photographed in <em>{{ $genus }}</em>. Click any tile to open the full-size photo — every image is watermarked CC&nbsp;BY-SA&nbsp;4.0.</p>
+<p class="small muted">{{ len $entries }} taxa photographed in <em>{{ $genus }}</em>. Click a tile to view full-size; every image is CC&nbsp;BY-SA&nbsp;4.0.</p>
+
+{{- /* Lightbox modal — one per page is enough; subsequent shortcode
+       invocations will just reuse the same element.  */}}
+<div class="collection-lightbox" id="collection-lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true">
+  <button type="button" class="cl-close" aria-label="Close">×</button>
+  <button type="button" class="cl-arrow cl-prev" aria-label="Previous photo">‹</button>
+  <figure class="cl-stage">
+    <img class="cl-img" src="" alt="">
+    <figcaption class="cl-caption"><em class="cl-taxon"></em><span class="cl-counter"></span></figcaption>
+  </figure>
+  <button type="button" class="cl-arrow cl-next" aria-label="Next photo">›</button>
+</div>
+
+<script>
+(function () {
+  const lb = document.getElementById('collection-lightbox');
+  if (!lb || lb.dataset.wired) return;   // only wire once per page
+  lb.dataset.wired = '1';
+
+  const img = lb.querySelector('.cl-img');
+  const taxonEl = lb.querySelector('.cl-taxon');
+  const counterEl = lb.querySelector('.cl-counter');
+  const prevBtn = lb.querySelector('.cl-prev');
+  const nextBtn = lb.querySelector('.cl-next');
+  const closeBtn = lb.querySelector('.cl-close');
+
+  let photos = [];
+  let taxon = '';
+  let idx = 0;
+
+  function render() {
+    img.src = photos[idx];
+    img.alt = taxon;
+    taxonEl.textContent = taxon;
+    counterEl.textContent = photos.length > 1 ? ` · ${idx + 1} / ${photos.length}` : '';
+    prevBtn.hidden = photos.length < 2;
+    nextBtn.hidden = photos.length < 2;
+  }
+
+  function open(list, t) {
+    photos = list; taxon = t; idx = 0;
+    render();
+    lb.hidden = false;
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lb.hidden = true;
+    lb.setAttribute('aria-hidden', 'true');
+    img.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function step(d) {
+    if (photos.length < 2) return;
+    idx = (idx + d + photos.length) % photos.length;
+    render();
+  }
+
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+  closeBtn.addEventListener('click', close);
+  lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+
+  document.querySelectorAll('.photo-tile[data-photos]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      try {
+        const list = JSON.parse(btn.dataset.photos);
+        open(list, btn.dataset.taxon || '');
+      } catch (err) { /* malformed data; ignore */ }
+    });
+  });
+})();
+</script>
+
 {{- else -}}
 <p class="muted small">No photos logged yet for <em>{{ $genus }}</em>.</p>
 {{- end -}}

@@ -30,16 +30,16 @@ Additional crops (square, 3:2 landscape, 16:9) are available on request — [ema
 
 ## Hero photographs
 
-Five photographs that represent the collection well at print or cover size. All are CC BY-SA 4.0 and watermarked accordingly. Click to open the full-resolution JPEG.
+Six photographs that represent the collection well at print or cover size. All are CC BY-SA 4.0 and watermarked accordingly. Click to open the full-resolution JPEG.
 
 <ul class="press-hero-list">
   <li>
     <a href="/img/collection/heliamphora/heliamphora-ionasi-elegance.jpg"><img src="/img/collection/heliamphora/heliamphora-ionasi-elegance.jpg" alt="Heliamphora ionasii 'Elegance'" loading="lazy"></a>
-    <p><em>Heliamphora ionasii</em> 'Elegance' · Ilu-Tepui, Venezuela · sun pitcher endemic to tepui summits.</p>
+    <p><em>Heliamphora ionasii</em> 'Elegance' · Ilu-Tepui, Venezuela · pitcher plant endemic to tepui summits.</p>
   </li>
   <li>
     <a href="/img/collection/heliamphora/heliamphora-macdonaldae.jpg"><img src="/img/collection/heliamphora/heliamphora-macdonaldae.jpg" alt="Heliamphora macdonaldae" loading="lazy"></a>
-    <p><em>Heliamphora macdonaldae</em> · Cerro Duida, Venezuela · one of the largest sun pitchers.</p>
+    <p><em>Heliamphora macdonaldae</em> · Cerro Duida, Venezuela · one of the largest species in the genus.</p>
   </li>
   <li>
     <a href="/img/collection/dracula/dracula-pholeodytes.jpg"><img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes" loading="lazy"></a>
@@ -52,6 +52,10 @@ Five photographs that represent the collection well at print or cover size. All 
   <li>
     <a href="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg"><img src="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg" alt="Sophronitis coccinea tetraploid" loading="lazy"></a>
     <p><em>Sophronitis coccinea</em> 4N · Brazilian <em>campos rupestres</em> · induced tetraploid form.</p>
+  </li>
+  <li>
+    <a href="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg"><img src="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg" alt="Vanda falcata 'Akausagi' in a cloisonné pot" loading="lazy"></a>
+    <p><em>Vanda falcata</em> 'Akausagi' · traditional Japanese fūkiran (富貴蘭) cultivar · displayed in a cloisonné pot on red lacquer.</p>
   </li>
 </ul>
 
