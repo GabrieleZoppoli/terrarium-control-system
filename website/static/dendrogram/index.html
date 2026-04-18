@@ -549,8 +549,11 @@ let hoverPreviewVisible = false;
 
 function schedulePreview(event, d) {
   clearTimeout(hoverPreviewTimer);
-  if (focusedNode) return;
-  if (d.depth < 2) return;
+  // Previously guarded with `if (focusedNode) return` — but inside a focused
+  // genus the side panel only shows text, so hovering a species tip should
+  // still reveal its photos. Leaves now always show previews; internal
+  // nodes still require depth >= 2 (clade/order level has little to add).
+  if (d.children && d.depth < 2) return;
   const x = event.clientX, y = event.clientY;
   hoverPreviewTimer = setTimeout(() => renderHoverPreview(d, x, y), HOVER_DELAY_MS);
 }
