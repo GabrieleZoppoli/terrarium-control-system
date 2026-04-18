@@ -1,6 +1,6 @@
 {{- $url := .Site.Params.liveConditionsURL | default "" -}}
 {{- if $url -}}
-<section class="highland-live" data-endpoint="{{ $url }}" data-poll-seconds="10" data-label-on="{{ i18n "live_on" }}" data-label-off="{{ i18n "live_off" }}" hidden aria-label="Live conditions inside the terrarium">
+<section class="highland-live" data-endpoint="{{ $url }}" data-poll-seconds="10" data-label-on="{{ i18n "live_on" }}" data-label-off="{{ i18n "live_off" }}" data-suffix-sec="{{ i18n "live_sec_ago" }}" data-suffix-min="{{ i18n "live_min_ago" }}" hidden aria-label="Live conditions inside the terrarium">
   <header class="highland-live__head">
     <span class="highland-live__dot" aria-hidden="true"></span>
     <span class="highland-live__label">{{ i18n "live_label" }}</span>
@@ -44,8 +44,10 @@
   var intervalMs = Math.max(5, parseInt(root.getAttribute('data-poll-seconds') || '10', 10)) * 1000;
   if (!endpoint) return;
 
-  var ON  = root.getAttribute('data-label-on')  || 'on';
-  var OFF = root.getAttribute('data-label-off') || 'off';
+  var ON      = root.getAttribute('data-label-on')   || 'on';
+  var OFF     = root.getAttribute('data-label-off')  || 'off';
+  var SEC_AGO = root.getAttribute('data-suffix-sec') || 's ago';
+  var MIN_AGO = root.getAttribute('data-suffix-min') || 'min ago';
 
   function formatOne(key, data) {
     var v;
@@ -93,8 +95,8 @@
           var d = new Date(data.updatedAt);
           if (isNaN(d.getTime())) return null;
           var diff = Math.round((Date.now() - d.getTime()) / 1000);
-          if (diff < 60) return diff + ' s ago';
-          if (diff < 3600) return Math.round(diff / 60) + ' min ago';
+          if (diff < 60) return diff + ' ' + SEC_AGO;
+          if (diff < 3600) return Math.round(diff / 60) + ' ' + MIN_AGO;
           return d.toLocaleTimeString();
         } catch (_) { return null; }
     }

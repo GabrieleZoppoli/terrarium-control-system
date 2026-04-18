@@ -62,6 +62,8 @@ live_fan:              "Fan"
 live_mists_today:      "Mists today"
 live_on:               "on"
 live_off:              "off"
+live_sec_ago:          "s ago"
+live_min_ago:          "min ago"
 
 # Home ledger — live totals from the Pi's InfluxDB
 ledger_kicker:         "Live from the running log"

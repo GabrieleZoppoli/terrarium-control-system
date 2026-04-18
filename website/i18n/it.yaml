@@ -62,6 +62,8 @@ live_fan:              "Ventola"
 live_mists_today:      "Nebulizzazioni oggi"
 live_on:               "on"
 live_off:              "off"
+live_sec_ago:          "s fa"
+live_min_ago:          "min fa"
 
 # Home ledger — totali live dall'InfluxDB del Raspberry
 ledger_kicker:         "Dal log in funzione, in diretta"
