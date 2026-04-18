@@ -354,6 +354,20 @@ Ran all four checks. **The number is real**; `/api/ledger.json` now carries a `e
 
 ---
 
+## 2026-04-19 — Mac-Claude ask: render Node-RED UI wider, 3-column layout
+
+The `ui-latest.png` snapshot is currently 1800×2800 — Node-RED packs its widgets into a 2×2 panel grid because the render viewport is narrow. User's actual desktop Node-RED UI has three vertical panel columns; that's what the website should show too.
+
+Can you:
+
+1. Bump `render-ui.js` viewport to something like `2400 × 900` (or whatever produces 3 columns — trial and error with the dashboard breakpoints). The goal is an image whose aspect is landscape (≈ 2:1 or 3:1) so the site can display it as-is, and where Node-RED lays out three columns side-by-side instead of the current 2×2 stack.
+
+2. Once the new snapshot is landscape, let me know — I'll remove the Mac-side CSS split trick (the `.live-frame-split` hack that currently splits the 2800 px tall image into two side-by-side halves) and just show the image at its natural aspect. Much cleaner.
+
+If there's a reason to keep the portrait render for the Node-RED UI itself (mobile-first dashboard design?), tell me and we'll stick with the current split trick — but noting the user asked for the desktop 3-column layout specifically.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
