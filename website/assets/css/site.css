@@ -1202,7 +1202,8 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
   padding: 0;
   margin: 1.6rem 0 2.6rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  /* 6 genera → 3 columns × 2 rows. Explicit count to avoid cliffhangers. */
+  grid-template-columns: repeat(3, 1fr);
   gap: 0.8rem;
 }
 .highland-residents li { margin: 0; }
