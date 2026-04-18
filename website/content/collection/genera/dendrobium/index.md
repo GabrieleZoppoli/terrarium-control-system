@@ -14,9 +14,11 @@ These plants represent a remarkable case of convergent evolution: they evolved i
 
 The collection also includes miniature *Dendrobium* from Southeast Asia and Vietnam that tolerate the same cool, humid conditions.
 
-## Position in Terrarium
+## Where they live
 
-**Upper zone** -- mounted on tree fern plaques or cork bark near the top of the terrarium. They receive relatively high light, matching their semi-epiphytic habit in nature.
+The cloud-forest *Dendrobium* of section *Oxyglossum* (cuthbertsonii, cyanocentrum, hellwigianum, victoriae-reginae, lawesii, and similar highland miniatures) are mounted on tree-fern plaques or cork bark near the **upper zone of the highland cabinet**, matching their semi-epiphytic habit at 2,000–3,000 m.
+
+The lowland and Australian members — most notably **'Berry Oda'**, **'Betty Goto' f. coerulea**, and **D. speciosum** — do not belong in the cloud-forest regime. They live indoors in the living room on a bright windowsill, at intermediate conditions (~18–25 °C year-round, moderate humidity). 'Berry Oda' in particular flowers happily with nothing more than weekly watering.
 
 ## Species in Collection (9 acquired, 8 alive, 1 lost)
 

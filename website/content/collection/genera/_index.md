@@ -13,4 +13,10 @@ The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland 
 
 ## Full collection
 
-Over 380 acquisitions across 89 genera total — the terrarium's cloud-forest residents plus outdoor *Sarracenia* and *Dionaea*, windowsill *Tillandsia*, aquatic plants in the *Nymphaea* tub, and various orchids in intermediate conditions. The pages below drill into each genus with live acquisition data, sources, prices, and photos.
+Over 380 acquisitions across 89 genera total, spread across **three distinct spaces**:
+
+- **The highland cabinet** — the cloud-forest residents: *Heliamphora*, *Dracula*, highland *Nepenthes*, *Sophronitis*, *Oxyglossum*-section *Dendrobium*, *Utricularia* sect. *Orchidioides*, miniature Pleurothallidinae.
+- **The balcony (outdoor, year-round)** — temperate carnivores that need full sun and winter dormancy: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, hardy terrestrial orchids (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).
+- **Around the house (indoor, not in the cabinet)** — plants that live at intermediate conditions on windowsills and bright spots: *Tillandsia* (~53 species and cultivars), most *Bulbophyllum*, one *Cattleya*, one *Oncidium*, one *Maxillaria*, most *Phalaenopsis*, and the non-highland *Dendrobium* (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
+
+The pages below drill into each genus with live acquisition data, sources, prices, and photos.
