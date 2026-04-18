@@ -1242,7 +1242,9 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
 
 .home-ledger__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* 6 cards → 3 cols × 2 rows (clean). No auto-fit so content width
+     doesn't push us to a cliffhanger 4+2 layout on wide screens. */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.2rem;
   margin: 0;
 }
@@ -2090,6 +2092,13 @@ figure.moment figcaption {
   .mosaic-tile__caption { padding: 0.7rem 0.7rem 0.45rem; }
   .mosaic-tile__caption .taxon { font-size: 0.82rem; }
   .mosaic-tile__caption .provenance { font-size: 0.66rem; }
+
+  /* Ledger, residents, press heroes: collapse to 2-col on mobile so
+     each card has enough breathing room and tiles stay touch-sized. */
+  .home-ledger__grid      { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+  .highland-residents     { grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
+  .press-hero-list        { grid-template-columns: repeat(2, 1fr); gap: 1rem 0.8rem; }
+  .photo-grid             { grid-template-columns: repeat(2, 1fr); gap: 0.55rem; }
 
   /* Home sections stack to one column */
   .home-sections { grid-template-columns: 1fr; }
