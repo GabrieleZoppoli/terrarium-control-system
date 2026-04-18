@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{- $narrow := .Params.narrow | default false -}}
+<section class="page{{ if $narrow }} page--prose{{ end }}">
+  {{- if and (not .IsHome) (gt (len .Ancestors) 1) }}
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    {{- range (.Ancestors.Reverse) }}
+      {{- if not .IsHome }}
+        <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a><span class="sep">·</span>
+      {{- end }}
+    {{- end }}
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+  {{- end }}
+  <header class="page-hero">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- /* Children cards are now placed by the {{< browse-cards >}} shortcode
+         inside the markdown content, so an appendix section (e.g. the
+         Golden Three) can sit *below* the browse options without pushing
+         them off-screen. No auto-append of children here. */ -}}
+  {{- with .Content }}
+  <div class="prose"{{ if not $narrow }} style="max-width: var(--page-max);"{{ end }}>{{ . }}</div>
+  {{- end }}
+</section>
+{{ end }}

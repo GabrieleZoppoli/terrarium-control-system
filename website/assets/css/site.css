@@ -1692,7 +1692,8 @@ figure.moment figcaption {
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* 6 contact cards → 3 cols × 2 rows (clean). */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin: 2rem 0 3rem;
 }

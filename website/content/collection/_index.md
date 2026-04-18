@@ -8,6 +8,8 @@ The collection logs every plant I have ever acquired — over 380 accessions acr
 
 Browse it the way that suits you best.
 
+{{< browse-cards >}}
+
 ## The Golden Three
 
 The priciest three plants in the collection.

@@ -8,6 +8,8 @@ La collezione tiene traccia di ogni pianta mai acquistata — oltre 380 esemplar
 
 Sfogliala come ti è più comodo.
 
+{{< browse-cards >}}
+
 ## The Golden Three
 
 Le tre piante più care della collezione.
