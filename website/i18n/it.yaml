@@ -57,7 +57,7 @@ live_compressor:       "Compressore"
 ledger_kicker:         "Dal log in funzione, in diretta"
 ledger_per_month:      "al mese"
 ledger_title:          "Ogni ciclo di nebbia e ogni wattora, contati."
-ledger_intro:          "Misurati direttamente dall'InfluxDB del Raspberry dal @SINCE@. Il log conserva un anno alla volta; l'hardware è in funzione da fine 2022, ma solo la finestra più recente ci sta."
+ledger_intro:          "Le misurazioni sono iniziate a @SINCE@. L'hardware è in funzione da fine 2022."
 
 ledger_mist_label:     "Cicli di nebbia"
 ledger_mist_caption:   "Ogni ciclo rilascia qualche secondo di nebbia fine. Il volume d'acqua per ciclo è ancora da calibrare."

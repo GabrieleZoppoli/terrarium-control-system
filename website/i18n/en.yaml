@@ -57,7 +57,7 @@ live_compressor:       "Compressor"
 ledger_kicker:         "Live from the running log"
 ledger_per_month:      "per month"
 ledger_title:          "Every mist cycle and watt-hour, counted."
-ledger_intro:          "Measured directly from the Pi's InfluxDB since @SINCE@. The log holds one year at a time; the hardware has been running since late 2022, but only the most recent window fits."
+ledger_intro:          "Measurements started in @SINCE@. The hardware itself has been running since late 2022."
 
 ledger_mist_label:     "Mist cycles"
 ledger_mist_caption:   "Each cycle releases a few seconds of fine fog. Water volume per cycle is still being calibrated."

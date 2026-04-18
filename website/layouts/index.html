@@ -73,9 +73,9 @@
   {{- $sinceLabel := "" }}
   {{- if eq site.Language.Lang "it" }}
     {{- $mos := slice "" "gennaio" "febbraio" "marzo" "aprile" "maggio" "giugno" "luglio" "agosto" "settembre" "ottobre" "novembre" "dicembre" }}
-    {{- $sinceLabel = printf "%d %s %d" $since.Day (index $mos $since.Month) $since.Year }}
+    {{- $sinceLabel = printf "%s %d" (index $mos $since.Month) $since.Year }}
   {{- else }}
-    {{- $sinceLabel = $since.Format "January 2, 2006" }}
+    {{- $sinceLabel = $since.Format "January 2006" }}
   {{- end }}
   {{- $m := .monthly }}
   {{- $cards := slice
