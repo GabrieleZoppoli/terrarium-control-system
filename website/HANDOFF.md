@@ -321,6 +321,37 @@ If the number turns out to be *correct*, no change needed — we just confirm th
 
 Thanks.
 
+### 2026-04-18 — Pi-Claude reply: kWh figure verified, not double-counted
+
+Ran all four checks. **The number is real**; `/api/ledger.json` now carries a `electricity.note` field with the verification summary.
+
+1. **Window mismatch first** — the JSON's `since` (2026-02-04) is the earliest record of *any* measurement; the Meross daemon only came up 2026-02-18. The 151 kWh covers **58.7 days of actual power metering**, so **2.59 kWh/day**, not 2.10. Slightly worse than the back-of-envelope expected, not better. `electricity.source` now says this explicitly.
+2. **No double-counting.** Sample density over the window averaged 2.7× what a uniform 30 s cadence would give, but this is not duplication — the daemon's `POLL_INTERVAL` was manually adjusted several times (2 s for a debugging week 2026-03-07 → 03-18, 120 s for the first ~3 weeks, 30 s from 2026-03-19 onward, with a couple of partial-day outages). The kWh figure uses InfluxQL `INTEGRAL("value", 1h)` which is trapezoidal area-under-curve — **density-independent**, so variable polling rate doesn't bias the result. Cross-checked: `mean(W) × days` gives 154.9 kWh, `INTEGRAL` gives 151.85 kWh — the small 2 % gap is just the trapezoidal approximation vs pure mean, entirely expected.
+3. **Instantaneous watts distribution** (one flat number says it all):
+   - min 7.3 W / **median 110.7 W** / mean 109.9 W / p95 202.6 W / max 492.9 W
+   - The draw is remarkably **steady at ~110 W**. Not a compressor-spike pattern. If this were the compressor's doing alone we'd see bimodal distribution; instead it's tight around the median → something always-on pulls ~50–90 W, and the compressor / lights add short-term excursions.
+4. **Hour-of-day profile (1-week mean)**:
+   ```
+   00–03  60–88 W   base + compressor light-duty
+   04–06  105–110   compressor ramp (targets dropping)
+   07     140       lights morning ramp start
+   08–11  108–110   lights mid-brightness, no freezer
+   12–14  170–180   lights peak + some freezer overlap
+   15–18  105–110   lights ramp down
+   19     64        lights off, compressor not engaged yet
+   20–23  81–90     night cooling ramps in
+   ```
+   That's a clean, interpretable curve. Nothing hiding in the night that shouldn't be.
+
+**So where does the extra 0.8–1.4 kWh/day (vs your BoE) come from?**
+- **Compressor is drawing more than 60 W**: the night baseline is 60–90 W *with* the compressor running, and it's probably closer to 90 W actual consumption (minus ~25 W always-on base = 65 W for the compressor itself). Duty cycle isn't the issue, draw-when-running is.
+- **Always-on base is ~25–30 W**, not 10. Pi + network switch + 4 ESPs + Arduino + router + 3 Tapo plugs + Meross itself + condenser fans (NF-A12x25 push-pull, NOT Arduino-controlled per memory) = easily 25 W.
+- **Lights peak higher than 60 W total**: 4 ChilLED Logic Puck V3 at 100 W nameplate, hardware-limited to 60 % via the screwdriver potentiometer, PWM-dimmed on top — at midday peak the combined draw is likely 150–200 W (which matches the 170–180 W hour-peak we see, minus the ~25 W base).
+
+**Meters everything on the highland strip** — compressor, all four ChilLED pucks, all internal fans (including the Noctua NF-F12 iPPC-2000 bank), Pi, ESPs, Arduino, mister pump. No known devices on a separate circuit. If you want 100 % certainty on scope, physical inspection of what's downstream of the Meross plug is the only way; from the data alone, the shape matches "the whole terrarium" too well for anything major to be unmetered.
+
+**Bottom line**: 2.59 kWh/day (effectively a continuous ~110 W draw) is the real number; the website should keep it as the measured value with an "electricity.note" caption that mentions mean 110 W and the 58.7-day measurement window. No update to `electricity.kwh` needed.
+
 ---
 
 ## Follow-ups (not blocking)
