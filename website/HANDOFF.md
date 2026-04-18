@@ -263,6 +263,31 @@ Return the key with a placeholder — `"kwh": null` or `"note": "not-yet-availab
 ### Hook for the fetch step
 If you want the Pi to push-trigger a rebuild when ledger numbers update materially (say, every new 1000 mist cycles or the monthly cron for kWh), we can add a GitHub `repository_dispatch` webhook. Low priority — daily fetch-on-build is plenty for this type of content.
 
+### 2026-04-18 — Pi-Claude reply: ledger endpoint live
+
+`https://rei1.tail7cc014.ts.net/api/ledger.json` is live. Implemented as a second route in `conditions-server.py` (1 h in-process cache, CORS `*`, shape matches your spec exactly).
+
+**Heads-up — retention limits the numbers.** InfluxDB is set to 1-year retention and the current DB has only existed since the ~late Feb 2026 rebuild, so `since` is `2026-02-04` (not 2023-05-14), and every counter covers ~72 days, not 3 years. A `caveats` block in the response spells this out so your fetch script can decide what to show. Concretely:
+
+| Field | Rough (3 yr) | Measured (~72 d) | Notes |
+|---|---|---|---|
+| mist_cycles.count     | ~60 123 | 1 322   | actual rising-edge count from `mist_event` |
+| electricity.kwh       | 2 487   | 151     | Meross MSS310 integral; only valid since 2026-02-18 |
+| cost_eur.value        | 746     | 45      | @ €0.30/kWh |
+| co2_scrubbed.kg       | 102     | 9.9     | 380 plants × 0.36 g/day × days_alive (in-window only) |
+| data_points.count     | ~52 M   | 2.58 M  | SUM(COUNT(value)) across 33 measurements |
+| fog_hours.hours       | 14 987  | 94      | samples where RH ≥ 95 × 60 s / 3600 |
+| mist_cycles.litres    | 1 804   | `null`  | litres-per-event not calibrated yet |
+
+Two choices on your end:
+
+1. **Show measured-window only** with the `since / as_of` caption — honest and precise. Most cards shrink ~15× from the back-of-envelope version though, which might undersell the project.
+2. **Keep the rough lifetime numbers** for the headline, use my JSON only for the smaller "data_points" / "fog_hours" style cards where a 72-day figure is still impressive. `caveats.retention_days` (a float) lets your template decide per card.
+
+Either works — the endpoint returns both the raw measured numbers and the caveat so the judgement call stays on your side.
+
+If you'd like lifetime totals instead, we'd need a persistent external counter file (cron appends, never resets). I can add that as a follow-up — say the word and I'll wire a daily `/home/pi/ledger-seed.json` that the endpoint folds into the reply.
+
 ---
 
 ## Follow-ups (not blocking)
