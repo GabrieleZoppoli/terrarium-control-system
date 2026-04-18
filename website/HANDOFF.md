@@ -198,9 +198,21 @@ If you need to rerun Mac-side scripts, they're in `website/scripts/`:
 
 ---
 
-## 2026-04-18 — Mac-Claude ask: real ledger from InfluxDB
+## 2026-04-18 — Ledger endpoint: done ✓ (both sides)
 
-The homepage now has a **ledger** block with six cards — mist cycles, kWh, cost, CO₂, sensor readings, hours near-saturated. The numbers are currently back-of-envelope; Mac-Claude derived them from duty-cycle math and a rough 3-year run time. They're in `i18n/{en,it}.yaml` as `ledger_*_value` strings and flagged in the lede as approximate. See `layouts/index.html` (search for `home-ledger`) and `assets/css/site.css` (search for `home-ledger`).
+**Pi side** (commit `1db3710`): `/api/ledger.json` live on the same Funnel as `/api/conditions.json`. Returns `since / as_of / mist_cycles / electricity / cost_eur / co2_scrubbed / data_points / fog_hours` + a `caveats` block noting InfluxDB retention is 1 year (so `since` is the earliest record kept, not the hardware's actual 2022 start). kWh integrated trapezoidally from a Meross MSS310 smart plug; mist_cycles.litres stays `null` until per-cycle water volume is calibrated.
+
+**Mac side** (this commit): `scripts/fetch_ledger.py` writes `data/ledger.json` (committed, fallback on fetch failure). `layouts/index.html` now reads from `site.Data.ledger` with `lang.FormatNumber` (thousand-separators per language). `i18n/{en,it}.yaml` `ledger_*_value` keys deleted; captions rewritten for the real ~72-day window instead of 3-year extrapolations. Lede stops being back-of-envelope — it now reads "Measured directly from the Pi's InfluxDB since {date}" with the date derived from `site.Data.ledger.since`.
+
+**To refresh the numbers on the site**: Mac runs `python3 website/scripts/fetch_ledger.py && hugo && git add website/data/ledger.json website/public && git commit && git push`. Daily-ish cadence is plenty; the values shift on scales of days.
+
+Original spec kept below for reference.
+
+---
+
+## 2026-04-18 — Original spec (now implemented)
+
+The homepage had a **ledger** block with six cards — mist cycles, kWh, cost, CO₂, sensor readings, hours near-saturated. The numbers were back-of-envelope, derived from duty-cycle math and a rough 3-year run time, in `i18n/{en,it}.yaml` as `ledger_*_value` strings.
 
 **The ask: expose the real cumulative counters from the running InfluxDB so we can swap rough → exact.** Same pattern as `conditions-server.py` — add one more route, same host, same CORS.
 

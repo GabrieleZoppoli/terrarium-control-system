@@ -1,0 +1,35 @@
+{
+  "since": "2026-02-04T22:22:14.09356613Z",
+  "as_of": "2026-04-18T07:12:37Z",
+  "mist_cycles": {
+    "count": 1322,
+    "litres": null,
+    "source": "measurement:mist_event (each row = 1 rising edge). Litres per cycle not yet calibrated."
+  },
+  "electricity": {
+    "kwh": 150.77,
+    "source": "measurement:power_consumption (Meross MSS310, watts every 30 s; integrated trapezoidally over window). Excludes pre-2026-02-18 when no meter existed."
+  },
+  "cost_eur": {
+    "value": 45.23,
+    "tariff_eur_per_kwh": 0.3
+  },
+  "co2_scrubbed": {
+    "kg": 9.9,
+    "method": "380 plants \u00d7 0.36 g/day \u00d7 days_alive",
+    "note": "model-based, not sensed"
+  },
+  "data_points": {
+    "count": 2585271,
+    "measurements": 33
+  },
+  "fog_hours": {
+    "hours": 94.2,
+    "threshold_rh": 95.0,
+    "note": "Approximated as count(humidity >= threshold) \u00d7 60s / 3600. Data Logger period is 60 s for continuous measurements."
+  },
+  "caveats": {
+    "retention_days": 72.4,
+    "note": "InfluxDB retention is 1 year; `since` is the earliest record present, not the date the hardware was first turned on (~late 2022). Counters below cover the window `since \u2192 as_of` only."
+  }
+}

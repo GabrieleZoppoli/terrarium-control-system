@@ -67,23 +67,41 @@
   </section>
   {{- end }}
 
-  {{- /* Ledger — back-of-envelope 3-year totals, playful equivalents */}}
+  {{- /* Ledger — live totals from the Pi's InfluxDB (scripts/fetch_ledger.py writes data/ledger.json). */}}
+  {{- with site.Data.ledger }}
+  {{- $since := time .since }}
+  {{- $sinceLabel := "" }}
+  {{- if eq site.Language.Lang "it" }}
+    {{- $mos := slice "" "gennaio" "febbraio" "marzo" "aprile" "maggio" "giugno" "luglio" "agosto" "settembre" "ottobre" "novembre" "dicembre" }}
+    {{- $sinceLabel = printf "%d %s %d" $since.Day (index $mos $since.Month) $since.Year }}
+  {{- else }}
+    {{- $sinceLabel = $since.Format "January 2, 2006" }}
+  {{- end }}
+  {{- $cards := slice
+    (dict "key" "mist" "value" (lang.FormatNumber 0 .mist_cycles.count))
+    (dict "key" "kwh"  "value" (lang.FormatNumber 0 .electricity.kwh))
+    (dict "key" "cost" "value" (printf "€%s" (lang.FormatNumber 0 .cost_eur.value)))
+    (dict "key" "co2"  "value" (lang.FormatNumber 1 .co2_scrubbed.kg))
+    (dict "key" "data" "value" (lang.FormatNumber 2 (div .data_points.count 1000000.0)))
+    (dict "key" "fog"  "value" (lang.FormatNumber 0 .fog_hours.hours))
+  }}
   <section class="home-ledger" aria-label="{{ i18n "ledger_title" }}">
     <header class="home-ledger__head">
       <span class="kicker">{{ i18n "ledger_kicker" }}</span>
       <h2>{{ i18n "ledger_title" }}</h2>
-      <p class="lede">{{ i18n "ledger_intro" }}</p>
+      <p class="lede">{{ replace (i18n "ledger_intro") "@SINCE@" $sinceLabel | safeHTML }}</p>
     </header>
     <dl class="home-ledger__grid">
-      {{- range $key := slice "mist" "kwh" "cost" "co2" "data" "fog" }}
+      {{- range $c := $cards }}
       <div>
-        <dt>{{ i18n (printf "ledger_%s_label" $key) }}</dt>
-        <dd>{{ i18n (printf "ledger_%s_value" $key) | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $key)) }} <small>{{ . }}</small>{{ end }}</dd>
-        <p>{{ i18n (printf "ledger_%s_caption" $key) | safeHTML }}</p>
+        <dt>{{ i18n (printf "ledger_%s_label" $c.key) }}</dt>
+        <dd>{{ $c.value | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }}</dd>
+        <p>{{ i18n (printf "ledger_%s_caption" $c.key) | safeHTML }}</p>
       </div>
       {{- end }}
     </dl>
   </section>
+  {{- end }}
 
   {{ $featured := dict
     "highland"   (slice
