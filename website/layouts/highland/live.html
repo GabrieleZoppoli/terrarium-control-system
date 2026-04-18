@@ -33,7 +33,19 @@
 
     <div class="live-frame-wrap">
       {{- if $snapshot }}
-      <img class="live-img" src="{{ $snapshot }}" alt="Latest snapshot of the highland control UI" loading="lazy">
+      {{- /*
+        Node-RED renders 1800x2800 (portrait) because the dashboard
+        stacks four panels in a 2x2 grid. Split the image into top
+        and bottom halves and show them side-by-side so the full UI
+        reads landscape on desktop. The hidden <img> stays around
+        purely so the refresh script can load+probe the next frame
+        and then mirror it into both halves' background-image.
+      */}}
+      <img class="live-img" src="{{ $snapshot }}" alt="Latest snapshot of the highland control UI" loading="lazy" hidden>
+      <div class="live-frame-split" aria-hidden="true">
+        <div class="live-half live-half-top"    style="background-image:url({{ $snapshot }})"></div>
+        <div class="live-half live-half-bottom" style="background-image:url({{ $snapshot }})"></div>
+      </div>
       {{- else }}
       <div class="live-placeholder">
         <p>The snapshot endpoint is not set up yet. See <a href="https://github.com/GabrieleZoppoli/terrarium-control-system/blob/master/website/HANDOFF.md">HANDOFF.md</a> for the Pi-side capture job that publishes <code>ui-latest.png</code> over Tailscale Funnel.</p>
@@ -92,28 +104,45 @@
     50%      { box-shadow: 0 0 0 8px rgba(143, 185, 122, 0); }
   }
 
-  /* The Node-RED UI is rendered 1800x2800 (portrait — it was laid out for
-     a tablet). A 16:10 landscape frame produced huge black letterboxing
-     on desktop; instead let the image define its own aspect and centre
-     it. 600px wide reads as a real tablet-sized control panel rather
-     than a phone thumbnail. */
+  /* The Node-RED dashboard renders 1800x2800 — four panels in a 2x2
+     grid, stacked tall. We split the image into top and bottom halves
+     and lay them side-by-side so the whole UI reads landscape on desk-
+     top, with no information lost. Each half has an aspect of 9:7
+     (1800:1400); placed in a 2-col grid the overall frame is 18:7. */
   .live-frame-wrap {
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-    background: var(--surface-solid);
     border: 1px solid var(--border-subtle);
     border-radius: var(--r-4);
     overflow: hidden;
     box-shadow: var(--elev-2);
+    background: var(--surface-solid);
   }
-  .live-img {
-    width: 100%;
-    height: auto;
-    background: #0c0d11;
-    display: block;
+  .live-frame-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border-subtle);
+  }
+  .live-half {
+    background-color: #0c0d11;
+    background-repeat: no-repeat;
+    background-size: 100% 200%;  /* image width fills half; height is 2x */
+    aspect-ratio: 9 / 7;
     transition: opacity 300ms var(--ease-out);
+  }
+  .live-half-top    { background-position: 0 0; }
+  .live-half-bottom { background-position: 0 100%; }
+
+  .live-shell.is-refreshing .live-half { opacity: 0.75; }
+  .live-shell.is-offline    .live-half { opacity: 0.15; filter: grayscale(0.8); }
+
+  @media (max-width: 900px) {
+    /* On narrow screens, stack the two halves back into portrait form
+       so each panel stays readable. Total aspect becomes 9:14 again. */
+    .live-frame-split { grid-template-columns: 1fr; }
   }
   .live-shell.is-refreshing .live-img { opacity: 0.75; }
   .live-shell.is-offline .live-img { opacity: 0.15; filter: grayscale(0.8); }
@@ -175,6 +204,12 @@
       return h + ' h ago';
     }
 
+    // The hidden <img class="live-img"> keeps the old single-frame
+    // behaviour (for alt-text, downloading, OG, etc.), and we ALSO
+    // mirror the refreshed frame into the two .live-half divs that
+    // drive the side-by-side landscape display.
+    var halves = shell.querySelectorAll('.live-half');
+
     function refresh() {
       shell.classList.add('is-refreshing');
       var sep = baseURL.indexOf('?') > -1 ? '&' : '?';
@@ -182,6 +217,7 @@
       var probe = new Image();
       probe.onload = function () {
         img.src = next;
+        halves.forEach(function (h) { h.style.backgroundImage = 'url(' + next + ')'; });
         lastOK = Date.now();
         setState('is-live', 'Live · auto-refreshed');
       };
