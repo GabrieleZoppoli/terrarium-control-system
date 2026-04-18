@@ -424,6 +424,13 @@ svg.call(zoomBehavior);
 // Disable d3-zoom's default double-click-to-zoom; we use dblclick for zoom-to-subtree instead.
 svg.on("dblclick.zoom", null);
 
+// When embedded as an iframe on /collection/dendrogram/, the parent page
+// intercepts wheel events unless this window has focus. Claim focus when
+// the cursor enters the iframe so scroll-to-zoom works immediately.
+document.addEventListener('mouseenter', () => {
+  try { window.focus(); } catch (e) { /* noop */ }
+}, true);
+
 const cluster = d3.cluster().size([360, radius])
   .separation((a, b) => {
     if (a.parent == b.parent) return 1;
@@ -802,6 +809,12 @@ root.children && root.children.forEach(clade => {
 
   arcG.append("path").attr("d",arc())
     .attr("fill",cladeColors[clade.data.name]||'#555').attr("opacity",0.15);
+
+  // Hide labels for small early-diverging clades (Algae/Bryophytes/Ferns/
+  // Gymnosperms/Basal Angiosperms). Their labels collided at 12 o'clock
+  // into an unreadable blob. Identity is still legible: each clade has a
+  // distinct colour band and counts are shown in the legend below.
+  if (leaves.length < 15) return;
 
   const labelAngle = midAngle-90;
   const [lx,ly] = [

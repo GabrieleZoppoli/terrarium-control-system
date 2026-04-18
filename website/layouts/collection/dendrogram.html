@@ -12,23 +12,23 @@
     {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
   </header>
 
-  {{- with .Content }}
-  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
-  {{- end }}
-
   {{ $dendroURL := "dendrogram/" | absURL }}
   <div class="dendro-shell" data-src="{{ $dendroURL }}">
-    <div class="dendro-frame-wrap">
-      <iframe class="dendro-frame" src="{{ $dendroURL }}" title="Phylogenetic dendrogram of the living collection" loading="lazy"></iframe>
-    </div>
     <aside class="dendro-mobile-cta" aria-label="Open the dendrogram full-screen">
       <h2>{{ i18n "dendro_mobile_title" }}</h2>
       <p>{{ i18n "dendro_mobile_body" }}</p>
       <a class="dendro-mobile-cta__button" href="{{ $dendroURL }}">{{ i18n "dendro_mobile_button" }} <span aria-hidden="true">↗</span></a>
       <p class="dendro-mobile-cta__meta">{{ i18n "dendro_mobile_meta_1" }} <a href="{{ "/collection/genera/" | relLangURL }}">{{ i18n "dendro_mobile_meta_2" }}</a> {{ i18n "dendro_mobile_meta_3" }}</p>
     </aside>
+    <div class="dendro-frame-wrap">
+      <iframe class="dendro-frame" src="{{ $dendroURL }}" title="Phylogenetic dendrogram of the living collection" loading="lazy"></iframe>
+    </div>
     <p class="dendro-hint small muted">{{ i18n "dendro_hint" }}<a href="{{ $dendroURL }}">{{ i18n "dendro_hint_open" }}</a>.</p>
   </div>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
 </section>
 
 <style>
