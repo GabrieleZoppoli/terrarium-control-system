@@ -62,6 +62,6 @@ For **trade inquiries** — please include species, cultivar/clone name where re
 
 ## Location
 
-Genoa (Genova), Italy. The terrarium lives at home in Corso Monte Grappa; the outdoor beds of *Sarracenia* and *Dionaea* are on the same balcony. The lab is at the University of Genoa — Viale Benedetto XV, 6, 16132 Genova — and the clinic at [IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
+Genoa (Genova), Italy. The terrarium lives at home; the outdoor beds of *Sarracenia* and *Dionaea* are on the same balcony. The lab is at the University of Genoa — Viale Benedetto XV, 6, 16132 Genova — and the clinic at [IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
 
 For anything else, email is the best default.

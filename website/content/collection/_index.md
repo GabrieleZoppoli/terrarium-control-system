@@ -8,12 +8,21 @@ The collection logs every plant I have ever acquired — over 380 accessions acr
 
 Browse it the way that suits you best.
 
-## The golden three
+## The Golden Three
 
-Three acquisitions sit well above the rest of the ledger — each paid for in money *and* in the story behind it.
+The priciest three plants in the collection.
 
-**Neofinetia falcata 'Akausagi'** (赤兎) — €761 · Negie Orchids, Nagoya, November 2020. A traditional Japanese *fūkiran* cultivar named after the legendary red horse of the Three Kingdoms. Rarely leaves Japan; Kiyoshige Negi packed it with CITES + phytosanitary paperwork for a two-week EMS journey. Arrived with four daughter plants attached and has flowered every year since 2022 — its three photos on [Wikimedia Commons]({{<ref "/press">}}) are the first of the cultivar on the platform.
-
-**Heliamphora minor var. pilosa (Auyan) Clone 3** — €205.61 · Andreas Wistuba, March 2023. A named clone of the smaller *Heliamphora* endemic to Auyán-tepui — the Venezuelan plateau that inspired Conan Doyle's *The Lost World*. Hairier trap interior than the type species; slow grower, now in its third season in the cabinet.
-
-**Sarracenia 'Hurricane Creek White' clone F** — €159 · Luca Gambini. Complex hybrid cultivar bred in Alabama, pre-selected for the enormous, white-crowned pitchers that have made it a classic of outdoor *Sarracenia* beds. One of the few plants on the balcony that can pass into a photograph without further colour correction.
+<div class="golden-three">
+  <figure class="golden-item">
+    <a href="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg"><img src="/img/collection/neofinetia/neofinetia-falcata-akausagi-5.jpg" alt="Neofinetia falcata 'Akausagi' in a cloisonné pot" loading="lazy"></a>
+    <figcaption><strong><em>Neofinetia falcata</em> 'Akausagi'</strong> (赤兎, "red rabbit") — €761 · Negie Orchids, Nagoya, November 2020. A Japanese <em>fūkiran</em> cultivar. Shipped from Nagoya with CITES and phytosanitary documents via EMS. Has flowered every year since 2022.</figcaption>
+  </figure>
+  <figure class="golden-item">
+    <a href="/img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3.jpg"><img src="/img/collection/heliamphora/heliamphora-minor-var-pilosa-auyan-clone-3.jpg" alt="Heliamphora minor var. pilosa (Auyán) Clone 3" loading="lazy"></a>
+    <figcaption><strong><em>Heliamphora minor</em> var. <em>pilosa</em> (Auyán) Clone 3</strong> — €205.61 · Andreas Wistuba, March 2023. Named clone of <em>H. minor</em> var. <em>pilosa</em>, endemic to Auyán-tepui (Venezuela). Pitcher interior more densely pubescent than the type.</figcaption>
+  </figure>
+  <figure class="golden-item">
+    <a href="/img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg"><img src="/img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg" alt="Sarracenia 'Hurricane Creek White' clone F" loading="lazy"></a>
+    <figcaption><strong><em>Sarracenia</em> 'Hurricane Creek White' clone F</strong> — €159 · Luca Gambini. Hybrid cultivar originating from the Hurricane Creek population in Baldwin County, Alabama. White-crowned pitchers with red venation.</figcaption>
+  </figure>
+</div>
