@@ -108,13 +108,15 @@
 
 <script>
 (function () {
-  const SESSION_KEY = 'hcf-intro-seen';
+  const STORE_KEY = 'hcf-intro-seen';
   const intro = document.getElementById('cinematic-intro');
   if (!intro) return;
 
-  // Respect "reduce motion" + already-shown flag.
+  // Respect "reduce motion" + already-shown flag (localStorage → persists
+  // across sessions; intro only plays on the very first visit).
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const already = sessionStorage.getItem(SESSION_KEY);
+  let already = false;
+  try { already = localStorage.getItem(STORE_KEY); } catch (e) { /* private-browsing no-op */ }
   if (reduced || already) {
     intro.classList.add('is-skipped');
     return;
@@ -125,7 +127,7 @@
 
   function finish() {
     intro.classList.add('is-gone');
-    sessionStorage.setItem(SESSION_KEY, '1');
+    try { localStorage.setItem(STORE_KEY, '1'); } catch (e) {}
     setTimeout(() => {
       intro.classList.add('is-skipped');
       document.documentElement.style.overflow = '';

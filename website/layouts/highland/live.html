@@ -139,9 +139,9 @@
   .live-shell.is-refreshing .live-half { opacity: 0.75; }
   .live-shell.is-offline    .live-half { opacity: 0.15; filter: grayscale(0.8); }
 
-  @media (max-width: 900px) {
-    /* On narrow screens, stack the two halves back into portrait form
-       so each panel stays readable. Total aspect becomes 9:14 again. */
+  @media (max-width: 700px) {
+    /* On phone-sized screens, stack the two halves back into portrait
+       form so each panel stays readable. Total aspect becomes 9:14 again. */
     .live-frame-split { grid-template-columns: 1fr; }
   }
   .live-shell.is-refreshing .live-img { opacity: 0.75; }

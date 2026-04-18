@@ -196,10 +196,14 @@
 <script>
 (function () {
   const TOUR_KEY = 'hcf-tour-seen';
-  const INTRO_KEY = 'hcf-intro-seen';
   const offer = document.getElementById('tour-offer');
   const stage = document.getElementById('tour-stage');
   if (!offer || !stage) return;
+
+  // localStorage persists across sessions — tour only shows once ever,
+  // not once per tab session.
+  function storeGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function storeSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
   // Steps reference nav items by pageRef. Each targets the first matching
   // <a> in the main nav — resilient to menu reordering.
@@ -245,7 +249,7 @@
   function dismissOffer(persist) {
     if (offer.classList.contains('dismissed')) return;
     offer.classList.add('dismissed');
-    if (persist) sessionStorage.setItem(TOUR_KEY, 'dismissed');
+    if (persist) storeSet(TOUR_KEY, 'dismissed');
     setTimeout(() => { offer.hidden = true; }, 500);
   }
 
@@ -325,7 +329,7 @@
     stage.classList.remove('is-on');
     stage.setAttribute('aria-hidden', 'true');
     if (clone) { clone.remove(); clone = null; }
-    sessionStorage.setItem(TOUR_KEY, 'done');
+    storeSet(TOUR_KEY, 'done');
   }
 
   nextBtn.addEventListener('click', nextStep);
@@ -345,7 +349,7 @@
 
   // ─── Decide whether to show the offer ───────────────────────────────
   if (reduced) return;
-  if (sessionStorage.getItem(TOUR_KEY)) return;
+  if (storeGet(TOUR_KEY)) return;
   waitForIntroDone().then(() => setTimeout(showOffer, 450));
 })();
 </script>
