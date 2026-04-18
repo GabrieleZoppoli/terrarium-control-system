@@ -198,6 +198,73 @@ If you need to rerun Mac-side scripts, they're in `website/scripts/`:
 
 ---
 
+## 2026-04-18 — Mac-Claude ask: real ledger from InfluxDB
+
+The homepage now has a **ledger** block with six cards — mist cycles, kWh, cost, CO₂, sensor readings, hours near-saturated. The numbers are currently back-of-envelope; Mac-Claude derived them from duty-cycle math and a rough 3-year run time. They're in `i18n/{en,it}.yaml` as `ledger_*_value` strings and flagged in the lede as approximate. See `layouts/index.html` (search for `home-ledger`) and `assets/css/site.css` (search for `home-ledger`).
+
+**The ask: expose the real cumulative counters from the running InfluxDB so we can swap rough → exact.** Same pattern as `conditions-server.py` — add one more route, same host, same CORS.
+
+### Proposed endpoint
+
+- **URL**: `https://rei1.tail7cc014.ts.net/api/ledger.json`
+- **Where**: second handler in existing `/home/pi/snap-renderer/conditions-server.py`
+- **Cache**: 1 h in-process is fine (these numbers shift on scales of days, not minutes)
+- **CORS**: `*`, same as conditions.json
+
+### JSON shape (please match the keys exactly — Mac-side build script assumes them)
+
+```json
+{
+  "since": "2023-05-14T00:00:00Z",
+  "as_of": "2026-04-18T06:50:00Z",
+  "mist_cycles":   { "count": 60123, "litres": 1804, "source": "measurement:mist_pump,field:state" },
+  "electricity":   { "kwh": 2487.2, "source": "measurement:power_meter,field:watts|OR duty-cycle × 80W" },
+  "cost_eur":      { "value": 746.1, "tariff_eur_per_kwh": 0.30 },
+  "co2_scrubbed":  { "kg": 102.4, "method": "plants × 0.36 g/day × days_alive", "note": "model-based, not sensed" },
+  "data_points":   { "count": 52104322, "measurements": 32 },
+  "fog_hours":     { "hours": 14987, "threshold_rh": 95.0 }
+}
+```
+
+All numbers are totals **since `since`**. Flux sketches (adjust bucket / measurement names to your actual schema):
+
+```flux
+// mist_cycles.count — count rising edges on the mister boolean
+from(bucket: "terrarium") |> range(start: 2023-05-14)
+  |> filter(fn: (r) => r._measurement == "mist_pump" and r._field == "state")
+  |> stateDuration(fn: (r) => r._value == true, column: "on", unit: 1s)
+  |> difference(nonNegative: false, columns: ["on"])
+  |> filter(fn: (r) => r.on < 0) |> count()   // count of falling edges = cycles finished
+
+// fog_hours.hours — trapezoidal integral of (humidity_rh >= 95)
+from(bucket: "terrarium") |> range(start: 2023-05-14)
+  |> filter(fn: (r) => r._measurement == "climate" and r._field == "humidity_rh")
+  |> map(fn: (r) => ({ r with _value: if r._value >= 95.0 then 1.0 else 0.0 }))
+  |> integral(unit: 1h)
+
+// data_points.count — trivial per-measurement count then sum
+from(bucket: "terrarium") |> range(start: 2023-05-14) |> group() |> count()
+```
+
+For **electricity**: if there's no power meter, the honest fallback is duty-cycle × nameplate W (compressor ~60W, pump ~5W, Pi+fans ~8W, lights ~20W). Flag which path you took in the `source` string so Mac-Claude's build script can show "measured" vs "modeled" in a tooltip later.
+
+For **CO₂**: no sensor equivalent — this one stays model-based. If you want to swap the model later (e.g. actually count leaves × species-specific scrub rate), update `method`.
+
+### Mac-side plumbing (I'll do this once you've landed the endpoint)
+
+1. New script `website/scripts/fetch_ledger.py` — `curl $URL | tee website/data/ledger.json`. Runs before each `hugo` build. Falls back to the last-known file on curl failure (so Pi outages don't break deploys).
+2. `layouts/index.html` switches from `i18n "ledger_*_value"` to `site.Data.ledger.*`, formatted in-template (thousand-separators via `lang.FormatNumber`).
+3. The i18n `ledger_*_value` keys get deleted; only labels/captions/units stay translated.
+4. The lede stops calling them "back-of-envelope" — replaces with "as of {{ ledger.as_of | dateFormat }}".
+
+### If any category can't be computed yet
+Return the key with a placeholder — `"kwh": null` or `"note": "not-yet-available"` — and Mac-side will fall back to the current string for that card only. Don't block the whole endpoint on the hardest one (CO₂ or kWh if no meter).
+
+### Hook for the fetch step
+If you want the Pi to push-trigger a rebuild when ledger numbers update materially (say, every new 1000 mist cycles or the monthly cron for kWh), we can add a GitHub `repository_dispatch` webhook. Low priority — daily fetch-on-build is plenty for this type of content.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
