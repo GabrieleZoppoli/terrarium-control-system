@@ -71,8 +71,15 @@
     text-shadow: 0 0 40px rgba(120,120,120,0.15);
   }
   #title .sub {
-    font-size: 11px; color: #555; margin-top: 4px; letter-spacing: 1.2px;
+    display: inline-block;
+    font-size: 11px; color: #777; margin-top: 4px; letter-spacing: 1.2px;
     font-weight: 300;
+    /* Backdrop so the counts stay legible over the outer label ring */
+    padding: 4px 14px;
+    background: rgba(10,12,15,0.78);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.04);
   }
 
   /* ── Search ── */
@@ -235,6 +242,32 @@
   }
   .legend-symbol { margin-right: 6px; font-size: 12px; min-width: 16px; text-align: center; }
 
+  /* Toggle button — hidden on desktop; only used to collapse legend on mobile */
+  #legend-toggle {
+    display: none;
+    background: transparent; border: 0;
+    color: #999; font-family: 'Inter', sans-serif; font-size: 10px;
+    font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; padding: 0; width: 100%;
+    align-items: center; justify-content: space-between; gap: 10px;
+  }
+  #legend-toggle .legend-toggle-chev {
+    transition: transform 0.2s;
+    font-size: 14px; line-height: 1;
+  }
+  #legend.collapsed #legend-body { display: none; }
+  #legend.collapsed #legend-toggle .legend-toggle-chev { transform: rotate(180deg); }
+
+  @media (max-width: 720px) {
+    #legend {
+      padding: 10px 14px;
+      max-width: calc(100vw - 40px);
+    }
+    #legend-toggle { display: flex; }
+    /* When collapsed, the legend body is hidden and the button shrinks to a pill */
+    #legend.collapsed { padding: 8px 14px; }
+  }
+
   /* ── Controls hint ── */
   #controls {
     position: fixed; top: 68px; right: 20px; z-index: 10;
@@ -358,14 +391,20 @@
 </div>
 
 <div id="legend">
-  <div class="section-title">Evolutionary Groups</div>
-  <div id="legend-items"></div>
-  <div class="section-title" style="margin-top:14px">Status</div>
-  <div style="display:flex;flex-direction:column;gap:3px">
-    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#4CAF50">&#x25CF;</span> Alive</div>
-    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#C62828">&#x271D;</span> Dead</div>
-    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#7E57C2">&#x1F381;</span> Gave away</div>
-    <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#FFD54F">&#x25C6;</span> Has photo</div>
+  <button id="legend-toggle" type="button" aria-expanded="true" aria-controls="legend-body">
+    <span class="legend-toggle-label">Legend</span>
+    <span class="legend-toggle-chev" aria-hidden="true">⌄</span>
+  </button>
+  <div id="legend-body">
+    <div class="section-title">Evolutionary Groups</div>
+    <div id="legend-items"></div>
+    <div class="section-title" style="margin-top:14px">Status</div>
+    <div style="display:flex;flex-direction:column;gap:3px">
+      <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#4CAF50">&#x25CF;</span> Alive</div>
+      <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#C62828">&#x271D;</span> Dead</div>
+      <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#7E57C2">&#x1F381;</span> Gave away</div>
+      <div style="font-size:11px;color:#888;display:flex;align-items:center;font-weight:300"><span class="legend-symbol" style="color:#FFD54F">&#x25C6;</span> Has photo</div>
+    </div>
   </div>
 </div>
 
@@ -1178,6 +1217,23 @@ cladeOrder.forEach(clade=>{
   item.append("div").attr("class","legend-swatch").style("background",color);
   item.append("span").text(`${clade} (${count})`);
 });
+
+// ── LEGEND TOGGLE (mobile) ──
+// On narrow screens the legend occupied too much of the viewport, so we
+// collapse it by default and let the user expand it on tap.
+const legendEl = document.getElementById('legend');
+const legendToggle = document.getElementById('legend-toggle');
+function setLegendCollapsed(collapsed) {
+  legendEl.classList.toggle('collapsed', collapsed);
+  legendToggle.setAttribute('aria-expanded', String(!collapsed));
+}
+legendToggle.addEventListener('click', () => {
+  setLegendCollapsed(!legendEl.classList.contains('collapsed'));
+});
+// Start collapsed below the mobile breakpoint.
+if (window.matchMedia && window.matchMedia('(max-width: 720px)').matches) {
+  setLegendCollapsed(true);
+}
 </script>
 </body>
 </html>
