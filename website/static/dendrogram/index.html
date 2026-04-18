@@ -707,6 +707,18 @@ nodes.filter(d => !d.children && d.data.status==='alive' && d.data.photos && d.d
   .attr("stroke-opacity", 0.35)
   .attr("stroke-width", 1.5);
 
+// Invisible 10-px hit ring around every leaf so hover/click works
+// reliably — without this the visible dot is 1–2 px and users have to
+// aim pixel-perfect. Added after the visible ring so it's topmost in the
+// node group and intercepts pointer events before the proximity overlay.
+nodes.filter(d => !d.children)
+  .append("circle")
+  .attr("class", "leaf-hit")
+  .attr("r", 10)
+  .attr("fill", "transparent")
+  .style("pointer-events", "all")
+  .style("cursor", "pointer");
+
 // Photo indicator (small diamond) for leaves with photos
 nodes.filter(d => !d.children && d.data.photos && d.data.photos.length > 0)
   .append("text")
@@ -903,6 +915,10 @@ function onNodeClick(d) {
   clearHoverPreview();
   if(d.depth===0){resetFocus();return;}
   focusedNode=d;
+  // Proximity cache remembers the last resolved candidate so it doesn't
+  // re-dispatch on every pixel move. Reset it after focus change so the
+  // next hover over a species inside the focused genus fires fresh.
+  lastProximityCandidate = null;
   const anc=new Set(getAncestors(d));
   const desc=new Set(getDescendants(d));
   const related=new Set([...anc,...desc]);
@@ -935,6 +951,7 @@ function onNodeClick(d) {
 function resetFocus() {
   clearHoverPreview();
   focusedNode=null;
+  lastProximityCandidate = null;
   nodes.classed("dimmed",false).classed("highlighted",false).classed("show-label",false);
   links.classed("dimmed",false).classed("highlighted",false);
   svg.transition().duration(750).ease(d3.easeCubicInOut)
