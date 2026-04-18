@@ -92,13 +92,15 @@
     50%      { box-shadow: 0 0 0 8px rgba(143, 185, 122, 0); }
   }
 
-  /* The Node-RED UI is rendered 900x1400 (portrait — it was laid out for
-     tablets). A 16:10 landscape frame produced huge black letterboxing on
-     desktop; instead, let the image define its own aspect and centre it. */
+  /* The Node-RED UI is rendered 1800x2800 (portrait — it was laid out for
+     a tablet). A 16:10 landscape frame produced huge black letterboxing
+     on desktop; instead let the image define its own aspect and centre
+     it. 600px wide reads as a real tablet-sized control panel rather
+     than a phone thumbnail. */
   .live-frame-wrap {
     position: relative;
     width: 100%;
-    max-width: 460px;
+    max-width: 600px;
     margin: 0 auto;
     background: var(--surface-solid);
     border: 1px solid var(--border-subtle);
