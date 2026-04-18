@@ -280,6 +280,28 @@
     font-weight: 300;
   }
 
+  /* ── Reset view button ── */
+  #reset-view {
+    position: fixed; bottom: 20px; right: 20px; z-index: 20;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: rgba(14,16,20,0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+    color: #999;
+    font-size: 18px; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s, border-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  #reset-view:hover {
+    color: #e0e0e0;
+    border-color: rgba(142,36,170,0.4);
+    transform: rotate(-90deg);
+  }
+  #reset-view:active { transform: rotate(-180deg); }
+
 
   /* ── Subtle vignette overlay ── */
   #vignette {
@@ -394,6 +416,8 @@
   <div class="lb-arrow lb-next" onclick="lbNav(1, event)">&#x203A;</div>
   <div class="lb-counter" id="lb-counter"></div>
 </div>
+
+<button id="reset-view" type="button" title="Reset view (Esc)" aria-label="Reset view">⟲</button>
 
 <div id="legend">
   <button id="legend-toggle" type="button" aria-expanded="true" aria-controls="legend-body">
@@ -1079,10 +1103,14 @@ function showInfo(d) {
       }).join('');
       document.getElementById('info-children').innerHTML=listHtml;
       document.querySelectorAll('#info-children .child').forEach(el=>{
-        el.addEventListener('click',()=>{
-          const target=d.children.find(c=>c.data.name===el.dataset.name);
-          if(target) onNodeClick(target);
-        });
+        const target=d.children.find(c=>c.data.name===el.dataset.name);
+        if(!target) return;
+        el.addEventListener('click',()=>{ onNodeClick(target); });
+        // Hovering a species/child name in the side panel should open the
+        // same photo preview grid as hovering its tip on the tree.
+        el.addEventListener('mouseenter',(e)=>{ schedulePreview(e, target); });
+        el.addEventListener('mousemove',(e)=>{ if (hoverPreviewVisible) positionHoverPreview(e.clientX, e.clientY); });
+        el.addEventListener('mouseleave',()=>{ clearHoverPreview(); });
       });
     }
   }
@@ -1241,6 +1269,20 @@ cladeOrder.forEach(clade=>{
     });
   item.append("div").attr("class","legend-swatch").style("background",color);
   item.append("span").text(`${clade} (${count})`);
+});
+
+// ── RESET VIEW button ──
+// Gives a visible fallback for "zoom out" — scroll-down to un-zoom works
+// but isn't always discoverable, and on trackpads some users can't reach
+// the minimum zoom. This button both clears any focus and animates back
+// to the initial fit transform.
+document.getElementById('reset-view').addEventListener('click', () => {
+  if (focusedNode) {
+    resetFocus();
+  } else {
+    svg.transition().duration(600).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform, initialFitTransform || d3.zoomIdentity);
+  }
 });
 
 // ── LEGEND TOGGLE (mobile) ──
