@@ -67,7 +67,7 @@ Per una selezione più ampia, il [mosaico della homepage](/) e le pagine di [Hel
 - *© Gabriele Zoppoli, CC BY-SA 4.0 · highlandcloud.forest* *(sostituire con l'URL canonico del sito)*
 - Per la stampa: *G. Zoppoli, 2025 · CC BY-SA 4.0*
 
-**Derivati.** Puoi ritagliare, correggere il colore, integrare le fotografie in contenuti stampati o digitali. Se l'immagine è modificata in modo sostanziale, segnalalo in didascalia.
+**Derivati.** Puoi ritagliare, correggere il colore e integrare le fotografie in contenuti stampati o digitali. Se l'immagine è modificata in modo sostanziale, segnalalo in didascalia.
 
 **ShareAlike.** Un'opera derivata va pubblicata con licenza CC BY-SA 4.0 (o compatibile) — è questo che tiene aperto l'ecosistema della fotografia botanica.
 

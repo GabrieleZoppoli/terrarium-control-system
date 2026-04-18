@@ -12,13 +12,13 @@ narrow: true
   <figcaption>Genova, 2025.</figcaption>
 </figure>
 
-Sono **Gabriele Zoppoli** — clinico e ricercatore in oncologia ed ematologia all'Università di Genova e, per quante ore il resto della vita mi concede, un collezionista di piante carnivore d'alta quota, orchidee miniatura e *Tillandsia* grigie. La collezione documentata in questo sito è cresciuta una pianta alla volta, dallo stupore silenzioso di trovare ancora vive, la mattina dopo, specie che in teoria qui non dovrebbero riuscire a vivere.
+Sono **Gabriele Zoppoli** — clinico e ricercatore in oncologia ed ematologia all'Università di Genova e, per quante ore il resto della vita mi concede, un collezionista di piante carnivore d'alta quota, orchidee miniatura e *Tillandsia* grigie. La collezione documentata in questo sito è cresciuta una pianta alla volta, dalla gioia di scoprire ancora vive, la mattina dopo, specie che in teoria qui non dovrebbero sopravvivere.
 
-Il lato sistematico di tutto questo — il foglio di calcolo, l'ordinamento filogenetico, il sistema di controllo open source — è quasi sicuramente un'abitudine presa in laboratorio. Applicato a un organismo vivo, che ostinatamente *non* è un esperimento, lo stesso riflesso si fa più mite: diventa attenzione, pazienza, e l'impegno a non perdere ciò che si ha avuto la fortuna di ricevere.
+Il lato sistematico di tutto questo — il foglio di calcolo, l'ordinamento filogenetico, il sistema di controllo open source — è quasi sicuramente un'abitudine presa in laboratorio. Applicato a un organismo vivo, che ostinatamente *non* è un esperimento, lo stesso riflesso si fa più mite: diventa attenzione, pazienza, e il proposito di preservare ciò che fortunatamente si possiede.
 
 ## Il lavoro
 
-Sono Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'*IRCCS Ospedale Policlinico San Martino*, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La mia ricerca attuale è sulla biopsia liquida — DNA libero circolante e sequenziamento a singola molecola — per la diagnosi precoce e il monitoraggio nel tempo del tumore della mammella. Lo stesso gusto per dati ordinati e metodi scritti lo ritrovo sia in ospedale sia nel terrario. Pubblicazioni e progetti su [ORCID](https://orcid.org/0000-0002-1619-1708), [Google Scholar](https://scholar.google.com/citations?user=Q5DfyqQAAAAJ), e nella [rubrica UniGe](https://rubrica.unige.it/persone/UkBGXVtc).
+Sono Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'*IRCCS Ospedale Policlinico San Martino*, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La mia ricerca attuale è sulla biopsia liquida — DNA libero circolante e sequenziamento a singola molecola — per la diagnosi precoce e il monitoraggio nel tempo del tumore della mammella. Lo stesso gusto per dati ordinati e metodi documentati lo ritrovo sia in ospedale sia nel terrario. Pubblicazioni e progetti su [ORCID](https://orcid.org/0000-0002-1619-1708), [Google Scholar](https://scholar.google.com/citations?user=Q5DfyqQAAAAJ), e nella [rubrica UniGe](https://rubrica.unige.it/persone/UkBGXVtc).
 
 ## Come è cominciata
 

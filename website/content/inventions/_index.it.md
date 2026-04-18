@@ -3,7 +3,7 @@ title: "Invenzioni & esperimenti"
 description: "Zeer pot autoirrigante per Darlingtonia, contenitori a bassa manutenzione, allestimento per Drosera regia"
 ---
 
-Piccoli esperimenti di coltivazione fuori dal terrario d'alta quota. Ogni progetto risolve un problema colturale specifico con una soluzione dedicata.
+Piccoli esperimenti di coltivazione fuori dal terrario d'alta quota. Ogni progetto risolve un problema colturale specifico con una soluzione su misura.
 
 ## Progetti
 

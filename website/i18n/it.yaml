@@ -13,7 +13,7 @@ stat_operational:      "In funzione dal"
 
 # Home mosaic
 mosaic_kicker:         "Una selezione · clicca per aprire la pagina del genere"
-mosaic_title:          "Un atlante vivo di altopiani convergenti."
+mosaic_title:          "Un atlante vivente di altopiani convergenti."
 mosaic_cta:            "Scopri il dendrogramma filogenetico completo"
 mosaic_outdoor_kicker: "Fuori dal terrario"
 mosaic_outdoor_title:  "Specie che preferiscono stare sul balcone."
@@ -43,7 +43,7 @@ dendro_mobile_button:  "Schermo intero"
 dendro_mobile_meta_1:  "Oppure sfoglia la collezione"
 dendro_mobile_meta_2:  "per genere"
 dendro_mobile_meta_3:  "— funziona bene anche su mobile."
-dendro_hint:           "Al meglio su desktop · rotella per lo zoom, trascina per muoverti, passa sopra una foglia per le foto · "
+dendro_hint:           "Al meglio su desktop · rotella per lo zoom, trascina per muoverti, scorri su un nodo per le foto · "
 dendro_hint_open:      "apri in una scheda dedicata"
 
 # Highland live sensor block
