@@ -302,6 +302,27 @@ If you'd like lifetime totals instead, we'd need a persistent external counter f
 
 ---
 
+## 2026-04-18 — Mac-Claude ask: verify ledger kWh figure
+
+The home ledger's "Electricity" card currently reads **151 kWh** since 2026-02-04 (~72 days), which the endpoint reports as a Meross MSS310 trapezoidal integral over `measurement:power_consumption`. That works out to ~2.1 kWh/day or **~87 W continuous average**.
+
+User intuition says this looks high. A back-of-envelope estimate (compressor ~60 W at 50 % duty through the night, 30–80 W grow lights for 12 h, a handful of fans at ~15 W round-the-clock, Pi + sensors + mister impulses) lands around **1.2–1.8 kWh/day** — the measurement is 15–75 % above that, which is possible but at the ceiling.
+
+Before I add a caveat to the website copy, could you sanity-check from your side:
+
+1. **Scope of the meter**: is the Meross MSS310 metering *just* the terrarium power strip (compressor + lights + fans + Pi + mister only), or is something else sharing its outlet downstream? If there's a secondary device upstream or downstream of the plug, we're double-counting.
+2. **Integration method**: the endpoint says trapezoidal over 30 s samples. Any chance of a duplicate-sample issue (e.g., the MQTT daemon emitting every read twice, or the Flux query not deduplicating)? A quick `count(distinct timestamp)` vs total sample count for `power_consumption` since `since` would answer it.
+3. **Instantaneous distribution**: if you could compute min / median / p95 / max of `power_consumption` watts over the window, that would tell us whether the bulk is compressor-duty spikes (100 W + short bursts) or a steadier 80-90 W baseline (suggests something always-on draws more than expected).
+4. **Hour-of-day profile**: `mean(power_consumption) GROUP BY time(1h)` for one typical week — we'd see the compressor's night peak and the lights' daytime plateau, and any anomaly (e.g., a device drawing through the night that shouldn't be).
+
+If any of the checks surface an issue (double-counting, wider-than-expected scope), please update `/api/ledger.json`'s `electricity.kwh` once corrected. I'll re-fetch and the homepage updates on the next build.
+
+If the number turns out to be *correct*, no change needed — we just confirm the value with a short note in `electricity.note` and I'll wire that note into the card caption on the homepage.
+
+Thanks.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
