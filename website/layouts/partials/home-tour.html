@@ -1,0 +1,351 @@
+{{- /*
+  Home tour — optional 20-second spotlight walkthrough of the main
+  navigation. Offered once per session after the cinematic intro, never
+  forced. Each step lifts a nav item out of a dimmed backdrop and shows
+  a short caption with Next / Skip controls.
+*/ -}}
+<div id="tour-offer" hidden role="dialog" aria-label="Take a short tour of the site">
+  <span class="tour-offer-text">Want a 20-second tour of the navigation?</span>
+  <button type="button" class="tour-offer-btn tour-offer-btn--primary" data-tour-start>Take tour</button>
+  <button type="button" class="tour-offer-btn" data-tour-dismiss>Skip</button>
+</div>
+
+<div id="tour-stage" hidden aria-hidden="true">
+  <div class="tour-backdrop" aria-hidden="true"></div>
+  <div class="tour-tooltip" role="dialog" aria-live="polite">
+    <span class="tour-step-counter"></span>
+    <h3 class="tour-step-title"></h3>
+    <p class="tour-step-body"></p>
+    <div class="tour-controls">
+      <button type="button" class="tour-btn tour-btn--ghost" data-tour-end>End tour</button>
+      <button type="button" class="tour-btn" data-tour-prev>‹ Back</button>
+      <button type="button" class="tour-btn tour-btn--primary" data-tour-next>Next ›</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ── Offer chip (appears after intro) ─────────────────────────────── */
+  #tour-offer {
+    position: fixed;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.7rem 1.2rem;
+    background: rgba(14, 16, 20, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.84rem;
+    color: #cfcfcf;
+    max-width: calc(100vw - 2rem);
+    opacity: 0;
+    animation: tour-offer-in 700ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+  #tour-offer.dismissed {
+    animation: tour-offer-out 400ms ease forwards;
+    pointer-events: none;
+  }
+  @keyframes tour-offer-in {
+    from { opacity: 0; transform: translate(-50%, 14px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+  @keyframes tour-offer-out {
+    from { opacity: 1; }
+    to   { opacity: 0; transform: translate(-50%, 8px); }
+  }
+  .tour-offer-text { font-weight: 300; letter-spacing: 0.01em; }
+  .tour-offer-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: #cfcfcf;
+    font: inherit;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: background 150ms, border-color 150ms, color 150ms;
+  }
+  .tour-offer-btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+  .tour-offer-btn--primary {
+    background: rgba(176, 109, 209, 0.18);
+    border-color: rgba(176, 109, 209, 0.55);
+    color: #e8d6f0;
+  }
+  .tour-offer-btn--primary:hover {
+    background: rgba(176, 109, 209, 0.32);
+    border-color: rgba(176, 109, 209, 0.8);
+    color: #fff;
+  }
+
+  /* ── Spotlight stage ───────────────────────────────────────────────── */
+  #tour-stage {
+    position: fixed;
+    inset: 0;
+    z-index: 700;
+    pointer-events: none;
+  }
+  #tour-stage.is-on { pointer-events: auto; }
+
+  .tour-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(6, 7, 10, 0.78);
+    backdrop-filter: blur(3px);
+    transition: opacity 300ms ease;
+  }
+
+  /* The highlighted element is cloned and positioned absolutely above
+     the backdrop; the original keeps its layout role. See JS. */
+  .tour-clone {
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 8px;
+    box-shadow:
+      0 0 0 4px rgba(176, 109, 209, 0.55),
+      0 0 40px 10px rgba(176, 109, 209, 0.35);
+    transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                left 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                width 300ms, height 300ms;
+  }
+
+  .tour-tooltip {
+    position: absolute;
+    z-index: 3;
+    max-width: 360px;
+    padding: 1.2rem 1.4rem 1rem;
+    background: rgba(14, 16, 20, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    color: #dcdcdc;
+    font-family: 'Crimson Pro', Georgia, serif;
+    transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                left 300ms cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 250ms;
+  }
+  .tour-step-counter {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem;
+    color: #8a8a8a;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .tour-step-title {
+    font-family: 'Crimson Pro', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin: 0 0 0.5rem;
+    color: #f1f1f1;
+  }
+  .tour-step-body {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #bfbfbf;
+    margin: 0 0 1rem;
+    font-style: italic;
+  }
+  .tour-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .tour-controls > :first-child { margin-right: auto; }
+  .tour-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #cfcfcf;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms, background 150ms;
+  }
+  .tour-btn:hover { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+  .tour-btn--primary {
+    background: rgba(176, 109, 209, 0.25);
+    border-color: rgba(176, 109, 209, 0.55);
+    color: #efe3f5;
+  }
+  .tour-btn--primary:hover { background: rgba(176, 109, 209, 0.4); color: #fff; }
+  .tour-btn--ghost { color: #888; }
+  .tour-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  @media (max-width: 640px) {
+    #tour-offer { font-size: 0.78rem; padding: 0.6rem 0.9rem; }
+    .tour-tooltip { max-width: calc(100vw - 2rem); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tour-clone, .tour-tooltip { transition: none; }
+  }
+</style>
+
+<script>
+(function () {
+  const TOUR_KEY = 'hcf-tour-seen';
+  const INTRO_KEY = 'hcf-intro-seen';
+  const offer = document.getElementById('tour-offer');
+  const stage = document.getElementById('tour-stage');
+  if (!offer || !stage) return;
+
+  // Steps reference nav items by pageRef. Each targets the first matching
+  // <a> in the main nav — resilient to menu reordering.
+  const STEPS = [
+    { ref: 'highland',   title: 'Highland',    body: 'The cloud-forest cabinet — live conditions, system documentation, architecture, the build log.' },
+    { ref: 'inventions', title: 'Inventions',  body: 'Side projects that spun off from the terrarium: self-watering Zeer pot, Drosera regia setup, simpler enclosures.' },
+    { ref: 'collection', title: 'Collection',  body: 'Every one of 380+ plants — browsed by genus, or as an interactive phylogenetic dendrogram.' },
+    { ref: 'blog',       title: 'Blog',        body: 'Build notes, bloom events, field reports. RSS-published. Posts in English, Italian, or both.' },
+    { ref: 'about',      title: 'About',       body: 'Who built this, why, and a little on the day job (oncology) that shaped the collection ethos.' },
+  ];
+
+  const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function findTarget(ref) {
+    // Match <a href> whose URL ends with /<ref>/ ; navigation is rendered
+    // from the Hugo menu so this is the stable handle.
+    const candidates = document.querySelectorAll('header a[href], nav a[href]');
+    for (const a of candidates) {
+      const href = a.getAttribute('href') || '';
+      if (href.replace(/\/$/, '').endsWith('/' + ref)) return a;
+    }
+    return null;
+  }
+
+  function waitForIntroDone() {
+    const intro = document.getElementById('cinematic-intro');
+    if (!intro || intro.classList.contains('is-skipped')) return Promise.resolve();
+    return new Promise((resolve) => {
+      const obs = new MutationObserver(() => {
+        if (intro.classList.contains('is-skipped')) { obs.disconnect(); resolve(); }
+      });
+      obs.observe(intro, { attributes: true, attributeFilter: ['class'] });
+      // Fallback timeout in case observer misses.
+      setTimeout(resolve, 5000);
+    });
+  }
+
+  function showOffer() {
+    offer.hidden = false;
+    setTimeout(() => { dismissOffer(false); }, 12000);  // auto-hide after 12s
+  }
+
+  function dismissOffer(persist) {
+    if (offer.classList.contains('dismissed')) return;
+    offer.classList.add('dismissed');
+    if (persist) sessionStorage.setItem(TOUR_KEY, 'dismissed');
+    setTimeout(() => { offer.hidden = true; }, 500);
+  }
+
+  // ─── Spotlight machinery ────────────────────────────────────────────
+  const backdrop = stage.querySelector('.tour-backdrop');
+  const tooltip = stage.querySelector('.tour-tooltip');
+  const counterEl = tooltip.querySelector('.tour-step-counter');
+  const titleEl = tooltip.querySelector('.tour-step-title');
+  const bodyEl = tooltip.querySelector('.tour-step-body');
+  const nextBtn = tooltip.querySelector('[data-tour-next]');
+  const prevBtn = tooltip.querySelector('[data-tour-prev]');
+  const endBtn = tooltip.querySelector('[data-tour-end]');
+  let clone = null;
+  let idx = 0;
+
+  function renderStep() {
+    const step = STEPS[idx];
+    const target = findTarget(step.ref);
+    if (!target) { nextStep(); return; }
+    const rect = target.getBoundingClientRect();
+
+    // Clone the target so we can glow it above the backdrop without
+    // touching its real position in the nav.
+    if (!clone) {
+      clone = document.createElement('div');
+      clone.className = 'tour-clone';
+      stage.appendChild(clone);
+    }
+    clone.style.top = rect.top + 'px';
+    clone.style.left = rect.left + 'px';
+    clone.style.width = rect.width + 'px';
+    clone.style.height = rect.height + 'px';
+    clone.textContent = target.textContent;
+    // Copy a little style so it looks the same on top of the backdrop
+    const cs = window.getComputedStyle(target);
+    clone.style.font = cs.font;
+    clone.style.color = cs.color;
+    clone.style.padding = cs.padding;
+    clone.style.background = cs.backgroundColor === 'rgba(0, 0, 0, 0)' ? 'rgba(14,16,20,0.95)' : cs.backgroundColor;
+    clone.style.display = 'flex';
+    clone.style.alignItems = 'center';
+
+    // Tooltip position: below the target, centred on it, but clamped
+    // to the viewport so it never falls off-screen.
+    const tooltipW = 360;
+    let tx = rect.left + rect.width / 2 - tooltipW / 2;
+    tx = Math.max(12, Math.min(tx, window.innerWidth - tooltipW - 12));
+    const ty = rect.bottom + 14;
+    tooltip.style.top = ty + 'px';
+    tooltip.style.left = tx + 'px';
+
+    counterEl.textContent = `Step ${idx + 1} of ${STEPS.length}`;
+    titleEl.textContent = step.title;
+    bodyEl.textContent = step.body;
+    prevBtn.disabled = idx === 0;
+    nextBtn.textContent = idx === STEPS.length - 1 ? 'Done ✓' : 'Next ›';
+  }
+
+  function nextStep() {
+    if (idx >= STEPS.length - 1) { endTour(); return; }
+    idx++; renderStep();
+  }
+  function prevStep() {
+    if (idx <= 0) return;
+    idx--; renderStep();
+  }
+  function startTour() {
+    dismissOffer(true);
+    idx = 0;
+    stage.hidden = false;
+    stage.classList.add('is-on');
+    stage.setAttribute('aria-hidden', 'false');
+    renderStep();
+  }
+  function endTour() {
+    stage.hidden = true;
+    stage.classList.remove('is-on');
+    stage.setAttribute('aria-hidden', 'true');
+    if (clone) { clone.remove(); clone = null; }
+    sessionStorage.setItem(TOUR_KEY, 'done');
+  }
+
+  nextBtn.addEventListener('click', nextStep);
+  prevBtn.addEventListener('click', prevStep);
+  endBtn.addEventListener('click', endTour);
+  document.addEventListener('keydown', (e) => {
+    if (stage.hidden) return;
+    if (e.key === 'Escape') endTour();
+    else if (e.key === 'ArrowRight') nextStep();
+    else if (e.key === 'ArrowLeft') prevStep();
+  });
+  // Re-position on resize.
+  window.addEventListener('resize', () => { if (!stage.hidden) renderStep(); });
+
+  offer.querySelector('[data-tour-start]').addEventListener('click', startTour);
+  offer.querySelector('[data-tour-dismiss]').addEventListener('click', () => dismissOffer(true));
+
+  // ─── Decide whether to show the offer ───────────────────────────────
+  if (reduced) return;
+  if (sessionStorage.getItem(TOUR_KEY)) return;
+  waitForIntroDone().then(() => setTimeout(showOffer, 450));
+})();
+</script>
