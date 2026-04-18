@@ -45,6 +45,7 @@ Niente di tutto questo sarebbe sostenibile senza la comunità europea dei coltiv
   <li><a href="https://scholar.google.com/citations?user=Q5DfyqQAAAAJ" rel="me"><span class="elsewhere__key">Google Scholar</span><span class="elsewhere__val">Pubblicazioni</span></a></li>
   <li><a href="https://github.com/GabrieleZoppoli" rel="me"><span class="elsewhere__key">GitHub</span><span class="elsewhere__val">Terrario, dendrogramma, sito</span></a></li>
   <li><a href="https://www.linkedin.com/in/gabriele-zoppoli" rel="me"><span class="elsewhere__key">LinkedIn</span><span class="elsewhere__val">Professionale</span></a></li>
+  <li><a href="https://mastodon.social/@zoppolig" rel="me"><span class="elsewhere__key">Mastodon</span><span class="elsewhere__val">@zoppolig@mastodon.social</span></a></li>
 </ul>
 
 Per scambi di piante, correzioni, collaborazioni o un semplice saluto — [scrivere è il modo migliore](mailto:gabriele.zoppoli@unige.it).

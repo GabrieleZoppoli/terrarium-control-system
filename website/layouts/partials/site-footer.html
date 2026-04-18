@@ -3,6 +3,7 @@
     <nav class="site-footer__links" aria-label="Follow and reach out">
       <a href="{{ "index.xml" | relLangURL }}" rel="alternate" type="application/rss+xml" title="{{ i18n "footer_rss_title" }}">{{ i18n "footer_rss" }}</a>
       <a href="{{ "press/" | relLangURL }}">{{ i18n "footer_press" }}</a>
+      {{- with .Site.Params.author.mastodon }}<a href="{{ . }}" rel="me external noopener">Mastodon</a>{{ end }}
       {{- with .Site.Params.repoURL }}<a href="{{ . }}" rel="me external">{{ i18n "footer_github" }}</a>{{ end }}
       <a href="mailto:gabriele.zoppoli@unige.it">{{ i18n "footer_email" }}</a>
       <span class="site-footer__license" title="{{ i18n "footer_cc_title" }}">

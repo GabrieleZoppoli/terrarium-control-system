@@ -45,6 +45,7 @@ None of this would be sustainable without the European carnivorous-plant and orc
   <li><a href="https://scholar.google.com/citations?user=Q5DfyqQAAAAJ" rel="me"><span class="elsewhere__key">Google Scholar</span><span class="elsewhere__val">Citation record</span></a></li>
   <li><a href="https://github.com/GabrieleZoppoli" rel="me"><span class="elsewhere__key">GitHub</span><span class="elsewhere__val">Terrarium, dendrogram, site</span></a></li>
   <li><a href="https://www.linkedin.com/in/gabriele-zoppoli" rel="me"><span class="elsewhere__key">LinkedIn</span><span class="elsewhere__val">Professional</span></a></li>
+  <li><a href="https://mastodon.social/@zoppolig" rel="me"><span class="elsewhere__key">Mastodon</span><span class="elsewhere__val">@zoppolig@mastodon.social</span></a></li>
 </ul>
 
 For plant trades, corrections, collaborations, or a simple hello — [email is best](mailto:gabriele.zoppoli@unige.it).

@@ -26,6 +26,7 @@
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}">
 {{- /* rel=me for identity discovery across IndieWeb / Mastodon / WebFinger */}}
 {{- with .Site.Params.author.orcid }}<link rel="me" href="{{ . }}">{{ end }}
+{{- with .Site.Params.author.mastodon }}<link rel="me" href="{{ . }}">{{ end }}
 {{- with .Site.Params.repoURL }}<link rel="me" href="{{ . }}">{{ end }}
 <link rel="me" href="https://scholar.google.com/citations?user=Q5DfyqQAAAAJ">
 <link rel="me" href="https://www.linkedin.com/in/gabriele-zoppoli">
