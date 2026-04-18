@@ -28,6 +28,7 @@ footer_press:          "Stampa & riuso"
 footer_github:         "GitHub"
 footer_email:          "Email"
 footer_meta:           "Collezione vivente · terrario d'alta quota · hardware aperto su misura"
+footer_counter_label:  "letture"
 footer_rss_title:      "Feed RSS — nuove specie, note di costruzione, post"
 footer_cc_title:       "Tutti i contenuti originali sono pubblicati con licenza Creative Commons Attribution-ShareAlike 4.0 International"
 

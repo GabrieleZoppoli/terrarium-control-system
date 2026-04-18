@@ -17,7 +17,32 @@
       © {{ now.Format "2006" }} · {{ .Site.Title }}
       {{- end -}}
       {{- with .Site.Params.repoURL }} · <a href="{{ . }}">source</a>{{ end }}
+      <span class="site-footer__counter" aria-live="polite" data-gc-counter hidden>
+        · <span class="site-footer__counter-num" data-gc-counter-num>—</span>
+        <span class="site-footer__counter-label" data-gc-counter-label>{{ i18n "footer_counter_label" }}</span>
+      </span>
       <span class="hushed"> · {{ i18n "footer_meta" }}</span>
     </div>
   </div>
 </footer>
+
+<script>
+  /* GoatCounter live page-view count (shown in the footer meta row).
+     Requires the site's GoatCounter settings to have
+     "Allow public access to /counter endpoint" enabled. If the fetch
+     fails the element stays hidden — never shows a broken dash. */
+  (function () {
+    var holder = document.querySelector('[data-gc-counter]');
+    if (!holder) return;
+    fetch('https://highland.goatcounter.com/counter/TOTAL.json', { mode: 'cors' })
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        var n = parseInt(data.count_unique || data.count || 0, 10);
+        if (isNaN(n) || n <= 0) return;
+        var num = holder.querySelector('[data-gc-counter-num]');
+        if (num) num.textContent = n.toLocaleString(document.documentElement.lang || 'en');
+        holder.hidden = false;
+      })
+      .catch(function () { /* endpoint not public yet — stay hidden */ });
+  })();
+</script>

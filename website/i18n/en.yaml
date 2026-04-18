@@ -28,6 +28,7 @@ footer_press:          "Press & re-use"
 footer_github:         "GitHub"
 footer_email:          "Email"
 footer_meta:           "Living collection · highland terrarium · bespoke open hardware"
+footer_counter_label:  "reads"
 footer_rss_title:      "RSS feed — new species, build logs, and posts"
 footer_cc_title:       "All original content licensed under Creative Commons Attribution-ShareAlike 4.0 International"
 

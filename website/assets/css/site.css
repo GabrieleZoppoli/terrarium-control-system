@@ -684,6 +684,15 @@ button.photo-tile:focus-visible {
 .site-footer__links a { color: var(--text-2); }
 .site-footer__license a { color: var(--text-4); }
 .site-footer__meta { font-family: var(--font-sans); }
+.site-footer__counter {
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+.site-footer__counter-num { color: var(--text-2); }
+.site-footer__counter-label {
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
 
 /* ----- Cards / grids ----- */
 
