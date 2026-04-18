@@ -1,6 +1,6 @@
 ---
 title: "Heliamphora"
-description: "Sun pitchers — tepui summit endemics from the Venezuelan/Guyana Highlands"
+description: "Carnivorous pitcher plants endemic to the summits of the Venezuelan/Guyana tepuis"
 tags: ["carnivorous", "sarraceniaceae", "tepui"]
 genera: ["Heliamphora"]
 ogImage: "img/collection/heliamphora/heliamphora-macdonaldae.jpg"

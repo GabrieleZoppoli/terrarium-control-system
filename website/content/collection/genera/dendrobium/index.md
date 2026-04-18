@@ -12,7 +12,7 @@ ogImage: "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg"
 
 These plants represent a remarkable case of convergent evolution: they evolved independently from Andean cloud forest orchids like *Dracula* and *Masdevallia*, yet require nearly identical environmental conditions.
 
-The collection also includes miniature *Dendrobium* from Southeast Asia and Vietnam that tolerate the same cool, humid conditions.
+The collection also includes *Dendrobium* from Southeast Asia and Vietnam that tolerate the same cool, humid conditions.
 
 ## Where they live
 

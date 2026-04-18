@@ -1,13 +1,13 @@
 ---
 title: "Other Orchids"
-description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis, miniature Pleurothallidinae, and more"
+description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, and more"
 tags: ["orchid"]
 genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia"]
 ---
 
 ## Neofinetia & Allies (Japanese Wind Orchids)
 
-Miniature vandaceous orchids prized for their fragrance and elegant form.
+Small vandaceous orchids prized for their fragrance and elegant form — the *fūkiran* tradition is built around them.
 
 | # | Taxon | Vendor | Price | Notes | Status |
 |---|-------|--------|-------|-------|--------|
@@ -27,16 +27,16 @@ Miniature vandaceous orchids prized for their fragrance and elegant form.
 | 3 | *H. amesianum* | Claessen Orchids & Plants | EUR 17.95 | 9 cm | Alive |
 | 4 | *H. quasispinifolium* | Nardotto e Capello | — | — | Lost |
 
-## Vanda (Miniature) (4 acquired, 2 alive, 2 lost)
+## Vanda (4 acquired, 2 alive, 2 lost)
 
 | # | Taxon | Vendor | Price | Notes | Status |
 |---|-------|--------|-------|-------|--------|
-| 1 | *V. coerulescens* | Celandroni Orchidee | EUR 55.00 | Miniature species | Alive |
+| 1 | *V. coerulescens* | Celandroni Orchidee | EUR 55.00 | Species | Alive |
 | 2 | *V. nana* | Claessen Orchids & Plants | EUR 19.95 | — | Alive |
 | 3 | *V. coerulescens* | Currlin Orchideen | EUR 13.08 | Second plant | Lost |
 | 4 | *V.* 'Chocolate Brown' | Growlist | — | — | Lost |
 
-## Miniature Phalaenopsis (6 acquired, 5 alive, 1 lost)
+## Phalaenopsis species (6 acquired, 5 alive, 1 lost)
 
 Species-form *Phalaenopsis* -- all miniatures, very different from commercial hybrids.
 
@@ -49,7 +49,7 @@ Species-form *Phalaenopsis* -- all miniatures, very different from commercial hy
 | 5 | *P. parishii* | Growlist | — | — | Alive |
 | 6 | *P. braceana* | Growlist | — | — | Lost |
 
-## Southeast Asian Miniatures
+## Southeast Asian species
 
 | # | Taxon | Vendor | Price | Notes | Status |
 |---|-------|--------|-------|-------|--------|
@@ -63,7 +63,7 @@ Species-form *Phalaenopsis* -- all miniatures, very different from commercial hy
 | 8 | *Stereochilus pachyphyllus* | Orchids & more | EUR 12.00 | — | Lost |
 | 9 | *Vandachostylis* Sasicha | Celandroni Orchidee | EUR 35.00 | — | Lost |
 
-## Miniature Pleurothallidinae & Neotropical Orchids
+## Pleurothallidinae & Neotropical orchids
 
 | # | Taxon | Vendor | Price | Notes | Status |
 |---|-------|--------|-------|-------|--------|
