@@ -1,17 +1,40 @@
 {{- $url := .Site.Params.liveConditionsURL | default "" -}}
 {{- if $url -}}
-<section class="highland-live" data-endpoint="{{ $url }}" data-poll-seconds="10" hidden aria-label="Live conditions inside the terrarium">
+<section class="highland-live" data-endpoint="{{ $url }}" data-poll-seconds="10" data-label-on="{{ i18n "live_on" }}" data-label-off="{{ i18n "live_off" }}" hidden aria-label="Live conditions inside the terrarium">
   <header class="highland-live__head">
     <span class="highland-live__dot" aria-hidden="true"></span>
     <span class="highland-live__label">{{ i18n "live_label" }}</span>
     <span class="highland-live__updated"><time data-field="updatedAt">—</time></span>
   </header>
   <dl class="highland-live__grid">
-    <div><dt>{{ i18n "live_temperature" }}</dt><dd data-field="temperature_c">—</dd></div>
-    <div><dt>{{ i18n "live_humidity" }}</dt><dd data-field="humidity_rh">—</dd></div>
-    <div><dt>{{ i18n "live_vpd" }}</dt><dd data-field="vpd_kpa">—</dd></div>
-    <div><dt>{{ i18n "live_compressor" }}</dt><dd data-field="compressor">—</dd></div>
+    <div>
+      <dt>{{ i18n "live_temperature" }}</dt>
+      <dd data-field="temperature_c">—</dd>
+      <small class="highland-live__sub" data-field="target_temperature_c"></small>
+    </div>
+    <div>
+      <dt>{{ i18n "live_humidity" }}</dt>
+      <dd data-field="humidity_rh">—</dd>
+      <small class="highland-live__sub" data-field="target_humidity_rh"></small>
+    </div>
+    <div>
+      <dt>{{ i18n "live_vpd" }}</dt>
+      <dd data-field="vpd_kpa">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_tank" }}</dt>
+      <dd data-field="water_level_pct">—</dd>
+    </div>
   </dl>
+  <ul class="highland-live__chips" aria-label="Secondary readings">
+    <li><span>{{ i18n "live_compressor" }}</span><strong class="highland-live__state" data-field="compressor">—</strong></li>
+    <li><span>{{ i18n "live_room" }}</span><strong data-field="room">—</strong></li>
+    <li><span>{{ i18n "live_fan" }}</span><strong data-field="fan_pwm">—</strong></li>
+    <li><span>{{ i18n "live_lights" }}</span><strong class="highland-live__state" data-field="lights">—</strong></li>
+    <li><span>{{ i18n "live_mister" }}</span><strong class="highland-live__state" data-field="mister">—</strong></li>
+    <li><span>{{ i18n "live_power" }}</span><strong data-field="power_w">—</strong></li>
+    <li><span>{{ i18n "live_mists_today" }}</span><strong data-field="mists_today">—</strong></li>
+  </ul>
 </section>
 <script>
 (function () {
@@ -21,32 +44,84 @@
   var intervalMs = Math.max(5, parseInt(root.getAttribute('data-poll-seconds') || '10', 10)) * 1000;
   if (!endpoint) return;
 
-  var setters = {
-    temperature_c: function (v) { return typeof v === 'number' ? v.toFixed(1) + ' °C' : null; },
-    humidity_rh:   function (v) { return typeof v === 'number' ? v.toFixed(0) + ' % RH' : null; },
-    vpd_kpa:       function (v) { return typeof v === 'number' ? v.toFixed(2) + ' kPa' : null; },
-    compressor:    function (v) { return v ? String(v).toUpperCase() : null; },
-    updatedAt:     function (v) {
-      if (!v) return null;
-      try {
-        var d = new Date(v);
-        if (isNaN(d.getTime())) return null;
-        var diff = Math.round((Date.now() - d.getTime()) / 1000);
-        if (diff < 60) return diff + ' s ago';
-        if (diff < 3600) return Math.round(diff / 60) + ' min ago';
-        return d.toLocaleTimeString();
-      } catch (_) { return null; }
+  var ON  = root.getAttribute('data-label-on')  || 'on';
+  var OFF = root.getAttribute('data-label-off') || 'off';
+
+  function formatOne(key, data) {
+    var v;
+    switch (key) {
+      case 'temperature_c':
+        v = data.temperature_c;
+        return typeof v === 'number' ? v.toFixed(1) + ' °C' : null;
+      case 'humidity_rh':
+        v = data.humidity_rh;
+        return typeof v === 'number' ? v.toFixed(0) + ' % RH' : null;
+      case 'vpd_kpa':
+        v = data.vpd_kpa;
+        return typeof v === 'number' ? v.toFixed(2) + ' kPa' : null;
+      case 'water_level_pct':
+        v = data.water_level_pct;
+        return typeof v === 'number' ? v.toFixed(0) + ' %' : null;
+      case 'target_temperature_c':
+        v = data.target_temperature_c;
+        return typeof v === 'number' ? '→ ' + v.toFixed(1) + ' °C' : '';
+      case 'target_humidity_rh':
+        v = data.target_humidity_rh;
+        return typeof v === 'number' ? '→ ' + v.toFixed(0) + ' %' : '';
+      case 'room':
+        var t = data.room_temperature_c, h = data.room_humidity_rh, parts = [];
+        if (typeof t === 'number') parts.push(t.toFixed(1) + ' °C');
+        if (typeof h === 'number') parts.push(h.toFixed(0) + ' %');
+        return parts.length ? parts.join(' · ') : null;
+      case 'fan_pwm':
+        v = data.fan_pwm;
+        return typeof v === 'number' ? v.toFixed(0) + ' %' : null;
+      case 'power_w':
+        v = data.power_w;
+        return typeof v === 'number' ? v.toFixed(0) + ' W' : null;
+      case 'mists_today':
+        v = data.mists_today;
+        return typeof v === 'number' ? String(v) : null;
+      case 'compressor':
+      case 'lights':
+      case 'mister':
+        if (typeof data[key] === 'boolean') return data[key] ? ON : OFF;
+        return null;
+      case 'updatedAt':
+        if (!data.updatedAt) return null;
+        try {
+          var d = new Date(data.updatedAt);
+          if (isNaN(d.getTime())) return null;
+          var diff = Math.round((Date.now() - d.getTime()) / 1000);
+          if (diff < 60) return diff + ' s ago';
+          if (diff < 3600) return Math.round(diff / 60) + ' min ago';
+          return d.toLocaleTimeString();
+        } catch (_) { return null; }
     }
-  };
+    return null;
+  }
+
+  var FIELDS = ['temperature_c', 'humidity_rh', 'vpd_kpa', 'water_level_pct',
+                'target_temperature_c', 'target_humidity_rh',
+                'compressor', 'room', 'fan_pwm', 'lights', 'mister',
+                'power_w', 'mists_today', 'updatedAt'];
+  var STATE_FIELDS = ['compressor', 'lights', 'mister'];
 
   function paint(data) {
     if (!data || typeof data !== 'object') return false;
     var any = false;
-    Object.keys(setters).forEach(function (key) {
+    FIELDS.forEach(function (key) {
       var el = root.querySelector('[data-field="' + key + '"]');
       if (!el) return;
-      var out = setters[key](data[key]);
+      var out = formatOne(key, data);
       if (out !== null) { el.textContent = out; any = true; }
+    });
+    STATE_FIELDS.forEach(function (key) {
+      var el = root.querySelector('[data-field="' + key + '"]');
+      if (!el) return;
+      if (typeof data[key] === 'boolean') {
+        el.setAttribute('data-on', data[key] ? 'true' : 'false');
+      }
     });
     return any;
   }
@@ -64,7 +139,6 @@
       })
       .catch(function () {
         failCount++;
-        // Mark stale after 3 consecutive failures; hide after 10.
         if (failCount >= 10) { root.hidden = true; }
         else if (failCount >= 3) { root.setAttribute('data-stale', 'true'); }
       });
