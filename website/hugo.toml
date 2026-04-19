@@ -64,7 +64,7 @@ enableEmoji = false
       { src = "img/collection/dracula/dracula-pholeodytes.jpg", alt = "Dracula pholeodytes", taxon = "Dracula pholeodytes", tepui = "Colombian Andes", href = "/collection/genera/dracula/" },
       { src = "img/collection/nepenthes/nepenthes-argentii.jpg", alt = "Nepenthes argentii", taxon = "Nepenthes argentii", tepui = "Mindanao, 2,300 m", href = "/collection/genera/nepenthes/" },
       { src = "img/collection/sophronitis/sophronitis-coccinea-4n.jpg", alt = "Sophronitis coccinea 4N", taxon = "Sophronitis coccinea 4N", tepui = "Brazilian campos rupestres", href = "/collection/genera/sophronitis/" },
-      { src = "img/collection/nepenthes/nepenthes-glabrata.jpg", alt = "Nepenthes glabrata pitcher", taxon = "Nepenthes glabrata", tepui = "Sulawesi · highland pitcher", href = "/collection/genera/nepenthes/" },
+      { src = "img/collection/nepenthes/nepenthes-jamban.jpg", alt = "Nepenthes jamban pitcher", taxon = "Nepenthes jamban", tepui = "Sumatra · 'toilet pitcher' endemic", href = "/collection/genera/nepenthes/" },
       { src = "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg", alt = "Dendrobium cuthbertsonii yellow", taxon = "Dendrobium cuthbertsonii 'Yellow'", tepui = "New Guinea highlands", href = "/collection/genera/dendrobium/" },
       { src = "img/collection/masdevallia/masdevallia-decumana.jpg", alt = "Masdevallia decumana", taxon = "Masdevallia decumana", tepui = "Andean cloud forest", href = "/collection/genera/other-orchids/" },
       { src = "img/collection/utricularia/utricularia-alpina.jpg", alt = "Utricularia alpina", taxon = "Utricularia alpina", tepui = "Guayana highlands, epiphyte", href = "/collection/genera/other-genera/" },
