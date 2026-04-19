@@ -10,7 +10,7 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
     <figcaption><em>Dracula pholeodytes</em> · inside the cabinet</figcaption>
   </a>
   <a class="highland-hero__dashboard" href="/highland/dashboard/" aria-label="Live 24-hour Grafana dashboard">
-    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-desktop.png" alt="Live 24-hour Grafana — temperature, humidity, VPD, actuator state" loading="eager" decoding="async">
+    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png" alt="Live 24-hour Grafana — temperature, humidity, VPD, actuator state" loading="eager" decoding="async">
     <figcaption>Live 24-hour Grafana · auto-refreshed every 15 min</figcaption>
   </a>
 </div>

@@ -10,7 +10,7 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
     <figcaption><em>Dracula pholeodytes</em> · dentro al terrario</figcaption>
   </a>
   <a class="highland-hero__dashboard" href="/it/highland/dashboard/" aria-label="Dashboard Grafana live delle ultime 24 ore">
-    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-desktop.png" alt="Grafana live — temperatura, umidità, VPD, stato attuatori sulle ultime 24 ore" loading="eager" decoding="async">
+    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png" alt="Grafana live — temperatura, umidità, VPD, stato attuatori sulle ultime 24 ore" loading="eager" decoding="async">
     <figcaption>Grafana live · aggiornata ogni 15 min</figcaption>
   </a>
 </div>
