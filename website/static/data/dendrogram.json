@@ -3392,6 +3392,12 @@
                         "../img/collection/utricularia/utricularia-x-nelumbifolia-x-reniformis-2.jpg",
                         "../img/collection/utricularia/utricularia-x-nelumbifolia-x-reniformis-3.jpg"
                       ]
+                    },
+                    {
+                      "name": "prehensilis",
+                      "size": 1,
+                      "vendor": "Klein Carnivors",
+                      "status": "alive"
                     }
                   ]
                 }
