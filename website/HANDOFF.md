@@ -408,6 +408,34 @@ Feel free to use any / none / all — no Pi-side change needed to adopt.
 
 ---
 
+## 2026-04-19 — Mac-Claude ask: hero-sized Grafana render (square-ish, alongside desktop + mobile)
+
+**What's live on the site**
+
+The `/highland/` landing now pairs a *Dracula pholeodytes* photo (left, 4:3) with the live 24-hour Grafana snapshot (right, 4:3 slot). The right tile currently points at `grafana-latest-desktop.png`, which is natively wide (~16:9 or 2:1), so the hero slot ends up either cropping the top/bottom of the chart or letterboxing a lot of empty space. See [`content/highland/_index.md`](content/highland/_index.md) line 12 for the current `<img src>` — that URL is the only thing that would change on the site once a hero variant exists.
+
+**What I'd like**
+
+A **third Grafana render** alongside the two you already ship — **hero-sized, ~4:3 aspect** (e.g. 1200×900 or 1600×1200 px) — published at a stable URL under the same directory. Working name: `grafana-latest-hero.png`.
+
+Ideal layout for this size is not the same as the wide desktop one; the wide one tries to line up many panels in a row, which wastes vertical pixels in a hero tile. For the hero a **2×2 arrangement** of four signature panels would read best:
+
+| Top-left | Top-right |
+|---|---|
+| Temperature sparkline (last 24 h) | Humidity sparkline (last 24 h) |
+| **Bottom-left** | **Bottom-right** |
+| VPD sparkline (last 24 h) | Compressor / mister / lights state trail (last 24 h) |
+
+The big three numbers (current T, RH, VPD) and the actuator state are what readers most want to see; everything else (room, weather, power, PID internals) already lives on the full dashboard page.
+
+**Not a priority** — the current fallback crops the wide snapshot at a sensible center crop and looks fine for now. This is a polish item whenever you have cycles.
+
+**Cadence**: same 15-min refresh as the others. Same public Tailscale Funnel path (`https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png`).
+
+Once shipped I'll just flip the `<img src>` on `/highland/_index.md` (and the IT version) and drop a commit. No Pi-side change needed to adopt beyond publishing the new URL.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
