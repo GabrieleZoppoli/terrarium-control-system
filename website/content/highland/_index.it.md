@@ -19,14 +19,7 @@ Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce 
 
 {{< highland-live >}}
 
-<dl class="highland-stats" aria-label="Condizioni operative">
-  <div><dt>Temperatura</dt><dd>13,5 – 24,3 °C</dd></div>
-  <div><dt>Umidità</dt><dd>75 – 98 % UR</dd></div>
-  <div><dt>VPD</dt><dd>0,03 – 0,64 kPa</dd></div>
-  <div><dt>Log</dt><dd>32 segnali · ogni 60 s</dd></div>
-  <div><dt>Specie ospitate</dt><dd>≈ 120</dd></div>
-  <div><dt>In funzione</dt><dd>dal 2023</dd></div>
-</dl>
+<p class="highland-envelope">In funzione dal 2023 · 32 segnali registrati ogni 60 s · intervalli storici 13,5 – 24,3 °C e 75 – 98 % UR.</p>
 
 ## Dentro al terrario
 

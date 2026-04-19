@@ -1881,8 +1881,8 @@ figure.moment figcaption {
 
 .highland-live__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem 1.5rem;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1.1rem 1.2rem;
   margin: 0;
 }
 .highland-live__grid > div { display: flex; flex-direction: column; gap: 0.15rem; }
@@ -1896,7 +1896,7 @@ figure.moment figcaption {
 }
 .highland-live__grid dd {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 300;
   color: var(--text-1);
   margin: 0;
@@ -1915,34 +1915,13 @@ figure.moment figcaption {
 .highland-live__state[data-on="true"]  { color: var(--status-alive); }
 .highland-live__state[data-on="false"] { color: var(--text-3); }
 
-.highland-live__chips {
-  list-style: none;
-  padding: 0;
+.highland-envelope {
   margin: 0.9rem 0 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 1.2rem;
-  border-top: 1px solid var(--border-hair);
-  padding-top: 0.75rem;
-  font-size: var(--step-xs);
-  color: var(--text-3);
-}
-.highland-live__chips li {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.45rem;
-}
-.highland-live__chips span {
   font-family: var(--font-sans);
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
+  font-size: var(--step-xs);
   color: var(--text-4);
-}
-.highland-live__chips strong {
-  font-family: var(--font-display);
-  font-weight: 400;
-  color: var(--text-2);
-  font-feature-settings: "tnum", "lnum";
+  letter-spacing: 0.04em;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2110,6 +2089,12 @@ figure.moment figcaption {
    the rules below tighten rhythm, typography, and tap targets
    for phone widths.
    ============================================================ */
+
+/* Midrange tablets/laptops: 12-cell live grid folds to 3×4 so each
+   cell stays readable (below this, the narrower rules take over). */
+@media (max-width: 1080px) {
+  .highland-live__grid { grid-template-columns: repeat(3, 1fr); }
+}
 
 @media (max-width: 720px) {
   /* Less top/bottom padding under the nav; let content breathe */

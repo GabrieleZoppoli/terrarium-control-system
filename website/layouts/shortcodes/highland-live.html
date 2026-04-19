@@ -25,16 +25,39 @@
       <dt>{{ i18n "live_tank" }}</dt>
       <dd data-field="water_level_pct">—</dd>
     </div>
+    <div>
+      <dt>{{ i18n "live_compressor" }}</dt>
+      <dd class="highland-live__state" data-field="compressor">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_fan" }}</dt>
+      <dd data-field="fan_pwm">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_lights" }}</dt>
+      <dd class="highland-live__state" data-field="lights">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_mister" }}</dt>
+      <dd class="highland-live__state" data-field="mister">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_power" }}</dt>
+      <dd data-field="power_w">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_mists_today" }}</dt>
+      <dd data-field="mists_today">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_room_temp" }}</dt>
+      <dd data-field="room_temperature_c">—</dd>
+    </div>
+    <div>
+      <dt>{{ i18n "live_room_rh" }}</dt>
+      <dd data-field="room_humidity_rh">—</dd>
+    </div>
   </dl>
-  <ul class="highland-live__chips" aria-label="Secondary readings">
-    <li><span>{{ i18n "live_compressor" }}</span><strong class="highland-live__state" data-field="compressor">—</strong></li>
-    <li><span>{{ i18n "live_room" }}</span><strong data-field="room">—</strong></li>
-    <li><span>{{ i18n "live_fan" }}</span><strong data-field="fan_pwm">—</strong></li>
-    <li><span>{{ i18n "live_lights" }}</span><strong class="highland-live__state" data-field="lights">—</strong></li>
-    <li><span>{{ i18n "live_mister" }}</span><strong class="highland-live__state" data-field="mister">—</strong></li>
-    <li><span>{{ i18n "live_power" }}</span><strong data-field="power_w">—</strong></li>
-    <li><span>{{ i18n "live_mists_today" }}</span><strong data-field="mists_today">—</strong></li>
-  </ul>
 </section>
 <script>
 (function () {
@@ -53,10 +76,12 @@
     var v;
     switch (key) {
       case 'temperature_c':
-        v = data.temperature_c;
+      case 'room_temperature_c':
+        v = data[key];
         return typeof v === 'number' ? v.toFixed(1) + ' °C' : null;
       case 'humidity_rh':
-        v = data.humidity_rh;
+      case 'room_humidity_rh':
+        v = data[key];
         return typeof v === 'number' ? v.toFixed(0) + ' % RH' : null;
       case 'vpd_kpa':
         v = data.vpd_kpa;
@@ -70,11 +95,6 @@
       case 'target_humidity_rh':
         v = data.target_humidity_rh;
         return typeof v === 'number' ? '→ ' + v.toFixed(0) + ' %' : '';
-      case 'room':
-        var t = data.room_temperature_c, h = data.room_humidity_rh, parts = [];
-        if (typeof t === 'number') parts.push(t.toFixed(1) + ' °C');
-        if (typeof h === 'number') parts.push(h.toFixed(0) + ' %');
-        return parts.length ? parts.join(' · ') : null;
       case 'fan_pwm':
         v = data.fan_pwm;
         return typeof v === 'number' ? v.toFixed(0) + ' %' : null;
@@ -105,8 +125,10 @@
 
   var FIELDS = ['temperature_c', 'humidity_rh', 'vpd_kpa', 'water_level_pct',
                 'target_temperature_c', 'target_humidity_rh',
-                'compressor', 'room', 'fan_pwm', 'lights', 'mister',
-                'power_w', 'mists_today', 'updatedAt'];
+                'compressor', 'fan_pwm', 'lights', 'mister',
+                'power_w', 'mists_today',
+                'room_temperature_c', 'room_humidity_rh',
+                'updatedAt'];
   var STATE_FIELDS = ['compressor', 'lights', 'mister'];
 
   function paint(data) {

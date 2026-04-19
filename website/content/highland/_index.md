@@ -19,14 +19,7 @@ A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulate
 
 {{< highland-live >}}
 
-<dl class="highland-stats" aria-label="Operating envelope">
-  <div><dt>Temperature</dt><dd>13.5 – 24.3 °C</dd></div>
-  <div><dt>Humidity</dt><dd>75 – 98 % RH</dd></div>
-  <div><dt>VPD</dt><dd>0.03 – 0.64 kPa</dd></div>
-  <div><dt>Logging</dt><dd>32 signals · 60 s</dd></div>
-  <div><dt>Species hosted</dt><dd>≈ 120</dd></div>
-  <div><dt>Operational</dt><dd>since 2023</dd></div>
-</dl>
+<p class="highland-envelope">Operational since 2023 · 32 signals logged every 60 s · historical envelope 13.5 – 24.3 °C and 75 – 98 % RH.</p>
 
 ## Inside the cabinet
 
