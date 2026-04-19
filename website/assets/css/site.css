@@ -1693,8 +1693,12 @@ figure.moment figcaption {
 
 .contact-grid {
   display: grid;
-  /* 6 contact cards → 3 cols × 2 rows (clean). */
+  /* 6 contact cards → 3 cols × 2 rows. grid-auto-rows: 1fr keeps
+     every card the same height regardless of body length, so the
+     two rows line up perfectly instead of the first being taller
+     just because its descriptions happen to be longer. */
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
   gap: 1rem;
   margin: 2rem 0 3rem;
 }

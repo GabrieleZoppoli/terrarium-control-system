@@ -13,10 +13,11 @@ Le più alte sopravvivenze (~100 % su 3+ anni) sono in *Heliamphora*, *Nepenthes
 
 ## Collezione completa
 
-Oltre 380 acquisizioni in 89 generi totali, distribuite in **tre spazi distinti**:
+Oltre 380 acquisizioni in 89 generi totali, distribuite in **quattro spazi distinti**:
 
 - **La camera d'alta quota** — i residenti di foresta nebulosa: *Heliamphora*, *Dracula*, *Nepenthes* d'alta quota, *Sophronitis*, *Dendrobium* sez. *Oxyglossum*, *Utricularia* sez. *Orchidioides*, Pleurothallidinae miniatura.
 - **Il balcone (all'esterno, tutto l'anno)** — carnivore temperate che vogliono pieno sole e dormienza invernale: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, orchidee terrestri rustiche (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).
-- **In casa (all'interno, ma fuori dal terrario)** — piante in condizioni intermedie, su davanzali e punti luminosi: *Tillandsia* (~53 specie e cultivar), la maggior parte dei *Bulbophyllum*, un *Cattleya*, un *Oncidium*, un *Maxillaria*, la maggior parte delle *Phalaenopsis*, e i *Dendrobium* non d'alta quota (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
+- **I ripiani a nebbia passiva** (in soggiorno, low-tech) — specie warm-intermediate che vogliono molta umidità ma non notti fresche: *Vanda coerulescens*, *Neostylis* Lou Sneary, *Darwinara* Charm 'Blue Moon', la maggior parte delle *Pinguicula* messicane, *Cephalotus*, le *Phalaenopsis* botaniche, *Angraecum didieri*, *Bulbophyllum makoyanum*. Vedi [i ripiani a nebbia passiva](/it/inventions/easier-environments/).
+- **Davanzali e altri spazi interni** — le più tolleranti alla siccità / più permissive: *Tillandsia* (~53 specie e cultivar), i restanti *Bulbophyllum*, un *Cattleya*, un *Oncidium*, un *Maxillaria*, e i *Dendrobium* non d'alta quota (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
 
 Le pagine qui sotto approfondiscono ogni genere con dati di acquisizione, fornitori, prezzi e foto.

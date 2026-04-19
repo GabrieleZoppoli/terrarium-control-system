@@ -11,13 +11,13 @@ Tutto ciò che su questo sito è mio — le fotografie, i testi, il dataset filo
 ## Bio — pronte da copiare
 
 **Una riga.**
-> Gabriele Zoppoli è un medico-ricercatore a Genova che coltiva una collezione di oltre 380 piante carnivore d'alta quota, orchidee miniatura e *Tillandsia* in un terrario di foresta nebulosa open-source, costruito da lui.
+> Gabriele Zoppoli è un medico-ricercatore a Genova che coltiva una collezione di oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, con le specie di foresta nebulosa ospitate in un terrario d'alta quota open-source, costruito da lui.
 
 **Due frasi.**
-> Gabriele Zoppoli è Professore Associato di Medicina Interna all'Università di Genova e clinico-ricercatore all'IRCCS Ospedale Policlinico San Martino, con ricerca sulla biopsia liquida nel tumore della mammella. Fuori dall'ospedale cura una collezione di oltre 380 piante carnivore d'alta quota, orchidee miniatura e *Tillandsia*, e un terrario open-source che riproduce il clima delle foreste nebulose — documentato [qui](/).
+> Gabriele Zoppoli è Professore Associato di Medicina Interna all'Università di Genova e clinico-ricercatore all'IRCCS Ospedale Policlinico San Martino, con ricerca sulla biopsia liquida nel tumore della mammella. Fuori dall'ospedale cura una collezione di oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia* — le specie di foresta nebulosa in un terrario d'alta quota open-source costruito da lui; le altre sul balcone e sui davanzali di casa. Documentato [qui](/).
 
 **~60 parole.**
-> Gabriele Zoppoli, MD PhD, è Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'IRCCS Ospedale Policlinico San Martino, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La sua ricerca è sulla biopsia liquida — DNA libero circolante e sequenziamento a singola molecola — nel tumore della mammella. Coltiva oltre 380 piante carnivore, orchidee miniatura e *Tillandsia* a Genova.
+> Gabriele Zoppoli, MD PhD, è Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'IRCCS Ospedale Policlinico San Martino, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La sua ricerca è sulla biopsia liquida — DNA libero circolante e sequenziamento a singola molecola — nel tumore della mammella. A Genova coltiva oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, distribuiti fra un terrario di foresta nebulosa open-source, le fioriere all'aperto e ripiani a nebbia passiva.
 
 ## Ritratto
 

@@ -13,10 +13,11 @@ The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland 
 
 ## Full collection
 
-Over 380 acquisitions across 89 genera total, spread across **three distinct spaces**:
+Over 380 acquisitions across 89 genera total, spread across **four distinct spaces**:
 
 - **The highland cabinet** — the cloud-forest residents: *Heliamphora*, *Dracula*, highland *Nepenthes*, *Sophronitis*, *Oxyglossum*-section *Dendrobium*, *Utricularia* sect. *Orchidioides*, miniature Pleurothallidinae.
 - **The balcony (outdoor, year-round)** — temperate carnivores that need full sun and winter dormancy: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, hardy terrestrial orchids (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).
-- **Around the house (indoor, not in the cabinet)** — plants that live at intermediate conditions on windowsills and bright spots: *Tillandsia* (~53 species and cultivars), most *Bulbophyllum*, one *Cattleya*, one *Oncidium*, one *Maxillaria*, most *Phalaenopsis*, and the non-highland *Dendrobium* (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
+- **The passive-mist shelves** (living room, low-tech) — warm-intermediate species that need high humidity but not cool nights: *Vanda coerulescens*, *Neostylis* Lou Sneary, *Darwinara* Charm 'Blue Moon', most Mexican *Pinguicula*, *Cephalotus*, the botanical *Phalaenopsis*, *Angraecum didieri*, *Bulbophyllum makoyanum*. See [the low-tech fog shelves](/inventions/easier-environments/).
+- **Windowsills and other indoor spots** — the dry-tolerant / very forgiving: *Tillandsia* (~53 species and cultivars), the remaining *Bulbophyllum*, one *Cattleya*, one *Oncidium*, one *Maxillaria*, and the non-highland *Dendrobium* (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
 
 The pages below drill into each genus with live acquisition data, sources, prices, and photos.
