@@ -67,6 +67,15 @@ live_off:              "off"
 live_sec_ago:          "s fa"
 live_min_ago:          "min fa"
 
+# Navigazione rapida fra le sezioni della home
+subnav_label:          "Sezioni della home"
+subnav_top:            "Torna su"
+subnav_stats:          "Numeri"
+subnav_featured:       "In vetrina"
+subnav_outdoor:        "Balcone"
+subnav_ledger:         "Registro"
+subnav_browse:         "Esplora"
+
 # Home ledger — totali live dall'InfluxDB del Raspberry
 ledger_kicker:         "Dal log in funzione, in diretta"
 ledger_per_month:      "al mese"

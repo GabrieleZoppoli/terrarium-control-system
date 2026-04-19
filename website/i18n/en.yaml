@@ -67,6 +67,15 @@ live_off:              "off"
 live_sec_ago:          "s ago"
 live_min_ago:          "min ago"
 
+# Home-page section jump-nav
+subnav_label:          "Home sections"
+subnav_top:            "Back to top"
+subnav_stats:          "Stats"
+subnav_featured:       "Featured"
+subnav_outdoor:        "Outdoor"
+subnav_ledger:         "Log"
+subnav_browse:         "Browse"
+
 # Home ledger — live totals from the Pi's InfluxDB
 ledger_kicker:         "Live from the running log"
 ledger_per_month:      "per month"

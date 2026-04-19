@@ -1,7 +1,15 @@
 {{ define "main" }}
 {{ partial "cinematic-intro.html" . }}
 {{ partial "home-tour.html" . }}
-<section class="page">
+<nav class="home-subnav" aria-label="{{ i18n "subnav_label" }}" data-home-subnav hidden>
+  <a href="#top" class="home-subnav__top" aria-label="{{ i18n "subnav_top" }}">↑</a>
+  <a href="#stats">{{ i18n "subnav_stats" }}</a>
+  <a href="#featured">{{ i18n "subnav_featured" }}</a>
+  <a href="#outdoor">{{ i18n "subnav_outdoor" }}</a>
+  <a href="#ledger">{{ i18n "subnav_ledger" }}</a>
+  <a href="#browse">{{ i18n "subnav_browse" }}</a>
+</nav>
+<section class="page" id="top">
   <div class="home-hero home-hero--split">
     <div class="home-hero__text">
       <span class="kicker">{{ i18n "home_kicker" }}</span>
@@ -16,7 +24,7 @@
 
   {{- /* Auto-updated from scripts/compute_stats.py (rerun at every /add-plant sync). */ -}}
   {{- $s := site.Data.stats -}}
-  <dl class="home-stats" aria-label="Collection and system at a glance">
+  <dl class="home-stats" id="stats" aria-label="Collection and system at a glance">
     <div><dt>{{ i18n "stat_accessions" }}</dt><dd>{{ $s.accessions }}</dd></div>
     <div><dt>{{ i18n "stat_alive_today" }}</dt><dd>{{ $s.alive }}</dd></div>
     <div><dt>{{ i18n "stat_genera" }}</dt><dd>{{ $s.genera }}</dd></div>
@@ -27,7 +35,7 @@
   </dl>
 
   {{- with .Site.Params.homepage.featuredMosaic }}
-  <section class="home-mosaic" aria-label="Featured species from the collection">
+  <section class="home-mosaic" id="featured" aria-label="Featured species from the collection">
     <header class="home-mosaic__head">
       <span class="kicker">{{ i18n "mosaic_kicker" }}</span>
       <h2>{{ i18n "mosaic_title" }}</h2>
@@ -50,7 +58,7 @@
   {{- end }}
 
   {{- with .Site.Params.homepage.featuredMosaicOutdoor }}
-  <section class="home-mosaic home-mosaic--outdoor" aria-label="Outdoor species">
+  <section class="home-mosaic home-mosaic--outdoor" id="outdoor" aria-label="Outdoor species">
     <header class="home-mosaic__head">
       <span class="kicker">{{ i18n "mosaic_outdoor_kicker" }}</span>
       <h2>{{ i18n "mosaic_outdoor_title" }}</h2>
@@ -88,7 +96,7 @@
     (dict "key" "data" "value" (lang.FormatNumber 2 (div .data_points.count 1000000.0))  "rate" (lang.FormatNumber 2 (div $m.data_points 1000000.0)))
     (dict "key" "fog"  "value" (lang.FormatNumber 0 .fog_hours.hours)              "rate" (lang.FormatNumber 0 $m.fog_hours))
   }}
-  <section class="home-ledger" aria-label="{{ i18n "ledger_title" }}">
+  <section class="home-ledger" id="ledger" aria-label="{{ i18n "ledger_title" }}">
     <header class="home-ledger__head">
       <span class="kicker">{{ i18n "ledger_kicker" }}</span>
       <h2>{{ i18n "ledger_title" }}</h2>
@@ -125,7 +133,7 @@
     )
   }}
 
-  <div class="home-sections">
+  <div class="home-sections" id="browse">
     {{- range $i, $ref := slice "highland" "inventions" "collection" }}
       {{- with site.GetPage $ref }}
       <div class="home-section">
@@ -148,4 +156,46 @@
   <div class="prose home-prose">{{ . }}</div>
   {{- end }}
 </section>
+
+<script>
+  (function () {
+    var nav = document.querySelector('[data-home-subnav]');
+    if (!nav) return;
+    var hero = document.querySelector('.home-hero');
+    if (!hero) return;
+
+    function threshold() {
+      var r = hero.getBoundingClientRect();
+      return window.scrollY + r.bottom - 80;  /* start showing as hero's bottom nears the top */
+    }
+
+    var visible = false;
+    function onScroll() {
+      var shouldShow = window.scrollY > threshold();
+      if (shouldShow === visible) return;
+      visible = shouldShow;
+      nav.hidden = !visible;
+      nav.classList.toggle('is-visible', visible);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+
+    /* Smooth scroll for same-page anchor clicks — respects existing CSS
+       scroll-behavior but also pads for the sticky site header. */
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      var target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      var headerH = 68;
+      var y = target.getBoundingClientRect().top + window.scrollY - headerH;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    });
+  })();
+</script>
 {{ end }}

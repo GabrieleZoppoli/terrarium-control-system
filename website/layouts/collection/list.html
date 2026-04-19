@@ -16,12 +16,26 @@
     {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
   </header>
 
-  {{- /* Children cards are now placed by the {{< browse-cards >}} shortcode
-         inside the markdown content, so an appendix section (e.g. the
-         Golden Three) can sit *below* the browse options without pushing
-         them off-screen. No auto-append of children here. */ -}}
   {{- with .Content }}
   <div class="prose"{{ if not $narrow }} style="max-width: var(--page-max);"{{ end }}>{{ . }}</div>
+  {{- end }}
+
+  {{- /* Auto-append child pages as cards unless the page opts out via
+         `no_auto_children: true` (used on /collection/ so the
+         {{< browse-cards >}} shortcode can place them above the
+         Golden Three). Other sections — like /collection/genera/ —
+         get their cards here automatically. */ -}}
+  {{- if and (not .Params.no_auto_children) .Pages }}
+  <div class="card-grid">
+    {{- range .Pages.ByWeight }}
+    <a class="card" href="{{ .RelPermalink }}">
+      {{- with .Params.kicker }}<span class="kicker">{{ . }}</span>{{ end }}
+      <h2 class="title">{{ .LinkTitle }}</h2>
+      {{- with .Description }}<p class="body">{{ partial "endstop.html" . }}</p>{{ end }}
+      {{- with .Params.meta }}<span class="meta">{{ . }}</span>{{ end }}
+    </a>
+    {{- end }}
+  </div>
   {{- end }}
 </section>
 {{ end }}
