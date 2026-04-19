@@ -3,6 +3,11 @@ title: "Per genere"
 description: "Oltre 380 esemplari in 89 generi — terrario, balcone, davanzali, e ospitati dalle invenzioni"
 cascade:
   wide: true
+extra_card:
+  kicker: "Vista filogenetica"
+  title: "Dendrogramma completo"
+  description: "Ogni esemplare su un unico albero evolutivo — zoom, hover per le foto."
+  url: "/collection/dendrogram/"
 ---
 
 ## Dentro al terrario

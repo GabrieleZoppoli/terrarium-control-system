@@ -2166,7 +2166,9 @@ figure.moment figcaption {
 
 .home-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  /* 6 stats → 6×1 on desktop, 3×2 on tablet, 2×3 on phone,
+     1×6 on very narrow. Every breakpoint divides cleanly. */
+  grid-template-columns: repeat(6, 1fr);
   gap: 1px;
   background: var(--border-hair);
   border: 1px solid var(--border-subtle);
@@ -2209,10 +2211,12 @@ figure.moment figcaption {
    for phone widths.
    ============================================================ */
 
-/* Midrange tablets/laptops: 12-cell live grid folds to 3×4 so each
-   cell stays readable (below this, the narrower rules take over). */
+/* Midrange tablets/laptops: 12-cell live grid folds to 3×4 and
+   the 6-cell home-stats strip folds to 3×2 so each cell stays
+   readable (below this, the narrower rules take over). */
 @media (max-width: 1080px) {
   .highland-live__grid { grid-template-columns: repeat(3, 1fr); }
+  .home-stats          { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 720px) {

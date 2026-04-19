@@ -24,7 +24,10 @@
          `no_auto_children: true` (used on /collection/ so the
          {{< browse-cards >}} shortcode can place them above the
          Golden Three). Other sections — like /collection/genera/ —
-         get their cards here automatically. */ -}}
+         get their cards here automatically. An optional
+         `extra_card: {kicker, title, description, url}` frontmatter
+         tacks on a final "see also" card so prime child counts
+         (e.g. 11) stay cliffhanger-free. */ -}}
   {{- if and (not .Params.no_auto_children) .Pages }}
   <div class="card-grid">
     {{- range .Pages.ByWeight }}
@@ -33,6 +36,13 @@
       <h2 class="title">{{ .LinkTitle }}</h2>
       {{- with .Description }}<p class="body">{{ partial "endstop.html" . }}</p>{{ end }}
       {{- with .Params.meta }}<span class="meta">{{ . }}</span>{{ end }}
+    </a>
+    {{- end }}
+    {{- with .Params.extra_card }}
+    <a class="card card--extra" href="{{ .url | relLangURL }}">
+      {{- with .kicker }}<span class="kicker">{{ . }}</span>{{ end }}
+      <h2 class="title">{{ .title }}</h2>
+      {{- with .description }}<p class="body">{{ . }}</p>{{ end }}
     </a>
     {{- end }}
   </div>

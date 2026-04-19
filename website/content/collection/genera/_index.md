@@ -3,6 +3,11 @@ title: "By Genus"
 description: "Over 380 accessions across 89 genera — terrarium, outdoor, windowsill, and invention-housed"
 cascade:
   wide: true
+extra_card:
+  kicker: "Phylogenetic view"
+  title: "Full dendrogram"
+  description: "Every accession on a single evolutionary tree — zoom, hover for photos."
+  url: "/collection/dendrogram/"
 ---
 
 ## Cloud forest terrarium
