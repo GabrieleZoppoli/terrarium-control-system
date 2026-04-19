@@ -93,6 +93,13 @@
       </a>
       {{- end }}
     </div>
+    <p class="home-mosaic__foot">
+      <a href="{{ "/collection/genera/sarracenia/" | relLangURL }}"><em>Sarracenia</em></a>
+      <span class="sep">·</span>
+      <a href="{{ "/collection/genera/dionaea/" | relLangURL }}"><em>Dionaea</em></a>
+      <span class="sep">·</span>
+      <a href="{{ "/collection/genera/outdoor/" | relLangURL }}">{{ i18n "mosaic_outdoor_cta_all" }} <span aria-hidden="true">→</span></a>
+    </p>
   </section>
   {{- end }}
 
@@ -131,6 +138,11 @@
       </div>
       {{- end }}
     </dl>
+    <p class="home-ledger__foot">
+      <a href="{{ "/highland/live/" | relLangURL }}">{{ i18n "home_live_cta_snapshot" }} <span aria-hidden="true">→</span></a>
+      <span class="sep">·</span>
+      <a href="{{ "/highland/dashboard/" | relLangURL }}">{{ i18n "home_live_cta_dashboard" }} <span aria-hidden="true">→</span></a>
+    </p>
   </section>
   {{- end }}
 

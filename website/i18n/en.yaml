@@ -17,6 +17,7 @@ mosaic_title:          "A living atlas of convergent highlands."
 mosaic_cta:            "Explore the full phylogenetic dendrogram"
 mosaic_outdoor_kicker: "Outside the Highland terrarium"
 mosaic_outdoor_title:  "Species that prefer the open balcony."
+mosaic_outdoor_cta_all: "All outdoor plants"
 
 # Site chrome
 menu_toggle:           "Menu"

@@ -1778,6 +1778,11 @@ figure.moment figcaption {
   background: var(--bg-1);
   padding: 1rem;
 }
+.highland-hero__dashboard img {
+  object-fit: cover;
+  object-position: center;
+  background: var(--bg-1);
+}
 .highland-hero figcaption {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -1792,6 +1797,43 @@ figure.moment figcaption {
 
 @media (max-width: 720px) {
   .highland-hero { grid-template-columns: 1fr; }
+}
+
+.highland-hero-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.9rem;
+  margin: -1rem 0 2.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface-veil);
+  border: 1px solid var(--border-hair);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  justify-content: center;
+}
+.highland-hero-links a {
+  color: var(--text-3);
+  text-decoration: none;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  transition: color 160ms ease, background 160ms ease;
+}
+.highland-hero-links a:hover,
+.highland-hero-links a:focus-visible {
+  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 720px) {
+  .highland-hero-links {
+    border-radius: var(--r-3);
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    padding: 0.6rem 0.8rem;
+  }
 }
 
 .highland-stats {
@@ -2152,7 +2194,61 @@ figure.moment figcaption {
 .home-mosaic__foot {
   margin: 1.5rem 0 0;
   text-align: right;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
 }
+.home-mosaic__foot a {
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.home-mosaic__foot a:hover,
+.home-mosaic__foot a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.home-mosaic__foot em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.home-mosaic__foot .sep {
+  margin: 0 0.5em;
+  color: var(--text-4);
+}
+.home-mosaic--outdoor .home-mosaic__foot { text-align: center; }
+
+.home-ledger__foot {
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.home-ledger__foot a {
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.home-ledger__foot a:hover,
+.home-ledger__foot a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.home-ledger__foot .sep {
+  margin: 0 0.6em;
+  color: var(--text-4);
+}
+
 .home-mosaic__link {
   font-family: var(--font-sans);
   font-size: var(--step-sm);

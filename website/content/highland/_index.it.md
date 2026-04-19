@@ -5,15 +5,22 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 
 <div class="highland-hero">
-  <a class="highland-hero__interior" href="/collection/genera/dracula/" aria-label="Dracula pholeodytes dentro al terrario">
+  <a class="highland-hero__interior" href="/it/collection/genera/dracula/" aria-label="Dracula pholeodytes dentro al terrario">
     <img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes dentro al terrario" loading="eager" decoding="async">
     <figcaption><em>Dracula pholeodytes</em> · dentro al terrario</figcaption>
   </a>
-  <a class="highland-hero__schematic" href="/highland/docs/architecture/" aria-label="Architettura hardware">
-    <img src="/img/highland/build/schematic_panel-01.png" alt="Schema del pannello frontale del terrario" loading="eager" decoding="async">
-    <figcaption>Pannello frontale · uno dei 10 schemi nella documentazione</figcaption>
+  <a class="highland-hero__dashboard" href="/it/highland/dashboard/" aria-label="Dashboard Grafana live delle ultime 24 ore">
+    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-desktop.png" alt="Grafana live — temperatura, umidità, VPD, stato attuatori sulle ultime 24 ore" loading="eager" decoding="async">
+    <figcaption>Grafana live · aggiornata ogni 15 min</figcaption>
   </a>
 </div>
+
+<nav class="highland-hero-links" aria-label="Costruzione, documentazione e sorgente">
+  <a href="/it/highland/photos/">Cronologia della costruzione</a>
+  <a href="/it/highland/docs/architecture/">Architettura e schemi</a>
+  <a href="/it/highland/docs/flows/">Flussi Node-RED</a>
+  <a href="https://github.com/GabrieleZoppoli/terrarium-control-system" rel="external">Sorgente e firmware</a>
+</nav>
 
 Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce il clima di una foresta nebulosa d'alta quota usando in tempo reale i dati meteo della Colombia (con uno scarto di 15 ore). Un compressore marino porta la temperatura notturna a circa 13,5 °C in una stanza a 22 °C. Circa 120 specie convivono sotto lo stesso regime — *Heliamphora*, *Nepenthes* d'alta quota, *Dracula*, *Sophronitis*, *Dendrobium* della Nuova Guinea, *Utricularia* sect. *Orchidioides*, e altre ancora.
 

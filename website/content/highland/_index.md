@@ -9,11 +9,18 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
     <img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes pitcher orchid inside the highland terrarium" loading="eager" decoding="async">
     <figcaption><em>Dracula pholeodytes</em> · inside the cabinet</figcaption>
   </a>
-  <a class="highland-hero__schematic" href="/highland/docs/architecture/" aria-label="Hardware architecture">
-    <img src="/img/highland/build/schematic_panel-01.png" alt="Front-panel schematic of the Highland cabinet" loading="eager" decoding="async">
-    <figcaption>Cabinet front panel · one of 10 schematics in the docs</figcaption>
+  <a class="highland-hero__dashboard" href="/highland/dashboard/" aria-label="Live 24-hour Grafana dashboard">
+    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-desktop.png" alt="Live 24-hour Grafana — temperature, humidity, VPD, actuator state" loading="eager" decoding="async">
+    <figcaption>Live 24-hour Grafana · auto-refreshed every 15 min</figcaption>
   </a>
 </div>
+
+<nav class="highland-hero-links" aria-label="Build, docs, and source">
+  <a href="/highland/photos/">Build timeline</a>
+  <a href="/highland/docs/architecture/">Architecture &amp; schematics</a>
+  <a href="/highland/docs/flows/">Node-RED flows</a>
+  <a href="https://github.com/GabrieleZoppoli/terrarium-control-system" rel="external">Source &amp; firmware</a>
+</nav>
 
 A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulates highland cloud forest weather using real-time Colombian meteorological data (time-shifted 15 hours). Marine refrigeration drives nighttime temperatures to ~13.5 °C in a room at 22 °C. About 120 species coexist under the same regime — *Heliamphora*, highland *Nepenthes*, *Dracula*, *Sophronitis*, New Guinea *Dendrobium*, *Utricularia* sect. *Orchidioides*, and more.
 

@@ -17,6 +17,7 @@ mosaic_title:          "Un atlante vivente di altopiani convergenti."
 mosaic_cta:            "Scopri il dendrogramma filogenetico completo"
 mosaic_outdoor_kicker: "Fuori dal terrario"
 mosaic_outdoor_title:  "Specie che preferiscono stare sul balcone."
+mosaic_outdoor_cta_all: "Tutte le piante all'aperto"
 
 # Site chrome
 menu_toggle:           "Menu"
