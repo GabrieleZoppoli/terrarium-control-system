@@ -4,6 +4,7 @@
 <nav class="home-subnav" aria-label="{{ i18n "subnav_label" }}" data-home-subnav hidden>
   <a href="#top" class="home-subnav__top" aria-label="{{ i18n "subnav_top" }}">↑</a>
   <a href="#stats">{{ i18n "subnav_stats" }}</a>
+  <a href="#live">{{ i18n "subnav_live" }}</a>
   <a href="#featured">{{ i18n "subnav_featured" }}</a>
   <a href="#outdoor">{{ i18n "subnav_outdoor" }}</a>
   <a href="#ledger">{{ i18n "subnav_ledger" }}</a>
@@ -33,6 +34,21 @@
     <div><dt>{{ i18n "stat_logging" }}</dt><dd>60 <small style="font-size:0.6em;color:var(--text-3)">s</small></dd></div>
     <div><dt>{{ i18n "stat_operational" }}</dt><dd>2023</dd></div>
   </dl>
+
+  {{- /* Live strip — current readings from the Pi. Same partial used by
+         the /highland/ page. Comes with its own script + i18n'd labels. */ -}}
+  <section class="home-live" id="live" aria-label="{{ i18n "live_label" }}">
+    <header class="home-live__head">
+      <span class="kicker">{{ i18n "home_live_kicker" }}</span>
+      <h2>{{ i18n "home_live_title" }}</h2>
+    </header>
+    {{ partial "highland-live.html" . }}
+    <p class="home-live__foot">
+      <a href="{{ "/highland/live/" | relLangURL }}">{{ i18n "home_live_cta_snapshot" }} <span aria-hidden="true">→</span></a>
+      <span class="sep">·</span>
+      <a href="{{ "/highland/dashboard/" | relLangURL }}">{{ i18n "home_live_cta_dashboard" }} <span aria-hidden="true">→</span></a>
+    </p>
+  </section>
 
   {{- with .Site.Params.homepage.featuredMosaic }}
   <section class="home-mosaic" id="featured" aria-label="Featured species from the collection">

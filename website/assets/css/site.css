@@ -1924,6 +1924,56 @@ figure.moment figcaption {
   text-align: center;
 }
 
+/* ----- Home-page "Live" section (wraps highland-live partial) ----- */
+
+.home-live {
+  margin: 3.5rem 0 2.5rem;
+}
+.home-live__head {
+  margin-bottom: 1.2rem;
+  max-width: 760px;
+}
+.home-live__head .kicker {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: var(--text-4);
+  margin-bottom: 0.7rem;
+}
+.home-live__head h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  color: var(--text-1);
+  letter-spacing: -0.005em;
+}
+.home-live__foot {
+  margin: 1rem 0 0;
+  font-family: var(--font-sans);
+  font-size: var(--step-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.home-live__foot a {
+  color: var(--text-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.home-live__foot a:hover,
+.home-live__foot a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.home-live__foot .sep {
+  margin: 0 0.6em;
+  color: var(--text-4);
+}
+
 /* ----- Home page sticky section jump-nav ----- */
 
 .home-subnav {

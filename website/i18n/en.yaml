@@ -71,10 +71,17 @@ live_min_ago:          "min ago"
 subnav_label:          "Home sections"
 subnav_top:            "Back to top"
 subnav_stats:          "Stats"
+subnav_live:           "Live"
 subnav_featured:       "Featured"
 subnav_outdoor:        "Outdoor"
 subnav_ledger:         "Log"
 subnav_browse:         "Browse"
+
+# Home-page live section
+home_live_kicker:      "Right now inside the cabinet"
+home_live_title:       "Live conditions"
+home_live_cta_snapshot: "Full UI snapshot"
+home_live_cta_dashboard: "24-hour Grafana"
 
 # Home ledger — live totals from the Pi's InfluxDB
 ledger_kicker:         "Live from the running log"

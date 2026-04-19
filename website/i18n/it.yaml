@@ -71,10 +71,17 @@ live_min_ago:          "min fa"
 subnav_label:          "Sezioni della home"
 subnav_top:            "Torna su"
 subnav_stats:          "Numeri"
+subnav_live:           "In diretta"
 subnav_featured:       "In vetrina"
 subnav_outdoor:        "Balcone"
 subnav_ledger:         "Registro"
 subnav_browse:         "Esplora"
+
+# Sezione live sulla home
+home_live_kicker:      "In questo momento, dentro al terrario"
+home_live_title:       "In diretta"
+home_live_cta_snapshot: "Snapshot UI completa"
+home_live_cta_dashboard: "Grafana 24 ore"
 
 # Home ledger — totali live dall'InfluxDB del Raspberry
 ledger_kicker:         "Dal log in funzione, in diretta"
