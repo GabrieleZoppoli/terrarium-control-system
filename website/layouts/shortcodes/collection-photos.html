@@ -21,7 +21,12 @@
 {{- if $entries -}}
 <div class="photo-grid" data-lightbox-group>
 {{- range $entries }}
-  {{- $primary := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
+  {{- $rel := printf "img/collection/%s/%s" $genusSlug .primary -}}
+  {{- $ext := path.Ext $rel -}}
+  {{- $base := strings.TrimSuffix $ext $rel -}}
+  {{- $primary := $rel | relURL -}}
+  {{- $src480 := printf "%s-480%s" $base $ext | relURL -}}
+  {{- $src960 := printf "%s-960%s" $base $ext | relURL -}}
   {{- $photos := slice $primary -}}
   {{- range .extras -}}
     {{- $photos = $photos | append (printf "img/collection/%s/%s" $genusSlug . | relURL) -}}
@@ -30,7 +35,10 @@
           data-photos="{{ $photos | jsonify }}"
           data-taxon="{{ .taxon }}"
           title="{{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
-    <img src="{{ $primary }}" alt="{{ .taxon }}" loading="lazy">
+    <img src="{{ $src480 }}"
+         srcset="{{ $src480 }} 480w, {{ $src960 }} 960w, {{ $primary }} 1600w"
+         sizes="(max-width: 720px) 45vw, 240px"
+         alt="{{ .taxon }}" loading="lazy">
     <span class="photo-tile__caption"><em>{{ .taxon }}</em></span>
     {{- with .extras }}<span class="photo-tile__count">+{{ len . }}</span>{{ end -}}
   </button>
