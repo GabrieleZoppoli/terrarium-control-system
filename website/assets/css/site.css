@@ -146,8 +146,12 @@ a:focus-visible {
   border-radius: var(--r-1);
 }
 
-/* Italic taxonomic epithets */
-em, i, .taxon { font-style: italic; font-family: var(--font-display); color: var(--text-1); }
+/* Italics inherit the surrounding font (Inter in body, Crimson Pro in
+   display contexts) so a binomial mid-sentence doesn't introduce a
+   jarring font switch. `.taxon` keeps the explicit display-serif
+   italic for labelled-taxon contexts (tile captions, headings). */
+em, i { font-style: italic; color: var(--text-1); }
+.taxon { font-style: italic; font-family: var(--font-display); color: var(--text-1); }
 
 strong, b { color: var(--text-1); font-weight: 500; }
 
