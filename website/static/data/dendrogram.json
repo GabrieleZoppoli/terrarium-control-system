@@ -1164,6 +1164,12 @@
                       "size": 1,
                       "vendor": "Lo Scrigno di Nebbia",
                       "status": "alive"
+                    },
+                    {
+                      "name": "pygmaea (Brazil Import)",
+                      "size": 1,
+                      "vendor": "Celandroni Orchidee",
+                      "status": "alive"
                     }
                   ]
                 },
@@ -1635,6 +1641,18 @@
                       "photos": [
                         "../img/collection/phalaenopsis/phalaenopsis-lobbii.jpg"
                       ]
+                    },
+                    {
+                      "name": "malipoensis",
+                      "size": 1,
+                      "vendor": "Celandroni Orchidee",
+                      "status": "alive"
+                    },
+                    {
+                      "name": "honghenensis",
+                      "size": 1,
+                      "vendor": "Celandroni Orchidee",
+                      "status": "alive"
                     }
                   ]
                 },

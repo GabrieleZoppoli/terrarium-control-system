@@ -123,10 +123,10 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 109,Fernandezia subbiflora,Fernandezia,subbiflora,,Großräschener Orchideen,28,Apr 2024,lost,highland,
 84,Fredclarkeara After Dark,Fredclarkeara,After Dark,,Celandroni Orchidee,60,Nov 2019,lost,windowsill,
 268,Gastrochilus japonicus,Gastrochilus,japonicus,,Varesina Orchidee,26,Jun 2023,alive,windowsill,Zattera (mounted)
-283,Genlisea africana,Genlisea,africana,,eBay (heliamphorina),See notes,Feb 2022,alive,windowsill,Part of €24 order (multiple Genlisea spp.)
-284,"Genlisea aurea (Chapada dos Guimarães, MG)",Genlisea,"aurea (Chapada dos Guimarães, MG)",,eBay (heliamphorina),See notes,Feb 2022,lost,windowsill,Part of €24 order
-285,Genlisea flexuosa,Genlisea,flexuosa,,eBay (heliamphorina),See notes,Feb 2022,lost,windowsill,Part of €24 order
-286,Genlisea violacea,Genlisea,violacea,,eBay (heliamphorina),See notes,Feb 2022,lost,windowsill,Part of €24 order
+283,Genlisea africana,Genlisea,africana,,eBay (heliamphorina),See notes,Feb 2022,alive,shelves,Part of €24 order (multiple Genlisea spp.)
+284,"Genlisea aurea (Chapada dos Guimarães, MG)",Genlisea,"aurea (Chapada dos Guimarães, MG)",,eBay (heliamphorina),See notes,Feb 2022,lost,shelves,Part of €24 order
+285,Genlisea flexuosa,Genlisea,flexuosa,,eBay (heliamphorina),See notes,Feb 2022,lost,shelves,Part of €24 order
+286,Genlisea violacea,Genlisea,violacea,,eBay (heliamphorina),See notes,Feb 2022,lost,shelves,Part of €24 order
 337,Habenaria radiata,Habenaria,radiata,,From growlist (May 2020),See notes,,alive,outdoor,Vendor/date unknown
 3,Heliamphora minor var. pilosa (Auyan) Clone 3,Heliamphora,minor,var. pilosa (Auyan) Clone 3,Andreas Wistuba,205.61,Mar 2023,alive,highland,Adult pitchers - young
 4,Heliamphora ionasi 'Elegance',Heliamphora,ionasi,'Elegance',Andreas Wistuba,82.24,Jan 2023,alive,highland,"Adult pitchers, young plant"
@@ -381,3 +381,6 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 423,Phalaenopsis lobbii,Phalaenopsis,lobbii,,unknown,,,alive,shelves,
 424,Leptotes unicolor,Leptotes,unicolor,,Orchids For You,,,alive,highland,
 425,Ornitophora radicans,Ornitophora,radicans,,Großräschener Orchideen,,,alive,highland,
+426,Sophronitis pygmaea (Brazil Import),Sophronitis,pygmaea (Brazil Import),,Celandroni Orchidee,27.27,Apr 2026,alive,highland,Third attempt after two earlier losses of this species
+427,Phalaenopsis malipoensis,Phalaenopsis,malipoensis,,Celandroni Orchidee,27.27,Apr 2026,alive,shelves,"Botanical species, Vietnam/S China"
+428,Phalaenopsis honghenensis,Phalaenopsis,honghenensis,,Celandroni Orchidee,25.45,Apr 2026,alive,shelves,"Botanical species, Yunnan (Honghe)"
