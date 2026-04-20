@@ -1,0 +1,41 @@
+# Highland Cloud Forest · Gabriele Zoppoli
+
+> Open-source cloud-forest terrarium, plant inventions, and a 386-accession living collection of carnivorous plants, miniature orchids, and Tillandsia in Genoa, Italy. Author: Gabriele Zoppoli (MD PhD, University of Genoa). Everything on the site — photographs, text, dendrogram data, schematics — is CC BY-SA 4.0 except where noted.
+
+## Project sections
+
+- [Highland Cloud Forest Terrarium](https://highlandcloudforest.com/highland/): A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure that simulates highland cloud-forest weather in real time, using Colombian meteorological data shifted 15 h. Hosts ~70 cloud-forest species (Heliamphora, highland Nepenthes, Dracula, Sophronitis, New Guinea Dendrobium, miniature Pleurothallidinae). Marine-refrigeration cooling, Node-RED control, InfluxDB logging.
+- [Inventions](https://highlandcloudforest.com/inventions/): Three smaller builds around the main terrarium — a self-watering Zeer-pot evaporative cooler for Darlingtonia californica, a Drosera regia setup, and low-tech passive-mist glass shelves for warm-intermediate species that don't need the full highland regime.
+- [Plant Collection](https://highlandcloudforest.com/collection/): 386 accessions across 89 genera, four spaces (highland cabinet, balcony outdoor, low-tech fog shelves, windowsills). Phylogenetic dendrogram at /collection/dendrogram/, per-genus detail pages under /collection/genera/.
+- [About](https://highlandcloudforest.com/about/): Author bio, links, Mastodon/ORCID/GitHub identity.
+
+## Live data
+
+- [Conditions JSON](https://rei1.tail7cc014.ts.net/api/conditions.json): Temperature, humidity, VPD, compressor/mister/lights state, water tank level, power draw. 60 s cache, CORS open.
+- [Ledger JSON](https://rei1.tail7cc014.ts.net/api/ledger.json): Cumulative mist cycles, kWh, cost (EUR), CO₂ scrubbed, data points logged, fog hours since 2026-02-04.
+- [Grafana snapshot (hero)](https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png): 24-hour dashboard rendered as PNG, 15-min refresh.
+- [Node-RED UI snapshot](https://rei1.tail7cc014.ts.net/highland/ui-latest.png): Live control-panel rendering, 15-min refresh.
+
+## Structured downloads
+
+- [Collection CSV](https://highlandcloudforest.com/data/collection.csv): Flat inventory — id, taxon, genus, species, infraspecific, source, price_eur, acquired_date, status (alive/lost/given), location (highland/shelves/outdoor/windowsill/seasonal), notes. CC BY-SA 4.0.
+- [Dendrogram JSON](https://highlandcloudforest.com/data/dendrogram.json): D3-hierarchy phylogenetic tree of every accession, with vendor and status on each leaf. CC BY-SA 4.0.
+
+## Documentation
+
+- [System architecture](https://highlandcloudforest.com/highland/docs/architecture/): Hardware layers (Raspberry Pi, Arduino Mega, ESP8266+SHT35, Tapo plugs, Meross energy meter), software stack (Node-RED, InfluxDB, Grafana, Mosquitto), data flow.
+- [PID controller](https://highlandcloudforest.com/highland/docs/pid-controller/): Gain-scheduled humidity-based fan control algorithm with anti-windup, derivative filtering, rate limiting.
+- [InfluxDB schema](https://highlandcloudforest.com/highland/docs/schema/): All 32 measurements logged by the system.
+- [Node-RED flows](https://highlandcloudforest.com/highland/docs/flows/): Import guide and tab-by-tab description.
+
+## Licenses
+
+- Text, images, phylogenetic data, schematics: **CC BY-SA 4.0**. Attribution: "Gabriele Zoppoli · highlandcloudforest.com · CC BY-SA 4.0". Derivatives must use the same license.
+- Control-system code and firmware: **CERN-OHL-P-2.0** (open hardware and open software). Source: https://github.com/GabrieleZoppoli/terrarium-control-system.
+
+## Contact
+
+- Email: gabriele.zoppoli@unige.it
+- Mastodon: @zoppolig@mastodon.social
+- ORCID: 0000-0002-1619-1708
+- GitHub: GabrieleZoppoli
