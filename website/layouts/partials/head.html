@@ -24,9 +24,8 @@
 <meta name="robots" content="{{ .Params.robots | default "index,follow,max-image-preview:large" }}">
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "index.xml" | absURL }}">
-{{- /* rel=me for identity discovery across IndieWeb / Mastodon / WebFinger */}}
+{{- /* rel=me for identity discovery across IndieWeb / WebFinger */}}
 {{- with .Site.Params.author.orcid }}<link rel="me" href="{{ . }}">{{ end }}
-{{- with .Site.Params.author.mastodon }}<link rel="me" href="{{ . }}">{{ end }}
 {{- with .Site.Params.repoURL }}<link rel="me" href="{{ . }}">{{ end }}
 <link rel="me" href="https://scholar.google.com/citations?user=Q5DfyqQAAAAJ">
 <link rel="me" href="https://www.linkedin.com/in/gabriele-zoppoli">

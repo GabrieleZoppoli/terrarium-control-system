@@ -100,14 +100,14 @@ enableEmoji = false
     image = "img/author.jpg"
     orcid = "https://orcid.org/0000-0002-1619-1708"
     email = "gabriele.zoppoli@unige.it"
-    mastodon = "https://mastodon.social/@zoppolig"
+    instagram = "https://www.instagram.com/zoppolig"
     sameAs = [
       "https://orcid.org/0000-0002-1619-1708",
       "https://scholar.google.com/citations?user=Q5DfyqQAAAAJ",
       "https://github.com/GabrieleZoppoli",
       "https://www.linkedin.com/in/gabriele-zoppoli",
       "https://www.researchgate.net/profile/Gabriele-Zoppoli",
-      "https://mastodon.social/@zoppolig",
+      "https://www.instagram.com/zoppolig",
     ]
     links = [
       { email = "mailto:gabriele.zoppoli@unige.it" },
@@ -116,7 +116,7 @@ enableEmoji = false
       { "google-scholar" = "https://scholar.google.com/citations?user=Q5DfyqQAAAAJ" },
       { linkedin = "https://www.linkedin.com/in/gabriele-zoppoli" },
       { researchgate = "https://www.researchgate.net/profile/Gabriele-Zoppoli" },
-      { mastodon = "https://mastodon.social/@zoppolig" },
+      { instagram = "https://www.instagram.com/zoppolig" },
     ]
 
 [taxonomies]
