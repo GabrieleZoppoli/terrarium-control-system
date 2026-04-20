@@ -1,6 +1,6 @@
 ---
 title: "Highland Cloud Forest Terrarium"
-description: "An open-source weather-mimicking terrarium simulating tepui climates for ~120 cloud forest species"
+description: "An open-source weather-mimicking terrarium simulating tepui climates for ~70 cloud forest species"
 ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 

@@ -122,7 +122,10 @@
     (dict "key" "data" "value" (lang.FormatNumber 2 (div .data_points.count 1000000.0))  "rate" (lang.FormatNumber 2 (div $m.data_points 1000000.0)))
     (dict "key" "fog"  "value" (lang.FormatNumber 0 .fog_hours.hours)              "rate" (lang.FormatNumber 0 $m.fog_hours))
   }}
-  <section class="home-ledger" id="ledger" aria-label="{{ i18n "ledger_title" }}">
+  <section class="home-ledger" id="ledger"
+           data-ledger-endpoint="https://rei1.tail7cc014.ts.net/api/ledger.json"
+           data-lang="{{ site.Language.Lang }}"
+           aria-label="{{ i18n "ledger_title" }}">
     <header class="home-ledger__head">
       <span class="kicker">{{ i18n "ledger_kicker" }}</span>
       <h2>{{ i18n "ledger_title" }}</h2>
@@ -132,8 +135,8 @@
       {{- range $c := $cards }}
       <div>
         <dt>{{ i18n (printf "ledger_%s_label" $c.key) }}</dt>
-        <dd>{{ $c.value | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }}</dd>
-        <dd class="rate">{{ $c.rate | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }} <small class="per">{{ i18n "ledger_per_month" }}</small></dd>
+        <dd data-ledger-value="{{ $c.key }}">{{ $c.value | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }}</dd>
+        <dd class="rate" data-ledger-rate="{{ $c.key }}">{{ $c.rate | safeHTML }}{{ with (i18n (printf "ledger_%s_unit" $c.key)) }} <small>{{ . }}</small>{{ end }} <small class="per">{{ i18n "ledger_per_month" }}</small></dd>
         <p>{{ i18n (printf "ledger_%s_caption" $c.key) | safeHTML }}</p>
       </div>
       {{- end }}
@@ -227,6 +230,69 @@
       window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
       history.replaceState(null, '', '#' + id);
     });
+  })();
+</script>
+
+<script>
+  /* Ledger auto-refresh: fetches the Pi's /api/ledger.json on page
+     load and rewrites every data-ledger-value / data-ledger-rate cell.
+     Falls back silently to the SSR values (from data/ledger.json) if
+     the Pi is unreachable. */
+  (function () {
+    var root = document.querySelector('.home-ledger');
+    if (!root) return;
+    var endpoint = root.getAttribute('data-ledger-endpoint');
+    if (!endpoint) return;
+    var lang = root.getAttribute('data-lang') || 'en';
+    var locale = lang === 'it' ? 'it-IT' : 'en-US';
+    var DAYS_PER_MONTH = 30.4375;
+
+    function parseIso(s) { return new Date(s); }
+    function fmt(n, digits) {
+      if (n == null || isNaN(n)) return '—';
+      return new Intl.NumberFormat(locale, {
+        minimumFractionDigits: digits, maximumFractionDigits: digits
+      }).format(n);
+    }
+
+    function smallUnit(el) {
+      /* keep the unit <small> suffix already in the DOM */
+      var s = el.querySelector('small');
+      return s ? s.outerHTML : '';
+    }
+
+    function setValue(key, total, rate, digits, prefix) {
+      prefix = prefix || '';
+      digits = digits || 0;
+      var vEl = root.querySelector('[data-ledger-value="' + key + '"]');
+      var rEl = root.querySelector('[data-ledger-rate="' + key + '"]');
+      if (vEl) {
+        var units = '';
+        vEl.querySelectorAll('small').forEach(function (s) { units += ' ' + s.outerHTML; });
+        vEl.innerHTML = prefix + fmt(total, digits) + units;
+      }
+      if (rEl) {
+        var units = '';
+        rEl.querySelectorAll('small').forEach(function (s) { units += ' ' + s.outerHTML; });
+        rEl.innerHTML = prefix + fmt(rate, digits) + units;
+      }
+    }
+
+    fetch(endpoint, { cache: 'no-store', credentials: 'omit' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) {
+        var days = (parseIso(d.as_of) - parseIso(d.since)) / 86400000;
+        if (!(days > 0)) return;
+        var m = DAYS_PER_MONTH / days;
+
+        setValue('mist', d.mist_cycles.count,        d.mist_cycles.count * m,        0);
+        setValue('kwh',  d.electricity.kwh,          d.electricity.kwh * m,          0);
+        setValue('cost', d.cost_eur.value,           d.cost_eur.value * m,           0, '€');
+        setValue('co2',  d.co2_scrubbed.kg,          d.co2_scrubbed.kg * m,          1);
+        setValue('data', d.data_points.count / 1e6,  d.data_points.count * m / 1e6,  2);
+        setValue('fog',  d.fog_hours.hours,          d.fog_hours.hours * m,          0);
+      })
+      .catch(function () { /* keep SSR values */ });
   })();
 </script>
 {{ end }}

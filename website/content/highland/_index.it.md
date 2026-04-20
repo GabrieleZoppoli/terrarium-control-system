@@ -1,6 +1,6 @@
 ---
 title: "Il terrario d'alta quota"
-description: "Un terrario open-source che riproduce il clima dei tepui per circa 120 specie di foresta nebulosa"
+description: "Un terrario open-source che riproduce il clima dei tepui per circa 70 specie di foresta nebulosa"
 ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 
