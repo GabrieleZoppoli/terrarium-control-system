@@ -25,6 +25,7 @@ loc_highland:   "Terrario"
 loc_shelves:    "Ripiani nebbia"
 loc_outdoor:    "Balcone"
 loc_windowsill: "In casa"
+loc_seasonal:   "Stagionale"
 
 # Site chrome
 menu_toggle:           "Menu"

@@ -490,6 +490,7 @@ button.photo-tile:focus-visible {
 .loc-badge--shelves    { color: var(--accent); }
 .loc-badge--outdoor    { color: var(--highlight, #d4a74a); }
 .loc-badge--windowsill { color: var(--text-3); }
+.loc-badge--seasonal   { color: #7fb3d1; }  /* cool sky blue — "balcony in summer, shelves in winter" */
 
 /* ----- Layout ----- */
 

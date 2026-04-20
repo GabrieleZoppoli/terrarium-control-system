@@ -166,9 +166,9 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 117,Mediocalcar decoratum,Mediocalcar,decoratum,,Großräschener Orchideen,11.95,Nov 2023,alive,highland,
 124,Mediocalcar bifolium,Mediocalcar,bifolium,,Großräschener Orchideen,15,Nov 2022,lost,highland,Mounted when available
 243,Nageliella purpurea,Nageliella,purpurea,,Orchids & more,14,Apr 2024,alive,highland,Size (B)
-67,Neofinetia falcata 'Benitengu' 紅天狗,Neofinetia,falcata,'Benitengu' 紅天狗,Celandroni Orchidee,55,May 2025,alive,windowsill,
-216,Neofinetia falcata 'Akausagi' (赤兎),Neofinetia,falcata,'Akausagi' (赤兎),Negie Orchids,761.04,Nov 2020,alive,windowsill,"Originally $906.00 USD (Nov 2020 rate ~0.84); near blooming size with many babies; CITES + Phytosanitary + EMS shipping included; from Kiyoshige Negi, Japan"
-382,Neofinetia falcata,Neofinetia,falcata,,Großräschener Orchideen,,2017,alive,windowsill,
+67,Neofinetia falcata 'Benitengu' 紅天狗,Neofinetia,falcata,'Benitengu' 紅天狗,Celandroni Orchidee,55,May 2025,alive,seasonal,
+216,Neofinetia falcata 'Akausagi' (赤兎),Neofinetia,falcata,'Akausagi' (赤兎),Negie Orchids,761.04,Nov 2020,alive,seasonal,"Originally $906.00 USD (Nov 2020 rate ~0.84); near blooming size with many babies; CITES + Phytosanitary + EMS shipping included; from Kiyoshige Negi, Japan"
+382,Neofinetia falcata,Neofinetia,falcata,,Großräschener Orchideen,,2017,alive,seasonal,
 71,Neostylis Lou Sneary,Neostylis,Lou Sneary,,Celandroni Orchidee,27.27,Nov 2023,alive,shelves,Neofinetia falcata x Rhynchostylis coelestis var coerulea
 1,Nepenthes pitopangii 'Ivory Colored Form' Clone:01,Nepenthes,pitopangii,'Ivory Colored Form' Clone:01,Andreas Wistuba,51.4,Mar 2024,alive,highland,Rooted cutting
 2,Nepenthes aristolochioides (Sumatra) Clone:NM03,Nepenthes,aristolochioides (Sumatra) Clone:NM03,,Andreas Wistuba,61.68,Jan 2023,alive,highland,Ø5-8cm

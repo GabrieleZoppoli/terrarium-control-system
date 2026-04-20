@@ -25,6 +25,7 @@ loc_highland:   "Terrarium"
 loc_shelves:    "Fog shelves"
 loc_outdoor:    "Balcony"
 loc_windowsill: "Indoors"
+loc_seasonal:   "Seasonal"
 
 # Site chrome
 menu_toggle:           "Menu"
