@@ -526,6 +526,43 @@ button.photo-tile:focus-visible {
 .giscus-note a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .giscus, .giscus-frame { width: 100%; }
 
+/* ----- Universal back-to-top button (every page except home) ----- */
+
+.back-to-top {
+  position: fixed;
+  right: 1.3rem;
+  bottom: 1.3rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--text-2);
+  background: rgba(14, 16, 20, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  box-shadow: var(--elev-2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out), color 160ms ease, border-color 160ms ease;
+  z-index: 40;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  color: var(--text-1);
+  border-color: var(--accent-glow);
+}
+
 /* ----- Layout ----- */
 
 .site-main {
