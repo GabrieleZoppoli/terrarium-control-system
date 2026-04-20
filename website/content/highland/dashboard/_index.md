@@ -25,5 +25,3 @@ Refreshed every 15 min · data for the last 24 h · all times Europe/Rome.
 - **Target vs actual** — the violet line is the measured value; the amber dashed line is the Colombian-highland setpoint (shifted 15 h to hit Genoese dawn at the tepui equivalent); the green line is the outside room for context.
 - **Equipment state** — lights, freezer and mister on/off history as an area chart of the last 24 h.
 - **Footer** — latest room temperature, room RH, and system power draw (Meross MSS310).
-
-For the interactive Grafana (tailnet-only) see [rei1.tail7cc014.ts.net:3000](http://rei1.tail7cc014.ts.net:3000).

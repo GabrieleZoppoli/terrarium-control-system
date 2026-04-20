@@ -25,5 +25,3 @@ Aggiornata ogni 15 min · dati delle ultime 24 h · fuso orario Europa/Roma.
 - **Target vs misurato** — la linea viola è il valore misurato; la linea tratteggiata ambra è il setpoint d'alta quota colombiano (sfasato di 15 h per far coincidere l'alba genovese con quella del tepui equivalente); la linea verde è la stanza, come contesto.
 - **Stato attuatori** — storico on/off delle luci, del compressore e del nebulizzatore come grafico ad area sulle ultime 24 h.
 - **Footer** — temperatura della stanza, UR della stanza e assorbimento elettrico del sistema (Meross MSS310).
-
-Per la Grafana interattiva (accessibile solo dalla tailnet) vedi [rei1.tail7cc014.ts.net:3000](http://rei1.tail7cc014.ts.net:3000).
