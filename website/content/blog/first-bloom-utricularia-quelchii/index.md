@@ -37,15 +37,15 @@ The detail I find most interesting: the flower spike emerged not from the wetter
 
 Deep-red flowers are rare in *Utricularia* and essentially a Pantepui specialty: *U. quelchii* and *U. campbelliana* sit alone at that end of the colour range within the section *Orchidioides*, both confined to the summit-mat bogs of Roraima, Ilu-Tramen, Wei, Chimantá, and neighbouring table-mountains of the Venezuelan Guayana Highlands ([Taylor, 1989](#references)). The other red one I have is *U. campbelliana*, also Ilu-sourced, also in live sphagnum, slow as hell for three years, also not yet in flower. The flower colour alone makes *quelchii* a collector's plant; the tear-drop leaves — large for the genus, and sometimes reddish themselves — are the second hook.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-4.jpg" caption="The pot seen from the top: 10 cm terracotta almost disappeared under the live sphagnum overflow, with one of the buds (dark purple) resting pointing out of the moss." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-4.jpg" caption="Top-down over the pot. The dark teardrop on the sphagnum isn't a bud — it's one of those purple-tinged leaves, just about the darkest I have on the plant right now." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-5.jpg" caption="A macro of the same kind of leaf resting on the moss surface. The reddish pigmentation runs through the whole lamina; the texture of the live *Sphagnum* underneath gives the scale." >}}
 
 I hadn't expected a bloom. The plant arrived with three or four leaves and now has many; the rosette slowly but steadily kept growing. But growth that stays pure vegetative starts to look like a contract — *I'll live here, I'll take up space, I won't flower*. Three years of that can be easy to accept. Turns out the plant had been setting up all along.
 
 ## What comes next
 
 I'll update this post as the spike opens and once I can get a lux meter into that position to replace the eyeball estimate.
-
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-5.jpg" caption="A single bud, macro. The pale streak along the lower lip is the flower beginning to draw itself in colour." >}}
 
 ## References
 

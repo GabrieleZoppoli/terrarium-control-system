@@ -37,15 +37,15 @@ Il dettaglio che trovo più interessante: il peduncolo floreale non è emerso da
 
 I fiori rosso-profondi sono rari in *Utricularia* e sono essenzialmente una specialità pantepui: *U. quelchii* e *U. campbelliana* stanno da sole a quell'estremo della gamma cromatica all'interno della sezione *Orchidioides*, confinate alle torbiere di vetta di Roraima, Ilu-Tramen, Wei, Chimantá e tepui vicini delle Guayana Highlands venezuelane ([Taylor, 1989](#references)). L'altra rossa che ho è *U. campbelliana*, anche lei di provenienza Ilu, anche lei in sfagno vivo, lenta come il diavolo da tre anni, e neanche lei ancora fiorita. Il colore del fiore da solo fa di *quelchii* una pianta da collezionista; le foglie a goccia — grandi per il genere, e talora rossastre a loro volta — sono il secondo aggancio.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-4.jpg" caption="Il vaso visto dall'alto: 10 cm di terracotta quasi scomparsi sotto lo sfagno vivo che trabocca, con uno dei boccioli (porpora scuro) che fa capolino dallo sfagno." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-4.jpg" caption="Dall'alto, sopra il vaso. La goccia scura sullo sfagno non è un bocciolo — è una di quelle foglie a tinta purpurea, praticamente la più scura che ho sulla pianta in questo momento." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-5.jpg" caption="Macro dello stesso tipo di foglia appoggiata sulla superficie del muschio. La pigmentazione rossastra attraversa tutta la lamina; la trama dello *Sphagnum* vivo sotto dà la scala." >}}
 
 Non mi aspettavo assolutamente una fioritura. La pianta è arrivata con tre o quattro foglie e oggi ne ha molte; la rosetta ha continuato a crescere, lenta ma costante. Ma una crescita che resta puramente vegetativa inizia a sembrare un patto — *qui vivo, occupo spazio, non fiorisco*. Tre anni di questo è facile accettarli. E invece la pianta stava preparando qualcosa da un bel po'.
 
 ## Cosa viene dopo
 
 Aggiorno il post man mano che il peduncolo si apre, e appena ho una lettura lux per quella posizione invece della stima a occhio.
-
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-5.jpg" caption="Un singolo bocciolo, macro. La striscia pallida lungo il labbro inferiore è il fiore che comincia a prendere colore." >}}
 
 ## References
 
