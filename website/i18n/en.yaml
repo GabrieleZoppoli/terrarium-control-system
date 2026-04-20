@@ -27,6 +27,10 @@ loc_outdoor:    "Balcony"
 loc_windowsill: "Indoors"
 loc_seasonal:   "Seasonal"
 
+# Blog post comments (giscus)
+comments_title: "Comments"
+comments_note:  "Thoughts, corrections, trade offers welcome. Comments live on <a href=\"https://github.com/GabrieleZoppoli/terrarium-control-system/discussions\" rel=\"external\">GitHub Discussions</a>; sign in with a GitHub account to post."
+
 # Site chrome
 menu_toggle:           "Menu"
 breadcrumb_home:       "Home"

@@ -45,5 +45,7 @@
   <p class="blog-post__back small muted">
     <a href="{{ .Parent.RelPermalink }}">← All posts</a>
   </p>
+
+  {{ partial "giscus.html" . }}
 </article>
 {{ end }}

@@ -1,0 +1,23 @@
+{{- /* giscus comments — GitHub Discussions-backed.
+       Requires the giscus app installed on the repo:
+       https://github.com/apps/giscus */ -}}
+<section class="giscus-wrap" aria-label="Comments">
+  <h2 class="giscus-head">{{ i18n "comments_title" }}</h2>
+  <p class="giscus-note">{{ i18n "comments_note" | safeHTML }}</p>
+  <script src="https://giscus.app/client.js"
+          data-repo="GabrieleZoppoli/terrarium-control-system"
+          data-repo-id="R_kgDORLduWg"
+          data-category="General"
+          data-category-id="DIC_kwDORLduWs4C7Kox"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="transparent_dark"
+          data-lang="{{ site.Language.Lang }}"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+</section>

@@ -1130,7 +1130,7 @@
                       "status": "alive"
                     },
                     {
-                      "name": "coccinea 4N",
+                      "name": "coccinea 'Big One' × 'Hinomaru' 4N GM/WQC",
                       "size": 1,
                       "vendor": "Celandroni Orchidee",
                       "status": "alive",
@@ -1139,7 +1139,10 @@
                         "../img/collection/sophronitis/sophronitis-coccinea-4n-2.jpg",
                         "../img/collection/sophronitis/sophronitis-coccinea-4n-3.jpg",
                         "../img/collection/sophronitis/sophronitis-coccinea-4n-4.jpg",
-                        "../img/collection/sophronitis/sophronitis-coccinea-4n-5.jpg"
+                        "../img/collection/sophronitis/sophronitis-coccinea-4n-5.jpg",
+                        "../img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc.jpg",
+                        "../img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg",
+                        "../img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-3.jpg"
                       ]
                     },
                     {
@@ -3421,7 +3424,14 @@
                       "name": "quelchii",
                       "size": 1,
                       "vendor": "Klein Carnivors",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/utricularia/utricularia-quelchii.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-2.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-3.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-4.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-5.jpg"
+                      ]
                     }
                   ]
                 }

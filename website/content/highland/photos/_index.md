@@ -57,6 +57,12 @@ Each image is CC BY-SA 4.0, watermarked accordingly. Click any photo to open it 
     </a>
     <p><strong>February 2025.</strong> Night view, room lights off. The two shelves are now full top-to-bottom; mosses have migrated onto the inside of the glass; the <em>Heliamphora</em> on the right have pitcher stems pushing through the neighbours. Thirty-three months in.</p>
   </li>
+  <li>
+    <a href="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" alt="Highland cabinet interior, April 2026 — Sophronitis coccinea 'Big One' × 'Hinomaru' 4N in full bloom, Utricularia quelchii just below" loading="lazy">
+    </a>
+    <p><strong>April 2026.</strong> Forty-seven months in. The orange spot left-of-centre is <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WQC; directly underneath it, half-buried in the sphagnum overflow, an <em>Utricularia quelchii</em> from Ilu Tepui starts its first peduncle (<a href="/blog/first-bloom-utricularia-quelchii/">full post</a>).</p>
+  </li>
 </ul>
 
-Photographs are *not* chronologically exhaustive — these are the eight shots I happened to take that survived the filter of "still tells the story". More regular documentation planned once the Pi-side webcam goes live.
+Photographs are *not* chronologically exhaustive — just the ones I snapped at the right moment that still have something to say. More regular documentation planned once the Pi-side webcam goes live.

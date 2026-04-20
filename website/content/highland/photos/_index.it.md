@@ -57,6 +57,12 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     </a>
     <p><strong>Febbraio 2025.</strong> Vista notturna, luci della stanza spente. I due ripiani sono pieni da cima a fondo; i muschi sono migrati sull'interno del vetro; le <em>Heliamphora</em> sulla destra hanno steli degli ascidi che spuntano fra le vicine. Trentatré mesi dentro.</p>
   </li>
+  <li>
+    <a href="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" alt="Interno armadio, aprile 2026 — Sophronitis coccinea 'Big One' × 'Hinomaru' 4N in piena fioritura, Utricularia quelchii appena sotto" loading="lazy">
+    </a>
+    <p><strong>Aprile 2026.</strong> Quarantasette mesi. Il punto arancio a sinistra del centro è <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WQC; proprio sotto, semi-sommersa dallo sfagno traboccante, una <em>Utricularia quelchii</em> da Ilu Tepui apre il suo primo peduncolo (<a href="/it/blog/first-bloom-utricularia-quelchii/">post completo</a>).</p>
+  </li>
 </ul>
 
-Le foto non sono *cronologicamente esaustive* — sono gli otto scatti che ho avuto la fortuna di fare e che hanno superato il filtro di "racconta ancora qualcosa". Documentazione più regolare prevista quando la webcam sul Pi sarà operativa.
+Le foto non sono *cronologicamente esaustive* — sono quelle che ho scattato al volo nei momenti giusti e che hanno ancora qualcosa da raccontare. Documentazione più regolare prevista quando la webcam sul Pi sarà operativa.

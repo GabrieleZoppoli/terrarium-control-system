@@ -762,6 +762,15 @@
       ]
     },
     {
+      "taxon": "Sophronitis coccinea 'Big One' × 'Hinomaru' 4N GMWQC",
+      "slug": "sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc",
+      "primary": "sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc.jpg",
+      "extras": [
+        "sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg",
+        "sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-3.jpg"
+      ]
+    },
+    {
       "taxon": "Sophronitis coccinea 4N",
       "slug": "sophronitis-coccinea-4n",
       "primary": "sophronitis-coccinea-4n.jpg",
@@ -815,6 +824,18 @@
       "slug": "utricularia-prehensilis",
       "primary": "utricularia-prehensilis.jpg",
       "extras": []
+    },
+    {
+      "taxon": "Utricularia quelchii",
+      "slug": "utricularia-quelchii",
+      "primary": "utricularia-quelchii.jpg",
+      "extras": [
+        "utricularia-quelchii-2.jpg",
+        "utricularia-quelchii-3.jpg",
+        "utricularia-quelchii-4.jpg",
+        "utricularia-quelchii-5.jpg",
+        "utricularia-quelchii-6.jpg"
+      ]
     },
     {
       "taxon": "Utricularia sandersonii (white)",

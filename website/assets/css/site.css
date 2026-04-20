@@ -496,6 +496,36 @@ button.photo-tile:focus-visible {
 .loc-badge--windowsill { color: var(--text-3); }
 .loc-badge--seasonal   { color: #7fb3d1; }  /* cool sky blue — "balcony in summer, shelves in winter" */
 
+/* ----- giscus comments block on blog posts ----- */
+
+.giscus-wrap {
+  margin: 3.5rem auto 2rem;
+  max-width: var(--page-max);
+  border-top: 1px solid var(--border-hair);
+  padding-top: 1.8rem;
+}
+.giscus-head {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+  color: var(--text-1);
+  margin: 0 0 0.4rem;
+}
+.giscus-note {
+  font-family: var(--font-sans);
+  font-size: var(--step-sm);
+  color: var(--text-3);
+  margin: 0 0 1.5rem;
+  max-width: 60ch;
+}
+.giscus-note a {
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.giscus-note a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.giscus, .giscus-frame { width: 100%; }
+
 /* ----- Layout ----- */
 
 .site-main {
