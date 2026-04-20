@@ -3328,7 +3328,7 @@
                       "name": "alpina",
                       "size": 1,
                       "vendor": "Gartenbau Carow",
-                      "status": "dead",
+                      "status": "alive",
                       "photos": [
                         "../img/collection/utricularia/utricularia-alpina.jpg",
                         "../img/collection/utricularia/utricularia-alpina-2.jpg"
@@ -3415,6 +3415,12 @@
                       "name": "prehensilis",
                       "size": 1,
                       "vendor": "Klein Carnivors",
+                      "status": "alive"
+                    },
+                    {
+                      "name": "quelchii",
+                      "size": 1,
+                      "vendor": "unknown",
                       "status": "alive"
                     }
                   ]
