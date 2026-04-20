@@ -22,7 +22,7 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
   <a href="https://github.com/GabrieleZoppoli/terrarium-control-system" rel="external">Source &amp; firmware</a>
 </nav>
 
-A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulates highland cloud forest weather using real-time Colombian meteorological data (time-shifted 15 hours). Marine refrigeration drives nighttime temperatures to ~13.5 °C in a room at 22 °C. About 75 species (≈90 accessions counting clonal lines) coexist under the same regime — *Heliamphora*, highland *Nepenthes*, *Dracula*, *Sophronitis*, New Guinea *Dendrobium*, *Utricularia* sect. *Orchidioides*, and more.
+A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulates highland cloud forest weather using real-time Colombian meteorological data (time-shifted 15 hours). Marine refrigeration drives nighttime temperatures to ~13.5 °C in a room at 22 °C. About 70 species (≈85 accessions counting clonal lines) coexist under the same regime — *Heliamphora*, highland *Nepenthes*, *Dracula*, *Sophronitis*, New Guinea *Dendrobium*, miniature Pleurothallidinae, and more.
 
 {{< highland-live >}}
 

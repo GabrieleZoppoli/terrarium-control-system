@@ -29,7 +29,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 244,Cleisostoma arietinum,Cleisostoma,arietinum,,Orchids & more,12,Apr 2024,alive,windowsill,Size (B)
 126,Coelogyne schilleriana,Coelogyne,schilleriana,,Currlin Orchideen,18.22,Dec 2021,lost,windowsill,
 250,Comparettia falcata,Comparettia,falcata,,Orchids & more,12,Oct 2024,alive,highland,Size (J1)
-80,Cymbidium Kiwi Midnight 'Geyserland',Cymbidium,Kiwi Midnight,'Geyserland',Celandroni Orchidee,60,Dec 2020,given,windowsill,Christmas gift
+80,Cymbidium Kiwi Midnight 'Geyserland',Cymbidium,Kiwi Midnight,'Geyserland',Celandroni Orchidee,60,Dec 2020,given,outdoor,Christmas gift
 381,Cyperus papyrus,Cyperus,papyrus,,,,,alive,outdoor,
 19,Darlingtonia californica,Darlingtonia,californica,,Giardino Carnivoro,18,Nov 2019,lost,outdoor,"90cm tall, from seed"
 32,Darlingtonia californica,Darlingtonia,californica,,Gartenbau Carow,32,Mar 2019,lost,outdoor,"Blühfähig (flowering size), 12er Topf"
@@ -37,8 +37,8 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 233,Darlingtonia californica,Darlingtonia,californica,,Andrea Fontana,See notes,,lost,outdoor,From growlist; date unknown
 83,Darwinara Charm 'Blue Star',Darwinara,Charm,'Blue Star',Celandroni Orchidee,35,Nov 2019,lost,shelves,
 263,Darwinara Charm 'Blue Moon',Darwinara,Charm,'Blue Moon',Claessen Orchids & Plants,54.04,Mar 2023,alive,shelves,Weather insurance €3.95 included in subtotal
-167,Davallia repens,Davallia,repens,,Klein Carnivors,12,Jan 2020,lost,windowsill,Dtf_14; invoice #3559
-346,Davallia fejeensis,Davallia,fejeensis,,From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown
+167,Davallia repens,Davallia,repens,,Klein Carnivors,12,Jan 2020,lost,shelves,Dtf_14; invoice #3559
+346,Davallia fejeensis,Davallia,fejeensis,,From growlist (May 2020),See notes,,lost,shelves,Vendor/date unknown
 82,Dendrobium Betty Goto f. coerulea,Dendrobium,Betty Goto,f. coerulea,Celandroni Orchidee,22,Jan 2020,alive,windowsill,
 108,Dendrobium cyanocentrum 'Blau',Dendrobium,cyanocentrum,'Blau',Großräschener Orchideen,95,Nov 2024,alive,highland,Blue form
 114,Dendrobium jenkinsii,Dendrobium,jenkinsii,,Großräschener Orchideen,18,Apr 2024,alive,windowsill,
@@ -148,7 +148,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 262,Laelia briegeri,Laelia,briegeri,,Ecuagenera.com,20.68,Dec 2022,lost,highland,Originally $22.00 USD (Dec 2022 rate ~0.94); separate CITES from order #98863
 384,Laelia milleri,Laelia,milleri,,eBay,,,alive,highland,
 404,Laelia lundii coerulea,Laelia,lundii coerulea,,Nardotto e Capello,,,alive,highland,
-168,Lecanopteris lomarioides,Lecanopteris,lomarioides,,Klein Carnivors,35,Jan 2020,lost,windowsill,Lec_11; ant fern; invoice #3559
+168,Lecanopteris lomarioides,Lecanopteris,lomarioides,,Klein Carnivors,35,Jan 2020,lost,shelves,Lec_11; ant fern; invoice #3559
 294,Lemna minor,Lemna,minor,,Vivai le Georgiche,4,Mar 2020,lost,outdoor,Lenticchia d'acqua; Vaso Ø12cm
 270,Lepanthopsis astrophora,Lepanthopsis,astrophora,,Varesina Orchidee,22,Jun 2023,alive,highland,Vaso (potted)
 103,Leptotes bicolor,Leptotes,bicolor,,Orchideria di Morosolo,15,May 2023,alive,highland,Su zattera (mounted)
@@ -161,8 +161,8 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 254,Masdevallia Devil's Heart,Masdevallia,Devil's Heart,,Ecuagenera Europe,15.32,Nov 2023,alive,highland,Hybrid
 258,Masdevallia coccinea 'Anchota',Masdevallia,coccinea,'Anchota',Ecuagenera Europe,27.04,Apr 2024,lost,highland,
 405,Masdevallia caudata 'Gigi',Masdevallia,caudata,'Gigi',Ecuagenera,,,alive,highland,
-247,Maxillaria sophronitis,Maxillaria,sophronitis,,Orchids & more,14,Oct 2024,alive,windowsill,Size (B)
-359,Maxillaria tenuifolia,Maxillaria,tenuifolia,,,,,alive,windowsill,Fiori profumo di cocco
+247,Maxillaria sophronitis,Maxillaria,sophronitis,,Orchids & more,14,Oct 2024,alive,highland,Size (B)
+359,Maxillaria tenuifolia,Maxillaria,tenuifolia,,,,,alive,outdoor,Fiori profumo di cocco
 117,Mediocalcar decoratum,Mediocalcar,decoratum,,Großräschener Orchideen,11.95,Nov 2023,alive,highland,
 124,Mediocalcar bifolium,Mediocalcar,bifolium,,Großräschener Orchideen,15,Nov 2022,lost,highland,Mounted when available
 243,Nageliella purpurea,Nageliella,purpurea,,Orchids & more,14,Apr 2024,alive,highland,Size (B)
@@ -186,8 +186,8 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 298,Nymphaea 'Perry's Baby Red',Nymphaea,,'Perry's Baby Red',Eta Beta Vivaio,18,Feb 2025,alive,outdoor,
 340,Nymphaea × 'Snow Princess',Nymphaea,×,'Snow Princess',From growlist (May 2020),See notes,,lost,outdoor,Vendor/date unknown
 246,Oerstedella centradenia,Oerstedella,centradenia,,Orchids & more,12,Apr 2024,alive,highland,Size (B)
-104,Oncidium eurycline,Oncidium,eurycline,,Orchideria di Morosolo,24,May 2023,lost,windowsill,"Su zattera Grande (mounted, large)"
-271,Oncidium cheirophorum,Oncidium,cheirophorum,,Varesina Orchidee,22,Jun 2023,alive,windowsill,Zattera (mounted)
+104,Oncidium eurycline,Oncidium,eurycline,,Orchideria di Morosolo,24,May 2023,lost,outdoor,"Su zattera Grande (mounted, large)"
+271,Oncidium cheirophorum,Oncidium,cheirophorum,,Varesina Orchidee,22,Jun 2023,alive,highland,Zattera (mounted)
 272,Ornithocephalus estradae,Ornithocephalus,estradae,,Varesina Orchidee,30,Jun 2023,lost,highland,Specie rara; zattera (mounted)
 85,Paphiopedilum micranthum x self,Paphiopedilum,micranthum x self,,Celandroni Orchidee,25,Nov 2019,lost,windowsill,
 332,Paphiopedilum sanderianum,Paphiopedilum,sanderianum,,From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown
@@ -204,36 +204,36 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 296,Picea pungens 'Glauca Globosa',Picea,pungens,'Glauca Globosa',Vivai le Georgiche,55,Mar 2020,alive,outdoor,Ø24cm pot
 21,Pinguicula laueana,Pinguicula,laueana,,Giardino Carnivoro,8,Jan 2017,lost,shelves,
 22,Pinguicula calderoniae,Pinguicula,calderoniae,,Giardino Carnivoro,25,Jan 2017,lost,shelves,
-23,Pinguicula 'Apasionada' (gigantea alba x moctezumae),Pinguicula,,'Apasionada' (gigantea alba x moctezumae),Giardino Carnivoro,8,Jan 2017,alive,windowsill,Hybrid
+23,Pinguicula 'Apasionada' (gigantea alba x moctezumae),Pinguicula,,'Apasionada' (gigantea alba x moctezumae),Giardino Carnivoro,8,Jan 2017,alive,shelves,Hybrid
 24,Pinguicula agnata x gypsicola,Pinguicula,agnata x gypsicola,,Giardino Carnivoro,8,Jan 2017,alive,shelves,Hybrid
 25,Pinguicula × Red Starfish,Pinguicula,× Red Starfish,,Giardino Carnivoro,19,Jan 2017,alive,shelves,Hybrid
 26,Pinguicula gracilis x emarginata,Pinguicula,gracilis x emarginata,,Giardino Carnivoro,6,Jan 2017,alive,shelves,Hybrid
 27,Pinguicula jaumavensis x cyclosecta,Pinguicula,jaumavensis x cyclosecta,,Giardino Carnivoro,6,Jan 2017,alive,shelves,Hybrid
 88,Pinguicula reticulata,Pinguicula,reticulata,,Carnivoria.eu,10,Feb 2017,alive,shelves,"Aramberi, Nuevo Leon"
-132,Pinguicula primuliflora,Pinguicula,primuliflora,,Nature et Paysages,7,Jan 2017,lost,windowsill,
-165,Pinguicula gigantea,Pinguicula,gigantea,,Klein Carnivors,10,Jan 2020,lost,windowsill,Pnh_5; invoice #3559; second specimen (first from Un Angolo di Deserto Jan 2017)
+132,Pinguicula primuliflora,Pinguicula,primuliflora,,Nature et Paysages,7,Jan 2017,lost,shelves,
+165,Pinguicula gigantea,Pinguicula,gigantea,,Klein Carnivors,10,Jan 2020,lost,shelves,Pnh_5; invoice #3559; second specimen (first from Un Angolo di Deserto Jan 2017)
 185,Pinguicula agnata,Pinguicula,agnata,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; part of €108 order (16 plants)
 186,Pinguicula medusina,Pinguicula,medusina,,Un Angolo di Deserto,See notes,Jan 2017,lost,shelves,Bare root; part of €108 order
 187,Pinguicula gypsicola × moctezumae,Pinguicula,gypsicola × moctezumae,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; ×7 plants; part of €108 order
 188,Pinguicula rotundiflora,Pinguicula,rotundiflora,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; part of €108 order
-189,Pinguicula gigantea,Pinguicula,gigantea,,Un Angolo di Deserto,See notes,Jan 2017,lost,windowsill,Bare root; part of €108 order
+189,Pinguicula gigantea,Pinguicula,gigantea,,Un Angolo di Deserto,See notes,Jan 2017,lost,shelves,Bare root; part of €108 order
 190,Pinguicula × 'Sethos',Pinguicula,×,'Sethos',Un Angolo di Deserto,See notes,Jan 2017,lost,shelves,Hybrid; bare root; part of €108 order
 191,Pinguicula rectifolia,Pinguicula,rectifolia,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; part of €108 order
 192,Pinguicula ehlersiae,Pinguicula,ehlersiae,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; ×2 plants; part of €108 order
 193,Pinguicula esseriana,Pinguicula,esseriana,,Un Angolo di Deserto,See notes,Jan 2017,alive,shelves,Bare root; part of €108 order
-317,Pinguicula primuliflora 'Rose',Pinguicula,primuliflora,'Rose',From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown; different from P. primuliflora (Nature et Paysages)
+317,Pinguicula primuliflora 'Rose',Pinguicula,primuliflora,'Rose',From growlist (May 2020),See notes,,lost,shelves,Vendor/date unknown; different from P. primuliflora (Nature et Paysages)
 350,Pinguicula 'Marciano' (heterophylla × 'Weser'),Pinguicula,,'Marciano' (heterophylla × 'Weser'),,,,alive,shelves,Ibrido
 351,Pinguicula cyclosecta,Pinguicula,cyclosecta,,,,,lost,shelves,
 398,Pinguicula immaculata,Pinguicula,immaculata,,Diflora,17,Mar 2026,alive,shelves,
 399,Pinguicula laueana 'Crimson Flower',Pinguicula,laueana,'Crimson Flower',Diflora,13,Mar 2026,alive,shelves,
 400,Pinguicula moranensis,Pinguicula,moranensis,,Diflora,,Mar 2026,alive,shelves,Gift with order
 401,Pinguicula sp. 'Lautner 92/52' × gypsicola 'Buenavista',Pinguicula,sp.,'Lautner 92/52' × gypsicola 'Buenavista',Un Angolo di Deserto,,Mar 2026,alive,shelves,
-343,Platycerium bifurcatum,Platycerium,bifurcatum,,From growlist (May 2020),See notes,,alive,outdoor,Vendor/date unknown; staghorn fern
-344,Platycerium veitchii,Platycerium,veitchii,,From growlist (May 2020),See notes,,alive,outdoor,Vendor/date unknown; staghorn fern
+343,Platycerium bifurcatum,Platycerium,bifurcatum,,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown; staghorn fern
+344,Platycerium veitchii,Platycerium,veitchii,,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown; staghorn fern
 256,Platystele baqueroi,Platystele,baqueroi,,Ecuagenera Europe,24.26,Apr 2024,alive,highland,€75 voucher applied from order #10346
 106,Pleurothallis leptotifolia,Pleurothallis,leptotifolia,,Orchideria di Morosolo,15,May 2023,alive,highland,Su zattera (mounted)
 282,Pogonia ophioglossoides,Pogonia,ophioglossoides,,eBay (westcornwallcarnivores),5.8,Nov 2019,alive,outdoor,Originally £5.00 GBP (Nov 2019 rate ~1.16); ≈GBP 11 total incl. shipping
-345,Pyrrosia nummularifolia,Pyrrosia,nummularifolia,,From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown
+345,Pyrrosia nummularifolia,Pyrrosia,nummularifolia,,From growlist (May 2020),See notes,,lost,shelves,Vendor/date unknown
 29,Roridula gorgonias,Roridula,gorgonias,,Gartenbau Carow,48.8,May 2019,lost,outdoor,With symbiotic Pameridea bug
 301,Rosa 'Sorbet Fruité',Rosa,,'Sorbet Fruité',"Meilland (Yacht & Garden, Genoa)",See notes,2019–2020,alive,outdoor,In-person purchase at Yacht & Garden show; exact year uncertain (2019 or 2020)
 289,Salvinia auriculata,Salvinia,auriculata,,Water Plants Italy,3.5,Mar 2020,alive,outdoor,Porzione piante a radice nuda (bare root)
@@ -350,22 +350,22 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 394,Tillandsia streptophylla,Tillandsia,streptophylla,,Unknown,,,alive,windowsill,In flower
 395,Tillandsia bergeri,Tillandsia,bergeri,,Unknown,,,alive,windowsill,Large clump
 107,Tolumnia hawkesiana,Tolumnia,hawkesiana,,Orchideria di Morosolo,15,May 2023,alive,windowsill,Su zattera (mounted)
-35,Utricularia alpina,Utricularia,alpina,,Gartenbau Carow,See notes,Apr 2020,alive,highland,Best.Nr: UTAL; part of €74.30 order
-87,Utricularia fulva,Utricularia,fulva,,Carnivoria.eu,8,Feb 2017,given,windowsill,"Rockhole, WA"
-153,Utricularia bisquamata 'Big Purple Flower',Utricularia,bisquamata,'Big Purple Flower',Klein Carnivors,5,Feb 2017,given,windowsill,Invoice #1911
-154,Utricularia dichotoma (Blue Flower),Utricularia,dichotoma (Blue Flower),,Klein Carnivors,6,Feb 2017,given,windowsill,Invoice #1911
-155,Utricularia × nelumbifolia × reniformis,Utricularia,× nelumbifolia × reniformis,,Klein Carnivors,12,Feb 2017,alive,highland,Invoice #1911
-156,Utricularia calycifida 'Asenath White',Utricularia,calycifida,'Asenath White',Klein Carnivors,7,Feb 2017,alive,windowsill,Invoice #1911
-157,Utricularia uniflora L-Type,Utricularia,uniflora L-Type,,Klein Carnivors,8,Feb 2017,lost,windowsill,Invoice #1911
-158,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,5,Feb 2017,given,windowsill,Invoice #1911
-159,Utricularia welwitschii,Utricularia,welwitschii,,Klein Carnivors,8,Feb 2017,lost,windowsill,Invoice #1911
-160,Utricularia blanchetii 'Violet' (Pico del Almos),Utricularia,blanchetii,'Violet' (Pico del Almos),Klein Carnivors,5,Feb 2017,lost,windowsill,Invoice #1911
-319,Utricularia sandersonii (white),Utricularia,sandersonii (white),,From growlist (May 2020),See notes,,alive,windowsill,Vendor/date unknown
-321,Utricularia longifolia,Utricularia,longifolia,,From growlist (May 2020),See notes,,alive,windowsill,Vendor/date unknown
+35,Utricularia alpina,Utricularia,alpina,,Gartenbau Carow,See notes,Apr 2020,alive,shelves,Best.Nr: UTAL; part of €74.30 order
+87,Utricularia fulva,Utricularia,fulva,,Carnivoria.eu,8,Feb 2017,given,shelves,"Rockhole, WA"
+153,Utricularia bisquamata 'Big Purple Flower',Utricularia,bisquamata,'Big Purple Flower',Klein Carnivors,5,Feb 2017,given,shelves,Invoice #1911
+154,Utricularia dichotoma (Blue Flower),Utricularia,dichotoma (Blue Flower),,Klein Carnivors,6,Feb 2017,given,shelves,Invoice #1911
+155,Utricularia × nelumbifolia × reniformis,Utricularia,× nelumbifolia × reniformis,,Klein Carnivors,12,Feb 2017,alive,shelves,Invoice #1911
+156,Utricularia calycifida 'Asenath White',Utricularia,calycifida,'Asenath White',Klein Carnivors,7,Feb 2017,alive,shelves,Invoice #1911
+157,Utricularia uniflora L-Type,Utricularia,uniflora L-Type,,Klein Carnivors,8,Feb 2017,lost,shelves,Invoice #1911
+158,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,5,Feb 2017,given,shelves,Invoice #1911
+159,Utricularia welwitschii,Utricularia,welwitschii,,Klein Carnivors,8,Feb 2017,lost,shelves,Invoice #1911
+160,Utricularia blanchetii 'Violet' (Pico del Almos),Utricularia,blanchetii,'Violet' (Pico del Almos),Klein Carnivors,5,Feb 2017,lost,shelves,Invoice #1911
+319,Utricularia sandersonii (white),Utricularia,sandersonii (white),,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown
+321,Utricularia longifolia,Utricularia,longifolia,,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown
 68,Vanda coerulescens,Vanda,coerulescens,,Celandroni Orchidee,55,May 2025,alive,shelves,
 127,Vanda coerulescens,Vanda,coerulescens,,Currlin Orchideen,13.08,Dec 2021,lost,shelves,
 265,Vanda nana,Vanda,nana,,Claessen Orchids & Plants,19.95,Nov 2023,alive,shelves,
-339,Vanda 'Chocolate Brown',Vanda,,'Chocolate Brown',From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown
+339,Vanda 'Chocolate Brown',Vanda,,'Chocolate Brown',From growlist (May 2020),See notes,,lost,shelves,Vendor/date unknown
 81,Vandachostylis Sasicha,Vandachostylis,Sasicha,,Celandroni Orchidee,35,Jan 2020,lost,windowsill,
 412,Stelis sp.,Stelis,sp.,,Ecuagenera.com,,,alive,highland,
 413,Brocchinia reducta,Brocchinia,reducta,,eBay,,,alive,highland,
@@ -373,7 +373,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 415,Ficus microcarpa,Ficus,microcarpa,,friend,,,alive,windowsill,
 416,Bulbophyllum thiurum,Bulbophyllum,thiurum,,Großräschener Orchideen,,,alive,windowsill,
 417,"Sarracenia flava var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",Sarracenia,flava,"var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",unknown,,,alive,outdoor,
-418,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,,,alive,windowsill,
+418,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,,,alive,shelves,
 419,Restrepia vasquezii,Restrepia,vasquezii,,Ecuagenera,20.4,Nov 2022,alive,highland,
 420,Phragmipedium kovachii,Phragmipedium,kovachii,,Ecuagenera,114.24,Nov 2022,alive,highland,
 421,Restrepia sanguinea,Restrepia,sanguinea,,Ecuagenera,24.48,Nov 2022,alive,highland,Ecuagenera batch 002263

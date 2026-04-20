@@ -22,7 +22,7 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
   <a href="https://github.com/GabrieleZoppoli/terrarium-control-system" rel="external">Sorgente e firmware</a>
 </nav>
 
-Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce il clima di una foresta nebulosa d'alta quota usando in tempo reale i dati meteo della Colombia (con uno scarto di 15 ore). Un compressore marino porta la temperatura notturna a circa 13,5 °C in una stanza a 22 °C. Circa 75 specie (≈90 esemplari contando le linee clonali) convivono sotto lo stesso regime — *Heliamphora*, *Nepenthes* d'alta quota, *Dracula*, *Sophronitis*, *Dendrobium* della Nuova Guinea, *Utricularia* sect. *Orchidioides*, e altre ancora.
+Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce il clima di una foresta nebulosa d'alta quota usando in tempo reale i dati meteo della Colombia (con uno scarto di 15 ore). Un compressore marino porta la temperatura notturna a circa 13,5 °C in una stanza a 22 °C. Circa 70 specie (≈85 esemplari contando le linee clonali) convivono sotto lo stesso regime — *Heliamphora*, *Nepenthes* d'alta quota, *Dracula*, *Sophronitis*, *Dendrobium* della Nuova Guinea, Pleurothallidinae miniatura, e altre ancora.
 
 {{< highland-live >}}
 
