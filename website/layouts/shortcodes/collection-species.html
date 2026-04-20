@@ -30,14 +30,15 @@
     {{- $taxon := index . 1 -}}
     {{- $photo := index $photoByTaxon $taxon -}}
     {{- $row := dict
-        "id"     (index . 0)
-        "taxon"  $taxon
-        "source" (index . 5)
-        "price"  (index . 6)
-        "date"   (index . 7)
-        "status" (index . 8)
-        "notes"  (index . 10)
-        "photo"  $photo
+        "id"       (index . 0)
+        "taxon"    $taxon
+        "source"   (index . 5)
+        "price"    (index . 6)
+        "date"     (index . 7)
+        "status"   (index . 8)
+        "location" (index . 9)
+        "notes"    (index . 10)
+        "photo"    $photo
     -}}
     {{- if or (eq $show "all") (eq $show $row.status) -}}
       {{- $matches = $matches | append $row -}}
@@ -89,6 +90,7 @@
       <th class="num">Price</th>
       <th>Acquired</th>
       <th>Status</th>
+      <th>{{ i18n "loc_col_header" }}</th>
       <th>Notes</th>
     </tr>
   </thead>
@@ -114,6 +116,7 @@
       </td>
       <td class="mono small" data-label="Acquired">{{ .date }}</td>
       <td data-label="Status">{{- with .status -}}<span class="status status--{{ . }}">{{ . }}</span>{{- end -}}</td>
+      <td data-label="{{ i18n "loc_col_header" }}">{{- with .location -}}<span class="loc-badge loc-badge--{{ . }}">{{ i18n (printf "loc_%s" .) }}</span>{{- end -}}</td>
       <td class="small" data-label="Notes">{{ .notes }}</td>
     </tr>
   {{- end }}

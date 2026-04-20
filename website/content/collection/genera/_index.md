@@ -12,7 +12,7 @@ extra_card:
 
 ## Cloud forest terrarium
 
-The terrarium houses most of the currently-alive collection — sourced from cloud forests and highland habitats worldwide. Despite different continents and evolutionary lineages, these plants thrive together because their native habitats share functionally identical climates: cool temperatures, persistent fog, high humidity, never dry.
+The terrarium houses about 75 of the currently-alive species (around 90 accessions counting clonal lines) — sourced from cloud forests and highland habitats worldwide. Despite different continents and evolutionary lineages, these plants thrive together because their native habitats share functionally identical climates: cool temperatures, persistent fog, high humidity, never dry. The remaining ~200 alive accessions live outdoors (*Sarracenia*, *Dionaea*, hardy orchids, aquatics), on the passive-mist shelves (*Vanda*, *Cephalotus*, botanical *Phalaenopsis* etc.), or on windowsills (*Tillandsia* and friends).
 
 The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland *Nepenthes*, and *Dracula*. Losses cluster around species needing a dry rest period or warmer nights than the terrarium provides.
 

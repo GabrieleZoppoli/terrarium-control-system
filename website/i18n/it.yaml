@@ -19,6 +19,13 @@ mosaic_outdoor_kicker: "Fuori dal terrario"
 mosaic_outdoor_title:  "Specie che preferiscono stare sul balcone."
 mosaic_outdoor_cta_all: "Tutte le piante all'aperto"
 
+# Badge "dove vive" sulle tabelle species per genere
+loc_col_header: "Dove"
+loc_highland:   "Terrario"
+loc_shelves:    "Ripiani nebbia"
+loc_outdoor:    "Balcone"
+loc_windowsill: "In casa"
+
 # Site chrome
 menu_toggle:           "Menu"
 breadcrumb_home:       "Home"

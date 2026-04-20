@@ -12,7 +12,7 @@ extra_card:
 
 ## Dentro al terrario
 
-Il terrario ospita la maggior parte della collezione attualmente viva — specie di foresta nebulosa e habitat d'alta quota da tutto il mondo. Pur provenendo da continenti diversi e lignaggi evolutivi distanti, queste piante convivono perché i loro habitat nativi condividono un clima funzionalmente identico: temperature fresche, nebbia persistente, umidità alta, mai secco.
+Il terrario ospita circa 75 delle specie attualmente vive (circa 90 esemplari contando le linee clonali) — provenienti dalle foreste nebulose e dagli habitat d'alta quota di tutto il mondo. Pur venendo da continenti diversi e lignaggi evolutivi distanti, queste piante convivono perché i loro habitat nativi condividono un clima funzionalmente identico: temperature fresche, nebbia persistente, umidità alta, mai secco. Le altre ~200 piante vive stanno all'aperto (*Sarracenia*, *Dionaea*, orchidee rustiche, acquatiche), sui ripiani a nebbia passiva (*Vanda*, *Cephalotus*, *Phalaenopsis* botaniche, ecc.), o sui davanzali di casa (*Tillandsia* e affini).
 
 Le più alte sopravvivenze (~100 % su 3+ anni) sono in *Heliamphora*, *Nepenthes* d'alta quota, e *Dracula*. Le perdite si concentrano nelle specie che richiedono un periodo secco di riposo o notti più calde di quelle che il terrario può offrire.
 

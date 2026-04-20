@@ -57,7 +57,19 @@ def main() -> int:
             "source", "price_eur", "acquired_date", "status", "location", "notes",
         ])
         for row in ws.iter_rows(min_row=2, values_only=True):
-            idx, genus, sp_cv, vendor, order_date, price, order_no, notes, status_sym, _photo = row
+            # Columns: #, Genus, Species/Cultivar, Vendor, Order Date,
+            # Unit Price, Order #, Features/Notes, Status, Photo, Location
+            # (Location was added April 2026; earlier rows may be missing
+            # the cell, so we index defensively.)
+            idx       = row[0] if len(row) > 0 else None
+            genus     = row[1] if len(row) > 1 else None
+            sp_cv     = row[2] if len(row) > 2 else None
+            vendor    = row[3] if len(row) > 3 else None
+            order_date= row[4] if len(row) > 4 else None
+            price     = row[5] if len(row) > 5 else None
+            notes     = row[7] if len(row) > 7 else None
+            status_sym= row[8] if len(row) > 8 else None
+            location  = row[10] if len(row) > 10 else None
             if not genus and not sp_cv:
                 skipped += 1
                 continue
@@ -77,7 +89,7 @@ def main() -> int:
                 price_str,
                 (order_date or "").strip() if isinstance(order_date, str) else (order_date or ""),
                 status,
-                "",
+                (location or "").strip() if isinstance(location, str) else "",
                 (notes or "").strip() if isinstance(notes, str) else "",
             ])
             written += 1
