@@ -8,9 +8,17 @@ showReadingTime: true
 
 I wasn't looking for it. Last week I was leaning into the highland cabinet to check on my *Sophronitis coccinea* hanging above, and through its roots I caught a thin red peduncle climbing out of the pot underneath. *Utricularia quelchii*. Three years in cultivation, steadily adding leaves and nothing else — until, suddenly, at least two buds, red-purple, the stem erect in that *reniformis* family posture but smaller and more hesitant.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="The first catch: a bud on an erect peduncle, red-purple, framed against the cabinet wall between the *Sophronitis* roots hanging from above." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="The first catch: two buds on the same erect peduncle, red-purple, framed against the cabinet wall between the *Sophronitis* roots hanging from above." >}}
 
-{{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="The whole frame: the *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC is the red spot left-of-centre; the quelchii pot is nestled below it, half-hidden by its own sphagnum overflow. (Also filed on the [terrarium photo timeline](/highland/photos/).)" >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-2.jpg" caption="The larger of the two buds, closer in. The lower-lip sac is already well-formed; the colour is a dense red-purple against the cabinet's white wall." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-3.jpg" caption="The second bud, still small and pointed, sitting lower on the peduncle." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-6.jpg" caption="Both buds together on the same peduncle, pulled back to show the tangle of *Sophronitis* aerial roots they had to thread through." >}}
+
+{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg" caption="The *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC flower — the whole reason I was leaning into the cabinet last week." >}}
+
+{{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="The whole frame: the *Sophronitis coccinea* is the red spot left-of-centre; the quelchii pot is nestled below it, half-hidden by its own sphagnum overflow. (Also filed on the [terrarium photo timeline](/highland/photos/).)" >}}
 
 ## How it got here
 

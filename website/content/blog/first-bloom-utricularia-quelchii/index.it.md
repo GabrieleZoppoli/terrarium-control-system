@@ -8,9 +8,17 @@ showReadingTime: true
 
 Non la stavo guardando. La settimana scorsa mi ero avvicinato all'armadio d'alta quota per controllare la mia *Sophronitis coccinea* appesa poco più in alto, e attraverso le sue radici ho intravisto un peduncolo rossastro sottile che saliva dal vaso sotto. *Utricularia quelchii*. Tre anni in coltivazione, a mettere foglie e basta — e all'improvviso almeno due boccioli, rosso-porpora, peduncolo eretto nel portamento tipico della sezione *Orchidioides* come in *reniformis*, ma più piccolo e più timido.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="La prima cattura: un bocciolo su peduncolo eretto, rosso-porpora, inquadrato contro la parete dell'armadio fra le radici della *Sophronitis* che pendono dall'alto." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="La prima cattura: due boccioli sullo stesso peduncolo eretto, rosso-porpora, inquadrati contro la parete dell'armadio fra le radici della *Sophronitis* che pendono dall'alto." >}}
 
-{{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="Tutto il quadro: la *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC è il punto rosso a sinistra del centro; il vaso della quelchii è incastrato sotto, semi-nascosto dallo sfagno che trabocca. (Archiviata anche nella [cronologia foto del terrario](/it/highland/photos/).)" >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-2.jpg" caption="Il più grande dei due boccioli, più da vicino. Il sacco del labbro inferiore è già ben formato; il colore è un rosso-porpora denso contro la parete bianca dell'armadio." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-3.jpg" caption="Il secondo bocciolo, ancora piccolo e appuntito, seduto più in basso sul peduncolo." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-6.jpg" caption="I due boccioli insieme sullo stesso peduncolo, visti più largo per mostrare il groviglio di radici aeree di *Sophronitis* attraverso cui hanno dovuto farsi strada." >}}
+
+{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg" caption="Il fiore di *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC — il motivo per cui la settimana scorsa mi ero avvicinato all'armadio." >}}
+
+{{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="Tutto il quadro: la *Sophronitis coccinea* è il punto rosso a sinistra del centro; il vaso della quelchii è incastrato sotto, semi-nascosto dallo sfagno che trabocca. (Archiviata anche nella [cronologia foto del terrario](/it/highland/photos/).)" >}}
 
 ## Come è arrivata qui
 
