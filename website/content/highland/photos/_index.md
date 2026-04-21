@@ -61,7 +61,7 @@ Each image is CC BY-SA 4.0, watermarked accordingly. Click any photo to open it 
     <a href="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" alt="Highland cabinet interior, April 2026 — Sophronitis coccinea 'Big One' × 'Hinomaru' 4N in full bloom, Utricularia quelchii just below" loading="lazy">
     </a>
-    <p><strong>April 2026.</strong> Forty-seven months in. The orange spot left-of-centre is <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WQC; directly underneath it, half-buried in the sphagnum overflow, an <em>Utricularia quelchii</em> from Ilu Tepui starts its first peduncle (<a href="/blog/first-bloom-utricularia-quelchii/">full post</a>).</p>
+    <p><strong>April 2026.</strong> Forty-seven months in. The orange spot left-of-centre is <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WOC; directly underneath it, half-buried in the sphagnum overflow, an <em>Utricularia quelchii</em> from Ilu Tepui starts its first peduncle (<a href="/blog/first-bloom-utricularia-quelchii/">full post</a>).</p>
   </li>
 </ul>
 

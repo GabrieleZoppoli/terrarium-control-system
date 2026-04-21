@@ -16,7 +16,7 @@ I wasn't looking for it. Last week I was leaning into the highland cabinet to ch
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-6.jpg" caption="Both buds together on the same peduncle, pulled back to show the tangle of *Sophronitis* aerial roots they had to thread through." >}}
 
-{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg" caption="The *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC flower — the whole reason I was leaning into the cabinet last week." >}}
+{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwoc-2.jpg" caption="The *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WOC flower — the whole reason I was leaning into the cabinet last week." >}}
 
 {{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="The whole frame: the *Sophronitis coccinea* is the red spot left-of-centre; the quelchii pot is nestled below it, half-hidden by its own sphagnum overflow. (Also filed on the [terrarium photo timeline](/highland/photos/).)" >}}
 

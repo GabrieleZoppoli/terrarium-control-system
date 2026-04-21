@@ -16,7 +16,7 @@ Non la stavo guardando. La settimana scorsa mi ero avvicinato all'armadio d'alta
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-6.jpg" caption="I due boccioli insieme sullo stesso peduncolo, visti più largo per mostrare il groviglio di radici aeree di *Sophronitis* attraverso cui hanno dovuto farsi strada." >}}
 
-{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwqc-2.jpg" caption="Il fiore di *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WQC — il motivo per cui la settimana scorsa mi ero avvicinato all'armadio." >}}
+{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwoc-2.jpg" caption="Il fiore di *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WOC — il motivo per cui la settimana scorsa mi ero avvicinato all'armadio." >}}
 
 {{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="Tutto il quadro: la *Sophronitis coccinea* è il punto rosso a sinistra del centro; il vaso della quelchii è incastrato sotto, semi-nascosto dallo sfagno che trabocca. (Archiviata anche nella [cronologia foto del terrario](/it/highland/photos/).)" >}}
 
