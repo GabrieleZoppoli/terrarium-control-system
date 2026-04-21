@@ -996,15 +996,18 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
   display: block;
 }
 .home-hero--split .home-hero__figure figcaption {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 0.8rem 1rem 0.9rem;
-  background: linear-gradient(180deg, rgba(10,11,14,0) 0%, rgba(10,11,14,0.85) 60%, rgba(10,11,14,0.95) 100%);
-  color: var(--text-2);
+  /* Caption now below the image, matching the mosaic/residents pattern. */
+  padding: 0.7rem 0.9rem 0.8rem;
+  color: var(--text-3);
   font-family: var(--font-sans);
   font-size: var(--step-xs);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.home-hero--split .home-hero__figure figcaption em {
+  font-family: var(--font-display);
+  font-size: var(--step-md);
+  color: var(--text-1);
+  font-style: italic;
 }
 .home-hero--split .home-hero__figure:hover {
   transform: translateY(-2px);
@@ -1605,8 +1608,6 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
 .highland-residents li { margin: 0; }
 .highland-residents a {
   display: block;
-  position: relative;
-  aspect-ratio: 1 / 1;
   border-radius: var(--r-3);
   overflow: hidden;
   background: var(--bg-1);
@@ -1619,34 +1620,31 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
   transform: translateY(-2px);
 }
 .highland-residents img {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   transition: transform 500ms var(--ease-out);
 }
 .highland-residents a:hover img { transform: scale(1.06); }
 .highland-residents span {
-  position: absolute;
-  left: 0; right: 0; bottom: 7%; /* clear the watermark bar */
-  padding: 1.4rem 0.8rem 0.6rem;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.92));
-  color: var(--text-1);
+  /* Label now sits BELOW the image, matching the home mosaic style. */
   display: flex;
   flex-direction: column;
   gap: 0.15rem;
-  font-family: var(--font-display);
+  padding: 0.7rem 0.9rem 0.8rem;
+  color: var(--text-1);
 }
 .highland-residents em {
   font-style: italic;
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-size: var(--step-md);
+  line-height: 1.2;
 }
 .highland-residents small {
   font-family: var(--font-sans);
-  font-size: 0.64rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: var(--step-xs);
+  letter-spacing: 0.06em;
   color: var(--text-3);
 }
 
@@ -1875,16 +1873,21 @@ figure.moment figcaption {
   background: var(--bg-1);
 }
 .highland-hero figcaption {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 1.8rem 0.9rem 0.75rem;
-  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.92));
+  /* Caption now sits BELOW the image, matching the home mosaic style
+     (no gradient band over the photo). */
+  padding: 0.7rem 0.9rem 0.8rem;
   font-family: var(--font-sans);
   font-size: var(--step-xs);
-  color: var(--text-2);
+  color: var(--text-3);
   letter-spacing: 0.05em;
+  text-align: left;
 }
-.highland-hero figcaption em { font-family: var(--font-display); color: var(--text-1); }
+.highland-hero figcaption em {
+  font-family: var(--font-display);
+  font-size: var(--step-md);
+  color: var(--text-1);
+  font-style: italic;
+}
 
 @media (max-width: 720px) {
   .highland-hero { grid-template-columns: 1fr; }
