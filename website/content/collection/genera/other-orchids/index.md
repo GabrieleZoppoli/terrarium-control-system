@@ -100,16 +100,16 @@ Species-form *Phalaenopsis* -- all miniatures, very different from commercial hy
 ## Orchid Vendors
 
 Major sources for the orchid collection:
-- **Grossraschener Orchideen** (Germany) -- wide range of miniatures
-- **Celandroni Orchidee** (Italy) -- Vandaceous specialists
-- **Orchids & more** (Germany) -- miniatures, good value
-- **Ecuagenera Europe** (Netherlands/Ecuador) -- Andean species
+- **Celandroni Orchidee** (Italy) -- vandaceous specialists
 - **Claessen Orchids & Plants** (Netherlands) -- quality specimens
-- **Varesina Orchidee** (Italy) -- Italian specialist
-- **Orchideria di Morosolo** (Italy) -- mounted miniatures
+- **Currlin Orchideen** (Germany) -- Southeast Asian species
+- **Ecuagenera Europe** (Netherlands / Ecuador) -- Andean species
+- **Grossraschener Orchideen** (Germany) -- wide range of miniatures
 - **Lo Scrigno di Nebbia** (Italy) -- Brazilian species
 - **Nardotto e Capello** (Italy) -- assorted species
-- **Currlin Orchideen** (Germany) -- Southeast Asian species
+- **Orchideria di Morosolo** (Italy) -- mounted miniatures
+- **Orchids & more** (Germany) -- miniatures, good value
+- **Varesina Orchidee** (Italy) -- Italian specialist
 
 ## Photos
 

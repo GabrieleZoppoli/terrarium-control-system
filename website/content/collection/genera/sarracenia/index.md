@@ -15,11 +15,13 @@ genera: ["Sarracenia"]
 
 ## Vendors
 
+- **Carnivoria.eu** (Germany / Czech Republic)
+- **Davide Tavecchio** (Italy) -- Italian CP community
+- **Hewitt-Cooper Carnivorous Plants** (UK)
 - **Klein Carnivors** (South Africa) -- wide selection, quality plants
 - **Luca Cappon** (Italy) -- Italian grower, trades and sales
-- **Paolo Mattevi** / **Davide Tavecchio** / **Luca Gambini** (Italy) -- Italian CP community
-- **Carnivoria.eu** (Germany/Czech Republic)
-- **Hewitt-Cooper Carnivorous Plants** (UK)
+- **Luca Gambini** (Italy) -- Italian CP community
+- **Paolo Mattevi** (Italy) -- Italian CP community
 
 ## Photos
 

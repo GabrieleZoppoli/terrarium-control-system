@@ -15,11 +15,13 @@ Le *Sarracenia* (piante carnivore ad ascidio del Nord America) crescono all'este
 
 ## Vivai di riferimento
 
+- **Carnivoria.eu** (Germania / Repubblica Ceca)
+- **Davide Tavecchio** (Italia) — comunità italiana CP
+- **Hewitt-Cooper Carnivorous Plants** (Regno Unito)
 - **Klein Carnivors** (Sudafrica) — ampia selezione, piante di qualità
 - **Luca Cappon** (Italia) — coltivatore italiano, scambi e vendite
-- **Paolo Mattevi** / **Davide Tavecchio** / **Luca Gambini** (Italia) — comunità italiana CP
-- **Carnivoria.eu** (Germania / Repubblica Ceca)
-- **Hewitt-Cooper Carnivorous Plants** (Regno Unito)
+- **Luca Gambini** (Italia) — comunità italiana CP
+- **Paolo Mattevi** (Italia) — comunità italiana CP
 
 ## Foto
 

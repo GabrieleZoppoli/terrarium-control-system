@@ -100,16 +100,16 @@ Piccole orchidee vandacee, apprezzate per il profumo e il portamento elegante �
 ## Vivai di riferimento per le orchidee
 
 Principali fornitori per la collezione di orchidee:
-- **Grossraschener Orchideen** (Germania) — ampia scelta di miniature
 - **Celandroni Orchidee** (Italia) — specialista vandacee
-- **Orchids & more** (Germania) — miniature, ottimo rapporto qualità-prezzo
-- **Ecuagenera Europe** (Paesi Bassi / Ecuador) — specie andine
 - **Claessen Orchids & Plants** (Paesi Bassi) — esemplari di qualità
-- **Varesina Orchidee** (Italia) — specialista italiano
-- **Orchideria di Morosolo** (Italia) — miniature montate
+- **Currlin Orchideen** (Germania) — specie del Sud-est asiatico
+- **Ecuagenera Europe** (Paesi Bassi / Ecuador) — specie andine
+- **Grossraschener Orchideen** (Germania) — ampia scelta di miniature
 - **Lo Scrigno di Nebbia** (Italia) — specie brasiliane
 - **Nardotto e Capello** (Italia) — specie assortite
-- **Currlin Orchideen** (Germania) — specie del Sud-est asiatico
+- **Orchideria di Morosolo** (Italia) — miniature montate
+- **Orchids & more** (Germania) — miniature, ottimo rapporto qualità-prezzo
+- **Varesina Orchidee** (Italia) — specialista italiano
 
 ## Foto
 

@@ -15,12 +15,13 @@ genera: ["Dionaea"]
 
 ## Vendors
 
-- **Carnivoria.eu** (Germany/Czech Republic)
-- **Paolo Mattevi** (Italy) -- major source for cultivars
-- **Klein Carnivors** (South Africa)
-- **Diflora** (Italy)
+- **Alessandro Ferri** (Italy)
 - **Andrea Fontana** (Italy)
-- **Alessandro Ferri** / **Luca Gambini** (Italy)
+- **Carnivoria.eu** (Germany / Czech Republic)
+- **Diflora** (Italy)
+- **Klein Carnivors** (South Africa)
+- **Luca Gambini** (Italy)
+- **Paolo Mattevi** (Italy) -- major source for cultivars
 
 ## Photos
 

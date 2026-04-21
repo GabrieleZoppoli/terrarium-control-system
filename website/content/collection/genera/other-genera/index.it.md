@@ -121,14 +121,14 @@ Le forme di *D. capensis* sono le più affidabili. Fra le sopravvissute notevoli
 ## Vivai delle carnivore
 
 Principali fornitori per la collezione di carnivore:
+- **Allen Lowrie** (Australia) — specialista *Drosera* tuberose
 - **Andreas Wistuba** (Germania) — specialista *Heliamphora* e *Nepenthes*
+- **Carnivoria.eu** (Germania / Repubblica Ceca) — carnivore assortite
+- **Diflora** (Italia) — carnivore assortite
+- **Gartenbau Carow** (Germania) — *Drosera*, *Sphagnum*
 - **Giardino Carnivoro** (Italia) — vivaio italiano di carnivore
 - **Klein Carnivors** (Sudafrica) — *Utricularia* e specie africane
-- **Gartenbau Carow** (Germania) — *Drosera*, *Sphagnum*
-- **Carnivoria.eu** (Germania / Repubblica Ceca) — carnivore assortite
 - **Un Angolo di Deserto** (Italia) — specialista *Pinguicula*
-- **Diflora** (Italia) — carnivore assortite
-- **Allen Lowrie** (Australia) — specialista *Drosera* tuberose
 
 ## Foto
 

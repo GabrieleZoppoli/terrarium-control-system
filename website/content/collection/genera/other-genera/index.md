@@ -121,14 +121,14 @@ Corkscrew plants -- subterranean trap specialists. High mortality suggests the t
 ## Carnivorous Plant Vendors
 
 Major sources for the carnivorous plant collection:
+- **Allen Lowrie** (Australia) -- tuberous *Drosera* specialist
 - **Andreas Wistuba** (Germany) -- *Heliamphora* and *Nepenthes* specialist
+- **Carnivoria.eu** (Germany / Czech Republic) -- assorted CPs
+- **Diflora** (Italy) -- assorted CPs
+- **Gartenbau Carow** (Germany) -- *Drosera*, *Sphagnum*
 - **Giardino Carnivoro** (Italy) -- Italian CP nursery
 - **Klein Carnivors** (South Africa) -- *Utricularia* and African species
-- **Gartenbau Carow** (Germany) -- *Drosera*, *Sphagnum*
-- **Carnivoria.eu** (Germany/Czech Republic) -- assorted CPs
 - **Un Angolo di Deserto** (Italy) -- *Pinguicula* specialist
-- **Diflora** (Italy) -- assorted CPs
-- **Allen Lowrie** (Australia) -- tuberous *Drosera* specialist
 
 ## Photos
 

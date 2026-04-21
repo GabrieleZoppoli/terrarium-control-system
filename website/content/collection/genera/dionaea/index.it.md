@@ -15,12 +15,13 @@ Le cultivar di *Dionaea muscipula* (pianta acchiappamosche) crescono all'esterno
 
 ## Vivai di riferimento
 
-- **Carnivoria.eu** (Germania / Repubblica Ceca)
-- **Paolo Mattevi** (Italia) — fonte principale per le cultivar
-- **Klein Carnivors** (Sudafrica)
-- **Diflora** (Italia)
+- **Alessandro Ferri** (Italia)
 - **Andrea Fontana** (Italia)
-- **Alessandro Ferri** / **Luca Gambini** (Italia)
+- **Carnivoria.eu** (Germania / Repubblica Ceca)
+- **Diflora** (Italia)
+- **Klein Carnivors** (Sudafrica)
+- **Luca Gambini** (Italia)
+- **Paolo Mattevi** (Italia) — fonte principale per le cultivar
 
 ## Foto
 
