@@ -1,11 +1,13 @@
 ---
-title: "Ripiani a nebulizzazione passiva"
-description: "Ripiani di vetro in soggiorno — umidità da un nebulizzatore a ultrasuoni, nessun controllo climatico"
+title: "Ripiani nebulizzati"
+description: "Ripiani di vetro in soggiorno — nebulizzatori a ultrasuoni su loop a isteresi UR (~80 %) gestito da un secondo Raspberry Pi via Tapo P100, sensori BME280 + SHT35"
 ---
 
-Non tutte le piante hanno bisogno di un armadio climatizzato da 1,5 m. Diverse specie della collezione vivono su una serie di ripiani di vetro in soggiorno: ciascuno ha un nebulizzatore a ultrasuoni da pochi euro per la nebbia, e nient'altro — niente compressore, niente PID, nessun logging dei dati. La stanza fa la temperatura da sola (18–24 °C tutto l'anno, clima mediterraneo genovese), la luce diurna più una semplice striscia LED fa il fotoperiodo, e l'umidità arriva solo dai cicli di fog.
+Non tutte le piante hanno bisogno di un armadio climatizzato da 1,5 m. Diverse specie della collezione vivono su una serie di ripiani di vetro in soggiorno. Ogni ripiano ha un nebulizzatore a ultrasuoni con serbatoio, collegato a una presa smart Tapo P100; un secondo Raspberry Pi legge un Bosch BME280 e un SHT35 sul ripiano e commuta la presa su un loop a isteresi intorno all'80 % UR. Niente compressore, niente PID, niente Grafana — ma neanche un timer cieco.
 
-Il contrasto con l'armadio d'alta quota è proprio il punto: qui vivono le piante la cui fascia di preferenza cade già dentro un soggiorno genovese, a patto di aggiungere soltanto *vapore acqueo*. Nessuna ingegneria oltre al nebulizzatore.
+La stanza fa la temperatura da sola (18–24 °C tutto l'anno, clima mediterraneo genovese), la luce diurna più una semplice striscia LED full-spectrum fa il fotoperiodo.
+
+Il contrasto con l'armadio d'alta quota è proprio il punto: qui vivono le piante la cui fascia di preferenza cade già dentro un soggiorno genovese, se aggiungi *vapore acqueo* e lasci stare la temperatura. Meno ingegneria dell'armadio, più di un sottovaso bagnato sul davanzale.
 
 ## Chi c'è sui ripiani
 
@@ -22,13 +24,15 @@ Un cast a rotazione. Le piante che crescono troppo per la loro nicchia o che ini
 | *Angraecum didieri* | Growlist | Miniatura malgascia; intermediate-warm, non tollera la caduta notturna dell'armadio d'alta quota. |
 | *Bulbophyllum makoyanum* | Regalo | Da quote basse-intermedie del Sud-est asiatico; l'armadio è troppo fresco di notte per lui. |
 
-## L'hardware (quello che c'è)
+## L'hardware
 
-- **Nebulizzatore a ultrasuoni**: disco piezoelettrico generico a 24 V, comandato da un timer da presa di corrente che lo accende per pochi minuti ogni una o due ore. Lo sostituisco ogni ~18 mesi; le cartucce costano poco, e l'intera unità costa ancora meno.
+- **Nebulizzatore a ultrasuoni**: disco piezoelettrico generico a 24 V con serbatoio ricaricabile, comandato da una presa smart Tapo P100. Il disco si sostituisce ogni ~18 mesi; le cartucce costano poco, e l'unità stessa costa ancora meno.
+- **Sensori**: un Bosch BME280 e un SHT35 montati sul ripiano. Due sensori per ridondanza e cross-check — i sensori di umidità driftano, e sbagliare il setpoint del 10 % è la differenza fra "piante contente" e "muffa".
+- **Controller**: un secondo Raspberry Pi (non quello dell'armadio d'alta quota) gira un piccolo loop Python — legge i due sensori, fa la media, e commuta la presa Tapo via la libreria PyP100 per tenere l'UR intorno all'80 % con isteresi. Niente InfluxDB, niente dashboard, niente Node-RED; un setpoint, una banda morta e un file di log.
 - **Luce**: una semplice striscia LED full-spectrum in cima a ogni ripiano, su una presa con timer giornaliero stupido (niente rampe di alba, niente PID, niente Node-RED).
 - **Il resto**: aria della stanza, temperatura della stanza, luce del davanzale dove serve.
 
-Il setup completo costa meno di un cinquantesimo dell'armadio d'alta quota. Anche il modello mentale è questo: *l'armadio è dove si investe ingegneria quando la specie lo esige; il ripiano a nebbia è dove la si evita quando la specie lo permette.*
+Il setup completo costa una frazione dell'armadio d'alta quota. Anche il modello mentale è questo: *l'armadio è dove si investe ingegneria full-stack quando la specie lo esige; i ripiani nebulizzati sono dove se ne investe quanto basta quando la specie lo permette.*
 
 ## Perché conta come "invenzione"
 

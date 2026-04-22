@@ -23,7 +23,7 @@ enableEmoji = false
     [languages.en.params]
       shortTitle = "Highland Cloud Forest"
       tagline    = "Gabriele Zoppoli · Genova"
-      heroLede   = "A highland cloud-forest terrarium cooled by a marine compressor and orchestrated by Node-RED, the standalone inventions built around it, and the plant collection it shelters — documented end to end."
+      heroLede   = "A highland cloud-forest terrarium cooled by a marine compressor and orchestrated by Node-RED, the standalone inventions built around it, and the wider plant collection — documented end to end."
       keywords   = ["cloud forest terrarium", "Heliamphora", "Dracula orchid", "Nepenthes", "Tillandsia", "highland orchid", "carnivorous plants", "phylogenetic dendrogram", "Node-RED", "marine compressor cooling", "Genova"]
 
   [languages.it]
@@ -35,7 +35,7 @@ enableEmoji = false
     [languages.it.params]
       shortTitle = "Foresta Nebulosa"
       tagline    = "Gabriele Zoppoli · Genova"
-      heroLede   = "Un terrario che riproduce il clima di una foresta nebulosa d'alta quota — raffreddato da un compressore marino, orchestrato con Node-RED — le invenzioni che ci sono nate intorno, e la collezione di piante che ospita. Tutto documentato, dall'inizio alla fine."
+      heroLede   = "Un terrario che riproduce il clima di una foresta nebulosa d'alta quota — raffreddato da un compressore marino, orchestrato con Node-RED — le invenzioni che ci sono nate intorno, e la più ampia collezione di piante. Tutto documentato, dall'inizio alla fine."
       keywords   = ["terrario cloud forest", "Heliamphora", "Dracula", "Nepenthes", "Tillandsia", "orchidee d'alta quota", "piante carnivore", "dendrogramma filogenetico", "Node-RED", "compressore marino", "Genova"]
 
 [params]

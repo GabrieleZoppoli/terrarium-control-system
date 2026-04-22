@@ -17,7 +17,7 @@ Everything on this site that I made — the photographs, the text, the phylogene
 > Gabriele Zoppoli is Associate Professor of Internal Medicine at the University of Genoa and a clinician-scientist at IRCCS Ospedale Policlinico San Martino, with research in liquid biopsy for breast cancer. Outside the hospital he maintains a 380+ accession living collection of carnivorous plants, miniature orchids, and *Tillandsia* — the cloud-forest species under a self-built, open-source highland terrarium; the outdoor and warm-growing plants on the balcony and on windowsills. Documented [here](/).
 
 **~60 words.**
-> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy — cell-free DNA and single-molecule sequencing — for breast cancer. In Genoa he grows over 380 accessions of carnivorous plants, miniature orchids, and *Tillandsia*, split between an open-source cloud-forest terrarium, outdoor beds, and passive-mist shelves.
+> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy — cell-free DNA and single-molecule sequencing — for breast cancer. In Genoa he grows over 380 accessions of carnivorous plants, miniature orchids, and *Tillandsia*, split between an open-source cloud-forest terrarium, outdoor beds, and a rack of fog shelves.
 
 ## Portrait
 

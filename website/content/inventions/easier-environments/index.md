@@ -1,11 +1,13 @@
 ---
-title: "Low-tech Fog Shelves"
-description: "Passive glass shelves in the living room — humidity from an ultrasonic mister, no climate control"
+title: "Fog Shelves"
+description: "Glass shelves in the living room — ultrasonic misters on a Raspberry-Pi-driven hysteresis RH loop (~80 %), switched via Tapo P100 plugs, BME280 + SHT35 sensors"
 ---
 
-Not every plant needs a 1.5 m climate-controlled cabinet. Several species in the collection live on a set of open glass shelves in the living room, each with a cheap ultrasonic mister for fog and nothing else — no chiller, no PID loop, no data logging. The room handles temperature passively (18–24 °C year-round, Genoese Mediterranean climate), ambient daylight plus a plain LED strip provides the photoperiod, and the humidity comes from fog cycles alone.
+Not every plant needs a 1.5 m climate-controlled cabinet. Several species in the collection live on a set of open glass shelves in the living room. Each shelf has an ultrasonic mister with a reservoir, plugged into a Tapo P100 smart plug; a second Raspberry Pi polls a Bosch BME280 and an SHT35 on the shelf and toggles the plug on a hysteresis loop around ~80 % RH. No chiller, no PID, no Grafana — but not a dumb timer either.
 
-The contrast with the highland cabinet is the point: these are the plants whose preference envelope sits inside a Genoese living room if you add only *water vapour*. No engineering needed beyond the mister.
+The room handles temperature passively (18–24 °C year-round, Genoese Mediterranean climate); ambient daylight plus a plain full-spectrum LED strip provides the photoperiod.
+
+The contrast with the highland cabinet is the point: these are the plants whose preference envelope sits inside a Genoese living room if you add *water vapour* and leave temperature alone. Less engineering than the cabinet, more than a wet tray on the windowsill.
 
 ## What's on the shelves
 
@@ -22,13 +24,15 @@ A rotating lineup. Plants that outgrow their spot or start wanting cooler nights
 | *Angraecum didieri* | Growlist | Madagascan miniature; intermediate-warm, intolerant of the highland night drop. |
 | *Bulbophyllum makoyanum* | Gift | Southeast-Asian lowland to mid-elevation; the cabinet is too cool overnight for it. |
 
-## The hardware (such as it is)
+## The hardware
 
-- **Ultrasonic mister**: generic 24 V piezoelectric disc, running on a cheap mains timer that flips on for a few minutes every hour or two. Replace every ~18 months; cartridges are cheap and the entire unit is cheaper.
+- **Ultrasonic mister**: generic 24 V piezoelectric disc with a refillable reservoir, switched by a Tapo P100 smart plug. Replace the disc every ~18 months; cartridges are cheap and the unit itself is cheaper.
+- **Sensors**: a Bosch BME280 and an SHT35 colocated on the shelf. Two sensors for redundancy and a sanity cross-check — RH sensors drift, and getting the setpoint wrong by 10 % is the difference between "happy plants" and "mould".
+- **Controller**: a second Raspberry Pi (not the highland one) runs a small Python loop — reads the two sensors, averages, and toggles the Tapo plug via the PyP100 library to hold RH around 80 % on hysteresis. No InfluxDB, no dashboard, no Node-RED; a setpoint, a dead-band, and a log file.
 - **Light**: a plain full-spectrum LED strip along the top of each shelf, on a wall socket with a dumb daily timer (no dawn ramps, no PID, no Node-RED).
 - **Everything else**: room air, room temperature, windowsill light where applicable.
 
-The whole setup costs less than a fiftieth of the highland cabinet. That's also the mental model: *the cabinet is where you invest engineering when the species demands it; the fog shelf is where you avoid it when the species lets you.*
+The whole setup costs a fraction of the highland cabinet. That's also the mental model: *the cabinet is where you invest full-stack engineering when the species demands it; the fog shelves are where you invest just enough when the species lets you.*
 
 ## Why this counts as an "invention"
 

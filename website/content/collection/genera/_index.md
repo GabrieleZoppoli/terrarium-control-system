@@ -12,7 +12,7 @@ extra_card:
 
 ## Cloud forest terrarium
 
-The terrarium houses about 75 of the currently-alive species (around 90 accessions counting clonal lines) — sourced from cloud forests and highland habitats worldwide. Despite different continents and evolutionary lineages, these plants thrive together because their native habitats share functionally identical climates: cool temperatures, persistent fog, high humidity, never dry. The remaining ~200 alive accessions live outdoors (*Sarracenia*, *Dionaea*, hardy orchids, aquatics), on the passive-mist shelves (*Vanda*, *Cephalotus*, botanical *Phalaenopsis* etc.), or on windowsills (*Tillandsia* and friends).
+The terrarium houses about 75 of the currently-alive species (around 90 accessions counting clonal lines) — sourced from cloud forests and highland habitats worldwide. Despite different continents and evolutionary lineages, these plants thrive together because their native habitats share functionally identical climates: cool temperatures, persistent fog, high humidity, never dry. The remaining ~200 alive accessions live outdoors (*Sarracenia*, *Dionaea*, hardy orchids, aquatics), on the fog shelves (*Vanda*, *Cephalotus*, botanical *Phalaenopsis* etc.), or on windowsills (*Tillandsia* and friends).
 
 The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland *Nepenthes*, and *Dracula*. Losses cluster around species needing a dry rest period or warmer nights than the terrarium provides.
 
@@ -22,7 +22,7 @@ Over 380 acquisitions across 89 genera total, spread across **four distinct spac
 
 - **The highland cabinet** — the cloud-forest residents: *Heliamphora*, *Dracula*, highland *Nepenthes*, *Sophronitis*, *Oxyglossum*-section *Dendrobium*, *Utricularia* sect. *Orchidioides*, miniature Pleurothallidinae.
 - **The balcony (outdoor, year-round)** — temperate carnivores that need full sun and winter dormancy: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, hardy terrestrial orchids (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).
-- **The passive-mist shelves** (living room, low-tech) — warm-intermediate species that need high humidity but not cool nights: *Vanda coerulescens*, *Neostylis* Lou Sneary, *Darwinara* Charm 'Blue Moon', most Mexican *Pinguicula*, *Cephalotus*, the botanical *Phalaenopsis*, *Angraecum didieri*, *Bulbophyllum makoyanum*. See [the low-tech fog shelves](/inventions/easier-environments/).
+- **The fog shelves** (living room — ultrasonic misters on a hysteresis RH loop around 80 %, driven by a second Raspberry Pi reading BME280 + SHT35 and switching Tapo P100 plugs) — warm-intermediate species that need high humidity but not cool nights: *Vanda coerulescens*, *Neostylis* Lou Sneary, *Darwinara* Charm 'Blue Moon', most Mexican *Pinguicula*, *Cephalotus*, the botanical *Phalaenopsis*, *Angraecum didieri*, *Bulbophyllum makoyanum*. See [the fog shelves](/inventions/easier-environments/).
 - **Windowsills and other indoor spots** — the dry-tolerant / very forgiving: *Tillandsia* (~53 species and cultivars), the remaining *Bulbophyllum*, one *Cattleya*, one *Oncidium*, one *Maxillaria*, and the non-highland *Dendrobium* (*'Berry Oda'*, *'Betty Goto' f. coerulea*, *speciosum*).
 
 The pages below drill into each genus with live acquisition data, sources, prices, and photos.
