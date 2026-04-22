@@ -97,7 +97,7 @@
         return typeof v === 'number' ? '→ ' + v.toFixed(0) + ' %' : '';
       case 'fan_pwm':
         v = data.fan_pwm;
-        return typeof v === 'number' ? v.toFixed(0) + ' %' : null;
+        return typeof v === 'number' ? v.toFixed(0) + ' PWM' : null;
       case 'power_w':
         v = data.power_w;
         return typeof v === 'number' ? v.toFixed(0) + ' W' : null;
