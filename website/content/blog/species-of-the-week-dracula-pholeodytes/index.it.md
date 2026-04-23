@@ -1,60 +1,59 @@
 ---
 title: "Specie della settimana: Dracula pholeodytes"
 date: 2026-04-23
-description: "Una Dracula compatta ma scenica delle Ande nord-orientali colombiane — coppa sepalina piccola, code molto lunghe, e una delle migliori faccine di scimmia del genere."
+description: "Una Dracula colombiana cold-grower fatta all'80 % di code. Piccola, strana, una delle scimmie più belle del genere."
 tags: ["dracula", "specie-della-settimana", "orchidee", "alta-quota"]
 showReadingTime: true
 ---
 
-*Dracula pholeodytes* è un fiore minuscolo che fa un gesto enorme. La coppa sepalina in sé è appena più grande di un'unghia — una cupola viola-marrone picchiettata — ma i tre sepali si prolungano in **caudae** (code) lunghe e scure (non petali) che si aprono a ventaglio in tre direzioni, allargando l'intero fiore su circa 10–15 cm di spazio. In mano, la coppa sta fra pollice e indice mentre due caudae arrivano oltre il polso e la terza scende sotto. Dentro la coppa, pallido e a forma di piccolo teschio, siede il labello — la **"faccia di scimmia"** che ha reso *Dracula* un genere di culto. La faccia della *pholeodytes* è incassata un po' più in fondo rispetto ai "pagliacci" frontali (*simia*, *gigas*, *vampira*), ma le caudae la rendono impossibile da ignorare. Per i miei gusti, una delle scimmie più belle nell'armadio.
+*Dracula pholeodytes* è un affare strambo. La testa del fiore è una cupola grande come un'unghia, viola-marrone picchiettata, con una faccetta da scimmia pallida incastonata dentro. Ciascuno dei tre sepali termina in una lunga coda sottile; le tre code si aprono a ventaglio in tre direzioni su 10–15 cm. In mano sembra un ragno viola piatto con una faccia dipinta addosso. Mi piace molto.
 
-{{< figure src="/img/collection/dracula/dracula-pholeodytes.jpg" caption="La coppa sepalina picchiettata con la colonna e il labello chiari infilati dentro. Il dito in basso a destra dà la scala — ma la drammaticità del fiore viene soprattutto dalle tre code scure che proseguono verso il basso, fuori inquadratura." >}}
+{{< figure src="/img/collection/dracula/dracula-pholeodytes.jpg" caption="Coppa fra pollice e indice. Due code in alto, una in basso, una scimmietta al centro che ti guarda." >}}
 
-## Nota anatomica veloce
+## Cosa sono, le code
 
-Le "code" o "speroni" lunghi e sottili che la gente nota per prime su un fiore di *Dracula* sono **caudae** — le punte allungate dei **sepali** (i tre tepali esterni). Non sono petali. I petali in *Dracula* sono le due strutture molto più piccole che affiancano la colonna *dentro* la coppa. In *pholeodytes* le tre caudae fanno quasi tutto il lavoro visivo: secondo IOSPE il fiore misura circa 1,5 × 6 pollici (≈ 3,75 × 15 cm), e quasi tutti quei 15 cm sono code che pendono sotto la coppa.[^iospe]
+Quelle strutture lunghe e sottili sono **caudae** (singolare *cauda*, "coda") — le punte allungate dei **sepali**. Non sono petali. I petali in *Dracula* sono i due piccoli lobi che affiancano la colonna *dentro* la coppa, e in *pholeodytes* sono praticamente invisibili. Le caudae sepaline fanno tutto il lavoro visivo. IOSPE dà il fiore intero a 1,5 × 6 pollici (3,75 × 15 cm), e sì — quei 15 cm sono quasi tutti code.[^iospe]
 
-## Il nome se lo guadagna
+## Perché il nome è buono
 
-*Pholeodytes*, dal greco *pholeos* (caverna, tana, anfratto) e *dytes* (tuffatore, uno che si tuffa): il tuffatore nella caverna. IOSPE glossa il nome come riferito a *"the central apparatus within the deeply cupped black interior of the flower"* — la colonna e il labello infilati dentro la coppa scura picchiettata.[^iospe] Quindi il "tuffatore" è la faccia chiara che vedi guardando dentro il cappuccio: il fiore è la caverna, la colonna è il tuffatore.
+*Pholeodytes* = *pholeos* (caverna, tana) + *dytes* (tuffatore). "Tuffatore-nella-caverna". Carl Luer le ha dato il nome perché la faccia-di-scimmia — in realtà colonna + labello — sta infilata in fondo alla coppa, non esibita davanti come in *simia*, *gigas* o *vampira*. È una scimmia che si tuffa. Tassonomia orchidacea al suo apice.
 
 ## Da dove viene
 
-**Colombia nord-orientale**, dipartimento di Boyacá,[^iospe] sulla Cordillera Orientale delle Ande — *non* il Chocó, nonostante l'associazione del genere con le foreste nebulose del versante pacifico. POWO riporta come areale nativo semplicemente "NE Colombia".[^powo] Altitudine circa 2.500 m — per questo IOSPE la classifica come **cold-growing**, da freddo vero, non solo fresco.[^iospe] A quella quota sulla Cordillera Orientale si entra in territorio di subpáramo e foresta nana: costantemente umida, nebbiosa, fredda per gli standard tropicali.
+Colombia nord-orientale, dipartimento di Boyacá,[^iospe] sul versante **orientale** delle Ande. Non il Chocó, anche se le *Dracula* di foresta nebulosa vengono spesso associate al Chocó. POWO dà l'areale semplicemente come "NE Colombia".[^powo] Intorno ai 2.500 m — e per questo IOSPE la classifica come cold-growing (non *cool*. Cold).[^iospe]
 
-Descritta per la prima volta da **Carl Luer e Rodrigo Escobar, *Selbyana* 7: 68 (1982)**.[^powo] Aggiunta relativamente recente al genere, quattro anni dopo la separazione di *Dracula* da *Masdevallia* operata da Luer nel 1978.
+Descritta da Luer e Rodrigo Escobar su *Selbyana* 7: 68 (1982),[^powo] quattro anni dopo che Luer ha staccato *Dracula* da *Masdevallia* sulla base di "questi fiori sono abbastanza strani da meritarsi un genere loro". Motivazione insolitamente onesta, per una separazione a livello di genere.
 
-## Come è arrivata qui
+## Com'è arrivata qui
 
-Da [Ecuagenera](https://ecuagenera.com) all'inizio del 2023, come piccola divisione su sfagno grande come una moneta da 2 €. Ci ha messo quasi tutto il 2023 ad assestarsi. Adesso è montata su una piastra di sughero con un velo di sfagno alla base, nel terzo basso e ombreggiato dell'[armadio d'alta quota](/it/highland/) dove la condensa scende lungo la parete posteriore quasi ogni sera.
+Da Ecuagenera, inizio 2023. È arrivata come una moneta da 2 € di sfagno e un caratterino. Ci ha messo un anno a sistemarsi. Adesso sta su una placca di sughero, nel terzo basso dell'[armadio d'alta quota](/it/highland/), nell'angolo più umido e buio.
 
-## Note colturali
+## Come si coltiva (se siete masochisti)
 
-- **Temperatura.** Cold-grower. L'armadio segue il clima colombiano con uno sfasamento di 15 ore; la *pholeodytes* sta fra circa 13,5–15 °C di notte e 19–21 °C di picco diurno. A 2.500 m sulla Cordillera Orientale le piante selvatiche hanno minime notturne regolarmente sotto i 10 °C — in coltivazione, la maggior parte dei coltivatori mira a minime di 12–15 °C. Le notti calde la uccidono.
-- **Umidità.** 85–98 % UR, praticamente sempre. IOSPE la segnala come *"full shade"* — quindi l'umidità, più che la luce, è la leva principale.[^iospe]
-- **Aria.** Movimento costante e leggero. Aria ferma e umida è ciò che produce le marcescenze fungine a cui queste piante non sopravvivono.
-- **Luce.** Ombra. Vive nella parte più buia dell'armadio, dietro residenti più alti.
-- **Acqua.** Piovana o a osmosi inversa. Lo sfagno non si asciuga mai; il mount viene riumidificato qualche volta a settimana dal ciclo di nebulizzazione.
+- **Notti fredde.** 12–15 °C di minima. Se in estate d'estate le notti in casa vostra superano i 18 °C, non compratela. Non esiste un trucco che non passi per un armadio refrigerato.
+- **Umidità** all'85–98 % UR, in pratica sempre. IOSPE dice "full shade", credetele.[^iospe]
+- **Aria in movimento costante.** Aria ferma e umida è quello che produce le marcescenze di cui tutti si lamentano sui forum CP e orchid.
+- **Acqua piovana o RO** e basta. Lo sfagno non si asciuga mai.
 
-## Curiosità
+Ho ammazzato piante più facili di questa. Vale la pena.
 
-- Il genere *Dracula* è stato separato da *Masdevallia* da Carl Luer nel 1978. La separazione era botanica ma anche atmosferica — Luer riteneva che queste orchidee meritassero un proprio genere per la semplice stranezza dei fiori. (Il nome è un riferimento horror dichiarato.)
-- L'**impressione di faccia di scimmia** è condivisa da molte *Dracula* — *simia*, *gigas*, *vampira*, *lotax*, *pholeodytes*, e così via. Ogni specie dispone colonna, labello e macchie dei sepali in modo diverso, e la "faccia" che ne emerge è la sua impronta digitale. La faccia della *pholeodytes* è incassata in fondo alla tasca più che messa in primo piano — è esattamente quello che cattura il nome "tuffatore-in-caverna".
-- Diverse specie di *Dracula* sembrano **imitare i funghi** nella forma e nell'odore del fiore, reclutando moscerini micofagi come impollinatori anziché api. Il lavoro sperimentale di riferimento è Endara, Grimaldi & Roy (2010) su *D. lafleurii* — piccoli drosofilidi visitavano il suo labello, che somigliava e odorava abbastanza a un vero fungo da ingannarli.[^endara] Il labello chiaro a forma di lamelle dentro la tasca di *pholeodytes* è coerente con questa sindrome, ma non mi risultano studi di impollinazione specifici su questa specie.
-- La *pholeodytes* viene dal versante **orientale** delle Ande colombiane — una zona che cede alla coltivazione molte meno orchidee rispetto al famoso, piovosissimo Chocó pacifico. Vederla su una placca di sughero a 8.000 km da casa sembra ancora un piccolo miracolo di trasporto.
+## Qualche nota
 
-## Altrove
+- Diverse *Dracula* imitano i **funghi** — come forma, come odore — e si fanno impollinare da moscerini micofagi anziché dalle api. Endara, Grimaldi & Roy (2010) l'hanno mostrato sperimentalmente per *D. lafleurii*.[^endara] Il labello pallido di *pholeodytes* sembra un minuscolo fungo a lamelle, quindi probabilmente vale anche per lei. Nessuno ha fatto lo studio in campo.
+- La "faccia di scimmia" è una cosa di tutto il genere, non solo di *simia*. La particolarità di *pholeodytes* è che la sua faccia sta *dentro* la tasca, non in primo piano — esattamente ciò che "tuffatore-nella-caverna" cerca di dire.
+- Le Ande orientali colombiane non sono l'hotspot orchideo che invece è il Chocó, dall'altra parte. Una *pholeodytes* in coltivazione è una pianta di montagna vera, da una zona che alla collezione mondiale esporta pochissimo.
 
-- [**Kew Plants of the World Online** — *Dracula pholeodytes*](https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:84003-2) (distribuzione e autorità tassonomica)
-- [**IOSPE** (Jay Pfahl) — *Dracula pholeodytes*](http://www.orchidspecies.com/dracpholeodytes.htm) (morfologia e coltivazione, con le dimensioni 1,5 × 6 pollici)
-- [**Ecuagenera**](https://ecuagenera.com) (fonte)
-- Luer, C.A. & Escobar, R. (1982). *Selbyana* 7: 68. *(Descrizione originale — a pagamento.)*
-- Endara, L., Grimaldi, D.A. & Roy, B.A. (2010). Lord of the flies: pollination of *Dracula* orchids. *Lankesteriana* 10(1): 1–11. [DOI / accesso aperto](https://doi.org/10.15517/lank.v10i1.18318)
+## Dove leggere di più
+
+- [**POWO**](https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:84003-2) — Kew, autorità per distribuzione e citazione d'autore.
+- [**IOSPE**](http://www.orchidspecies.com/dracpholeodytes.htm) — Jay Pfahl, primo posto dove cercare qualsiasi orchidea botanica.
+- [**Ecuagenera**](https://ecuagenera.com) — dove ho preso la mia.
+- Endara, Grimaldi & Roy (2010). *Lord of the flies: pollination of Dracula orchids.* *Lankesteriana* 10(1): 1–11. [PDF ad accesso aperto](https://doi.org/10.15517/lank.v10i1.18318).
 
 ---
 
-*La "specie della settimana" è una serie in corso — una pianta alla volta, dalla collezione. Le puntate precedenti sotto il tag* `species-of-the-week`*; la scheda della specie con provenienza e tutte le foto è su [`/it/collection/species/dracula-pholeodytes/`](/it/collection/species/dracula-pholeodytes/).*
+*La "specie della settimana" è una serie in corso. Puntate precedenti sotto il tag* `species-of-the-week`*; scheda della specie con provenienza e tutte le foto su [`/it/collection/species/dracula-pholeodytes/`](/it/collection/species/dracula-pholeodytes/).*
 
-[^iospe]: Pfahl, J. *Internet Orchid Species Photo Encyclopedia.* Voce *Dracula pholeodytes*. <http://www.orchidspecies.com/dracpholeodytes.htm>
-[^powo]: *Plants of the World Online* (POWO), Royal Botanic Gardens, Kew. *Dracula pholeodytes* Luer & R.Escobar. <https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:84003-2> — consultato il 23 aprile 2026.
+[^iospe]: Pfahl, J. *Internet Orchid Species Photo Encyclopedia*. <http://www.orchidspecies.com/dracpholeodytes.htm>
+[^powo]: *Plants of the World Online*. *Dracula pholeodytes* Luer & R.Escobar. <https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:84003-2> (consultato 2026-04-23).
 [^endara]: Endara, L., Grimaldi, D.A. & Roy, B.A. (2010). Lord of the flies: pollination of *Dracula* orchids (Orchidaceae; Pleurothallidinae) by mushroom-infesting flies (Drosophilidae). *Lankesteriana* 10(1): 1–11.
