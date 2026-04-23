@@ -1,0 +1,115 @@
+# Provenance / origin captions for homepage mosaic pool entries.
+# Read by scripts/generate_mosaic_pools.py; used as the tile's bottom
+# caption (short phrase, ≤10 words) when a pool entry is rotated in.
+#
+# Lookup precedence for a given taxon string:
+#   1. exact-match key (allows clone / cultivar-specific wording)
+#   2. "Genus species" prefix match (first 2 whitespace tokens)
+#   3. fallback to a generic location label ("Highland cabinet",
+#      "Balcony · outdoor") — set in the Python script.
+#
+# Keep phrases concise (3–10 words). Geographic + one distinguishing
+# habitat / elevation / noteworthy fact where room allows. Match the
+# style of the curated hugo.toml featuredMosaic entries.
+
+# ── Terrarium ──────────────────────────────────────────────────────────
+
+"Comparettia falcata":                   "Tropical Americas, cool epiphyte 500–1,800 m"
+
+# Dendrobium — New Guinea (sect. Oxyglossum) and friends
+"Dendrobium cyanocentrum":               "New Guinea highlands, blue-flowered miniature"
+"Dendrobium hellwigianum":               "New Guinea cloud forest, sect. Oxyglossum"
+"Dendrobium cuthbertsonii":              "New Guinea highlands, 1,200–3,500 m"
+"Dendrobium victoriae-reginae":          "Luzon cloud forest, Philippines"
+"Dendrobium trantuanii":                 "Northern Vietnam limestone karst"
+
+# Dracula — Andean cloud forest
+"Dracula simia":                         "Ecuador, 1,000–2,000 m — 'monkey-face'"
+"Dracula lotax":                         "Colombian W. Cordillera, ~2,000 m"
+"Dracula vlad-tepes":                    "Reserva Dracula, Carchi, Ecuador"
+"Dracula pholeodytes":                   "Ecuadorian Chocó — 'cave-dweller'"
+"Dracula Raven 'Jet'":                   "Dark-flowered Dracula hybrid"
+
+# Heliamphora — Venezuelan tepuis
+"Heliamphora minor var. pilosa (Auyan) Clone 3": "Auyán-tepui, Venezuela, 1,500–2,400 m"
+"Heliamphora ionasi 'Elegance'":         "Ilu-Tepui, Venezuela, ~2,500 m"
+"Heliamphora macdonaldae (Cerro Duida) ISC": "Cerro Duida tepui, Venezuela"
+"Heliamphora minor 'Burgundy Black'":    "Auyán-tepui base, dark selection"
+"Heliamphora 'Godzilla'":                "Cultivated hybrid — H. ionasi × minor"
+
+# Holcoglossum — SE Asian limestone cliff dwellers
+"Holcoglossum flavescens":               "SW China cliffs, 1,500–2,500 m"
+"Holcoglossum amesianum":                "Indochinese limestone outcrops"
+
+# Leptotes — Brazilian Atlantic Forest miniatures
+"Leptotes bicolor":                      "Brazilian Atlantic Forest, pendulous"
+"Leptotes unicolor":                     "SE Brazilian Atlantic Forest"
+
+"Macroclinium manabinum":                "Western Ecuador dry forests, Manabí"
+
+# Masdevallia — Andean
+"Masdevallia decumana":                  "Andean cloud forest, 1,500–2,100 m"
+"Masdevallia lucernula":                 "Ecuadorian/Peruvian cloud forest"
+"Masdevallia Devil's Heart":             "Masdevallia hybrid cultivar"
+
+"Maxillaria sophronitis":                "N. Andes miniature, 1,200–2,200 m"
+"Mediocalcar decoratum":                 "New Guinea highlands, orange bells"
+
+# Nepenthes — highland Sundaland + Philippines
+"Nepenthes pitopangii 'Ivory Colored Form' Clone:01": "Central Sulawesi — fewer than a dozen wild plants"
+"Nepenthes aristolochioides (Sumatra) Clone:NM03": "Mt. Tujuh, Sumatra, 1,800–2,500 m"
+"Nepenthes tenuis 'Reddish Leaves' (West Sumatra)": "West Sumatran highlands, miniature"
+"Nepenthes argentii":                    "Mt. Guiting-Guiting, Sibuyan, Philippines"
+"Nepenthes jamban":                      "North Sumatra, 1,800–2,200 m — 'toilet' pitcher"
+"Nepenthes glabrata":                    "Central Sulawesi, 1,600–2,100 m"
+
+"Oerstedella centradenia":               "Mesoamerican highlands, 500–2,000 m"
+"Oncidium cheirophorum":                 "Cool Neotropical cloud forest"
+"Platystele baqueroi":                   "Ecuadorian cloud forest, sub-cm flowers"
+"Schoenorchis pachyacris":               "Indochinese evergreen forest, pendulous"
+"Sophronitis brevipedunculata":          "Brazilian campos rupestres, 900–1,500 m"
+"Stelis sp.":                            "Neotropical cloud forest miniature"
+"Brocchinia reducta":                    "Gran Sabana, Venezuela — carnivorous bromeliad"
+"Restrepia vasquezii":                   "Bolivia/Peru cloud forest"
+"Ornitophora radicans":                  "SE Brazilian Atlantic Forest, epiphyte"
+"Utricularia quelchii":                  "Tepui cliffs, Venezuela — epiphytic Utricularia"
+
+# ── Balcony ────────────────────────────────────────────────────────────
+
+"Aldrovanda vesiculosa":                 "Cosmopolitan aquatic trapdoor carnivore"
+"Calopogon tuberosus":                   "Eastern North American sphagnum bogs"
+
+# Dionaea cultivars — all from the Carolinas coastal plain
+"Dionaea muscipula 'Dracula'":           "Carolinas endemic; red-teeth cultivar"
+"Dionaea muscipula 'Alien'":             "Carolinas endemic; atypical trap form"
+"Dionaea muscipula \"Pom Pom\"":         "Carolinas endemic; multi-trap cultivar"
+
+"Habenaria radiata":                     "Japanese wet meadows, egret-flower orchid"
+"Iris louisiana 'Bout Midnight'":        "Louisiana iris cv, dark-purple garden form"
+"Maxillaria tenuifolia":                 "Mesoamerica 600–1,500 m; coconut-scented"
+
+# Nymphaea cultivars
+"Nymphaea pygmaea 'Helvola'":            "Miniature hardy water lily, yellow cv"
+"Nymphaea 'Indiana'":                    "Color-shifting hardy water lily"
+
+# Sarracenia cultivars — all SE US coastal plain
+"Sarracenia flava var. flava 'Goldie'":  "SE US coastal plain; all-yellow selection"
+"Sarracenia 'Hurricane Creek White' clone F": "Alabama cultivar; white-topped"
+"Sarracenia flava var. ornata FO6 \"Filiformis\" (V. Bordin), aberrant form": "Carolinas; Bordin's filiform-vein form"
+
+# ── Genus-level fallbacks (keyed "Genus species") ──────────────────────
+# Used when an exact-match key above isn't present. Kept short; species
+# with distinctive origins get their own exact-match entry above.
+
+"Dracula":     "Andean cloud forest"
+"Heliamphora": "Venezuelan tepuis"
+"Nepenthes":   "Southeast Asian highlands"
+"Dendrobium":  "New Guinea highlands"
+"Masdevallia": "Andean cloud forest"
+"Sophronitis": "Brazilian campos rupestres"
+"Restrepia":   "Andean cloud forest"
+"Pleurothallis": "Neotropical cloud forest miniature"
+"Lepanthopsis": "Andean cloud forest miniature"
+"Sarracenia":  "SE US coastal plain"
+"Dionaea":     "Carolinas endemic"
+"Nymphaea":    "Hardy water lily"

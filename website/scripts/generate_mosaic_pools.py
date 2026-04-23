@@ -23,6 +23,7 @@ WEB = Path(__file__).resolve().parent.parent
 CSV_PATH = WEB / "static" / "data" / "collection.csv"
 IMG_ROOT = WEB / "static" / "img" / "collection"
 OUT_PATH = WEB / "static" / "data" / "mosaic_pools.json"
+PROVENANCE_YAML = WEB / "data" / "mosaic_provenance.yaml"
 
 LOCATION_TO_POOL = {
     "highland": "terrarium",
@@ -33,6 +34,48 @@ PROVENANCE_BY_POOL = {
     "terrarium": "Highland cabinet",
     "balcony":   "Balcony · outdoor",
 }
+
+
+def load_provenance() -> dict[str, str]:
+    """Hand-curated taxon → provenance-caption lookup.
+
+    Pure-Python mini-parser — the file uses a simple `"key": "value"` /
+    `key: value` style per line, with '#' line comments. This avoids a
+    PyYAML dependency for a file that's effectively a flat dict.
+    """
+    if not PROVENANCE_YAML.is_file():
+        return {}
+    out: dict[str, str] = {}
+    for raw in PROVENANCE_YAML.read_text(encoding="utf-8").splitlines():
+        s = raw.strip()
+        if not s or s.startswith("#"):
+            continue
+        # Split on the first colon that isn't inside quotes. For our use
+        # the key is always the leading quoted/bare token, value is the
+        # rest after ': '.
+        m = re.match(r'^\s*"((?:[^"\\]|\\.)*)"\s*:\s*"((?:[^"\\]|\\.)*)"\s*$', raw)
+        if m:
+            key = m.group(1).replace('\\"', '"')
+            val = m.group(2).replace('\\"', '"')
+            out[key] = val
+            continue
+        m = re.match(r'^\s*([A-Za-z][\w\s\.\-×\']+?)\s*:\s*"((?:[^"\\]|\\.)*)"\s*$', raw)
+        if m:
+            out[m.group(1).strip()] = m.group(2).replace('\\"', '"')
+    return out
+
+
+def provenance_for(taxon: str, genus: str, species: str, pool_key: str,
+                   lookup: dict[str, str]) -> str:
+    """Resolve provenance: exact match → 'Genus species' → genus → pool default."""
+    if taxon in lookup:
+        return lookup[taxon]
+    gs = f"{genus} {species}".strip()
+    if gs in lookup:
+        return lookup[gs]
+    if genus in lookup:
+        return lookup[genus]
+    return PROVENANCE_BY_POOL[pool_key]
 
 # Genera that have their own genus page on the site. Anything else routes
 # to /collection/genera/ so we never emit a 404 link.
@@ -80,8 +123,10 @@ def find_photo(genus: str, taxon: str) -> str | None:
 
 
 def build_pools() -> dict:
+    provenance_lookup = load_provenance()
     pools: dict[str, list] = {k: [] for k in LOCATION_TO_POOL.values()}
     seen: dict[str, set] = {k: set() for k in LOCATION_TO_POOL.values()}
+    missing_provenance: list[str] = []
     with CSV_PATH.open() as f:
         for row in csv.DictReader(f):
             if row.get("status") != "alive":
@@ -91,6 +136,7 @@ def build_pools() -> dict:
                 continue
             taxon = row.get("taxon", "").strip()
             genus = row.get("genus", "").strip()
+            species = row.get("species", "").strip()
             if not taxon or not genus:
                 continue
             # Dedupe at the taxon level — clonal lines pile up otherwise.
@@ -105,14 +151,21 @@ def build_pools() -> dict:
                 if genus_slug in GENUS_PAGES
                 else "/collection/genera/"
             )
+            provenance = provenance_for(taxon, genus, species, pool_key, provenance_lookup)
+            if provenance == PROVENANCE_BY_POOL[pool_key]:
+                missing_provenance.append(taxon)
             pools[pool_key].append({
                 "src":         src,
                 "alt":         taxon,
                 "taxon":       taxon,
                 "href":        href,
-                "provenance":  PROVENANCE_BY_POOL[pool_key],
+                "provenance":  provenance,
             })
             seen[pool_key].add(taxon)
+    if missing_provenance:
+        print(f"[warn] {len(missing_provenance)} taxa fell back to generic provenance:")
+        for t in missing_provenance:
+            print(f"       - {t}")
     return pools
 
 
