@@ -26,7 +26,7 @@ Described by Luer & Escobar, *Selbyana* 7: 68 (1982),[^powo] four years after Lu
 
 ## How mine got here
 
-Ecuagenera, early 2023, as a small division on sphagnum. Took a year to settle. Mounted on cork now, in the bottom third of the [highland cabinet](/highland/).
+Ecuagenera, early 2023, as a small division on sphagnum. Took a year to settle. In a 10 cm black plastic basket in bark now, hanging in the lower right of the [highland cabinet](/highland/) below the *Heliamphora*.
 
 ## Growing it
 

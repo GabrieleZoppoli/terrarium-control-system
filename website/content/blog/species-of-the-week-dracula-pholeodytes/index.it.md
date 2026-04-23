@@ -26,7 +26,7 @@ Descritta da Luer & Escobar, *Selbyana* 7: 68 (1982),[^powo] quattro anni dopo c
 
 ## Com'è arrivata qui
 
-Ecuagenera, inizio 2023, come piccola divisione su sfagno. Un anno per assestarsi. Adesso su una placca di sughero, nel terzo basso dell'[armadio d'alta quota](/it/highland/).
+Ecuagenera, inizio 2023, come piccola divisione su sfagno. Un anno per assestarsi. Adesso in un cestello di plastica nera da 10 cm con bark, appeso in basso a destra nell'[armadio d'alta quota](/it/highland/) sotto le *Heliamphora*.
 
 ## Come si coltiva
 
