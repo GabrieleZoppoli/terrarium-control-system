@@ -9,7 +9,7 @@
 <script>
 (function () {
   'use strict';
-  var POOL_URL   = {{ "/data/mosaic_pools.json" | absURL | jsonify }};
+  var POOL_URL   = "/data/mosaic_pools.json";
   var ROTATE_MS  = 7000;
   var FADE_MS    = 450;
   var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
