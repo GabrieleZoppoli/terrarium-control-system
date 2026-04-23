@@ -6,7 +6,7 @@ tags: ["dracula", "species-of-the-week", "orchids", "highland"]
 showReadingTime: true
 ---
 
-*Dracula pholeodytes* runs smaller than the *Raven 'Jet'* next to it, but small here doesn't mean subdued. The three sepals extend into thin, dark **caudae** — the genus-defining tails — trailing the flower out to roughly 15 cm of vertical drama. Open the glass and what you see first is the sepaline cup: a heart-shaped, dark-maroon-speckled hood opening forward. Deep inside the cup sits a pale, skull-like labellum — the "monkey face" that has made *Dracula* a cult genus. *Pholeodytes* is, for my money, one of the coolest monkeys in it.
+*Dracula pholeodytes* is a tiny flower making a huge gesture. The sepaline cup itself is barely bigger than a thumbnail — a dark-maroon speckled dome — but the three sepals extend into long, dark **caudae** (the genus-defining tails, not petals) that fan out in three directions, spreading the whole flower across roughly 15–20 cm of space. In the hand, the cup sits between thumb and forefinger while two caudae reach up past the wrist and a third drops below. Deep inside the cup, pale and skull-shaped, sits the labellum — the "monkey face" that has made *Dracula* a cult genus. *Pholeodytes*' face sits a little deeper in the cup than the front-facing clowns (*simia*, *gigas*, *vampira*), but the caudae make it impossible to miss. For my money, one of the coolest monkeys in the cabinet.
 
 {{< figure src="/img/collection/dracula/dracula-pholeodytes.jpg" caption="The speckled sepaline cup with the pale column + labellum tucked inside. The finger at the lower right gives the scale — but most of the flower's drama comes from the thin dark caudae that continue downward off-frame." >}}
 
