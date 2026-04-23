@@ -1,0 +1,98 @@
+{{- /*
+  Rotates homepage mosaic tiles through pools/mosaic_pools.json.
+  - Terrarium pool fills tiles in .home-mosaic__grid (not --outdoor).
+  - Balcony pool fills tiles in .home-mosaic__grid--outdoor.
+  - One random tile per mosaic swaps every ROTATE_MS with crossfade.
+  - No swap to an already-visible image; no consecutive swaps of same tile.
+  - Honors prefers-reduced-motion.
+*/}}
+<script>
+(function () {
+  'use strict';
+  var POOL_URL   = {{ "/data/mosaic_pools.json" | absURL | jsonify }};
+  var ROTATE_MS  = 7000;
+  var FADE_MS    = 450;
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var mosaics = [
+    { key: 'terrarium', selector: '.home-mosaic__grid:not(.home-mosaic__grid--outdoor)' },
+    { key: 'balcony',   selector: '.home-mosaic__grid--outdoor' }
+  ];
+
+  function preload(src) {
+    return new Promise(function (resolve, reject) {
+      var i = new Image();
+      i.onload  = function () { resolve(src); };
+      i.onerror = reject;
+      i.src = src;
+    });
+  }
+
+  function visibleSrcs(grid) {
+    var out = {};
+    grid.querySelectorAll('.mosaic-tile img').forEach(function (img) {
+      out[img.getAttribute('src')] = true;
+    });
+    return out;
+  }
+
+  function fadeSwap(tile, entry) {
+    var img = tile.querySelector('img');
+    var taxonEl = tile.querySelector('.mosaic-tile__caption .taxon');
+    var provEl  = tile.querySelector('.mosaic-tile__caption .provenance');
+    var newSrc  = entry.src.indexOf('/') === 0 ? entry.src : '/' + entry.src;
+    return preload(newSrc).then(function () {
+      img.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+      img.style.opacity = '0';
+      return new Promise(function (resolve) { setTimeout(resolve, FADE_MS); });
+    }).then(function () {
+      img.src = newSrc;
+      img.alt = entry.alt || entry.taxon || '';
+      tile.setAttribute('href', entry.href || tile.getAttribute('href'));
+      tile.setAttribute('aria-label', (entry.taxon || '') + (entry.provenance ? ' — ' + entry.provenance : ''));
+      if (taxonEl) taxonEl.innerHTML = '<em></em>', taxonEl.querySelector('em').textContent = entry.taxon || '';
+      if (provEl)  provEl.textContent = entry.provenance || '';
+      img.style.opacity = '1';
+    }).catch(function () { /* swallow preload errors quietly */ });
+  }
+
+  function scheduleMosaic(grid, pool) {
+    if (!grid || !pool || !pool.length) return;
+    var tiles = Array.prototype.slice.call(grid.querySelectorAll('.mosaic-tile'));
+    if (!tiles.length) return;
+    var lastTileIdx = -1;
+    setInterval(function () {
+      if (document.hidden) return;
+      var visible = visibleSrcs(grid);
+      var tileIdx;
+      for (var i = 0; i < 4; i++) {
+        tileIdx = Math.floor(Math.random() * tiles.length);
+        if (tileIdx !== lastTileIdx) break;
+      }
+      lastTileIdx = tileIdx;
+      var candidates = pool.filter(function (e) {
+        var s = e.src.indexOf('/') === 0 ? e.src : '/' + e.src;
+        return !visible[s] && !visible[e.src];
+      });
+      if (!candidates.length) return;
+      var entry = candidates[Math.floor(Math.random() * candidates.length)];
+      fadeSwap(tiles[tileIdx], entry);
+    }, ROTATE_MS);
+  }
+
+  function start(pools) {
+    mosaics.forEach(function (m) {
+      var grid = document.querySelector(m.selector);
+      scheduleMosaic(grid, pools[m.key] || []);
+    });
+  }
+
+  if (prefersReduced) return;
+  if (!document.querySelector('.home-mosaic__grid')) return;
+
+  fetch(POOL_URL, { cache: 'no-cache' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (pools) { if (pools) start(pools); })
+    .catch(function () { /* pools missing → leave curated mosaic as is */ });
+})();
+</script>
