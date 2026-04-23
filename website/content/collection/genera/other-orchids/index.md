@@ -133,7 +133,7 @@ Major sources for the orchid collection:
 
 {{< collection-photos "Restrepia" >}}
 
-{{< collection-photos "Stelis" >}}
+{{< collection-photos "Lepanthopsis" >}}
 
 {{< collection-photos "Platystele" >}}
 

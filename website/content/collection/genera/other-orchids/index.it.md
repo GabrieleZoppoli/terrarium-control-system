@@ -133,7 +133,7 @@ Principali fornitori per la collezione di orchidee:
 
 {{< collection-photos "Restrepia" >}}
 
-{{< collection-photos "Stelis" >}}
+{{< collection-photos "Lepanthopsis" >}}
 
 {{< collection-photos "Platystele" >}}
 

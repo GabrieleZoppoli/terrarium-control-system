@@ -346,6 +346,17 @@
       ]
     }
   ],
+  "lepanthopsis": [
+    {
+      "taxon": "Lepanthopsis astrophora",
+      "slug": "lepanthopsis-astrophora",
+      "primary": "lepanthopsis-astrophora.jpg",
+      "extras": [
+        "lepanthopsis-astrophora-2.jpg",
+        "lepanthopsis-astrophora-3.jpg"
+      ]
+    }
+  ],
   "leptotes": [
     {
       "taxon": "Leptotes bicolor",
@@ -788,17 +799,6 @@
       "extras": [
         "sophronitis-pygmaea-2.jpg",
         "sophronitis-pygmaea-3.jpg"
-      ]
-    }
-  ],
-  "stelis": [
-    {
-      "taxon": "Stelis sp.",
-      "slug": "stelis-sp",
-      "primary": "stelis-sp.jpg",
-      "extras": [
-        "stelis-sp-2.jpg",
-        "stelis-sp-3.jpg"
       ]
     }
   ],
