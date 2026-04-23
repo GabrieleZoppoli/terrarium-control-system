@@ -18,16 +18,36 @@
       <p class="lede">{{ .Site.Params.heroLede }}</p>
     </div>
     {{- /* Hero figure: driven by data/featured_this_week.yaml.
-           Falls back to the earlier Heliamphora macdonaldae tile if
-           the featured slug can't be resolved — so a missing/stale
-           featured_this_week never breaks the home page. */ -}}
+
+           Critical: we resolve the target URL via site.GetPage so we
+           only link to a page that actually exists *in the current
+           language*. Without this check, an EN-only blog post rendered
+           on the IT home page linked to /it/blog/… → 404. If GetPage
+           comes back empty for the IT context, we fall back to the
+           absolute (EN) URL of the post so the click at least lands
+           somewhere real. If the whole featured lookup fails, we
+           restore the earlier Heliamphora macdonaldae tile. */ -}}
     {{- $fw     := site.Data.featured_this_week | default dict -}}
     {{- $idx    := site.Data.species_index      | default dict -}}
     {{- $feat   := index $idx ($fw.slug | default "") -}}
     {{- if $feat -}}
-      {{- $href := $fw.blog_post | default (printf "/collection/species/%s/" $fw.slug) -}}
+      {{- $candidate := $fw.blog_post | default (printf "/collection/species/%s/" $fw.slug) -}}
+      {{- $page := site.GetPage $candidate -}}
+      {{- /* If the page exists in the current lang, use its Permalink
+             (language-correct). Otherwise try site.Home.Sites to fetch
+             the default-language version and fall back to that. */ -}}
+      {{- $href := "" -}}
+      {{- if $page -}}
+        {{- $href = $page.RelPermalink -}}
+      {{- else -}}
+        {{- range site.Sites -}}
+          {{- $p := .GetPage $candidate -}}
+          {{- if and $p (not $href) -}}{{- $href = $p.Permalink -}}{{- end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if not $href -}}{{- $href = $candidate -}}{{- end -}}
     <a class="home-hero__figure home-hero__figure--featured"
-       href="{{ $href | relLangURL }}"
+       href="{{ $href }}"
        aria-label="{{ i18n "hero_sotw_kicker" | default "Species of the week" }}: {{ $feat.taxon }}">
       <img src="{{ $feat.primary_photo | relURL }}"
            alt="{{ $feat.taxon }}{{ with $feat.provenance }} — {{ . }}{{ end }}"
