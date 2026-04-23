@@ -1,0 +1,24 @@
+{{- /*
+  Override Hugo's built-in alias template.
+
+  Hugo generates a meta-refresh alias page at /en/ (among other places)
+  when defaultContentLanguageInSubdir = false — English content lives
+  at root, but /en/ still gets an alias stub. The built-in template in
+  some Hugo versions omits the `noindex` meta, so Google crawls it and
+  logs "Page with redirect" in Search Console, adding noise.
+
+  This override always emits <meta name="robots" content="noindex">
+  plus the standard canonical + meta-refresh so Google stops indexing
+  the alias while humans still get the intended redirect.
+*/ -}}
+<!DOCTYPE html>
+<html lang="{{ .Language.Lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, follow">
+<title>{{ .Permalink }}</title>
+<link rel="canonical" href="{{ .Permalink }}">
+<meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+</head>
+<body></body>
+</html>

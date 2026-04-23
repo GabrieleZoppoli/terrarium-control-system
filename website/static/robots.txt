@@ -1,9 +1,11 @@
 User-agent: *
 Allow: /
 
-# Block large generated asset trees that are not useful search surfaces.
-Disallow: /data/
-Disallow: /dendrogram/
+# /en/ is a Hugo-generated meta-refresh alias for the English homepage
+# (defaultContentLanguageInSubdir=false puts EN at root; /en/ is just
+# an alias stub). Keep it out of the index — but let the per-language
+# sitemap through, since the root sitemap index references it.
+Disallow: /en/
+Allow: /en/sitemap.xml
 
-# Sitemap (Hugo auto-generates this at build time).
-Sitemap: https://gabrielezoppoli.github.io/terrarium-control-system/sitemap.xml
+Sitemap: https://highlandcloudforest.com/sitemap.xml
