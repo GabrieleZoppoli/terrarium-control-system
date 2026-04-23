@@ -1,0 +1,125 @@
+{{- /*
+  /collection/species/ landing — photo-tile grid of every auto-
+  generated per-species page (78 taxa today). Data comes from
+  site.Data.species_index so the grid stays in sync with the
+  generate_species_pages.py output without an extra build step.
+  Blog-linked entries (deep-dives) get a small badge.
+*/ -}}
+{{ define "main" }}
+{{- $index := site.Data.species_index | default dict -}}
+{{- $sotw  := (site.Data.species_of_the_week.index) | default dict -}}
+<section class="page">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="{{ "/collection/" | relLangURL }}">{{ i18n "nav_collection" | default "Collection" }}</a>
+    <span class="sep">·</span>
+    <span>{{ .LinkTitle }}</span>
+  </nav>
+
+  <header class="page-hero">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lede">{{ partial "endstop.html" . }}</p>{{ end }}
+  </header>
+
+  {{- with .Content }}
+  <div class="prose" style="max-width: var(--page-max);">{{ . }}</div>
+  {{- end }}
+
+  <ul class="species-grid" aria-label="All species">
+    {{- /* Pages are rendered children of this section; walk them
+           and enrich from species_index. Sort by the .Title
+           (== taxon) for a clean alphabetical flow. */ -}}
+    {{- range sort .Pages "Title" "asc" -}}
+      {{- $slug := .Params.slug | default (path.Base .RelPermalink) -}}
+      {{- $meta := index $index $slug -}}
+      {{- $hasSotw := isset $sotw $slug -}}
+      {{- $photo := or .Params.primary_photo ($meta).primary_photo -}}
+      {{- $prov  := or .Params.provenance  ($meta).provenance  -}}
+    <li class="species-grid__tile">
+      <a href="{{ .RelPermalink }}">
+        {{- $taxon := or (.Params.taxon) .Title -}}
+        {{- with $photo }}<img src="{{ . | relURL }}" alt="{{ $taxon }}" loading="lazy" decoding="async">{{ end }}
+        <div class="species-grid__caption">
+          <span class="taxon"><em>{{ .Title }}</em></span>
+          {{- with $prov }}<span class="provenance">{{ . }}</span>{{ end }}
+          {{- if $hasSotw }}<span class="species-grid__badge" title="Deep-dive blog post available">★</span>{{ end }}
+        </div>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+
+  <p class="species-grid__foot">
+    {{ len .Pages }} species · <a href="{{ "/collection/dendrogram/" | relLangURL }}">see the phylogenetic tree</a>
+  </p>
+</section>
+
+<style>
+.species-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 1rem;
+}
+.species-grid__tile { margin: 0; }
+.species-grid__tile a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface-1, #0f1114);
+  aspect-ratio: 1 / 1;
+}
+.species-grid__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 450ms ease;
+}
+.species-grid__tile a:hover img { transform: scale(1.04); }
+.species-grid__caption {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0.5rem 0.6rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+  color: #fff;
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.4rem;
+  align-items: baseline;
+}
+.species-grid__caption .taxon { display: block; width: 100%; }
+.species-grid__caption .provenance {
+  display: block;
+  width: 100%;
+  font-size: 0.72rem;
+  opacity: 0.85;
+}
+.species-grid__badge {
+  position: absolute;
+  top: 0.4rem; right: 0.5rem;
+  background: rgba(255, 217, 102, 0.9);
+  color: #1a1400;
+  border-radius: 50%;
+  width: 1.35rem; height: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.species-grid__foot {
+  color: var(--text-3, #888);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+@media (max-width: 480px) {
+  .species-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+{{ end }}
