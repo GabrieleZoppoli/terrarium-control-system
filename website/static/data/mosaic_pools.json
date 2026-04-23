@@ -12,7 +12,7 @@
       "alt": "Dendrobium cyanocentrum 'Blau'",
       "taxon": "Dendrobium cyanocentrum 'Blau'",
       "href": "/collection/genera/dendrobium/",
-      "provenance": "New Guinea highlands, blue-flowered miniature"
+      "provenance": "New Guinea, blue-flowered miniature (300–1,500 m)"
     },
     {
       "src": "img/collection/dendrobium/dendrobium-hellwigianum-2.jpg",
@@ -61,7 +61,7 @@
       "alt": "Dracula pholeodytes",
       "taxon": "Dracula pholeodytes",
       "href": "/collection/genera/dracula/",
-      "provenance": "Ecuadorian Chocó — 'cave-dweller'"
+      "provenance": "Colombian Chocó — 'cave-dweller'"
     },
     {
       "src": "img/collection/dracula/dracula-raven-jet-2.jpg",
@@ -118,6 +118,13 @@
       "taxon": "Holcoglossum amesianum",
       "href": "/collection/genera/",
       "provenance": "Indochinese limestone outcrops"
+    },
+    {
+      "src": "img/collection/lepanthopsis/lepanthopsis-astrophora-2.jpg",
+      "alt": "Lepanthopsis astrophora",
+      "taxon": "Lepanthopsis astrophora",
+      "href": "/collection/genera/",
+      "provenance": "Venezuelan & Colombian cloud forest — sub-cm star-flowers"
     },
     {
       "src": "img/collection/leptotes/leptotes-bicolor-2.jpg",
@@ -244,13 +251,6 @@
       "taxon": "Sophronitis brevipedunculata",
       "href": "/collection/genera/sophronitis/",
       "provenance": "Brazilian campos rupestres, 900–1,500 m"
-    },
-    {
-      "src": "img/collection/stelis/stelis-sp-2.jpg",
-      "alt": "Stelis sp.",
-      "taxon": "Stelis sp.",
-      "href": "/collection/genera/",
-      "provenance": "Neotropical cloud forest miniature"
     },
     {
       "src": "img/collection/brocchinia/brocchinia-reducta.jpg",

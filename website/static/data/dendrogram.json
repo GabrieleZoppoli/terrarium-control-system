@@ -1576,6 +1576,17 @@
                       "size": 1,
                       "vendor": "Varesina Orchidee",
                       "status": "alive"
+                    },
+                    {
+                      "name": "astrophora",
+                      "size": 1,
+                      "vendor": "Ecuagenera.com",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/lepanthopsis/lepanthopsis-astrophora.jpg",
+                        "../img/collection/lepanthopsis/lepanthopsis-astrophora-2.jpg",
+                        "../img/collection/lepanthopsis/lepanthopsis-astrophora-3.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1967,22 +1978,6 @@
                         "../img/collection/papilionanthe/papilionanthe-teres.jpg",
                         "../img/collection/papilionanthe/papilionanthe-teres-2.jpg",
                         "../img/collection/papilionanthe/papilionanthe-teres-3.jpg"
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "Stelis",
-                  "children": [
-                    {
-                      "name": "sp.",
-                      "size": 1,
-                      "vendor": "Ecuagenera.com",
-                      "status": "alive",
-                      "photos": [
-                        "../img/collection/stelis/stelis-sp.jpg",
-                        "../img/collection/stelis/stelis-sp-2.jpg",
-                        "../img/collection/stelis/stelis-sp-3.jpg"
                       ]
                     }
                   ]
