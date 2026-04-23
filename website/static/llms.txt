@@ -5,7 +5,7 @@
 ## Project sections
 
 - [Highland Cloud Forest Terrarium](https://highlandcloudforest.com/highland/): A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure that simulates highland cloud-forest weather in real time, using Colombian meteorological data shifted 15 h. Hosts ~70 cloud-forest species (Heliamphora, highland Nepenthes, Dracula, Sophronitis, New Guinea Dendrobium, miniature Pleurothallidinae). Marine-refrigeration cooling, Node-RED control, InfluxDB logging.
-- [Inventions](https://highlandcloudforest.com/inventions/): Three smaller builds around the main terrarium — a self-watering Zeer-pot evaporative cooler for Darlingtonia californica, a Drosera regia setup, and low-tech passive-mist glass shelves for warm-intermediate species that don't need the full highland regime.
+- [Inventions](https://highlandcloudforest.com/inventions/): Three smaller builds around the main terrarium — a self-watering Zeer-pot evaporative cooler for Darlingtonia californica, a Drosera regia setup, and auto-misted fog shelves (ultrasonic misters on a Raspberry-Pi-driven hysteresis RH loop, ~80 %) for warm-intermediate species that don't need the full highland regime.
 - [Plant Collection](https://highlandcloudforest.com/collection/): 386 accessions across 89 genera, four spaces (highland cabinet, balcony outdoor, low-tech fog shelves, windowsills). Phylogenetic dendrogram at /collection/dendrogram/, per-genus detail pages under /collection/genera/.
 - [About](https://highlandcloudforest.com/about/): Author bio, links, Instagram/ORCID/GitHub identity.
 
