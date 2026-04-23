@@ -11,6 +11,9 @@ stat_volume:           "Volume del terrario"
 stat_logging:          "Frequenza di log"
 stat_operational:      "In funzione dal"
 
+# Home hero
+hero_sotw_kicker:      "Specie della settimana · clicca per l'approfondimento"
+
 # Home mosaic
 mosaic_kicker:         "Una selezione · clicca per aprire la pagina del genere"
 mosaic_title:          "Un atlante vivente di altopiani convergenti."

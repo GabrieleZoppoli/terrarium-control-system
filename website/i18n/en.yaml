@@ -11,6 +11,9 @@ stat_volume:           "Terrarium volume"
 stat_logging:          "Logging cadence"
 stat_operational:      "Operational since"
 
+# Home hero
+hero_sotw_kicker:      "Species of the week · click for the deep-dive"
+
 # Home mosaic
 mosaic_kicker:         "Selected species · click through to the genus page"
 mosaic_title:          "A living atlas of convergent highlands."

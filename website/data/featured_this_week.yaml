@@ -1,0 +1,13 @@
+# Homepage hero: species of the week.
+# The hero image + caption + link are driven by this single slug. Change
+# it weekly (or whenever a new deep-dive post lands) and re-deploy.
+#
+# - `slug` must match an entry in data/species_index.yaml (auto-generated).
+# - `week_started` is a yyyy-mm-dd anchor for archival/rotation bookkeeping.
+# - `blog_post` is an OPTIONAL path to the deep-dive blog post.
+#   If set, the hero links there; otherwise it falls back to the
+#   species detail page (/collection/species/<slug>/).
+
+slug:         dracula-pholeodytes
+week_started: 2026-04-23
+blog_post:    /blog/species-of-the-week-dracula-pholeodytes/

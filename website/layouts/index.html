@@ -17,10 +17,32 @@
       <h1>{{ i18n "home_title" | safeHTML }}</h1>
       <p class="lede">{{ .Site.Params.heroLede }}</p>
     </div>
+    {{- /* Hero figure: driven by data/featured_this_week.yaml.
+           Falls back to the earlier Heliamphora macdonaldae tile if
+           the featured slug can't be resolved — so a missing/stale
+           featured_this_week never breaks the home page. */ -}}
+    {{- $fw     := site.Data.featured_this_week | default dict -}}
+    {{- $idx    := site.Data.species_index      | default dict -}}
+    {{- $feat   := index $idx ($fw.slug | default "") -}}
+    {{- if $feat -}}
+      {{- $href := $fw.blog_post | default (printf "/collection/species/%s/" $fw.slug) -}}
+    <a class="home-hero__figure home-hero__figure--featured"
+       href="{{ $href | relLangURL }}"
+       aria-label="{{ i18n "hero_sotw_kicker" | default "Species of the week" }}: {{ $feat.taxon }}">
+      <img src="{{ $feat.primary_photo | relURL }}"
+           alt="{{ $feat.taxon }}{{ with $feat.provenance }} — {{ . }}{{ end }}"
+           loading="eager" decoding="async">
+      <figcaption>
+        <span class="kicker">{{ i18n "hero_sotw_kicker" | default "Species of the week" }}</span>
+        <em>{{ $feat.taxon }}</em>{{ with $feat.provenance }} · {{ . }}{{ end }}
+      </figcaption>
+    </a>
+    {{- else -}}
     <a class="home-hero__figure" href="{{ "/collection/genera/heliamphora/" | relURL }}" aria-label="Heliamphora macdonaldae">
       <img src="{{ "img/collection/heliamphora/heliamphora-macdonaldae.jpg" | relURL }}" alt="Heliamphora macdonaldae — Cerro Duida, Venezuela" loading="eager" decoding="async">
       <figcaption><em>Heliamphora macdonaldae</em> · Cerro Duida</figcaption>
     </a>
+    {{- end -}}
   </div>
 
   {{- /* Auto-updated from scripts/compute_stats.py (rerun at every /add-plant sync). */ -}}

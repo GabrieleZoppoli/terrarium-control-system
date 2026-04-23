@@ -1,0 +1,15 @@
+# Species-of-the-week blog-post index.
+# Maps species slug → deep-dive blog post metadata. Each entry means:
+# "a dedicated write-up for this species has been published; the
+# per-species page at /collection/species/<slug>/ should show a
+# prominent link to it."
+#
+# Add an entry here each time you publish a new species-of-the-week
+# post under content/blog/. The species-detail template reads this at
+# build time and decorates the corresponding species page.
+
+index:
+  dracula-pholeodytes:
+    url:       /blog/species-of-the-week-dracula-pholeodytes/
+    title:     "Dracula pholeodytes — the cave-dweller of the Chocó"
+    published: 2026-04-23
