@@ -28,10 +28,15 @@
     });
   }
 
+  function pathOf(urlOrPath) {
+    try { return new URL(urlOrPath, window.location.origin).pathname; }
+    catch (_) { return urlOrPath.charAt(0) === '/' ? urlOrPath : '/' + urlOrPath; }
+  }
+
   function visibleSrcs(grid) {
     var out = {};
     grid.querySelectorAll('.mosaic-tile img').forEach(function (img) {
-      out[img.getAttribute('src')] = true;
+      out[pathOf(img.src || img.getAttribute('src') || '')] = true;
     });
     return out;
   }
@@ -71,8 +76,7 @@
       }
       lastTileIdx = tileIdx;
       var candidates = pool.filter(function (e) {
-        var s = e.src.indexOf('/') === 0 ? e.src : '/' + e.src;
-        return !visible[s] && !visible[e.src];
+        return !visible[pathOf(e.src)];
       });
       if (!candidates.length) return;
       var entry = candidates[Math.floor(Math.random() * candidates.length)];
