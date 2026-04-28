@@ -6,7 +6,7 @@ tags: ["heliamphora", "species-of-the-week", "carnivorous-plants", "highland", "
 showReadingTime: true
 ---
 
-*Heliamphora macdonaldae* is a tepui endemic that spent fifty years hidden inside another species and is named for a woman nobody remembers. Yellow-green pitchers to about 30 cm, taller examples close to 40, with a low waist that drains overflow and crimson veins running across a glabrous interior. The nectar spoon on top is small and dark red.[^wistuba]
+*Heliamphora macdonaldae* is a tepui endemic that spent thirty years hidden inside another species and is named for a woman nobody remembers. Yellow-green pitchers to about 30 cm, taller examples close to 40, with a low waist that drains overflow and crimson veins running across a glabrous interior. The nectar spoon on top is small and dark red.[^wistuba]
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="The Cerro Duida clone via Wistuba. Crimson veins inside, ruby spoon on top, drainage hole at the waist." >}}
 
@@ -38,7 +38,7 @@ The party that did was the **Tyler–Duida Expedition** of the American Museum o
 
 That's it: four men plus the Olalla brothers. Tyler funded the trip; Tate (zoologist, mammalogist) led it and did the botanical collecting on the side; Hitchcock surveyed and mapped; Deck handled birds. They left New York on 20 July 1928, sailed up the Amazon to Manaus, then up the Rio Negro and through the Casiquiare Canal to Esmeralda — a tiny settlement on the Orinoco, ten miles from Duida. They arrived 1 October 1928. The first ascent of the summit was 24 October 1928. They stayed until 18 March 1929 and were back in New York by 20 May.[^gleason]
 
-Three of the four *Heliamphora* species Gleason described from the haul are named for the men who paid for or led the expedition: *H. tyleri* for the funder, *H. tatei* for the leader. *H. macdonaldae* honours someone else entirely. More on that below.
+Gleason described three new *Heliamphora* species from the haul. Two are named for men on the trip: *H. tyleri* for the funder, *H. tatei* for the leader. *H. macdonaldae* honours someone else entirely. More on that below.
 
 ## Sunk and reinstated
 

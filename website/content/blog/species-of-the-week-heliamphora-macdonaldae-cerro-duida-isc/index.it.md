@@ -6,7 +6,7 @@ tags: ["heliamphora", "specie-della-settimana", "piante-carnivore", "alta-quota"
 showReadingTime: true
 ---
 
-*Heliamphora macdonaldae* è una endemita del tepui che ha passato cinquant'anni nascosta dentro un'altra specie ed è dedicata a una donna di cui nessuno ricorda chi fosse. Ascidi giallo-verdi fino a 30 cm, esemplari più alti vicino ai 40, con una strozzatura bassa che drena l'acqua in eccesso e venature cremisi sull'interno glabro. Il "cucchiaio" nettarifero in cima è piccolo e rosso scuro.[^wistuba]
+*Heliamphora macdonaldae* è una endemita del tepui che ha passato trent'anni nascosta dentro un'altra specie ed è dedicata a una donna di cui nessuno ricorda chi fosse. Ascidi giallo-verdi fino a 30 cm, esemplari più alti vicino ai 40, con una strozzatura bassa che drena l'acqua in eccesso e venature cremisi sull'interno glabro. Il "cucchiaio" nettarifero in cima è piccolo e rosso scuro.[^wistuba]
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="Il clone Cerro Duida via Wistuba. Venature cremisi all'interno, cucchiaio rubino in cima, foro di drenaggio sulla strozzatura." >}}
 
@@ -38,7 +38,7 @@ Ci riuscì la **spedizione Tyler–Duida** dell'American Museum of Natural Histo
 
 Quattro uomini, più i fratelli Olalla. Tyler ha finanziato; Tate (zoologo, mammologo) ha guidato e ha raccolto le piante in extra; Hitchcock ha rilevato e cartografato; Deck si è occupato degli uccelli. Sono partiti da New York il 20 luglio 1928, sono saliti per il Rio delle Amazzoni fino a Manaus, poi per il Rio Negro e attraverso il Canale di Casiquiare fino a Esmeralda — un piccolo insediamento sull'Orinoco, a sedici chilometri dal Duida. Sono arrivati il 1° ottobre 1928. La prima ascensione è del 24 ottobre 1928. Sono rimasti fino al 18 marzo 1929 e sono tornati a New York il 20 maggio.[^gleason]
 
-Tre delle quattro *Heliamphora* descritte da Gleason in quel lavoro sono dedicate a uomini della spedizione: *H. tyleri* al finanziatore, *H. tatei* al capo. *H. macdonaldae* dedica a qualcun altro. Su questo, sotto.
+Gleason ha descritto tre nuove *Heliamphora* dal raccolto. Due sono dedicate a uomini della spedizione: *H. tyleri* al finanziatore, *H. tatei* al capo. *H. macdonaldae* dedica a qualcun altro. Su questo, sotto.
 
 ## Sinonimizzata e reintegrata
 
