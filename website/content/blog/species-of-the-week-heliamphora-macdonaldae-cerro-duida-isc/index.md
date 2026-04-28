@@ -82,7 +82,7 @@ Pure LFS works for most growers; this is what works in my cabinets.
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Two years in. Kanuma + LFS, RO water at the bottom of the pot." >}}
 
-## The vanished Mrs Macdonald
+## The mysterious Mrs Macdonald
 
 The species name encodes one fact and hides another.
 
