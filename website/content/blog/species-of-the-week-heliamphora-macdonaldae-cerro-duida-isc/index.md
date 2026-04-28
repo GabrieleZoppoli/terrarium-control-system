@@ -1,12 +1,12 @@
 ---
 title: "Species of the week: Heliamphora macdonaldae"
 date: 2026-04-28
-description: "A pitcher plant from a single Venezuelan tepui. Found in 1928, sunk into Heliamphora tatei in 1978, reinstated in 2011 — and named for a woman whose identity has dropped out of the records."
+description: "A pitcher plant from a single Venezuelan tepui. Found in 1928, sunk into Heliamphora tatei in 1978, reinstated in 2011 — and named for a woman of mysterious identity."
 tags: ["heliamphora", "species-of-the-week", "carnivorous-plants", "highland", "tepui"]
 showReadingTime: true
 ---
 
-*Heliamphora macdonaldae* is a tepui endemic that spent thirty years hidden inside another species and is named for a woman nobody remembers. Yellow-green pitchers to about 30 cm, taller examples close to 40, with a low waist that drains overflow and crimson veins running across a glabrous interior. The nectar spoon on top is small and dark red.[^wistuba]
+*Heliamphora macdonaldae* is a tepui endemic that spent thirty years hidden inside another species and is named for a woman of mysterious identity. Yellow-green pitchers to about 30 cm, taller examples close to 40, with a low waist that drains overflow and crimson veins running across a glabrous interior. The nectar spoon on top is small and dark red.[^wistuba]
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="The Cerro Duida clone via Wistuba. Crimson veins inside, ruby spoon on top, drainage hole at the waist." >}}
 
@@ -22,7 +22,9 @@ Single tepui, Venezuelan Amazonas, peak at 2,358 m, summit plateau spread across
 
 {{< figure src="/img/external/cerro-duida-pd.jpg" caption="Cerro Duida from La Esmeralda. Photo: David23021984, public domain (Wikimedia Commons)." >}}
 
-[Satellite view on Google Maps](https://www.google.com/maps/@3.4167,-65.6667,11z/data=!3m1!1e3) — the green plateau is the summit; everything around it is lowland Amazon.
+<iframe src="https://maps.google.com/maps?q=3.4167,-65.6667&t=k&z=11&output=embed" width="100%" height="380" style="border:0;border-radius:6px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Cerro Duida — satellite view"></iframe>
+
+The green plateau in the satellite view is the summit; everything around it is lowland Amazon. ([Open in Google Maps](https://www.google.com/maps/@3.4167,-65.6667,11z/data=!3m1!1e3))
 
 ## Tepuis, briefly
 

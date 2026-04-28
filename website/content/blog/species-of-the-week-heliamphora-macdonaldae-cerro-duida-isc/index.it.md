@@ -1,68 +1,70 @@
 ---
 title: "Specie della settimana: Heliamphora macdonaldae"
 date: 2026-04-28
-description: "Una pianta carnivora endemica di un singolo tepui venezuelano. Trovata nel 1928, sinonimizzata con Heliamphora tatei nel 1978, reintegrata nel 2011 — e dedicata a una donna di cui nessuno ricorda l'identità."
+description: "Una pianta carnivora endemica di un singolo tepui venezuelano. Trovata nel 1928, sinonimizzata con Heliamphora tatei nel 1978, reintegrata nel 2011 — e dedicata a una donna dalla misteriosa identità."
 tags: ["heliamphora", "specie-della-settimana", "piante-carnivore", "alta-quota", "tepui"]
 showReadingTime: true
 ---
 
-*Heliamphora macdonaldae* è una endemita del tepui che ha passato trent'anni nascosta dentro un'altra specie ed è dedicata a una donna di cui nessuno ricorda chi fosse. Ascidi giallo-verdi fino a 30 cm, esemplari più alti vicino ai 40, con una strozzatura bassa che drena l'acqua in eccesso e venature cremisi sull'interno glabro. Il "cucchiaio" nettarifero in cima è piccolo e rosso scuro.[^wistuba]
+*Heliamphora macdonaldae* è una specie endemica di un singolo tepui venezuelano, sparita per trent'anni dentro un'altra specie e dedicata a una donna dalla misteriosa identità. Ascidi giallo-verdi alti circa 30 cm, gli esemplari più grandi arrivano vicini ai 40, con una strozzatura bassa che drena l'acqua in eccesso e venature cremisi sull'interno glabro. In cima, un piccolo cucchiaio nettarifero rosso scuro.[^wistuba]
 
-{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="Il clone Cerro Duida via Wistuba. Venature cremisi all'interno, cucchiaio rubino in cima, foro di drenaggio sulla strozzatura." >}}
+{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="Il clone Cerro Duida da Wistuba. Venature cremisi all'interno, cucchiaio rubino in cima, foro di drenaggio sulla strozzatura." >}}
 
 ## L'ascidio
 
-Rosetta compatta a livello del suolo, senza fusto rampicante — è così che si presenta *macdonaldae* in coltivazione. In natura sul Cerro Duida pare allungarsi un po', ma mai come *H. tatei*, l'unica specie del genere a formare fusto.[^musekautas] La parete interna è liscia tranne una frangia di peli setiformi al margine. La firma è la venatura cremisi su fondo giallo-verde; alcuni cloni virano quasi al rosso pieno.[^wistuba]
+In coltivazione *macdonaldae* si presenta come una rosetta compatta, a livello del suolo, senza fusto rampicante. In natura sul Cerro Duida pare che si allunghi un poco, ma mai quanto *H. tatei*, l'unica del genere a sviluppare un vero fusto.[^musekautas] La parete interna dell'ascidio è liscia, salvo una corona di peli setiformi al margine. Il tratto distintivo è la venatura cremisi su fondo giallo-verde; in alcuni cloni il colore copre quasi tutta la parete interna.[^wistuba]
 
-Il foro di drenaggio sulla strozzatura non è un dettaglio. Le *Heliamphora* non riempiono gli ascidi di enzimi come *Sarracenia* o *Nepenthes* — la digestione è affidata in gran parte a batteri commensali, e il foro serve a buttare via l'acqua in eccesso durante le piogge intense.[^icps] Tate notò il foro durante la spedizione del 1928 e lo descrisse nello stesso lavoro che ha dato il nome alla specie.[^gleason]
+Il foro di drenaggio sulla strozzatura non è un dettaglio decorativo. Le *Heliamphora* non riempiono gli ascidi di enzimi digestivi come *Sarracenia* o *Nepenthes*: la digestione è in gran parte affidata a batteri commensali, e il foro serve a scaricare l'acqua piovana in eccesso prima che il liquido straripi.[^icps] Tate annotò questa caratteristica già durante la spedizione del 1928, descrivendola nello stesso lavoro che ha battezzato la specie.[^gleason]
 
 ## Cerro Duida
 
-Singolo tepui, Amazonas venezuelano, vetta a 2.358 m, plateau sommitale di 1.089 km².[^cerroduida] Un blocco di arenaria che sale di colpo dalla foresta pluviale. *Macdonaldae* sta tra 1.500 e 2.300 m, sulla vetta e sulle colline circostanti.[^wistuba]
+Un singolo tepui in Amazonas (Venezuela), vetta a 2.358 m, altopiano sommitale di 1.089 km².[^cerroduida] Un blocco di arenaria che si erge a strapiombo dalla foresta pluviale circostante. *Macdonaldae* cresce fra i 1.500 e i 2.300 m, sulla vetta e sulle alture vicine.[^wistuba]
 
-{{< figure src="/img/external/cerro-duida-pd.jpg" caption="Il Cerro Duida da La Esmeralda. Foto: David23021984, dominio pubblico (Wikimedia Commons)." >}}
+{{< figure src="/img/external/cerro-duida-pd.jpg" caption="Il Cerro Duida visto da La Esmeralda. Foto: David23021984, dominio pubblico (Wikimedia Commons)." >}}
 
-[Vista satellitare su Google Maps](https://www.google.com/maps/@3.4167,-65.6667,11z/data=!3m1!1e3) — il pianoro verde è la vetta; tutto intorno è Amazzonia di pianura.
+<iframe src="https://maps.google.com/maps?q=3.4167,-65.6667&t=k&z=11&output=embed" width="100%" height="380" style="border:0;border-radius:6px;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Cerro Duida — vista satellitare"></iframe>
+
+L'altopiano verde nella vista satellitare è la vetta; tutto attorno è Amazzonia di pianura. ([Apri in Google Maps](https://www.google.com/maps/@3.4167,-65.6667,11z/data=!3m1!1e3))
 
 ## I tepui, in breve
 
-Sono circa 115 questi tavolati di arenaria che svettano sopra lo Scudo della Guayana fra Venezuela, Guyana e Brasile. Quarzite arenacea precambriana, erosa da circa 70 milioni di anni, dilavata talmente a lungo che le vette sono povere di nutrienti e acide. Circa il 42 % delle piante vascolari registrate sui tepui è endemico.[^tepui] Le carnivore prosperano in quei suoli dilavati — *Heliamphora*, *Brocchinia*, *Drosera*, *Utricularia*, *Genlisea*. Sul Cerro Duida ce ne sono parecchie. Il genere *Heliamphora* è praticamente confinato a questo arcipelago di vette.
+I tepui sono circa 115 — tavolati di arenaria che dominano lo Scudo della Guayana fra Venezuela, Guyana e Brasile. Quarzite arenacea precambriana, erosa da circa 70 milioni di anni, dilavata al punto che le vette risultano povere di nutrienti e marcatamente acide. Si stima che il 42 % delle piante vascolari registrate sui tepui sia endemico.[^tepui] Le carnivore prosperano in questi suoli leggeri — *Heliamphora*, *Brocchinia*, *Drosera*, *Utricularia*, *Genlisea* — e sul Cerro Duida ne crescono diverse. Il genere *Heliamphora* è di fatto confinato a questo arcipelago di vette.
 
 ## La spedizione che la trovò
 
-La vetta del Monte Duida non era stata raggiunta da spedizioni occidentali fino al 1928. Humboldt e Bonpland l'avevano vista da Esmeralda nel 1801; Schomburgk arrivò alla base nel 1839; Spruce raccolse nelle vicinanze pochi anni dopo. Nessuno fece l'ascensione.[^gleason]
+Fino al 1928 nessuna spedizione occidentale aveva raggiunto la vetta del Monte Duida. Humboldt e Bonpland l'avevano osservata da Esmeralda nel 1801; Schomburgk era arrivato fino alla base nel 1839; Spruce aveva raccolto nei dintorni qualche anno più tardi. Nessuno aveva fatto l'ascensione.[^gleason]
 
-Ci riuscì la **spedizione Tyler–Duida** dell'American Museum of Natural History. Il racconto di Tate, incluso nel paper di Gleason, elenca il personale per nome:
+Ci riuscì la **spedizione Tyler–Duida** dell'American Museum of Natural History. Il racconto di Tate, contenuto nel lavoro di Gleason, elenca i partecipanti per nome:
 
 > "The personnel consisted of Mr. Sidney F. Tyler, Jr., Mr. R. S. Deck, ornithologist, Mr. C. B. Hitchcock, geologist and cartographer, and the writer. The expedition was joined in Brazil by A. M. Olalla and brother with their four assistants, professional bird-collectors."[^gleason]
 
-Quattro uomini, più i fratelli Olalla. Tyler ha finanziato; Tate (zoologo, mammologo) ha guidato e ha raccolto le piante in extra; Hitchcock ha rilevato e cartografato; Deck si è occupato degli uccelli. Sono partiti da New York il 20 luglio 1928, sono saliti per il Rio delle Amazzoni fino a Manaus, poi per il Rio Negro e attraverso il Canale di Casiquiare fino a Esmeralda — un piccolo insediamento sull'Orinoco, a sedici chilometri dal Duida. Sono arrivati il 1° ottobre 1928. La prima ascensione è del 24 ottobre 1928. Sono rimasti fino al 18 marzo 1929 e sono tornati a New York il 20 maggio.[^gleason]
+Quattro persone, più i fratelli Olalla. Tyler era il finanziatore; Tate (zoologo, mammalogo) ne era il capo scientifico e si occupava della botanica come incarico aggiuntivo; Hitchcock rilevava e cartografava; Deck studiava gli uccelli. La spedizione lasciò New York il 20 luglio 1928, risalì il Rio delle Amazzoni fino a Manaus, poi il Rio Negro e il Canale di Casiquiare fino a Esmeralda — un piccolo abitato sull'Orinoco, a una decina di miglia dal Duida. Arrivarono il 1° ottobre 1928. La vetta venne raggiunta per la prima volta il 24 ottobre. Lasciarono Esmeralda il 18 marzo 1929 e furono di nuovo a New York il 20 maggio.[^gleason]
 
-Gleason ha descritto tre nuove *Heliamphora* dal raccolto. Due sono dedicate a uomini della spedizione: *H. tyleri* al finanziatore, *H. tatei* al capo. *H. macdonaldae* dedica a qualcun altro. Su questo, sotto.
+Gleason descrisse tre nuove *Heliamphora* da quel materiale. Due le dedicò a uomini della spedizione: *H. tyleri* al finanziatore, *H. tatei* al capo. *H. macdonaldae* fu dedicata a qualcun altro. Su questo, fra poco.
 
 ## Sinonimizzata e reintegrata
 
-Gleason ha descritto *macdonaldae*, *tatei* e *tyleri* come specie distinte nel 1931. Bassett Maguire l'ha ridotta a varietà di *tatei* nel 1978. Julian Steyermark è andato oltre nel 1984, declassandola a forma (*H. tatei* fm. *macdonaldae*).[^powo] Per decenni è uscita dalla letteratura attiva.
+Gleason descrisse *macdonaldae*, *tatei* e *tyleri* come specie distinte nel 1931. Bassett Maguire la ridusse a varietà di *tatei* nel 1978; Julian Steyermark spinse oltre nel 1984, classificandola come forma (*H. tatei* fm. *macdonaldae*).[^powo] Per decenni *macdonaldae* sparì dalla letteratura attiva.
 
-Nel 2011 la monografia **Sarraceniaceae of South America** (McPherson, Wistuba, Fleischmann & Nerz) l'ha reintegrata come specie a sé sulla base della morfologia: rosetta compatta, cucchiaio nettarifero conico (non allungato), venatura cremisi unica nel genere.[^sasa] La maggior parte dei coltivatori — e il vivaio Wistuba — la trattano così.
+Nel 2011 la monografia **Sarraceniaceae of South America** (McPherson, Wistuba, Fleischmann & Nerz) la riportò a specie a sé, su base morfologica: rosetta compatta, cucchiaio nettarifero conico (non allungato), venatura cremisi unica nel genere.[^sasa] La maggior parte dei coltivatori — e il vivaio Wistuba — la trattano oggi così.
 
-POWO no. Al momento elenca ancora *macdonaldae* come sinonimo eterotipico di *H. tatei*.[^powo] Wikipedia accetta la reintegrazione.[^wikip] Quale nome usare dipende da quale autorità si segua.
+POWO ancora no: al momento elenca *macdonaldae* come sinonimo eterotipico di *H. tatei*.[^powo] Wikipedia accetta la reintegrazione.[^wikip] Quale nome usare dipende quindi da quale autorità si segua.
 
 ## Da Wistuba
 
-Andreas Wistuba (n. 1967, Maselheim, Germania; prima a Mannheim) ha descritto, da solo o in coautoria, oltre la metà delle specie di *Heliamphora* attualmente riconosciute.[^wistubawiki] È uno dei quattro autori della monografia del 2011 che ha rimesso *macdonaldae* sulla mappa. Gestisce il vivaio da cui è arrivata questa pianta.
+Andreas Wistuba (n. 1967, oggi a Maselheim, Germania; in passato a Mannheim) ha descritto, da solo o in coautoria, oltre la metà delle specie di *Heliamphora* attualmente riconosciute.[^wistubawiki] È uno dei quattro autori della monografia del 2011 che ha rimesso *macdonaldae* sulla mappa, e gestisce il vivaio da cui mi è arrivata la pianta.
 
-La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti dal lotto Cerro Duida di Wistuba. È andata nell'attuale armadio d'alta quota, in funzione dal 2023. L'armadio ha rimpiazzato un acquario raffreddato a chiller in funzione dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono arrivate al decimo anno.
+La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti, dal materiale Cerro Duida di Wistuba. È andata nella vetrina d'alta quota attuale, in funzione dal 2023. Quella vetrina ha sostituito un acquario raffreddato a chiller che gira dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono al loro decimo anno.
 
 ## Come si coltiva
 
-- 12–22 °C, con un chiaro salto giorno/notte. Sopra i 25 °C in modo prolungato è un problema.
-- UR all'80–95 %. Aria sempre in movimento.
-- LED a 30–40 kLux misurati in cima all'armadio. Non ho mai coltivato *Heliamphora* a sole pieno, quindi non posso dire nulla sulla tolleranza outdoor.
+- 12–22 °C, con un chiaro salto fra giorno e notte. Sopra i 25 °C in modo prolungato è un problema.
+- UR all'80–95 %, aria sempre in movimento.
+- LED a 30–40 kLux misurati in cima alla vetrina. Non ho mai coltivato *Heliamphora* a sole pieno e quindi non posso dire nulla sulla loro tolleranza all'aperto.
 - Solo acqua piovana o RO.
-- Concimazione leggera, senza prede. Akerne Rain Mix a ½ cucchiaino per gallone di RO, due volte a settimana. L'armadio è abbastanza chiuso che non entrano insetti — il mix diluito sostituisce le prede. Va contro il riflesso "le *Heliamphora* si fanno la cena da sole" ma funziona da dieci anni, sia sul vecchio che sul nuovo impianto.
+- Concimazione leggera, senza prede. Akerne Rain Mix, mezzo cucchiaino per gallone d'acqua RO, due volte la settimana. La vetrina è abbastanza chiusa che non vi entrano insetti — il mix diluito prende il posto delle prede. Va contro l'idea ricevuta che le *Heliamphora* "se la facciano da sole", ma funziona da dieci anni, sia sul vecchio che sul nuovo impianto.
 
-Cure standard da armadio d'alta quota per il genere. Più facile delle *Nepenthes* highland, secondo me, perché non si offende se le notti salgono di un paio di gradi.
+Coltura standard d'alta quota per il genere. Più facile delle *Nepenthes* highland, secondo me, perché tollera senza problemi qualche grado in più di notte.
 
 ## Substrato, ieri e oggi
 
@@ -70,34 +72,34 @@ Due mix nell'arco del decennio.
 
 Dal 2016 a inizio 2023, negli anni dell'acquario col chiller: **lapillo + pomice + bark, con circa il 50 % di sfagno a fibra lunga**. Funzionava — la *pulchella*, i cloni di *minor* e la *purpurascens* × *ionasii* sono passate da questo mix senza problemi.
 
-Dal 2023, nel nuovo armadio d'alta quota: **kanuma più sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**. Il mix kanuma + sfagno è nettamente più aerato del precedente, ed è quella la metà del cambiamento che porta il peso.
+Dal 2023, nella nuova vetrina d'alta quota: **kanuma e sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**. Il mix kanuma + sfagno è nettamente più aerato del precedente, ed è proprio quella la differenza che pesa di più.
 
-Le vette dei tepui sono arenaria quarzitica precambriana dilavata — sabbia e ghiaia acida, porosa, povera di nutrienti, con uno strato di sfagno sopra nei punti più umidi. Le radici delle *Heliamphora* si sono evolute per bere da un substrato sempre umido ma drenato bene, mai anaerobico. Gli ascidi stessi scaricano l'eccesso di acqua dal foro della strozzatura per la stessa ragione per cui le radici non tollerano il ristagno: l'ecologia gira sul flusso, non sull'acqua ferma.
+Le vette dei tepui sono arenaria quarzitica precambriana dilavata: sabbia e ghiaia acide, porose, povere di nutrienti, con un manto di sfagno sopra nei punti più umidi. Le radici delle *Heliamphora* si sono evolute per bere da un substrato sempre umido ma drenato bene, mai anaerobico. Gli ascidi stessi scaricano l'acqua in eccesso dal foro della strozzatura per la stessa ragione per cui le radici non tollerano il ristagno: l'ecologia gira sul flusso, non sull'acqua ferma.
 
-Il kanuma è la metà strutturale del mix attuale. Pomice vulcanica giapponese, naturalmente acida (pH ~5), molto porosa; trattiene l'acqua dentro il granulo e lascia aria intorno. Lo sfagno è il buffer di umidità e il manto superficiale. Il centimetro di RO sul fondo del vaso risale per capillarità attraverso lo sfagno senza che lo strato di kanuma vada mai in stagnazione.
+Il kanuma è la metà strutturale del mix attuale: pomice vulcanica giapponese, naturalmente acida (pH ~5), molto porosa, che trattiene l'acqua dentro il granulo lasciando aria intorno. Lo sfagno è il buffer di umidità e il manto di superficie. Il centimetro di RO sul fondo del vaso risale per capillarità attraverso lo sfagno, senza che lo strato di kanuma vada mai in stagnazione.
 
-Lo sfagno puro funziona per la maggior parte dei coltivatori; questo funziona nei miei armadi.
+Lo sfagno puro funziona per la maggior parte dei coltivatori; nelle mie vetrine funziona questo.
 
-{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Due anni dopo. Kanuma + sfagno, RO sul fondo del vaso." >}}
+{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Due anni dopo. Kanuma + sfagno a fibra lunga, con un velo di acqua RO sul fondo." >}}
 
-## La signora Macdonald scomparsa
+## La misteriosa signora Macdonald
 
 Il nome della specie codifica un fatto e ne nasconde un altro.
 
-**Il fatto**: la desinenza genitiva `-ae` è femminile. L'eponimo è una donna — Mrs, Miss o Ms Macdonald. Se Gleason avesse onorato un uomo la specie sarebbe *macdonaldii*. La latinizzazione botanica collassa anche le tre grafie inglesi *McDonald*, *MacDonald* e *Macdonald* nella stessa forma, quindi il cognome può portarne una qualsiasi.
+**Il fatto**: la desinenza genitiva `-ae` è femminile. L'eponimo è una donna — Mrs, Miss o Ms Macdonald. Se Gleason avesse onorato un uomo, la specie si chiamerebbe *macdonaldii*. La latinizzazione botanica fonde inoltre le tre grafie inglesi *McDonald*, *MacDonald* e *Macdonald* in un'unica forma, e del cognome originale possiamo dire soltanto che era una di queste tre.
 
 **La parte nascosta**: chi fosse.
 
-Il protologo di Gleason del 1931 non dà nessuna etimologia — solo la diagnosi.[^gleason] L'elenco del personale della spedizione (sopra) è breve e specifico: nessun Macdonald fra loro. L'introduzione del Torrey Botanical Club al volume ringrazia "il sostegno di numerosi soci e amici che hanno contribuito al fondo speciale per le pubblicazioni" — ma non li nomina.[^gleason] Le altre due specie del Cerro Duida nello stesso lavoro, *tyleri* e *tatei*, dedicano a uomini della spedizione nominati nella stessa pagina; *macdonaldae* è quella fuori posto.
+Il protologo di Gleason del 1931 non offre alcuna etimologia, solo la diagnosi.[^gleason] L'elenco dei membri della spedizione (sopra) è breve e specifico, e nessun Macdonald vi compare. L'introduzione del Torrey Botanical Club al volume ringrazia "il sostegno di numerosi soci e amici che hanno contribuito al fondo speciale per le pubblicazioni" — senza fare nomi.[^gleason] Le altre due specie del Cerro Duida descritte nello stesso lavoro, *tyleri* e *tatei*, sono dedicate a uomini della spedizione citati nella stessa pagina; *macdonaldae* è l'eccezione.
 
-Gli scenari più plausibili: una donatrice del fondo Torrey nominata nel registro del tesoriere ma non nel paper; una benefattrice dell'AMNH la cui contribuzione è passata da un'altra contabilità; o una parente di Tate, Deck o Hitchcock la cui biografia non è stata digitalizzata. La genealogia Tyler che sono riuscito a ricostruire — Sidney F. Tyler Sr. (1850–1935) sposato prima Mary Woodrow Binney poi Ida Amelia Elkins; la madre di Tyler Jr. era Stella Elkins — non contiene Macdonald.
+Tre scenari plausibili: una donatrice del fondo Torrey, registrata nei libri del tesoriere ma non nella pubblicazione; una benefattrice dell'AMNH la cui contribuzione è passata da una contabilità diversa; o una parente di Tate, Deck o Hitchcock la cui biografia non è stata digitalizzata. La genealogia Tyler che sono riuscito a ricostruire — Sidney F. Tyler Sr. (1850–1935) sposato prima Mary Woodrow Binney e poi Ida Amelia Elkins; la madre di Tyler Jr. era Stella Elkins — non contiene Macdonald.
 
 Due archivi possono risolvere il caso:
 
-- Il **typus di *H. macdonaldae*** è nell'erbario Steere del New York Botanical Garden, dove Gleason lavorava.[^gleason] Sull'etichetta potrebbe esserci una nota etimologica scritta da lui.
-- Le **carte della Torrey Botanical Society** alla biblioteca Mertz del NYBG contengono un registro di cassa 1926–33 (Serie 9, cartella 36.7) che dovrebbe elencare i contributori del fondo pubblicazioni per gli anni del paper.[^nybgfa]
+- Il **typus di *H. macdonaldae*** è conservato nello Steere Herbarium del New York Botanical Garden, dove Gleason lavorava.[^gleason] Sull'etichetta potrebbe esserci una nota etimologica scritta da lui.
+- Le **carte della Torrey Botanical Society** alla biblioteca Mertz del NYBG comprendono un libro di cassa 1926–33 (Serie 9, cartella 36.7) che dovrebbe elencare i contributori del fondo pubblicazioni per gli anni del lavoro di Gleason.[^nybgfa]
 
-Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio AMNH, che custodisce le carte della spedizione Tyler–Duida e il diario di campo di Tate. Tempo di risposta tipico: due settimane.
+Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio AMNH, che custodisce le carte della spedizione Tyler–Duida e il diario di campo di Tate.
 
 *Continua…*
 
