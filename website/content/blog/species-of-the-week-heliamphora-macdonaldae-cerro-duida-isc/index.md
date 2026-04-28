@@ -60,7 +60,7 @@ Mine arrived January 2023 as an adult-pitcher young plant from Wistuba's Cerro D
 - 80–95 % RH. Constant air movement.
 - Bright LED, 30–40 kLux measured at the top of the cabinet. I've not grown *Heliamphora* under unfiltered sun, so I can't speak to outdoor tolerance.
 - Rainwater or RO only.
-- No fertiliser. They get their nitrogen from prey.
+- Light fertilisation, no prey. Akerne Rain Mix at ½ teaspoon per gallon of RO, twice a week. The cabinet is sealed enough that no insects get in — the dilute mix takes the place of prey. This goes against the "*Heliamphora* eat their own dinner" reflex but it's been working for a decade across the older and newer rigs.
 
 Standard highland-cabinet care for this genus. Easier than highland *Nepenthes* in my experience because it doesn't sulk if night temperatures rise a couple of degrees.
 

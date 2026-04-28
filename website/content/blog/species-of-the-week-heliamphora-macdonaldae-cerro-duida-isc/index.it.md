@@ -60,7 +60,7 @@ La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti dal lott
 - UR all'80–95 %. Aria sempre in movimento.
 - LED a 30–40 kLux misurati in cima all'armadio. Non ho mai coltivato *Heliamphora* a sole pieno, quindi non posso dire nulla sulla tolleranza outdoor.
 - Solo acqua piovana o RO.
-- Niente fertilizzante. L'azoto se lo prendono dalle prede.
+- Concimazione leggera, senza prede. Akerne Rain Mix a ½ cucchiaino per gallone di RO, due volte a settimana. L'armadio è abbastanza chiuso che non entrano insetti — il mix diluito sostituisce le prede. Va contro il riflesso "le *Heliamphora* si fanno la cena da sole" ma funziona da dieci anni, sia sul vecchio che sul nuovo impianto.
 
 Cure standard da armadio d'alta quota per il genere. Più facile delle *Nepenthes* highland, secondo me, perché non si offende se le notti salgono di un paio di gradi.
 
