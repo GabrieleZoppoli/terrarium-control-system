@@ -58,21 +58,25 @@ Mine arrived January 2023 as an adult-pitcher young plant from Wistuba's Cerro D
 
 - 12–22 °C, with a clear day/night drop. Above 25 °C for sustained periods is a problem.
 - 80–95 % RH. Constant air movement.
-- Bright, diffuse light. Direct sun cooks the pitcher tops.
+- Bright LED, 30–40 kLux measured at the top of the cabinet. I've not grown *Heliamphora* under unfiltered sun, so I can't speak to outdoor tolerance.
 - Rainwater or RO only.
 - No fertiliser. They get their nitrogen from prey.
 
 Standard highland-cabinet care for this genus. Easier than highland *Nepenthes* in my experience because it doesn't sulk if night temperatures rise a couple of degrees.
 
-## Substrate and the 1 cm trick
+## Substrate, then and now
 
-The mix that's been working for ten years: **kanuma plus long-fibre sphagnum, standing in no more than 1 cm of RO water**.
+Two mixes across the decade.
+
+From 2016 to early 2023, in the chiller-cabinet years: **lapillus + pumice + bark, with about 50 % long-fibre sphagnum**. Worked fine — the *pulchella*, the *minor* clones and the *purpurascens* × *ionasii* came through it intact.
+
+From 2023, in the new highland cabinet: **kanuma plus long-fibre sphagnum, standing in no more than 1 cm of RO water**. The kanuma+LFS mix is markedly more aerated than the older blend, and that's the half I'd point at as the load-bearing change.
 
 Tepui summits are weathered Precambrian quartz arenite — acidic, porous, nutrient-poor sand and grit, with a sphagnum mat overlaid in the wettest spots. *Heliamphora* roots evolved to drink from a substrate that's permanently damp but freely drained, never anaerobic. The pitchers themselves drain overflow through the waist hole for the same reason the roots can't tolerate stagnation: the ecology runs on flow, not on standing water.
 
-Kanuma is the structural half of that mix. Japanese volcanic pumice, naturally acidic (pH ~5), highly porous; it holds water inside the grain and gives free air around it. LFS is the moisture buffer and the surface mat. The 1 cm of RO water at the bottom of the pot wicks upward through the LFS without the kanuma layer ever going stagnant.
+Kanuma is the structural half of the current mix. Japanese volcanic pumice, naturally acidic (pH ~5), highly porous; it holds water inside the grain and gives free air around it. LFS is the moisture buffer and the surface mat. The 1 cm of RO water at the bottom of the pot wicks upward through the LFS without the kanuma layer ever going stagnant.
 
-The decade-long survivors in this collection — *pulchella* and the *minors*, the *purpurascens* × *ionasii* — have been in this mix since 2016. Pure LFS works for most growers; this is what works in my cabinets.
+Pure LFS works for most growers; this is what works in my cabinets.
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Two years in. Kanuma + LFS, RO water at the bottom of the pot." >}}
 

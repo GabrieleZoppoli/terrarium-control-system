@@ -58,21 +58,25 @@ La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti dal lott
 
 - 12–22 °C, con un chiaro salto giorno/notte. Sopra i 25 °C in modo prolungato è un problema.
 - UR all'80–95 %. Aria sempre in movimento.
-- Luce intensa ma diffusa. Il sole diretto cuoce la cima dell'ascidio.
+- LED a 30–40 kLux misurati in cima all'armadio. Non ho mai coltivato *Heliamphora* a sole pieno, quindi non posso dire nulla sulla tolleranza outdoor.
 - Solo acqua piovana o RO.
 - Niente fertilizzante. L'azoto se lo prendono dalle prede.
 
 Cure standard da armadio d'alta quota per il genere. Più facile delle *Nepenthes* highland, secondo me, perché non si offende se le notti salgono di un paio di gradi.
 
-## Substrato e il trucco del centimetro
+## Substrato, ieri e oggi
 
-Il mix che funziona da dieci anni: **kanuma più sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**.
+Due mix nell'arco del decennio.
+
+Dal 2016 a inizio 2023, negli anni dell'acquario col chiller: **lapillo + pomice + bark, con circa il 50 % di sfagno a fibra lunga**. Funzionava — la *pulchella*, i cloni di *minor* e la *purpurascens* × *ionasii* sono passate da questo mix senza problemi.
+
+Dal 2023, nel nuovo armadio d'alta quota: **kanuma più sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**. Il mix kanuma + sfagno è nettamente più aerato del precedente, ed è quella la metà del cambiamento che porta il peso.
 
 Le vette dei tepui sono arenaria quarzitica precambriana dilavata — sabbia e ghiaia acida, porosa, povera di nutrienti, con uno strato di sfagno sopra nei punti più umidi. Le radici delle *Heliamphora* si sono evolute per bere da un substrato sempre umido ma drenato bene, mai anaerobico. Gli ascidi stessi scaricano l'eccesso di acqua dal foro della strozzatura per la stessa ragione per cui le radici non tollerano il ristagno: l'ecologia gira sul flusso, non sull'acqua ferma.
 
-Il kanuma è la metà strutturale del mix. Pomice vulcanica giapponese, naturalmente acida (pH ~5), molto porosa; trattiene l'acqua dentro il granulo e lascia aria intorno. Lo sfagno è il buffer di umidità e il manto superficiale. Il centimetro di RO sul fondo del vaso risale per capillarità attraverso lo sfagno senza che lo strato di kanuma vada mai in stagnazione.
+Il kanuma è la metà strutturale del mix attuale. Pomice vulcanica giapponese, naturalmente acida (pH ~5), molto porosa; trattiene l'acqua dentro il granulo e lascia aria intorno. Lo sfagno è il buffer di umidità e il manto superficiale. Il centimetro di RO sul fondo del vaso risale per capillarità attraverso lo sfagno senza che lo strato di kanuma vada mai in stagnazione.
 
-I sopravvissuti decennali della collezione — *pulchella*, i *minor*, la *purpurascens* × *ionasii* — sono in questo mix dal 2016. Lo sfagno puro funziona per la maggior parte dei coltivatori; questo funziona nei miei armadi.
+Lo sfagno puro funziona per la maggior parte dei coltivatori; questo funziona nei miei armadi.
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Due anni dopo. Kanuma + sfagno, RO sul fondo del vaso." >}}
 
