@@ -8,7 +8,7 @@ showReadingTime: true
 
 *Heliamphora macdonaldae* is a tepui endemic that spent fifty years hidden inside another species and is named for a woman nobody remembers. Yellow-green pitchers to about 30 cm, taller examples close to 40, with a low waist that drains overflow and crimson veins running across a glabrous interior. The nectar spoon on top is small and dark red.[^wistuba]
 
-{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="The Cerro Duida clone via Wistuba, January 2023. Crimson veins inside, ruby spoon on top, drainage hole at the waist." >}}
+{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="The Cerro Duida clone via Wistuba. Crimson veins inside, ruby spoon on top, drainage hole at the waist." >}}
 
 ## The pitcher
 

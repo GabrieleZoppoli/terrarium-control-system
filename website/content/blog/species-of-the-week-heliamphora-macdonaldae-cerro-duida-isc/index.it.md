@@ -8,7 +8,7 @@ showReadingTime: true
 
 *Heliamphora macdonaldae* è una endemita del tepui che ha passato cinquant'anni nascosta dentro un'altra specie ed è dedicata a una donna di cui nessuno ricorda chi fosse. Ascidi giallo-verdi fino a 30 cm, esemplari più alti vicino ai 40, con una strozzatura bassa che drena l'acqua in eccesso e venature cremisi sull'interno glabro. Il "cucchiaio" nettarifero in cima è piccolo e rosso scuro.[^wistuba]
 
-{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="Il clone Cerro Duida via Wistuba, gennaio 2023. Venature cremisi all'interno, cucchiaio rubino in cima, foro di drenaggio sulla strozzatura." >}}
+{{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg" caption="Il clone Cerro Duida via Wistuba. Venature cremisi all'interno, cucchiaio rubino in cima, foro di drenaggio sulla strozzatura." >}}
 
 ## L'ascidio
 
