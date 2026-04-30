@@ -63,6 +63,12 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     </a>
     <p><strong>Aprile 2026.</strong> Quarantasette mesi. Il punto arancio a sinistra del centro è <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WOC; proprio sotto, semi-sommersa dallo sfagno traboccante, una <em>Utricularia quelchii</em> da Ilu Tepui apre il suo primo peduncolo (<a href="/it/blog/first-bloom-utricularia-quelchii/">post completo</a>).</p>
   </li>
+  <li>
+    <a href="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" alt="Vetrina highland, maggio 2026 — prima grande pulizia da quando la vetrina è in funzione" loading="lazy">
+    </a>
+    <p><strong>Maggio 2026.</strong> Prima grande pulizia da quando la vetrina è in funzione — due anni di velo minerale e un angolo di muffa nera ripuliti, una ventola staccata ricrimpata, ripiano in policarbonato rimesso al suo posto. Il racconto completo nel <a href="/it/blog/highland-cabinet-deep-clean/"><em>build log</em></a>.</p>
+  </li>
 </ul>
 
 Le foto non sono *cronologicamente esaustive* — sono quelle che ho scattato al volo nei momenti giusti e che hanno ancora qualcosa da raccontare. Documentazione più regolare prevista quando la webcam sul Pi sarà operativa.

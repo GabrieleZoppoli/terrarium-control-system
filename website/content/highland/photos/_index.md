@@ -63,6 +63,12 @@ Each image is CC BY-SA 4.0, watermarked accordingly. Click any photo to open it 
     </a>
     <p><strong>April 2026.</strong> Forty-seven months in. The orange spot left-of-centre is <em>Sophronitis coccinea</em> 'Big One' × 'Hinomaru' 4N GM/WOC; directly underneath it, half-buried in the sphagnum overflow, an <em>Utricularia quelchii</em> from Ilu Tepui starts its first peduncle (<a href="/blog/first-bloom-utricularia-quelchii/">full post</a>).</p>
   </li>
+  <li>
+    <a href="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" target="_blank" rel="noopener">
+      <img src="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" alt="Highland cabinet, May 2026 — first deep clean since the cabinet went online" loading="lazy">
+    </a>
+    <p><strong>May 2026.</strong> First deep clean since the cabinet went online — two years of mineral haze and a corner of black mold scrubbed off, one disconnected fan recrimped, polycarbonate shelf reinstalled. Full story in the <a href="/blog/highland-cabinet-deep-clean/">build log</a>.</p>
+  </li>
 </ul>
 
 Photographs are *not* chronologically exhaustive — just the ones I snapped at the right moment that still have something to say. More regular documentation planned once the Pi-side webcam goes live.
