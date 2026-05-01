@@ -28,13 +28,13 @@ Most of the black on the walls actually came off with just water and a sponge �
 
 With the cabinet bare it took about ten minutes to swap the cable. New crimp, into a known-good lead — the fan span up immediately, ruling out the motor. While the work was open I redid the crimps on all three connectors, on the principle that whatever weakened one will probably weaken the others.
 
-{{< figure src="recrimping-fan.jpg" caption="Recrimping the cable. The fan span up immediately on a known-good lead, confirming the fault was the cable, not the motor." >}}
+{{< figure src="recrimping-fan.jpg" caption="Starting the scrub-down. The cable swap had been a ten-minute job; the bulk of the time was here — Physan and a sponge across every surface." >}}
 
 ## Drainage and plant work
 
-The condensate channel under the evaporator is a strip of clear corrugated polycarbonate — the wave pattern in the photo. Water from the cold-plate runs down into it and drains by gravity through a PVC pipe to a tank under the cabinet. With everything out, it got scrubbed and reseated.
+The canalina — the condensate channel below the evaporator — is a thin aluminum fold suspended on fishing line at a precise 5° tilt toward the drainage pipe. Water from the back of the cold-plate runs down its length and drains by gravity through a PVC pipe to a tank under the cabinet. With everything out, it got scrubbed and the fishing line re-tensioned.
 
-{{< figure src="canalina.jpg" caption="The condensate channel under the evaporator — wave-pattern polycarbonate strip, drains by gravity into the tank below the cabinet." >}}
+{{< figure src="canalina.jpg" caption="The canalina — the aluminum fold across the top of the frame (camera looking up from below). Suspended on fishing line at 5° toward the drainage pipe; condensate runs off the back of the evaporator (the serpentine refrigerant-tube pattern pressed into the aluminum cooling plate, visible below) onto it, then by gravity through a PVC pipe to the tank under the cabinet." >}}
 
 While the plants were on the table, I repotted all the *Nepenthes* — *N. glabrata*, *pitopangii*, *tenuis*, *inermis* — and tied each climber up a thin wooden orchid stake with plastic zip ties. They've been getting tall enough to need it. The hanging *Dracula* and *Restrepia* moved into less stagnant positions; the corner that lost its fan no longer holds a hanger.
 

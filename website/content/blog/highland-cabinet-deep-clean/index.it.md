@@ -28,13 +28,13 @@ Buona parte della muffa nera sulle pareti, in realtà, è venuta via con sola ac
 
 A vetrina vuota, sostituire il cavo è stata cosa di una decina di minuti. Crimp nuovo, attaccato a un'uscita funzionante — la ventola è partita subito, escludendo il motore. Già che il lavoro era aperto, ho rifatto i crimp anche sugli altri due connettori: quello che ha indebolito uno probabilmente indebolirà gli altri.
 
-{{< figure src="recrimping-fan.jpg" caption="Sostituzione del crimp. La ventola è partita subito su un'uscita funzionante, confermando che il guasto era nel cavo e non nel motore." >}}
+{{< figure src="recrimping-fan.jpg" caption="Inizio della pulizia delle superfici. La sostituzione del crimp era già fatta — un lavoro da una decina di minuti; il grosso del tempo è stato qui, Physan e spugna su ogni superficie." >}}
 
 ## Canalina e piante
 
-La canalina di scolo sotto l'evaporatore è un profilo di policarbonato corrugato trasparente — il disegno a onda che si vede in foto. L'acqua di condensa scende dalla piastra e per gravità defluisce attraverso un tubo in PVC fino a una tanica sotto la vetrina. Con tutto fuori, è stata strofinata e ricollocata.
+La canalina — il canale di scolo sotto l'evaporatore — è una sottile lamina di alluminio piegata, sospesa su filo da pesca con un'inclinazione precisa di 5° verso il tubo di scarico. L'acqua dal retro della piastra fredda scorre lungo la sua lunghezza e per gravità defluisce attraverso un tubo in PVC fino a una tanica sotto la vetrina. Con tutto fuori, è stata strofinata e il filo riteso.
 
-{{< figure src="canalina.jpg" caption="Canalina di scolo sotto l'evaporatore — profilo in policarbonato corrugato trasparente. Per gravità l'acqua scarica nella tanica sotto la vetrina." >}}
+{{< figure src="canalina.jpg" caption="La canalina — la lamina di alluminio piegata visibile nella parte alta dell'inquadratura (camera che guarda dal basso verso l'alto). Sospesa su filo da pesca a 5° verso il tubo di scarico; la condensa scorre dal retro dell'evaporatore (il pattern a serpentina dei tubi di refrigerazione pressati nella piastra di alluminio, visibile sotto) sulla canalina, e per gravità defluisce attraverso un tubo in PVC fino alla tanica sotto la vetrina." >}}
 
 Con le piante sul tavolo ho rinvasato tutte le *Nepenthes* — *N. glabrata*, *pitopangii*, *tenuis*, *inermis* — e legato ogni rampicante a un bastoncino di legno per orchidee con fascette di plastica. Stanno crescendo abbastanza alte da averne bisogno. Le *Dracula* e *Restrepia* sospese si sono spostate in posizioni meno stagnanti; nell'angolo che ha perso la ventola non c'è più nulla di sospeso.
 
