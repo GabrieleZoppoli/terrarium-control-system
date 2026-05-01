@@ -54,7 +54,7 @@ POWO ancora no: al momento elenca *macdonaldae* come sinonimo eterotipico di *H.
 
 Andreas Wistuba (n. 1967, oggi a Maselheim, Germania; in passato a Mannheim) ha descritto, da solo o in coautoria, oltre la metà delle specie di *Heliamphora* attualmente riconosciute.[^wistubawiki] È uno dei quattro autori della monografia del 2011 che ha rimesso *macdonaldae* sulla mappa, e gestisce il vivaio da cui mi è arrivata la pianta.
 
-La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti, dal materiale Cerro Duida di Wistuba. È andata nella vetrina d'alta quota attuale, in funzione dal 2023. Quella vetrina ha sostituito un acquario raffreddato a chiller che gira dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono al loro decimo anno.
+La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti, dal materiale Cerro Duida di Wistuba. È andata nella vetrina d'alta quota attuale, in funzione dal 2022. Quella vetrina ha sostituito un acquario raffreddato a chiller che gira dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono al loro decimo anno.
 
 ## Come si coltiva
 

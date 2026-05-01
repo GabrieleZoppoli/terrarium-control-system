@@ -1,7 +1,7 @@
 ---
-title: "Deep clean: two years in, one corner-fan dead"
+title: "Deep clean: four years in, two of them with mold building"
 date: 2026-05-01T01:00:00+02:00
-description: "After two years on Physan-free maintenance, the highland cabinet got its first deep clean — triggered by what I'd taken for botrytis on a Dracula and traced back to a single fan that had silently disconnected itself months ago."
+description: "Four years online — the last two with mold quietly accumulating in a stagnant corner — and the highland cabinet finally got its first deep clean. Triggered by what I'd taken for botrytis on a Dracula and traced back to a single fan that had silently disconnected itself months ago."
 tags: ["build-log", "highland-terrarium", "maintenance", "nepenthes", "physan"]
 showReadingTime: true
 ---
@@ -18,7 +18,7 @@ The freezer-evaporator behind the back wall has three small PWM fans pulling air
 
 ## Pulling everything out
 
-For the first time in two years, the cabinet got fully emptied. Around 70 plants — *Heliamphora*, *Sarracenia*, *Nepenthes*, the dense pleurothallid layer, the hanging *Dracula* and *Restrepia* — out onto the dining table. The pump sprayer in the foreground holds the working solution: **Physan-20 at 10 mL per 5 L of water**, which is what I use for everything cabinet-related. Walls, polycarbonate, the steel evaporator plate, all sprayed and scrubbed.
+For the first time since it went online four years ago, the cabinet got fully emptied. Around 70 plants — *Heliamphora*, *Sarracenia*, *Nepenthes*, the dense pleurothallid layer, the hanging *Dracula* and *Restrepia* — out onto the dining table. The pump sprayer in the foreground holds the working solution: **Physan-20 at 10 mL per 5 L of water**, which is what I use for everything cabinet-related. Walls, polycarbonate, the steel evaporator plate, all sprayed and scrubbed.
 
 Most of the black on the walls actually came off with just water and a sponge — a saprophyte, the kind that lives on dust and condensate in a stagnant corner, not something that infects leaves. The Physan was belt-and-braces; the real fix is getting airflow back to that corner.
 

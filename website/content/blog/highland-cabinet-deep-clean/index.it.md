@@ -1,7 +1,7 @@
 ---
-title: "Grande pulizia: due anni dopo, una ventola spenta"
+title: "Grande pulizia: quattro anni dopo, di cui due con muffa che cresce"
 date: 2026-05-01T01:00:00+02:00
-description: "Dopo due anni di manutenzione minima, la vetrina highland ha avuto la sua prima grande pulizia — innescata da quello che avevo preso per una botrytis su una Dracula e ricondotta a una sola ventola che si era staccata in silenzio mesi fa."
+description: "Quattro anni in funzione — gli ultimi due con muffa che si accumulava in silenzio in un angolo stagnante — e la vetrina highland ha avuto finalmente la sua prima grande pulizia. Innescata da quello che avevo preso per una botrytis su una Dracula e ricondotta a una sola ventola che si era staccata in silenzio mesi fa."
 tags: ["build-log", "highland-terrarium", "maintenance", "nepenthes", "physan"]
 showReadingTime: true
 ---
@@ -18,7 +18,7 @@ Dietro la parete posteriore, sull'evaporatore, ci sono tre piccole ventole PWM c
 
 ## Svuotare tutto
 
-Per la prima volta in due anni la vetrina è stata svuotata completamente. Settanta piante circa — *Heliamphora*, *Sarracenia*, *Nepenthes*, lo strato denso di pleurothallidinae, le *Dracula* e *Restrepia* sospese — sul tavolo del soggiorno. Lo spruzzatore in primo piano contiene la soluzione di lavoro: **Physan-20 a 10 mL per 5 L d'acqua**, che è quanto uso per tutto ciò che riguarda la vetrina. Pareti, policarbonato, piastra dell'evaporatore in acciaio: tutto spruzzato e strofinato.
+Per la prima volta da quando è in funzione quattro anni fa, la vetrina è stata svuotata completamente. Settanta piante circa — *Heliamphora*, *Sarracenia*, *Nepenthes*, lo strato denso di pleurothallidinae, le *Dracula* e *Restrepia* sospese — sul tavolo del soggiorno. Lo spruzzatore in primo piano contiene la soluzione di lavoro: **Physan-20 a 10 mL per 5 L d'acqua**, che è quanto uso per tutto ciò che riguarda la vetrina. Pareti, policarbonato, piastra dell'evaporatore in acciaio: tutto spruzzato e strofinato.
 
 Buona parte della muffa nera sulle pareti, in realtà, è venuta via con sola acqua e una spugna — saprofita, il tipo che vive su polvere e condensa in un angolo stagnante, non un patogeno fogliare. Il Physan è stato per sicurezza; il vero rimedio è far tornare l'aria a circolare in quell'angolo.
 
