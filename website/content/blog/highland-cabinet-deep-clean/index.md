@@ -34,7 +34,7 @@ With the cabinet bare it took about ten minutes to swap the cable. New crimp, in
 
 The canalina — the condensate channel below the evaporator — is a thin aluminum fold suspended on fishing line at a precise 5° tilt toward the drainage pipe. Water from the back of the cold-plate runs down its length and drains by gravity through a PVC pipe to a tank under the cabinet. With everything out, it got scrubbed and the fishing line re-tensioned.
 
-{{< figure src="canalina.jpg" caption="The canalina — the aluminum fold across the top of the frame (camera looking up from below). Suspended on fishing line at 5° toward the drainage pipe; condensate runs off the back of the evaporator (the serpentine refrigerant-tube pattern pressed into the aluminum cooling plate, visible below) onto it, then by gravity through a PVC pipe to the tank under the cabinet." >}}
+{{< figure src="canalina.jpg" caption="The canalina — the aluminum fold across the bottom of the frame. Suspended on fishing line at 5° toward the drainage pipe; condensate runs off the back of the evaporator (the serpentine refrigerant-tube pattern pressed into the aluminum cooling plate, visible above) onto it, then by gravity through a PVC pipe to the tank under the cabinet." >}}
 
 While the plants were on the table, I repotted all the *Nepenthes* — *N. glabrata*, *pitopangii*, *tenuis*, *inermis* — and tied each climber up a thin wooden orchid stake with plastic zip ties. They've been getting tall enough to need it. The hanging *Dracula* and *Restrepia* moved into less stagnant positions; the corner that lost its fan no longer holds a hanger.
 
