@@ -1,63 +1,33 @@
 ---
 title: "Phalaenopsis sections Aphyllae & Parishianae"
-description: "Deciduous miniature phalaenopsis — what's here, what's ordered, and what's still hiding in Europe"
+description: "Deciduous miniature phalaenopsis"
 weight: 30
 tags: ["wishlist", "orchidaceae"]
 ---
 
-Deciduous and semi-deciduous miniature *Phalaenopsis* from the Himalayan foothills to northern Borneo. Sections Aphyllae (cold-tolerant, fully leafless in winter) and Parishianae (semi-deciduous SE Asian) are sometimes merged in modern treatments; I keep them separate because cultural requirements differ.
+Deciduous and semi-deciduous miniatures from the Himalayan foothills to northern Borneo. Christenson keeps Aphyllae (cold-tolerant, fully leafless in winter) and Parishianae (semi-deciduous SE Asian) separate; modern treatments often merge them.
 
-## Already in the collection
+## In the collection
 
-- **Section Aphyllae s.s.:** *P. wilsonii* (alive); *P. braceana* (lost)
-- **Section Parishianae:** *P. finleyi*, *P. gibbosa*, *P. lowii*, *P. parishii* — all alive
-- **Just arrived (April 2026):** *P. stobartiana* from Claessen Orchids — €32.65 plant + cold-pack shipping = €62 total
+- **Aphyllae:** *P. wilsonii* (alive); *P. braceana* (lost)
+- **Parishianae:** *P. finleyi*, *P. gibbosa*, *P. lowii*, *P. parishii*
+- *P. stobartiana* — Claessen Orchids, April 2026
 
-## Currlin — priority order
+## Currlin — primary order (€32–48)
 
-**Vendor:** Currlin Orchideen (Germany) — [currlin.com/en](https://www.currlin.com/en)
-**Plants total: €32–48 + shipping**
+[currlin.com/en](https://www.currlin.com/en) — cheapest per plant, flowering-size, mounted.
 
-| Species | € | Rationale |
+| Species | € | Note |
 |---|---|---|
-| *P. lobbii* | 16 | Obvious gap — showiest Parishianae, bold yellow-cream flowers with a marked lip; flowering size, mounted |
-| *P. honghenensis* | 16 | True section Aphyllae, fills the sectional gap left by *braceana*; Yunnan endemic, rarely offered |
-| *P. lobbii* f. *flava* × self *(optional)* | 16 | Yellow form — secondary, budget permitting |
+| *P. lobbii* | 16 | Showiest Parishianae |
+| *P. honghenensis* | 16 | True Aphyllae, fills the gap left by *braceana* |
+| *P. lobbii* f. *flava* × self | 16 | Optional, yellow form |
 
-**Why Currlin:** cheapest per plant (€16 versus €25–33 elsewhere), already flowering-size, mounted — his preferred culture for miniatures — and a single shipment saves repeated cold-pack fees.
+## Watching
 
-## Celandroni — watchlist (out of stock)
+- **Celandroni** (Pisa) — *P. braceana* (€21.81) and *P. appendiculata* (€25.45), both sold out as of April 2026.
+- **Orchibias** — *P. lobbii* var. Orange × sib (€29.95), opportunistic.
 
-**Vendor:** Giulio Celandroni Orchidee, Pisa — [celandroni.myshopify.com](https://celandroni.myshopify.com/en/collections/botaniche-phalaenopsis)
-**Status:** Both species listed but sold out as of 2026-04-10.
+## Still hunting in Europe
 
-| Species | € | Rationale |
-|---|---|---|
-| *P. braceana* | 21.81 | Replace the lost #335 — true section Aphyllae, well-shaped pink flowers, worth a second attempt |
-| *P. appendiculata* | 25.45 | Rare Bornean Parishianae, unlikely to find elsewhere in Europe |
-
-Italian vendor, cheap shipping to Genova — re-check after spring shows.
-
-## Orchibias — watchlist (out of stock)
-
-**Vendor:** Orchibias (orchidsforeurope.com) — Taiwan imports
-
-| Species | € | Rationale |
-|---|---|---|
-| *P. lobbii* var. Orange × sib | 29.95 | Unusual orange form; opportunistic buy only — flask-grown, slow to bloom |
-
-## Not currently available in Europe
-
-- ***P. taenialis*** — leafless habit with photosynthetic roots, genuinely rare in trade; Asian exporters or orchid shows.
-- ***P. malipoensis*** — recently described Yunnan/Vietnam species, almost never offered commercially.
-- ***P. minus***, ***P. hainanensis*** — occasionally from Asian specialists, not in any checked European vendor.
-
-## Other vendors checked (nothing in stock)
-
-- Schwerter Orchideenzucht — *P. lobbii* listed, availability unconfirmed.
-- Roellke Orchideen — *P. lobbii* and *P. stobartiana* listed, availability unconfirmed.
-- Claessen Orchids ([orchids-shop.com](https://orchids-shop.com)) — *P. stobartiana* only, already bought.
-
-## Taxonomy footnote
-
-Christenson keeps Aphyllae and Parishianae strictly separate — Aphyllae being the cold-tolerant Himalayan/Chinese deciduous group, Parishianae the semi-deciduous SE Asian group. Modern treatments often merge them. The intended scope here is the broader deciduous-miniature group, regardless of which classification wins.
+*P. taenialis*, *P. malipoensis*, *P. minus*, *P. hainanensis* — almost never offered commercially.
