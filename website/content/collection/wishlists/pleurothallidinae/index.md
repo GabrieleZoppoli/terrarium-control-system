@@ -19,28 +19,28 @@ Cabinet runs 12–24 °C. *Cold* = high Andean / NG highland 3,000+ m. *Cool* = 
 
 ## Ecuagenera Europe — primary
 
-Sint-Niklaas, Belgium · [ecuageneraeu.com](https://www.ecuageneraeu.com/). Deepest Pleurothallidinae catalog in the EU; weekly consolidated shipments. Wait for ≥6 plants before pulling the trigger to amortize the box fee.
+Sint-Niklaas, Belgium · [ecuagenera.com](https://ecuagenera.com/). Deepest Pleurothallidinae catalog in the EU; weekly consolidated shipments. Wait for ≥6 plants before pulling the trigger to amortize the box fee.
 
 | Species | Note |
 |---|---|
-| [*Lepanthes telipogoniflora*](https://www.ecuageneraeu.com/) | Flame red, flower larger than the plant — short-lived (2–3 yr in cultivation) |
-| [*Pabstiella mirabilis*](https://www.ecuageneraeu.com/) | Vivid red, Brazilian — may not stock; fall back to Schwerter or Roellke |
-| [*Pleurothallis allenii*](https://www.ecuageneraeu.com/) | Pink-red clusters, easy entry point |
-| [*Acianthera bidentata*](https://www.ecuageneraeu.com/) | Red-purple, lithophyte |
-| [*Restrepia striata*](https://www.ecuageneraeu.com/) | Orange-yellow striped |
-| [*Masdevallia ignea*](https://www.ecuageneraeu.com/) | Flame red; borderline mini at 10–12 cm — substitute *floribunda* or *herradurae* if size matters |
+| [*Lepanthes telipogoniflora*](https://ecuagenera.com/) | Flame red, flower larger than the plant — short-lived (2–3 yr in cultivation) |
+| [*Pabstiella mirabilis*](https://ecuagenera.com/) | Vivid red, Brazilian — may not stock; fall back to Schwerter or Roellke |
+| [*Pleurothallis allenii*](https://ecuagenera.com/) | Pink-red clusters, easy entry point |
+| [*Acianthera bidentata*](https://ecuagenera.com/) | Red-purple, lithophyte |
+| [*Restrepia striata*](https://ecuagenera.com/) | Orange-yellow striped |
+| [*Masdevallia ignea*](https://ecuagenera.com/) | Flame red; borderline mini at 10–12 cm — substitute *floribunda* or *herradurae* if size matters |
 
 ## Großräschener — NG miniatures
 
-Brandenburg, DE · [grossraeschener-orchideen.de](https://grossraeschener-orchideen.de/). Solid NG sect. *Pedilonum* / *Oxyglossum* run; you've already ordered *cuthbertsonii*, *cyanocentrum*, *jenkinsii*, *hellwigianum*, *Mediocalcar decoratum*, *B. thiurum* from them.
+Brandenburg, DE · [orchideenwlodarczyk.de](https://orchideenwlodarczyk.de/). Solid NG sect. *Pedilonum* / *Oxyglossum* run; you've already ordered *cuthbertsonii*, *cyanocentrum*, *jenkinsii*, *hellwigianum*, *Mediocalcar decoratum*, *B. thiurum* from them.
 
 | Species | Note |
 |---|---|
-| [*Dendrobium lawesii*](https://grossraeschener-orchideen.de/) | Hot pink-magenta, tubular clusters |
-| [*Dendrobium cuthbertsonii*](https://grossraeschener-orchideen.de/) (pink or bicolor) | Lost the red form — confirm placement before re-buying |
-| [*Dendrobium dichaeoides*](https://grossraeschener-orchideen.de/) | Violet, fills the violet end vs. existing sky-blue dendrobiums |
-| [*Cadetia taylori*](https://grossraeschener-orchideen.de/) | Pure white star — fall back to Claessen if not in stock |
-| [*Promenaea stapelioides*](https://grossraeschener-orchideen.de/) | Yellow + maroon, warmer-leaning |
+| [*Dendrobium lawesii*](https://orchideenwlodarczyk.de/) | Hot pink-magenta, tubular clusters |
+| [*Dendrobium cuthbertsonii*](https://orchideenwlodarczyk.de/) (pink or bicolor) | Lost the red form — confirm placement before re-buying |
+| [*Dendrobium dichaeoides*](https://orchideenwlodarczyk.de/) | Violet, fills the violet end vs. existing sky-blue dendrobiums |
+| [*Cadetia taylori*](https://orchideenwlodarczyk.de/) | Pure white star — fall back to Claessen if not in stock |
+| [*Promenaea stapelioides*](https://orchideenwlodarczyk.de/) | Yellow + maroon, warmer-leaning |
 
 ## Claessen — Aerangis + violet-blue Dendrobium
 
@@ -57,40 +57,40 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 
 | Species | Vendor | Note |
 |---|---|---|
-| [*L. pulchella*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Pink-red, more available than *manabina* / *lucifer* |
+| [*L. pulchella*](https://ecuagenera.com/) | Ecuagenera EU | Pink-red, more available than *manabina* / *lucifer* |
 | [*L. manabina*](https://ecuagenera.com) | Ecuagenera (Ecuador, CITES) | Crimson, regional endemic |
 | [*L. lucifer*](https://ecuagenera.com) | Ecuagenera (Ecuador, CITES) | Fiery red |
-| [*L. elegantula*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Coral pink |
-| [*L. saltonii*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Green-orange |
-| [*L. calodictyon*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Foliage is the show — reticulated red-net leaves |
-| [*L. gargoyla*](https://grossraeschener-orchideen.de/) | Großräschener | Yellow-orange, gargoyle-shaped |
-| [*L. tsubotae*](https://www.schwerter-orchideen.de/) | Schwerter | Periodic stock |
+| [*L. elegantula*](https://ecuagenera.com/) | Ecuagenera EU | Coral pink |
+| [*L. saltonii*](https://ecuagenera.com/) | Ecuagenera EU | Green-orange |
+| [*L. calodictyon*](https://ecuagenera.com/) | Ecuagenera EU | Foliage is the show — reticulated red-net leaves |
+| [*L. gargoyla*](https://orchideenwlodarczyk.de/) | Großräschener | Yellow-orange, gargoyle-shaped |
+| [*L. tsubotae*](https://schwerter-orchideenzucht.de/) | Schwerter | Periodic stock |
 
 ### Other Pleurothallidinae
 
 | Species | Vendor | Note |
 |---|---|---|
-| [*Stelis aprica*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Day-blooming, small leaves (5–8 cm) |
-| [*Masdevallia floribunda*](https://www.ecuageneraeu.com/) | Ecuagenera EU | True mini ~5 cm — alternative to *ignea* |
-| [*Masdevallia herradurae*](https://www.ecuageneraeu.com/) | Ecuagenera EU | True mini, dense flowering |
+| [*Stelis aprica*](https://ecuagenera.com/) | Ecuagenera EU | Day-blooming, small leaves (5–8 cm) |
+| [*Masdevallia floribunda*](https://ecuagenera.com/) | Ecuagenera EU | True mini ~5 cm — alternative to *ignea* |
+| [*Masdevallia herradurae*](https://ecuagenera.com/) | Ecuagenera EU | True mini, dense flowering |
 | [*Restrepia mendozae*](https://www.akerne-orchids.com/) | Akerne | Recently described, vivid colour |
-| [*Pleurothallis canaligera*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Andean small |
-| [*Masdevallia rolfeana*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Costa Rican white-violet |
-| [*Masdevallia menatoi*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Tiny purple Andean |
-| [*Brachionidium parvifolium*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Dusk-pollinated, demanding cold |
-| [*Echinosepala aspasicensis*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Sea-urchin-like flower |
-| [*Anathallis sclerophylla*](https://grossraeschener-orchideen.de/) | Großräschener | Easy mounter, modest flowers |
-| [*Trichosalpinx orbicularis*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Hat-shaped lip with airflow-driven motion |
+| [*Pleurothallis canaligera*](https://ecuagenera.com/) | Ecuagenera EU | Andean small |
+| [*Masdevallia rolfeana*](https://ecuagenera.com/) | Ecuagenera EU | Costa Rican white-violet |
+| [*Masdevallia menatoi*](https://ecuagenera.com/) | Ecuagenera EU | Tiny purple Andean |
+| [*Brachionidium parvifolium*](https://ecuagenera.com/) | Ecuagenera EU | Dusk-pollinated, demanding cold |
+| [*Echinosepala aspasicensis*](https://ecuagenera.com/) | Ecuagenera EU | Sea-urchin-like flower |
+| [*Anathallis sclerophylla*](https://orchideenwlodarczyk.de/) | Großräschener | Easy mounter, modest flowers |
+| [*Trichosalpinx orbicularis*](https://ecuagenera.com/) | Ecuagenera EU | Hat-shaped lip with airflow-driven motion |
 | *Andinia (Salpistele) brachypus* | Ecuagenera EU | Pendulous mini-micro |
 
 ### NG / Asian
 
 | Species | Vendor | Note |
 |---|---|---|
-| [*Dendrobium agathodaemonis*](https://grossraeschener-orchideen.de/) | Großräschener / Claessen | True blue-violet, top candidate for the mystery violet |
-| [*Dendrobium parvulum*](https://grossraeschener-orchideen.de/) | Großräschener | Fuchsia, alt candidate |
+| [*Dendrobium agathodaemonis*](https://orchideenwlodarczyk.de/) | Großräschener / Claessen | True blue-violet, top candidate for the mystery violet |
+| [*Dendrobium parvulum*](https://orchideenwlodarczyk.de/) | Großräschener | Fuchsia, alt candidate |
 | [*Dendrobium toressae*](https://www.currlin.com/en) | Currlin | Australian mini, cold-tolerant |
-| [*Mediocalcar uniflorum*](https://grossraeschener-orchideen.de/) | Großräschener | Red-yellow lantern |
+| [*Mediocalcar uniflorum*](https://orchideenwlodarczyk.de/) | Großräschener | Red-yellow lantern |
 | [*Eria pannea*](https://www.currlin.com/en) | Currlin | Silvery NG mini, foliage feature |
 | [*Bulbophyllum nipondhii*](https://www.orchidsandmore.de) | Orchids & more | Thai mid-elevation |
 | [*Bulbophyllum frostii*](https://www.orchidsandmore.de) | Orchids & more | Vietnam mid-elevation, yellow-and-maroon "shoe" |
@@ -110,7 +110,7 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 | Species | Vendor | Note |
 |---|---|---|
 | [*Hofmeisterella eumicroscopica*](https://ecuagenera.com) | Ecuagenera (Ecuador) | Genuine micro |
-| [*Telipogon ampliflorus*](https://www.ecuageneraeu.com/) | Ecuagenera EU | Yellow-purple "fly", demanding cold |
+| [*Telipogon ampliflorus*](https://ecuagenera.com/) | Ecuagenera EU | Yellow-purple "fly", demanding cold |
 
 ### Brazilian / Atlantic forest
 
@@ -118,24 +118,24 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 |---|---|---|
 | [*Capanemia superflua*](https://celandroni.myshopify.com) | Celandroni | Tiny white starry, dense clusters |
 | [*Constantia cipoensis*](https://www.roellke-orchideen.de/) | Roellke | Pendulous wax, rupicolous |
-| [*Sophronitis cernua*](https://loscrignodinebbia.it/) | Lo Scrigno di Nebbia | Bright orange, distinct from existing *brevipedunculata* |
+| [*Sophronitis cernua*](https://loscrignodinebbia.com/) | Lo Scrigno di Nebbia | Bright orange, distinct from existing *brevipedunculata* |
 
 ## Vendors
 
 | Vendor | URL |
 |---|---|
-| Ecuagenera Europe (Belgium) | [ecuageneraeu.com](https://www.ecuageneraeu.com/) |
+| Ecuagenera Europe (Belgium) | [ecuagenera.com](https://ecuagenera.com/) |
 | Ecuagenera (Ecuador HQ, CITES) | [ecuagenera.com](https://ecuagenera.com) |
-| Großräschener Orchideen (DE) | [grossraeschener-orchideen.de](https://grossraeschener-orchideen.de/) |
+| Großräschener Orchideen (DE) | [orchideenwlodarczyk.de](https://orchideenwlodarczyk.de/) |
 | Claessen Orchids & Plants (BE) | [orchids-shop.com](https://orchids-shop.com) |
 | Currlin Orchideen (DE) | [currlin.com/en](https://www.currlin.com/en) |
 | Orchids & more (DE) | [orchidsandmore.de](https://www.orchidsandmore.de) |
-| Schwerter Orchideen (DE) | [schwerter-orchideen.de](https://www.schwerter-orchideen.de/) |
+| Schwerter Orchideen (DE) | [schwerter-orchideenzucht.de](https://schwerter-orchideenzucht.de/) |
 | Roellke Orchideen (DE) | [roellke-orchideen.de](https://www.roellke-orchideen.de/) |
 | Akerne Orchids (BE) | [akerne-orchids.com](https://www.akerne-orchids.com/) |
-| Quinta Camallera (ES) | [quintacamallera.com](https://www.quintacamallera.com/) |
+| Quinta Camallera (ES) | (URL unconfirmed — vendor name as plain text) |
 | Celandroni Orchidee (IT) | [celandroni.myshopify.com](https://celandroni.myshopify.com) |
-| Lo Scrigno di Nebbia (IT) | [loscrignodinebbia.it](https://loscrignodinebbia.it/) |
+| Lo Scrigno di Nebbia (IT) | [loscrignodinebbia.com](https://loscrignodinebbia.com/) |
 
 ## Cultural notes
 
