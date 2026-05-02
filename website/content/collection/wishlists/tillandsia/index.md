@@ -29,14 +29,14 @@ Spain · [plantabrutt.eu/es/40-tillandsia](https://www.plantabrutt.eu/es/40-till
 
 | Species | € |
 |---|---|
-| [*T. tectorum*](https://www.plantabrutt.eu/buscar?controller=search&s=tectorum) caulescent | 39.90 |
-| [*T. heteromorpha*](https://www.plantabrutt.eu/buscar?controller=search&s=heteromorpha) 'Rope Type' | 39.90 |
-| [*T. ehlersiana*](https://www.plantabrutt.eu/buscar?controller=search&s=ehlersiana) (S / XL / clump) | 10.50 / 39.90 / 19.90 |
-| [*T. welzii*](https://www.plantabrutt.eu/buscar?controller=search&s=welzii) | 69.90 |
-| [*T. trigalensis*](https://www.plantabrutt.eu/buscar?controller=search&s=trigalensis) | 69.91 |
-| [*T. edithae*](https://www.plantabrutt.eu/buscar?controller=search&s=edithae) silver L | 15.90 |
-| [*T. edithae*](https://www.plantabrutt.eu/buscar?controller=search&s=edithae) green S/M | 14.50 / 16.90 |
-| [*T. jucunda*](https://www.plantabrutt.eu/buscar?controller=search&s=jucunda) | 8.90 |
+| [*T. tectorum*](https://www.plantabrutt.eu/es/40-tillandsia) caulescent | 39.90 |
+| [*T. heteromorpha*](https://www.plantabrutt.eu/es/40-tillandsia) 'Rope Type' | 39.90 |
+| [*T. ehlersiana*](https://www.plantabrutt.eu/es/40-tillandsia) (S / XL / clump) | 10.50 / 39.90 / 19.90 |
+| [*T. welzii*](https://www.plantabrutt.eu/es/40-tillandsia) | 69.90 |
+| [*T. trigalensis*](https://www.plantabrutt.eu/es/40-tillandsia) | 69.91 |
+| [*T. edithae*](https://www.plantabrutt.eu/es/40-tillandsia) silver L | 15.90 |
+| [*T. edithae*](https://www.plantabrutt.eu/es/40-tillandsia) green S/M | 14.50 / 16.90 |
+| [*T. jucunda*](https://www.plantabrutt.eu/es/40-tillandsia) | 8.90 |
 
 ## Replacements
 

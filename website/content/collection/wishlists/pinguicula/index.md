@@ -14,10 +14,10 @@ Seven Mexican butterworts, picked for color and form gaps in the current collect
 | Species | € | Note |
 |---|---|---|
 | *P.* BCP Golden Eye | 12 | Yellow |
-| [*P. cyclosecta*](https://heldros.com/?s=cyclosecta) | 8 | Dark violet — replaces #351 |
-| [*P. emarginata*](https://heldros.com/?s=emarginata) form A | 8 | Veined violet |
-| [*P. debbertiana*](https://heldros.com/?s=debbertiana) | 10 | Violet-pink miniature |
-| [*P. gypsicola*](https://heldros.com/?s=gypsicola) BG Bonn | 11 | Thread-leaf rosette |
+| [*P. cyclosecta*](https://heldros.com/) | 8 | Dark violet — replaces #351 |
+| [*P. emarginata*](https://heldros.com/) form A | 8 | Veined violet |
+| [*P. debbertiana*](https://heldros.com/) | 10 | Violet-pink miniature |
+| [*P. gypsicola*](https://heldros.com/) BG Bonn | 11 | Thread-leaf rosette |
 
 ## Diflora (€26)
 
@@ -25,7 +25,7 @@ Seven Mexican butterworts, picked for color and form gaps in the current collect
 
 | Species | € | Note |
 |---|---|---|
-| [*P. moctezumae*](https://diflora.it/?s=moctezumae) | 10 | Largest flowers in the genus |
-| [*P. medusina*](https://diflora.it/?s=medusina) | 16 | Tentacle rosette — replaces #186 |
+| [*P. moctezumae*](https://diflora.it/) | 10 | Largest flowers in the genus |
+| [*P. medusina*](https://diflora.it/) | 16 | Tentacle rosette — replaces #186 |
 
 BCP (bestcarnivorousplants.net) may reopen May 2026 — worth checking for *elizabethiae*, *pilosa*, *robertiana*, *nivalis*, *zamudioana*.
