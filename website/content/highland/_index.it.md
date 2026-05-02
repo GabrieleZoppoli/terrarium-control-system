@@ -26,7 +26,7 @@ Una camera acrilica isolata da 1,5 × 0,6 × 1,1 m, qui a Genova, che riproduce 
 
 {{< highland-live >}}
 
-<p class="highland-envelope">In funzione dal 2023 · 32 segnali registrati ogni 60 s · intervalli storici 13,5 – 24,3 °C e 75 – 98 % UR.</p>
+<p class="highland-envelope">In funzione dal 2022 · 32 segnali registrati ogni 60 s · intervalli storici 13,5 – 24,3 °C e 75 – 98 % UR.</p>
 
 ## Dentro al terrario
 

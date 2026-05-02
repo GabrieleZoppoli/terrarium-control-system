@@ -26,7 +26,7 @@ A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulate
 
 {{< highland-live >}}
 
-<p class="highland-envelope">Operational since 2023 · 32 signals logged every 60 s · historical envelope 13.5 – 24.3 °C and 75 – 98 % RH.</p>
+<p class="highland-envelope">Operational since 2022 · 32 signals logged every 60 s · historical envelope 13.5 – 24.3 °C and 75 – 98 % RH.</p>
 
 ## Inside the cabinet
 

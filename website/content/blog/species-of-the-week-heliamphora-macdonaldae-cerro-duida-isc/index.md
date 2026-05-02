@@ -54,7 +54,7 @@ POWO has not followed. As of this writing it still lists *macdonaldae* as a hete
 
 Andreas Wistuba (b. 1967, based in Maselheim, Germany; previously Mannheim) has authored or co-authored more than half of all currently recognised *Heliamphora* species.[^wistubawiki] He's one of four authors on the 2011 monograph that put *macdonaldae* back on the map. He runs the nursery this plant came from.
 
-Mine arrived January 2023 as an adult-pitcher young plant from Wistuba's Cerro Duida stock. It went into the current highland cabinet, which has been online since 2023. The cabinet replaced an aquarium-chiller-cooled tank that ran from 2016 — the *pulchella*, the *minor* clones (all but var. *pilosa*) and the *purpurascens* × *ionasii* migrated across from that older rig and are now in their tenth year here.
+Mine arrived January 2023 as an adult-pitcher young plant from Wistuba's Cerro Duida stock. It went into the current highland cabinet, which has been online since 2022. The cabinet replaced an aquarium-chiller-cooled tank that ran from 2016 — the *pulchella*, the *minor* clones (all but var. *pilosa*) and the *purpurascens* × *ionasii* migrated across from that older rig and are now in their tenth year here.
 
 ## Growing it
 
