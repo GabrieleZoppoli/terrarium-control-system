@@ -19,9 +19,9 @@ Deciduous and semi-deciduous miniatures from the Himalayan foothills to northern
 
 | Species | € | Note |
 |---|---|---|
-| [*P. lobbii*](https://www.currlin.com/en) | 16 | Showiest Parishianae |
-| [*P. honghenensis*](https://www.currlin.com/en) | 16 | True Aphyllae, fills the gap left by *braceana* |
-| [*P. lobbii*](https://www.currlin.com/en) f. *flava* × self | 16 | Optional, yellow form |
+| [*P. lobbii*](https://www.currlin.com/en/?s=lobbii) | 16 | Showiest Parishianae |
+| [*P. honghenensis*](https://www.currlin.com/en/?s=honghenensis) | 16 | True Aphyllae, fills the gap left by *braceana* |
+| [*P. lobbii*](https://www.currlin.com/en/?s=lobbii) f. *flava* × self | 16 | Optional, yellow form |
 
 ## Watching
 
