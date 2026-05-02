@@ -23,12 +23,12 @@ Sint-Niklaas, Belgium · [ecuageneraeu.com](https://www.ecuageneraeu.com/). Deep
 
 | Species | Note |
 |---|---|
-| *Lepanthes telipogoniflora* | Flame red, flower larger than the plant — short-lived (2–3 yr in cultivation) |
-| *Pabstiella mirabilis* | Vivid red, Brazilian — may not stock; fall back to Schwerter or Roellke |
-| *Pleurothallis allenii* | Pink-red clusters, easy entry point |
-| *Acianthera bidentata* | Red-purple, lithophyte |
-| *Restrepia striata* | Orange-yellow striped |
-| *Masdevallia ignea* | Flame red; borderline mini at 10–12 cm — substitute *floribunda* or *herradurae* if size matters |
+| [*Lepanthes telipogoniflora*](https://powo.science.kew.org/?q=Lepanthes+telipogoniflora) | Flame red, flower larger than the plant — short-lived (2–3 yr in cultivation) |
+| [*Pabstiella mirabilis*](https://powo.science.kew.org/?q=Pabstiella+mirabilis) | Vivid red, Brazilian — may not stock; fall back to Schwerter or Roellke |
+| [*Pleurothallis allenii*](https://powo.science.kew.org/?q=Pleurothallis+allenii) | Pink-red clusters, easy entry point |
+| [*Acianthera bidentata*](https://powo.science.kew.org/?q=Acianthera+bidentata) | Red-purple, lithophyte |
+| [*Restrepia striata*](https://powo.science.kew.org/?q=Restrepia+striata) | Orange-yellow striped |
+| [*Masdevallia ignea*](https://powo.science.kew.org/?q=Masdevallia+ignea) | Flame red; borderline mini at 10–12 cm — substitute *floribunda* or *herradurae* if size matters |
 
 ## Großräschener — NG miniatures
 
@@ -36,11 +36,11 @@ Brandenburg, DE · [grossraeschener-orchideen.de](https://grossraeschener-orchid
 
 | Species | Note |
 |---|---|
-| *Dendrobium lawesii* | Hot pink-magenta, tubular clusters |
-| *Dendrobium cuthbertsonii* (pink or bicolor) | Lost the red form — confirm placement before re-buying |
-| *Dendrobium dichaeoides* | Violet, fills the violet end vs. existing sky-blue dendrobiums |
-| *Cadetia taylori* | Pure white star — fall back to Claessen if not in stock |
-| *Promenaea stapelioides* | Yellow + maroon, warmer-leaning |
+| [*Dendrobium lawesii*](https://powo.science.kew.org/?q=Dendrobium+lawesii) | Hot pink-magenta, tubular clusters |
+| [*Dendrobium cuthbertsonii*](https://powo.science.kew.org/?q=Dendrobium+cuthbertsonii) (pink or bicolor) | Lost the red form — confirm placement before re-buying |
+| [*Dendrobium dichaeoides*](https://powo.science.kew.org/?q=Dendrobium+dichaeoides) | Violet, fills the violet end vs. existing sky-blue dendrobiums |
+| [*Cadetia taylori*](https://powo.science.kew.org/?q=Cadetia+taylori) | Pure white star — fall back to Claessen if not in stock |
+| [*Promenaea stapelioides*](https://powo.science.kew.org/?q=Promenaea+stapelioides) | Yellow + maroon, warmer-leaning |
 
 ## Claessen — Aerangis + violet-blue Dendrobium
 
@@ -48,8 +48,8 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 
 | Species | Note |
 |---|---|
-| *Dendrobium violaceum* / *parvulum* / *agathodaemonis* | Violet-blue NG miniature; ID unclear — confirm species on next visit |
-| *Aerangis hyaloides* | Crystal-translucent white, Madagascar; high humidity + airflow simultaneously |
+| [*Dendrobium violaceum*](https://powo.science.kew.org/?q=Dendrobium+violaceum) / *parvulum* / *agathodaemonis* | Violet-blue NG miniature; ID unclear — confirm species on next visit |
+| [*Aerangis hyaloides*](https://powo.science.kew.org/?q=Aerangis+hyaloides) | Crystal-translucent white, Madagascar; high humidity + airflow simultaneously |
 
 ## Watchlist
 
@@ -57,68 +57,68 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 
 | Species | Vendor | Note |
 |---|---|---|
-| *L. pulchella* | Ecuagenera EU | Pink-red, more available than *manabina* / *lucifer* |
-| *L. manabina* | Ecuagenera (Ecuador, CITES) | Crimson, regional endemic |
-| *L. lucifer* | Ecuagenera (Ecuador, CITES) | Fiery red |
-| *L. elegantula* | Ecuagenera EU | Coral pink |
-| *L. saltonii* | Ecuagenera EU | Green-orange |
-| *L. calodictyon* | Ecuagenera EU | Foliage is the show — reticulated red-net leaves |
-| *L. gargoyla* | Großräschener | Yellow-orange, gargoyle-shaped |
-| *L. tsubotae* | Schwerter | Periodic stock |
+| [*L. pulchella*](https://powo.science.kew.org/?q=Lepanthes+pulchella) | Ecuagenera EU | Pink-red, more available than *manabina* / *lucifer* |
+| [*L. manabina*](https://powo.science.kew.org/?q=Lepanthes+manabina) | Ecuagenera (Ecuador, CITES) | Crimson, regional endemic |
+| [*L. lucifer*](https://powo.science.kew.org/?q=Lepanthes+lucifer) | Ecuagenera (Ecuador, CITES) | Fiery red |
+| [*L. elegantula*](https://powo.science.kew.org/?q=Lepanthes+elegantula) | Ecuagenera EU | Coral pink |
+| [*L. saltonii*](https://powo.science.kew.org/?q=Lepanthes+saltonii) | Ecuagenera EU | Green-orange |
+| [*L. calodictyon*](https://powo.science.kew.org/?q=Lepanthes+calodictyon) | Ecuagenera EU | Foliage is the show — reticulated red-net leaves |
+| [*L. gargoyla*](https://powo.science.kew.org/?q=Lepanthes+gargoyla) | Großräschener | Yellow-orange, gargoyle-shaped |
+| [*L. tsubotae*](https://powo.science.kew.org/?q=Lepanthes+tsubotae) | Schwerter | Periodic stock |
 
 ### Other Pleurothallidinae
 
 | Species | Vendor | Note |
 |---|---|---|
-| *Stelis aprica* | Ecuagenera EU | Day-blooming, small leaves (5–8 cm) |
-| *Masdevallia floribunda* | Ecuagenera EU | True mini ~5 cm — alternative to *ignea* |
-| *Masdevallia herradurae* | Ecuagenera EU | True mini, dense flowering |
-| *Restrepia mendozae* | Akerne | Recently described, vivid colour |
-| *Pleurothallis canaligera* | Ecuagenera EU | Andean small |
-| *Masdevallia rolfeana* | Ecuagenera EU | Costa Rican white-violet |
-| *Masdevallia menatoi* | Ecuagenera EU | Tiny purple Andean |
-| *Brachionidium parvifolium* | Ecuagenera EU | Dusk-pollinated, demanding cold |
-| *Echinosepala aspasicensis* | Ecuagenera EU | Sea-urchin-like flower |
-| *Anathallis sclerophylla* | Großräschener | Easy mounter, modest flowers |
-| *Trichosalpinx orbicularis* | Ecuagenera EU | Hat-shaped lip with airflow-driven motion |
+| [*Stelis aprica*](https://powo.science.kew.org/?q=Stelis+aprica) | Ecuagenera EU | Day-blooming, small leaves (5–8 cm) |
+| [*Masdevallia floribunda*](https://powo.science.kew.org/?q=Masdevallia+floribunda) | Ecuagenera EU | True mini ~5 cm — alternative to *ignea* |
+| [*Masdevallia herradurae*](https://powo.science.kew.org/?q=Masdevallia+herradurae) | Ecuagenera EU | True mini, dense flowering |
+| [*Restrepia mendozae*](https://powo.science.kew.org/?q=Restrepia+mendozae) | Akerne | Recently described, vivid colour |
+| [*Pleurothallis canaligera*](https://powo.science.kew.org/?q=Pleurothallis+canaligera) | Ecuagenera EU | Andean small |
+| [*Masdevallia rolfeana*](https://powo.science.kew.org/?q=Masdevallia+rolfeana) | Ecuagenera EU | Costa Rican white-violet |
+| [*Masdevallia menatoi*](https://powo.science.kew.org/?q=Masdevallia+menatoi) | Ecuagenera EU | Tiny purple Andean |
+| [*Brachionidium parvifolium*](https://powo.science.kew.org/?q=Brachionidium+parvifolium) | Ecuagenera EU | Dusk-pollinated, demanding cold |
+| [*Echinosepala aspasicensis*](https://powo.science.kew.org/?q=Echinosepala+aspasicensis) | Ecuagenera EU | Sea-urchin-like flower |
+| [*Anathallis sclerophylla*](https://powo.science.kew.org/?q=Anathallis+sclerophylla) | Großräschener | Easy mounter, modest flowers |
+| [*Trichosalpinx orbicularis*](https://powo.science.kew.org/?q=Trichosalpinx+orbicularis) | Ecuagenera EU | Hat-shaped lip with airflow-driven motion |
 | *Andinia (Salpistele) brachypus* | Ecuagenera EU | Pendulous mini-micro |
 
 ### NG / Asian
 
 | Species | Vendor | Note |
 |---|---|---|
-| *Dendrobium agathodaemonis* | Großräschener / Claessen | True blue-violet, top candidate for the mystery violet |
-| *Dendrobium parvulum* | Großräschener | Fuchsia, alt candidate |
-| *Dendrobium toressae* | Currlin | Australian mini, cold-tolerant |
-| *Mediocalcar uniflorum* | Großräschener | Red-yellow lantern |
-| *Eria pannea* | Currlin | Silvery NG mini, foliage feature |
-| *Bulbophyllum nipondhii* | Orchids & more | Thai mid-elevation |
-| *Bulbophyllum frostii* | Orchids & more | Vietnam mid-elevation, yellow-and-maroon "shoe" |
-| *Bulbophyllum corolliferum* | Orchids & more / Currlin | True mini SE Asian |
+| [*Dendrobium agathodaemonis*](https://powo.science.kew.org/?q=Dendrobium+agathodaemonis) | Großräschener / Claessen | True blue-violet, top candidate for the mystery violet |
+| [*Dendrobium parvulum*](https://powo.science.kew.org/?q=Dendrobium+parvulum) | Großräschener | Fuchsia, alt candidate |
+| [*Dendrobium toressae*](https://powo.science.kew.org/?q=Dendrobium+toressae) | Currlin | Australian mini, cold-tolerant |
+| [*Mediocalcar uniflorum*](https://powo.science.kew.org/?q=Mediocalcar+uniflorum) | Großräschener | Red-yellow lantern |
+| [*Eria pannea*](https://powo.science.kew.org/?q=Eria+pannea) | Currlin | Silvery NG mini, foliage feature |
+| [*Bulbophyllum nipondhii*](https://powo.science.kew.org/?q=Bulbophyllum+nipondhii) | Orchids & more | Thai mid-elevation |
+| [*Bulbophyllum frostii*](https://powo.science.kew.org/?q=Bulbophyllum+frostii) | Orchids & more | Vietnam mid-elevation, yellow-and-maroon "shoe" |
+| [*Bulbophyllum corolliferum*](https://powo.science.kew.org/?q=Bulbophyllum+corolliferum) | Orchids & more / Currlin | True mini SE Asian |
 
 ### African / Madagascar
 
 | Species | Vendor | Note |
 |---|---|---|
-| *Aerangis fastuosa* | Claessen / Currlin | Jasmine scent, high-altitude Madagascar |
-| *Aerangis macrocentra* | Currlin | Long-spurred white |
-| *Aerangis curnowiana* | Claessen | Micro-Aerangis, near-leafless |
-| *Angraecum compactum* | Currlin | Tiny high-altitude Madagascan |
+| [*Aerangis fastuosa*](https://powo.science.kew.org/?q=Aerangis+fastuosa) | Claessen / Currlin | Jasmine scent, high-altitude Madagascar |
+| [*Aerangis macrocentra*](https://powo.science.kew.org/?q=Aerangis+macrocentra) | Currlin | Long-spurred white |
+| [*Aerangis curnowiana*](https://powo.science.kew.org/?q=Aerangis+curnowiana) | Claessen | Micro-Aerangis, near-leafless |
+| [*Angraecum compactum*](https://powo.science.kew.org/?q=Angraecum+compactum) | Currlin | Tiny high-altitude Madagascan |
 
 ### Mexican / Central American
 
 | Species | Vendor | Note |
 |---|---|---|
-| *Hofmeisterella eumicroscopica* | Ecuagenera (Ecuador) | Genuine micro |
-| *Telipogon ampliflorus* | Ecuagenera EU | Yellow-purple "fly", demanding cold |
+| [*Hofmeisterella eumicroscopica*](https://powo.science.kew.org/?q=Hofmeisterella+eumicroscopica) | Ecuagenera (Ecuador) | Genuine micro |
+| [*Telipogon ampliflorus*](https://powo.science.kew.org/?q=Telipogon+ampliflorus) | Ecuagenera EU | Yellow-purple "fly", demanding cold |
 
 ### Brazilian / Atlantic forest
 
 | Species | Vendor | Note |
 |---|---|---|
-| *Capanemia superflua* | Celandroni | Tiny white starry, dense clusters |
-| *Constantia cipoensis* | Roellke | Pendulous wax, rupicolous |
-| *Sophronitis cernua* | Lo Scrigno di Nebbia | Bright orange, distinct from existing *brevipedunculata* |
+| [*Capanemia superflua*](https://powo.science.kew.org/?q=Capanemia+superflua) | Celandroni | Tiny white starry, dense clusters |
+| [*Constantia cipoensis*](https://powo.science.kew.org/?q=Constantia+cipoensis) | Roellke | Pendulous wax, rupicolous |
+| [*Sophronitis cernua*](https://powo.science.kew.org/?q=Sophronitis+cernua) | Lo Scrigno di Nebbia | Bright orange, distinct from existing *brevipedunculata* |
 
 ## Vendors
 
