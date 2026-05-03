@@ -28,7 +28,7 @@ These 16 measurements are written by the centralized Data Logger function node o
 | 2 | `local_humidity` | `value` | float | % RH | SHT35 via ESP8266/MQTT |
 | 3 | `vpd` | `value` | float | kPa | Calculated (Magnus formula) |
 | 4 | `target_temperature_computed` | `value` | float | °C | Weather average (clamped 12--24°C) |
-| 5 | `target_humidity_computed` | `value` | float | % RH | Weather average (clamped 70--90%) |
+| 5 | `target_humidity_computed` | `value` | float | % RH | Weather average (clamped 75--95% as of 2026-05-02) |
 | 6 | `difference_temperature` | `value` | float | °C | target − actual |
 | 7 | `difference_humidity` | `value` | float | % | target − actual |
 | 8 | `fan_speed` | `value` | float | PWM (0–255) | PID controller output |

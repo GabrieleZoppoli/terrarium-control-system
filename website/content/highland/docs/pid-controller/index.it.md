@@ -47,7 +47,7 @@ fan_speed = BASE_SPEED + P + I + D
 | **Kd** | 10 | Guadagno derivativo — smorza le oscillazioni, reagisce al tasso di variazione |
 | **BASE_SPEED** | 50 | Velocità di riposo con errore zero (~20 % duty cycle) |
 | **MIN_SPEED** | 40 | PWM minimo ventola (~16 %) — mantiene circolazione costante |
-| **MAX_SPEED** | 230/255 | Cap per fascia oraria: 255 (04:00–07:00 "blast" mattutino), poi cap feriali/weekend (vedi sotto) |
+| **MAX_SPEED** | 255 | Tetto uniforme — fino al 2026-04-30 era variabile per fascia oraria (180/230/255), ora rimosso |
 
 Questi guadagni sono memorizzati nel flow context (persistono fra restart di Node-RED) e modificabili a runtime dal text input della Dashboard Node-RED (formato: `Kp,Ki,Kd`).
 
@@ -132,13 +132,10 @@ La variazione massima è limitata a 20 PWM per ciclo, anche per proteggere il li
 ```
 raw_output = BASE_SPEED + P + I + D
 fan_speed  = clamp(round(raw_output), MIN_SPEED, MAX_SPEED)
-           = clamp(round(raw_output), 40, MAX_SPEED)
-
-Schedule MAX_SPEED:
-  04:00–07:00 (tutti i giorni):  255  (blast mattutino di umidità)
-  Feriale dopo le 07:00:          06:30–08:00 → 180, 08:00–17:00 → 255, altrimenti → 230
-  Weekend dopo le 07:00:          07:00–10:00 → 180, 10:00–17:00 → 255, altrimenti → 230
+           = clamp(round(raw_output), 40, 255)
 ```
+
+`MAX_SPEED` è uniforme a 255 (dal 2026-04-30 — i precedenti cap orari per ore di silenzio a 180/230 sono stati rimossi perché non cambiavano in modo significativo la dinamica dell'umidità). Anche l'esperimento A/B mattutino che forzava la velocità ventola a 75 o 255 in base alla parità del giorno dell'anno è stato rimosso (2026-05-03) dopo 13 giorni di dati che mostravano un effetto del trattamento entro il rumore (≤0,5 %, p>0,9).
 
 La velocità ventola è applicata contemporaneamente alla ventola outlet (pin 45) e alla ventola impeller (pin 46) tramite comandi seriali (`P45,<valore>` e `P46,<valore>`). La ventola evaporatore (pin 44) e quella di circolazione (pin 12) operano indipendentemente con controllo a isteresi basato sul compressore.
 
@@ -172,7 +169,7 @@ Nota: l'esperimento A/B notturno è sospeso — Night Mode produce sempre 0 fra 
 | Sul setpoint | 0 | 0,15 | 0 | ~0 | 0 | 50 | 50 (~20 %) |
 | Leggermente umido (+1 % UR) | +1 | 0,15 | +7,5 | ~+3 | ~0 | 60 | 60 (~24 %) |
 | Umido moderato (+3 % UR) | +3 | 0,76 | +114 | ~+10 | ~+5 | 179 | 179 (~70 %) |
-| Molto umido (+5 % UR) | +5 | 1,0 | +250 | ~+15 | ~+8 | 230 | 230 (MAX) |
+| Molto umido (+5 % UR) | +5 | 1,0 | +250 | ~+15 | ~+8 | 255 | 255 (MAX) |
 | Leggermente secco (−1 % UR) | −1 | 0,15 | −7,5 | ~−3 | ~0 | 40 | 40 (MIN) |
 | Salita rapida di umidità | +3, in salita | 0,76 | +114 | ~+8 | +16 | 188 | 188 (~74 %) |
 

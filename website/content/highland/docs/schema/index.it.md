@@ -28,7 +28,7 @@ Queste 16 misure sono scritte dal function node Data Logger centralizzato nel ta
 | 2 | `local_humidity` | `value` | float | % UR | SHT35 via ESP8266/MQTT |
 | 3 | `vpd` | `value` | float | kPa | Calcolato (formula di Magnus) |
 | 4 | `target_temperature_computed` | `value` | float | °C | Media meteo (limitata a 12–24 °C) |
-| 5 | `target_humidity_computed` | `value` | float | % UR | Media meteo (limitata a 70–90 %) |
+| 5 | `target_humidity_computed` | `value` | float | % UR | Media meteo (limitata a 75–95 % dal 2026-05-02) |
 | 6 | `difference_temperature` | `value` | float | °C | target − misurata |
 | 7 | `difference_humidity` | `value` | float | % | target − misurata |
 | 8 | `fan_speed` | `value` | float | PWM (0–255) | Output del controllore PID |

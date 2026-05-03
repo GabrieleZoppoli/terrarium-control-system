@@ -47,7 +47,7 @@ fan_speed = BASE_SPEED + P + I + D
 | **Kd** | 10 | Derivative gain — dampens oscillation, reacts to rate of change |
 | **BASE_SPEED** | 50 | Resting fan speed at zero error (~20% duty cycle) |
 | **MIN_SPEED** | 40 | Minimum fan PWM (~16%) — ensures continuous air circulation |
-| **MAX_SPEED** | 230/255 | Time-of-day cap: 255 (04:00–07:00 morning blast), then weekday/weekend caps (see below) |
+| **MAX_SPEED** | 255 | Uniform fan-speed ceiling — was time-of-day-varying (180/230/255) until 2026-04-30, when noise-window caps were removed |
 
 These gains are stored in flow context (persists across Node-RED restarts) and are adjustable at runtime via the Node-RED Dashboard UI text input (format: `Kp,Ki,Kd`).
 
@@ -131,13 +131,10 @@ The maximum change is capped at 20 PWM per cycle to protect the serial communica
 ```
 raw_output = BASE_SPEED + P + I + D
 fan_speed  = clamp(round(raw_output), MIN_SPEED, MAX_SPEED)
-           = clamp(round(raw_output), 40, MAX_SPEED)
-
-MAX_SPEED schedule:
-  04:00–07:00 (all days):  255  (morning humidity blast)
-  Weekday after 07:00:     06:30–08:00 → 180, 08:00–17:00 → 255, else → 230
-  Weekend after 07:00:     07:00–10:00 → 180, 10:00–17:00 → 255, else → 230
+           = clamp(round(raw_output), 40, 255)
 ```
+
+`MAX_SPEED` is uniform at 255 (since 2026-04-30 — earlier time-of-day quiet-hour caps at 180/230 were removed because the cabinet ran fans during the day and they didn't materially change humidity dynamics). The morning A/B experiment that briefly forced fan speed to 75 or 255 by day-of-year parity was also removed (2026-05-03) after 13 days of data showed the treatment effect was within noise (≤0.5%, p>0.9).
 
 The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) simultaneously via serial commands (`P45,<value>` and `P46,<value>`). The evaporator fan (pin 44) and circulation fan (pin 12) operate independently based on compressor hysteresis control.
 
@@ -171,7 +168,7 @@ Note: The A/B night experiment is suspended — Night Mode always outputs 0 duri
 | At setpoint | 0 | 0.15 | 0 | ~0 | 0 | 50 | 50 (~20%) |
 | Slightly humid (+1% RH) | +1 | 0.15 | +7.5 | ~+3 | ~0 | 60 | 60 (~24%) |
 | Moderately humid (+3% RH) | +3 | 0.76 | +114 | ~+10 | ~+5 | 179 | 179 (~70%) |
-| Very humid (+5% RH) | +5 | 1.0 | +250 | ~+15 | ~+8 | 230 | 230 (MAX) |
+| Very humid (+5% RH) | +5 | 1.0 | +250 | ~+15 | ~+8 | 255 | 255 (MAX) |
 | Slightly dry (−1% RH) | −1 | 0.15 | −7.5 | ~−3 | ~0 | 40 | 40 (MIN) |
 | Rapid humidity rise | +3, rising | 0.76 | +114 | ~+8 | +16 | 188 | 188 (~74%) |
 
