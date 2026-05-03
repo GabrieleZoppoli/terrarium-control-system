@@ -13,9 +13,9 @@ Cabinet runs 12–24 °C. *Cold* = high Andean / NG highland 3,000+ m. *Cool* = 
 
 - **Pleurothallidinae:** Dracula (6 alive), Masdevallia (5 alive — *decumana*, *xanthina red*, *lucernula*, *Devil's Heart*, *caudata* 'Gigi'), Restrepia (3: *vasquezii*, *sanguinea*, *trichoglossa* xanthina), *Lepanthopsis astrophora*, *Platystele baqueroi*, *Pleurothallis leptotifolia*, *Stelis* sp.
 - **NG / Asian:** *Dendrobium cyanocentrum* 'Blau', *D. victoriae-reginae*, *D. cuthbertsonii* 'Yellow', *D. lamyaiae*, *D. hellwigianum*, *D. trantuanii*, *D. loddigesii*, *D. jenkinsii*, *Mediocalcar decoratum*, *Bulbophyllum makoyanum*, *B. thiurum*
-- **Sophronitis:** *coccinea* f. *aurea*, *brevipedunculata*, *wittigiana rosea*, *coccinea* 4N
+- **Sophronitis:** *coccinea* f. *aurea*, *brevipedunculata*, *wittigiana rosea*, *coccinea* 4N, *pygmaea* Brazil Import (Celandroni, April 2026)
 - ***Ornitophora radicans*** (= *Sigmatostalix radicans*) — already alive
-- **Past losses:** *Masdevallia glandulosa*, *M. coccinea* 'Anchota', *Sophronitis pygmaea* (×2), *Bulbophyllum moniliforme*, *Mediocalcar bifolium*, *D. cuthbertsonii* (red form)
+- **Past losses:** *Masdevallia glandulosa*, *M. coccinea* 'Anchota', *Bulbophyllum moniliforme*, *Mediocalcar bifolium*, *D. cuthbertsonii* (red form). *Sophronitis pygmaea* lost twice in earlier years; the new Brazil-import is its third attempt.
 
 ## Ecuagenera Europe — primary
 

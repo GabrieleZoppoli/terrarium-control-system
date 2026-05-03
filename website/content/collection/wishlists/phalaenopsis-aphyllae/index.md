@@ -9,7 +9,7 @@ Deciduous and semi-deciduous miniatures from the Himalayan foothills to northern
 
 ## In the collection
 
-- **Aphyllae:** *P. wilsonii* (alive); *P. braceana* (lost)
+- **Aphyllae:** *P. wilsonii* (alive); *P. braceana* (lost); ***P. honghenensis*** — Celandroni, April 2026; ***P. malipoensis*** — Celandroni, April 2026
 - **Parishianae:** *P. finleyi*, *P. gibbosa*, *P. lowii*, *P. parishii*
 - *P. stobartiana* — Claessen Orchids, April 2026
 
@@ -20,7 +20,6 @@ Deciduous and semi-deciduous miniatures from the Himalayan foothills to northern
 | Species | € | Note |
 |---|---|---|
 | [*P. lobbii*](https://www.currlin.com/en) | 16 | Showiest Parishianae |
-| [*P. honghenensis*](https://www.currlin.com/en) | 16 | True Aphyllae, fills the gap left by *braceana* |
 | [*P. lobbii*](https://www.currlin.com/en) f. *flava* × self | 16 | Optional, yellow form |
 
 ## Watching
@@ -30,4 +29,4 @@ Deciduous and semi-deciduous miniatures from the Himalayan foothills to northern
 
 ## Still hunting in Europe
 
-*P. taenialis*, *P. malipoensis*, *P. minus*, *P. hainanensis* — almost never offered commercially.
+*P. taenialis*, *P. minus*, *P. hainanensis* — almost never offered commercially.
