@@ -117,3 +117,62 @@ If the answer is broadly "yes, it works", the curve stays. If not, I'll either d
 The data needed to make that call already exists in InfluxDB; the script lives at `~/terrarium-analysis/light_curve_charts.py` on the Pi. The point of the post-by-post structure is to make the experiment legible — *here is the hypothesis, here is the data, here is what I expect, here is what actually happened* — rather than buried in commit messages.
 
 See you in three weeks.
+
+---
+
+## Day-1 update — 2026-05-05
+
+A small interim update before the 2026-05-25 followup, because today is the first full day under Curve C and a few useful fixes happened along the way.
+
+{{< figure src="day1-overview.png" caption="Day 1 of Curve C: cabinet temperature, humidity, and slider trajectory through 2026-05-05 in Genoa. The slider rises smoothly from 0 through the dawn ramp at 06:39, climbs the cosine to peak ~70 at solar noon (13:15), and will descend symmetrically through the dusk ramp at 19:21. Mist events are marked as faint green vertical lines on the humidity panel." >}}
+
+What today's numbers say (00:00 → 13:53 CEST):
+
+- **Cabinet temperature**: 14.6 °C overnight low → 22.4 °C peak. Mean 18.7 °C. The morning warming is steeper than under the old step schedule because the cosine drops less sharply onto a 35 % floor (vs the old 40 % plateau that landed earlier and held flat).
+- **Cabinet humidity**: 78 % overnight low → 96.6 % peak. Mean 88.6 %. The cabinet entered the day drier than usual (warm previous afternoon left less buffered moisture), and the PID misted 20 times to track target.
+- **Slider trajectory** (computed, since the global isn't logged): 0 at 06:39 → 35 at 07:09 → climbs the cosine → 70.0 at 13:15 → 69.6 now.
+
+A few small improvements landed today, in order of how much they matter:
+
+**Dawn and dusk soft-ramps restored.** The original Curve C had a hard step from 0 (Tapo off) to 35 (FLOOR) at sunrise, and the same in reverse at sunset. Highland plants and Mean Well drivers both prefer to be eased in. The function now linearly ramps 0 → 35 over the 30 min before sunrise, then the cosine takes over — and symmetrically 35 → 0 over the 30 min after sunset. The transition is continuous: at sunrise the cosine output equals 35 (where cos(–π/2) = 0), so the dawn ramp meets the cosine seamlessly. Same in reverse at sunset.
+
+**Dashboard tracks the live curve.** Until today the dashboard's "Intensity of light" slider widget was being driven by an old startup-brightness function still using the 40-60-40 step schedule, so the UI showed e.g. 40 while the underlying PWM was at 70. The widget is now wired to the curve function's second output and updates every 60 seconds; the AU gauge tracks too.
+
+**LED dim-signal watchdog.** A separate change pushed yesterday: a function node monitors total power (Meross MSS310 on the same circuit as the LED drivers and freezer) and trips the lights' Tapo plug if the LED drivers misbehave (dim PWM line floats → drivers go to full output). The model is `expected = 32 W base + 2.8 × slider + (170 W if freezer on)`; trip at expected + 60 W. Calibrated empirically — yesterday's accidental fault state was 311 W ≈ 280 W LED cap + 30 W base, so the screw cap is delivering ~70 % of rated, not 60 % as I'd assumed initially. False-tripped once this morning at 167 W under the wrong constants; fixed.
+
+### Mist tuning, derived from 21 days of mist-event data
+
+The cooling miss on the 04 → 05 night surfaced a chronic pattern: the cabinet was being misted ~17–22 times per night, each event landing the RH a little **above** target, then drifting back, then re-firing. A textbook hunting loop. Adding latent heat each cycle made the freezer's job harder.
+
+I pulled 21 days of `mist_event` timestamps and stratified by simultaneous state, computing per-event ΔRH = peak[+30…+180 s] − baseline[−60…0 s]:
+
+{{< figure src="mist-delta-distribution.png" caption="Distribution of per-event RH gain over the last 21 days, by stratum. Night events with the cabinet sealed (outlet+impeller fans off via lights-off-fan-gate) cluster around +2 % per event. Daytime events with the PID exchanging air with the room cluster around +3–4 % per event because the room is significantly drier than the cabinet (~50 % RH vs ~90 %), so each milliliter of mist clears the seal more easily." >}}
+
+| stratum | n | room state | mean Δ | mechanism |
+|---|---:|---|---:|---|
+| Night, freezer-ON, outlet+impeller off | 96 | T 22 °C, RH 60 % | **+2.1 %** | sealed cabinet — vapor stays put but fights evaporator condensation |
+| Day, freezer-OFF, slider ≈ 40, fans on | ~10 | T 23 °C, RH 47 % | +4.0 % | mixing with drier room — vapor easily replaces leaked air |
+| Day, freezer-OFF, slider ≈ 60, fans on | 17 | T 22 °C, RH 49 % | +3.1 % | same mixing regime, more LED-driven fan activity |
+
+Two regimes, two mechanisms, two different per-event gains. Treating both with a single fixed rule guarantees overshoot in at least one of them. The pre-tuning rule fired whenever the cabinet was 1 % below target and ran a 20 s mist regardless of regime — and 20 s of atomization is a +2 % gain at night, +3-4 % during day, so cabinet *always* landed above target on each event and re-triggered shortly after.
+
+So as of today the humidity-driven mister trigger is regime-aware, gated on `wbt_shutdown_active` (the lights-off / cabinet-sealed window):
+
+```
+wbt_shutdown_active == 1 (night, sealed):  fire at  Δ ≥ 2,  20 s mist on-time
+wbt_shutdown_active == 0 (day, mixing):    fire at  Δ ≥ 1,  10 s mist on-time
+```
+
+Threshold now matches gain in both regimes. At night the cabinet drifts down ~2 % between events, the trigger fires, and the +2 % mist lands the RH right at target — no overshoot, no immediate re-trigger. Daytime keeps the same trigger frequency but halves the per-event water + latent heat injection, since each daytime event was overshooting by 2–3 % anyway.
+
+A methodological caveat I owe the data: my first instinct was to "regression-adjust" the daytime strata to a common room state and conclude the per-event gain was secretly the same (~+2.3 %) in all three regimes. That would have justified a single uniform tuning. But adjusting B and C to a 58 % RH room they never actually operate in (they live at 47–49 %) is extrapolation, not interpretation — the underlying physics genuinely differ between sealed and mixing regimes. The honest number is the per-stratum raw mean in each stratum's own room conditions, and those are different. Hence two rules.
+
+Expected effect on a clear-night cooling fight: half the events × similar latent kJ per event ≈ ~13 W less average heat injection during the freezer's hardest 9-hour window. Not enough on its own to fix the dead P44 evaporator fan that triggered the 04→05 night undershoot, but it's a free improvement and removes one of the two superimposed loads on the freezer.
+
+### What I'm watching now
+
+- The 15:00–18:00 RH bump that triggered Curve C in the first place — the next three weeks will show whether the smooth afternoon shoulder closes that gap.
+- Whether the cabinet's daytime peak temperature creeps above target. Today it touched 22.4 °C around midday — well within the 24 °C target — but with one fewer evaporator fan and seasonally warming Genoa, this is the system-side metric to keep an eye on.
+- Plant-side: I don't expect to see anything on a 1-day timescale, but at the 2026-05-25 followup I'll inspect the upper tier (Heliamphora, highland Nepenthes) for any photoinhibition tinging or pitcher abortion, and the lower-tier orchids for any leaf-tip burn.
+
+The full post-curve hour-of-day assessment runs at 2026-05-25 as planned.

@@ -452,6 +452,40 @@ Flip the `<img src>` on `/highland/_index.md` (+ `.it`) whenever you're ready; n
 
 ---
 
+## 2026-05-05 — Pi-Claude: Day-1 update on the Light Curve C blog post
+
+**STOP. Read this before doing anything.**
+
+I added a Day-1 addendum to `content/blog/light-curve-c/index.md` (en) and `index.it.md` (it), plus two new chart PNGs in the same directory:
+
+- `day1-overview.png` — today's cabinet T/RH/slider trajectory (3 panels)
+- `mist-delta-distribution.png` — per-event ΔRH distribution by stratum from the 21-day study
+
+The chart-generation script lives at `~/terrarium-analysis/light_curve_day1_charts.py` on the Pi (uses InfluxDB HTTP, hand-rolled OLS, no extra deps). It is **NOT** in the website repo.
+
+### DO NOT TOUCH
+
+- **Do not** rewrite the existing 2026-05-04 portion of either `index.md` or `index.it.md`. Only the new "Day-1 update — 2026-05-05" / "Aggiornamento Day-1 — 2026-05-05" sections at the bottom are new today; everything above them was published yesterday and is stable.
+- **Do not** delete or regenerate `curve-comparison.png`, `delta-auc.png`, `temperature-3w.png`, `humidity-3w.png`, `pwm-outlet-3w.png` — those are the original 21-day baseline charts and they're part of the published post; replacing them now would break the historical record.
+- **Do not** touch the chart script `~/terrarium-analysis/light_curve_day1_charts.py` (Mac doesn't have InfluxDB anyway).
+
+### What I'd like you to do
+
+- Just `hugo` + `git push` whenever you're next at the Mac. The commit is local on the Pi; pushing is your turf per division of labour.
+- If you find any obvious typo / phrasing issue in the IT version (I'm not a native speaker), fix in place — but please leave the technical content unchanged.
+
+### Recovery if anything goes wrong
+
+```
+cd /path/to/terrarium-paper/website
+git log --oneline -5     # find the Pi-Claude Day-1 commit
+git checkout <hash> -- content/blog/light-curve-c/    # restore everything in that dir
+```
+
+The full 2026-05-25 followup (re-run the original 3-week chart script with post-curve data) is still on the schedule. This Day-1 update is just an interim because today happened to be the first full day under the curve and a few small fixes landed worth recording.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.

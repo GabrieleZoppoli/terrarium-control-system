@@ -117,3 +117,62 @@ Se la risposta è genericamente "sì, funziona", la curva resta. Altrimenti, abb
 I dati per quella decisione esistono già in InfluxDB; lo script vive in `~/terrarium-analysis/light_curve_charts.py` sul Pi. Lo scopo della struttura post-by-post è rendere l'esperimento leggibile — *ecco l'ipotesi, ecco i dati, ecco cosa mi aspetto, ecco cosa è successo davvero* — invece di lasciarlo sepolto nei messaggi di commit.
 
 A tra tre settimane.
+
+---
+
+## Aggiornamento Day-1 — 2026-05-05
+
+Un piccolo aggiornamento intermedio prima del followup del 2026-05-25, perché oggi è il primo giorno completo sotto la Curva C e nel frattempo sono atterrate alcune piccole correzioni utili.
+
+{{< figure src="day1-overview.png" caption="Giorno 1 della Curva C: temperatura della vetrina, umidità e traiettoria dello slider per il 2026-05-05 a Genova. Lo slider sale dolcemente da 0 attraverso la rampa dell'alba alle 06:39, sale lungo la cosinusoide fino al picco ~70 al mezzogiorno solare (13:15), e scenderà simmetricamente nella rampa del tramonto alle 19:21. Gli eventi di nebulizzazione sono segnati come linee verdi verticali sul pannello dell'umidità." >}}
+
+Cosa dicono i numeri di oggi (00:00 → 13:53 CEST):
+
+- **Temperatura vetrina**: minima notturna 14,6 °C → picco 22,4 °C. Media 18,7 °C. Il riscaldamento mattutino è più ripido che con la vecchia funzione a gradini perché la cosinusoide cade meno bruscamente su un floor del 35 % (vs il vecchio plateau del 40 % che atterrava prima e restava piatto).
+- **Umidità vetrina**: minima notturna 78 % → picco 96,6 %. Media 88,6 %. La vetrina è entrata nel giorno più secca del solito (il pomeriggio caldo precedente ha lasciato meno umidità tamponata), e il PID ha nebulizzato 20 volte per inseguire il target.
+- **Traiettoria slider** (calcolata, dato che la global non è loggata): 0 alle 06:39 → 35 alle 07:09 → sale la cosinusoide → 70,0 alle 13:15 → 69,6 ora.
+
+Alcuni piccoli miglioramenti applicati oggi, in ordine di impatto:
+
+**Rampe morbide all'alba e al tramonto, ripristinate.** La Curva C originale aveva un gradino netto da 0 (Tapo off) a 35 (FLOOR) all'alba, e lo stesso al contrario al tramonto. Le piante d'altura e i driver Mean Well preferiscono entrambi essere accompagnati gradualmente. La funzione ora rampa linearmente 0 → 35 nei 30 min prima dell'alba, poi subentra la cosinusoide — e simmetricamente 35 → 0 nei 30 min dopo il tramonto. La transizione è continua: all'alba il valore della cosinusoide è esattamente 35 (dove cos(–π/2) = 0), così la rampa dell'alba si raccorda alla cosinusoide senza salti. Stesso al tramonto.
+
+**Il dashboard segue la curva live.** Fino a oggi lo slider widget "Intensity of light" del dashboard era pilotato da una vecchia funzione di startup-brightness ancora basata sullo schedule a gradini 40-60-40, quindi la UI mostrava ad esempio 40 mentre il PWM sottostante era a 70. Il widget è ora cablato alla seconda uscita della funzione curva e si aggiorna ogni 60 secondi; anche il gauge AU lo segue.
+
+**Watchdog del segnale dim LED.** Una modifica separata pushata ieri: un function node monitora il consumo totale (Meross MSS310 sullo stesso circuito dei driver LED e del freezer) e fa scattare il Tapo delle luci se rileva i driver LED che si comportano male (linea PWM dim flottante → driver vanno a uscita massima). Il modello è `expected = 32 W base + 2,8 × slider + (170 W se freezer on)`; trip a expected + 60 W. Calibrato empiricamente — lo stato di guasto ieri era 311 W ≈ 280 W cap LED + 30 W base, quindi il cap del trimmer fornisce ~70 % del nominale, non il 60 % che avevo inizialmente assunto. Falsa partenza stamattina a 167 W con le costanti vecchie; corretta.
+
+### Tuning della nebulizzazione, derivato da 21 giorni di dati di eventi mist
+
+La mancata catch-up della notte 04 → 05 ha fatto emergere un pattern cronico: la vetrina veniva nebulizzata ~17-22 volte per notte, ogni evento atterrando l'UR un po' **sopra** target, poi rilassamento, poi ri-trigger. Un classico loop di hunting. E ogni ciclo aggiungeva calore latente, rendendo il lavoro del freezer più difficile.
+
+Ho estratto 21 giorni di timestamp `mist_event` e stratificato per stato simultaneo, calcolando ΔRH per evento = peak[+30…+180 s] − baseline[−60…0 s]:
+
+{{< figure src="mist-delta-distribution.png" caption="Distribuzione del guadagno UR per evento sugli ultimi 21 giorni, per strato. Eventi notturni con vetrina sigillata (ventole outlet+impeller spente via lights-off-fan-gate) si raggruppano intorno a +2 % per evento. Eventi diurni con il PID che scambia aria con la stanza si raggruppano intorno a +3-4 % per evento perché la stanza è significativamente più secca della vetrina (~50 % UR vs ~90 %), così ogni millilitro di mist passa più facilmente attraverso il sigillo." >}}
+
+| strato | n | stato stanza | media Δ | meccanismo |
+|---|---:|---|---:|---|
+| Notte, freezer-ON, outlet+impeller off | 96 | T 22 °C, UR 60 % | **+2,1 %** | vetrina sigillata — il vapore resta ma combatte la condensazione sull'evaporatore |
+| Giorno, freezer-OFF, slider ≈ 40, ventole on | ~10 | T 23 °C, UR 47 % | +4,0 % | mixing con stanza più secca — vapore sostituisce facilmente l'aria persa |
+| Giorno, freezer-OFF, slider ≈ 60, ventole on | 17 | T 22 °C, UR 49 % | +3,1 % | stesso regime di mixing, più attività ventole guidate dai LED |
+
+Due regimi, due meccanismi, due guadagni per evento diversi. Trattare entrambi con una singola regola fissa garantisce overshoot in almeno uno dei due. La regola pre-tuning sparava ogni volta che la vetrina era 1 % sotto target ed eseguiva un mist da 20 s indipendentemente dal regime — ma 20 s di atomizzazione sono +2 % di notte, +3-4 % di giorno, quindi la vetrina atterrava *sempre* sopra target a ogni evento e ri-triggerava poco dopo.
+
+Quindi da oggi il trigger automatico nebulizzazione è regime-aware, gated su `wbt_shutdown_active` (la finestra lights-off / vetrina sigillata):
+
+```
+wbt_shutdown_active == 1 (notte, sigillata):  spara a  Δ ≥ 2,  mist on-time 20 s
+wbt_shutdown_active == 0 (giorno, mixing):    spara a  Δ ≥ 1,  mist on-time 10 s
+```
+
+La soglia ora corrisponde al guadagno in entrambi i regimi. Di notte la vetrina deriva di ~2 % tra eventi, il trigger spara, e il mist da +2 % atterra l'UR proprio sul target — niente overshoot, niente ri-trigger immediato. Il giorno mantiene la stessa frequenza di trigger ma dimezza l'iniezione di acqua + calore latente per evento, dato che ogni evento diurno stava comunque facendo overshoot di 2-3 %.
+
+Una nota metodologica che devo ai dati: il mio primo istinto era "aggiustare via regressione" gli strati diurni a uno stato comune della stanza e concludere che il guadagno per evento fosse segretamente lo stesso (~+2,3 %) in tutti e tre i regimi. Avrebbe giustificato una regola unica. Ma aggiustare B e C a una stanza al 58 % UR in cui non operano mai (vivono al 47-49 %) è estrapolazione, non interpretazione — la fisica sotto è davvero diversa tra regime sigillato e regime di mixing. Il numero onesto è la media grezza per strato nelle sue stesse condizioni di stanza, e quelle sono diverse. Da qui due regole.
+
+Effetto atteso su una notte di cooling-fight: metà degli eventi × kJ latenti simili per evento ≈ ~13 W in meno di iniezione di calore medio durante le 9 ore più dure del freezer. Non abbastanza da solo per compensare la ventola P44 morta che ha innescato l'undershoot della notte 04→05, ma è un miglioramento gratuito che toglie uno dei due carichi sovrapposti al freezer.
+
+### Cosa sto guardando ora
+
+- La gobba UR delle 15:00–18:00 che ha innescato la Curva C in primis — le prossime tre settimane mostreranno se la spalla pomeridiana liscia chiuderà quel gap.
+- Se il picco di temperatura diurna della vetrina sale sopra target. Oggi ha toccato 22,4 °C verso mezzogiorno — ben entro il target di 24 °C — ma con una ventola evaporatore in meno e Genova che si scalda stagionalmente, questa è la metrica system-side da tenere d'occhio.
+- Lato piante: non mi aspetto di vedere niente su scala di 1 giorno, ma al followup del 2026-05-25 ispezionerò lo strato superiore (Heliamphora, Nepenthes d'altura) per eventuali sfumature da fotoinibizione o aborti di pitcher, e le orchidee dello strato basso per eventuali bruciature delle punte.
+
+L'assessment completo post-curva per ora-del-giorno parte come previsto il 2026-05-25.
