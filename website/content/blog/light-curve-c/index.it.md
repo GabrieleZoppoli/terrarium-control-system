@@ -122,13 +122,13 @@ A tra tre settimane.
 
 ## Aggiornamento Day-1 — 2026-05-05
 
-Un piccolo aggiornamento intermedio prima del followup del 2026-05-25, perché oggi è il primo giorno completo sotto la Curva C e nel frattempo sono atterrate alcune piccole correzioni utili.
+Un piccolo aggiornamento intermedio prima del followup del 2026-05-25, perché oggi è il primo giorno completo sotto la Curva C e nel frattempo sono arrivate alcune piccole correzioni utili.
 
 {{< figure src="day1-overview.png" caption="Giorno 1 della Curva C: temperatura della vetrina, umidità e traiettoria dello slider per il 2026-05-05 a Genova. Lo slider sale dolcemente da 0 attraverso la rampa dell'alba alle 06:39, sale lungo la cosinusoide fino al picco ~70 al mezzogiorno solare (13:15), e scenderà simmetricamente nella rampa del tramonto alle 19:21. Gli eventi di nebulizzazione sono segnati come linee verdi verticali sul pannello dell'umidità." >}}
 
 Cosa dicono i numeri di oggi (00:00 → 13:53 CEST):
 
-- **Temperatura vetrina**: minima notturna 14,6 °C → picco 22,4 °C. Media 18,7 °C. Il riscaldamento mattutino è più ripido che con la vecchia funzione a gradini perché la cosinusoide cade meno bruscamente su un floor del 35 % (vs il vecchio plateau del 40 % che atterrava prima e restava piatto).
+- **Temperatura vetrina**: minima notturna 14,6 °C → picco 22,4 °C. Media 18,7 °C. Il riscaldamento mattutino è più ripido che con la vecchia funzione a gradini perché la cosinusoide cade meno bruscamente su un floor del 35 % (vs il vecchio plateau del 40 % che si stabilizzava prima e restava piatto).
 - **Umidità vetrina**: minima notturna 78 % → picco 96,6 %. Media 88,6 %. La vetrina è entrata nel giorno più secca del solito (il pomeriggio caldo precedente ha lasciato meno umidità tamponata), e il PID ha nebulizzato 20 volte per inseguire il target.
 - **Traiettoria slider** (calcolata, dato che la global non è loggata): 0 alle 06:39 → 35 alle 07:09 → sale la cosinusoide → 70,0 alle 13:15 → 69,6 ora.
 
@@ -142,7 +142,7 @@ Alcuni piccoli miglioramenti applicati oggi, in ordine di impatto:
 
 ### Tuning della nebulizzazione, derivato da 21 giorni di dati di eventi mist
 
-La mancata catch-up della notte 04 → 05 ha fatto emergere un pattern cronico: la vetrina veniva nebulizzata ~17-22 volte per notte, ogni evento atterrando l'UR un po' **sopra** target, poi rilassamento, poi ri-trigger. Un classico loop di hunting. E ogni ciclo aggiungeva calore latente, rendendo il lavoro del freezer più difficile.
+La mancata catch-up della notte 04 → 05 ha fatto emergere un pattern cronico: la vetrina veniva nebulizzata ~17-22 volte per notte, con ogni evento che portava l'UR un po' **sopra** target, poi rilassamento, poi ri-trigger. Un classico loop di hunting. E ogni ciclo aggiungeva calore latente, rendendo il lavoro del freezer più difficile.
 
 Ho estratto 21 giorni di timestamp `mist_event` e stratificato per stato simultaneo, calcolando ΔRH per evento = peak[+30…+180 s] − baseline[−60…0 s]:
 
@@ -154,18 +154,18 @@ Ho estratto 21 giorni di timestamp `mist_event` e stratificato per stato simulta
 | Giorno, freezer-OFF, slider ≈ 40, ventole on | ~10 | T 23 °C, UR 47 % | +4,0 % | mixing con stanza più secca — vapore sostituisce facilmente l'aria persa |
 | Giorno, freezer-OFF, slider ≈ 60, ventole on | 17 | T 22 °C, UR 49 % | +3,1 % | stesso regime di mixing, più attività ventole guidate dai LED |
 
-Due regimi, due meccanismi, due guadagni per evento diversi. Trattare entrambi con una singola regola fissa garantisce overshoot in almeno uno dei due. La regola pre-tuning sparava ogni volta che la vetrina era 1 % sotto target ed eseguiva un mist da 20 s indipendentemente dal regime — ma 20 s di atomizzazione sono +2 % di notte, +3-4 % di giorno, quindi la vetrina atterrava *sempre* sopra target a ogni evento e ri-triggerava poco dopo.
+Due regimi, due meccanismi, due guadagni per evento diversi. Trattare entrambi con una singola regola fissa garantisce overshoot in almeno uno dei due. La regola pre-tuning sparava ogni volta che la vetrina era 1 % sotto target ed eseguiva un mist da 20 s indipendentemente dal regime — ma 20 s di atomizzazione sono +2 % di notte, +3-4 % di giorno, quindi la vetrina si stabilizzava *sempre* sopra target a ogni evento e ri-triggerava poco dopo.
 
-Quindi da oggi il trigger automatico nebulizzazione è regime-aware, gated su `wbt_shutdown_active` (la finestra lights-off / vetrina sigillata):
+Quindi da oggi il trigger automatico di nebulizzazione è regime-aware, gated su `wbt_shutdown_active` (la finestra lights-off / vetrina sigillata):
 
 ```
 wbt_shutdown_active == 1 (notte, sigillata):  spara a  Δ ≥ 2,  mist on-time 20 s
 wbt_shutdown_active == 0 (giorno, mixing):    spara a  Δ ≥ 1,  mist on-time 10 s
 ```
 
-La soglia ora corrisponde al guadagno in entrambi i regimi. Di notte la vetrina deriva di ~2 % tra eventi, il trigger spara, e il mist da +2 % atterra l'UR proprio sul target — niente overshoot, niente ri-trigger immediato. Il giorno mantiene la stessa frequenza di trigger ma dimezza l'iniezione di acqua + calore latente per evento, dato che ogni evento diurno stava comunque facendo overshoot di 2-3 %.
+La soglia ora corrisponde al guadagno in entrambi i regimi. Di notte la vetrina deriva di ~2 % tra eventi, il trigger spara, e il mist da +2 % porta l'UR proprio sul target — niente overshoot, niente ri-trigger immediato. Il giorno mantiene la stessa frequenza di trigger ma dimezza l'iniezione di acqua + calore latente per evento, dato che ogni evento diurno stava comunque facendo overshoot di 2-3 %.
 
-Una nota metodologica che devo ai dati: il mio primo istinto era "aggiustare via regressione" gli strati diurni a uno stato comune della stanza e concludere che il guadagno per evento fosse segretamente lo stesso (~+2,3 %) in tutti e tre i regimi. Avrebbe giustificato una regola unica. Ma aggiustare B e C a una stanza al 58 % UR in cui non operano mai (vivono al 47-49 %) è estrapolazione, non interpretazione — la fisica sotto è davvero diversa tra regime sigillato e regime di mixing. Il numero onesto è la media grezza per strato nelle sue stesse condizioni di stanza, e quelle sono diverse. Da qui due regole.
+Una nota metodologica che devo ai dati: il mio primo istinto era "aggiustare via regressione" gli strati diurni a uno stato comune della stanza e concludere che il guadagno per evento fosse in realtà lo stesso (~+2,3 %) in tutti e tre i regimi. Avrebbe giustificato una regola unica. Ma aggiustare B e C a una stanza al 58 % UR in cui non operano mai (vivono al 47-49 %) è estrapolazione, non interpretazione — la fisica sottostante è davvero diversa tra regime sigillato e regime di mixing. Il numero onesto è la media grezza per strato nelle sue stesse condizioni di stanza, e quelle sono diverse. Da qui due regole.
 
 Effetto atteso su una notte di cooling-fight: metà degli eventi × kJ latenti simili per evento ≈ ~13 W in meno di iniezione di calore medio durante le 9 ore più dure del freezer. Non abbastanza da solo per compensare la ventola P44 morta che ha innescato l'undershoot della notte 04→05, ma è un miglioramento gratuito che toglie uno dei due carichi sovrapposti al freezer.
 
