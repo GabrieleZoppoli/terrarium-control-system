@@ -103,6 +103,26 @@ Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio A
 
 *Continua…*
 
+## Aggiornamento — NYBG, maggio 2026
+
+Stephen Sinon, William B. O'Connor Curator of Special Collections alla biblioteca Mertz del NYBG, ha risposto in cinque giorni. Due pezzi.
+
+**Il foglio del typus.** L'olotipo di *Heliamphora macdonaldae* è il foglio NY barcode 00387773 — la raccolta di Tate del 1928 da "Top of Peak no. 7", vetta del Mount Duida, Venezuela, 7100 ft, Tate no. 1022.[^nytype] Sul foglio sono montate tre etichette:
+
+- l'etichetta di campo della spedizione Tyler–Duida, scritta a matita: *"Heliamphora Macdonaldae Gleason / Top of Peak no. 7. / Not originally numbered. / Type"* — nessuna nota etimologica;
+- l'etichetta di determinazione di Gleason, bordata d'arancio: *"TYPE OF / Heliamphora Macdonaldae Gleason / Bull. Torrey Club 58: 367. 1931"*;
+- e l'annotazione del 1973 di Bassett Maguire, bordata di rosso, che la riduce a *H. tatei (Gleason) var. macdonaldae Maguire* — il cambiamento che avrebbe poi formalizzato in *Mem. NYBG* 29: 57 (1978).
+
+Il foglio non porta alcuna nota a margine in mano a Gleason che spieghi chi fosse l'eponimo. La speranza che avesse scritto in qualche angolo *"dedicata alla Sig.ra X"* sull'olotipo si rivela un'illusione: non è così che lavorava.
+
+{{< figure src="holotype-ny00387773.jpg" caption="Olotipo di *Heliamphora macdonaldae* Gleason — NY barcode 00387773. G. H. H. Tate, no. 1022, agosto 1928 – aprile 1929, vetta del Mount Duida, Venezuela, 7100 ft. Immagine: The New York Botanical Garden, William & Lynda Steere Herbarium (CC BY 4.0, tramite GBIF)." >}}
+
+**Il libro di cassa del Torrey Club.** Sinon ha anche scorso il libro di cassa del Torrey Botanical Club per il 1931, cercando un donatore — McDonald, MacDonald o Macdonald, in qualunque grafia — al fondo speciale per le pubblicazioni a cui Gleason fa riferimento nell'introduzione. Nessuno. L'unica voce che ha trovato, annotata "Gleason's Bulletins 1931", era *Fleda Griffith — $10*; Miss Griffith era la fotografa di staff del Garden. Qualche cognome Mc o Mac compariva altrove nel registro, ma solo come socio ordinario in regola con la quota annuale di $5 — non fra i contributori del fondo pubblicazioni.[^sinon]
+
+Il NYBG si chiama quindi fuori su entrambi i fronti: l'eponimo non è una donatrice del Torrey e non è un nome che Gleason abbia annotato sul foglio del typus. Resta in piedi la pista dell'AMNH, che custodisce il diario di campo di Tate, la corrispondenza della famiglia Tyler e i registri finanziari della spedizione stessa. Quella richiesta è ancora aperta.
+
+*Citato con il cortese permesso di Stephen Sinon, NYBG.*
+
 ## Link
 
 - [POWO — *H. tatei*](https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:118880-2) (tratta *macdonaldae* come sinonimo).
@@ -128,3 +148,5 @@ Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio A
 [^wistubawiki]: Wikipedia. *Andreas Wistuba*. <https://en.wikipedia.org/wiki/Andreas_Wistuba>.
 [^gleason]: Gleason, H.A. (1931). Botanical Results of the Tyler-Duida Expedition. *Bulletin of the Torrey Botanical Club* 58 (5): 277–344; (6): 345–404. Il racconto della spedizione di Tate è la Sezione II. *Heliamphora macdonaldae* sp. nov. è descritta a p. 367. Testo completo via Internet Archive: <https://archive.org/details/sim_journal-of-the-torrey-botanical-society_1931-05_58_5>.
 [^nybgfa]: NYBG Mertz Library Archives. *Torrey Botanical Society Records*, Serie 9 (Financial), cartella 36.7 "Cash ledger 1926-33". Inventario su <https://nybgarchives.libraryhost.com/>.
+[^nytype]: NYBG Steere Herbarium, olotipo barcode NY00387773, *Heliamphora macdonaldae* Gleason. Scheda pubblica su <https://sweetgum.nybg.org/science/vh/specimen-details/?irn=234875>; immagine tramite GBIF (CC BY 4.0): <http://sweetgum.nybg.org/images3/30/257/v-129-00387773.jpg>. GBIF occurrence key 1928790480.
+[^sinon]: Stephen Sinon, William B. O'Connor Curator of Special Collections, Research and Archives, biblioteca Mertz del NYBG — comunicazione personale, 5–6 maggio 2026 (via NYBG Mertz Library Archives, ticket #18220094). Dato dai Torrey Botanical Society Records, Serie 9 (Financial), libro di cassa 1931.

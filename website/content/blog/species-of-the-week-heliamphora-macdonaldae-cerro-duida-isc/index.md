@@ -103,6 +103,26 @@ I've sent reference inquiries to both libraries and to the AMNH Museum Archives,
 
 *More to follow…*
 
+## Update — NYBG, May 2026
+
+Stephen Sinon, William B. O'Connor Curator of Special Collections at the NYBG Mertz Library, replied within five days. Two pieces.
+
+**The type sheet.** The holotype of *Heliamphora macdonaldae* is NY barcode 00387773 — Tate's 1928 collection from "Top of Peak no. 7", Summit of Mount Duida, Venezuela, 7100 ft, Tate no. 1022.[^nytype] Three labels are mounted on the sheet:
+
+- the field label of the Tyler–Duida Expedition, in pencil hand: *"Heliamphora Macdonaldae Gleason / Top of Peak no. 7. / Not originally numbered. / Type"* — no etymology note;
+- Gleason's determination label, orange-bordered: *"TYPE OF / Heliamphora Macdonaldae Gleason / Bull. Torrey Club 58: 367. 1931"*;
+- and Bassett Maguire's 1973 annotation, red-bordered, reducing it to *H. tatei (Gleason) var. macdonaldae Maguire* — the change he later formalised in *Mem. NYBG* 29: 57 (1978).
+
+The sheet carries no marginal note in Gleason's hand explaining who the eponym was. The hope that he had quietly written *"named for Mrs X"* somewhere on the holotype turns out not to be how he worked.
+
+{{< figure src="holotype-ny00387773.jpg" caption="Holotype of *Heliamphora macdonaldae* Gleason — NY barcode 00387773. G. H. H. Tate, no. 1022, August 1928 – April 1929, Summit of Mount Duida, Venezuela, 7100 ft. Image: The New York Botanical Garden, William & Lynda Steere Herbarium (CC BY 4.0, via GBIF)." >}}
+
+**The Torrey ledger.** Sinon also went through the Torrey Botanical Club's 1931 cash ledger looking for any donor named McDonald, MacDonald or Macdonald to the special publishing fund Gleason's introduction acknowledges. There wasn't one. The only entry he found earmarked to *Gleason's Bulletins 1931* was *Fleda Griffith — $10*; Miss Griffith was the Garden's staff photographer. A handful of Mc and Mac names appeared elsewhere in the book, but only as ordinary club members paying the $5 yearly dues — not as contributors to the publishing fund.[^sinon]
+
+So NYBG rules itself out on both counts: the eponym is not a Torrey donor and not a name Gleason annotated onto the type sheet. The remaining hope is the AMNH Museum Archives, which holds Tate's expedition diary, the Tyler family correspondence, and the financial records of the expedition itself. That inquiry is still open.
+
+*Quoted with kind permission of Stephen Sinon, NYBG.*
+
 ## Links
 
 - [POWO entry — *H. tatei*](https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:118880-2) (treats *macdonaldae* as synonym).
@@ -128,3 +148,5 @@ I've sent reference inquiries to both libraries and to the AMNH Museum Archives,
 [^wistubawiki]: Wikipedia. *Andreas Wistuba*. <https://en.wikipedia.org/wiki/Andreas_Wistuba>.
 [^gleason]: Gleason, H.A. (1931). Botanical Results of the Tyler-Duida Expedition. *Bulletin of the Torrey Botanical Club* 58 (5): 277–344; (6): 345–404. Tate's expedition narrative is embedded as Section II. *Heliamphora macdonaldae* sp. nov. is described on p. 367. Full text via Internet Archive: <https://archive.org/details/sim_journal-of-the-torrey-botanical-society_1931-05_58_5>.
 [^nybgfa]: NYBG Mertz Library Archives. *Torrey Botanical Society Records*, Series 9 (Financial), folder 36.7 "Cash ledger 1926-33". Finding aid at <https://nybgarchives.libraryhost.com/>.
+[^nytype]: NYBG Steere Herbarium, holotype barcode NY00387773, *Heliamphora macdonaldae* Gleason. Public record at <https://sweetgum.nybg.org/science/vh/specimen-details/?irn=234875>; image via GBIF (CC BY 4.0): <http://sweetgum.nybg.org/images3/30/257/v-129-00387773.jpg>. GBIF occurrence key 1928790480.
+[^sinon]: Stephen Sinon, William B. O'Connor Curator of Special Collections, Research and Archives, NYBG Mertz Library — personal communication, 5–6 May 2026 (via NYBG Mertz Library Archives ticket #18220094). Finding from Torrey Botanical Society Records, Series 9 (Financial), 1931 ledger.
