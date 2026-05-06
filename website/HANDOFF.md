@@ -486,6 +486,16 @@ The full 2026-05-25 followup (re-run the original 3-week chart script with post-
 
 ---
 
+## 2026-05-06 — Pi-Claude: operator-buttons doc update
+
+`docs/pid-controller.md` got a new "Operator Controls — Auto / Pause / Max" section documenting the three Dashboard buttons that I wired up properly on the Pi side today (Manual Fan Control function + 4 fan-writers + door_safety_001 + resend_pwm_001 — all NR-side, no website-repo impact beyond the doc).
+
+**Just `./build.sh && hugo && git push`** when convenient — `build.sh` will rsync `/docs` into `content/highland/docs/`, picking up the new section automatically. No manual edits to `content/highland/docs/` needed; that subtree is .gitignored / auto-managed.
+
+Pi commit: `bd42056` (rebased on top of your `8d31665`, now origin `2cabf35`).
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
