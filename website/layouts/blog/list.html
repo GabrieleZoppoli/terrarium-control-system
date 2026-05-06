@@ -15,14 +15,19 @@
   {{- end }}
 
   {{- $posts := where .Pages "Section" "blog" }}
-  {{- $posts = $posts.ByDate.Reverse }}
+  {{- $posts = $posts.ByLastmod.Reverse }}
   {{- if $posts }}
   <ul class="blog-index">
     {{- range $posts }}
+    {{- $updated := ne (.Date.UTC.Format "2006-01-02") (.Lastmod.UTC.Format "2006-01-02") }}
     <li class="blog-index__item">
       <a href="{{ .RelPermalink }}" class="blog-index__link">
-        <time datetime="{{ .Date.Format "2006-01-02" }}" class="blog-index__date">
-          {{ .Date.Format "January 2, 2006" }}
+        <time datetime="{{ (cond $updated .Lastmod .Date).Format "2006-01-02" }}" class="blog-index__date">
+          {{- if $updated -}}
+            Updated {{ .Lastmod.Format "January 2, 2006" }}
+          {{- else -}}
+            {{ .Date.Format "January 2, 2006" }}
+          {{- end -}}
         </time>
         <h2 class="blog-index__title">{{ .Title }}</h2>
         {{- with .Description }}

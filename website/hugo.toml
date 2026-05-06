@@ -13,6 +13,10 @@ canonifyURLs = true
 enableRobotsTXT = true
 enableEmoji = false
 
+# Use git commit times for Lastmod so blog posts that get updates bubble
+# back to the top of /blog/ listings (see layouts/blog/list.html).
+enableGitInfo = true
+
 [languages]
   [languages.en]
     languageCode  = "en"
@@ -138,17 +142,21 @@ enableEmoji = false
     pageRef = "collection"
     weight = 30
   [[languages.en.menus.main]]
+    name = "Areas"
+    url = "/areas/"
+    weight = 35
+  [[languages.en.menus.main]]
     name = "Blog"
     pageRef = "blog"
-    weight = 35
+    weight = 40
   [[languages.en.menus.main]]
     name = "About"
     pageRef = "about"
-    weight = 40
+    weight = 45
   [[languages.en.menus.main]]
     name = "Contact"
     pageRef = "contact"
-    weight = 50
+    weight = 55
 
 [languages.it.menus]
   [[languages.it.menus.main]]
@@ -164,17 +172,21 @@ enableEmoji = false
     pageRef = "collection"
     weight = 30
   [[languages.it.menus.main]]
+    name = "Aree"
+    url = "/areas/"
+    weight = 35
+  [[languages.it.menus.main]]
     name = "Blog"
     pageRef = "blog"
-    weight = 35
+    weight = 40
   [[languages.it.menus.main]]
     name = "Chi sono"
     pageRef = "about"
-    weight = 40
+    weight = 45
   [[languages.it.menus.main]]
     name = "Contatti"
     pageRef = "contact"
-    weight = 50
+    weight = 55
 
 [markup]
   [markup.highlight]
