@@ -141,18 +141,36 @@ The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) si
 
 The PID controller output is blocked (returns null) when:
 
-1. **Door safety active** — all fans are forced to 0 by the door safety controller
+1. **Door safety active** — all fans are forced to 0 by the door safety controller (unless manual override is set, see below)
 2. **Manual mode is active** — operator has set a fixed fan speed via the Dashboard UI
 3. **Mister is ON** — safety interlock stops all fans during misting
 4. **Night mode** — fans off from midnight to 04:00 (PID active 04:00–00:00)
 5. **No data** — humidity difference is undefined (sensor offline)
 6. **Time gap** — dt > 120s (NR restart, prevents integral spike from stale timestamps)
 
+## Operator Controls — Auto / Pause / Max
+
+The Dashboard exposes three buttons that wire to the **Manual Fan Control** function. Each button sets `flow.manual_fan_mode` and `global.payload.manual_fan_mode` to the same value, so every consumer (PID, Night Mode, fan writers, door-safety, resend-PWM) sees one consistent state.
+
+| Button | `manual_fan_mode` | `manual_fan_speed` | Effect |
+|---|---|---|---|
+| **Auto** | `auto` | cleared | Reverts to PID / freezer-status / Night Mode control. Re-fires the outlet and freezer trigger paths so the next PID cycle catches up. |
+| **Pause** | `manual` | `0` | All four fans (P12 / P44 / P45 / P46) → 0. Useful for stress tests on cabinet temperature or saturation humidity, where you want to remove fan-driven mixing entirely. |
+| **Max** | `manual` | `255` | All four fans → 255. Designed for cleaning / drying with the doors open: the manual override is honoured **even while door-safety is active**, so the operator can run airflow at full while the lid is off. |
+
+**Door-safety interaction with manual mode** (since 2026-05-06):
+
+- In `manual_fan_mode === 'manual'`, the door-safety open/close transitions skip their fan commands. Light-PWM force, freezer-Tapo OFF and mister-Tapo OFF still happen — only the fan stop/restore is bypassed.
+- In `auto`, door-safety is unchanged: opening any door sends `P12,0 / P44,0 / P45,0 / P46,0` immediately, and closing both doors restores `P12 / P44` to baseline 140 (or 255 if compressor on) and `P45 / P46` to the latest PID-computed speed.
+- The four `fan_writer_*` nodes (P12, P44, P45, P46) check both `door_safety_active` AND `manual_fan_mode`: they only block when door-safety is active *and* not in manual mode.
+
+**Arduino-reset interaction:** `Resend All PWM` (which fires when the watchdog detects an Arduino reboot) restores the manual override speed if `manual_fan_mode === 'manual'`. So a cosmic-ray-induced reset in the middle of a cleaning session doesn't drop the fans.
+
 ## Control Hierarchy
 
 ```
-Priority 0 (highest): Door safety        → all fans stop (0 PWM)
-Priority 1:           Manual override     → fixed user-set speed
+Priority 0 (highest): Manual override     → fixed user-set speed (bypasses door safety on fans)
+Priority 1:           Door safety         → all fans stop (0 PWM) — only in auto mode
 Priority 2:           Mister interlock    → all fans stop (0 PWM)
 Priority 3:           Night mode          → fans off (midnight to 04:00)
 Priority 4 (lowest):  PID automatic       → computed fan speed
