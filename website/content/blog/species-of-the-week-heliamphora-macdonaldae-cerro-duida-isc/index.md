@@ -105,7 +105,7 @@ I've sent reference inquiries to both libraries and to the AMNH Museum Archives,
 
 ## Update — NYBG, May 2026
 
-Stephen Sinon, William B. O'Connor Curator of Special Collections at the NYBG Mertz Library, replied within five days. Two pieces.
+Stephen Sinon, William B. O'Connor Curator of Special Collections at the NYBG Mertz Library, replied within five days, with two findings: a scan of the type sheet, and a search through the 1931 Torrey ledger.
 
 **The type sheet.** The holotype of *Heliamphora macdonaldae* is NY barcode 00387773 — Tate's 1928 collection from "Top of Peak no. 7", Summit of Mount Duida, Venezuela, 7100 ft, Tate no. 1022.[^nytype] Three labels are mounted on the sheet:
 
@@ -113,13 +113,13 @@ Stephen Sinon, William B. O'Connor Curator of Special Collections at the NYBG Me
 - Gleason's determination label, orange-bordered: *"TYPE OF / Heliamphora Macdonaldae Gleason / Bull. Torrey Club 58: 367. 1931"*;
 - and Bassett Maguire's 1973 annotation, red-bordered, reducing it to *H. tatei (Gleason) var. macdonaldae Maguire* — the change he later formalised in *Mem. NYBG* 29: 57 (1978).
 
-The sheet carries no marginal note in Gleason's hand explaining who the eponym was. The hope that he had quietly written *"named for Mrs X"* somewhere on the holotype turns out not to be how he worked.
+The sheet carries no marginal note in Gleason's hand explaining who the eponym was. Apparently he didn't write etymology notes on his type sheets.
 
 {{< figure src="holotype-ny00387773.jpg" caption="Holotype of *Heliamphora macdonaldae* Gleason — NY barcode 00387773. G. H. H. Tate, no. 1022, August 1928 – April 1929, Summit of Mount Duida, Venezuela, 7100 ft. Image: The New York Botanical Garden, William & Lynda Steere Herbarium (CC BY 4.0, via GBIF)." >}}
 
-**The Torrey ledger.** Sinon also went through the Torrey Botanical Club's 1931 cash ledger looking for any donor named McDonald, MacDonald or Macdonald to the special publishing fund Gleason's introduction acknowledges. There wasn't one. The only entry he found earmarked to *Gleason's Bulletins 1931* was *Fleda Griffith — $10*; Miss Griffith was the Garden's staff photographer. A handful of Mc and Mac names appeared elsewhere in the book, but only as ordinary club members paying the $5 yearly dues — not as contributors to the publishing fund.[^sinon]
+**The Torrey ledger.** Sinon also went through the Torrey Botanical Club's 1931 cash ledger looking for any donor named McDonald, MacDonald or Macdonald to the special publishing fund that Gleason mentions in his introduction. There wasn't one. The only entry he found earmarked to *Gleason's Bulletins 1931* was *Fleda Griffith — $10*; Miss Griffith was the Garden's staff photographer. A handful of Mc and Mac names appeared elsewhere in the book, but only as ordinary club members paying the $5 yearly dues — not as contributors to the publishing fund.[^sinon]
 
-So NYBG rules itself out on both counts: the eponym is not a Torrey donor and not a name Gleason annotated onto the type sheet. The remaining hope is the AMNH Museum Archives, which holds Tate's expedition diary, the Tyler family correspondence, and the financial records of the expedition itself. That inquiry is still open.
+So neither line at NYBG produces a name: not the publishing-fund ledger, not the type sheet itself. What's left is the AMNH Museum Archives, which holds Tate's expedition diary, the Tyler family correspondence, and the financial records of the expedition itself. That inquiry is still open.
 
 *Quoted with kind permission of Stephen Sinon, NYBG.*
 

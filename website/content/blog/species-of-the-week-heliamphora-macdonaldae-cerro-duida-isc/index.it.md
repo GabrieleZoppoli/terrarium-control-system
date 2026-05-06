@@ -105,7 +105,7 @@ Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio A
 
 ## Aggiornamento — NYBG, maggio 2026
 
-Stephen Sinon, William B. O'Connor Curator of Special Collections alla biblioteca Mertz del NYBG, ha risposto in cinque giorni. Due pezzi.
+Stephen Sinon, William B. O'Connor Curator of Special Collections alla biblioteca Mertz del NYBG, ha risposto in cinque giorni, con due risultati: una scansione del foglio del typus e una ricerca nel libro di cassa Torrey del 1931.
 
 **Il foglio del typus.** L'olotipo di *Heliamphora macdonaldae* è il foglio NY barcode 00387773 — la raccolta di Tate del 1928 da "Top of Peak no. 7", vetta del Mount Duida, Venezuela, 7100 ft, Tate no. 1022.[^nytype] Sul foglio sono montate tre etichette:
 
@@ -113,13 +113,13 @@ Stephen Sinon, William B. O'Connor Curator of Special Collections alla bibliotec
 - l'etichetta di determinazione di Gleason, bordata d'arancio: *"TYPE OF / Heliamphora Macdonaldae Gleason / Bull. Torrey Club 58: 367. 1931"*;
 - e l'annotazione del 1973 di Bassett Maguire, bordata di rosso, che la riduce a *H. tatei (Gleason) var. macdonaldae Maguire* — il cambiamento che avrebbe poi formalizzato in *Mem. NYBG* 29: 57 (1978).
 
-Il foglio non porta alcuna nota a margine in mano a Gleason che spieghi chi fosse l'eponimo. La speranza che avesse scritto in qualche angolo *"dedicata alla Sig.ra X"* sull'olotipo si rivela un'illusione: non è così che lavorava.
+Il foglio non porta alcuna nota a margine di mano di Gleason che spieghi chi fosse l'eponimo. A quanto pare non scriveva note etimologiche sui fogli del typus.
 
 {{< figure src="holotype-ny00387773.jpg" caption="Olotipo di *Heliamphora macdonaldae* Gleason — NY barcode 00387773. G. H. H. Tate, no. 1022, agosto 1928 – aprile 1929, vetta del Mount Duida, Venezuela, 7100 ft. Immagine: The New York Botanical Garden, William & Lynda Steere Herbarium (CC BY 4.0, tramite GBIF)." >}}
 
-**Il libro di cassa del Torrey Club.** Sinon ha anche scorso il libro di cassa del Torrey Botanical Club per il 1931, cercando un donatore — McDonald, MacDonald o Macdonald, in qualunque grafia — al fondo speciale per le pubblicazioni a cui Gleason fa riferimento nell'introduzione. Nessuno. L'unica voce che ha trovato, annotata "Gleason's Bulletins 1931", era *Fleda Griffith — $10*; Miss Griffith era la fotografa di staff del Garden. Qualche cognome Mc o Mac compariva altrove nel registro, ma solo come socio ordinario in regola con la quota annuale di $5 — non fra i contributori del fondo pubblicazioni.[^sinon]
+**Il libro di cassa del Torrey Club.** Sinon ha anche scorso il libro di cassa del Torrey Botanical Club per il 1931, cercando un donatore — McDonald, MacDonald o Macdonald, in qualunque grafia — al fondo speciale per le pubblicazioni a cui Gleason fa riferimento nell'introduzione. Nessuno. L'unica voce che ha trovato, annotata "Gleason's Bulletins 1931", era *Fleda Griffith — $10*; Miss Griffith era la fotografa interna del Garden. Qualche cognome Mc o Mac compariva altrove nel registro, ma solo come socio ordinario in regola con la quota annuale di $5 — non fra i contributori del fondo pubblicazioni.[^sinon]
 
-Il NYBG si chiama quindi fuori su entrambi i fronti: l'eponimo non è una donatrice del Torrey e non è un nome che Gleason abbia annotato sul foglio del typus. Resta in piedi la pista dell'AMNH, che custodisce il diario di campo di Tate, la corrispondenza della famiglia Tyler e i registri finanziari della spedizione stessa. Quella richiesta è ancora aperta.
+Quindi nessuna delle due piste al NYBG produce un nome: né il libro di cassa del fondo, né il foglio del typus. Resta la pista dell'AMNH, che custodisce il diario di campo di Tate, la corrispondenza della famiglia Tyler e i registri finanziari della spedizione stessa. Quella richiesta è ancora aperta.
 
 *Citato con il cortese permesso di Stephen Sinon, NYBG.*
 
