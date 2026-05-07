@@ -107,11 +107,11 @@ ledger_title:          "Ogni ciclo di nebbia e ogni wattora, contati."
 ledger_intro:          "Le misurazioni sono iniziate a @SINCE@. L'hardware è in funzione da fine 2022."
 
 ledger_mist_label:     "Cicli di nebbia"
-ledger_mist_caption:   "Ogni ciclo rilascia qualche secondo di nebbia fine. Il volume d'acqua per ciclo è ancora da calibrare."
+ledger_mist_caption:   "Ogni ciclo è innescato quando l'umidità della vetrina scende sotto il target della curva colombiana. Dal 2026-05-05 la durata è regime-aware: 10 s di giorno, 20 s di notte. Guadagno UR per evento ≈ +2 % di notte (vetrina sigillata, mentre il freezer combatte il calore) oppure +3–4 % di giorno (ventole che scambiano aria con la stanza più secca). Il volume d'acqua per ciclo è ancora da calibrare."
 
 ledger_kwh_label:      "Elettricità"
 ledger_kwh_unit:       "kWh"
-ledger_kwh_caption:    "Meross MSS310 sull'intera ciabatta — compressore, 4× luci ChilLED, ventole, Pi, sensori. Media ~110 W continui: 60–90 W di notte, picco 170–180 W a mezzogiorno."
+ledger_kwh_caption:    "Meross MSS310 sull'intera ciabatta — compressore, 4× luci ChilLED, ventole, Pi, sensori. Media ~110 W continui: 60–90 W di notte, picco ~220 W a mezzogiorno con la nuova curva LED a coseno rialzato (picco slider 70 al mezzogiorno solare, attiva dal 2026-05-04)."
 
 ledger_cost_label:     "Bolletta elettrica"
 ledger_cost_caption:   "A prezzi italiani residenziali (~€0,30/kWh) — all'incirca un mese di cappuccini quotidiani."
