@@ -47,6 +47,22 @@ Non mi aspettavo assolutamente una fioritura. La pianta è arrivata con tre o qu
 
 Aggiorno il post man mano che il peduncolo si apre, e appena ho una lettura lux per quella posizione invece della stima a occhio.
 
+## Aggiornamento — 2026-05-07: il primo fiore è aperto
+
+Diciassette giorni dopo le prime foto, il bocciolo più grande si è aperto e la struttura della sezione *Orchidioides* è inconfondibile: una galea a cappuccio sopra, una gola giallo-crema con due macchie callose rosse all'interno, e un labbro inferiore largo che sfuma dal magenta del cappuccio al bianco-rosato dei bordi. Il secondo bocciolo è ancora chiuso, poco più in basso.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-7.jpg" caption="Il bocciolo che si apre. Il labbro inferiore comincia a staccarsi dalla galea — il rosso-porpora lucido è alla saturazione massima poco prima che la corolla si dispieghi." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-10.jpg" caption="Profilo del fiore aperto. La galea forma un cappuccio scuro; la gola giallo-crema è visibile sotto, e il labbro inferiore si protende in avanti — la struttura che mima la corolla di un'orchidea abbastanza da ingannare gli sfingidi sulle vette dei tepui." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Tre-quarti, con il secondo bocciolo (ancora chiuso) visibile sotto. Il giallo-crema della gola è un contrasto netto contro il cappuccio magenta e il rosa più freddo del labbro." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-11.jpg" caption="Frontale. Le due macchie scure dentro la gola sono i marker callosi che la sezione *Orchidioides* condivide — stanno alla base della colonna e presumibilmente funzionano da guida al nettare." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro della faccia aperta. La colonna verdognola si proietta in avanti attraverso la gola; le venature magenta sul labbro inferiore prendono la luce dell'armadio." >}}
+
+La pianta è sempre nella stessa posizione appesa, stesso kokedama di sfagno, stesso ugello sopra. Lettura lux ancora rimandata. Il colore è più vicino a un magenta freddo che al rosso-sangue profondo che le foto in Taylor (1989) lasciano intuire — possibile variazione clonale, possibile effetto della luce. Vedrò se il secondo bocciolo apre più scuro o più chiaro del primo.
+
 ## References
 
 - **Taylor, P.** (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. Il trattamento definitivo del genere; la chiave della sezione *Orchidioides* (pp. 42–59) è dove vivono i caratteri che separano *quelchii* e *campbelliana*.

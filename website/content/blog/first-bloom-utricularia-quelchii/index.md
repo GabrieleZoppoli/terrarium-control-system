@@ -47,6 +47,22 @@ I hadn't expected a bloom. The plant arrived with three or four leaves and now h
 
 I'll update this post as the spike opens and once I can get a lux meter into that position to replace the eyeball estimate.
 
+## Update — 2026-05-07: the first flower is open
+
+Seventeen days from the first photos, the larger bud has opened and the section *Orchidioides* gestalt is unmistakable: a hooded galea above, a yellow-cream throat with two red callus blotches inside, and a broad lower lip that pales from the magenta of the hood to white-pink at the edges. The second bud is still closed, slightly below.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-7.jpg" caption="The bud cracking open. The lower lip is just starting to peel away from the galea — the glossy red-purple is at peak saturation right before the corolla unfolds." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-10.jpg" caption="Side profile of the open flower. The galea forms a dark hood; the yellow-cream gullet is visible underneath, and the lower lip extends forward — the structure that mimics an orchid corolla closely enough to fool sphingid pollinators on the tepui summits." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Three-quarters view, with the second (still-closed) bud visible below. The yellow-cream of the throat is a clean contrast against the magenta hood and the cooler-pink lip." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-11.jpg" caption="Head-on. The two dark blotches inside the throat are the callus markings that section *Orchidioides* shares — they sit at the base of the column and presumably function as nectar guides." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro of the open face. The greenish column projects forward through the throat; the magenta venation on the lower lip catches the cabinet light." >}}
+
+The plant is still in the same hanging position, same sphagnum kokedama, same mister nozzle overhead. Lux meter still pending. The colour is closer to cool magenta than the deep blood-red the photographs in Taylor (1989) hint at — possibly clone variation, possibly light-driven. I'll see whether the second bud opens darker or paler than the first.
+
 ## References
 
 - **Taylor, P.** (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. The definitive treatment of the genus; the key to sect. *Orchidioides* (pp. 42–59) is where the *quelchii*/*campbelliana* characters live.
