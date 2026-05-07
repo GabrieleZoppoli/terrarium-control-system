@@ -4,6 +4,8 @@ description: "An open-source weather-mimicking terrarium simulating tepui climat
 ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 
+> **70+ species live inside.** [See the plant grid →](/areas/highland-terrarium/)
+
 <div class="highland-hero">
   <a class="highland-hero__interior" href="/collection/genera/dracula/" aria-label="Dracula pholeodytes inside the terrarium">
     <img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes pitcher orchid inside the highland terrarium" loading="eager" decoding="async">

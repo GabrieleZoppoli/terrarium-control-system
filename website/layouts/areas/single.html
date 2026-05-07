@@ -1,0 +1,56 @@
+{{ define "main" }}
+{{ $areaSlug := .Params.area_slug }}
+{{ $areaName := .Title }}
+{{ $manifest := .Site.Data.areas_manifest }}
+{{ $photos := index $manifest $areaSlug }}
+
+<article class="area-page">
+  <header class="area-hero">
+    <h1>{{ $areaName }}</h1>
+    <p class="count">{{ len $photos }} photo{{ if ne (len $photos) 1 }}s{{ end }}</p>
+    {{ with .Content }}{{ . }}{{ end }}
+  </header>
+
+  {{ if eq $areaSlug "highland-terrarium" }}
+    <aside class="area-crosslink">
+      <a href="/highland/">How this ecosystem is built →</a>
+    </aside>
+  {{ end }}
+
+  {{ if gt (len $photos) 0 }}
+    <section class="area-photo-grid">
+      {{ range $photos }}
+        <figure class="area-photo">
+          <img src="/img/areas/{{ $areaSlug }}/{{ . }}"
+               alt="{{ $areaName }}" loading="lazy">
+        </figure>
+      {{ end }}
+    </section>
+  {{ else }}
+    <p class="area-empty">No photos of this area yet.</p>
+  {{ end }}
+</article>
+
+<style>
+.area-page { max-width: 1200px; margin: 0 auto; padding: 24px; }
+.area-hero h1 { margin-bottom: 4px; }
+.area-hero .count { color: var(--muted, #666); margin-top: 0; }
+.area-crosslink { margin: 12px 0 24px; padding: 10px 14px;
+  background: rgba(122, 183, 255, 0.08);
+  border-left: 3px solid #7ab7ff; border-radius: 4px; }
+.area-crosslink a { text-decoration: none; }
+.area-photo-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 800px) {
+  .area-photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+  .area-photo-grid { grid-template-columns: 1fr; }
+}
+.area-photo { margin: 0; border-radius: 6px; overflow: hidden; background: #111; }
+.area-photo img { width: 100%; height: auto; display: block; }
+.area-empty { color: var(--muted, #888); padding: 20px 0; }
+</style>
+{{ end }}

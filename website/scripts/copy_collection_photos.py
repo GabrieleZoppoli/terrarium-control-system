@@ -28,6 +28,7 @@ WEB = Path("/Users/gabrielezoppoli/Documents/documenti personali/my website/terr
 DST = WEB / "static/img/collection"
 MANIFEST = WEB / "data/photo_manifest.json"
 
+
 QUOTE_CHARS = "'\u2018\u2019\u201C\u201D\""
 
 

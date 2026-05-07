@@ -10,9 +10,9 @@ provenance: "Indochinese evergreen forest, pendulous"
 slug: schoenorchis-pachyacris
 sources:
   - id: 336
-    vendor: From growlist (May 2020)
-    acquired: ""
-    price_eur: See notes
+    vendor: Großräschener Orchideen
+    acquired: Jul 2017
+    price_eur: 18
     location: Highland cabinet
     notes: Vendor/date unknown
 photos:

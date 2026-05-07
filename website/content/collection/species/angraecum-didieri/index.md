@@ -10,9 +10,9 @@ provenance: ""
 slug: angraecum-didieri
 sources:
   - id: 338
-    vendor: From growlist (May 2020)
-    acquired: ""
-    price_eur: See notes
+    vendor: Großräschener Orchideen
+    acquired: Dec 2016
+    price_eur: 17
     location: Fog shelves
     notes: Vendor/date unknown
 photos:

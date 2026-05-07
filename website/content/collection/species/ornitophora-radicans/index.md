@@ -11,9 +11,10 @@ slug: ornitophora-radicans
 sources:
   - id: 425
     vendor: Großräschener Orchideen
-    acquired: ""
-    price_eur: ""
+    acquired: Feb 2016
+    price_eur: 13
     location: Highland cabinet
+    notes: purchased as Sigmatostalix radicans (synonym)
 photos:
   - img/collection/ornitophora/ornitophora-radicans.jpg
 primary_photo: img/collection/ornitophora/ornitophora-radicans.jpg

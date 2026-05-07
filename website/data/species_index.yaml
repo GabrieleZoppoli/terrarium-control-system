@@ -32,6 +32,10 @@
   taxon: Cephalotus follicularis
   genus: Cephalotus
   primary_photo: img/collection/cephalotus/cephalotus-follicularis.jpg
+"ceratochilus-biglandulosus":
+  taxon: Ceratochilus biglandulosus
+  genus: Ceratochilus
+  primary_photo: img/collection/ceratochilus/ceratochilus-biglandulosus.jpg
 "comparettia-falcata":
   taxon: Comparettia falcata
   genus: Comparettia
@@ -106,6 +110,10 @@
   taxon: Ficus microcarpa
   genus: Ficus
   primary_photo: img/collection/ficus/ficus-microcarpa.jpg
+"gastrochilus-japonicus":
+  taxon: Gastrochilus japonicus
+  genus: Gastrochilus
+  primary_photo: img/collection/gastrochilus/gastrochilus-japonicus.jpg
 "genlisea-africana":
   taxon: Genlisea africana
   genus: Genlisea
@@ -115,6 +123,10 @@
   genus: Habenaria
   primary_photo: img/collection/habenaria/habenaria-radiata.jpg
   provenance: "Japanese wet meadows, egret-flower orchid"
+"haraella-retrocalla":
+  taxon: Haraella retrocalla
+  genus: Haraella
+  primary_photo: img/collection/haraella/haraella-retrocalla.jpg
 "heliamphora-godzilla":
   taxon: "Heliamphora 'Godzilla'"
   genus: Heliamphora
@@ -300,6 +312,11 @@
   genus: Platystele
   primary_photo: img/collection/platystele/platystele-baqueroi.jpg
   provenance: "Ecuadorian cloud forest, sub-cm flowers"
+"restrepia-sanguinea":
+  taxon: Restrepia sanguinea
+  genus: Restrepia
+  primary_photo: img/collection/restrepia/restrepia-sanguinea.jpg
+  provenance: Andean cloud forest
 "restrepia-vasquezii":
   taxon: Restrepia vasquezii
   genus: Restrepia
@@ -334,10 +351,22 @@
   genus: Sophronitis
   primary_photo: img/collection/sophronitis/sophronitis-brevipedunculata.jpg
   provenance: "Brazilian campos rupestres, 900–1,500 m"
+"tillandsia-aeranthos":
+  taxon: Tillandsia aeranthos
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-aeranthos.jpg
+"tillandsia-tricholepis":
+  taxon: Tillandsia tricholepis
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-tricholepis.jpg
 "tolumnia-hawkesiana":
   taxon: Tolumnia hawkesiana
   genus: Tolumnia
   primary_photo: img/collection/tolumnia/tolumnia-hawkesiana.jpg
+"trichoglottis-pusilla":
+  taxon: Trichoglottis pusilla
+  genus: Trichoglottis
+  primary_photo: img/collection/trichoglottis/trichoglottis-pusilla.jpg
 "utricularia-alpina":
   taxon: Utricularia alpina
   genus: Utricularia

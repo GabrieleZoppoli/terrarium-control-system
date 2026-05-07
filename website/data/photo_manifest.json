@@ -65,6 +65,18 @@
       "extras": []
     }
   ],
+  "ceratochilus": [
+    {
+      "taxon": "Ceratochilus biglandulosus",
+      "slug": "ceratochilus-biglandulosus",
+      "primary": "ceratochilus-biglandulosus.jpg",
+      "extras": [
+        "ceratochilus-biglandulosus-2.jpg",
+        "ceratochilus-biglandulosus-3.jpg",
+        "ceratochilus-biglandulosus-4.jpg"
+      ]
+    }
+  ],
   "chiloschista": [
     {
       "taxon": "Chiloschista lunifera",
@@ -242,6 +254,14 @@
       "extras": []
     }
   ],
+  "gastrochilus": [
+    {
+      "taxon": "Gastrochilus japonicus",
+      "slug": "gastrochilus-japonicus",
+      "primary": "gastrochilus-japonicus.jpg",
+      "extras": []
+    }
+  ],
   "genlisea": [
     {
       "taxon": "Genlisea africana",
@@ -256,6 +276,17 @@
       "slug": "habenaria-radiata",
       "primary": "habenaria-radiata.jpg",
       "extras": []
+    }
+  ],
+  "haraella": [
+    {
+      "taxon": "Haraella retrocalla",
+      "slug": "haraella-retrocalla",
+      "primary": "haraella-retrocalla.jpg",
+      "extras": [
+        "haraella-retrocalla-2.jpg",
+        "haraella-retrocalla-3.jpg"
+      ]
     }
   ],
   "heliamphora": [
@@ -342,7 +373,8 @@
       "slug": "iris-louisiana-bout-midnight",
       "primary": "iris-louisiana-bout-midnight.jpg",
       "extras": [
-        "iris-louisiana-bout-midnight-2.jpg"
+        "iris-louisiana-bout-midnight-2.jpg",
+        "iris-louisiana-bout-midnight-3.jpg"
       ]
     }
   ],
@@ -353,7 +385,9 @@
       "primary": "lepanthopsis-astrophora.jpg",
       "extras": [
         "lepanthopsis-astrophora-2.jpg",
-        "lepanthopsis-astrophora-3.jpg"
+        "lepanthopsis-astrophora-3.jpg",
+        "lepanthopsis-astrophora-4.jpg",
+        "lepanthopsis-astrophora-5.jpg"
       ]
     }
   ],
@@ -475,7 +509,8 @@
         "neofinetia-falcata-akausagi-10.jpg",
         "neofinetia-falcata-akausagi-11.jpg",
         "neofinetia-falcata-akausagi-12.jpg",
-        "neofinetia-falcata-akausagi-13.jpg"
+        "neofinetia-falcata-akausagi-13.jpg",
+        "neofinetia-falcata-akausagi-14.jpg"
       ]
     }
   ],
@@ -608,7 +643,11 @@
       "primary": "papilionanthe-teres.jpg",
       "extras": [
         "papilionanthe-teres-2.jpg",
-        "papilionanthe-teres-3.jpg"
+        "papilionanthe-teres-3.jpg",
+        "papilionanthe-teres-4.jpg",
+        "papilionanthe-teres-5.jpg",
+        "papilionanthe-teres-6.jpg",
+        "papilionanthe-teres-7.jpg"
       ]
     }
   ],
@@ -679,6 +718,14 @@
   ],
   "restrepia": [
     {
+      "taxon": "Restrepia sanguinea",
+      "slug": "restrepia-sanguinea",
+      "primary": "restrepia-sanguinea.jpg",
+      "extras": [
+        "restrepia-sanguinea-2.jpg"
+      ]
+    },
+    {
       "taxon": "Restrepia vasquezii",
       "slug": "restrepia-vasquezii",
       "primary": "restrepia-vasquezii.jpg",
@@ -693,7 +740,9 @@
       "slug": "rosa-sorbet-fruite",
       "primary": "rosa-sorbet-fruite.jpg",
       "extras": [
-        "rosa-sorbet-fruite-2.jpg"
+        "rosa-sorbet-fruite-2.jpg",
+        "rosa-sorbet-fruite-3.jpg",
+        "rosa-sorbet-fruite-4.jpg"
       ]
     }
   ],
@@ -802,12 +851,41 @@
       ]
     }
   ],
+  "tillandsia": [
+    {
+      "taxon": "Tillandsia aeranthos",
+      "slug": "tillandsia-aeranthos",
+      "primary": "tillandsia-aeranthos.jpg",
+      "extras": [
+        "tillandsia-aeranthos-2.jpg",
+        "tillandsia-aeranthos-3.jpg"
+      ]
+    },
+    {
+      "taxon": "Tillandsia tricholepis",
+      "slug": "tillandsia-tricholepis",
+      "primary": "tillandsia-tricholepis.jpg",
+      "extras": []
+    }
+  ],
   "tolumnia": [
     {
       "taxon": "Tolumnia hawkesiana",
       "slug": "tolumnia-hawkesiana",
       "primary": "tolumnia-hawkesiana.jpg",
       "extras": []
+    }
+  ],
+  "trichoglottis": [
+    {
+      "taxon": "Trichoglottis pusilla",
+      "slug": "trichoglottis-pusilla",
+      "primary": "trichoglottis-pusilla.jpg",
+      "extras": [
+        "trichoglottis-pusilla-2.jpg",
+        "trichoglottis-pusilla-3.jpg",
+        "trichoglottis-pusilla-4.jpg"
+      ]
     }
   ],
   "utricularia": [

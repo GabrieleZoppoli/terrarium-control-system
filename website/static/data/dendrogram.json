@@ -412,7 +412,12 @@
                       "name": "aeranthos",
                       "size": 1,
                       "vendor": "",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-aeranthos.jpg",
+                        "../img/collection/tillandsia/tillandsia-aeranthos-2.jpg",
+                        "../img/collection/tillandsia/tillandsia-aeranthos-3.jpg"
+                      ]
                     },
                     {
                       "name": "albertiana",
@@ -724,7 +729,10 @@
                       "name": "tricholepis",
                       "size": 1,
                       "vendor": "",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-tricholepis.jpg"
+                      ]
                     },
                     {
                       "name": "usneoides 'Silber Grob'",
@@ -780,7 +788,8 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/iris/iris-louisiana-bout-midnight.jpg",
-                        "../img/collection/iris/iris-louisiana-bout-midnight-2.jpg"
+                        "../img/collection/iris/iris-louisiana-bout-midnight-2.jpg",
+                        "../img/collection/iris/iris-louisiana-bout-midnight-3.jpg"
                       ]
                     },
                     {
@@ -1575,7 +1584,11 @@
                       "name": "astrophora",
                       "size": 1,
                       "vendor": "Varesina Orchidee",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/lepanthopsis/lepanthopsis-astrophora-4.jpg",
+                        "../img/collection/lepanthopsis/lepanthopsis-astrophora-5.jpg"
+                      ]
                     },
                     {
                       "name": "astrophora",
@@ -1783,7 +1796,8 @@
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-10.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-11.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-12.jpg",
-                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-13.jpg"
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-13.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-14.jpg"
                       ]
                     },
                     {
@@ -1875,7 +1889,10 @@
                       "name": "japonicus",
                       "size": 1,
                       "vendor": "Varesina Orchidee",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/gastrochilus/gastrochilus-japonicus.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1935,7 +1952,13 @@
                       "name": "biglandulosus",
                       "size": 1,
                       "vendor": "Großräschener Orchideen",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/ceratochilus/ceratochilus-biglandulosus.jpg",
+                        "../img/collection/ceratochilus/ceratochilus-biglandulosus-2.jpg",
+                        "../img/collection/ceratochilus/ceratochilus-biglandulosus-3.jpg",
+                        "../img/collection/ceratochilus/ceratochilus-biglandulosus-4.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1977,7 +2000,11 @@
                       "photos": [
                         "../img/collection/papilionanthe/papilionanthe-teres.jpg",
                         "../img/collection/papilionanthe/papilionanthe-teres-2.jpg",
-                        "../img/collection/papilionanthe/papilionanthe-teres-3.jpg"
+                        "../img/collection/papilionanthe/papilionanthe-teres-3.jpg",
+                        "../img/collection/papilionanthe/papilionanthe-teres-4.jpg",
+                        "../img/collection/papilionanthe/papilionanthe-teres-5.jpg",
+                        "../img/collection/papilionanthe/papilionanthe-teres-6.jpg",
+                        "../img/collection/papilionanthe/papilionanthe-teres-7.jpg"
                       ]
                     }
                   ]
@@ -1999,7 +2026,11 @@
                       "name": "sanguinea",
                       "size": 1,
                       "vendor": "Ecuagenera",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/restrepia/restrepia-sanguinea.jpg",
+                        "../img/collection/restrepia/restrepia-sanguinea-2.jpg"
+                      ]
                     },
                     {
                       "name": "trichoglossa var. xanthina",
@@ -2030,6 +2061,39 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/ornitophora/ornitophora-radicans.jpg"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Haraella",
+                  "children": [
+                    {
+                      "name": "retrocalla",
+                      "size": 1,
+                      "vendor": "Großräschener Orchideen",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/haraella/haraella-retrocalla.jpg",
+                        "../img/collection/haraella/haraella-retrocalla-2.jpg",
+                        "../img/collection/haraella/haraella-retrocalla-3.jpg"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Trichoglottis",
+                  "children": [
+                    {
+                      "name": "pusilla",
+                      "size": 1,
+                      "vendor": "Großräschener Orchideen",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/trichoglottis/trichoglottis-pusilla.jpg",
+                        "../img/collection/trichoglottis/trichoglottis-pusilla-2.jpg",
+                        "../img/collection/trichoglottis/trichoglottis-pusilla-3.jpg",
+                        "../img/collection/trichoglottis/trichoglottis-pusilla-4.jpg"
                       ]
                     }
                   ]
@@ -2631,7 +2695,9 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/rosa/rosa-sorbet-fruite.jpg",
-                        "../img/collection/rosa/rosa-sorbet-fruite-2.jpg"
+                        "../img/collection/rosa/rosa-sorbet-fruite-2.jpg",
+                        "../img/collection/rosa/rosa-sorbet-fruite-3.jpg",
+                        "../img/collection/rosa/rosa-sorbet-fruite-4.jpg"
                       ]
                     }
                   ]

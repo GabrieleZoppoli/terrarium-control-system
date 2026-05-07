@@ -47,10 +47,10 @@ Note: `node-red-contrib-ioplugin` is no longer required (Firmata protocol was re
 
 ### 3. Install Python Dependencies
 
-The Tapo smart plug control uses Python function nodes, and the Meross power monitoring daemon requires the `meross-iot` library:
+The Tapo smart plug control uses Python function nodes, and the Meross power monitor uses a standalone script:
 
 ```bash
-pip3 install PyP100 meross-iot paho-mqtt
+pip3 install PyP100 meross-iot
 ```
 
 ### 4. Install External Services
@@ -118,28 +118,7 @@ Adjust the longitude to your location if astronomical times should reflect your 
 
 ### Meross Power Monitoring (Optional)
 
-Power monitoring uses a persistent daemon (`meross_daemon.py`) that maintains a single session to the Meross cloud API and publishes readings to MQTT every 2 seconds. This is far more efficient than the previous approach of spawning a new Python process every 120 seconds with a full login/logout cycle.
-
-**Setup:**
-
-1. Edit `scripts/meross_daemon.py` and set your credentials:
-   - `EMAIL`: Your Meross account email
-   - `PASSWORD`: Your Meross account password
-   - `PLUG_NAME`: Your plug's name in the Meross app
-
-2. Install and start the systemd service:
-   ```bash
-   sudo cp systemd/meross-daemon.service /etc/systemd/system/
-   sudo systemctl daemon-reload
-   sudo systemctl enable --now meross-daemon
-   ```
-
-3. Verify it is publishing:
-   ```bash
-   mosquitto_sub -t meross/power/watts -C 3
-   ```
-
-Node-RED subscribes to `meross/power/watts` via an MQTT-in node on the Utilities tab. The daemon also accepts `on`/`off` commands on `meross/power/command`. If you don't have a Meross plug, disable the MQTT-in node (`meross_mqtt_in_001`) on the Utilities tab.
+The `meross_script.py` requires Meross cloud credentials. Edit the script and replace `YOUR_EMAIL` and `YOUR_PASSWORD` with your Meross account credentials. Also update `PLUG_ID` to match your plug's name. If you don't have a Meross plug, disable the "Get energy" inject node on the Utilities tab.
 
 ## Flow Tab Descriptions
 
@@ -227,7 +206,7 @@ Data logging, serial communication, power monitoring, and system diagnostics.
 - **Serial parser**: Routes incoming serial data — heartbeat (→ arduino_status), doors (→ door controller)
 - **Data Logger** (function): 14 outputs, reads global context every 60 seconds
 - **InfluxDB out** (×14+): One per measurement, writing to `highland` database
-- **Meross power monitoring**: MQTT subscription (`meross/power/watts`) from persistent daemon → parse → UI text + InfluxDB (2s updates)
+- **Meross power monitoring**: 120s inject → exec meross_script.py → parse → UI text + InfluxDB
 - **Mist counter persistence**: Startup inject → restore function → UI text nodes
 - **Resend PWM**: Periodic re-send of current fan states to prevent stale serial
 - **Send to All Fans**: Manual 4-output node for debugging (outlet, impeller, freezer, circulation)

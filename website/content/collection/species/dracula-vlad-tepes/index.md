@@ -11,8 +11,8 @@ slug: dracula-vlad-tepes
 sources:
   - id: 195
     vendor: Großräschener Orchideen
-    acquired: 2016
-    price_eur: 17.5
+    acquired: Feb 2016
+    price_eur: 26
     location: Highland cabinet
     notes: Part of €116.50 order
 photos:

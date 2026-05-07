@@ -11,8 +11,8 @@ slug: bulbophyllum-thiurum
 sources:
   - id: 416
     vendor: Großräschener Orchideen
-    acquired: ""
-    price_eur: ""
+    acquired: Jul 2017
+    price_eur: 14.95
     location: Windowsill
 photos:
   - img/collection/bulbophyllum/bulbophyllum-thiurum.jpg

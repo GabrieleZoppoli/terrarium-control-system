@@ -100,7 +100,7 @@ Belgium · [orchids-shop.com](https://orchids-shop.com). Madagascan miniature *A
 
 | Species | Vendor | Note |
 |---|---|---|
-| [*Aerangis fastuosa*](https://orchids-shop.com) | Claessen / Currlin | Jasmine scent, high-altitude Madagascar |
+| [*Aerangis fastuosa*](https://orchids-shop.com) | Claessen / Currlin / Lo Scrigno | Jasmine scent, mid-altitude Madagascar (intermediate with cool tolerance — upper zone, not Dracula end) |
 | [*Aerangis macrocentra*](https://www.currlin.com/en) | Currlin | Long-spurred white |
 | [*Aerangis curnowiana*](https://orchids-shop.com) | Claessen | Micro-Aerangis, near-leafless |
 | [*Angraecum compactum*](https://www.currlin.com/en) | Currlin | Tiny high-altitude Madagascan |

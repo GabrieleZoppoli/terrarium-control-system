@@ -3,7 +3,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 79,Aerangis mystacidii,Aerangis,mystacidii,,Celandroni Orchidee,20,Dec 2021,lost,highland,
 402,Aldrovanda vesiculosa,Aldrovanda,vesiculosa,,Un Angolo di Deserto,,Mar 2026,alive,outdoor,
 72,Angraecum viguieri,Angraecum,viguieri,,Celandroni Orchidee,25,Jun 2022,lost,shelves,
-338,Angraecum didieri,Angraecum,didieri,,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown
+338,Angraecum didieri,Angraecum,didieri,,Großräschener Orchideen,17,Dec 2016,alive,shelves,Vendor/date unknown
 290,Azolla filiculoides,Azolla,filiculoides,,Water Plants Italy,3,Mar 2020,lost,outdoor,Porzione piante a radice nuda (bare root); ×2 ordered (€6 total)
 291,Azolla filiculoides,Azolla,filiculoides,,Water Plants Italy,3,Mar 2020,lost,outdoor,Second unit; porzione piante a radice nuda (bare root)
 299,Azolla filiculoides,Azolla,filiculoides,,Eta Beta Vivaio,4,Feb 2025,alive,outdoor,
@@ -49,7 +49,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 276,Dendrobium victoriae-reginae,Dendrobium,victoriae-reginae,,Orchis Mundi,35,Apr 2021,alive,highland,
 329,Dendrobium speciosum,Dendrobium,speciosum,,From growlist (May 2020),See notes,,alive,windowsill,Vendor/date unknown
 330,Dendrobium loddigesii,Dendrobium,loddigesii,,From growlist (May 2020),See notes,,alive,windowsill,Vendor/date unknown
-331,Dendrobium trantuanii,Dendrobium,trantuanii,,From growlist (May 2020),See notes,,alive,highland,Vendor/date unknown
+331,Dendrobium trantuanii,Dendrobium,trantuanii,,Großräschener Orchideen,12.01,Jul 2017,alive,highland,Vendor/date unknown
 368,Dendrobium 'Berry Oda',Dendrobium,,'Berry Oda',Re di Fiori Vivai,,,alive,windowsill,Ibrido australiano (D. kingianum × D. 'Mini Pearl')
 92,Dionaea muscipula 'All Red Giant Form',Dionaea,muscipula,'All Red Giant Form',Carnivoria.eu,10,Mar 2016,alive,outdoor,6-8cm
 93,Dionaea muscipula 'Akai Ryu',Dionaea,muscipula,'Akai Ryu',Carnivoria.eu,8,Mar 2016,alive,outdoor,4-6cm
@@ -94,7 +94,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 365,Dionaea muscipula 'Charlie Mandon Spotted',Dionaea,muscipula,'Charlie Mandon Spotted',Paolo Mattevi,,,alive,outdoor,
 122,Dracula simia,Dracula,simia,,Ecuagenera Europe,35,Nov 2022,alive,highland,Mounted when available
 140,Dracula lotax,Dracula,lotax,,Großräschener Orchideen,See notes,Mar 2016,alive,highland,"Orchid; temperate grower, very small form"
-195,Dracula vlad-tepes,Dracula,vlad-tepes,,Großräschener Orchideen,17.5,2016,alive,highland,Part of €116.50 order
+195,Dracula vlad-tepes,Dracula,vlad-tepes,,Großräschener Orchideen,26,Feb 2016,alive,highland,Part of €116.50 order
 252,Dracula pholeodytes,Dracula,pholeodytes,,Ecuagenera Europe,51.4,Mar 2023,alive,highland,
 396,Dracula Raven 'Jet',Dracula,Raven,'Jet',Ecuagenera,,,alive,highland,Hybrid: D. vampira × D. roezlii
 397,Dracula 'Fake' hirsuta 'Yellow',Dracula,,'Fake' hirsuta 'Yellow',Ecuagenera Europe,,,alive,highland,Uncertain ID; possibly hirsuta f. xanthina
@@ -168,7 +168,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 243,Nageliella purpurea,Nageliella,purpurea,,Orchids & more,14,Apr 2024,alive,highland,Size (B)
 67,Neofinetia falcata 'Benitengu' 紅天狗,Neofinetia,falcata,'Benitengu' 紅天狗,Celandroni Orchidee,55,May 2025,alive,seasonal,
 216,Neofinetia falcata 'Akausagi' (赤兎),Neofinetia,falcata,'Akausagi' (赤兎),Negie Orchids,761.04,Nov 2020,alive,seasonal,"Originally $906.00 USD (Nov 2020 rate ~0.84); near blooming size with many babies; CITES + Phytosanitary + EMS shipping included; from Kiyoshige Negi, Japan"
-382,Neofinetia falcata,Neofinetia,falcata,,Großräschener Orchideen,,2017,alive,seasonal,
+382,Neofinetia falcata,Neofinetia,falcata,,Großräschener Orchideen,19,Feb 2016,alive,seasonal,
 71,Neostylis Lou Sneary,Neostylis,Lou Sneary,,Celandroni Orchidee,27.27,Nov 2023,alive,shelves,Neofinetia falcata x Rhynchostylis coelestis var coerulea
 1,Nepenthes pitopangii 'Ivory Colored Form' Clone:01,Nepenthes,pitopangii,'Ivory Colored Form' Clone:01,Andreas Wistuba,51.4,Mar 2024,alive,highland,Rooted cutting
 2,Nepenthes aristolochioides (Sumatra) Clone:NM03,Nepenthes,aristolochioides (Sumatra) Clone:NM03,,Andreas Wistuba,61.68,Jan 2023,alive,highland,Ø5-8cm
@@ -190,15 +190,15 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 271,Oncidium cheirophorum,Oncidium,cheirophorum,,Varesina Orchidee,22,Jun 2023,alive,highland,Zattera (mounted)
 272,Ornithocephalus estradae,Ornithocephalus,estradae,,Varesina Orchidee,30,Jun 2023,lost,highland,Specie rara; zattera (mounted)
 85,Paphiopedilum micranthum x self,Paphiopedilum,micranthum x self,,Celandroni Orchidee,25,Nov 2019,lost,windowsill,
-332,Paphiopedilum sanderianum,Paphiopedilum,sanderianum,,From growlist (May 2020),See notes,,lost,windowsill,Vendor/date unknown
+332,Paphiopedilum sanderianum,Paphiopedilum,sanderianum,,Großräschener Orchideen,119.95,Jun 2016,lost,windowsill,Vendor/date unknown
 333,Paphiopedilum delenatii vinicolor,Paphiopedilum,delenatii vinicolor,,From growlist (May 2020),See notes,,alive,windowsill,Vendor/date unknown
 411,Papilionanthe teres,Papilionanthe,teres,,Celandroni Orchidee,35,,alive,windowsill,
 75,Phalaenopsis finleyi,Phalaenopsis,finleyi,,Celandroni Orchidee,27.27,Dec 2021,alive,shelves,
 76,Phalaenopsis lowii,Phalaenopsis,lowii,,Celandroni Orchidee,22.73,Dec 2021,alive,shelves,
 77,Phalaenopsis gibbosa,Phalaenopsis,gibbosa,,Celandroni Orchidee,22.73,Dec 2021,alive,shelves,
 86,Phalaenopsis wilsonii,Phalaenopsis,wilsonii,,Celandroni Orchidee,22,Jan 2018,alive,shelves,
-334,Phalaenopsis parishii,Phalaenopsis,parishii,,From growlist (May 2020),See notes,,alive,shelves,Vendor/date unknown
-335,Phalaenopsis braceana,Phalaenopsis,braceana,,From growlist (May 2020),See notes,,lost,shelves,Vendor/date unknown
+334,Phalaenopsis parishii,Phalaenopsis,parishii,,Großräschener Orchideen,15,Jul 2017,alive,shelves,Vendor/date unknown
+335,Phalaenopsis braceana,Phalaenopsis,braceana,,Großräschener Orchideen,18,Jul 2017,lost,shelves,Vendor/date unknown
 410,Phalaenopsis stobartiana,Phalaenopsis,stobartiana,,Claessen Orchids,32.65,Apr 2026,alive,shelves,
 105,Phymatidium tillandsioides,Phymatidium,tillandsioides,,Orchideria di Morosolo,15,May 2023,alive,highland,Su zattera (mounted)
 296,Picea pungens 'Glauca Globosa',Picea,pungens,'Glauca Globosa',Vivai le Georgiche,55,Mar 2020,alive,outdoor,Ø24cm pot
@@ -278,7 +278,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 360,Sarracenia areolata L28MK × A28MK,Sarracenia,areolata L28MK × A28MK,,,,,alive,outdoor,
 361,Sarracenia × alata AF,Sarracenia,× alata AF,,,,,alive,outdoor,⚠️ Incrocio illeggibile
 362,Sarracenia leucophylla 'Big Bulbous Pink Pitchers',Sarracenia,leucophylla,'Big Bulbous Pink Pitchers',,,,alive,outdoor,
-336,Schoenorchis pachyacris,Schoenorchis,pachyacris,,From growlist (May 2020),See notes,,alive,highland,Vendor/date unknown
+336,Schoenorchis pachyacris,Schoenorchis,pachyacris,,Großräschener Orchideen,18,Jul 2017,alive,highland,Vendor/date unknown
 78,Seidenfadenia mitrata,Seidenfadenia,mitrata,,Celandroni Orchidee,31.82,Dec 2021,lost,windowsill,
 69,Sophronitis coccinea f. aurea ('Atsumi' x 'Perfection'),Sophronitis,coccinea,f. aurea ('Atsumi' x 'Perfection'),Celandroni Orchidee,150,Mar 2024,alive,highland,SM/JOGA Japan Selection
 118,Sophronitis pygmaea,Sophronitis,pygmaea,,Großräschener Orchideen,35,Nov 2023,lost,highland,
@@ -371,7 +371,7 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 413,Brocchinia reducta,Brocchinia,reducta,,eBay,,,alive,highland,
 414,"Dionaea muscipula ""Pom Pom""",Dionaea,muscipula,"""Pom Pom""",friend,,,alive,outdoor,
 415,Ficus microcarpa,Ficus,microcarpa,,friend,,,alive,windowsill,
-416,Bulbophyllum thiurum,Bulbophyllum,thiurum,,Großräschener Orchideen,,,alive,windowsill,
+416,Bulbophyllum thiurum,Bulbophyllum,thiurum,,Großräschener Orchideen,14.95,Jul 2017,alive,windowsill,
 417,"Sarracenia flava var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",Sarracenia,flava,"var. ornata FO6 ""Filiformis"" (V. Bordin), aberrant form",unknown,,,alive,outdoor,
 418,Utricularia prehensilis,Utricularia,prehensilis,,Klein Carnivors,,,alive,shelves,
 419,Restrepia vasquezii,Restrepia,vasquezii,,Ecuagenera,20.4,Nov 2022,alive,highland,
@@ -380,8 +380,10 @@ id,taxon,genus,species,infraspecific,source,price_eur,acquired_date,status,locat
 422,Restrepia trichoglossa var. xanthina,Restrepia,trichoglossa,var. xanthina,Ecuagenera,21.6,Nov 2022,alive,highland,yellow form
 423,Phalaenopsis lobbii,Phalaenopsis,lobbii,,unknown,,,alive,shelves,
 424,Leptotes unicolor,Leptotes,unicolor,,Orchids For You,,,alive,highland,
-425,Ornitophora radicans,Ornitophora,radicans,,Großräschener Orchideen,,,alive,highland,
+425,Ornitophora radicans,Ornitophora,radicans,,Großräschener Orchideen,13,Feb 2016,alive,highland,purchased as Sigmatostalix radicans (synonym)
 426,Sophronitis pygmaea (Brazil Import),Sophronitis,pygmaea (Brazil Import),,Celandroni Orchidee,27.27,Apr 2026,alive,highland,Third attempt after two earlier losses of this species
 427,Phalaenopsis malipoensis,Phalaenopsis,malipoensis,,Celandroni Orchidee,27.27,Apr 2026,alive,shelves,"Botanical species, Vietnam/S China"
 428,Phalaenopsis honghenensis,Phalaenopsis,honghenensis,,Celandroni Orchidee,25.45,Apr 2026,alive,shelves,"Botanical species, Yunnan (Honghe)"
 429,Utricularia quelchii,Utricularia,quelchii,,Klein Carnivors,38,Feb 2023,alive,highland,"Ilu Tepui provenance; currently flowering, April 2026"
+430,Haraella retrocalla,Haraella,retrocalla,,Großräschener Orchideen,13,Feb 2016,alive,,purchased as Haraella odorata (synonym); Großräschener Orchideen
+431,Trichoglottis pusilla,Trichoglottis,pusilla,,Großräschener Orchideen,13,Feb 2016,alive,,purchased as Trichoglottis putida; Großräschener Orchideen

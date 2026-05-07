@@ -4,6 +4,8 @@ description: "Un terrario open-source che riproduce il clima dei tepui per circa
 ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 ---
 
+> **Più di 70 specie vivono all'interno.** [Vedi la griglia delle piante →](/areas/highland-terrarium/)
+
 <div class="highland-hero">
   <a class="highland-hero__interior" href="/it/collection/genera/dracula/" aria-label="Dracula pholeodytes dentro al terrario">
     <img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes dentro al terrario" loading="eager" decoding="async">
