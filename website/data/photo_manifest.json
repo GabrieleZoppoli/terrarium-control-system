@@ -7,6 +7,19 @@
       "extras": []
     }
   ],
+  "amorphophallus": [
+    {
+      "taxon": "Amorphophallus konjak",
+      "slug": "amorphophallus-konjak",
+      "primary": "amorphophallus-konjak.jpg",
+      "extras": [
+        "amorphophallus-konjak-2.jpg",
+        "amorphophallus-konjak-3.jpg",
+        "amorphophallus-konjak-4.jpg",
+        "amorphophallus-konjak-5.jpg"
+      ]
+    }
+  ],
   "angraecum": [
     {
       "taxon": "Angraecum didieri",
@@ -319,7 +332,10 @@
       "primary": "heliamphora-macdonaldae-cerro-duida-isc.jpg",
       "extras": [
         "heliamphora-macdonaldae-cerro-duida-isc-2.jpg",
-        "heliamphora-macdonaldae-cerro-duida-isc-3.jpg"
+        "heliamphora-macdonaldae-cerro-duida-isc-3.jpg",
+        "heliamphora-macdonaldae-cerro-duida-isc-4.jpg",
+        "heliamphora-macdonaldae-cerro-duida-isc-5.jpg",
+        "heliamphora-macdonaldae-cerro-duida-isc-6.jpg"
       ]
     },
     {
@@ -374,7 +390,9 @@
       "primary": "iris-louisiana-bout-midnight.jpg",
       "extras": [
         "iris-louisiana-bout-midnight-2.jpg",
-        "iris-louisiana-bout-midnight-3.jpg"
+        "iris-louisiana-bout-midnight-3.jpg",
+        "iris-louisiana-bout-midnight-4.jpg",
+        "iris-louisiana-bout-midnight-5.jpg"
       ]
     }
   ],
@@ -493,6 +511,15 @@
     }
   ],
   "neofinetia": [
+    {
+      "taxon": "Neofinetia falcata",
+      "slug": "neofinetia-falcata",
+      "primary": "neofinetia-falcata.jpg",
+      "extras": [
+        "neofinetia-falcata-2.jpg",
+        "neofinetia-falcata-3.jpg"
+      ]
+    },
     {
       "taxon": "Neofinetia falcata 'Akausagi' (赤兎)",
       "slug": "neofinetia-falcata-akausagi",
@@ -912,7 +939,14 @@
         "utricularia-quelchii-3.jpg",
         "utricularia-quelchii-4.jpg",
         "utricularia-quelchii-5.jpg",
-        "utricularia-quelchii-6.jpg"
+        "utricularia-quelchii-6.jpg",
+        "utricularia-quelchii-7.jpg",
+        "utricularia-quelchii-8.jpg",
+        "utricularia-quelchii-9.jpg",
+        "utricularia-quelchii-10.jpg",
+        "utricularia-quelchii-11.jpg",
+        "utricularia-quelchii-12.jpg",
+        "utricularia-quelchii-13.jpg"
       ]
     },
     {

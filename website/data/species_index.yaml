@@ -6,6 +6,10 @@
   genus: Aldrovanda
   primary_photo: img/collection/aldrovanda/aldrovanda-vesiculosa.jpg
   provenance: Cosmopolitan aquatic trapdoor carnivore
+"amorphophallus-konjak":
+  taxon: Amorphophallus konjak
+  genus: Amorphophallus
+  primary_photo: img/collection/amorphophallus/amorphophallus-konjak.jpg
 "angraecum-didieri":
   taxon: Angraecum didieri
   genus: Angraecum
@@ -222,6 +226,10 @@
   genus: Mediocalcar
   primary_photo: img/collection/mediocalcar/mediocalcar-decoratum.jpg
   provenance: "New Guinea highlands, orange bells"
+"neofinetia-falcata":
+  taxon: Neofinetia falcata
+  genus: Neofinetia
+  primary_photo: img/collection/neofinetia/neofinetia-falcata.jpg
 "neofinetia-falcata-akausagi-赤兎":
   taxon: "Neofinetia falcata 'Akausagi' (赤兎)"
   genus: Neofinetia

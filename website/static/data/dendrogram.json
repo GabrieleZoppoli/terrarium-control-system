@@ -328,6 +328,24 @@
                       "status": "dead"
                     }
                   ]
+                },
+                {
+                  "name": "Amorphophallus",
+                  "children": [
+                    {
+                      "name": "konjak",
+                      "size": 1,
+                      "vendor": "unknown",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/amorphophallus/amorphophallus-konjak.jpg",
+                        "../img/collection/amorphophallus/amorphophallus-konjak-2.jpg",
+                        "../img/collection/amorphophallus/amorphophallus-konjak-3.jpg",
+                        "../img/collection/amorphophallus/amorphophallus-konjak-4.jpg",
+                        "../img/collection/amorphophallus/amorphophallus-konjak-5.jpg"
+                      ]
+                    }
+                  ]
                 }
               ]
             },
@@ -789,7 +807,8 @@
                       "photos": [
                         "../img/collection/iris/iris-louisiana-bout-midnight.jpg",
                         "../img/collection/iris/iris-louisiana-bout-midnight-2.jpg",
-                        "../img/collection/iris/iris-louisiana-bout-midnight-3.jpg"
+                        "../img/collection/iris/iris-louisiana-bout-midnight-3.jpg",
+                        "../img/collection/iris/iris-louisiana-bout-midnight-5.jpg"
                       ]
                     },
                     {
@@ -1776,7 +1795,12 @@
                       "name": "falcata",
                       "size": 1,
                       "vendor": "Großräschener Orchideen",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/neofinetia/neofinetia-falcata.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-2.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-3.jpg"
+                      ]
                     },
                     {
                       "name": "falcata 'Akausagi' (赤兎)",
@@ -2809,7 +2833,10 @@
                         "../img/collection/heliamphora/heliamphora-macdonaldae.jpg",
                         "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc.jpg",
                         "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg",
-                        "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-3.jpg"
+                        "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-3.jpg",
+                        "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-4.jpg",
+                        "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-5.jpg",
+                        "../img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-6.jpg"
                       ]
                     },
                     {
@@ -3491,7 +3518,14 @@
                         "../img/collection/utricularia/utricularia-quelchii-2.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-3.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-4.jpg",
-                        "../img/collection/utricularia/utricularia-quelchii-5.jpg"
+                        "../img/collection/utricularia/utricularia-quelchii-5.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-7.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-8.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-9.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-10.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-11.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-12.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-13.jpg"
                       ]
                     }
                   ]
