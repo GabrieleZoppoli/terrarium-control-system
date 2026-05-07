@@ -1,0 +1,49 @@
+name: Weekly ledger refresh
+
+# Refreshes website/data/ledger.json from the Pi's public ledger endpoint
+# every Sunday at 04:00 UTC. If the file changed, commits and pushes —
+# which then triggers hugo-deploy.yml.
+#
+# The fetch script (website/scripts/fetch_ledger.py) gracefully falls back
+# to the previous file on Pi outage, so a Pi-down Sunday won't break the
+# job — it just produces a no-op commit (which we skip below).
+#
+# Manual trigger: actions tab -> "Weekly ledger refresh" -> "Run workflow".
+
+on:
+  schedule:
+    # Sunday 04:00 UTC = 06:00 CEST (summer) / 05:00 CET (winter)
+    - cron: "0 4 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Refresh ledger.json from live endpoint
+        run: python3 website/scripts/fetch_ledger.py
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- website/data/ledger.json; then
+            echo "ledger.json unchanged - no commit"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add website/data/ledger.json
+          git commit -m "auto: weekly ledger refresh"
+          git push
