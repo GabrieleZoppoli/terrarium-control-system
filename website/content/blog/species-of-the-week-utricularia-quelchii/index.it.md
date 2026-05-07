@@ -48,6 +48,8 @@ Nelle *Orchidioides* epifite le bladders sono più piccole e più nascoste rispe
 
 Carnivors & More (Christian e Claudia Klein, Germania), inizio 2023, etichetta *Utricularia quelchii*, Ilu Tepui. Una manciata di foglie a goccia su *Sphagnum* vivo, qualche trappola già visibile, e tre anni di sole foglie prima del peduncolo della settimana scorsa.
 
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-7.jpg" caption="Il bocciolo che si apre — il magenta è alla saturazione massima poco prima che la corolla si dispieghi, con il labbro inferiore che inizia a staccarsi dalla galea." >}}
+
 ## Come la coltivo
 
 - 12–22 °C, oscillazione giorno/notte di 4–6 °C. L'armadio replica un profilo Chinchiná (Colombia, 4,98 °N, ~1.300 m, 13,5–24,3 °C / 75–98 % UR) — un grado o due più caldo della cima dell'Ilú ma dentro l'envelope pubblicato di 1.400–2.800 m della specie.[^wikip]
@@ -58,6 +60,26 @@ Carnivors & More (Christian e Claudia Klein, Germania), inizio 2023, etichetta *
 
 Questo **si discosta dalla raccomandazione di Barry Rice** — Rice preferisce un mix *Sphagnum*+perlite tenuto "un po' più asciutto di quanto sei abituato con le piante carnivore", innaffiato sempre dall'alto, e mette in guardia contro l'irrigazione a sottovaso.[^rice5592] Il mio substrato è più vicino alla saturazione permanente che a "un po' più asciutto". Il motivo per cui qui funziona, credo, è il flusso d'aria: il movimento continuo mantiene lo *Sphagnum* vivo ossigenato anche quando resta bagnato. La ricetta di Rice è il punto di partenza prudente — perlite + dosaggio più asciutto perdonano un setup ad aria ferma. Il mio è ciò che è venuto fuori dal mettere la pianta sotto un mister, in aria in movimento, e non toccarla per tre anni.
 
+## Rosa, rosso, o entrambi?
+
+La mia è magenta — un magenta freddo sulla galea che sfuma a bianco-rosato sul labbro inferiore — non il rosso sangue pubblicizzato da molti vivaisti e visibile in alcune foto in habitat. Vale la pena tirarne il filo: "fiore rosso" si rivela una descrizione di comodo e la specie mostra una variazione cromatica intraspecifica reale.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-11.jpg" caption="Vista frontale della mia pianta. La galea è un magenta pulito, il callus della gola un carminio più scuro, il labbro inferiore impallidisce verso il bianco-rosato ai bordi. Nessun rosso saturo da nessuna parte." >}}
+
+I coltivatori di riferimento pubblicano "rosso", punto. Barry Rice scrive che *quelchii* "condivide con *U. campbelliana* e *U. menziesii* la peculiarità di essere una *Utricularia* a fiore rosso" — niente granularità a livello di clone.[^rice5656] Le descrizioni dei vivaisti vanno da "fantastici fiori rossi"[^heldros] a "fiori rosa-rossi" a "rosa-rosso intenso".
+
+La fonte più informativa che ho trovato è la fotografia in habitat dal Monte Roraima. **An D Smith** ha documentato la variazione cromatica direttamente sulla cima e ha postato la sequenza sul forum CPUK: rosa, rosa con centro rosso, rosso-e-rosa, arancio-rosso-e-rosa, rosso puro.[^cpuk] L'osservazione chiave:
+
+> "Le sole forme a fiore rosso di *U. quelchii* sono state viste sul Roraima." Sugli altri tepui le piante mostravano fiori rosa, con peduncoli più lunghi e più fiori per scapo.[^cpuk]
+
+Combacia con la mia. È etichettata **Ilu Tepui** — vetta diversa, colore atteso rosa-magenta, scapo a un solo fiore aperto (il secondo è ancora chiuso ma sullo stesso scapo). Le piante "rosso sangue" dei cataloghi sono provenienze del Roraima; chi non differenzia per tepui sta probabilmente mescolando le due cose.
+
+Perché il Roraima porta il rosso? Smith e gli habitué del CPUK avanzano l'**ipotesi ibridogena**: *U. campbelliana* — l'altra *Utricularia* pantepui a fiore rosso — cresce a fianco di *quelchii* sul Roraima ma non (o raramente) sugli altri tepui.[^cpuk] Due fiori saturi, rossi e con sindrome ornitofila nello stesso metro quadro è la situazione tipica per swarm ibridi. Nessuno studio molecolare ha confermato (per quanto ho trovato), quindi resta un'ipotesi di lavoro. Ma è una spiegazione pulita per cui il fenotipo rosso scuro si concentra alla località tipica.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro della faccia aperta. La colonna verdognola si proietta in avanti; le macchie scure dentro la gola sono i marker callosi condivisi nella sez. *Orchidioides*, presunti come guida al nettare. Il colore è magenta, non rosso." >}}
+
+Quindi quando dico "specie a fiore rosso" nelle sezioni precedenti, la lettura precisa è: *quelchii* appartiene al piccolo gruppo di utricularie pigmentate verso le lunghezze d'onda lunghe, con un'ampia dispersione intraspecifica dal rosa (Ilu, Auyán, ecc.) al magenta (la mia) al rosso (Roraima — possibilmente con introgressione). Senza lavoro molecolare i confini restano sfumati.
+
 ## Curiosità
 
 **Fiori rossi nel genere.** Un piccolo gruppo: *U. quelchii* (Pantepui), *U. campbelliana* (Pantepui), *U. menziesii* (Australia sud-occidentale, sezione non imparentata, colore evoluto in modo indipendente), e qualche rosso meno saturo come *U. reniformis*.[^rice5656] Per *U. campbelliana* è documentata la visita di colibrì; per *U. menziesii* la melifaga *Acanthorhynchus superciliosus* (Western Spinebill); per *U. quelchii* non ho trovato in letteratura una conferma sul pollinatore. Si suppone una convergenza verso pollinatori uccellini in due lignaggi non imparentati, ma i dati sono pochi.[^plachno2019]
@@ -65,6 +87,8 @@ Questo **si discosta dalla raccomandazione di Barry Rice** — Rice preferisce u
 **Vive nelle *Brocchinia*.** Rice annota che *quelchii* "spesso cresce nelle ascelle fogliari di *Brocchinia*"[^rice5656] — le grandi bromeliacee a serbatoio del Pantepui, anch'esse carnivore (per *B. reducta*, Givnish 1984). L'utricularia abita la rosetta cisterna, sfrutta le prede catturate sia dalla pianta ospite sia da sé, e si avvantaggia del buffer di umidità che la bromeliacea mantiene.
 
 **Tuberosa.** Diverse specie di *Orchidioides*, *quelchii* compresa, immagazzinano acqua in tuberi sotterranei e tollerano periodi di siccità lieve che altre utricularie epifite non sopportano.[^rice5656] In coltivazione raramente conta; sotto nebulizzazione costante i tuberi restano piccoli e la pianta corre a stoloni.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Tre-quarti, con il secondo bocciolo (ancora chiuso) visibile sotto. Scapi a due fiori sono riportati per le popolazioni non-Roraima; scapi a fiore singolo per il Roraima." >}}
 
 ## Links
 
@@ -94,3 +118,5 @@ Questo **si discosta dalla raccomandazione di Barry Rice** — Rice preferisce u
 [^vincent2011]: Vincent, O., Weißkopf, C., Poppinga, S., Masselter, T., Speck, T., Joyeux, M., Quilliet, C. & Marmottant, P. (2011). Ultra-fast underwater suction traps. *Proceedings of the Royal Society B* 278: 2909–2914. <https://doi.org/10.1098/rspb.2010.2292>. Apertura della porta e ingresso d'acqua nelle *Utricularia* acquatiche misurati a 0,3–0,7 ms.
 [^rodrigues]: Rodrigues, F. G. *et al.* (2017). Phylogenetics of *Utricularia* (Lentibulariaceae) and the expanded sect. *Orchidioides*: morphology and molecular data place the former sect. *Iperua* within *Orchidioides*. *Annals of Botany* 120 (5): 709–724. <https://doi.org/10.1093/aob/mcx088>.
 [^plachno2019]: Płachno, B. J. *et al.* (2019). Floral micromorphology and floral nectaries in *Utricularia* sect. *Orchidioides* and sect. *Iperua*. *Plant Biology* 21: 105–116. <https://pmc.ncbi.nlm.nih.gov/articles/PMC6344090/>.
+[^cpuk]: Smith, A. D. e partecipanti del Forum CPUK. *Flower colour variation of Utricularia quelchii*. CPUK Carnivorous Plants forum, thread "Carnivorous Plants in Habitat". <https://www.cpukforum.com/forum/index.php?/topic/32751-flower-colour-variation-of-utricularia-quelchii/>. Foto dal Monte Roraima che documentano fenotipi rosa, rosa-con-rosso, arancio-rosso e rosso puro; osservazione che il rosso è ristretto al Roraima e discussione di possibile introgressione di *U. campbelliana*.
+[^heldros]: Heldros (PL). *Utricularia QUELCHII — Ilu Tepui*. Pagina prodotto, consultata 2026-05-07. <https://heldros.com/en_US/p/Utricularia-QUELCHII-Ilu-Tepui/177>. La descrizione "fantastici fiori rossi" è citata come esempio di copy di vivaisti che non differenzia per provenienza.

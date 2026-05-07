@@ -48,6 +48,8 @@ The traps in epiphytic *Orchidioides* are smaller and harder to see than in aqua
 
 Carnivors & More (Christian and Claudia Klein, Germany), early 2023, label *Utricularia quelchii*, Ilu Tepui. A handful of teardrop leaves on live *Sphagnum*, a few traps already visible, and three years of nothing-but-leaves before last week's spike.
 
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-7.jpg" caption="The bud cracking open — magenta is at peak saturation right before the corolla unfolds, with the lower lip starting to peel away from the galea." >}}
+
 ## Growing it
 
 - 12–22 °C, day/night drop of 4–6 °C. The cabinet runs a Chinchiná, Colombia profile (4.98 °N, ~1,300 m, 13.5–24.3 °C / 75–98 % RH) — a degree or two warmer than the Ilu summit but inside the published 1,400–2,800 m envelope for the species.[^wikip]
@@ -58,6 +60,26 @@ Carnivors & More (Christian and Claudia Klein, Germany), early 2023, label *Utri
 
 This **departs from Barry Rice's recommendation** — Rice prefers a *Sphagnum*+perlite mix kept "a little drier than you are used to with carnivorous plants", watered from above only, and warns that tray watering is harmful.[^rice5592] My substrate is closer to permanently saturated than to "a little drier". The reason it works here, I think, is the airflow: continuous air movement keeps the live *Sphagnum* oxygenated even while it stays wet. Rice's recipe is the conservative starting point — perlite + drier dosing forgive a still-air setup. Mine is what fell out of putting the plant under a mister, in moving air, and not touching it for three years.
 
+## Pink, red, or both?
+
+Mine is magenta — a cool magenta on the galea, fading to white-pink on the lower lip — not the blood-red advertised by many vendors and depicted in some habitat photos. Worth pulling on this thread, because "red-flowered" turns out to be a generic-bin description and the species shows real intraspecific colour variation.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-11.jpg" caption="Head-on view of my plant. Galea is a clean magenta, throat callus a darker carmine, lower lip pales to white-pink at the edges. No saturated red anywhere." >}}
+
+The reference cultivators publish "red", full stop. Barry Rice writes that *quelchii* "shares with *U. campbelliana* and *U. menziesii* the distinction of being a red-flowered *Utricularia*" — no clone-level granularity.[^rice5656] Vendor copy goes anywhere from "fantastic red flowers"[^heldros] to "amazing pink red flowers" to "pink to deep red".
+
+The most informative source I've found is in-habitat photography from Mt. Roraima itself. **An D Smith** documented colour variation directly on the summit and posted the run on the CPUK forum: pink, pink-with-red-centre, red-and-pink, orange-red-and-pink, and pure red.[^cpuk] The key observation:
+
+> "The only red-flowered forms of *U. quelchii* were seen on Roraima." Plants on other tepuis showed pink, with longer flower stalks and multiple flowers per scape.[^cpuk]
+
+That matches my plant. It's labelled **Ilu Tepui** — different summit, expected pink-to-magenta colour, single-bud spike (the second is still closed but it's on the same scape). The "blood red" plants in catalogues are Roraima provenances; vendors that don't differentiate by tepui are probably mixing the two.
+
+Why does Roraima carry red? Smith and the CPUK regulars float the **hybrid hypothesis**: *U. campbelliana* — the other red-flowered Pantepui *Utricularia* — grows alongside *quelchii* on Roraima but not (or rarely) on the other tepuis.[^cpuk] Two saturated-red, hummingbird-attracting flowers in the same square metre is the kind of setup that produces hybrid swarms. No molecular study has confirmed this yet (none I could find), so it stays a working hypothesis. But it's a clean explanation for why the deep-red phenotype clusters at the type locality.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro of the open face. The greenish column projects forward; the dark blotches inside the throat are the callus markings shared across sect. *Orchidioides*, presumed to function as nectar guides. Colour reads as magenta, not red." >}}
+
+So when I say "red-flowered species" in the previous sections, the precise reading is: *quelchii* belongs to the small handful of pigmented bladderworts pulling toward the long-wavelength end, with substantial intraspecific spread from pink (Ilu, Auyán, etc.) through magenta (mine) to red (Roraima — possibly with introgression). Without molecular work the boundaries stay fuzzy.
+
 ## Curios
 
 **Red flowers in the genus.** A small set: *U. quelchii* (Pantepui), *U. campbelliana* (Pantepui), *U. menziesii* (south-western Australia, unrelated section, colour evolved independently), and a few less-saturated reds like *U. reniformis*.[^rice5656] *U. campbelliana* has documented hummingbird visitation; *U. menziesii* is visited by Western Spinebill (*Acanthorhynchus superciliosus*); *U. quelchii*'s pollinator is not yet documented in the literature I could find. Inferred bird-pollination convergence across two unrelated lineages, but the data are thin.[^plachno2019]
@@ -65,6 +87,8 @@ This **departs from Barry Rice's recommendation** — Rice prefers a *Sphagnum*+
 **Lives in *Brocchinia*.** Rice notes *quelchii* "often grows in the leaf axils of *Brocchinia*"[^rice5656] — the giant tank bromeliads of the Pantepui, themselves carnivorous (per Givnish 1984 for *B. reducta*). The bladderwort hangs out in the rosette tank, draws nutrients from prey trapped by both itself and its host, and benefits from the moisture buffer the bromeliad maintains.
 
 **Tuberous.** Several *Orchidioides* species, including *quelchii*, store water in subterranean tubers and survive mild dry periods that other epiphytic *Utricularia* don't tolerate.[^rice5656] In cultivation this rarely matters; under permanent mist the tubers stay small and the plant runs on stolons.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Three-quarters profile, with the second (still-closed) bud visible below. Two-bud scapes are reported from non-Roraima populations; single-flower scapes from Roraima." >}}
 
 ## Links
 
@@ -94,3 +118,5 @@ This **departs from Barry Rice's recommendation** — Rice prefers a *Sphagnum*+
 [^vincent2011]: Vincent, O., Weißkopf, C., Poppinga, S., Masselter, T., Speck, T., Joyeux, M., Quilliet, C. & Marmottant, P. (2011). Ultra-fast underwater suction traps. *Proceedings of the Royal Society B* 278: 2909–2914. <https://doi.org/10.1098/rspb.2010.2292>. Door-opening and water inrush in aquatic *Utricularia* timed at 0.3–0.7 ms.
 [^rodrigues]: Rodrigues, F. G. *et al.* (2017). Phylogenetics of *Utricularia* (Lentibulariaceae) and the expanded sect. *Orchidioides*: morphology and molecular data place the former sect. *Iperua* within *Orchidioides*. *Annals of Botany* 120 (5): 709–724. <https://doi.org/10.1093/aob/mcx088>.
 [^plachno2019]: Płachno, B. J. *et al.* (2019). Floral micromorphology and floral nectaries in *Utricularia* sect. *Orchidioides* and sect. *Iperua*. *Plant Biology* 21: 105–116. <https://pmc.ncbi.nlm.nih.gov/articles/PMC6344090/>.
+[^cpuk]: Smith, A. D. and CPUK Forum participants. *Flower colour variation of Utricularia quelchii*. CPUK Carnivorous Plants forum, "Carnivorous Plants in Habitat" thread. <https://www.cpukforum.com/forum/index.php?/topic/32751-flower-colour-variation-of-utricularia-quelchii/>. Photographs from Mt. Roraima documenting pink, red-with-pink, orange-red and pure-red phenotypes; observation that red is restricted to Roraima and the discussion of possible *U. campbelliana* introgression.
+[^heldros]: Heldros (PL). *Utricularia QUELCHII — Ilu Tepui*. Vendor product page, accessed 2026-05-07. <https://heldros.com/en_US/p/Utricularia-QUELCHII-Ilu-Tepui/177>. Vendor description "fantastic red flowers" cited as an example of catalogue copy that doesn't differentiate provenance.
