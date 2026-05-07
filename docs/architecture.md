@@ -46,7 +46,7 @@ Switched mains power for high-current loads, controlled via the PyP100 Python li
 
 | Plug | IP Address | Controls |
 |------|------------|----------|
-| Lights | 192.168.1.55 | 4×100W ChilLED Logic Puck V3 array |
+| Lights | 192.168.1.55 | 4× ChilLED Logic Puck V3 (100 W nameplate each, hardware-capped to ~60% via screwdriver potentiometer, PWM-dimmed during runtime — array peaks ~150–200 W combined) |
 | Mister | 192.168.1.199 | MistKing diaphragm pump |
 | Compressor | 192.168.1.196 | Vitrifrigo ND50 compressor unit |
 

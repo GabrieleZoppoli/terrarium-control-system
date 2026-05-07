@@ -51,7 +51,7 @@ Commutano l'alimentazione di rete per carichi ad alta corrente, controllate dall
 
 | Presa | IP | Controlla |
 |-------|----|-----------|
-| Luci | 192.168.1.55 | Array 4×100 W ChilLED Logic Puck V3 |
+| Luci | 192.168.1.55 | 4× ChilLED Logic Puck V3 (100 W nominali ciascuno, cap hardware a ~60% via potenziometro a vite, poi PWM in run-time — picco array ~150–200 W combinati) |
 | Nebulizzatore | 192.168.1.199 | Pompa a diaframma MistKing |
 | Compressore | 192.168.1.196 | Unità compressore Vitrifrigo ND50 |
 

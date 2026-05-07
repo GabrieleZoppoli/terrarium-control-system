@@ -47,7 +47,7 @@ fan_speed = BASE_SPEED + P + I + D
 | **Kd** | 10 | Derivative gain — dampens oscillation, reacts to rate of change |
 | **BASE_SPEED** | 50 | Resting fan speed at zero error (~20% duty cycle) |
 | **MIN_SPEED** | 40 | Minimum fan PWM (~16%) — ensures continuous air circulation |
-| **MAX_SPEED** | 255 | Uniform fan-speed ceiling — was time-of-day-varying (180/230/255) until 2026-04-30, when noise-window caps were removed |
+| **MAX_SPEED** | 230/255 | Time-of-day cap: 255 (04:00–07:00 morning blast), then weekday/weekend caps (see below) |
 
 These gains are stored in flow context (persists across Node-RED restarts) and are adjustable at runtime via the Node-RED Dashboard UI text input (format: `Kp,Ki,Kd`).
 
@@ -131,10 +131,13 @@ The maximum change is capped at 20 PWM per cycle to protect the serial communica
 ```
 raw_output = BASE_SPEED + P + I + D
 fan_speed  = clamp(round(raw_output), MIN_SPEED, MAX_SPEED)
-           = clamp(round(raw_output), 40, 255)
-```
+           = clamp(round(raw_output), 40, MAX_SPEED)
 
-`MAX_SPEED` is uniform at 255 (since 2026-04-30 — earlier time-of-day quiet-hour caps at 180/230 were removed because the cabinet ran fans during the day and they didn't materially change humidity dynamics). The morning A/B experiment that briefly forced fan speed to 75 or 255 by day-of-year parity was also removed (2026-05-03) after 13 days of data showed the treatment effect was within noise (≤0.5%, p>0.9).
+MAX_SPEED schedule:
+  04:00–07:00 (all days):  255  (morning humidity blast)
+  Weekday after 07:00:     06:30–08:00 → 180, 08:00–17:00 → 255, else → 230
+  Weekend after 07:00:     07:00–10:00 → 180, 10:00–17:00 → 255, else → 230
+```
 
 The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) simultaneously via serial commands (`P45,<value>` and `P46,<value>`). The evaporator fan (pin 44) and circulation fan (pin 12) operate independently based on compressor hysteresis control.
 
@@ -142,18 +145,36 @@ The fan speed is applied to the outlet fan (pin 45) and impeller fan (pin 46) si
 
 The PID controller output is blocked (returns null) when:
 
-1. **Door safety active** — all fans are forced to 0 by the door safety controller
+1. **Door safety active** — all fans are forced to 0 by the door safety controller (unless manual override is set, see below)
 2. **Manual mode is active** — operator has set a fixed fan speed via the Dashboard UI
 3. **Mister is ON** — safety interlock stops all fans during misting
 4. **Night mode** — fans off from midnight to 04:00 (PID active 04:00–00:00)
 5. **No data** — humidity difference is undefined (sensor offline)
 6. **Time gap** — dt > 120s (NR restart, prevents integral spike from stale timestamps)
 
+## Operator Controls — Auto / Pause / Max
+
+The Dashboard exposes three buttons that wire to the **Manual Fan Control** function. Each button sets `flow.manual_fan_mode` and `global.payload.manual_fan_mode` to the same value, so every consumer (PID, Night Mode, fan writers, door-safety, resend-PWM) sees one consistent state.
+
+| Button | `manual_fan_mode` | `manual_fan_speed` | Effect |
+|---|---|---|---|
+| **Auto** | `auto` | cleared | Reverts to PID / freezer-status / Night Mode control. Re-fires the outlet and freezer trigger paths so the next PID cycle catches up. |
+| **Pause** | `manual` | `0` | All four fans (P12 / P44 / P45 / P46) → 0. Useful for stress tests on cabinet temperature or saturation humidity, where you want to remove fan-driven mixing entirely. |
+| **Max** | `manual` | `255` | All four fans → 255. Designed for cleaning / drying with the doors open: the manual override is honoured **even while door-safety is active**, so the operator can run airflow at full while the lid is off. |
+
+**Door-safety interaction with manual mode** (since 2026-05-06):
+
+- In `manual_fan_mode === 'manual'`, the door-safety open/close transitions skip their fan commands. Light-PWM force, freezer-Tapo OFF and mister-Tapo OFF still happen — only the fan stop/restore is bypassed.
+- In `auto`, door-safety is unchanged: opening any door sends `P12,0 / P44,0 / P45,0 / P46,0` immediately, and closing both doors restores `P12 / P44` to baseline 140 (or 255 if compressor on) and `P45 / P46` to the latest PID-computed speed.
+- The four `fan_writer_*` nodes (P12, P44, P45, P46) check both `door_safety_active` AND `manual_fan_mode`: they only block when door-safety is active *and* not in manual mode.
+
+**Arduino-reset interaction:** `Resend All PWM` (which fires when the watchdog detects an Arduino reboot) restores the manual override speed if `manual_fan_mode === 'manual'`. So a cosmic-ray-induced reset in the middle of a cleaning session doesn't drop the fans.
+
 ## Control Hierarchy
 
 ```
-Priority 0 (highest): Door safety        → all fans stop (0 PWM)
-Priority 1:           Manual override     → fixed user-set speed
+Priority 0 (highest): Manual override     → fixed user-set speed (bypasses door safety on fans)
+Priority 1:           Door safety         → all fans stop (0 PWM) — only in auto mode
 Priority 2:           Mister interlock    → all fans stop (0 PWM)
 Priority 3:           Night mode          → fans off (midnight to 04:00)
 Priority 4 (lowest):  PID automatic       → computed fan speed
@@ -168,7 +189,7 @@ Note: The A/B night experiment is suspended — Night Mode always outputs 0 duri
 | At setpoint | 0 | 0.15 | 0 | ~0 | 0 | 50 | 50 (~20%) |
 | Slightly humid (+1% RH) | +1 | 0.15 | +7.5 | ~+3 | ~0 | 60 | 60 (~24%) |
 | Moderately humid (+3% RH) | +3 | 0.76 | +114 | ~+10 | ~+5 | 179 | 179 (~70%) |
-| Very humid (+5% RH) | +5 | 1.0 | +250 | ~+15 | ~+8 | 255 | 255 (MAX) |
+| Very humid (+5% RH) | +5 | 1.0 | +250 | ~+15 | ~+8 | 230 | 230 (MAX) |
 | Slightly dry (−1% RH) | −1 | 0.15 | −7.5 | ~−3 | ~0 | 40 | 40 (MIN) |
 | Rapid humidity rise | +3, rising | 0.76 | +114 | ~+8 | +16 | 188 | 188 (~74%) |
 
