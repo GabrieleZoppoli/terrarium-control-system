@@ -96,6 +96,7 @@
   </thead>
   <tbody>
   {{- range $matches }}
+    {{- $rowTaxon := .taxon -}}
     <tr class="row--{{ .status }}">
       <td class="species-table__photo">
         {{- with .photo -}}
@@ -104,12 +105,13 @@
           {{- range .extras -}}
             {{- $photos = $photos | append (printf "img/collection/%s/%s" $genusSlug . | relURL) -}}
           {{- end -}}
+          {{- $extraCount := len .extras -}}
           <button type="button" class="species-table__photo-btn"
                   data-photos="{{ $photos | jsonify }}"
-                  data-taxon="{{ $.taxon }}"
-                  title="View photo{{ with .extras }}s ({{ add (len .) 1 }} total){{ end }} of {{ $.taxon }}">
+                  data-taxon="{{ $rowTaxon }}"
+                  title="View photo{{ if gt $extraCount 0 }}s ({{ add $extraCount 1 }} total){{ end }} of {{ $rowTaxon }}">
             <img src="{{ $primary }}" alt="" loading="lazy">
-            {{- with .extras }}<span class="species-table__photo-count">+{{ len . }}</span>{{ end -}}
+            {{- if gt $extraCount 0 }}<span class="species-table__photo-count">+{{ $extraCount }}</span>{{ end -}}
           </button>
         {{- end -}}
       </td>

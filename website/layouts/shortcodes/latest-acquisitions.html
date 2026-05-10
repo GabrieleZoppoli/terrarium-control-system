@@ -55,14 +55,15 @@
 {{- if $latest }}
 <div class="latest-acquisitions">
 {{- range $latest }}
+  {{- $rowGenusSlug := .genusSlug -}}
   {{- $hasPhoto := and .photo .photo.primary -}}
   {{- $primary := "" -}}
   {{- $photosJSON := "" -}}
   {{- if $hasPhoto -}}
-    {{- $primary = printf "img/collection/%s/%s" .genusSlug .photo.primary | relURL -}}
+    {{- $primary = printf "img/collection/%s/%s" $rowGenusSlug .photo.primary | relURL -}}
     {{- $photos := slice $primary -}}
     {{- range .photo.extras -}}
-      {{- $photos = $photos | append (printf "img/collection/%s/%s" $.genusSlug . | relURL) -}}
+      {{- $photos = $photos | append (printf "img/collection/%s/%s" $rowGenusSlug . | relURL) -}}
     {{- end -}}
     {{- $photosJSON = $photos | jsonify -}}
   {{- end -}}
