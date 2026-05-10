@@ -65,9 +65,9 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
   </li>
   <li>
     <a href="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" target="_blank" rel="noopener">
-      <img src="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" alt="Vetrina highland, maggio 2026 — prima grande pulizia da quando la vetrina è in funzione" loading="lazy">
+      <img src="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" alt="Armadio highland, maggio 2026 — prima grande pulizia da quando l'armadio è in funzione" loading="lazy">
     </a>
-    <p><strong>Maggio 2026.</strong> Prima grande pulizia da quando la vetrina è in funzione — due anni di velo minerale e un angolo di muffa nera ripuliti, una ventola staccata ricrimpata, ripiano in policarbonato rimesso al suo posto. Il racconto completo nel <a href="/it/blog/highland-cabinet-deep-clean/"><em>build log</em></a>.</p>
+    <p><strong>Maggio 2026.</strong> Prima grande pulizia da quando l'armadio è in funzione — due anni di velo minerale e un angolo di muffa nera ripuliti, una ventola staccata ricrimpata, ripiano in policarbonato rimesso al suo posto. Il racconto completo nel <a href="/it/blog/highland-cabinet-deep-clean/"><em>build log</em></a>.</p>
   </li>
 </ul>
 

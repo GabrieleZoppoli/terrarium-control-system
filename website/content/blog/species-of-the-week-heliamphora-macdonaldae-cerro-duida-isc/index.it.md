@@ -54,15 +54,15 @@ POWO ancora no: al momento elenca *macdonaldae* come sinonimo eterotipico di *H.
 
 Andreas Wistuba (n. 1967, oggi a Maselheim, Germania; in passato a Mannheim) ha descritto, da solo o in coautoria, oltre la metà delle specie di *Heliamphora* attualmente riconosciute.[^wistubawiki] È uno dei quattro autori della monografia del 2011 che ha rimesso *macdonaldae* sulla mappa, e gestisce il vivaio da cui mi è arrivata la pianta.
 
-La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti, dal materiale Cerro Duida di Wistuba. È andata nella vetrina d'alta quota attuale, in funzione dal 2022. Quella vetrina ha sostituito un acquario raffreddato a chiller che gira dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono al loro decimo anno.
+La mia è arrivata a gennaio 2023 come pianta giovane con ascidi adulti, dal materiale Cerro Duida di Wistuba. È andata nell'armadio d'alta quota attuale, in funzione dal 2022. Quell'armadio ha sostituito un acquario raffreddato a chiller che gira dal 2016 — la *pulchella*, i cloni di *minor* (tutti tranne var. *pilosa*) e la *purpurascens* × *ionasii* sono migrate dal vecchio impianto e qui sono al loro decimo anno.
 
 ## Come si coltiva
 
 - 12–22 °C, con un chiaro salto fra giorno e notte. Sopra i 25 °C in modo prolungato è un problema.
 - UR all'80–95 %, aria sempre in movimento.
-- LED a 30–40 kLux misurati in cima alla vetrina. Non ho mai coltivato *Heliamphora* a sole pieno e quindi non posso dire nulla sulla loro tolleranza all'aperto.
+- LED a 30–40 kLux misurati in cima all'armadio. Non ho mai coltivato *Heliamphora* a sole pieno e quindi non posso dire nulla sulla loro tolleranza all'aperto.
 - Solo acqua piovana o RO.
-- Concimazione leggera, senza prede. Akerne Rain Mix, mezzo cucchiaino per gallone d'acqua RO, due volte la settimana. La vetrina è abbastanza chiusa che non vi entrano insetti — il mix diluito prende il posto delle prede. Va contro l'idea ricevuta che le *Heliamphora* "se la facciano da sole", ma funziona da dieci anni, sia sul vecchio che sul nuovo impianto.
+- Concimazione leggera, senza prede. Akerne Rain Mix, mezzo cucchiaino per gallone d'acqua RO, due volte la settimana. L'armadio è abbastanza chiuso che non vi entrano insetti — il mix diluito prende il posto delle prede. Va contro l'idea ricevuta che le *Heliamphora* "se la facciano da sole", ma funziona da dieci anni, sia sul vecchio che sul nuovo impianto.
 
 Coltura standard d'alta quota per il genere. Più facile delle *Nepenthes* highland, secondo me, perché tollera senza problemi qualche grado in più di notte.
 
@@ -72,13 +72,13 @@ Due mix nell'arco del decennio.
 
 Dal 2016 a inizio 2023, negli anni dell'acquario col chiller: **lapillo + pomice + bark, con circa il 50 % di sfagno a fibra lunga**. Funzionava — la *pulchella*, i cloni di *minor* e la *purpurascens* × *ionasii* sono passate da questo mix senza problemi.
 
-Dal 2023, nella nuova vetrina d'alta quota: **kanuma e sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**. Il mix kanuma + sfagno è nettamente più aerato del precedente, ed è proprio quella la differenza che pesa di più.
+Dal 2023, nel nuovo armadio d'alta quota: **kanuma e sfagno a fibra lunga, con non più di 1 cm di acqua RO sul fondo**. Il mix kanuma + sfagno è nettamente più aerato del precedente, ed è proprio quella la differenza che pesa di più.
 
 Le vette dei tepui sono arenaria quarzitica precambriana dilavata: sabbia e ghiaia acide, porose, povere di nutrienti, con un manto di sfagno sopra nei punti più umidi. Le radici delle *Heliamphora* si sono evolute per bere da un substrato sempre umido ma drenato bene, mai anaerobico. Gli ascidi stessi scaricano l'acqua in eccesso dal foro della strozzatura per la stessa ragione per cui le radici non tollerano il ristagno: l'ecologia gira sul flusso, non sull'acqua ferma.
 
 Il kanuma è la metà strutturale del mix attuale: pomice vulcanica giapponese, naturalmente acida (pH ~5), molto porosa, che trattiene l'acqua dentro il granulo lasciando aria intorno. Lo sfagno è il buffer di umidità e il manto di superficie. Il centimetro di RO sul fondo del vaso risale per capillarità attraverso lo sfagno, senza che lo strato di kanuma vada mai in stagnazione.
 
-Lo sfagno puro funziona per la maggior parte dei coltivatori; nelle mie vetrine funziona questo.
+Lo sfagno puro funziona per la maggior parte dei coltivatori; nelle mie armadi funziona questo.
 
 {{< figure src="/img/collection/heliamphora/heliamphora-macdonaldae-cerro-duida-isc-2.jpg" caption="Due anni dopo. Kanuma + sfagno a fibra lunga, con un velo di acqua RO sul fondo." >}}
 
