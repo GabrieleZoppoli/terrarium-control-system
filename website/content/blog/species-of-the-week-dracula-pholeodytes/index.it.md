@@ -26,7 +26,7 @@ Descritta da Luer & Escobar, *Selbyana* 7: 68 (1982),[^powo] quattro anni dopo c
 
 ## Com'è arrivata qui
 
-Ecuagenera, inizio 2023, come piccola divisione su sfagno. Un anno per assestarsi. Adesso in un cestello di plastica nera da 10 cm con bark, appeso in basso a destra nell'[armadio d'alta quota](/it/highland/) sotto le *Heliamphora*.
+Ecuagenera, inizio 2023, come piccola divisione su sfagno. Un anno per assestarsi. Adesso in un cestello di plastica nera da 10 cm con bark, appeso in basso a destra nell'[terrario d'alta quota](/it/highland/) sotto le *Heliamphora*.
 
 ## Come si coltiva
 
@@ -36,7 +36,7 @@ Ecuagenera, inizio 2023, come piccola divisione su sfagno. Un anno per assestars
 - Acqua piovana o RO; lo sfagno non si asciuga mai.
 - Ombra piena.[^iospe]
 
-Non esiste un modo che non passi per un armadio refrigerato.
+Non esiste un modo che non passi per un terrario refrigerato.
 
 ## Note
 

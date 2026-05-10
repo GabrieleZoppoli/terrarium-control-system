@@ -6,17 +6,17 @@ tags: ["utricularia", "terrario", "fioritura", "prima-fioritura"]
 showReadingTime: true
 ---
 
-Non la stavo guardando. La settimana scorsa mi ero avvicinato all'armadio d'alta quota per controllare la mia *Sophronitis coccinea* appesa poco più in alto, e attraverso le sue radici ho intravisto un peduncolo rossastro sottile che saliva dal vaso sotto. *Utricularia quelchii*. Tre anni in coltivazione, a mettere foglie e basta — e all'improvviso almeno due boccioli, rosso-porpora, peduncolo eretto nel portamento tipico della sezione *Orchidioides* come in *reniformis*, ma più piccolo e più timido.
+Non la stavo guardando. La settimana scorsa mi ero avvicinato al terrario d'alta quota per controllare la mia *Sophronitis coccinea* appesa poco più in alto, e attraverso le sue radici ho intravisto un peduncolo rossastro sottile che saliva dal vaso sotto. *Utricularia quelchii*. Tre anni in coltivazione, a mettere foglie e basta — e all'improvviso almeno due boccioli, rosso-porpora, peduncolo eretto nel portamento tipico della sezione *Orchidioides* come in *reniformis*, ma più piccolo e più timido.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="La prima cattura: due boccioli sullo stesso peduncolo eretto, rosso-porpora, inquadrati contro la parete dell'armadio fra le radici della *Sophronitis* che pendono dall'alto." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii.jpg" caption="La prima cattura: due boccioli sullo stesso peduncolo eretto, rosso-porpora, inquadrati contro la parete del terrario fra le radici della *Sophronitis* che pendono dall'alto." >}}
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-2.jpg" caption="Il più grande dei due boccioli, più da vicino. Il sacco del labbro inferiore è già ben formato; il colore è un rosso-porpora denso contro la parete bianca dell'armadio." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-2.jpg" caption="Il più grande dei due boccioli, più da vicino. Il sacco del labbro inferiore è già ben formato; il colore è un rosso-porpora denso contro la parete bianca del terrario." >}}
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-3.jpg" caption="Il secondo bocciolo, ancora piccolo e appuntito, seduto più in basso sul peduncolo." >}}
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-6.jpg" caption="I due boccioli insieme sullo stesso peduncolo, visti più largo per mostrare il groviglio di radici aeree di *Sophronitis* attraverso cui hanno dovuto farsi strada." >}}
 
-{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwoc-2.jpg" caption="Il fiore di *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WOC — il motivo per cui la settimana scorsa mi ero avvicinato all'armadio." >}}
+{{< figure src="/img/collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwoc-2.jpg" caption="Il fiore di *Sophronitis coccinea* 'Big One' × 'Hinomaru' 4N GM/WOC — il motivo per cui la settimana scorsa mi ero avvicinato al terrario." >}}
 
 {{< figure src="/img/highland/interior/interior_2026-04-20_coccinea-bloom.jpg" caption="Tutto il quadro: la *Sophronitis coccinea* è il punto rosso a sinistra del centro; il vaso della quelchii è incastrato sotto, semi-nascosto dallo sfagno che trabocca. (Archiviata anche nella [cronologia foto del terrario](/it/highland/photos/).)" >}}
 
@@ -28,10 +28,10 @@ Inizio 2023, da Christian e Claudia Klein di **Carnivors & More**. L'etichetta d
 
 - **Contenitore**: terracotta, forato, diametro 10 cm.
 - **Substrato**: *Sphagnum* vivo puro. Il muschio ha occupato e tracimato dal vaso al punto che si legge più come un kokedama che come un vaso.
-- **Posizione**: appesa alla parete di fondo dell'armadio d'alta quota, a mezza altezza, con nulla sopra di lei sul muro. La luce è diretta ma non è l'angolo più luminoso — le *Heliamphora* stanno a circa 30 cm dai LED, quello è il gradino di pieno sole; la quelchii è un gradino sotto. Aggiungo la lettura lux appena riesco a infilarci il luxmetro.
+- **Posizione**: appesa alla parete di fondo del terrario d'alta quota, a mezza altezza, con nulla sopra di lei sul muro. La luce è diretta ma non è l'angolo più luminoso — le *Heliamphora* stanno a circa 30 cm dai LED, quello è il gradino di pieno sole; la quelchii è un gradino sotto. Aggiungo la lettura lux appena riesco a infilarci il luxmetro.
 - **Annaffiatura**: zero, da parte mia. Il vaso sta dritto sotto un ugello del nebulizzatore e lo sfagno vivo resta uniformemente umido da solo. Fertilizzazione fogliare con Akerne Orchid Mix a mezzo cucchiaino in tre litri d'acqua, un paio di volte al mese.
 
-Il dettaglio che trovo più interessante: il peduncolo floreale non è emerso dal corpo più umido del vaso ma dai 2 cm più asciutti, quelli contro la parete dell'armadio. Qualunque segnale serva a una *quelchii* per fiorire, potrebbe non essere la saturazione continua.
+Il dettaglio che trovo più interessante: il peduncolo floreale non è emerso dal corpo più umido del vaso ma dai 2 cm più asciutti, quelli contro la parete del terrario. Qualunque segnale serva a una *quelchii* per fiorire, potrebbe non essere la saturazione continua.
 
 ## Perché mi importa
 
@@ -59,7 +59,7 @@ Diciassette giorni dopo le prime foto, il bocciolo più grande si è aperto e la
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-11.jpg" caption="Frontale. Le due macchie scure dentro la gola sono i marker callosi che la sezione *Orchidioides* condivide — stanno alla base della colonna e presumibilmente funzionano da guida al nettare." >}}
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro della faccia aperta. La colonna verdognola si proietta in avanti attraverso la gola; le venature magenta sul labbro inferiore prendono la luce dell'armadio." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-13.jpg" caption="Macro della faccia aperta. La colonna verdognola si proietta in avanti attraverso la gola; le venature magenta sul labbro inferiore prendono la luce del terrario." >}}
 
 La pianta è sempre nella stessa posizione appesa, stesso kokedama di sfagno, stesso ugello sopra. Lettura lux ancora rimandata. Il colore è più vicino a un magenta freddo che al rosso-sangue profondo che le foto in Taylor (1989) lasciano intuire — possibile variazione clonale, possibile effetto della luce. Vedrò se il secondo bocciolo apre più scuro o più chiaro del primo.
 

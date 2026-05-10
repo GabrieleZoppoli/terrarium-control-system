@@ -45,7 +45,7 @@ Tasso di sopravvivenza combinato: 77 % (10 su 13). La doppia perdita di *S. pygm
 
 La fioritura è affidabile e abbondante in autunno, spesso con una seconda emissione più leggera in primavera. La saturazione del colore dipende dalla temperatura minima notturna più che da qualsiasi altra variabile — l'incrocio 'Atsumi' × 'Perfection' in particolare mantiene un vermiglio più profondo quando viene portato 3 °C più fresco di notte rispetto al regime di default.
 
-Non impongo alcun riposo secco, e nessuno degli esemplari sopravvissuti ha mostrato la crescita spugnosa e cava che la letteratura associa alle sofroniti "annaffiate troppo" — a patto che il ricircolo d'aria resti forte (una ventola muffin a 24 V gira continuamente in cima all'armadio) e che il supporto di sughero passi da "inzuppato" a "quasi-non-gocciolante" fra un ciclo di nebulizzazione e l'altro.
+Non impongo alcun riposo secco, e nessuno degli esemplari sopravvissuti ha mostrato la crescita spugnosa e cava che la letteratura associa alle sofroniti "annaffiate troppo" — a patto che il ricircolo d'aria resti forte (una ventola muffin a 24 V gira continuamente in cima al terrario) e che il supporto di sughero passi da "inzuppato" a "quasi-non-gocciolante" fra un ciclo di nebulizzazione e l'altro.
 
 ## Foto
 

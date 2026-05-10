@@ -34,7 +34,7 @@ Qualche osservazione puntuale:
 - **N. jamban** (l'endemica bassa e tozza, "pianta del water") è l'unica del gruppo che visibilmente mal sopporta il lato dell'evaporatore; produce ascidi correttamente solo se ruotata nell'angolo più ombreggiato e meno ventilato.
 - **N. glabrata** — endemica del Sulawesi — è arrivata da una growlist senza data di acquisizione registrata; si è rivelata la più accomodante del gruppo e mantiene gli ascidi ondulati per mesi.
 
-Il regime d'alta quota (minime notturne intorno ai 13–14 °C) rientra nell'intervallo di preferenza per tutte le specie sopra; non ho mai dovuto intervenire per il caldo estivo, perché l'armadio è termicamente disaccoppiato dall'aria ligure che lo circonda.
+Il regime d'alta quota (minime notturne intorno ai 13–14 °C) rientra nell'intervallo di preferenza per tutte le specie sopra; non ho mai dovuto intervenire per il caldo estivo, perché il terrario è termicamente disaccoppiato dall'aria ligure che lo circonda.
 
 ## Foto
 

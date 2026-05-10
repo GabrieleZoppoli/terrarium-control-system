@@ -6,7 +6,7 @@ tags: ["utricularia", "specie-della-settimana", "piante-carnivore", "highland", 
 showReadingTime: true
 ---
 
-*Utricularia quelchii* è una delle poche utricularie a fiore rosso. *U. quelchii* e *U. campbelliana* sono entrambe pantepui, su roccia bagnata e banchi di muschio delle Guiana Highlands. *U. menziesii* è invece australiana sud-occidentale, in sottogenere *Polypompholyx* (sez. *Pleiochasia*), e ha raggiunto lo stesso colore in modo indipendente.[^rice5656] Tre anni di crescita solo vegetativa nel mio armadio, e dalla settimana scorsa il primo fiore è aperto — [un appunto diaristico è uscito sotto quel titolo](/it/blog/first-bloom-utricularia-quelchii/); questo post è la sua controparte enciclopedica.
+*Utricularia quelchii* è una delle poche utricularie a fiore rosso. *U. quelchii* e *U. campbelliana* sono entrambe pantepui, su roccia bagnata e banchi di muschio delle Guiana Highlands. *U. menziesii* è invece australiana sud-occidentale, in sottogenere *Polypompholyx* (sez. *Pleiochasia*), e ha raggiunto lo stesso colore in modo indipendente.[^rice5656] Tre anni di crescita solo vegetativa nel mio terrario, e dalla settimana scorsa il primo fiore è aperto — [un appunto diaristico è uscito sotto quel titolo](/it/blog/first-bloom-utricularia-quelchii/); questo post è la sua controparte enciclopedica.
 
 {{< figure src="/img/collection/utricularia/utricularia-quelchii-10.jpg" caption="Profilo di una *quelchii* aperta. Galea magenta sopra, gola giallo-crema sotto, labbro inferiore largo proteso in avanti — il *gestalt* della sezione *Orchidioides* che ingannava i primi raccoglitori convinti di avere a che fare con una parente delle orchidee." >}}
 
@@ -52,10 +52,10 @@ Carnivors & More (Christian e Claudia Klein, Germania), inizio 2023, etichetta *
 
 ## Come la coltivo
 
-- 12–22 °C, oscillazione giorno/notte di 4–6 °C. L'armadio replica un profilo Chinchiná (Colombia, 4,98 °N, ~1.300 m, 13,5–24,3 °C / 75–98 % UR) — un grado o due più caldo della cima dell'Ilú ma dentro l'envelope pubblicato di 1.400–2.800 m della specie.[^wikip]
+- 12–22 °C, oscillazione giorno/notte di 4–6 °C. Il terrario replica un profilo Chinchiná (Colombia, 4,98 °N, ~1.300 m, 13,5–24,3 °C / 75–98 % UR) — un grado o due più caldo della cima dell'Ilú ma dentro l'envelope pubblicato di 1.400–2.800 m della specie.[^wikip]
 - *Sphagnum* vivo puro, in vaso di terracotta forato da 10 cm. Il muschio ha tracimato e si legge come un kokedama.
-- Appesa al **lato sinistro dell'armadio d'alta quota, a mezza altezza, proprio sotto uno degli ugelli del nebulizzatore**. La posizione conta: si trova nel percorso del flusso d'aria laterale, quindi lo *Sphagnum* è permanentemente saturo ma mai anossico — il muschio resta ossigenato dal movimento d'aria, non dal seccarsi fra cicli. Niente annaffiatura manuale; acqua dalla linea RO dell'armadio.
-- Luce intermedia-alta. Le *Heliamphora* stanno a circa 30 cm dai LED (il piano di pieno sole); la *quelchii* è un gradino sotto, a metà cabinet, con nulla d'ombreggio sopra di lei.
+- Appesa al **lato sinistro del terrario d'alta quota, a mezza altezza, proprio sotto uno degli ugelli del nebulizzatore**. La posizione conta: si trova nel percorso del flusso d'aria laterale, quindi lo *Sphagnum* è permanentemente saturo ma mai anossico — il muschio resta ossigenato dal movimento d'aria, non dal seccarsi fra cicli. Niente annaffiatura manuale; acqua dalla linea RO del terrario.
+- Luce intermedia-alta. Le *Heliamphora* stanno a circa 30 cm dai LED (il piano di pieno sole); la *quelchii* è un gradino sotto, a metà altezza nel terrario, con nulla d'ombreggio sopra di lei.
 - Niente fertilizzante. Akerne Orchid Mix a mezzo cucchiaino in tre litri va sulle orchidee accanto come fogliare un paio di volte al mese; la *quelchii* raccatta lo spillover.
 
 Questo **si discosta dalla raccomandazione di Barry Rice** — Rice preferisce un mix *Sphagnum*+perlite tenuto "un po' più asciutto di quanto sei abituato con le piante carnivore", innaffiato sempre dall'alto, e mette in guardia contro l'irrigazione a sottovaso.[^rice5592] Il mio substrato è più vicino alla saturazione permanente che a "un po' più asciutto". Il motivo per cui qui funziona, credo, è il flusso d'aria: il movimento continuo mantiene lo *Sphagnum* vivo ossigenato anche quando resta bagnato. La ricetta di Rice è il punto di partenza prudente — perlite + dosaggio più asciutto perdonano un setup ad aria ferma. Il mio è ciò che è venuto fuori dal mettere la pianta sotto un mister, in aria in movimento, e non toccarla per tre anni.

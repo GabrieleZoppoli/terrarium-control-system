@@ -16,7 +16,7 @@ La collezione include anche *Dendrobium* del Sud-est asiatico e del Vietnam che 
 
 ## Dove vivono
 
-I *Dendrobium* di foresta nebulosa della sezione *Oxyglossum* (cuthbertsonii, cyanocentrum, hellwigianum, victoriae-reginae, lawesii e simili miniature d'alta quota) sono montati su plaquette di felce arborea o su corteccia di sughero, vicino alla **zona alta dell'armadio d'alta quota**, in linea con il loro portamento semi-epifita a 2.000–3.000 m.
+I *Dendrobium* di foresta nebulosa della sezione *Oxyglossum* (cuthbertsonii, cyanocentrum, hellwigianum, victoriae-reginae, lawesii e simili miniature d'alta quota) sono montati su plaquette di felce arborea o su corteccia di sughero, vicino alla **zona alta del terrario d'alta quota**, in linea con il loro portamento semi-epifita a 2.000–3.000 m.
 
 I membri di bassa quota e australiani — soprattutto **'Berry Oda'**, **'Betty Goto' f. coerulea** e **D. speciosum** — non appartengono al regime di foresta nebulosa. Vivono in soggiorno, su un davanzale luminoso, a condizioni intermedie (~18–25 °C tutto l'anno, umidità moderata). In particolare, 'Berry Oda' fiorisce senza problemi con una semplice annaffiatura settimanale.
 

@@ -24,7 +24,7 @@ Akadama e *Sphagnum* a fibra lunga, con uno strato superficiale di *Sphagnum* vi
 
 ## Note di coltivazione
 
-Nove esemplari, tutti vivi. L'escursione giornaliera del terrario (≈13,5 °C di notte, 22 °C di giorno, 85–100 % UR) si colloca nella zona di comfort del genere *Heliamphora* senza ulteriori interventi — ed è in sostanza il motivo per cui un genere tepui diventa gestibile: invece di un pozzo senza fondo di chiller e ventole, basta un armadio ben regolato e una miscela generica di akadama + *Sphagnum* a fibra lunga.
+Nove esemplari, tutti vivi. L'escursione giornaliera del terrario (≈13,5 °C di notte, 22 °C di giorno, 85–100 % UR) si colloca nella zona di comfort del genere *Heliamphora* senza ulteriori interventi — ed è in sostanza il motivo per cui un genere tepui diventa gestibile: invece di un pozzo senza fondo di chiller e ventole, basta un terrario ben regolato e una miscela generica di akadama + *Sphagnum* a fibra lunga.
 
 Alcune osservazioni dalle schede di provenienza:
 
