@@ -104,7 +104,7 @@ home_live_cta_dashboard: "Grafana 24 ore"
 ledger_kicker:         "Dal log in funzione, in diretta"
 ledger_per_month:      "al mese"
 ledger_title:          "Ogni ciclo di nebbia e ogni wattora, contati."
-ledger_intro:          "Le misurazioni sono iniziate a @SINCE@. L'hardware è in funzione da fine 2022."
+ledger_intro:          "Le misurazioni sono iniziate a @SINCE@. La vetrina attuale a compressore marino è in funzione da fine 2022 e ha sostituito una vasca raffreddata a chiller in funzione dal 2016."
 
 ledger_mist_label:     "Cicli di nebbia"
 ledger_mist_caption:   "Ogni ciclo è innescato quando l'umidità della vetrina scende sotto il target della curva colombiana. Dal 2026-05-05 la durata è regime-aware: 10 s di giorno, 20 s di notte. Guadagno UR per evento ≈ +2 % di notte (vetrina sigillata, mentre il freezer combatte il calore) oppure +3–4 % di giorno (ventole che scambiano aria con la stanza più secca). Il volume d'acqua per ciclo è ancora da calibrare."
