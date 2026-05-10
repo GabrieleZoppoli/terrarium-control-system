@@ -1,45 +1,45 @@
 {
   "since": "2026-02-04T22:22:14.09356613Z",
-  "as_of": "2026-05-07T13:41:22Z",
+  "as_of": "2026-05-10T06:26:07Z",
   "mist_cycles": {
-    "count": 1412,
+    "count": 1439,
     "litres": null,
     "source": "measurement:mist_event (each row = 1 rising edge). Litres per cycle not yet calibrated."
   },
   "electricity": {
-    "kwh": 203.49,
+    "kwh": 211.41,
     "source": "measurement:power_consumption (Meross MSS310, trapezoidal integral over the period since the daemon came up 2026-02-18 \u2014 ~59 d, not the full `since\u2192as_of` window). Polling cadence varied 2 s \u2014 30 s \u2014 120 s across the window; trapezoidal integral is density-independent, so the kWh figure is unaffected.",
     "note": "Verified 2026-04-18 against raw distribution: mean 109.9 W, median 110.7 W, p95 202.6 W, max 492.9 W. Hour-of-day profile: night 60\u201390 W (compressor+base), midday peak 170\u2013180 W (lights peak, occasional compressor overlap). Meross meters the whole highland power strip \u2014 compressor, 4\u00d7 ChilLED pucks, fans, Pi, ESP sensors, mister pump \u2014 no known devices are unmetered. 2.6 kWh/day is real, not an artefact."
   },
   "cost_eur": {
-    "value": 61.05,
+    "value": 63.42,
     "tariff_eur_per_kwh": 0.3
   },
   "co2_scrubbed": {
-    "kg": 12.5,
+    "kg": 12.9,
     "method": "380 plants \u00d7 0.36 g/day \u00d7 days_alive",
     "note": "model-based, not sensed"
   },
   "data_points": {
-    "count": 3031455,
+    "count": 3114287,
     "measurements": 33
   },
   "fog_hours": {
-    "hours": 111.8,
+    "hours": 118.2,
     "threshold_rh": 95.0,
     "note": "Approximated as count(humidity >= threshold) \u00d7 60s / 3600. Data Logger period is 60 s for continuous measurements."
   },
   "caveats": {
-    "retention_days": 91.6,
+    "retention_days": 94.3,
     "note": "InfluxDB retention is 1 year; `since` is the earliest record present, not the date the hardware was first turned on (~late 2022). Counters below cover the window `since \u2192 as_of` only."
   },
   "monthly": {
-    "days_elapsed": 91.6,
-    "mist_cycles": 469,
-    "electricity": 67.6,
-    "cost_eur": 20.3,
-    "co2_scrubbed": 4.15,
-    "data_points": 1006893,
-    "fog_hours": 37.1
+    "days_elapsed": 94.3,
+    "mist_cycles": 464,
+    "electricity": 68.2,
+    "cost_eur": 20.5,
+    "co2_scrubbed": 4.16,
+    "data_points": 1004824,
+    "fog_hours": 38.1
   }
 }
