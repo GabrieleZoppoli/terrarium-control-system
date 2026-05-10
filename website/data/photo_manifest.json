@@ -929,6 +929,12 @@
       ]
     },
     {
+      "taxon": "Tillandsia baileyi var. vivipara",
+      "slug": "tillandsia-baileyi-var-vivipara",
+      "primary": "tillandsia-baileyi-var-vivipara.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Tillandsia didisticha",
       "slug": "tillandsia-didisticha",
       "primary": "tillandsia-didisticha.jpg",
@@ -941,12 +947,6 @@
       "extras": [
         "tillandsia-roezlii-2.jpg"
       ]
-    },
-    {
-      "taxon": "Tillandsia sp. (Michieli)",
-      "slug": "tillandsia-sp-michieli",
-      "primary": "tillandsia-sp-michieli.jpg",
-      "extras": []
     },
     {
       "taxon": "Tillandsia tectorum f. caulescens",

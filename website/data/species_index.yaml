@@ -387,6 +387,10 @@
   taxon: Tillandsia aeranthos
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-aeranthos.jpg
+"tillandsia-baileyi-var-vivipara":
+  taxon: Tillandsia baileyi var. vivipara
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-baileyi-var-vivipara.jpg
 "tillandsia-didisticha":
   taxon: Tillandsia didisticha
   genus: Tillandsia
@@ -395,10 +399,6 @@
   taxon: Tillandsia roezlii
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-roezlii.jpg
-"tillandsia-sp-michieli":
-  taxon: Tillandsia sp. (Michieli)
-  genus: Tillandsia
-  primary_photo: img/collection/tillandsia/tillandsia-sp-michieli.jpg
 "tillandsia-tectorum-f-caulescens":
   taxon: Tillandsia tectorum f. caulescens
   genus: Tillandsia
