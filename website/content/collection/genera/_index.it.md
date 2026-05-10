@@ -1,6 +1,6 @@
 ---
 title: "Per genere"
-description: "Oltre 380 esemplari in 89 generi — terrario, balcone, davanzali, e ospitati dalle invenzioni"
+description: "Oltre 400 esemplari in 88 generi — terrario, balcone, davanzali, e ospitati dalle invenzioni"
 cascade:
   wide: true
 extra_card:
@@ -18,7 +18,7 @@ Le più alte sopravvivenze (~100 % su 3+ anni) sono in *Heliamphora*, *Nepenthes
 
 ## Collezione completa
 
-Oltre 380 acquisizioni in 89 generi totali, distribuite in **quattro spazi distinti**:
+Oltre 400 acquisizioni in 88 generi totali, distribuite in **quattro spazi distinti**:
 
 - **La camera d'alta quota** — i residenti di foresta nebulosa: *Heliamphora*, *Dracula*, *Nepenthes* d'alta quota, *Sophronitis*, *Dendrobium* sez. *Oxyglossum*, *Utricularia* sez. *Orchidioides*, Pleurothallidinae miniatura.
 - **Il balcone (all'esterno, tutto l'anno)** — carnivore temperate che vogliono pieno sole e dormienza invernale: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, orchidee terrestri rustiche (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).

@@ -12,7 +12,7 @@ sources:
   - id: 437
     vendor: Michieli Floricoltura
     acquired: May 2026
-    price_eur: ""
+    price_eur: 20
     location: ""
     notes: Orticola 2026 — ID al rinvaso/fioritura
 photos:

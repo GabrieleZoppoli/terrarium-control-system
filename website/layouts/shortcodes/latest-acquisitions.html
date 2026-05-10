@@ -1,0 +1,94 @@
+{{- /*
+  latest-acquisitions — show the N most recently acquired plants from
+  static/data/collection.csv (id-based ordering — newest #s first).
+
+  Each tile is a thumbnail (when a photo exists in data/photo_manifest)
+  + taxon + acquisition date + source. Tiles wire into the same lightbox
+  the genus pages use (button[data-photos] hook in collection-photos JS).
+
+  Usage:
+    {{< latest-acquisitions >}}            — default 12
+    {{< latest-acquisitions count="8" >}}
+*/ -}}
+{{- $count := .Get "count" | default "12" -}}
+{{- $count = int $count -}}
+
+{{- $raw := os.ReadFile "static/data/collection.csv" -}}
+{{- $rows := transform.Unmarshal (dict "delimiter" ",") $raw -}}
+{{- $data := after 1 $rows -}}
+
+{{- $manifest := .Site.Data.photo_manifest -}}
+
+{{- /* Build typed rows with numeric id for sorting. */ -}}
+{{- $typed := slice -}}
+{{- range $data -}}
+  {{- $id := index . 0 -}}
+  {{- if $id -}}
+    {{- $idN := int $id -}}
+    {{- $genus := index . 2 -}}
+    {{- $taxon := index . 1 -}}
+    {{- $genusSlug := lower $genus -}}
+    {{- $entries := index $manifest $genusSlug -}}
+    {{- $photo := dict -}}
+    {{- range $entries -}}
+      {{- if eq .taxon $taxon -}}
+        {{- $photo = . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $typed = $typed | append (dict
+        "id"        $idN
+        "taxon"     $taxon
+        "genus"     $genus
+        "genusSlug" $genusSlug
+        "source"    (index . 5)
+        "price"     (index . 6)
+        "date"      (index . 7)
+        "status"    (index . 8)
+        "photo"     $photo
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $sorted := sort $typed "id" "desc" -}}
+{{- $latest := first $count $sorted -}}
+
+{{- if $latest }}
+<div class="latest-acquisitions">
+{{- range $latest }}
+  {{- $hasPhoto := and .photo .photo.primary -}}
+  {{- $primary := "" -}}
+  {{- $photosJSON := "" -}}
+  {{- if $hasPhoto -}}
+    {{- $primary = printf "img/collection/%s/%s" .genusSlug .photo.primary | relURL -}}
+    {{- $photos := slice $primary -}}
+    {{- range .photo.extras -}}
+      {{- $photos = $photos | append (printf "img/collection/%s/%s" $.genusSlug . | relURL) -}}
+    {{- end -}}
+    {{- $photosJSON = $photos | jsonify -}}
+  {{- end -}}
+  <figure class="latest-acquisitions__item">
+    {{- if $hasPhoto -}}
+      <button type="button" class="latest-acquisitions__btn"
+              data-photos="{{ $photosJSON }}"
+              data-taxon="{{ .taxon }}"
+              title="View photo of {{ .taxon }}">
+        <img src="{{ $primary }}" alt="{{ .taxon }}" loading="lazy">
+        {{- with .photo.extras }}<span class="latest-acquisitions__count">+{{ len . }}</span>{{ end -}}
+      </button>
+    {{- else -}}
+      <div class="latest-acquisitions__btn latest-acquisitions__btn--empty" aria-hidden="true">
+        <span class="muted small">no photo</span>
+      </div>
+    {{- end -}}
+    <figcaption>
+      <strong><em>{{ .taxon }}</em></strong>
+      <span class="latest-acquisitions__meta small muted">
+        {{ .date }}{{ with .source }} · {{ . }}{{ end }}{{ with .price }} · €{{ . }}{{ end }}
+      </span>
+    </figcaption>
+  </figure>
+{{- end }}
+</div>
+{{- else }}
+<p class="muted">No acquisitions logged yet.</p>
+{{- end -}}

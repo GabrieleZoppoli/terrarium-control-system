@@ -99,12 +99,18 @@
     <tr class="row--{{ .status }}">
       <td class="species-table__photo">
         {{- with .photo -}}
-          {{- $src := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
-          <a href="{{ $src }}" target="_blank" rel="noopener"
-             title="Open photo of {{ .taxon }}{{ with .extras }} (+{{ len . }} more){{ end }}">
-            <img src="{{ $src }}" alt="" loading="lazy">
+          {{- $primary := printf "img/collection/%s/%s" $genusSlug .primary | relURL -}}
+          {{- $photos := slice $primary -}}
+          {{- range .extras -}}
+            {{- $photos = $photos | append (printf "img/collection/%s/%s" $genusSlug . | relURL) -}}
+          {{- end -}}
+          <button type="button" class="species-table__photo-btn"
+                  data-photos="{{ $photos | jsonify }}"
+                  data-taxon="{{ $.taxon }}"
+                  title="View photo{{ with .extras }}s ({{ add (len .) 1 }} total){{ end }} of {{ $.taxon }}">
+            <img src="{{ $primary }}" alt="" loading="lazy">
             {{- with .extras }}<span class="species-table__photo-count">+{{ len . }}</span>{{ end -}}
-          </a>
+          </button>
         {{- end -}}
       </td>
       <td data-label="Taxon"><em>{{ .taxon }}</em></td>

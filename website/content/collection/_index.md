@@ -1,11 +1,11 @@
 ---
 title: "Plant Collection"
-description: "Over 380 accessions across 89 genera — terrarium, outdoor, and invention-housed"
+description: "400+ accessions across 88 genera — terrarium, outdoor, and invention-housed"
 ogImage: "img/collection/heliamphora/heliamphora-macdonaldae.jpg"
 no_auto_children: true
 ---
 
-The collection logs every plant I have ever acquired — over 380 accessions across 89 genera. About 280 are alive today; the rest were lost to cultivation mistakes, to transport, or were traded away. Three years of cultivation data, ~73 % overall survival, with near-100 % survival in *Heliamphora*, highland *Nepenthes*, and *Dracula*.
+The collection logs every plant I have ever acquired — 400+ accessions across 88 genera. About 290 are alive today; the rest were lost to cultivation mistakes, to transport, or were traded away. Three years of cultivation data, ~73 % overall survival, with near-100 % survival in *Heliamphora*, highland *Nepenthes*, and *Dracula*.
 
 Browse it the way that suits you best.
 
@@ -29,3 +29,9 @@ The priciest three plants in the collection.
     <figcaption><strong><em>Sarracenia</em> 'Hurricane Creek White' clone F</strong> — €159 · Luca Gambini. Hybrid cultivar originating from the Hurricane Creek population in Baldwin County, Alabama. White-crowned pitchers with red venation.</figcaption>
   </figure>
 </div>
+
+## Latest acquisitions
+
+The most recent plants logged into the collection. Click a tile to see the photo at full size; arrows navigate between shots when a plant has multiple.
+
+{{< latest-acquisitions count="12" >}}

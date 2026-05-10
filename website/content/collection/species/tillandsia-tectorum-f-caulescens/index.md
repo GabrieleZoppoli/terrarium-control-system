@@ -12,9 +12,9 @@ sources:
   - id: 434
     vendor: Le Figlie del Vento
     acquired: May 2026
-    price_eur: ""
+    price_eur: 12.5
     location: ""
-    notes: Orticola 2026 — forma caulescente (distinta da f. gigantea)
+    notes: Orticola 2026 — forma caulescente (distinta da f. gigantea) — bundle 50€/4 pz Camarda
 photos:
   - img/collection/tillandsia/tillandsia-tectorum-f-caulescens.jpg
 primary_photo: img/collection/tillandsia/tillandsia-tectorum-f-caulescens.jpg

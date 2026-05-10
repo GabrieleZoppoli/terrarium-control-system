@@ -12,9 +12,9 @@ sources:
   - id: 441
     vendor: Diflora
     acquired: May 2026
-    price_eur: ""
+    price_eur: 8.33
     location: ""
-    notes: "Orticola 2026 — fiori più grandi del genere, su wishlist Heldros/Diflora"
+    notes: "Orticola 2026 — fiori più grandi del genere, su wishlist Heldros/Diflora — bundle 25€/3 pz Diflora"
 photos:
   - img/collection/pinguicula/pinguicula-moctezumae.jpg
 primary_photo: img/collection/pinguicula/pinguicula-moctezumae.jpg

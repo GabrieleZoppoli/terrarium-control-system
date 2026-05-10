@@ -12,9 +12,9 @@ sources:
   - id: 436
     vendor: Le Figlie del Vento
     acquired: May 2026
-    price_eur: ""
+    price_eur: 12.5
     location: ""
-    notes: Orticola 2026 — cv hybrid (T. paucifolia × T. streptophylla)
+    notes: Orticola 2026 — cv hybrid (T. paucifolia × T. streptophylla) — bundle 50€/4 pz Camarda
 photos:
   - img/collection/tillandsia/tillandsia-love-knot.jpg
 primary_photo: img/collection/tillandsia/tillandsia-love-knot.jpg

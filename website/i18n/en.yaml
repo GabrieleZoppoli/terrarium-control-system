@@ -56,7 +56,7 @@ lang_it:               "Italiano"
 
 # Dendrogram mobile CTA
 dendro_mobile_title:   "Pinch to zoom · tap the button for full-screen."
-dendro_mobile_body:    "378 species labels around a radial tree doesn't fit a phone screen. Open it full-screen — pinch to zoom, tap a node to focus, tap the centre to reset."
+dendro_mobile_body:    "399 species labels around a radial tree doesn't fit a phone screen. Open it full-screen — pinch to zoom, tap a node to focus, tap the centre to reset."
 dendro_mobile_button:  "Full screen"
 dendro_mobile_meta_1:  "Or browse the collection"
 dendro_mobile_meta_2:  "by genus"
@@ -118,7 +118,7 @@ ledger_cost_caption:   "At Italian residential rates (~€0.30/kWh) — about a 
 
 ledger_co2_label:      "CO₂ quietly scrubbed"
 ledger_co2_unit:       "kg"
-ledger_co2_caption:    "≈ a 50-km drive in a small car, offset by the plants. Modelled from 380 plants × ~0.36 g/day."
+ledger_co2_caption:    "≈ a 50-km drive in a small car, offset by the plants. Modelled from 400 plants × ~0.36 g/day."
 
 ledger_data_label:     "Sensor readings"
 ledger_data_unit:      "million"

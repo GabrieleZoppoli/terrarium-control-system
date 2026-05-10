@@ -12,7 +12,7 @@ sources:
   - id: 438
     vendor: Piante Pazze
     acquired: May 2026
-    price_eur: ""
+    price_eur: 40
     location: ""
     notes: "Orticola 2026 — substitution day-of dal pre-ordinato 'Da Tu Yuan'. Cultivar Amakusa, foglia variegata cream-margine, fragrante. Vernalizzazione 0–14 °C necessaria."
 photos:

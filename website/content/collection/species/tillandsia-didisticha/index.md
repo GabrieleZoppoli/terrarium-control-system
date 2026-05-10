@@ -12,9 +12,9 @@ sources:
   - id: 435
     vendor: Le Figlie del Vento
     acquired: May 2026
-    price_eur: ""
+    price_eur: 12.5
     location: ""
-    notes: Orticola 2026 — opportunistico al banco di Camarda
+    notes: Orticola 2026 — opportunistico al banco di Camarda — bundle 50€/4 pz Camarda
 photos:
   - img/collection/tillandsia/tillandsia-didisticha.jpg
 primary_photo: img/collection/tillandsia/tillandsia-didisticha.jpg

@@ -1,6 +1,6 @@
 ---
 title: "By Genus"
-description: "Over 380 accessions across 89 genera — terrarium, outdoor, windowsill, and invention-housed"
+description: "Over 400 accessions across 88 genera — terrarium, outdoor, windowsill, and invention-housed"
 cascade:
   wide: true
 extra_card:
@@ -18,7 +18,7 @@ The highest survival rates (~100% over 3+ years) sit in *Heliamphora*, highland 
 
 ## Full collection
 
-Over 380 acquisitions across 89 genera total, spread across **four distinct spaces**:
+Over 400 acquisitions across 88 genera total, spread across **four distinct spaces**:
 
 - **The highland cabinet** — the cloud-forest residents: *Heliamphora*, *Dracula*, highland *Nepenthes*, *Sophronitis*, *Oxyglossum*-section *Dendrobium*, *Utricularia* sect. *Orchidioides*, miniature Pleurothallidinae.
 - **The balcony (outdoor, year-round)** — temperate carnivores that need full sun and winter dormancy: *Sarracenia*, *Dionaea*, *Aldrovanda*, *Nymphaea*, hardy terrestrial orchids (*Calopogon*, *Habenaria*, *Spiranthes*, *Pogonia*).

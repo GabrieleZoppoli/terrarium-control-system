@@ -56,7 +56,7 @@ lang_it:               "Italiano"
 
 # Dendrogram mobile CTA
 dendro_mobile_title:   "Avvicina due dita per ingrandire · tocca il pulsante per schermo intero."
-dendro_mobile_body:    "378 etichette di specie attorno a un albero radiale non entrano in uno schermo da telefono. Aprilo a tutto schermo — zoom con due dita, tocca un nodo per centrarlo, tocca il centro per tornare alla vista d'insieme."
+dendro_mobile_body:    "399 etichette di specie attorno a un albero radiale non entrano in uno schermo da telefono. Aprilo a tutto schermo — zoom con due dita, tocca un nodo per centrarlo, tocca il centro per tornare alla vista d'insieme."
 dendro_mobile_button:  "Schermo intero"
 dendro_mobile_meta_1:  "Oppure sfoglia la collezione"
 dendro_mobile_meta_2:  "per genere"
@@ -118,7 +118,7 @@ ledger_cost_caption:   "A prezzi italiani residenziali (~€0,30/kWh) — all'in
 
 ledger_co2_label:      "CO₂ silenziosamente assorbita"
 ledger_co2_unit:       "kg"
-ledger_co2_caption:    "≈ una cinquantina di km in un'auto piccola, compensati dalle piante. Modellato da 380 piante × ~0,36 g/giorno."
+ledger_co2_caption:    "≈ una cinquantina di km in un'auto piccola, compensati dalle piante. Modellato da 400 piante × ~0,36 g/giorno."
 
 ledger_data_label:     "Letture dei sensori"
 ledger_data_unit:      "milioni"

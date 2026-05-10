@@ -1,11 +1,11 @@
 ---
 title: "La collezione"
-description: "Oltre 380 esemplari in 89 generi — dentro al terrario, sul balcone, e ospitati dalle invenzioni"
+description: "Oltre 400 esemplari in 88 generi — dentro al terrario, sul balcone, e ospitati dalle invenzioni"
 ogImage: "img/collection/heliamphora/heliamphora-macdonaldae.jpg"
 no_auto_children: true
 ---
 
-La collezione tiene traccia di ogni pianta mai acquistata — oltre 380 esemplari in 89 generi. Oggi ne sono vive circa 280; le altre sono state perse per errori di coltivazione, durante il trasporto, o scambiate. Tre anni di dati: circa il 73 % di sopravvivenza complessiva, con una sopravvivenza vicina al 100 % in *Heliamphora*, *Nepenthes* d'alta quota e *Dracula*.
+La collezione tiene traccia di ogni pianta mai acquistata — oltre 400 esemplari in 88 generi. Oggi ne sono vive circa 290; le altre sono state perse per errori di coltivazione, durante il trasporto, o scambiate. Tre anni di dati: circa il 73 % di sopravvivenza complessiva, con una sopravvivenza vicina al 100 % in *Heliamphora*, *Nepenthes* d'alta quota e *Dracula*.
 
 Sfogliala come ti è più comodo.
 
@@ -29,3 +29,9 @@ Le tre piante più care della collezione.
     <figcaption><strong><em>Sarracenia</em> 'Hurricane Creek White' clone F</strong> — €159 · Luca Gambini. Cultivar ibrida originata dalla popolazione di Hurricane Creek nella contea di Baldwin, Alabama. Ascidi dalla sommità bianca con venature rosse.</figcaption>
   </figure>
 </div>
+
+## Ultime acquisizioni
+
+Le piante più recenti registrate in collezione. Clicca un riquadro per vedere la foto a tutto schermo; le frecce navigano fra gli scatti quando una pianta ne ha più di uno.
+
+{{< latest-acquisitions count="12" >}}

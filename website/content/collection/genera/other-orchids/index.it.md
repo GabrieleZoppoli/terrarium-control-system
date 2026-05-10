@@ -1,9 +1,17 @@
 ---
 title: "Altre orchidee"
-description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae e altre"
+description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, Cymbidium e altre"
 tags: ["orchidea"]
-genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia"]
+genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia", "Cymbidium"]
 ---
+
+## Cymbidium goeringii (tradizione orchidofila d'alta quota asiatica)
+
+Un lignaggio diverso dal resto della pagina — *Cymbidium* asiatico da clima temperato, con una tradizione coltivazionale millenaria in Cina e Giappone. La dormienza fredda (0–14 °C dal solstizio d'inverno) è il punto non negoziabile: senza, i boccioli blastano.
+
+| # | Taxon | Vivaista | Prezzo | Note | Status |
+|---|-------|----------|--------|------|--------|
+| 1 | *C. goeringii* 'Tian Cao' (天草, Amakusa) | [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD) | EUR 40,00 | Cv di linea giapponese Amakusa, foglie variegate a margine crema, profumata. Acquistata a Orticola 2026 in sostituzione del 'Da Tu Yuan' pre-ordinato. Vedi [la pagina della specie](/it/collection/species/cymbidium-goeringii-tian-cao/) per le specifiche di coltivazione. | Viva |
 
 ## Neofinetia e affini (orchidee del vento giapponesi)
 

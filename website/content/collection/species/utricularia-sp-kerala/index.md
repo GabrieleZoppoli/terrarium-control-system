@@ -12,7 +12,7 @@ sources:
   - id: 443
     vendor: Un Angolo di Deserto
     acquired: May 2026
-    price_eur: ""
+    price_eur: 6
     location: ""
     notes: "Orticola 2026 — provenance India (Kerala), ID pendente. Castellaneta owner."
 photos:

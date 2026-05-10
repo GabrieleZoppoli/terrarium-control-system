@@ -116,7 +116,7 @@
     else if (e.key === 'ArrowRight') step(1);
   });
 
-  document.querySelectorAll('.photo-tile[data-photos]').forEach((btn) => {
+  document.querySelectorAll('button[data-photos]').forEach((btn) => {
     btn.addEventListener('click', () => {
       try {
         const list = JSON.parse(btn.dataset.photos);

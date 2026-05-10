@@ -1,9 +1,17 @@
 ---
 title: "Other Orchids"
-description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, and more"
+description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, Cymbidium, and more"
 tags: ["orchid"]
-genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia"]
+genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia", "Cymbidium"]
 ---
+
+## Cymbidium goeringii (Asian highland orchid tradition)
+
+A different lineage from the rest of this page — temperate-climate Asian *Cymbidium*, with a thousand-year cultivation tradition in China and Japan. Strict cold dormancy (0–14 °C from winter solstice) is the non-negotiable: without it the buds blast.
+
+| # | Taxon | Vendor | Price | Notes | Status |
+|---|-------|--------|-------|-------|--------|
+| 1 | *C. goeringii* 'Tian Cao' (天草, Amakusa) | [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD) | EUR 40.00 | Japanese Amakusa-line cv, cream-margined variegated foliage, fragrant. Acquired Orticola 2026 as substitute for the pre-ordered 'Da Tu Yuan'. See [the species page](/collection/species/cymbidium-goeringii-tian-cao/) for cultivation specifics. | Alive |
 
 ## Neofinetia & Allies (Japanese Wind Orchids)
 

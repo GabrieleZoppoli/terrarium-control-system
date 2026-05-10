@@ -12,9 +12,9 @@ sources:
   - id: 439
     vendor: Diflora
     acquired: May 2026
-    price_eur: ""
+    price_eur: 8.33
     location: ""
-    notes: "Orticola 2026 — clone Best Carnivorous Plants line, fiore giallo (raro nelle pings mex)"
+    notes: "Orticola 2026 — clone Best Carnivorous Plants line, fiore giallo (raro nelle pings mex) — bundle 25€/3 pz Diflora"
 photos:
   - img/collection/pinguicula/pinguicula-x-golden-eye-bcp.jpg
 primary_photo: img/collection/pinguicula/pinguicula-x-golden-eye-bcp.jpg
