@@ -1,82 +1,79 @@
 ---
 title: "Altre piante"
-description: "Darlingtonia, ninfee, orchidee, felci e piante varie"
+description: "Darlingtonia, ninfee, orchidee rustiche, felci e piante varie"
 tags: ["balcone", "acquatica", "varie"]
 genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
 ---
 
-## Darlingtonia (4 acquisite, 0 vive — tutte perse)
+## Darlingtonia
 
-*Darlingtonia californica* (pianta cobra) si è rivelata estremamente difficile nel clima mediterraneo di Genova. Quattro piante da fonti diverse sono andate tutte perse.
+*Darlingtonia californica* (cobra lily) si è rivelata estremamente difficile nel clima mediterraneo di Genova. Quattro piante da fonti diverse, tutte perse.
 
-| # | Taxon | Vivaio | Prezzo | Stato |
-|---|-------|--------|--------|-------|
-| 1 | *D. californica* | Giardino Carnivoro | EUR 18,00 | Persa |
-| 2 | *D. californica* | Gartenbau Carow | EUR 32,00 | Persa |
-| 3 | *D. californica* | Klein Carnivors | EUR 16,00 | Persa |
-| 4 | *D. californica* | Andrea Fontana | — | Persa |
+{{< collection-species "Darlingtonia" >}}
 
 ## Piante acquatiche
 
-| # | Taxon | Vivaio | Prezzo | Stato |
-|---|-------|--------|--------|-------|
-| 1 | *Nymphaea pygmaea* 'Helvola' | Vivai le Georgiche | EUR 33,00 | Viva |
-| 2 | *N.* 'Indiana' | Arborea Farm | EUR 16,00 | Viva |
-| 3 | *N.* 'Perry's Baby Red' | Eta Beta Vivaio | EUR 18,00 | Viva |
-| 4 | *N.* 'Perry's Baby Red' | Water Plants Italy | EUR 18,00 | Persa |
-| 5 | *N.* x 'Snow Princess' | Growlist | — | Persa |
-| 6 | *Iris versicolor* | Water Plants Italy | EUR 4,50 | Viva |
-| 7 | *I. louisiana* 'Bout Midnight' | Growlist | — | Viva |
-| 8 | *Azolla filiculoides* | Eta Beta Vivaio | EUR 4,00 | Viva |
-| 9 | *Salvinia auriculata* | Water Plants Italy | EUR 3,50 | Viva |
-| 10 | *Eleocharis acicularis* | Growlist | — | Viva |
-| 11 | *Cyperus papyrus* | — | — | Viva |
+Ninfee, iris e specie galleggianti — vasi su balcone e laghetto, all'aperto tutto l'anno.
 
-## Altre orchidee (fuori dal terrario)
+{{< collection-species "Nymphaea" >}}
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *Paphiopedilum delenatii* vinicolor | Growlist | — | — | Viva |
-| 2 | *P. micranthum* x self | Celandroni Orchidee | EUR 25,00 | — | Persa |
-| 3 | *P. sanderianum* | Growlist | — | — | Persa |
-| 4 | *Cymbidium* Kiwi Midnight 'Geyserland' | Celandroni Orchidee | EUR 60,00 | — | Regalata |
-| 5 | *Fredclarkeara* After Dark | Celandroni Orchidee | EUR 60,00 | — | Persa |
-| 6 | *Coelogyne schilleriana* | Currlin Orchideen | EUR 18,22 | — | Persa |
-| 7 | *Dendrobium speciosum* | Growlist | — | Troppo grande per il terrario | Viva |
-| 8 | *D. loddigesii* | Growlist | — | Condizioni intermedie | Viva |
-| 9 | *D.* 'Berry Oda' | Re di Fiori Vivai | — | Ibrido | Viva |
+{{< collection-species "Iris" >}}
+
+{{< collection-species "Azolla" >}}
+
+{{< collection-species "Salvinia" >}}
+
+{{< collection-species "Eleocharis" >}}
+
+{{< collection-species "Cyperus" >}}
+
+## Orchidee scarpetta e altre orchidee (fuori dal terrario)
+
+Scarpette, ibridi *Cymbidium* e orchidee da intermedio-caldo che non rientrano nel regime d'alta quota.
+
+{{< collection-species "Paphiopedilum" >}}
+
+{{< collection-species "Cymbidium" >}}
+
+{{< collection-species "Fredclarkeara" >}}
+
+{{< collection-species "Coelogyne" >}}
 
 ## Orchidee terrestri e rustiche
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *Calopogon tuberosus* | Gartenbau Carow | EUR 38,80 | — | Viva |
-| 2 | *Habenaria radiata* | Growlist | — | — | Viva |
-| 3 | *Pogonia ophioglossoides* | eBay (westcornwallcarnivores) | EUR 5,80 | — | Viva |
-| 4 | *Spiranthes cernua* var. *odorata* 'Chadds Ford' | Gartenbau Carow | — | Orchidea palustre | Viva |
+{{< collection-species "Calopogon" >}}
+
+{{< collection-species "Habenaria" >}}
+
+{{< collection-species "Pogonia" >}}
+
+{{< collection-species "Spiranthes" >}}
 
 ## Felci
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *Platycerium bifurcatum* | Growlist | — | Felce corno di cervo | Viva |
-| 2 | *P. veitchii* | Growlist | — | — | Viva |
-| 3 | *Davallia repens* | Klein Carnivors | EUR 12,00 | — | Persa |
-| 4 | *D. fejeensis* | Growlist | — | — | Persa |
-| 5 | *Lecanopteris lomarioides* | Klein Carnivors | EUR 35,00 | Felce mirmecofila | Persa |
-| 6 | *Pyrrosia nummularifolia* | Growlist | — | — | Persa |
+{{< collection-species "Platycerium" >}}
+
+{{< collection-species "Davallia" >}}
+
+{{< collection-species "Lecanopteris" >}}
+
+{{< collection-species "Pyrrosia" >}}
 
 ## Varie
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *Picea pungens* 'Glauca Globosa' | Vivai le Georgiche | EUR 55,00 | Abete blu nano | Viva |
-| 2 | *Rosa* 'Sorbet Fruite' | Meilland (Yacht & Garden, Genova) | — | — | Viva |
-| 3 | *Byblis gigantea* | eBay (killerblume) | EUR 6,99 | — | Persa |
-| 4 | *B. liniflora* 'Kingston Rest' | eBay (killerblume) | EUR 6,99 | — | Persa |
-| 5 | *Catopsis berteroniana* | Araflora | — | Bromeliacea carnivora | Persa |
-| 6 | *Drosophyllum lusitanicum* | Rita Corino | — | — | Persa |
-| 7 | *Roridula gorgonias* | Gartenbau Carow | EUR 48,80 | — | Persa |
+Conifere, rose, *Byblis* sub-carnivora dell'Australia occidentale, *Catopsis*, *Drosophyllum*, *Roridula* — le compagne non-proprio-CP e gli accenti da balcone.
+
+{{< collection-species "Picea" >}}
+
+{{< collection-species "Rosa" >}}
+
+{{< collection-species "Byblis" >}}
+
+{{< collection-species "Catopsis" >}}
+
+{{< collection-species "Drosophyllum" >}}
+
+{{< collection-species "Roridula" >}}
 
 ## Foto
 
@@ -87,3 +84,11 @@ genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
 {{< collection-photos "Rosa" >}}
 
 {{< collection-photos "Iris" >}}
+
+{{< collection-photos "Nymphaea" >}}
+
+{{< collection-photos "Drosophyllum" >}}
+
+{{< collection-photos "Calopogon" >}}
+
+{{< collection-photos "Habenaria" >}}

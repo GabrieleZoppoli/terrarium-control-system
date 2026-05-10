@@ -9,117 +9,115 @@ genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis",
 
 A different lineage from the rest of this page — temperate-climate Asian *Cymbidium*, with a thousand-year cultivation tradition in China and Japan. Strict cold dormancy (0–14 °C from winter solstice) is the non-negotiable: without it the buds blast.
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *C. goeringii* 'Tian Cao' (天草, Amakusa) | [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD) | EUR 40.00 | Japanese Amakusa-line cv, cream-margined variegated foliage, fragrant. Acquired Orticola 2026 as substitute for the pre-ordered 'Da Tu Yuan'. See [the species page](/collection/species/cymbidium-goeringii-tian-cao/) for cultivation specifics. | Alive |
+Vendor for the cultivar below: [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD).
+
+{{< collection-species "Cymbidium" >}}
 
 ## Neofinetia & Allies (Japanese Wind Orchids)
 
 Small vandaceous orchids prized for their fragrance and elegant form — the *fūkiran* tradition is built around them.
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *Neofinetia falcata* 'Benitengu' | Celandroni Orchidee | EUR 55.00 | — | Alive |
-| 2 | *N. falcata* 'Akausagi' (red rabbit) | Negie Orchids, Japan | EUR 761.04 | Near blooming size with many babies; CITES + phytosanitary + EMS from Japan | Alive |
-| 3 | *N. falcata* | Grossraschener Orchideen | — | — | Alive |
-| 4 | *Neostylis* Lou Sneary | Celandroni Orchidee | EUR 27.27 | *N. falcata* x *Rhynchostylis coelestis* var. coerulea | Alive |
-| 5 | *Darwinara* Charm 'Blue Moon' | Claessen Orchids & Plants | EUR 54.04 | — | Alive |
-| 6 | *Darwinara* Charm 'Blue Star' | Celandroni Orchidee | EUR 35.00 | — | Lost |
+{{< collection-species "Neofinetia" >}}
 
-## Holcoglossum (4 acquired, 3 alive, 1 lost)
+{{< collection-species "Neostylis" >}}
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *H. flavescens* | Celandroni Orchidee | EUR 22.72 | — | Alive |
-| 2 | *H. tsii* | Orchids & more | EUR 14.00 | — | Alive |
-| 3 | *H. amesianum* | Claessen Orchids & Plants | EUR 17.95 | 9 cm | Alive |
-| 4 | *H. quasispinifolium* | Nardotto e Capello | — | — | Lost |
+{{< collection-species "Darwinara" >}}
 
-## Vanda (4 acquired, 2 alive, 2 lost)
+## Holcoglossum
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *V. coerulescens* | Celandroni Orchidee | EUR 55.00 | Species | Alive |
-| 2 | *V. nana* | Claessen Orchids & Plants | EUR 19.95 | — | Alive |
-| 3 | *V. coerulescens* | Currlin Orchideen | EUR 13.08 | Second plant | Lost |
-| 4 | *V.* 'Chocolate Brown' | Growlist | — | — | Lost |
+{{< collection-species "Holcoglossum" >}}
 
-## Phalaenopsis species (6 acquired, 5 alive, 1 lost)
+## Vanda
 
-Species-form *Phalaenopsis* -- all miniatures, very different from commercial hybrids.
+{{< collection-species "Vanda" >}}
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *P. finleyi* | Celandroni Orchidee | EUR 27.27 | — | Alive |
-| 2 | *P. lowii* | Celandroni Orchidee | EUR 22.73 | — | Alive |
-| 3 | *P. gibbosa* | Celandroni Orchidee | EUR 22.73 | — | Alive |
-| 4 | *P. wilsonii* | Celandroni Orchidee | EUR 22.00 | — | Alive |
-| 5 | *P. parishii* | Growlist | — | — | Alive |
-| 6 | *P. braceana* | Growlist | — | — | Lost |
+## Phalaenopsis species
+
+Species-form *Phalaenopsis* — all miniatures, very different from commercial hybrids.
+
+{{< collection-species "Phalaenopsis" >}}
 
 ## Southeast Asian species
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *Gastrochilus japonicus* | Varesina Orchidee | EUR 26.00 | Mounted | Alive |
-| 2 | *Chiloschista himalaica* | Orchids & more | EUR 14.00 | Leafless miniature | Alive |
-| 3 | *Chiloschista lunifera* | Orchids & more | EUR 16.00 | — | Lost |
-| 4 | *Cleisostoma arietinum* | Orchids & more | EUR 12.00 | — | Alive |
-| 5 | *Schoenorchis pachyacris* | Growlist | — | — | Alive |
-| 6 | *Ceratochilus biglandulosus* | Grossraschener Orchideen | EUR 17.00 | — | Alive |
-| 7 | *Seidenfadenia mitrata* | Celandroni Orchidee | EUR 31.82 | — | Lost |
-| 8 | *Stereochilus pachyphyllus* | Orchids & more | EUR 12.00 | — | Lost |
-| 9 | *Vandachostylis* Sasicha | Celandroni Orchidee | EUR 35.00 | — | Lost |
+Mounted miniatures and oddities from the Indo-Malayan region.
+
+{{< collection-species "Gastrochilus" >}}
+
+{{< collection-species "Chiloschista" >}}
+
+{{< collection-species "Cleisostoma" >}}
+
+{{< collection-species "Schoenorchis" >}}
+
+{{< collection-species "Ceratochilus" >}}
+
+{{< collection-species "Seidenfadenia" >}}
+
+{{< collection-species "Stereochilus" >}}
+
+{{< collection-species "Vandachostylis" >}}
+
+{{< collection-species "Haraella" >}}
 
 ## Pleurothallidinae & Neotropical orchids
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *Platystele baqueroi* | Ecuagenera Europe | EUR 24.26 | — | Alive |
-| 2 | *Pleurothallis leptotifolia* | Orchideria di Morosolo | EUR 15.00 | Mounted | Alive |
-| 3 | *Lepanthopsis astrophora* | Varesina Orchidee | EUR 22.00 | — | Alive |
-| 4 | *Comparettia falcata* | Orchids & more | EUR 12.00 | — | Alive |
-| 5 | *Macroclinium manabinum* | Orchids & more | EUR 12.00 | — | Alive |
-| 6 | *Phymatidium tillandsioides* | Orchideria di Morosolo | EUR 15.00 | Mounted | Alive |
-| 7 | *Ornithocephalus estradae* | Varesina Orchidee | EUR 30.00 | Rare species; mounted | Lost |
-| 8 | *Oerstedella centradenia* | Orchids & more | EUR 12.00 | — | Alive |
-| 9 | *Nageliella purpurea* | Orchids & more | EUR 14.00 | — | Alive |
-| 10 | *Fernandezia subbiflora* | Grossraschener Orchideen | EUR 28.00 | — | Lost |
-| 11 | *Chytroglossa aurata* | Grossraschener Orchideen | EUR 15.00 | — | Lost |
+{{< collection-species "Platystele" >}}
 
-## Other Orchids
+{{< collection-species "Pleurothallis" >}}
 
-| # | Taxon | Vendor | Price | Notes | Status |
-|---|-------|--------|-------|-------|--------|
-| 1 | *Oncidium cheirophorum* | Varesina Orchidee | EUR 22.00 | Mounted; coconut fragrance | Alive |
-| 2 | *Oncidium eurycline* | Orchideria di Morosolo | EUR 24.00 | Mounted, large | Lost |
-| 3 | *Tolumnia hawkesiana* | Orchideria di Morosolo | EUR 15.00 | Mounted | Alive |
-| 4 | *Maxillaria sophronitis* | Orchids & more | EUR 14.00 | — | Alive |
-| 5 | *Maxillaria tenuifolia* | — | — | Coconut-scented flowers | Alive |
-| 6 | *Mediocalcar decoratum* | Grossraschener Orchideen | EUR 11.95 | PNG highlands | Alive |
-| 7 | *Mediocalcar bifolium* | Grossraschener Orchideen | EUR 15.00 | Mounted | Lost |
-| 8 | *Aerangis somalensis* | Celandroni Orchidee | EUR 30.00 | — | Alive |
-| 9 | *Aerangis mystacidii* | Celandroni Orchidee | EUR 20.00 | — | Lost |
-| 10 | *Angraecum didieri* | Growlist | — | — | Alive |
-| 11 | *Angraecum viguieri* | Celandroni Orchidee | EUR 25.00 | — | Lost |
-| 12 | *Bulbophyllum makoyanum* | Gift | — | Name unverified | Alive |
-| 13 | *Bulbophyllum moniliforme* | Celandroni Orchidee | EUR 27.27 | — | Lost |
+{{< collection-species "Lepanthopsis" >}}
 
-## Orchid Vendors
+{{< collection-species "Comparettia" >}}
+
+{{< collection-species "Macroclinium" >}}
+
+{{< collection-species "Phymatidium" >}}
+
+{{< collection-species "Ornithocephalus" >}}
+
+{{< collection-species "Oerstedella" >}}
+
+{{< collection-species "Nageliella" >}}
+
+{{< collection-species "Fernandezia" >}}
+
+{{< collection-species "Chytroglossa" >}}
+
+## Other genera
+
+{{< collection-species "Oncidium" >}}
+
+{{< collection-species "Tolumnia" >}}
+
+{{< collection-species "Maxillaria" >}}
+
+{{< collection-species "Mediocalcar" >}}
+
+{{< collection-species "Aerangis" >}}
+
+{{< collection-species "Angraecum" >}}
+
+{{< collection-species "Bulbophyllum" >}}
+
+## Orchid vendors
 
 Major sources for the orchid collection:
-- **Celandroni Orchidee** (Italy) -- vandaceous specialists
-- **Claessen Orchids & Plants** (Netherlands) -- quality specimens
-- **Currlin Orchideen** (Germany) -- Southeast Asian species
-- **Ecuagenera Europe** (Netherlands / Ecuador) -- Andean species
-- **Grossraschener Orchideen** (Germany) -- wide range of miniatures
-- **Lo Scrigno di Nebbia** (Italy) -- Brazilian species
-- **Nardotto e Capello** (Italy) -- assorted species
-- **Orchideria di Morosolo** (Italy) -- mounted miniatures
-- **Orchids & more** (Germany) -- miniatures, good value
-- **Varesina Orchidee** (Italy) -- Italian specialist
+
+- **Celandroni Orchidee** (Italy) — vandaceous specialists
+- **Claessen Orchids & Plants** (Netherlands) — quality specimens
+- **Currlin Orchideen** (Germany) — Southeast Asian species
+- **Ecuagenera Europe** (Netherlands / Ecuador) — Andean species
+- **Grossraschener Orchideen** (Germany) — wide range of miniatures
+- **Lo Scrigno di Nebbia** (Italy) — Brazilian species
+- **Nardotto e Capello** (Italy) — assorted species
+- **Orchideria di Morosolo** (Italy) — mounted miniatures
+- **Orchids & more** (Germany) — miniatures, good value
+- **[Piante Pazze](https://www.piantepazze.it/)** (Italy) — temperate-climate Asian *Cymbidium*
+- **Varesina Orchidee** (Italy) — Italian specialist
 
 ## Photos
+
+{{< collection-photos "Cymbidium" >}}
 
 {{< collection-photos "Phalaenopsis" >}}
 
@@ -172,3 +170,5 @@ Major sources for the orchid collection:
 {{< collection-photos "Tolumnia" >}}
 
 {{< collection-photos "Calopogon" >}}
+
+{{< collection-photos "Haraella" >}}

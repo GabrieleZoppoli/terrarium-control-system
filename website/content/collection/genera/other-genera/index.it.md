@@ -2,133 +2,57 @@
 title: "Altri generi"
 description: "Utricularia, Pinguicula, Drosera, Genlisea, Cephalotus, Sphagnum e piante accompagnatrici"
 tags: ["carnivora", "accompagnatrice"]
-genera: ["Utricularia", "Pinguicula", "Drosera", "Genlisea", "Cephalotus"]
+genera: ["Utricularia", "Pinguicula", "Drosera", "Genlisea", "Cephalotus", "Sphagnum"]
 ---
 
-## Utricularia sez. Orchidioides (terrario)
+## Utricularia
 
-Utricolarie epifite dalle pareti rocciose dei tepui e dalle chiome delle foreste nebulose neotropicali, coltivate a kokedama nella zona media del terrario. Solo le specie epifite stanno nel terrario; le *Utricularia* terrestri sono coltivate altrove.
+Utricolarie. Il clade epifito *Orchidioides* — pareti dei tepui e chiome di foresta nebulosa neotropicale — vive nel terrario d'alta quota a kokedama; le specie terrestri stanno altrove. Tre delle quattro specie della sez. *Orchidioides* sono state perse — il singolo fallimento colturale più rilevante della collezione. Sopravvive l'ibrido *U.* × *nelumbifolia* × *reniformis*; *U. quelchii* è il riacquisto recente che ha finalmente fiorito.
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *U.* x *nelumbifolia* x *reniformis* | Klein Carnivors | EUR 12,00 | Ibrido sez. *Orchidioides* | Viva |
-| 2 | *U. alpina* | Gartenbau Carow | — | Sez. *Orchidioides*; endemica dei tepui | Persa |
-| 3 | *U. quelchii* | — | — | Sez. *Orchidioides*; endemica dei tepui | Persa |
-| 4 | *U. campbelliana* | — | — | Sez. *Orchidioides* | Persa |
+{{< collection-species "Utricularia" >}}
 
-Tre delle quattro specie della sez. *Orchidioides* sono andate perse — il fallimento di coltivazione più significativo della collezione. Solo l'ibrido *U. nelumbifolia* x *reniformis* è sopravvissuto.
+## Cephalotus
 
-## Utricularia — terrestri (fuori dal terrario)
+Pianta-brocca dell'Australia occidentale — coltivata fuori dal terrario. Le talee 'Eden Black' non hanno attecchito (×2 tentativi).
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *U. calycifida* 'Asenath White' | Klein Carnivors | EUR 7,00 | — | Viva |
-| 2 | *U. sandersonii* (bianca) | Growlist | — | — | Viva |
-| 3 | *U. longifolia* | Growlist | — | — | Viva |
-| 4 | *U. uniflora* L-Type | Klein Carnivors | EUR 8,00 | — | Persa |
-| 5 | *U. welwitschii* | Klein Carnivors | EUR 8,00 | — | Persa |
-| 6 | *U. blanchetii* 'Violet' | Klein Carnivors | EUR 5,00 | Pico del Almos | Persa |
-| 7 | *U. fulva* | Carnivoria.eu | EUR 8,00 | Rockhole, WA | Regalata |
-| 8 | *U. bisquamata* 'Big Purple Flower' | Klein Carnivors | EUR 5,00 | — | Regalata |
-| 9 | *U. dichotoma* (fiore blu) | Klein Carnivors | EUR 6,00 | — | Regalata |
-| 10 | *U. prehensilis* | Klein Carnivors | EUR 5,00 | — | Regalata |
+{{< collection-species "Cephalotus" >}}
 
-## Cephalotus (fuori dal terrario)
+## Pinguicula
 
-Piante ad ascidio dell'Australia occidentale — coltivate fuori dal terrario.
+Soprattutto specie e ibridi messicani. La tropicale *P. primuliflora* e la grande *P. gigantea* si sono rivelate poco affidabili; gli arrivi da Diflora e Un Angolo di Deserto sono i più costanti.
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *C. follicularis* | Giardino Carnivoro | EUR 22,00 | — | Viva |
-| 2 | *C. follicularis* f. 'Hummer's Giant' | David Maccioni | — | — | Viva |
-| 3 | *C. follicularis* f. 'Eden Black' | Nature et Paysages | EUR 70,00 | Talea, 4 cm | Persa |
-| 4 | *C. follicularis* f. 'Eden Black' | Taudan & Plants | EUR 69,00 | Vivaio ormai chiuso | Persa |
+{{< collection-species "Pinguicula" >}}
 
-## Pinguicula (22 acquisite, 13 vive, 9 perse)
+## Genlisea
 
-Prevalentemente specie e ibridi messicani. La tropicale *P. primuliflora* e la grande *P. gigantea* si sono rivelate inaffidabili.
+Piante a cavatappi — specialiste di trappole sotterranee. La mortalità alta su questo lotto suggerisce che il terrario possa essere troppo freddo per la maggior parte delle specie.
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *P.* 'Apasionada' (*gigantea alba* x *moctezumae*) | Giardino Carnivoro | EUR 8,00 | Ibrido | Viva |
-| 2 | *P. agnata* x *gypsicola* | Giardino Carnivoro | EUR 8,00 | Ibrido | Viva |
-| 3 | *P.* x Red Starfish | Giardino Carnivoro | EUR 19,00 | Ibrido | Viva |
-| 4 | *P. gracilis* x *emarginata* | Giardino Carnivoro | EUR 6,00 | Ibrido | Viva |
-| 5 | *P. jaumavensis* x *cyclosecta* | Giardino Carnivoro | EUR 6,00 | Ibrido | Viva |
-| 6 | *P. reticulata* | Carnivoria.eu | EUR 10,00 | Aramberi, Nuevo León | Viva |
-| 7 | *P. agnata* | Un Angolo di Deserto | — | A radice nuda | Viva |
-| 8 | *P. gypsicola* x *moctezumae* | Un Angolo di Deserto | — | 7 piante | Viva |
-| 9 | *P. rotundiflora* | Un Angolo di Deserto | — | — | Viva |
-| 10 | *P. rectifolia* | Un Angolo di Deserto | — | — | Viva |
-| 11 | *P. ehlersiae* | Un Angolo di Deserto | — | 2 piante | Viva |
-| 12 | *P. esseriana* | Un Angolo di Deserto | — | — | Viva |
-| 13 | *P.* 'Marciano' (*heterophylla* x 'Weser') | — | — | Ibrido | Viva |
-| 14 | *P. laueana* | Giardino Carnivoro | EUR 8,00 | — | Persa |
-| 15 | *P. calderoniae* | Giardino Carnivoro | EUR 25,00 | — | Persa |
-| 16 | *P. primuliflora* | Nature et Paysages | EUR 7,00 | — | Persa |
-| 17 | *P. gigantea* | Klein Carnivors | EUR 10,00 | Secondo esemplare | Persa |
-| 18 | *P. medusina* | Un Angolo di Deserto | — | — | Persa |
-| 19 | *P. gigantea* | Un Angolo di Deserto | — | — | Persa |
-| 20 | *P.* x 'Sethos' | Un Angolo di Deserto | — | Ibrido | Persa |
-| 21 | *P. primuliflora* 'Rose' | Growlist | — | — | Persa |
-| 22 | *P. cyclosecta* | — | — | — | Persa |
+{{< collection-species "Genlisea" >}}
 
-## Genlisea (4 acquisite, 1 viva, 3 perse)
+## Drosera
 
-Piante a cavatappi — specialiste nelle trappole sotterranee. L'alta mortalità suggerisce che il terrario sia per loro troppo fresco.
+Drosere. Le forme di *D. capensis* sono le più affidabili; fra i sopravvissuti notevoli, tre specie tuberose australiane di Allen Lowrie.
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *G. africana* | eBay (heliamphorina) | — | Parte di un ordine da EUR 24 | Viva |
-| 2 | *G. aurea* (Chapada dos Guimaraes, MG) | eBay (heliamphorina) | — | — | Persa |
-| 3 | *G. flexuosa* | eBay (heliamphorina) | — | — | Persa |
-| 4 | *G. violacea* | eBay (heliamphorina) | — | — | Persa |
+{{< collection-species "Drosera" >}}
 
-## Drosera (19 acquisite, 10 vive, 7 perse, 2 regalate)
+## Sphagnum
 
-Le forme di *D. capensis* sono le più affidabili. Fra le sopravvissute notevoli, tre specie tuberose australiane da Allen Lowrie.
+Strato di muschio vivo nel terrario e nei vasi delle carnivore.
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *D. capensis* 'Red' | Gartenbau Carow | EUR 7,20 | — | Viva |
-| 2 | *D. capensis* 'Broad Leaf' | Gartenbau Carow | — | — | Viva |
-| 3 | *D. regia* | Gartenbau Carow | — | Dimensione da fioritura | Viva |
-| 4 | *D. capensis* 'Bainskloof' | Klein Carnivors | EUR 10,00 | — | Viva |
-| 5 | *D. capensis* 'Hairy Form' | Diflora | — | — | Viva |
-| 6 | *D. filiformis* 'Florida Giant' | — | — | — | Viva |
-| 7 | *D. capensis* (tipica) | — | — | — | Viva |
-| 8 | *D. tubaestylis* 'Large' | Allen Lowrie | — | Tuberosa | Viva |
-| 9 | *D. macrantha* subsp. *eremaea* | Allen Lowrie | — | Tuberosa | Viva |
-| 10 | *D. zonaria* 'Large' | Allen Lowrie | — | Tuberosa | Viva |
-| 11 | *D. capensis* alba | Giardino Carnivoro | EUR 6,00 | — | Regalata |
-| 12 | *D. capensis* 'Giant Form' | Diflora | — | — | Regalata |
-| 13 | *D. gigantea* | Gartenbau Carow | — | — | Persa |
-| 14 | *D. falconeri* 'Wangi form' | Carnivoria.eu | EUR 12,00 | — | Persa |
-| 15 | *D. ordensis* | Carnivoria.eu | EUR 10,00 | Timber Creek, NT | Persa |
-| 16 | *D.* x Solaris | Giacomo Mehle | EUR 12,80 | Ibrido | Persa |
-| 17 | *D. capensis* var. alba | Diflora | — | — | Persa |
-| 18 | *D. cistiflora* | Diflora | — | — | Persa |
-| 19 | *D. regia* | Diflora | — | Seconda pianta | Persa |
+{{< collection-species "Sphagnum" >}}
 
-## Sphagnum (muschio vivo — terrario)
+## Vivai di piante carnivore
 
-| # | Taxon | Vivaio | Prezzo | Note | Stato |
-|---|-------|--------|--------|------|-------|
-| 1 | *S. papillosum* | Gartenbau Carow | — | Muschio vivo | Vivo |
-| 2 | *S. fallax* | Growlist | — | — | Vivo |
-| 3 | *S. girgensohnii* | Gartenbau Carow | — | Muschio vivo | Perso |
+Le fonti principali della collezione carnivora:
 
-## Vivai delle carnivore
-
-Principali fornitori per la collezione di carnivore:
-- **Allen Lowrie** (Australia) — specialista *Drosera* tuberose
-- **Andreas Wistuba** (Germania) — specialista *Heliamphora* e *Nepenthes*
-- **Carnivoria.eu** (Germania / Repubblica Ceca) — carnivore assortite
-- **Diflora** (Italia) — carnivore assortite
+- **Allen Lowrie** (Australia) — specialista di *Drosera* tuberose
+- **Andreas Wistuba** (Germania) — specialista di *Heliamphora* e *Nepenthes*
+- **Carnivoria.eu** (Germania / Repubblica Ceca) — CP miste
+- **Diflora** (Italia) — CP miste
 - **Gartenbau Carow** (Germania) — *Drosera*, *Sphagnum*
-- **Giardino Carnivoro** (Italia) — vivaio italiano di carnivore
+- **Giardino Carnivoro** (Italia) — vivaio italiano di CP
 - **Klein Carnivors** (Sudafrica) — *Utricularia* e specie africane
-- **Un Angolo di Deserto** (Italia) — specialista *Pinguicula*
+- **Un Angolo di Deserto** (Italia) — specialista di *Pinguicula*
 
 ## Foto
 
@@ -139,3 +63,5 @@ Principali fornitori per la collezione di carnivore:
 {{< collection-photos "Cephalotus" >}}
 
 {{< collection-photos "Genlisea" >}}
+
+{{< collection-photos "Drosera" >}}
