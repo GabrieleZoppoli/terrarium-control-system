@@ -769,6 +769,52 @@
                       "size": 1,
                       "vendor": "Michieli Floricoltura",
                       "status": "dead"
+                    },
+                    {
+                      "name": "roezlii",
+                      "size": 1,
+                      "vendor": "Le Figlie del Vento",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-roezlii.jpg",
+                        "../img/collection/tillandsia/tillandsia-roezlii-2.jpg"
+                      ]
+                    },
+                    {
+                      "name": "tectorum f. caulescens",
+                      "size": 1,
+                      "vendor": "Le Figlie del Vento",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-tectorum-f-caulescens.jpg"
+                      ]
+                    },
+                    {
+                      "name": "didisticha",
+                      "size": 1,
+                      "vendor": "Le Figlie del Vento",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-didisticha.jpg"
+                      ]
+                    },
+                    {
+                      "name": "'Love Knot'",
+                      "size": 1,
+                      "vendor": "Le Figlie del Vento",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-love-knot.jpg"
+                      ]
+                    },
+                    {
+                      "name": "sp. (Michieli)",
+                      "size": 1,
+                      "vendor": "Michieli Floricoltura",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-sp-michieli.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1379,6 +1425,16 @@
                       "size": 1,
                       "vendor": "Celandroni Orchidee",
                       "status": "gave"
+                    },
+                    {
+                      "name": "goeringii 'Tian Cao'",
+                      "size": 1,
+                      "vendor": "Piante Pazze",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg"
+                      ]
                     }
                   ]
                 },
@@ -3280,7 +3336,10 @@
                       "name": "cyclosecta",
                       "size": 1,
                       "vendor": "",
-                      "status": "dead"
+                      "status": "dead",
+                      "photos": [
+                        "../img/collection/pinguicula/pinguicula-cyclosecta.jpg"
+                      ]
                     },
                     {
                       "name": "ehlersiae",
@@ -3409,6 +3468,33 @@
                       "size": 1,
                       "vendor": "Giardino Carnivoro",
                       "status": "alive"
+                    },
+                    {
+                      "name": "× 'Golden Eye' (BCP)",
+                      "size": 1,
+                      "vendor": "Diflora",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/pinguicula/pinguicula-x-golden-eye-bcp.jpg"
+                      ]
+                    },
+                    {
+                      "name": "debbertiana",
+                      "size": 1,
+                      "vendor": "Diflora",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/pinguicula/pinguicula-debbertiana.jpg"
+                      ]
+                    },
+                    {
+                      "name": "moctezumae",
+                      "size": 1,
+                      "vendor": "Diflora",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/pinguicula/pinguicula-moctezumae.jpg"
+                      ]
                     }
                   ]
                 },
@@ -3526,6 +3612,15 @@
                         "../img/collection/utricularia/utricularia-quelchii-11.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-12.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-13.jpg"
+                      ]
+                    },
+                    {
+                      "name": "sp. Kerala",
+                      "size": 1,
+                      "vendor": "Un Angolo di Deserto",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/utricularia/utricularia-sp-kerala.jpg"
                       ]
                     }
                   ]

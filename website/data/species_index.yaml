@@ -45,6 +45,10 @@
   genus: Comparettia
   primary_photo: img/collection/comparettia/comparettia-falcata.jpg
   provenance: "Tropical Americas, cool epiphyte 500–1,800 m"
+"cymbidium-goeringii-tian-cao":
+  taxon: "Cymbidium goeringii 'Tian Cao'"
+  genus: Cymbidium
+  primary_photo: img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg
 "dendrobium-betty-goto-f-coerulea":
   taxon: Dendrobium Betty Goto f. coerulea
   genus: Dendrobium
@@ -307,14 +311,30 @@
   taxon: Pinguicula agnata x gypsicola
   genus: Pinguicula
   primary_photo: img/collection/pinguicula/pinguicula-agnata-x-gypsicola.jpg
+"pinguicula-cyclosecta":
+  taxon: Pinguicula cyclosecta
+  genus: Pinguicula
+  primary_photo: img/collection/pinguicula/pinguicula-cyclosecta.jpg
+"pinguicula-debbertiana":
+  taxon: Pinguicula debbertiana
+  genus: Pinguicula
+  primary_photo: img/collection/pinguicula/pinguicula-debbertiana.jpg
 "pinguicula-jaumavensis-x-cyclosecta":
   taxon: Pinguicula jaumavensis x cyclosecta
   genus: Pinguicula
   primary_photo: img/collection/pinguicula/pinguicula-jaumavensis-x-cyclosecta.jpg
+"pinguicula-moctezumae":
+  taxon: Pinguicula moctezumae
+  genus: Pinguicula
+  primary_photo: img/collection/pinguicula/pinguicula-moctezumae.jpg
 "pinguicula-rectifolia":
   taxon: Pinguicula rectifolia
   genus: Pinguicula
   primary_photo: img/collection/pinguicula/pinguicula-rectifolia.jpg
+"pinguicula-golden-eye-bcp":
+  taxon: "Pinguicula × 'Golden Eye' (BCP)"
+  genus: Pinguicula
+  primary_photo: img/collection/pinguicula/pinguicula-x-golden-eye-bcp.jpg
 "platystele-baqueroi":
   taxon: Platystele baqueroi
   genus: Platystele
@@ -359,10 +379,30 @@
   genus: Sophronitis
   primary_photo: img/collection/sophronitis/sophronitis-brevipedunculata.jpg
   provenance: "Brazilian campos rupestres, 900–1,500 m"
+"tillandsia-love-knot":
+  taxon: "Tillandsia 'Love Knot'"
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-love-knot.jpg
 "tillandsia-aeranthos":
   taxon: Tillandsia aeranthos
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-aeranthos.jpg
+"tillandsia-didisticha":
+  taxon: Tillandsia didisticha
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-didisticha.jpg
+"tillandsia-roezlii":
+  taxon: Tillandsia roezlii
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-roezlii.jpg
+"tillandsia-sp-michieli":
+  taxon: Tillandsia sp. (Michieli)
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-sp-michieli.jpg
+"tillandsia-tectorum-f-caulescens":
+  taxon: Tillandsia tectorum f. caulescens
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-tectorum-f-caulescens.jpg
 "tillandsia-tricholepis":
   taxon: Tillandsia tricholepis
   genus: Tillandsia
@@ -386,12 +426,16 @@
 "utricularia-quelchii":
   taxon: Utricularia quelchii
   genus: Utricularia
-  primary_photo: img/collection/utricularia/utricularia-quelchii-10.jpg
-  provenance: "Ilu Tepui, Venezuela — red-flowered sect. Orchidioides"
+  primary_photo: img/collection/utricularia/utricularia-quelchii.jpg
+  provenance: "Tepui cliffs, Venezuela — epiphytic Utricularia"
 "utricularia-sandersonii-white":
   taxon: Utricularia sandersonii (white)
   genus: Utricularia
   primary_photo: img/collection/utricularia/utricularia-sandersonii-white.jpg
+"utricularia-sp-kerala":
+  taxon: Utricularia sp. Kerala
+  genus: Utricularia
+  primary_photo: img/collection/utricularia/utricularia-sp-kerala.jpg
 "utricularia-nelumbifolia-reniformis":
   taxon: Utricularia × nelumbifolia × reniformis
   genus: Utricularia

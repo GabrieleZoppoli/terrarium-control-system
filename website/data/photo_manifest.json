@@ -109,6 +109,16 @@
       ]
     }
   ],
+  "cymbidium": [
+    {
+      "taxon": "Cymbidium goeringii 'Tian Cao'",
+      "slug": "cymbidium-goeringii-tian-cao",
+      "primary": "cymbidium-goeringii-tian-cao.jpg",
+      "extras": [
+        "cymbidium-goeringii-tian-cao-2.jpg"
+      ]
+    }
+  ],
   "dendrobium": [
     {
       "taxon": "Dendrobium Betty Goto f. coerulea",
@@ -716,6 +726,18 @@
       "extras": []
     },
     {
+      "taxon": "Pinguicula cyclosecta",
+      "slug": "pinguicula-cyclosecta",
+      "primary": "pinguicula-cyclosecta.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Pinguicula debbertiana",
+      "slug": "pinguicula-debbertiana",
+      "primary": "pinguicula-debbertiana.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Pinguicula jaumavensis x cyclosecta",
       "slug": "pinguicula-jaumavensis-x-cyclosecta",
       "primary": "pinguicula-jaumavensis-x-cyclosecta.jpg",
@@ -725,9 +747,21 @@
       ]
     },
     {
+      "taxon": "Pinguicula moctezumae",
+      "slug": "pinguicula-moctezumae",
+      "primary": "pinguicula-moctezumae.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Pinguicula rectifolia",
       "slug": "pinguicula-rectifolia",
       "primary": "pinguicula-rectifolia.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Pinguicula × 'Golden Eye' (BCP)",
+      "slug": "pinguicula-x-golden-eye-bcp",
+      "primary": "pinguicula-x-golden-eye-bcp.jpg",
       "extras": []
     }
   ],
@@ -880,6 +914,12 @@
   ],
   "tillandsia": [
     {
+      "taxon": "Tillandsia 'Love Knot'",
+      "slug": "tillandsia-love-knot",
+      "primary": "tillandsia-love-knot.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Tillandsia aeranthos",
       "slug": "tillandsia-aeranthos",
       "primary": "tillandsia-aeranthos.jpg",
@@ -887,6 +927,32 @@
         "tillandsia-aeranthos-2.jpg",
         "tillandsia-aeranthos-3.jpg"
       ]
+    },
+    {
+      "taxon": "Tillandsia didisticha",
+      "slug": "tillandsia-didisticha",
+      "primary": "tillandsia-didisticha.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Tillandsia roezlii",
+      "slug": "tillandsia-roezlii",
+      "primary": "tillandsia-roezlii.jpg",
+      "extras": [
+        "tillandsia-roezlii-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Tillandsia sp. (Michieli)",
+      "slug": "tillandsia-sp-michieli",
+      "primary": "tillandsia-sp-michieli.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Tillandsia tectorum f. caulescens",
+      "slug": "tillandsia-tectorum-f-caulescens",
+      "primary": "tillandsia-tectorum-f-caulescens.jpg",
+      "extras": []
     },
     {
       "taxon": "Tillandsia tricholepis",
@@ -953,6 +1019,12 @@
       "taxon": "Utricularia sandersonii (white)",
       "slug": "utricularia-sandersonii-white",
       "primary": "utricularia-sandersonii-white.jpg",
+      "extras": []
+    },
+    {
+      "taxon": "Utricularia sp. Kerala",
+      "slug": "utricularia-sp-kerala",
+      "primary": "utricularia-sp-kerala.jpg",
       "extras": []
     },
     {
