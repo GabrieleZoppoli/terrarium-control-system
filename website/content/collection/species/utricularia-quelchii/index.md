@@ -17,7 +17,7 @@ sources:
     notes: "Ilu Tepui provenance; currently flowering, April 2026"
 photos:
   - img/collection/utricularia/utricularia-quelchii.jpg
-primary_photo: img/collection/utricularia/utricularia-quelchii.jpg
+primary_photo: img/collection/utricularia/utricularia-quelchii-15.jpg
 genus_page: /collection/genera/utricularia/
 ---
 

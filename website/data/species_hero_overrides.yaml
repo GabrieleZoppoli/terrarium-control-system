@@ -1,0 +1,12 @@
+# Hand-maintained overrides for the homepage SOTW hero + species detail
+# page primary photo. Without an override, generate_species_pages.py picks
+# the alphabetically-first photo (typically `<slug>.jpg`, i.e. source 1.jpg)
+# — which for older accessions is the catch shot, not the best portrait.
+#
+# Format: "<species-slug>": "img/collection/<genus>/<filename>"
+#
+# Slugs must exist in data/species_index.yaml (i.e. an alive taxon with at
+# least one photo). Filenames must exist under static/img/collection/.
+# Unrecognised slugs are silently ignored.
+
+"utricularia-quelchii": "img/collection/utricularia/utricularia-quelchii-15.jpg"

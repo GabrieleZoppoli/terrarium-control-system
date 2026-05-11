@@ -29,6 +29,7 @@ WEB = Path(__file__).resolve().parent.parent
 CSV_PATH     = WEB / "static" / "data" / "collection.csv"
 MANIFEST     = WEB / "data" / "photo_manifest.json"
 PROVENANCE   = WEB / "data" / "mosaic_provenance.yaml"
+HERO_OVERRIDES = WEB / "data" / "species_hero_overrides.yaml"
 SPECIES_ROOT = WEB / "content" / "collection" / "species"
 INDEX_OUT    = WEB / "data" / "species_index.yaml"
 
@@ -66,6 +67,23 @@ def load_provenance() -> dict[str, str]:
         m = re.match(r'^\s*([A-Za-z][\w\s\.\-×\']+?)\s*:\s*"((?:[^"\\]|\\.)*)"\s*$', raw)
         if m:
             out[m.group(1).strip()] = m.group(2).replace('\\"', '"')
+    return out
+
+
+def load_hero_overrides() -> dict[str, str]:
+    """Map species slug → primary_photo path, overriding the auto-pick.
+
+    Lets the homepage SOTW hero (and the species detail page) feature a
+    specific photo instead of the alphabetically-first one. Same flat-YAML
+    format as load_provenance.
+    """
+    if not HERO_OVERRIDES.is_file():
+        return {}
+    out: dict[str, str] = {}
+    for raw in HERO_OVERRIDES.read_text(encoding="utf-8").splitlines():
+        m = re.match(r'^\s*"((?:[^"\\]|\\.)*)"\s*:\s*"((?:[^"\\]|\\.)*)"\s*$', raw)
+        if m:
+            out[m.group(1).replace('\\"', '"')] = m.group(2).replace('\\"', '"')
     return out
 
 
@@ -148,6 +166,7 @@ def main() -> None:
             }
 
     provenance_lookup = load_provenance()
+    hero_overrides = load_hero_overrides()
 
     # Group CSV rows by taxon (alive only)
     by_taxon: dict[str, dict] = {}
@@ -188,7 +207,7 @@ def main() -> None:
             continue  # skip taxa without any photo — nothing to show
 
         entry["photos"] = [photos_info["primary"], *photos_info["extras"]]
-        entry["primary_photo"] = photos_info["primary"]
+        entry["primary_photo"] = hero_overrides.get(entry["slug"], photos_info["primary"])
         entry["provenance"] = provenance_for(taxon, entry["genus"], provenance_lookup)
 
         genus_slug = slug(entry["genus"])
