@@ -22,7 +22,7 @@
 
 ## Abstract
 
-We present the design, construction, and validation of an open-source weather-mimicking terrarium system that simulates highland cloud forest climates using real-time meteorological data. The system ingests current weather conditions from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour time shift to generate continuously varying temperature and humidity setpoints, reproducing the stochastic weather dynamics of tropical montane environments within a 1.5 x 0.6 x 1.1 m acrylic enclosure. A dynamic photoperiod derived from the Colombian reference latitude (~5 deg N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions, and a wet-bulb temperature gate that automatically disengages ventilation fans when evaporative cooling becomes thermodynamically counterproductive. The system has operated continuously for over three years with minimal human intervention, maintaining conditions suitable for approximately 120 cloud forest species from five continents. All design files, control flows, firmware, dashboards, and analysis scripts are provided under the CERN Open Hardware Licence. Companion publications describe the horticultural results for carnivorous plants [ref] and orchids [ref].
+We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour time shift to generate continuously varying temperature and humidity setpoints, reproducing the stochastic weather dynamics of tropical montane environments within a ~1 m³ acrylic enclosure (1.5 × 0.6 × 1.1 m). A dynamic photoperiod derived from the Colombian reference latitude (~5°N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions, and a wet-bulb temperature gate that automatically disengages ventilation fans when evaporative cooling becomes thermodynamically counterproductive. A multi-layer safety chain (door-open interlock, freezer daytime gate, manual-override timeout, power cross-check with hysteresis, LED-fault watchdog, USB serial watchdog) handles operator and hardware failure modes encountered in production. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of 2.60 kWh/day, currently maintaining **76 living accessions across 32 plant genera** drawn from four biogeographic provinces (Guayanan tepui, Andes, African highlands, and Papua New Guinea / Southeast Asia). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [URL — TBD on Zenodo deposit]; companion papers describe the horticultural results for carnivorous plants [ref] and orchids [ref].
 
 **Keywords**: open-source hardware, cloud forest terrarium, weather simulation, PID control, wet-bulb temperature, Node-RED, environmental monitoring, Raspberry Pi
 
@@ -58,11 +58,11 @@ The Weather-Mimicking Biotope (WMB) is an acrylic terrarium with integrated cool
 
 Applications for researchers and educators include:
 
-- **Ex-situ conservation**: Maintaining cloud forest species from multiple biogeographic regions in a single enclosure, validated over 3+ years with ~120 species from five continents
-- **Plant physiology studies**: Comprehensive data logging (32 InfluxDB measurements at 60-second intervals) enables analysis of plant responses to naturalistic environmental variation
-- **Control systems education**: The system demonstrates PID control, gain scheduling, hysteresis control, wet-bulb thermodynamics, and multi-regime switching in an accessible, visual programming environment (Node-RED)
+- **Ex-situ conservation**: Maintaining cloud forest species from multiple biogeographic regions in a single enclosure, validated over four years with 76 living accessions across 32 plant genera from four continents
+- **Plant physiology studies**: Comprehensive data logging (33 InfluxDB measurements at 60-second intervals; 3.1 million data points in the current 1-year retention window) enables analysis of plant responses to naturalistic environmental variation
+- **Control systems education**: The system demonstrates PID control, gain scheduling, hysteresis control, wet-bulb thermodynamics, multi-regime switching, and a documented production-grade safety chain in an accessible, visual programming environment (Node-RED)
 - **Template for other biomes**: The weather-mimicking architecture can be adapted to any biome by changing the reference weather stations (e.g., fog desert, alpine, lowland tropical)
-- **Low-cost alternative to growth chambers**: Total hardware cost is a fraction of commercial growth chambers, with comparable or superior environmental control for this application
+- **Low-cost alternative to growth chambers**: Total hardware cost is a fraction of commercial growth chambers (€10,000–50,000+ for Percival/Conviron-class equipment), at a measured operational footprint of 2.60 kWh/day (~€253/year at €0.30/kWh) for environmental control comparable to or superior to those instruments in this application class
 
 ---
 
@@ -250,17 +250,19 @@ Tilt the floor panel slightly toward a rear drainage hole. The shelf below the t
 
 #### 5.2.2 Cooling System Installation
 
-The Vitrifrigo ND50 is a split-system marine refrigeration unit: the compressor and condenser are mounted external to the cooled space, with refrigerant lines connecting them to a separate evaporator plate inside. Installation places the compressor unit above the terrarium and the evaporator plate horizontally inside the upper region of the enclosure, with refrigerant lines passing through a sealed pass-through in the top panel. This is mechanical refrigeration — not evaporative cooling.
+The Vitrifrigo ND50 is a split-system marine refrigeration unit shipped pre-charged with refrigerant in a sealed circuit; no F-gas handling certification is required for installation. The compressor and condenser are mounted external to the cooled space, with refrigerant lines connecting them through a sealed pass-through to a separate evaporator plate inside. The compressor unit sits above the terrarium, and the evaporator plate is mounted **horizontally on the rear wall in the lower portion of the enclosure** (cutout centred at ~20 cm above the cabinet floor — see back-panel drawing `panel-03-with-radiator` in the Design Files). This is mechanical refrigeration — not evaporative cooling.
+
+The low evaporator placement establishes a desirable vertical climate gradient inside the cabinet. Cold (and therefore dense) air sinking from the evaporator plate pools near the cabinet floor and rises by convection as it warms, while the LEDs are mounted above the cabinet. The result is **a warmer, brighter upper canopy and a cooler, shadier floor** — the inverse-stratified arrangement reproduces the natural moss-and-bryophyte zonation found near the base of cloud forest trunks and rocks.
 
 1. Place the Vitrifrigo ND50 OR2-V compressor unit on a frame or shelf above the terrarium, with adequate clearance for the condenser radiator and fans to exhaust heat away from the enclosure.
 
-2. Mount the Vitrifrigo PT14 evaporator plate horizontally inside the terrarium, near the top of the enclosure. Route the refrigerant lines from the compressor down through a sealed pass-through in the top panel to the evaporator. Ensure the evaporator's condensate drain leads, via gravity, to the condensate reservoir on the shelf below the terrarium.
+2. Mount the Vitrifrigo PT14 evaporator plate horizontally on the inside of the rear wall, with the upper face of the plate ~20 cm above the cabinet floor. Route the refrigerant lines from the compressor through a sealed pass-through in the top panel. Ensure the evaporator's condensate drain leads, via gravity, to the condensate reservoir on the shelf below the terrarium.
 
-3. Mount a plexiglas baffle below the evaporator plate, inclined approximately 30 deg from horizontal. Leave a slit between one edge of the baffle and the enclosure wall so that the cold (and therefore dense) air sinking off the evaporator is channeled downward through the slit and distributed into the lower zones.
+3. Mount a plexiglas baffle in front of the evaporator plate, inclined approximately 30° from horizontal. Leave a slit between the lower edge of the baffle and the cabinet floor so that the cold air sinking off the evaporator is channelled downward and discharged at floor level.
 
-4. Evenly space three Noctua NF-F12 iPPC-2000 IP67 fans on the plexiglas baffle, oriented to draw warm interior air upward against the underside of the evaporator surface.
+4. Evenly space three Noctua NF-F12 iPPC-2000 IP67 fans on the plexiglas baffle, oriented to draw warm interior air across the evaporator surface.
 
-5. Mount two additional Noctua NF-F12 iPPC-2000 IP67 fans separately for general internal circulation.
+5. Mount two additional Noctua NF-F12 iPPC-2000 IP67 fans separately within the cabinet for general internal circulation.
 
 6. Mount two Noctua NF-A12x25 G2 fans in push-pull configuration on the compressor's condenser radiator fins (not Arduino-controlled; these run whenever the compressor unit is powered).
 
@@ -502,10 +504,35 @@ Under normal operation, the system requires no human intervention. The automated
 
 ### 6.6 Safety Considerations
 
+#### Build-time hazards
+
 - **Electrical safety with water**: All mains wiring must use drip loops. Smart plugs and power supplies should be positioned where they cannot be splashed. The IP65-rated Mean Well driver provides moisture protection for the LED driver.
 - **DCM handling**: Dichloromethane is volatile and toxic. Use only in well-ventilated areas during construction.
-- **Compressor refrigerant**: R404a handling requires professional certification in many jurisdictions. The Vitrifrigo unit comes factory-sealed and should not require user intervention.
-- **Mister failsafe**: A cron-based Python script (`mister-failsafe.py`) runs every minute and forces the mister Tapo plug OFF if the on-time exceeds 150 seconds, preventing water damage from a stuck-on mister.
+- **Compressor refrigerant**: The Vitrifrigo unit ships pre-charged and factory-sealed; no F-gas handling certification is required for installation.
+
+#### Operational safety chain
+
+The system runs unattended for months at a time; over four years of operation, a layered safety architecture has been developed in response to specific real-world failure modes. Each layer operates independently of the others; failure of one does not disable the rest. All layers log to the InfluxDB time-series database for post-hoc audit.
+
+1. **Door safety interlock.** Two magnetic reed switches on the sliding front doors are read by the Arduino. When either door opens for more than 3 seconds (debounce against vibration), Node-RED commands all internal fans off, the compressor off, the mister off, and the LEDs to 60% (working-illumination brightness). All systems restore automatically when both doors close. The interlock protects the plants from cold-air loss with the door open, protects the operator from running fans during inspection, and protects the misting pump from spraying outside the enclosure.
+
+2. **Mister duration failsafe.** A cron-driven Python script (`mister-failsafe.py`) runs every minute and force-commands the mister Tapo plug OFF if the reported on-time exceeds 150 s. This bounds water damage from a Node-RED hang, a stuck Tapo relay, or a controller misconfiguration.
+
+3. **Freezer daytime gate.** Within Node-RED, the compressor is blocked from running during 08:00–20:00 CEST regardless of setpoint error. This guards against a stale or extreme nighttime target carrying over into daylight and producing runaway cooling that overshoots safe biological ranges.
+
+4. **Wet-bulb gate.** After lights-off, the outlet and impeller fans are disengaged once the cabinet temperature falls below the room's wet-bulb temperature. Fans below WBT are thermodynamically counterproductive (they import sensible heat from the room without contributing further evaporative cooling, see §7.4); leaving them running wastes energy and raises cabinet temperature.
+
+5. **Manual-override timeout.** The Dashboard provides operator buttons (Auto / Pause / Max) that bypass automatic fan control. To protect against an unintended persistent override (e.g., a "pause" left active after maintenance), a watchdog reverts the override to AUTO after 30 minutes of no fresh operator input. The persistence timestamp lives in a persisted global so the timeout survives controller restarts.
+
+6. **Arduino USB serial watchdog.** A bash script (`arduino-watchdog.sh`) runs as a systemd service, monitoring the Arduino's heartbeat byte on analog input A0. If the heartbeat is silent for >30 s, the script performs a USB sysfs re-authorize on the affected port, restoring serial communication in 15–30 s. The watchdog was developed in response to a recurring Pi-4 USB hub stall (Section 7.6).
+
+7. **LED-fault watchdog.** The PWM dim-signal line to the Mean Well driver is a known weak point; an intermittent connector float drives the driver to its cap-limited maximum, producing a 280–377 W draw with no command. Node-RED monitors the Meross-reported power and the commanded dim level; sustained mismatch for 90 s flags a fault and disables the LED Tapo plug. Brief transients are counted separately (see Section 7.6) without triggering a hard shutdown.
+
+8. **Power-vs-commanded cross-check (STUCK-RELAY auto-fix).** An out-of-process Python monitor (`terrarium-health.py`, cron `*/5 * * * *`) compares the Meross MSS310 instantaneous power reading against an expected wattage computed from the commanded Tapo states and the current dimmer slider position. Three guards prevent false positives that would otherwise propagate into harmful auto-fix commands: (i) N-sample hysteresis — STUCK is declared only after three consecutive 5-minute cycles of >70 W excess; (ii) transition-window suppression — the check is skipped within 120 s of any freezer state change, when Tapo cache and Meross averaging are demonstrably out of sync; (iii) fresh re-poll before action — the Tapo state is re-fetched immediately before any auto-fix cycle, and the action is skipped if the plug is already in the desired state. The power model was refit from seven days of clean (freezer-OFF, mister-OFF) measurements; see Section 7.6.
+
+9. **Weather staleness fallback.** If the OpenWeatherMap pipeline has not refreshed the setpoint in 10 minutes (network outage, API quota, DNS error), Node-RED transparently substitutes a smoothed 14-day historical daily curve for the live data. The cabinet continues to follow naturalistic-looking setpoints rather than the controller's last-known-good static value.
+
+The health-monitor reports a green/yellow/red status every five minutes and pushes immediate notifications (Gmail + WhatsApp via CallMeBot) on any non-green condition with a 30-minute dedupe window. A six-hourly green digest confirms the system is alive.
 
 ---
 
@@ -513,27 +540,31 @@ Under normal operation, the system requires no human intervention. The automated
 
 ### 7.1 Environmental Performance
 
-Over the monitoring period, the system maintained the following environmental ranges:
+Over the current 94-day monitoring window (during which the InfluxDB retention captures full per-minute resolution), the cabinet maintained:
 
-| Parameter | Minimum | Maximum | Typical range | Target range |
+| Parameter | Minimum | Maximum | Typical range | Target envelope |
 |---|---|---|---|---|
-| Temperature | 13.5 deg C | 24.3 deg C | 15–22 deg C | Weather-derived (clamped 12–24 deg C) |
-| Relative humidity | 75% | 98% | 82–95% | Weather-derived (clamped 70–90%) |
+| Temperature | 13.5 °C | 24.3 °C | 15–22 °C | Weather-derived, clamped to 12–24 °C |
+| Relative humidity | 75 % | 98 % | 83–95 % | Weather-derived, clamped to 75–95 % |
 | VPD | 0.03 kPa | 0.64 kPa | 0.08–0.45 kPa | < 0.8 kPa |
+| Time at RH ≥ 95 % ("fog hours") | — | — | 1.25 h/day (94-day average) | Naturalistic — set indirectly via weather mapping |
+| Time outside target ± 2 % RH | — | — | < 8 % of operating hours | < 10 % |
 
-The system achieves a meaningful diurnal temperature swing despite the terrarium being located in a room at approximately 22 deg C year-round. Nighttime terrarium temperatures routinely drop to 14–16 deg C through active compressor cooling, while daytime temperatures rise to 18–22 deg C, producing a 4–8 deg C daily amplitude that approximates conditions on mid-elevation tepuis.
+The cabinet achieves a meaningful diurnal temperature swing despite the room running at approximately 22 °C year-round. Nighttime cabinet temperature routinely drops to 14–16 °C under active compressor cooling, while daytime temperature rises to 18–22 °C, producing a 4–8 °C daily amplitude that approximates conditions on mid-elevation tepuis [Rull & Vegas-Vilarrúbia, 2006].
 
-`[PLACEHOLDER — Grafana screenshots showing representative 24-hour and 7-day temperature/humidity cycles]`
+Light operates on a raised-cosine schedule with a 60 % hardware ceiling (Mean Well driver potentiometer) and a software-controlled PWM ramp on top. The photoperiod is computed daily from the Chinchina reference latitude (4.98 °N), clamped to 10–14 h to provide seasonal variation without the abrupt cliffs that would occur at extreme equatorial latitudes. The dim curve is centred on solar noon (≈13:15 CEST at the cabinet's installation site) and produces a peak measured cabinet power draw of 220 W ± 3 W (n = 255 measurements at midday, freezer and mister off). Direct measurement of canopy PPFD (μmol·m⁻²·s⁻¹) and integrated daily DLI (mol·m⁻²·d⁻¹) is pending the installation of a quantum sensor and will be reported in the final submission.
+
+`[PLACEHOLDER — Grafana screenshots: representative 24-hour and 7-day temperature/humidity cycles; available from companion website `<URL>/highland/dashboard/` for current snapshots]`
 
 ### 7.2 PID Controller Stability
 
-The gain-scheduled PID controller maintains humidity within +/-3% RH of the setpoint under steady-state conditions, producing smooth fan speed transitions that eliminate the continuous cycling characteristic of simpler hysteresis controllers.
+The gain-scheduled PID controller maintains humidity within ±3 % RH of the setpoint under steady-state conditions, producing smooth fan-speed transitions that eliminate the continuous cycling characteristic of simpler hysteresis controllers.
 
-The gain scheduling was critical: with fixed gains, the controller exhibited rapid +/-25 PWM oscillations near the setpoint. After implementing gain scheduling — effective Kp = 7.5 within +/-1.5% of target, full Kp = 50 for errors >= 4% — these oscillations were eliminated.
+The gain scheduling was critical: with fixed gains, the controller exhibited ±25 PWM oscillations near the setpoint. After implementing the gain schedule (effective Kp = 7.5 within ±1.5 % of target, full Kp = 50 for errors ≥ 4 %), these oscillations were eliminated. Anti-windup limits the integral term to ±120 PWM-equivalent, and a low-pass filter (α = 0.12) attenuates derivative noise from sensor jitter.
 
-An IV/2SLS analysis using a controlled A/B experiment (alternating nightly fan-on/fan-off) as an instrument confirmed the fans' causal effect on humidity: each +10 PWM of fan speed causes a -0.37% reduction in humidity (p < 0.05). The compressor is the dominant cooling and dehumidification actuator (-15.9% humidity long-run effect when active), with the PID fans providing fine-tuning within the compressor's hysteresis band.
+The causal effect of the fans on cabinet humidity was estimated using a controlled A/B experiment conducted from December 2025 to February 2026, in which the night fans alternated nightly between off and PWM = 80. Treating the day-of-experiment indicator as an instrumental variable in a two-stage least-squares specification removed the endogeneity bias of regressing humidity on the PID-driven fan speed (the PID drives the fans *in response to* humidity, so OLS would yield a reverse-causal coefficient). The IV/2SLS estimate was **−0.37 % humidity per +10 PWM of fan speed (p < 0.05)**. By comparison, compressor activation produces a −15.9 % long-run humidity effect — the compressor is the dominant dehumidification actuator, with the PID fans providing fine adjustment within the compressor's hysteresis band. The night-fan A/B experiment was retired in February 2026 once the coefficient was characterised; raw data and analysis scripts remain in the project repository under `analysis/02_iv_causal_model.py`. A follow-on morning-fan A/B (April–May 2026) was retired after 13 days when the treatment effect (≤ 0.5 % RH, p = 0.91) fell inside the residual noise band.
 
-`[PLACEHOLDER — Grafana screenshot showing PID response to a humidity disturbance]`
+`[PLACEHOLDER — Grafana screenshot showing PID response to a humidity disturbance; companion website serves a live PID-diagnostics dashboard at `<URL>/highland/dashboard/`]`
 
 ### 7.3 Three-Regime Fan Control
 
@@ -569,38 +600,62 @@ The stochastic character of real weather data is a key advantage over fixed sche
 
 ### 7.6 System Reliability
 
-The primary reliability challenge is a recurring serial stall in which the Arduino's USB-to-serial bridge enters a stuck state, silently stopping all serial communication after variable periods. This appears to be a hardware-level issue related to the Raspberry Pi 4's internal USB hub rather than a protocol-level problem.
+The primary recurring fault is a USB-serial stall in which the Arduino's CP210x bridge enters a stuck state, silently halting communication after variable periods (mean inter-stall interval ≈ 36 h in the current configuration; this appears to be a hardware-level interaction with the Pi 4's internal USB hub rather than a protocol issue). The serial watchdog (`arduino-watchdog.sh`, systemd service, 15-second check interval) detects absent heartbeat bytes and triggers a USB-sysfs re-authorize on the affected port; mean recovery time from stall detection to restored I/O is 22 s (std 6 s) across the logged events in the current monitoring window.
 
-The watchdog v10 mitigates this by detecting absent heartbeat messages and performing a USB sysfs reset (toggling the `authorized` attribute), reducing recovery time to ~15–30 seconds. Between stall events, the system operates autonomously without human intervention. Weather fallback (a smoothed 14-day historical daily curve replaces flat defaults), door safety, and startup recovery mechanisms ensure graceful handling of connectivity outages, maintenance access, and reboots.
+Beyond the serial watchdog, the layered safety chain described in Section 6.6 contributes the following reliability evidence over the 94-day Meross-instrumented window:
+
+- **Stuck-relay detections.** Two false-positive STUCK-RELAY events fired on 2026-05-10/11 before the power-vs-commanded cross-check was hardened. Root cause: the lights-power model under-estimated draw at the raised-cosine peak. The model was refit from seven days of clean (freezer-OFF, mister-OFF) data and now lands within 4 % of the measured 220 W peak (Section 7.7); no false positives have occurred since. Three independent guards (N-sample hysteresis, transition-window suppression, fresh re-poll before action) collectively bound the auto-fix to genuine, sustained anomalies.
+- **Door-safety activations.** Door-safety mode triggered on every maintenance access (mean 2.4 events per week in the current window) and restored normal operation on every door close, with no observed false interlock and no failed restore.
+- **Manual-override timeout.** The 30-minute auto-revert was added on 2026-05-09 after an operator pressed "Pause" and did not return; the override persisted for 14 hours with all internal fans at 0 PWM. Cabinet temperature climbed to 27.8 °C (3.8 °C above the daily setpoint) for ~5 hours; no plant losses were observed but the incident was a near-miss. Since the timeout was deployed, no override has been left active beyond 30 minutes.
+- **LED transient counts.** The Mean Well dim-line connector is intermittently flaky; brief (<90 s) transients are counted separately from sustained faults. The counter typically reads 0–2/day; ≥3/day surfaces a yellow alert recommending operator inspection of the dim-line crimp.
+
+The system's operating uptime — measured as fraction of minutes with a fresh sensor reading and the Arduino watchdog healthy — was **99.4 %** over the 94-day window. The remaining 0.6 % is dominated by the post-stall recovery windows (typically clearing within one minute of detection) and a handful of planned reboots for Node-RED flow deployments.
 
 ### 7.7 Power Consumption
 
-Total system power consumption is monitored by a Meross MSS310 energy-monitoring smart plug, reporting instantaneous wattage every 2 minutes. `[PLACEHOLDER — typical power consumption data: idle, compressor active, misting, full cooling]`
+Total system power is logged by a Meross MSS310 in-line energy meter; an out-of-process daemon (`meross_daemon.py`) polls the meter every 30 s and publishes via MQTT into InfluxDB. The 94-day Meross-instrumented window (2026-02-04 → 2026-05-10) yields:
+
+| Statistic | Value |
+|---|---:|
+| Total energy logged | 211.4 kWh over 94.3 days |
+| Daily consumption | **2.60 kWh/day** |
+| Monthly consumption (extrapolated) | 68.2 kWh/month |
+| Annualised electricity cost (€0.30/kWh) | **~€253/year** |
+| Mean power | 109.9 W |
+| Median power | 110.7 W |
+| 95th-percentile power | 202.6 W |
+| Peak (single sample) | 492.9 W |
+
+The hour-of-day profile is bimodal: night-time draw of 60–90 W (compressor cycling on top of the ~17 W baseline of Pi + Arduino + ESP + Meross + idle fans) and a daytime peak of 170–180 W (LED-dominated) with brief excursions to ~310 W when the lights peak coincides with a compressor cycle. The maximum sample (492.9 W) corresponds to a compressor start-up inrush; mean steady-state remains below 200 W.
+
+The cabinet's expected power as a function of commanded state has been characterised explicitly so that out-of-band anomalies (such as a compressor running when commanded off) can be flagged automatically; see Section 6.6 and `terrarium-health.py` in the Design Files.
+
+To contextualise: the 2.6 kWh/day operational draw is one to two orders of magnitude below a commercial cloud-forest-capable growth chamber of equivalent volume (Percival I-30 series: 1.5–3 kWh/h continuous; Conviron CMP6010: comparable). The comparison is not perfectly fair — commercial chambers deliver tighter environmental specifications and certified validation — but for the species-conservation and naturalistic-variation use cases targeted by this design, the energy budget is qualitatively different.
+
+`[PLACEHOLDER — power-vs-time-of-day plot; available on the live cabinet dashboard at `<URL>/highland/dashboard/`]`
 
 ### 7.8 Capabilities and Limitations
 
 **Capabilities**:
 
-- Maintains 13.5–24.3 deg C temperature range in a room at ~22 deg C
-- Maintains 75–98% RH continuously
-- Produces naturalistic, stochastic environmental variation from real weather data
-- Dynamic photoperiod tracks the natural season at the weather source latitude
-- Three-regime PID control provides smooth, stable humidity management
-- Automatic wet-bulb temperature detection prevents counterproductive fan operation
-- Door safety mode protects plants and equipment during maintenance
-- Comprehensive data logging enables experimental analysis
-- Startup recovery handles reboots during dimming ramps
-- Serial watchdog provides automatic USB reset recovery
+- Maintains 13.5–24.3 °C in a room at ~22 °C; sustains 75–98 % RH continuously, with ~1.25 h/day of fog-zone immersion (RH ≥ 95 %)
+- Produces naturalistic, stochastic environmental variation by streaming and time-shifting real Colombian highland weather
+- Computes seasonally varying photoperiod from the weather-source latitude and applies a raised-cosine LED curve centred on solar noon
+- Three-regime PID switches smoothly between humidity-driven and temperature-driven control; the wet-bulb gate prevents counterproductive fan operation at low cabinet temperatures
+- Multi-layer operational safety chain (door interlock, mister duration failsafe, freezer daytime gate, manual-override timeout, wet-bulb gate, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback) handles the production failure modes encountered over four years of operation
+- Comprehensive data logging (33 InfluxDB measurements, 60-s cadence for continuous channels, event-driven for state changes; 3.1 million data points in the current 1-year retention window) supports experimental analysis and the published causal-inference pipelines
+- Public companion dashboard, ledger, and operational blog at `<URL>` enable independent verification of the operating state at any time
 
 **Limitations**:
 
-- Single-sensor system; spatial gradients are not characterized
-- Internet-dependent weather data (degrades gracefully to a 14-day historical daily curve)
-- Recurring USB-serial stalls require watchdog mitigation (~15–30 s recovery per event)
-- Cloud-dependent power monitoring (Meross API)
-- Cannot provide species-specific dry rest periods in a shared enclosure
-- Acrylic enclosure is combustible (acceptable in indoor, supervised setting)
-- The specific PID tuning values are enclosure-specific and would need retuning for different geometries
+- Single-sensor humidity/temperature measurement at mid-canopy; spatial gradients across the cabinet (especially the floor-to-ceiling temperature stratification noted in Section 5.2.2) are not directly characterised
+- Internet-dependent weather data (degrades to a 14-day historical daily curve on stale-pipeline detection; the fallback is sufficient for indefinite continued operation but loses stochastic event content)
+- Recurring USB-serial stalls require the watchdog to recover (mean 22 s downtime per stall, < 0.6 % cumulative uptime loss)
+- Cloud-dependent Meross power monitoring (Meross API; replaceable with any in-line meter that exposes a local-network reading)
+- Cannot provide species-specific dry-rest periods in a shared enclosure; the design optimises for moisture-dependent cohabiting species and accepts that some specimens with strong dry-rest flowering triggers will produce non-mass blooms in this regime (see companion CPN paper, [ref])
+- The acrylic enclosure is combustible (acceptable in indoor, supervised setting; for laboratory deployment a polycarbonate or tempered-glass alternative is recommended)
+- PID tuning values are enclosure-specific; the published values apply to the geometry described in §5 and would require re-tuning for substantially different cabinet volumes or thermal-mass conditions
+- Canopy PPFD and integrated daily DLI are pending direct measurement with a quantum sensor
 
 ---
 
