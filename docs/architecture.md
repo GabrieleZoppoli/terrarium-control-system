@@ -290,6 +290,18 @@ The control loop in Node-RED handles climate regulation; an out-of-process **`te
 
 The safety-critical check is the **power-vs-commanded** comparison. Tapo's commanded state plus the lights-dimmer slider position (read from Node-RED context) build an expected wattage; the Meross MSS310 reports the actual draw. A persistent **+70 W excess with the freezer commanded OFF** is the only condition flagged as RED, because it represents a compressor running uncommanded — the failure mode that would chill the cabinet below setpoint without operator awareness.
 
+The expected-wattage model was refit from 7 days of clean (freezer-OFF + mister-OFF) Meross data on 2026-05-11 after a false positive at the Curve-C peak exposed an under-estimating LED coefficient. Calibrated values:
+
+```
+base_w         = 9 W     (Pi + Arduino + ESP + Meross + idle mister/pump)
+daytime_fans_w = 13 W    (cabinet fan baseline + LED heatsink fans, when lights ON)
+freezer_w      = 110 W   (compressor when commanded ON)
+mister_w       = 5 W     (when commanded ON)
+lights_dim_w   = slider × 2.71 W   (linear, calibrated from 220 W observed at slider 70)
+```
+
+Lights-OFF baseline (night): ~17 W. Curve-C peak (slider 70, midday): ~220 W observed, ~212 W predicted, 8 W under threshold. A real stuck compressor adds ~110 W on top of the model's prediction, well above the 70 W STUCK threshold.
+
 When a STUCK RELAY condition fires, the monitor's auto-fix cycles the Tapo plug `ON → OFF` to break the stuck relay state, with a 15-minute cooldown between attempts.
 
 Two failure modes of the cross-check itself were observed and patched on 2026-05-11 (tag `stuck_relay_hysteresis_2026_05_11`):
