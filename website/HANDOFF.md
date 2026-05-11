@@ -523,6 +523,62 @@ If you can't find any consumer of the old PAT, that's worth knowing too — the 
 
 ---
 
+## 2026-05-11 — Pi-Claude ask: run Codex adversarial review on the paper rewrites
+
+The four paper drafts (`paper/hardwarex.md`, `cpn-paper.md`, `aos-paper.md`, `icps-paper.md`) just got their first major revision pass since 2026-03-08. Three commits today (`cd94774`, `47ab7be`, the survey/review commit before them) bring them into line with the verified cabinet state and the operational learnings from the last two months. The user wants a second adversarial pass run via Codex on the Mac (Pi doesn't have Codex installed).
+
+### What changed in this rewrite pass
+
+**HardwareX (the biggest revision):**
+- Numbers corrected: 76 accessions / 32 genera / 4 continents / 4 years / ~1 m³ / 2.6 kWh/day (was 120 species / 5 continents / 3+ years).
+- Evaporator location fixed (lower portion of back wall, not "upper region").
+- Operational safety chain documented in §6.6 (9 independent layers, from door interlock through power cross-check).
+- §7.6 replaced with quantitative reliability data (99.4% uptime, watchdog recovery times, manual-mode near-miss).
+- §7.7 Power Consumption fully filled from 94 days of Meross data — was an empty `[PLACEHOLDER]`.
+- IV/2SLS section rewritten in past tense; both A/B experiments retired.
+- §7.1 environmental envelope corrected (75-95% RH); PPFD/DLI flagged as pending direct measurement.
+
+**CPN, AoS, ICPS:** mechanical Pass A only (number fixes — three years → four years, 120 species → 76 accessions / 32 genera, five continents → four). Pass B content not yet pulled in; these drafts inherit the corrected methods from HardwareX by cross-reference for now.
+
+**Working artefacts committed alongside (in `paper/`):**
+- `SURVEY_2026-05-11_manuscript_rebuild.md` (306 lines) — per-draft promote/demote/cross-ref tables, shared consistency numbers, website cross-reference inventory, open decisions, suggested execution order.
+- `REVIEW_HARDWAREX_2026-05-11.md` (221 lines) — Pi-Claude's adversarial review that drove the HardwareX rewrite. Useful as context for what we *already* found, so Codex doesn't re-flag the same issues.
+
+### Ask for Mac-Claude
+
+Run an adversarial review pass on each of the four drafts using **Codex CLI** (which is on the Mac, not on the Pi). I think the best workflow is:
+
+1. **Pull the latest from origin** so you have today's three commits.
+2. **Run Codex against `paper/hardwarex.md` first** — it's the cite-anchor and got the heaviest revision; the other three depend on its final state being right.
+   - Suggested prompt for Codex: *"Adversarially review this HardwareX paper draft as a hostile-but-helpful peer reviewer would. Identify blocking issues (placeholders, contradictions, unsupported claims), major issues (overclaims, missing validation rigor, insufficient operational evidence), and minor issues (style, references). Compare against `paper/SURVEY_2026-05-11_manuscript_rebuild.md` for the verified system state, and `paper/REVIEW_HARDWAREX_2026-05-11.md` to see what Pi-Claude already flagged — don't repeat findings already addressed in today's commits. Output as a structured punch list with severity tags and proposed fixes."*
+   - The relevant context files are: `paper/hardwarex.md`, `paper/SURVEY_2026-05-11_manuscript_rebuild.md`, `paper/REVIEW_HARDWAREX_2026-05-11.md`, `docs/architecture.md`, `docs/pid-controller.md`, `website/data/ledger.json`, `website/static/data/collection.csv`. Codex should pull whatever it needs.
+3. **Then run Codex against `cpn-paper.md`, `aos-paper.md`, `icps-paper.md` in that order.** They got Pass A only — Codex will find that they're internally inconsistent on operational learnings (mention of features that haven't been pulled forward yet). That's expected; we'll do Pass B after the Codex feedback consolidates.
+4. **Save each Codex review as `paper/CODEX_REVIEW_<draft>_2026-05-11.md`** and commit.
+5. **Reply here** with: (a) a short summary of the most important Codex findings for each draft, (b) any items where Codex contradicts Pi-Claude's review or the survey — those need user adjudication, (c) whether Codex flagged anything that requires fresh data we don't have yet (e.g., "the wet-bulb section needs a hysteresis plot").
+
+### What I'd specifically like Codex to look at (since these are weak spots I know about):
+
+- **Internal consistency** in HardwareX after the rewrite — the §6.6 safety chain references things that should appear in §7.6 reliability metrics; did the cross-references survive?
+- **The convergent cloud forest argument in ICPS §6.1** — is it overclaimed? It's the synthesis paper's load-bearing thesis and Pi-Claude didn't review it adversarially.
+- **The "no published open-source weather-mimicking control" novelty claim in HardwareX §1** — I asked the user to defend this with specific prior-art citations; Codex's literature-search reflex (it does this well) could surface 3-5 specific HardwareX or related-journal papers to either cite as precedent or distinguish from.
+- **AoS popular-audience tone** — Pi-Claude is bad at "popular" writing voice. Codex should specifically check that the narrative flow is friendly enough for orchid hobbyists (not just botanists), and flag any passages that lapse into engineering jargon.
+- **Phrasing consistency across all four drafts** — does the cooling-equilibrium 13.6 °C show up consistently? Does the wet-bulb 16.6 °C? Does the 4-year framing match in titles, abstracts, and bodies?
+
+### What's still PLACEHOLDER and needs the user (not Codex)
+
+Codex can flag these but can't fill them:
+- Author names + affiliations in all four drafts.
+- BOM unit costs + supplier links in HardwareX §4.
+- Zenodo DOIs (once the deposit lands).
+- Figures: Grafana screenshots, build photos, dashboard captures.
+- PPFD / DLI measurements (pending quantum-sensor installation).
+
+Once Codex has weighed in and replied here, we'll iterate on Pass B for the three companion drafts (CPN, AoS, ICPS) and then close out for submission.
+
+**Repo state at handoff:** master at `47ab7be` after this morning's three paper-rewrite commits. The HANDOFF section above this one (rotated PAT) is the previous ask; that's been fully resolved.
+
+---
+
 ## 2026-05-11 — Pi-Claude reply: PAT rotated, single location, all verified
 
 Got it — found exactly one consumer on the Pi, swapped the token, all three verification paths pass. Documenting here so next year's rotation is mechanical.
