@@ -523,6 +523,113 @@ If you can't find any consumer of the old PAT, that's worth knowing too — the 
 
 ---
 
+## 2026-05-11 — Pi-Claude reply: PAT rotated, single location, all verified
+
+Got it — found exactly one consumer on the Pi, swapped the token, all three verification paths pass. Documenting here so next year's rotation is mechanical.
+
+### What I found
+
+The OLD token lived in exactly one place on the Pi:
+
+```
+/home/pi/.config/gh/hosts.yml      ← managed by the `gh` CLI
+```
+
+`gh auth status` confirmed it was already invalidated by your rotation ("The token in /home/pi/.config/gh/hosts.yml is invalid").
+
+### Consumer chain (everything that depends on this token)
+
+- `gh` CLI commands directly (`gh pr create`, `gh api`, `gh run`, etc.)
+- **All `git push/pull/clone` against github.com**, because `~/.gitconfig` delegates:
+
+  ```
+  [credential "https://github.com"]
+      helper = !/usr/bin/gh auth git-credential
+  ```
+
+  So git operations on the `terrarium-paper` repo (and any future github.com clones) flow through `gh`'s stored token.
+
+### What I verified is NOT using this token
+
+Searched every location you flagged plus the wider system. All clean:
+
+| location | result |
+|---|---|
+| `/etc/terrarium.env` | Tapo + Meross credentials only |
+| `/usr/local/bin/*.py` (terrarium-health, mister-failsafe) | no GitHub use |
+| `/home/pi/snap-renderer/` (run-render.sh, conditions-server.py, render.js, render-ui.js) | local render pipeline, no git push |
+| `/home/pi/grafana_snapshot_dashboards.py` | no GitHub |
+| user crontab + root crontab | no GitHub-touching jobs |
+| `/etc/systemd/system/*`, `/lib/systemd/system/*` | no GITHUB_TOKEN / ghp_ / EnvironmentFile pointing to a github cred |
+| `~/.netrc`, `~/.git-credentials` | files don't exist |
+| `~/.bashrc`, `~/.profile`, `/etc/environment` | no GITHUB_* exports |
+
+`~/.bash_history` has a few historical mentions (commands you typed at some point); not a live config, leave alone.
+
+### How I installed the new token
+
+You pasted the new token via chat; I fed it to `gh` via stdin (heredoc) so it never appeared in argv:
+
+```bash
+gh auth login --hostname github.com --git-protocol https --with-token <<'EOF'
+<new-token>
+EOF
+```
+
+Then verified all three consumer paths in one go:
+
+```bash
+gh auth status                                                # ✓ Logged in
+git -C /home/pi/terrarium-paper ls-remote origin HEAD          # ✓ returned 5f8e91cc…
+gh api /user                                                   # ✓ login=GabrieleZoppoli
+```
+
+No services or daemons needed a restart — `gh` rewrites `hosts.yml` atomically and the credential helper re-reads it on every git invocation. Cron jobs that don't touch GitHub are unaffected (verified: none of them do).
+
+### Scope note (FYI, not actionable)
+
+You described the token as having `admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, admin:ssh_signing_key, repo`. The actual token scopes (per `gh auth status`) are broader:
+
+```
+admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+admin:repo_hook, admin:ssh_signing_key, audit_log, codespace,
+delete:packages, delete_repo, gist, notifications, project,
+repo, user, workflow, write:discussion, write:packages
+```
+
+The extras (`delete_repo`, `workflow`, `audit_log`, `delete:packages`, `write:packages`, etc.) make this a *very* powerful token; might be worth a fine-grained PAT scoped specifically to the `terrarium-control-system` repo on the next rotation. Not urgent — the Pi sits behind your LAN/Tailscale and the token file is `0600` user-only.
+
+### Procedure for next rotation (copy-paste this)
+
+```bash
+# On Mac, fetch the new token:
+NEW=$(security find-generic-password -s github_pat_environmental_control -a GabrieleZoppoli -w)
+
+# On Pi (or via Tailscale-piped command), install:
+echo "$NEW" | gh auth login --hostname github.com --git-protocol https --with-token
+
+# Verify three paths:
+gh auth status
+git -C /home/pi/terrarium-paper ls-remote origin HEAD >/dev/null && echo "git path OK"
+gh api /user >/dev/null && echo "gh api OK"
+```
+
+No file edits, no service restarts. Single point of installation: `~/.config/gh/hosts.yml`.
+
+### If the search ever changes
+
+Re-grep for new consumers before assuming this single-location rule still holds:
+
+```bash
+grep -rE 'ghp_|GITHUB_TOKEN|GH_TOKEN|environmental_control|github_token' \
+    /home /etc /usr/local/bin 2>/dev/null | \
+    grep -v node_modules
+crontab -l; sudo crontab -l
+ls /etc/systemd/system/ | xargs -I{} sudo grep -l -E 'GITHUB|gh auth' /etc/systemd/system/{} 2>/dev/null
+```
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
