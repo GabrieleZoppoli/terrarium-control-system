@@ -1,4 +1,4 @@
-# Weather-Mimicking Terrarium for Convergent Cloud Forest Species: Open-Source Climate Simulation, Compressor Cooling, and Three Years of Co-Cultivating Highland Carnivorous Plants, Orchids, and Epiphytes
+# Weather-Mimicking Terrarium for Convergent Cloud Forest Species: Open-Source Climate Simulation, Compressor Cooling, and Four Years of Co-Cultivating Highland Carnivorous Plants, Orchids, and Epiphytes
 
 **Authors**: [USER INPUT NEEDED — author names and affiliations]
 
@@ -8,7 +8,7 @@
 
 ## Abstract
 
-We describe a weather-mimicking terrarium system that cultivates approximately 120 plant species from convergent cloud forests on five continents — Venezuelan tepuis, the Colombian and Ecuadorian Andes, the highlands of Papua New Guinea, the Brazilian Atlantic Forest, and montane Borneo-Sumatra — within a single 1.5 x 0.6 x 1.1 m enclosure in Genoa, Italy. The system ingests real-time meteorological data from four Colombian highland cities (1,300--2,600 m elevation) and applies a 15-hour time shift to generate continuously varying temperature and humidity setpoints, reproducing the stochastic weather dynamics of tropical montane environments rather than static fixed-point control. A dynamic photoperiod derived from the Colombian reference latitude (~5 deg N) provides seasonally varying day length. Under these conditions, *Heliamphora* species and hybrids (tepui summit endemics), highland *Nepenthes* (upper montane forest species from Borneo and Sumatra), *Utricularia* of section *Orchidioides* (epiphytes of tepui cliff faces and cloud forest canopies), *Brocchinia reducta* (tepui endemic), *Dracula* and *Masdevallia* orchids (Colombian Andes), *Dendrobium* section *Oxyglossum* (Papua New Guinea highlands), and rupicolous *Cattleya* (Brazilian Atlantic Forest) are maintained alongside ferns, mosses, and bromeliads — all under identical conditions. A marine compressor unit (Vitrifrigo ND50) routinely drives the terrarium to 13.5 deg C in a room at 22 deg C, overcoming the thermodynamic limit of evaporative cooling. A three-regime fan control strategy adapts the PID controller's error signal based on temperature: humidity-driven control under normal conditions, temperature-driven evaporative cooling in a 24--25 deg C transition band, and humidity-driven control with active mechanical refrigeration above 25 deg C. A wet-bulb temperature analysis revealed that evaporative fan cooling becomes counterproductive when the terrarium temperature drops below the room's wet-bulb temperature (~16.6 deg C), at which point the system automatically disengages ventilation fans and relies solely on compressor-based refrigeration. The control system, built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O, has operated continuously for over three years. All source code, firmware, dashboards, and analysis scripts are available at https://github.com/GabrieleZoppoli/terrarium-control-system.
+We describe a weather-mimicking terrarium system that cultivates 76 living accessions across 32 plant genera from convergent cloud forests on four continents — Venezuelan tepuis, the Colombian and Ecuadorian Andes, the highlands of Papua New Guinea, the Brazilian Atlantic Forest, and montane Borneo-Sumatra — within a single ~1 m³ (1.5 × 0.6 × 1.1 m) enclosure in Genoa, Italy. The system ingests real-time meteorological data from four Colombian highland cities (1,300--2,600 m elevation) and applies a 15-hour time shift to generate continuously varying temperature and humidity setpoints, reproducing the stochastic weather dynamics of tropical montane environments rather than static fixed-point control. A dynamic photoperiod derived from the Colombian reference latitude (~5 deg N) provides seasonally varying day length. Under these conditions, *Heliamphora* species and hybrids (tepui summit endemics), highland *Nepenthes* (upper montane forest species from Borneo and Sumatra), *Utricularia* of section *Orchidioides* (epiphytes of tepui cliff faces and cloud forest canopies), *Brocchinia reducta* (tepui endemic), *Dracula* and *Masdevallia* orchids (Colombian Andes), *Dendrobium* section *Oxyglossum* (Papua New Guinea highlands), and rupicolous *Cattleya* (Brazilian Atlantic Forest) are maintained alongside ferns, mosses, and bromeliads — all under identical conditions. A marine compressor unit (Vitrifrigo ND50) routinely drives the terrarium to 13.5 deg C in a room at 22 deg C, overcoming the thermodynamic limit of evaporative cooling. A three-regime fan control strategy adapts the PID controller's error signal based on temperature: humidity-driven control under normal conditions, temperature-driven evaporative cooling in a 24--25 deg C transition band, and humidity-driven control with active mechanical refrigeration above 25 deg C. A wet-bulb temperature analysis revealed that evaporative fan cooling becomes counterproductive when the terrarium temperature drops below the room's wet-bulb temperature (~16.6 deg C), at which point the system automatically disengages ventilation fans and relies solely on compressor-based refrigeration. The control system, built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O, has operated continuously for over four years. All source code, firmware, dashboards, and analysis scripts are available at https://github.com/GabrieleZoppoli/terrarium-control-system.
 
 **Keywords**: cloud forest terrarium, convergent evolution, weather simulation, wet-bulb temperature, dynamic photoperiod, *Heliamphora*, *Nepenthes*, *Dracula*, *Utricularia*, *Dendrobium*, three-regime PID control, compressor cooling, open-source horticulture
 
@@ -20,7 +20,7 @@ Highland cloud forests — from the tepui table-top mountains of the Guiana High
 
 The central difficulty is nighttime cooling. While maintaining high humidity in a sealed terrarium is straightforward, achieving the 4--8 deg C nocturnal temperature drops characteristic of tropical highlands — in a room at 22 deg C — requires active refrigeration. The hobby has developed several approaches to this problem, each with characteristic limitations.
 
-Evaporative cooling — using misting and ventilation fans to cool by evaporation — is the most accessible method. However, it has a hard thermodynamic limit: evaporation can only cool the air down to the wet-bulb temperature, a value determined by the room's temperature and humidity. In a typical room at 22 deg C and 58% relative humidity, this floor is approximately 16.6 deg C. Below that point, ventilation fans no longer extract heat through evaporation and instead inject warm room air into the enclosure, producing net warming — a finding confirmed by three years of continuous data logging in this system (Section 5).
+Evaporative cooling — using misting and ventilation fans to cool by evaporation — is the most accessible method. However, it has a hard thermodynamic limit: evaporation can only cool the air down to the wet-bulb temperature, a value determined by the room's temperature and humidity. In a typical room at 22 deg C and 58% relative humidity, this floor is approximately 16.6 deg C. Below that point, ventilation fans no longer extract heat through evaporation and instead inject warm room air into the enclosure, producing net warming — a finding confirmed by four years of continuous data logging in this system (Section 5).
 
 Thermoelectric (Peltier) modules are attractive for their simplicity and silent operation, but their coefficient of performance (COP) is approximately 0.2 — roughly one-tenth that of a vapor-compression system — meaning they draw 5 W of electricity for every 1 W of heat removed. In practice, a single 36 W module achieves only 2--4 deg C of cooling in a 20-liter volume (cexx.org 2011), and scaling to larger enclosures requires arrays of modules with correspondingly large heat sinks and power supplies.
 
@@ -34,7 +34,7 @@ This paper describes an open-source control system that addresses these limitati
 
 1. **Weather-mimicking from real Colombian data**: The system ingests real-time meteorological data from four Colombian highland cities (Chinchina, Medellin, Bogota, Sonson) at elevations of 1,300--2,600 m, applying a 15-hour time shift to produce naturalistic, continuously varying setpoints. A dynamic photoperiod is derived from the Colombian reference latitude (~5 deg N).
 
-2. **Convergent cloud forest concept**: Cloud forests worldwide converge on remarkably similar climatic envelopes despite their geographic isolation. A single terrarium tuned to the common envelope can support species from multiple continents simultaneously — a principle validated over three years of co-cultivation with approximately 120 species.
+2. **Convergent cloud forest concept**: Cloud forests worldwide converge on remarkably similar climatic envelopes despite their geographic isolation. A single terrarium tuned to the common envelope can support species from multiple continents simultaneously — a principle validated over four years of co-cultivation with 76 living accessions across 32 plant genera.
 
 3. **Marine compressor cooling**: The Vitrifrigo ND50 provides sufficient cooling capacity to drive terrarium temperatures well below the room's wet-bulb temperature, accessing a thermal regime inaccessible to evaporative methods.
 
@@ -42,7 +42,7 @@ This paper describes an open-source control system that addresses these limitati
 
 5. **Complete open-source stack**: Every component — Node-RED, InfluxDB, Grafana — runs on a single Raspberry Pi, with all source code, firmware, and dashboards freely available.
 
-The system has maintained approximately 120 species from cloud forest genera across five continents in a 1.5 x 0.6 x 1.1 m terrarium in Genoa, Italy for over three years, demonstrating long-term reliability and horticultural effectiveness.
+The system has maintained 76 living accessions across 32 plant genera from cloud forest genera across four continents in a ~1 m³ (1.5 × 0.6 × 1.1 m) terrarium in Genoa, Italy for over four years, demonstrating long-term reliability and horticultural effectiveness.
 
 ---
 
@@ -50,7 +50,7 @@ The system has maintained approximately 120 species from cloud forest genera acr
 
 ### 2.1 Terrarium Construction
 
-The terrarium is a custom-built acrylic (PMMA) enclosure measuring 1.5 x 0.6 x 1.1 m (external dimensions), assembled by solvent welding laser-cut panels with dichloromethane and sealing with crystalline silicone. The enclosure weighs approximately 100 kg empty. External insulation — 1 cm extruded polystyrene laminated with diamond Mylar reflective sheeting — reduces heat gain and improves cooling efficiency. Access is via two sliding front panels on alloy guides. The enclosure is placed in an area of the apartment that does not receive direct sunlight, reducing cooling load.
+The terrarium is a custom-built acrylic (PMMA) enclosure measuring ~1 m³ (1.5 × 0.6 × 1.1 m) (external dimensions), assembled by solvent welding laser-cut panels with dichloromethane and sealing with crystalline silicone. The enclosure weighs approximately 100 kg empty. External insulation — 1 cm extruded polystyrene laminated with diamond Mylar reflective sheeting — reduces heat gain and improves cooling efficiency. Access is via two sliding front panels on alloy guides. The enclosure is placed in an area of the apartment that does not receive direct sunlight, reducing cooling load.
 
 The supporting scaffold is a semi-industrial aluminium alloy unit (2.20 x 3.20 x 0.50 m, approximately 300 kg). Aluminium was chosen over wood after an earlier wooden scaffold suffered waterproof coating degradation and swelling after four years in the high-humidity environment.
 
@@ -137,7 +137,7 @@ The thermodynamic rationale: evaporative cooling can only reduce air temperature
 
 ## 3. Species Cultivated
 
-The terrarium supports approximately 120 species from cloud forests across five biogeographic regions. The successful co-cultivation of these species in a single enclosure with shared environmental conditions demonstrates the convergent nature of cloud forest climates worldwide.
+The terrarium supports 76 living accessions across 32 plant genera from cloud forests across five biogeographic regions. The successful co-cultivation of these species in a single enclosure with shared environmental conditions demonstrates the convergent nature of cloud forest climates worldwide.
 
 ### 3.1 Venezuelan Tepui: *Heliamphora*
 
@@ -158,7 +158,7 @@ Ten *Heliamphora* species and hybrids are currently cultivated, all sourced from
 | *H. purpurascens* x *ionasii* (Red Giant) | — | Adult pitchers |
 | *H.* 'Godzilla' | — | Juvenile |
 
-All ten plants are alive and growing after 3+ years in the system, representing a 100% survival rate. No *Heliamphora* losses have occurred, making them the most reliable genus in the collection.
+All ten plants are alive and growing after four years in the system, representing a 100% survival rate. No *Heliamphora* losses have occurred, making them the most reliable genus in the collection.
 
 [USER INPUT NEEDED — Cultivation observations:
 - Pitcher production rates and division frequency
@@ -369,7 +369,7 @@ Companion plants include living *Sphagnum* (2 species surviving: *S. papillosum*
 
 ### 4.1 Temperature and Humidity
 
-Over three years of monitoring, the terrarium maintained the following conditions:
+Over four years of monitoring, the terrarium maintained the following conditions:
 
 | Parameter | Minimum | Maximum | Typical Range | Target Source |
 |-----------|---------|---------|---------------|--------------|
@@ -450,7 +450,7 @@ Nevertheless, the physical climate at these sites overlaps substantially. The sa
 
 The practical implication is that growers of highland cloud forest species need not maintain separate terraria for tepui *Heliamphora*, Asian *Nepenthes*, Andean *Dracula*, and PNG *Dendrobium*. A single enclosure tuned to the shared temperature and humidity requirements, with a vertical light gradient to accommodate different irradiance needs, can house all of them together.
 
-Three years of successful co-cultivation — with species from five continents growing, flowering, and propagating side by side — validates this convergent cultivation concept. The species that have been lost are those requiring dry rest periods incompatible with year-round high humidity, not those from particular geographic regions, further supporting the idea that the climate envelope rather than the geographic origin determines compatibility.
+Four years of successful co-cultivation — with species from four continents growing, flowering, and propagating side by side — validates this convergent cultivation concept. The species that have been lost are those requiring dry rest periods incompatible with year-round high humidity, not those from particular geographic regions, further supporting the idea that the climate envelope rather than the geographic origin determines compatibility.
 
 ### 6.2 Weather-Based vs. Fixed Setpoints
 
@@ -460,7 +460,7 @@ While not formally tested, we hypothesize that weather-driven environmental vari
 
 ### 6.3 The No-Dry-Rest Tradeoff
 
-The persistent high humidity required by *Heliamphora*, *Utricularia*, and *Dracula* precludes dry rest periods. This means that certain companion species requiring dry rests — some *Dendrobium* section *Callista*, seasonal *Cattleya* alliance species — cannot be accommodated long-term. Over three years, species losses have been concentrated among those requiring seasonal drying rather than those from particular geographic regions, confirming that moisture tolerance rather than geographic origin determines compatibility.
+The persistent high humidity required by *Heliamphora*, *Utricularia*, and *Dracula* precludes dry rest periods. This means that certain companion species requiring dry rests — some *Dendrobium* section *Callista*, seasonal *Cattleya* alliance species — cannot be accommodated long-term. Over four years, species losses have been concentrated among those requiring seasonal drying rather than those from particular geographic regions, confirming that moisture tolerance rather than geographic origin determines compatibility.
 
 This is a fundamental tradeoff of the single-biome approach. The system selects for species compatible with continuous high moisture, which is precisely the defining feature shared by convergent cloud forests worldwide.
 
@@ -481,11 +481,11 @@ The entire system is built on freely available software and commodity hardware. 
 
 ## 7. Conclusions
 
-We have demonstrated a weather-mimicking terrarium system that simulates highland cloud forest climates using real-time Colombian meteorological data, successfully cultivating approximately 120 species from convergent cloud forests across five continents for over three years.
+We have demonstrated a weather-mimicking terrarium system that simulates highland cloud forest climates using real-time Colombian meteorological data, successfully cultivating 76 living accessions across 32 plant genera from convergent cloud forests across four continents for over four years.
 
 The **weather-mimicking approach** — ingesting real weather data and applying a 15-hour time shift — produces naturalistic, stochastic environmental variation that captures the dynamic character of tropical montane climates. The comprehensive data logging enabled by this approach facilitated the discovery of the wet-bulb temperature limitation.
 
-The **convergent cloud forest cultivation concept** — co-cultivating species from Venezuelan tepuis, the Colombian Andes, PNG highlands, the Brazilian Atlantic Forest, and montane Borneo-Sumatra in a single enclosure — is validated by three years of successful growth, flowering, and vegetative propagation across taxonomically diverse genera. The success rests on recognizing that cloud forests worldwide converge on similar climatic envelopes, driven by the physics of tropical mountain meteorology rather than by biogeographic proximity.
+The **convergent cloud forest cultivation concept** — co-cultivating species from Venezuelan tepuis, the Colombian Andes, PNG highlands, the Brazilian Atlantic Forest, and montane Borneo-Sumatra in a single enclosure — is validated by four years of successful growth, flowering, and vegetative propagation across taxonomically diverse genera. The success rests on recognizing that cloud forests worldwide converge on similar climatic envelopes, driven by the physics of tropical mountain meteorology rather than by biogeographic proximity.
 
 **Marine compressor refrigeration** provides effective and reliable cooling for medium-to-large terraria, driving the enclosure to 13.5 deg C in a room at 22 deg C — some 3 deg C below the evaporative cooling floor. The **wet-bulb temperature insight** — that ventilation fans become counterproductive below the room's wet-bulb temperature (~16.6 deg C in typical conditions) — has practical implications for any grower using compressor-cooled terraria.
 

@@ -10,9 +10,9 @@ It started with a simple question: what if my terrarium could experience real cl
 
 Growing highland orchids in a Mediterranean climate — Genoa, Italy, where summer temperatures regularly exceed 30 deg C — is a constant battle against heat and dryness. *Dracula*, *Masdevallia*, *Dendrobium victoriae-reginae*, and the rupicolous *Cattleya* species from the Brazilian highlands all demand cool, humid conditions year-round. Traditional terrarium approaches use fixed environmental targets: set the thermostat to 18 deg C, keep humidity at 90%, and hope for the best. But real cloud forests are not static. They experience weather — sudden temperature drops during rainstorms, diurnal fog cycles, seasonal shifts in cloud cover, brief sunny clearings at midday. Could a terrarium simulate that?
 
-Over three years ago, I built a system that tries. Instead of programming fixed temperatures and humidity levels, the terrarium receives real-time weather data from four Colombian highland cities — Chinchina, Medellin, Bogota, and Sonson, at elevations of 1,300 to 2,600 meters — and uses their current conditions to set its own targets. A 15-hour time shift aligns Colombian daytime with my nighttime, so the terrarium's daily rhythm tracks real tropical mountain weather, complete with rain events, seasonal variation, and all the unpredictability that our orchids evolved with.
+Four years ago (May 2022), I built a system that tries. Instead of programming fixed temperatures and humidity levels, the terrarium receives real-time weather data from four Colombian highland cities — Chinchina, Medellin, Bogota, and Sonson, at elevations of 1,300 to 2,600 meters — and uses their current conditions to set its own targets. A 15-hour time shift aligns Colombian daytime with my nighttime, so the terrarium's daily rhythm tracks real tropical mountain weather, complete with rain events, seasonal variation, and all the unpredictability that our orchids evolved with.
 
-The results have been encouraging. Approximately 120 species from cloud forests on five continents coexist in a single 1.5 x 0.6 x 1.1 meter enclosure: orchids from the Andes, Papua New Guinea, and Brazil growing alongside Venezuelan tepui carnivorous plants and Asian highland pitcher plants — all under the same weather-driven conditions.
+The results have been encouraging. Seventy-six living accessions across 32 plant genera — from cloud forests on four continents — coexist in a single ~1 m³ enclosure (1.5 × 0.6 × 1.1 m): orchids from the Andes, Papua New Guinea, and Brazil growing alongside Venezuelan tepui carnivorous plants, Asian highland pitcher plants, and a lone African epiphyte — all under the same weather-driven conditions.
 
 ---
 
@@ -22,13 +22,13 @@ The fundamental idea behind this terrarium is not new, but it is underappreciate
 
 This convergence is driven by physics. At similar tropical elevations, adiabatic cooling, orographic lifting, and cloud formation produce broadly similar microclimates regardless of longitude. Species evolving independently in these convergent environments face similar selective pressures and develop similar tolerances, even though they share no recent evolutionary history.
 
-The practical consequence for growers is profound: *Dracula vampira* from the Colombian Andes, *Dendrobium victoriae-reginae* from Papua New Guinea, and rupicolous *Cattleya* from the Brazilian highlands can share a single terrarium because their native cloud forests, though separated by thousands of kilometers and millions of years of independent evolution, converge on the same environmental envelope. In my terrarium, these species grow side by side with tepui *Heliamphora* and Bornean *Nepenthes* — all thriving under identical conditions. Three years of co-cultivation is the strongest practical argument for this approach.
+The practical consequence for growers is profound: *Dracula vampira* from the Colombian Andes, *Dendrobium victoriae-reginae* from Papua New Guinea, and rupicolous *Cattleya* from the Brazilian highlands can share a single terrarium because their native cloud forests, though separated by thousands of kilometers and millions of years of independent evolution, converge on the same environmental envelope. In my terrarium, these species grow side by side with tepui *Heliamphora* and Bornean *Nepenthes* — all thriving under identical conditions. Four years of co-cultivation is the strongest practical argument for this approach.
 
 ---
 
 ## The Setup
 
-The terrarium is a 1.5 x 0.6 x 1.1 meter acrylic enclosure mounted on a heavy-duty aluminium scaffold. Two sliding front panels provide maintenance access. External insulation — extruded polystyrene with reflective Mylar — reduces heat gain and improves cooling efficiency.
+The terrarium is a ~1 m³ (1.5 × 0.6 × 1.1 m) acrylic enclosure mounted on a heavy-duty aluminium scaffold. Two sliding front panels provide maintenance access. External insulation — extruded polystyrene with reflective Mylar — reduces heat gain and improves cooling efficiency.
 
 The height of the enclosure is the critical design dimension. A perforated acrylic shelf at mid-height divides the interior into three growing zones:
 
@@ -56,7 +56,7 @@ But the real magic is in the weather events. When an afternoon rainstorm sweeps 
 
 The lighting follows a dynamic photoperiod calculated daily from the Colombian latitude (about 5 deg N). Near the equator, day length varies only about 34 minutes through the year — from 11 hours 43 minutes at the December solstice to 12 hours 17 minutes at the June solstice. A gradual 30-minute dawn ramp simulates the slow tropical sunrise, and a midday brightness boost mimics the brief clearing events common on cloud forest mountaintops when the sun briefly breaks through the cloud layer.
 
-One of the most surprising discoveries after three years of data collection was about nighttime cooling. I had assumed that running fans at night would help cool the terrarium by exchanging warm internal air with cooler room air. Analysis of the data showed the opposite: once the terrarium temperature drops below a threshold called the wet-bulb temperature — the lowest temperature achievable through evaporation alone — the fans actually *warm* the terrarium by pumping in room air whose heat content exceeds what evaporation can remove. The system now automatically shuts off the ventilation fans in the evening once this threshold is crossed, relying entirely on the compressor for overnight cooling. The lesson for growers: if you are running fans at night in a cooled terrarium, you may be working against yourself.
+One of the most surprising discoveries after four years of data collection was about nighttime cooling. I had assumed that running fans at night would help cool the terrarium by exchanging warm internal air with cooler room air. Analysis of the data showed the opposite: once the terrarium temperature drops below a threshold called the wet-bulb temperature — the lowest temperature achievable through evaporation alone — the fans actually *warm* the terrarium by pumping in room air whose heat content exceeds what evaporation can remove. The system now automatically shuts off the ventilation fans in the evening once this threshold is crossed, relying entirely on the compressor for overnight cooling. The lesson for growers: if you are running fans at night in a cooled terrarium, you may be working against yourself.
 
 ---
 
@@ -155,7 +155,7 @@ One of the most surprising discoveries after three years of data collection was 
 
 ## Lessons Learned
 
-Three years of growing highland orchids with weather simulation have taught me several things:
+Four years of growing highland orchids with weather simulation have taught me several things:
 
 **The light gradient is your most valuable tool.** Rather than trying to provide uniform light — which would require compromises unsuitable for either high-light or shade-adapted species — exploit the inverse square law. Place *Cattleya* and *Dendrobium* near the top, *Masdevallia* and *Dracula* at the bottom, and intermediate growers in between. A single lighting system creates three distinct growing environments.
 
@@ -163,7 +163,7 @@ Three years of growing highland orchids with weather simulation have taught me s
 
 **The wet-bulb lesson: fans can warm your terrarium at night.** This was the most counterintuitive discovery. If your terrarium is cooled below the wet-bulb temperature of the surrounding room air — which happens any time you use mechanical cooling to drop temperatures significantly below room ambient — running ventilation fans actually heats the terrarium. The incoming room air carries more heat than evaporation can remove. The solution is simple: turn off the fans in the evening and let the compressor do the work alone.
 
-**No dry rest means some losses.** The persistent high humidity required by *Dracula*, *Heliamphora*, and the epiphytic *Utricularia* precludes dry rest periods. Over three years, the orchids I have lost have primarily been those needing seasonal drying to initiate flowering — certain *Dendrobium* and *Cattleya* alliance species with pronounced rest requirements. If your priority species need dry rest, this is not the system for them. But for the many orchid genera that thrive in year-round moisture — the Pleurothallis alliance, the *Oxyglossum* dendrobiums, the rupicolous *Cattleya*, *Phragmipedium* — it works well.
+**No dry rest means some losses.** The persistent high humidity required by *Dracula*, *Heliamphora*, and the epiphytic *Utricularia* precludes dry rest periods. Over four years, the orchids I have lost have primarily been those needing seasonal drying to initiate flowering — certain *Dendrobium* and *Cattleya* alliance species with pronounced rest requirements. If your priority species need dry rest, this is not the system for them. But for the many orchid genera that thrive in year-round moisture — the Pleurothallis alliance, the *Oxyglossum* dendrobiums, the rupicolous *Cattleya*, *Phragmipedium* — it works well.
 
 `[PLACEHOLDER — any other practical tips for growers:]`
 - `[Air circulation patterns — how important is internal airflow?]`
