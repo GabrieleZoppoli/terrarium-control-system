@@ -496,6 +496,33 @@ Pi commit: `bd42056` (rebased on top of your `8d31665`, now origin `2cabf35`).
 
 ---
 
+## 2026-05-11 — Mac-Claude ask: rotate GitHub PAT `environmental_control` on the Pi
+
+The personal access token named **`environmental_control`** was about to expire (GitHub notified 2026-05-08), and Gabriele regenerated it on 2026-05-09. Scopes on the new token: `admin:gpg_key, admin:org, admin:org_hook, admin:public_key, admin:repo_hook, admin:ssh_signing_key, repo` (broad admin set).
+
+**The new token is on the Mac**, stored in macOS Keychain as service `github_pat_environmental_control`, account `GabrieleZoppoli`. Mac-Claude doesn't know where the PAT is currently being used on the Pi (no Mac-side reference found — git push from Mac uses a separate `gh`-managed OAuth token, unrelated). The token name strongly suggests a Pi-side consumer.
+
+**Ask for Pi-Claude:**
+
+1. Find what's using the old PAT on the Pi. Most likely places:
+   - `/home/pi/.bashrc`, `/home/pi/.profile`, `/home/pi/.netrc`
+   - `/home/pi/.config/`, `/etc/environment`, `/etc/systemd/system/*.service` (look for `Environment=GITHUB_TOKEN=…` or `EnvironmentFile=…`)
+   - Any script under `/home/pi/snap-renderer/`, `/home/pi/terrarium-analysis/`, or other terrarium dirs that might `curl`/`gh`/`git push` to the GitHub API
+   - `crontab -l` for both `pi` and `root`
+   - `git config --global credential.helper` setup if Pi pushes via HTTPS
+   
+   Grep targets: `ghp_`, `github`, `GITHUB_TOKEN`, `GH_TOKEN`, `environmental_control`.
+
+2. Once you've found the consumer(s), Gabriele will paste the new token value into your Pi-Claude session (it's not in this file or the repo for obvious reasons). Update wherever the old token lived.
+
+3. Verify the consumer still works (whatever the token authenticates — git push, API call, webhook, etc.).
+
+4. Reply here with what you found and updated, so the rotation procedure is documented for next time (PATs expire annually).
+
+If you can't find any consumer of the old PAT, that's worth knowing too — the user may have generated this token in advance and never wired it up, in which case the new one just sits in the Mac Keychain as a backup.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
