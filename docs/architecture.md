@@ -263,3 +263,54 @@ Humidity Tab         Temp Tab  Fans Tab            Weather Tab
 | `grafana-server` | Visualization | on-failure |
 | `mosquitto` | MQTT broker | on-failure |
 | `arduino-watchdog` | Arduino serial health monitor | Always, RestartSec=10 |
+| `meross-daemon` | MSS310 power-monitor polling daemon (30 s) | on-failure |
+| `conditions-server` | Read-only HTTP endpoint serving `/api/conditions.json`, `/api/ledger.json`, and the cached PNG snapshots | on-failure |
+
+## Health Monitoring & Safety Watchdogs
+
+The control loop in Node-RED handles climate regulation; an out-of-process **`terrarium-health.py`** monitor (cron `*/5 * * * *`) validates the whole stack against ground-truth sources and triggers email/WhatsApp alerts on yellow or red conditions. It runs as user `pi` and persists state to `~/.terrarium-health-state.json` between cycles.
+
+### Cross-checks the health monitor performs
+
+| Check | Sources cross-referenced | Failure example |
+|---|---|---|
+| Device ICMP reachability | ping → Tapo plug IPs + ESP water sensor | Tapo offline (Wi-Fi outage) |
+| Tapo control state | `tapo.p100.get_device_info()` | Plug not responding to commands |
+| Sensor freshness | InfluxDB `last()` ages on the 7 logged measurements | Arduino serial drop, NR stall |
+| Node-RED process state | `systemctl is-active` + HTTP GET on `:1880/` + uptime + recent errors | NR crash, NR loop hang |
+| Arduino heartbeat age | NR global `payload.arduino_gpio_alive` | Serial USB drop |
+| Watchdog activity | `/tmp/arduino-watchdog.flag` + `journalctl --since` | Watchdog itself stopped |
+| Meross power liveness | Daemon-published MQTT topic age | Power-monitor daemon died |
+| Mister cron heartbeat | Recent invocations of `mister-failsafe.py` in journal | Cron stopped firing |
+| Wi-Fi power-mgmt | `iw wlan0 get power_save` | Power-mgmt re-enabled (radio sleep → packet loss) |
+| Power vs commanded state | Meross watts vs (base + Tapo-commanded freezer/lights/mister + slider) | **Freezer stuck ON** (compressor running when commanded OFF) |
+| LED fault flag | `/tmp/led-fault.flag` written by the NR LED watchdog | LED PWM-line cable issue |
+
+### Power cross-check & STUCK RELAY auto-fix
+
+The safety-critical check is the **power-vs-commanded** comparison. Tapo's commanded state plus the lights-dimmer slider position (read from Node-RED context) build an expected wattage; the Meross MSS310 reports the actual draw. A persistent **+70 W excess with the freezer commanded OFF** is the only condition flagged as RED, because it represents a compressor running uncommanded — the failure mode that would chill the cabinet below setpoint without operator awareness.
+
+When a STUCK RELAY condition fires, the monitor's auto-fix cycles the Tapo plug `ON → OFF` to break the stuck relay state, with a 15-minute cooldown between attempts.
+
+Two failure modes of the cross-check itself were observed and patched on 2026-05-11 (tag `stuck_relay_hysteresis_2026_05_11`):
+
+1. **Tapo cache + Meross averaging are not synchronous.** Within ~30-90 s of a freezer cmd change (e.g., door-safety toggling the plug off), Tapo can report OFF while Meross still sees residual compressor draw. A single sample during that window historically fired a false STUCK alert.
+2. **One-sample Meross transients** (compressor inrush, meter spike during the lights ramp) could trigger the same single-sample alert.
+
+Three guards now prevent these false positives:
+
+- **N-sample hysteresis** — `STUCK_HYSTERESIS_SAMPLES = 3`. The check counts consecutive suspect cycles in persisted state; only emits RED after sustained excess across ~15 min. Below threshold prints a YELLOW "watching" line.
+- **Transition-window suppression** — `STUCK_TRANSITION_WINDOW = 120 s`. Before counting a suspect cycle, the monitor queries InfluxDB for any `freezer_status` value change in the last 120 s; if found, the cross-check is skipped for this cycle and the hysteresis counter is left untouched.
+- **Fresh re-poll before auto-fix** — inside `auto_fix_stuck_relay()`, the Tapo plug is queried fresh just before the on/off cycle. If the plug is genuinely OFF on the fresh poll, the auto-fix is skipped and a "false positive cleared on re-poll" line is logged; the cooldown is still recorded so the same condition can't loop.
+
+A true stuck relay produces +110 W excess across many cycles; the 15-minute detection delay introduced by hysteresis is comfortably inside the cabinet's thermal time-constant (cabinet drops ~2-3 °C in 15 min when actively cooling, well within the 12-24 °C target band).
+
+### Alert delivery
+
+| Channel | Use | Cooldown |
+|---|---|---|
+| Gmail SMTP | Yellow + Red, full report | 30 min per alert hash; require 2 consecutive same-class cycles |
+| CallMeBot WhatsApp | Same alerts, shorter body | Same cooldown |
+| Green status | Every 6 h "all clear" digest | 6 h interval |
+
+Alert classes are hashed by content with numerals masked, so the same anomaly type dedupes across cycles even when wattage drifts.
