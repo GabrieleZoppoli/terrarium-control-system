@@ -63,6 +63,14 @@ Seventeen days from the first photos, the larger bud has opened and the section 
 
 The plant is still in the same hanging position, same sphagnum kokedama, same mister nozzle overhead. Lux meter still pending. The colour is closer to cool magenta than the deep blood-red the photographs in Taylor (1989) hint at — possibly clone variation, possibly light-driven. I'll see whether the second bud opens darker or paler than the first.
 
+## Update — 2026-05-11: both flowers open
+
+Day 21. The second bud has caught up — both flowers are now face-out on the same scape. Colour is uniform across both: same magenta hood, same yellow-cream throat, same pink lower lip. No shift toward the deep red of the Roraima phenotype on the second flower; this clone is reliably Ilu pink.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-14.jpg" caption="Both flowers open on the same scape. The kokedama and the surrounding cabinet planting are visible in the background." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-16.jpg" caption="Macro into the throat of the second flower. The yellow callus and column structure read identically to the first." >}}
+
 ## References
 
 - **Taylor, P.** (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. The definitive treatment of the genus; the key to sect. *Orchidioides* (pp. 42–59) is where the *quelchii*/*campbelliana* characters live.

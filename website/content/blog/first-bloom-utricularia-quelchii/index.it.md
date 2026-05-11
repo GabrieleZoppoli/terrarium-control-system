@@ -63,6 +63,14 @@ Diciassette giorni dopo le prime foto, il bocciolo più grande si è aperto e la
 
 La pianta è sempre nella stessa posizione appesa, stesso kokedama di sfagno, stesso ugello sopra. Lettura lux ancora rimandata. Il colore è più vicino a un magenta freddo che al rosso-sangue profondo che le foto in Taylor (1989) lasciano intuire — possibile variazione clonale, possibile effetto della luce. Vedrò se il secondo bocciolo apre più scuro o più chiaro del primo.
 
+## Aggiornamento — 11 maggio 2026: entrambi i fiori aperti
+
+Giorno 21. Il secondo bocciolo ha recuperato — entrambi i fiori sono ora frontali sullo stesso scapo. Il colore è uniforme: stesso cappuccio magenta, stessa gola giallo-crema, stesso labbro inferiore rosa. Nessuno spostamento verso il rosso profondo del fenotipo Roraima sul secondo fiore; questo clone è affidabilmente rosa-Ilu.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-14.jpg" caption="Entrambi i fiori aperti sullo stesso scapo. Il kokedama e la piantumazione circostante del terrario sono visibili sullo sfondo." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-16.jpg" caption="Macro della gola del secondo fiore. Il callus giallo e la struttura della colonna si leggono identici al primo." >}}
+
 ## References
 
 - **Taylor, P.** (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. Il trattamento definitivo del genere; la chiave della sezione *Orchidioides* (pp. 42–59) è dove vivono i caratteri che separano *quelchii* e *campbelliana*.

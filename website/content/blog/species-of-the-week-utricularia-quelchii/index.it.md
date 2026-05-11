@@ -8,7 +8,7 @@ showReadingTime: true
 
 *Utricularia quelchii* è una delle poche utricularie a fiore rosso. *U. quelchii* e *U. campbelliana* sono entrambe pantepui, su roccia bagnata e banchi di muschio delle Guiana Highlands. *U. menziesii* è invece australiana sud-occidentale, in sottogenere *Polypompholyx* (sez. *Pleiochasia*), e ha raggiunto lo stesso colore in modo indipendente.[^rice5656] Tre anni di crescita solo vegetativa nel mio terrario, e dalla settimana scorsa il primo fiore è aperto — [un appunto diaristico è uscito sotto quel titolo](/it/blog/first-bloom-utricularia-quelchii/); questo post è la sua controparte enciclopedica.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-10.jpg" caption="Profilo di una *quelchii* aperta. Galea magenta sopra, gola giallo-crema sotto, labbro inferiore largo proteso in avanti — il *gestalt* della sezione *Orchidioides* che ingannava i primi raccoglitori convinti di avere a che fare con una parente delle orchidee." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-15.jpg" caption="Profilo di una *quelchii* aperta, con la condensa che imperla il labbro inferiore e lo sperone. Galea magenta sopra, gola giallo-crema sotto, labbro inferiore largo proteso in avanti — il *gestalt* della sezione *Orchidioides* che ingannava i primi raccoglitori convinti di avere a che fare con una parente delle orchidee." >}}
 
 ## Il nome
 
@@ -72,7 +72,7 @@ La fonte più informativa che ho trovato è la fotografia in habitat dal Monte R
 
 > "Le sole forme a fiore rosso di *U. quelchii* sono state viste sul Roraima." Sugli altri tepui le piante mostravano fiori rosa, con peduncoli più lunghi e più fiori per scapo.[^cpuk]
 
-Combacia con la mia. È etichettata **Ilu Tepui** — vetta diversa, colore atteso rosa-magenta, scapo a un solo fiore aperto (il secondo è ancora chiuso ma sullo stesso scapo). Le piante "rosso sangue" dei cataloghi sono provenienze del Roraima; chi non differenzia per tepui sta probabilmente mescolando le due cose.
+Combacia con la mia. È etichettata **Ilu Tepui** — vetta diversa, colore atteso rosa-magenta, scapo a due fiori (entrambi aperti a metà maggio; vedi l'aggiornamento in fondo al post). Le piante "rosso sangue" dei cataloghi sono provenienze del Roraima; chi non differenzia per tepui sta probabilmente mescolando le due cose.
 
 Perché il Roraima porta il rosso? Smith e gli habitué del CPUK avanzano l'**ipotesi ibridogena**: *U. campbelliana* — l'altra *Utricularia* pantepui a fiore rosso — cresce a fianco di *quelchii* sul Roraima ma non (o raramente) sugli altri tepui.[^cpuk] Due fiori saturi, rossi e con sindrome ornitofila nello stesso metro quadro è la situazione tipica per swarm ibridi. Nessuno studio molecolare ha confermato (per quanto ho trovato), quindi resta un'ipotesi di lavoro. Ma è una spiegazione pulita per cui il fenotipo rosso scuro si concentra alla località tipica.
 
@@ -88,7 +88,15 @@ Quindi quando dico "specie a fiore rosso" nelle sezioni precedenti, la lettura p
 
 **Tuberosa.** Diverse specie di *Orchidioides*, *quelchii* compresa, immagazzinano acqua in tuberi sotterranei e tollerano periodi di siccità lieve che altre utricularie epifite non sopportano.[^rice5656] In coltivazione raramente conta; sotto nebulizzazione costante i tuberi restano piccoli e la pianta corre a stoloni.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Tre-quarti, con il secondo bocciolo (ancora chiuso) visibile sotto. Scapi a due fiori sono riportati per le popolazioni non-Roraima; scapi a fiore singolo per il Roraima." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Tre-quarti, con il secondo bocciolo (allora ancora chiuso) visibile sotto. Scapi a due fiori sono riportati per le popolazioni non-Roraima; scapi a fiore singolo per il Roraima." >}}
+
+## Aggiornamento — 11 maggio 2026
+
+Il secondo bocciolo si è aperto, quattro giorni dopo il primo. Entrambi i fiori si presentano frontali sullo stesso scapo, cappuccio magenta e labbro inferiore rosa su ciascuno — il display a due fiori che la letteratura sulla variazione cromatica attribuisce alle provenienze non-Roraima.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-14.jpg" caption="Entrambi i fiori aperti sullo stesso scapo, a quattro giorni di distanza. Il vaso è ancora nella stessa posizione sotto il nebulizzatore, il kokedama di sfagno sempre saturo." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-16.jpg" caption="Macro della gola del secondo fiore. Stesso magenta, stesse macchie callose — i due fiori sono clone-uniformi; nessuno spostamento verso il rosso profondo del fenotipo Roraima." >}}
 
 ## Links
 

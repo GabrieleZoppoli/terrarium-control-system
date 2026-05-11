@@ -8,7 +8,7 @@ showReadingTime: true
 
 *Utricularia quelchii* is one of a small number of strongly red-flowered bladderworts. *U. quelchii* and *U. campbelliana* are Pantepui species, on wet rock and in moss banks across the Guiana Highlands. *U. menziesii* is unrelated — south-western Australia, in subgenus *Polypompholyx* (sect. *Pleiochasia*) — and arrived at the same colour independently.[^rice5656] Three years vegetative growth in my cabinet, and as of last week the first flower is open — a [diaristic note went up under that title](/blog/first-bloom-utricularia-quelchii/); this post is the encyclopaedic counterpart.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-10.jpg" caption="Side profile of an open *quelchii*. Magenta galea above, yellow-cream gullet underneath, broad lower lip extended forward — the section-*Orchidioides* gestalt that fooled early collectors into thinking the genus was an orchid relative." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-15.jpg" caption="Side profile of an open *quelchii*, condensation beading along the lower lip and spur. Magenta galea above, yellow-cream gullet underneath, broad lower lip extended forward — the section-*Orchidioides* gestalt that fooled early collectors into thinking the genus was an orchid relative." >}}
 
 ## The name
 
@@ -72,7 +72,7 @@ The most informative source I've found is in-habitat photography from Mt. Roraim
 
 > "The only red-flowered forms of *U. quelchii* were seen on Roraima." Plants on other tepuis showed pink, with longer flower stalks and multiple flowers per scape.[^cpuk]
 
-That matches my plant. It's labelled **Ilu Tepui** — different summit, expected pink-to-magenta colour, single-bud spike (the second is still closed but it's on the same scape). The "blood red" plants in catalogues are Roraima provenances; vendors that don't differentiate by tepui are probably mixing the two.
+That matches my plant. It's labelled **Ilu Tepui** — different summit, expected pink-to-magenta colour, two-flower scape (both buds open as of mid-May; see update at the end of the post). The "blood red" plants in catalogues are Roraima provenances; vendors that don't differentiate by tepui are probably mixing the two.
 
 Why does Roraima carry red? Smith and the CPUK regulars float the **hybrid hypothesis**: *U. campbelliana* — the other red-flowered Pantepui *Utricularia* — grows alongside *quelchii* on Roraima but not (or rarely) on the other tepuis.[^cpuk] Two saturated-red, hummingbird-attracting flowers in the same square metre is the kind of setup that produces hybrid swarms. No molecular study has confirmed this yet (none I could find), so it stays a working hypothesis. But it's a clean explanation for why the deep-red phenotype clusters at the type locality.
 
@@ -88,7 +88,15 @@ So when I say "red-flowered species" in the previous sections, the precise readi
 
 **Tuberous.** Several *Orchidioides* species, including *quelchii*, store water in subterranean tubers and survive mild dry periods that other epiphytic *Utricularia* don't tolerate.[^rice5656] In cultivation this rarely matters; under permanent mist the tubers stay small and the plant runs on stolons.
 
-{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Three-quarters profile, with the second (still-closed) bud visible below. Two-bud scapes are reported from non-Roraima populations; single-flower scapes from Roraima." >}}
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-9.jpg" caption="Three-quarters profile, with the second (then-still-closed) bud visible below. Two-bud scapes are reported from non-Roraima populations; single-flower scapes from Roraima." >}}
+
+## Update — 2026-05-11
+
+The second bud has opened, four days after the first. Both flowers face out from the same scape, magenta hood and pink lower lip on each — the two-flower display the colour-variation literature attaches to non-Roraima provenances.
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-14.jpg" caption="Both flowers open on the same scape, four days apart. Pot still in the same position under the mister, *Sphagnum* kokedama still saturated." >}}
+
+{{< figure src="/img/collection/utricularia/utricularia-quelchii-16.jpg" caption="Throat macro of the second flower. Same magenta, same callus markings — the two flowers are clone-uniform; no shift toward the deep red of the Roraima phenotype." >}}
 
 ## Links
 
