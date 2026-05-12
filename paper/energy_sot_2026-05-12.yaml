@@ -1,0 +1,73 @@
+# Single source of truth — Meross-measured energy figures
+# Generated 2026-05-12 from `SELECT integral(value, 1s) FROM power_consumption`
+# Daemon: meross_daemon.py, polling cadence 2 s — 30 s — 120 s across window.
+# Trapezoidal integration is density-independent so the kWh figure is unaffected
+# by cadence changes (confirmed against mean × 24 h: 110.9 W × 24 = 2.66 kWh/d).
+#
+# All four manuscripts must cite from THIS BLOCK. Anyone editing this file is
+# also responsible for updating the kWh-dependent numbers in all four drafts.
+
+daemon_first_sample: "2026-02-18T22:12:44Z"
+ledger_as_of_used:   "2026-05-10T06:26:07Z"   # ledger.json's published cutoff
+now_at_regeneration: "2026-05-12T07:32:28Z"
+
+# Window A: daemon-start → ledger as_of  (matches ledger.json's 211.4 kWh figure)
+window_A:
+  start:           "2026-02-18T22:12:44Z"
+  end:             "2026-05-10T06:26:07Z"
+  days:            80.34
+  kWh_integrated:  211.41
+  kWh_per_day:     2.631
+  W_mean:          110.9
+  W_p50:           110.8
+  W_p95:           203.1
+  W_min:           7.0
+  W_max:           492.9
+
+# Window B: daemon-start → now (fresher, what to cite in the paper for "current state")
+window_B:
+  start:           "2026-02-18T22:12:44Z"
+  end:             "2026-05-12T07:32:28Z"
+  days:            82.39
+  kWh_integrated:  218.03
+  kWh_per_day:     2.646
+  W_mean:          110.9
+
+# Headline figures for the manuscripts
+headline:
+  kWh_per_day:        2.6     # round to 1 decimal; the precise value is 2.63 (window A) / 2.65 (window B)
+  monthly_kWh:        80      # 2.63 × 30.42
+  annual_kWh:         960     # 2.63 × 365
+  tariff_eur_per_kWh: 0.30    # user to confirm — see "open" below
+  annual_cost_eur:    288     # at 0.30; at 0.31 → 298
+
+# Reconciliation with prior numbers in this session
+reconciliation:
+  ledger_json_calc:
+    formula:    "211.4 / 94.3"
+    result:     2.24
+    status:     WRONG
+    reason:     >
+      ledger.json uses (as_of - since) = 94.3 days as the denominator,
+      where `since` is the first sample of ANY measurement, not the
+      daemon-instrumented power window. Power_consumption data only exists
+      from 2026-02-18 onward (daemon deployment date), not from 2026-02-04
+      (`since`). Correct denominator is the 80.34-day daemon window.
+  survey_original:
+    value:      2.60
+    status:     APPROXIMATELY RIGHT (true value 2.63)
+    note:       Probably derived from mean × 24h ≈ 109.9 × 24 = 2.64. Off by ~1% from the true trapezoidal integral.
+  mac_claude_counter_review_A_2:
+    proposed_correction: "2.24 kWh/day, €253/year at €0.31/kWh"
+    status:     WRONG — adopted the ledger's 94.3-day denominator without verifying.
+
+open:
+  - electricity_tariff: >
+      User has not explicitly confirmed €0.30/kWh vs €0.31/kWh. Need the
+      latest Italian residential bill or the published tariff (Italian
+      mercato libero vs maggior tutela) to pin €/year. Default to €0.30 for
+      now (typical Italian 2024-2026 residential rate); adjust on user input.
+  - ledger_denominator_bug: >
+      `website/scripts/fetch_ledger.py` (or whichever script computes the
+      ledger) divides kWh by the wrong window length. Fix at source so the
+      weekly auto-refresh produces the correct kWh/day.

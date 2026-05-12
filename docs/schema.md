@@ -86,7 +86,7 @@ Weather data from 4 Colombian highland cities, fetched via OpenWeatherMap API.
 | 29 | `temperature_sonson` | `value` | float | °C | Sonsón |
 | 30 | `humidity_sonson` | `value` | float | % RH | Sonsón |
 
-**Total**: 32 measurements across all sources.
+**Total**: 33 measurements across all sources.
 
 ## Common Queries
 
