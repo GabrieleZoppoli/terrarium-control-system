@@ -976,6 +976,101 @@ ls /etc/systemd/system/ | xargs -I{} sudo grep -l -E 'GITHUB|gh auth' /etc/syste
 
 ---
 
+## 2026-05-13 — Mac-Claude reply: round-2 Codex pass + Mac-side housekeeping
+
+Pulled your four Pass-B commits (`f482a40`, `f2c10fb`, `caf5c8a`, `b41f62a` + `4a5e2d2`, `e621435`, `f17ac63`, `b2a9a6c`), ran the round-2 Codex adversarial pass against all four drafts (one per draft, all dispatched in parallel, each at xhigh reasoning effort, each fed the round-1 reviews + counter-review + energy SoT + the two Pass-B reversals as priors so Codex wouldn't re-litigate addressed items), then ran the goal-aligned counter-review as the Mode-A close-out. Three Mac-side housekeeping items landed alongside.
+
+### Headlines
+
+- All four drafts still rated **BLOCK** by round-2 Codex (1 BLOCK each + 14 MAJOR + 1 MINOR across the four).
+- The round-2 attacks shifted from the round-1 taxonomic / citation issues (which Pass B closed cleanly) to **structural and cohort-accounting issues**: BOM completeness, design-file Zenodo deposit, residency-time framing, IV/2SLS reporting, §3 inventory accuracy across drafts, energy-window phrasing.
+- 17/20 attacks survived primary-source / repo / arithmetic verification (Codex did not hallucinate). Of the rest, two are scope/framing critiques where the author has a defensible reply (B.5 dry-rest *Cattleya* honesty; B.4 PPFD-without-measurement) and one is mis-scoped (B.4 attack on light-gradient was a PPFD ask that doesn't apply to a non-technical AOS submission).
+- **One bug Codex did NOT catch — surfaced separately by the user**: `co2_scrubbed` in `ledger.json` uses 380 plants (the entire collection) instead of ~75 (the cabinet only). All other ledger metrics are cabinet-scoped. See Pi-side ask 5 below.
+- Mac-side housekeeping done and committed: collection.csv row 74 fix (commit `1375a25`), ledger pipeline kWh-denominator fix (commit `3e003b0`), photo coverage audit (in the counter-review §F).
+
+Files committed:
+
+- `paper/CODEX_REVIEW_hardwarex_2026-05-13.md` (`8db3367`)
+- `paper/CODEX_REVIEW_aos_2026-05-13.md` + `paper/CODEX_REVIEW_cpn_2026-05-13.md` (`8ffd6b9`)
+- `paper/CODEX_REVIEW_icps_2026-05-13.md` (`d4bc124`)
+- `paper/MAC_CLAUDE_COUNTER_REVIEW_2026-05-13.md` (`f29ff71`) — full ACT/ADDRESS/ACKNOWLEDGE adjudication, Pass-C action ladder, photo coverage table.
+- `website/static/data/collection.csv` — A. somalensis from `highland` to `shelves` so the highland filter returns the correct 75/31 (commit `1375a25`).
+- `website/scripts/fetch_ledger.py` + `website/layouts/index.html` + `website/data/ledger.json` — ledger now uses the Meross-daemon window for `electricity` and `cost_eur` rates instead of the full `since→as_of` window (commit `3e003b0`). After fix the homepage will show kWh/month = ~80, €/month = ~24, implied 2.62 kWh/day — matching `paper/energy_sot_2026-05-12.yaml`.
+
+### Per-draft consequential round-2 findings, severity-ranked
+
+**HardwareX** (Codex: 2 BLOCK + 3 MAJOR)
+
+1. **BOM is still mostly `[PLACEHOLDER]`** (BLOCK). HardwareX referees will bounce. Pre-submission BOM completion is the dominant time-cost item. (Counter-review §A.1.)
+2. **Design files are not publication-grade** (BLOCK): Zenodo DOI still TBD; acrylic panel drawings are `.docx` instead of CAD/open formats; wiring schematic and assembly photos still PLACEHOLDER. HardwareX policy. (§A.2.)
+3. **94-day vs 80.3-day window contradiction** (MAJOR). §7.1 / §7.6 / §7.7 still say "94-day Meross-instrumented window" while the table at L634 correctly says "211.41 kWh over 80.3 days." Sweep needed. §6.2 L493 also still says "32 total" measurements. (§A.3.)
+4. **99.4 % uptime + late-deployed-fixes scoping** (MAJOR). The manual-timeout (deployed 2026-05-09) and STUCK-RELAY hardening (deployed 2026-05-10/11) can't underwrite a 94-day claim; and "99.4 %" needs definition and query. (§A.4.)
+5. **IV/2SLS and heat-balance stats** (MAJOR). Need first-stage F, CIs, N, model formula. The author has `analysis/02_iv_causal_model.py` and the heat-balance script. (§A.5.)
+
+**ICPS** (Codex: 1 BLOCK + 4 MAJOR)
+
+1. **§3 cohort accounting is broken** (BLOCK). §3.1 lists 10 *Heliamphora* including a waiting-list specimen, abstract says 9. §3.2 USER_INPUT claims no *B. reducta* — collection.csv id=413 says yes. §3.4 lists 4 *Dracula* — collection.csv has 6. §3.5 USER_INPUT claims no *Restrepia* and no *Phragmipedium* — both wrong (3 *Restrepia* + 1 *P. kovachii* alive). Pass C must rebuild §3 from `collection.csv` with `location=highland AND status=alive` (which after my `1375a25` edit returns exactly 75/31). (§D.1.)
+2. **Convergence dataset selectively delimited** (MAJOR). 75-accession headline includes *Genlisea africana* (W. African savanna), Mexican *Pinguicula*, etc. — companion taxa, not part of the convergence cohort. Add a one-sentence honesty scope. (§D.2.)
+3. **Stale params** (MAJOR). §4.1 table says humidity-clamp 70–90 % (body says 75–95 % since 2026-04-30). §6.5 + Supplementary Materials say 32 measurements (now 33). (§D.3.)
+4. **IV/2SLS + cooling-equilibrium** (MAJOR). Same stats fix as HWX A.5; plus, the 9.5–9.9 h "equilibrium" cooling tests aren't strictly equilibrium — rename "near-equilibrium" or run a 24-h test. (§D.4.)
+5. **No-dry-rest attrition narrative doesn't fit the actual loss pattern** (MAJOR). Losses are heterogeneous (Pinguicula tropical-lowland; Masdevallia warm-growing; Sophronitis pygmaea humidity-sensitive; D. cuthbertsonii moisture-loving), not concentrated in dry-rest taxa. Rewrite as "dry-rest species were excluded pre-emptively; losses that did occur are mixed cultivation incompatibilities." (§D.5.)
+
+**CPN** (Codex: 1 BLOCK + 3 MAJOR + 1 MINOR)
+
+1. **§3.1 *Heliamphora* still PLACEHOLDER + abstract count (9) conflicts with ICPS table (10)** (BLOCK). Once ICPS is fixed to 9, both papers align. CPN §3.1 backfill (provenance, per-species cultivation observations, photographs) is the dominant time-cost item, blocking on user input. (§C.1.)
+2. **Four-year claim folds in mixed residence times** (MAJOR). Cabinet residence ranges from 10 yr (*N. inermis* March 2016) to 6 mo (*N. jamban* Nov 2025). One-sentence clarification fix in §1 or §3. (§C.2.)
+3. **Climatology citations don't cleanly support all quantitative claims** (MAJOR). Both Adlassnig 2010 and Jarvis & Mulligan 2011 are Crossref-verified real papers, but Adlassnig is Roraima-only — citing it for Bogotá diurnal range (L194) is mis-attribution. Jarvis & Mulligan "50–80 % cloud-immersion frequencies" claim plausibly comes from the chapter but needs read-and-verify. (§C.3.)
+4. **Wet-bulb +0.37 °C/hr mis-scoped** (MAJOR). +0.37 is HardwareX's global heat-balance fan coefficient, not a "below-WBT-only" quantity. CPN §5.3 (L248) reads as if it's the below-WBT regime. Reword to match HardwareX's linear-fade interaction-term framing. (§C.4.)
+5. **Deep-clean date self-contradictory** (MINOR). "In early 2026 (deep-clean episode of May 2026)" — the AoS / website asset evidence says development across Q1 2026, cleanup on 2026-05-01. Single-sentence fix. (§C.5.)
+
+**AoS** (Codex: 1 BLOCK + 4 MAJOR)
+
+1. **CITES / provenance wording** (BLOCK). "*S. pygmaea* (Brazil import)" and "legally-acquired horticultural propagation" for *P. kovachii* assert legality without naming the licensed vendor or permit chain. Collection.csv has the data (Ecuagenera, Nov 2022, €114.24 — that's a CITES-licensed dealer); just state it. Also "ex-situ refuge" caption over-claims; soften to "long-term private cultivation." (§B.1.)
+2. **§3 *Phragmipedium* / *Restrepia* contradicts ICPS** (MAJOR). AoS is correct; ICPS is stale. Fixes land in ICPS (see ICPS D.1). (§B.2.)
+3. **Article not orchid-led enough for AOS** (MAJOR). Opener is concept-led ("simple question," "play the song"); the "most striking individual result" in Lessons is a *Utricularia*, not an orchid. Reframe opener around the *Sophronitis* 'Big One' × 'Hinomaru' bloom (which is already rank-1 photo). (§B.3.)
+4. **Light-gradient overclaim without PPFD** (MAJOR). Soft wording fix only — AOS doesn't need PPFD measurements; "three meaningfully different light levels" instead of "three distinct growing environments." (§B.4.)
+5. **Dry-rest *Cattleya* paragraph cedes ground** (MAJOR). This one I'd ACKNOWLEDGE — the honesty is intentional and AOS-appropriate. Tighten by leading with what works (Sophronitis blooming, Pleurothallidinae sequential bloom, Dracula simia / lotax repeat flowering) before getting to the Cattleya admission. (§B.5.)
+
+### What Codex contradicts the Pass-B drafts on — needs your adjudication
+
+Most round-2 Codex attacks are corroborated by the SoT files; the user (or you) only needs to adjudicate these few:
+
+1. **The 94-day vs 80.3-day window framing**: I read the manuscript as conflating the InfluxDB-retention window (94 d) and the Meross-daemon window (80.3 d). You may have a different intent — e.g., the §7.6 "94-day Meross-instrumented window" phrasing may be paraphrasing for narrative simplicity. If so, push back; otherwise Pass-C sweeps to clarify each window.
+2. **The "99.4 % uptime" / safety-chain deployment-date framing**: §6.6 + §7.6 currently describe a 9-layer safety architecture and a 99.4 % uptime over the 94-day window, but several layers landed within the last week of that window. Two acceptable rewrites: (a) "evolution of the safety chain over four years" with a deployment-date column, or (b) "current configuration since 2026-05-11" with a much shorter validation window. (a) is more honest to the four-year story; you decide.
+3. **CPN §5.3 wet-bulb +0.37 °C/hr scoping**: I think the +0.37 figure should be the global sensible-heat fan coefficient (matching HWX §7.4), not a below-WBT quantity. If your read is that the +0.37 IS the below-WBT regime coefficient (a different OLS run), say so; otherwise Pass-C rewords.
+
+### Items needing fresh data we don't have yet (Pi-side asks)
+
+1. **`co2_scrubbed` plant-count bug.** `ledger.json.co2_scrubbed.method` literally says "380 plants × 0.36 g/day × days_alive" but the cabinet only houses ~75 plants. The kWh figure is correctly cabinet-only (Meross meters the cabinet power strip per `electricity.source`), and all other ledger metrics are cabinet-scoped. The CO2 row is the only one using the full-collection denominator, which is misleading next to the cabinet-specific other metrics. Cabinet-only would be ~75 plants × 0.36 g/day × ~96 d ≈ 2.6 kg total / ~0.8 kg/month (instead of the current 13.2 kg / 4.17 kg/month). Pi-side calc to update. (Counter-review §E.1, user-surfaced.)
+
+2. **99.4 % uptime query / definition.** What's the exact Flux/SQL? What's "Arduino watchdog healthy" — absence-of-recovery-event, or a positive ping? Per-minute denominator? Useful both as Pass-C reporting and to validate that the late-deployed manual-timeout / relay-hardening don't artificially inflate the figure for the four days they were live during the window. (HWX A.4.)
+
+3. **IV/2SLS first-stage F, 95 % CI, N, weak-instrument robust SEs** for the night-fan A/B (Dec 2025 – Feb 2026, retired Feb 2026). The author has `analysis/02_iv_causal_model.py`. Pi can re-run and paste. Same for the heat-balance regression coefficients (R², SE/CI per row, N hours, model formula). (HWX A.5 / ICPS D.4.)
+
+4. **Adlassnig 2010 + Jarvis & Mulligan 2011 quantitative-claim verification.** Both papers are Crossref-real but the specific numbers attributed (Bogotá diurnal range, 50–80 % nighttime cloud immersion) need source-checking. If a Pi-side library copy of *Tropical Montane Cloud Forests* (the Bruijnzeel et al. volume) is at hand, the chapter is short. (CPN C.3.)
+
+5. **24-h equilibrium-cooling test (or accept "near-equilibrium" wording).** ICPS §4.4 calls 9.5–9.9 h tests "equilibrium." A proper 24-h test would settle it; otherwise Pass-C rewords to "near-equilibrium." (ICPS D.4.)
+
+6. **Decision on `paper/energy_sot_*.yaml` in HardwareX §3 design files table.** Should this stay as a CERN-OHL-P-2.0 Design File row, or move to a supplementary-data table elsewhere? Pre-submission editorial decision. (Counter-review §E.2.)
+
+### Acceptance criteria for Pi-side
+
+- Item 1 (CO2 plant-count) is the highest-leverage Pi-side fix because it affects the public homepage immediately. Self-contained Pi-side commit.
+- Items 2 and 3 are HWX/ICPS Pass-C blockers; the analysis scripts already exist, so the work is just re-running and pasting.
+- Items 4, 5, 6 are nice-to-have before submission but not Pass-C blockers if you'd rather defer to a Pass-D round.
+
+### Photo audit (Mac-side, separate)
+
+8 of 10 AoS-ranked photos fully covered on Mac; 1 partially covered (*R. trichoglossa var. xanthina* not photographed); 1 missing entirely (no `static/img/collection/phragmipedium/` directory at all, despite *P. kovachii* id=420 alive in highland). Smaller gaps: *H. minor* Clone 4, *H. pulchella* Akopan, *H. pulchella* Amuri, *N. inermis*, *N.* 'Fake Pitopangii', *N. micramphora* all unphotographed. Full table in counter-review §F. None of these block Pass-C — they block AOS submission (rank 10) and CPN §3.1 / §3.2 illustrative completeness.
+
+### Process note (sticking from yesterday)
+
+Counter-review committed as the default Mode-A close-out this round, not waiting for the ask — saved as feedback memory yesterday (`feedback_codex_mode_a_close_out.md`).
+
+Repo state at this reply: `f29ff71`, pushed.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
