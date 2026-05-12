@@ -320,16 +320,34 @@
       }
     }
 
+    /* `since` covers any-measurement; the Meross daemon started later, so
+       kWh / cost rates use a shorter window than the rest. Parse the
+       daemon-start date out of d.electricity.source (or use the explicit
+       d.electricity.window_start if the Pi side adds it). */
+    function electricityWindowDays(d, fullDays) {
+      var explicit = d.electricity && d.electricity.window_start;
+      var startStr = explicit || null;
+      if (!startStr) {
+        var src = (d.electricity && d.electricity.source) || '';
+        var m = /daemon came up (\d{4}-\d{2}-\d{2})/.exec(src);
+        if (m) startStr = m[1] + 'T00:00:00Z';
+      }
+      if (!startStr) return fullDays;
+      var elecDays = (parseIso(d.as_of) - parseIso(startStr)) / 86400000;
+      return elecDays > 0 ? elecDays : fullDays;
+    }
+
     fetch(endpoint, { cache: 'no-store', credentials: 'omit' })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (d) {
         var days = (parseIso(d.as_of) - parseIso(d.since)) / 86400000;
         if (!(days > 0)) return;
         var m = DAYS_PER_MONTH / days;
+        var mElec = DAYS_PER_MONTH / electricityWindowDays(d, days);
 
         setValue('mist', d.mist_cycles.count,        d.mist_cycles.count * m,        0);
-        setValue('kwh',  d.electricity.kwh,          d.electricity.kwh * m,          0);
-        setValue('cost', d.cost_eur.value,           d.cost_eur.value * m,           0, '€');
+        setValue('kwh',  d.electricity.kwh,          d.electricity.kwh * mElec,      0);
+        setValue('cost', d.cost_eur.value,           d.cost_eur.value * mElec,       0, '€');
         setValue('co2',  d.co2_scrubbed.kg,          d.co2_scrubbed.kg * m,          1);
         setValue('data', d.data_points.count / 1e6,  d.data_points.count * m / 1e6,  2);
         setValue('fog',  d.fog_hours.hours,          d.fog_hours.hours * m,          0);

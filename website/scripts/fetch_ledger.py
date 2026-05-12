@@ -7,6 +7,7 @@ Idempotent; committing the resulting file is normal.
 from __future__ import annotations
 
 import json
+import re
 import ssl
 import sys
 import urllib.request
@@ -20,25 +21,56 @@ REQUIRED_KEYS = ("since", "as_of", "mist_cycles", "electricity",
                  "cost_eur", "co2_scrubbed", "data_points", "fog_hours")
 DAYS_PER_MONTH = 30.4375
 
+# `since` is the first sample of ANY measurement in InfluxDB (currently
+# 2026-02-04). Power_consumption only exists from the Meross daemon's
+# deployment date (2026-02-18 in the current run), so the kWh integral
+# covers a shorter window than `since→as_of`. Dividing by the full
+# `since→as_of` window under-estimates kWh/day (2.24 instead of the
+# correct 2.63). Pi-Claude documented the daemon-start date inside
+# `electricity.source`; we parse it out here. If Pi side later exposes
+# `electricity.window_start` as a structured field, we use that instead.
+_DAEMON_DATE_RE = re.compile(r"daemon came up (\d{4}-\d{2}-\d{2})")
+
 
 def _iso(s: str) -> datetime:
     return datetime.fromisoformat(s.replace("Z", "+00:00"))
 
 
+def _electricity_window_start(data: dict) -> datetime:
+    elec = data.get("electricity", {})
+    explicit = elec.get("window_start")
+    if explicit:
+        return _iso(explicit)
+    m = _DAEMON_DATE_RE.search(elec.get("source", ""))
+    if m:
+        return datetime.fromisoformat(m.group(1) + "T00:00:00+00:00")
+    return _iso(data["since"])
+
+
 def _enrich(data: dict) -> dict:
-    """Add ``monthly`` block with rates per month for every numeric counter."""
-    days = (_iso(data["as_of"]) - _iso(data["since"])).total_seconds() / 86400
-    if days <= 0:
+    """Add ``monthly`` block with rates per month for every numeric counter.
+
+    Most counters span the full `since→as_of` window. Electricity (and
+    therefore cost_eur) only spans the Meross-daemon window, which is
+    shorter. Mixing the two windows here would mis-scale kWh/day.
+    """
+    as_of = _iso(data["as_of"])
+    since = _iso(data["since"])
+    days_full = (as_of - since).total_seconds() / 86400
+    days_elec = (as_of - _electricity_window_start(data)).total_seconds() / 86400
+    if days_full <= 0 or days_elec <= 0:
         return data
-    scale = DAYS_PER_MONTH / days
+    scale_full = DAYS_PER_MONTH / days_full
+    scale_elec = DAYS_PER_MONTH / days_elec
     data["monthly"] = {
-        "days_elapsed": round(days, 1),
-        "mist_cycles":   round(data["mist_cycles"]["count"] * scale),
-        "electricity":   round(data["electricity"]["kwh"] * scale, 1),
-        "cost_eur":      round(data["cost_eur"]["value"] * scale, 1),
-        "co2_scrubbed":  round(data["co2_scrubbed"]["kg"] * scale, 2),
-        "data_points":   round(data["data_points"]["count"] * scale),
-        "fog_hours":     round(data["fog_hours"]["hours"] * scale, 1),
+        "days_elapsed":             round(days_full, 1),
+        "days_elapsed_electricity": round(days_elec, 1),
+        "mist_cycles":   round(data["mist_cycles"]["count"] * scale_full),
+        "electricity":   round(data["electricity"]["kwh"] * scale_elec, 1),
+        "cost_eur":      round(data["cost_eur"]["value"] * scale_elec, 1),
+        "co2_scrubbed":  round(data["co2_scrubbed"]["kg"] * scale_full, 2),
+        "data_points":   round(data["data_points"]["count"] * scale_full),
+        "fog_hours":     round(data["fog_hours"]["hours"] * scale_full, 1),
     }
     return data
 
