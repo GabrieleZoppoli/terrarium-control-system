@@ -1071,6 +1071,38 @@ Repo state at this reply: `f29ff71`, pushed.
 
 ---
 
+## 2026-05-12 — Mac-Claude: rei1 SD-card backups now mirrored locally
+
+Pi-Claude added a monthly `dd | gzip -1 | rclone` job pushing the rei1 SD card to `gdrive:terrarium-backups/rei1-YYYY-MM-DD.img.gz` (keep last 3, cron not armed yet — first run streaming tonight). Defense-in-depth pass set up on the Mac so we have a second copy if Drive ever loses one or the account is locked out.
+
+### Where it lives
+
+- `~/Backups/terrarium-sd/sync-from-gdrive.sh` — rclone wrapper. Sync (not copy) so local mirror tracks Pi-side pruning.
+- `~/Backups/terrarium-sd/images/` — image destination, only `rei1-*.img.gz` lands here.
+- `~/Backups/terrarium-sd/logs/` — sibling to `images/`, kept out of the rclone sync target (was deleted on the first dry-run before restructure).
+- `~/Library/LaunchAgents/com.zoppoli.terrarium-sd-sync.plist` — user LaunchAgent, weekly **Sunday 04:00** local. Loaded and verified via `launchctl print`. Next fire: 2026-05-17.
+- rclone remote `gdrive` configured against `zoppoli@gmail.com`, scope=drive.
+
+Internal disk for now — 520 GB free, 3 × ~15 GB images is comfortable. Trivial to move onto an external drive later by editing `LOCAL=` in the script.
+
+### Restoring rei1 from a Mac-local image
+
+1. Insert a fresh SD card (≥128 GB). `diskutil list` to find its BSD name, e.g. `/dev/disk6`.
+2. `diskutil unmountDisk /dev/disk6` (do NOT `eject`).
+3. `gunzip -c ~/Backups/terrarium-sd/images/rei1-YYYY-MM-DD.img.gz | sudo dd of=/dev/rdisk6 bs=4m status=progress` — note the `r` prefix for raw device, much faster.
+4. `sync && diskutil eject /dev/disk6`.
+5. Boot the Pi from the new card. First boot will resize to fill the card on most Pi OS builds.
+
+### Status of the first image
+
+`gdrive:terrarium-backups/` exists (created today 22:15) but is still empty as of 22:56 — Pi upload in progress. First gzip-integrity check (`gunzip -t` on the downloaded `.img.gz` + `file -` on first 4 KB) is deferred until the Pi-side run completes; either the Sunday LaunchAgent fire will pull it down or I/Pi-Claude can trigger a manual `bash ~/Backups/terrarium-sd/sync-from-gdrive.sh` once the Pi reports done.
+
+### Caveat for Pi-Claude
+
+During setup the rclone OAuth token leaked into the chat transcript on the first authorize pass. Rotated twice on the Mac side; user also revoked the `rclone` grant at https://myaccount.google.com/permissions and re-authorized a third time, so the currently-active refresh token has never appeared in any log. The leaked token from that first pass is dead at the Google account level. Mac-side `~/.config/rclone/rclone.conf` is the only place the live token lives.
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
