@@ -22,7 +22,7 @@
 
 ## Abstract
 
-We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour time shift to generate continuously varying temperature and humidity setpoints, reproducing the stochastic weather dynamics of tropical montane environments within a ~1 m³ acrylic enclosure (1.5 × 0.6 × 1.1 m). A dynamic photoperiod derived from the Colombian reference latitude (~5°N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions, and a wet-bulb temperature gate that automatically disengages ventilation fans when evaporative cooling becomes thermodynamically counterproductive. A multi-layer safety chain (door-open interlock, freezer daytime gate, manual-override timeout, power cross-check with hysteresis, LED-fault watchdog, USB serial watchdog) handles operator and hardware failure modes encountered in production. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of 2.60 kWh/day, currently maintaining **76 living accessions across 32 plant genera** drawn from four biogeographic provinces (Guayanan tepui, Andes, African highlands, and Papua New Guinea / Southeast Asia). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [URL — TBD on Zenodo deposit]; companion papers describe the horticultural results for carnivorous plants [ref] and orchids [ref].
+We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud-forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour backward lookup against the locally archived time-series to generate continuously varying temperature and humidity setpoints. Combined with the 7-hour Italy-to-Colombia time-zone offset, the shift produces a phase-aligned daily cycle in which Colombian afternoon highs drive cabinet warmth at Italian midday and Colombian pre-dawn lows drive cabinet cooling at Italian midnight — reproducing the stochastic weather of tropical montane environments without inverting the day/night cycle. The enclosure is a ~1 m³ acrylic cabinet (1.5 × 0.6 × 1.1 m), and a dynamic photoperiod derived from the Colombian reference latitude (~5°N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions, and a wet-bulb temperature gate that automatically disengages ventilation fans when evaporative cooling becomes thermodynamically counterproductive. A multi-layer safety chain (door-open interlock, freezer daytime gate, manual-override timeout, power cross-check with hysteresis, LED-fault watchdog, USB serial watchdog) handles operator and hardware failure modes encountered in production. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of **2.63 kWh/day (~€288/year at €0.30/kWh)**, currently maintaining **75 living accessions across 31 plant genera** drawn from three biogeographic provinces of the convergent cloud-forest biome (Neotropical highlands: Guayanan tepui, Andes, Brazilian Atlantic Forest; Southeast Asian highlands; Papua New Guinea / Oceania). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [URL — TBD on Zenodo deposit]; companion papers describe the horticultural results for carnivorous plants [ref] and orchids [ref].
 
 **Keywords**: open-source hardware, cloud forest terrarium, weather simulation, PID control, wet-bulb temperature, Node-RED, environmental monitoring, Raspberry Pi
 
@@ -36,7 +36,7 @@ Traditional terrarium controllers rely on fixed environmental setpoints (e.g., 1
 
 Commercial terrarium controllers such as the MistKing HygroStat and similar products provide basic hysteresis control of humidity and temperature, but none ingest real-time weather data to produce dynamic setpoints. At the other end of the spectrum, laboratory growth chambers (Percival, Conviron) offer precise environmental control at costs of EUR 10,000–50,000+, with proprietary software that limits customization and data access.
 
-In the open-source domain, several environmental control systems have been described in HardwareX and similar venues, including greenhouse automation platforms and plant growth monitoring systems. However, to our knowledge, no published open-source system implements weather-mimicking control — the ingestion of real-time meteorological data to drive continuously varying environmental setpoints — for terrarium-scale applications.
+A number of open-source environmental control systems have been described in HardwareX and adjacent venues, providing relevant reference designs but stopping short of the weather-mimicking concept. McDowell et al. (2021) [4] describe an internet-connected temperature controller for plant-growth experiments, providing a clean open-hardware template for sensor + actuator + remote-management but with fixed-setpoint control. Lau & Subbiah (2020) [5] present HumidOSH, a self-contained environmental chamber with relative-humidity and fan-speed control, focused on a single bench-top humidity envelope rather than diurnal or weather-driven variation. Sánchez et al. (2020) [6] document OpenTCC, a low-cost open-source temperature-control chamber demonstrating that compressor or Peltier hardware can be controlled cleanly from an open stack, again with fixed setpoints. Yuan et al. (2022) [7] develop an IoT framework for feedback control of photosynthetic activity in *Arabidopsis* — the closest conceptual prior art, since it closes a control loop on a biological signal rather than a programmed schedule, but it does not ingest external weather data. Iucci et al. (2026) [8] describe a compact modular hydroponic greenhouse with environmental sensing and control, aimed at production rather than ex-situ conservation of native-climate species. To our knowledge, **no published open-source system ingests real-time meteorological data from a geographically distinct reference site and applies a time-zone-aware phase shift to drive continuously varying environmental setpoints**, which is the gap the present design fills for terrarium-scale ex-situ conservation of cloud-forest taxa.
 
 The system described here addresses this gap through five key innovations:
 
@@ -58,11 +58,11 @@ The Weather-Mimicking Biotope (WMB) is an acrylic terrarium with integrated cool
 
 Applications for researchers and educators include:
 
-- **Ex-situ conservation**: Maintaining cloud forest species from multiple biogeographic regions in a single enclosure, validated over four years with 76 living accessions across 32 plant genera from four continents
-- **Plant physiology studies**: Comprehensive data logging (33 InfluxDB measurements at 60-second intervals; 3.1 million data points in the current 1-year retention window) enables analysis of plant responses to naturalistic environmental variation
+- **Ex-situ conservation**: Maintaining cloud-forest species from multiple biogeographic regions in a single enclosure, validated over four years with 75 living accessions across 31 plant genera from three biogeographic provinces (Neotropical highlands, Southeast Asian highlands, Papua New Guinea / Oceania)
+- **Plant physiology studies**: Comprehensive data logging (33 InfluxDB measurements at 60-second intervals for continuous channels plus event-driven actuator-change logging; 3.1 million data points in the current 1-year retention window) enables analysis of plant responses to naturalistic environmental variation
 - **Control systems education**: The system demonstrates PID control, gain scheduling, hysteresis control, wet-bulb thermodynamics, multi-regime switching, and a documented production-grade safety chain in an accessible, visual programming environment (Node-RED)
-- **Template for other biomes**: The weather-mimicking architecture can be adapted to any biome by changing the reference weather stations (e.g., fog desert, alpine, lowland tropical)
-- **Low-cost alternative to growth chambers**: Total hardware cost is a fraction of commercial growth chambers (€10,000–50,000+ for Percival/Conviron-class equipment), at a measured operational footprint of 2.60 kWh/day (~€253/year at €0.30/kWh) for environmental control comparable to or superior to those instruments in this application class
+- **Template for other biomes**: The weather-mimicking architecture can be adapted to any biome by changing the reference weather stations (e.g., fog desert, alpine, lowland tropical) and the photoperiod-source latitude
+- **Low-cost alternative to growth chambers**: Total hardware cost is a fraction of commercial growth chambers (€10,000–50,000+ for Percival/Conviron-class equipment), at a measured operational footprint of **2.63 kWh/day (~€288/year at €0.30/kWh)** for environmental control comparable to or superior to those instruments in this application class
 
 ---
 
@@ -70,17 +70,22 @@ Applications for researchers and educators include:
 
 | File name | File type | Open-source license | Location |
 |---|---|---|---|
-| `flows-sanitized.json` | Node-RED flow configuration | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `arduino-terrarium.ino` | Arduino Mega firmware (C++) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `grafana/*.json` | Grafana dashboard exports (4 dashboards) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `arduino-watchdog.sh` | Serial watchdog script (Bash) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `arduino-watchdog.service` | Systemd service for watchdog | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `meross_script.py` | Power monitoring script (Python) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `schema.md` | InfluxDB measurement schema (32 measurements) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `architecture.md` | System architecture documentation | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `pid-controller.md` | PID algorithm documentation | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `statistical-analysis/*.py` | Analysis scripts (OLS, IV/2SLS, wet-bulb) | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
-| `S6-panel-drawings-*.docx` | Acrylic panel technical drawings | CERN-OHL-P-2.0 | `[PLACEHOLDER — Zenodo DOI]` |
+| `nodered/flows-sanitized.json` | Node-RED flow configuration | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `firmware/arduino-terrarium.ino` | Arduino Mega firmware (C++) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `grafana/*.json` | Grafana dashboard exports (4 dashboards) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `scripts/arduino-watchdog.sh` | Serial watchdog script v10 (Bash) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `systemd/arduino-watchdog.service` | Systemd unit for the watchdog | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `scripts/meross_daemon.py` | Meross MSS310 power-monitor daemon (Python, polled, publishes to MQTT + InfluxDB) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `systemd/meross-daemon.service` | Systemd unit for the Meross daemon | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `scripts/terrarium-health.py` | Health-monitor cron script (Gmail + WhatsApp alerts; STUCK-RELAY auto-fix; LED-fault watchdog readout) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `scripts/mister-failsafe.py` | Mister cron failsafe (Tapo plug force-OFF if `on_time > 150 s`) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `scripts/snapshot-capture.sh` | Snapshot capture for the public companion-site mirror | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `docs/schema.md` | InfluxDB measurement schema (33 measurements) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `docs/architecture.md` | System architecture documentation, including the layered safety chain | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `docs/pid-controller.md` | PID algorithm documentation (gain schedule, anti-windup, manual-override semantics) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `analysis/*.py` | Analysis scripts (OLS heat-balance, IV/2SLS causal estimate, wet-bulb characterization, cooling-test reports) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `paper/energy_sot_*.yaml` | Single-source-of-truth block for the Meross-measured kWh figures cited throughout the manuscript | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `S6-panel-drawings-*.docx` | Acrylic panel technical drawings | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
 
 **flows-sanitized.json**: Complete Node-RED flow configuration (~435 nodes across 7 tabs) with credentials removed. Covers all control logic: weather integration, PID fan control, three-regime switching, wet-bulb gate, dynamic photoperiod, door safety, mister hysteresis, data logging, and dashboard UI.
 
@@ -88,7 +93,15 @@ Applications for researchers and educators include:
 
 **Grafana dashboards**: Four monitoring dashboards — primary operational (temperature, humidity, VPD, actuator status), Colombian weather reference, system performance (PID diagnostics, fan PWM), and A/B experiment historical reference.
 
-**arduino-watchdog.sh**: Watchdog v10 script monitoring USB connection health at 15-second intervals with four-step health checks and USB sysfs reset recovery.
+**scripts/arduino-watchdog.sh**: Watchdog v10 script monitoring USB connection health at 15-second intervals with four-step health checks and USB sysfs reset recovery.
+
+**scripts/meross_daemon.py**: Long-running Python daemon that polls the Meross MSS310 in-line energy meter (variable cadence 2–120 s) and publishes power readings via MQTT into InfluxDB. Coexists with the older `meross_script.py` (single-shot variant, retained for compatibility); production deployments should use the daemon.
+
+**scripts/terrarium-health.py**: Cron-driven (every 5 min) health monitor that cross-checks Tapo commanded state against Meross measured power, raises green/yellow/red conditions to Gmail + WhatsApp, runs the STUCK-RELAY auto-fix when the freezer is drawing power while commanded off, and reads the NR LED-fault flag. Includes N-sample hysteresis (3 polls) and a 120 s freezer-transition window to suppress poll-skew false positives. Credentials are placeholders in the published file.
+
+**scripts/mister-failsafe.py**: Independent of Node-RED, runs every minute, force-commands the mister Tapo plug OFF if the plug's reported `on_time` exceeds 150 s. Last-resort guard against water damage from a controller hang or stuck relay.
+
+**analysis/**: Python scripts for the published analyses, including the OLS heat-balance regression, the IV/2SLS causal estimate of the fan effect on humidity, the wet-bulb temperature characterization, and the maximum-cooling-capacity test reports.
 
 **Acrylic panel drawings**: Original fabrication specifications for all structural panels (20 panels + 6 triangles + 2022 add-on set) with dimensions, hole positions, and material callouts.
 
@@ -515,7 +528,7 @@ Under normal operation, the system requires no human intervention. The automated
 
 The system runs unattended for months at a time; over four years of operation, a layered safety architecture has been developed in response to specific real-world failure modes. Each layer operates independently of the others; failure of one does not disable the rest. All layers log to the InfluxDB time-series database for post-hoc audit.
 
-1. **Door safety interlock.** Two magnetic reed switches on the sliding front doors are read by the Arduino. When either door opens for more than 3 seconds (debounce against vibration), Node-RED commands all internal fans off, the compressor off, the mister off, and the LEDs to 60% (working-illumination brightness). All systems restore automatically when both doors close. The interlock protects the plants from cold-air loss with the door open, protects the operator from running fans during inspection, and protects the misting pump from spraying outside the enclosure.
+1. **Door safety interlock.** Two magnetic reed switches on the sliding front doors are read by the Arduino. When either door opens for more than 3 seconds (debounce against vibration), Node-RED commands all internal fans off, the compressor off, the mister off, and the LEDs to 60% (working-illumination brightness). All systems restore automatically when both doors close. The interlock protects the plants from cold-air loss with the door open, protects the operator from running fans during inspection, and protects the misting pump from spraying outside the enclosure. **Operator-initiated maintenance override**: when the Dashboard fan-mode toggle is set to `manual` (Max or Pause), the door-safety chain still cuts the compressor, mister, and LEDs on door-open, but the fan stop/restore is bypassed — by design, so the operator can run airflow at full while cleaning or drying the enclosure with the lid off. This deliberate exception is documented in `docs/pid-controller.md`; the manual-override timeout (item 5 below) ensures the bypass is bounded in time.
 
 2. **Mister duration failsafe.** A cron-driven Python script (`mister-failsafe.py`) runs every minute and force-commands the mister Tapo plug OFF if the reported on-time exceeds 150 s. This bounds water damage from a Node-RED hang, a stuck Tapo relay, or a controller misconfiguration.
 
@@ -595,7 +608,7 @@ The wet-bulb temperature gate (Section 6.2) implements this finding operationall
 
 ### 7.5 Weather Correlation
 
-The Colombian weather integration produces continuously varying setpoints that reflect real meteorological conditions. The 15-hour time shift means that Colombian daytime conditions (16–22 deg C, 60–80% RH) map onto Italian nighttime, while Colombian nighttime conditions (12–16 deg C, 85–95% RH) map onto Italian daytime, producing a biologically desirable pattern mirroring the natural diurnal cycle of cloud forest environments.
+The Colombian weather integration produces continuously varying setpoints that reflect real meteorological conditions. The 15-hour backward lookup against the locally archived Colombian time-series is best understood in combination with the 7-hour Italy-to-Colombia time-zone offset: their sum (~22 hours) is close to a full diurnal cycle, so the cabinet's target at any Italian local time tracks Colombian weather from approximately the same time-of-day, one day earlier. Concretely, at Italian noon (10:00 UTC) the controller retrieves Colombian conditions from 15 h prior (19:00 UTC yesterday = 14:00 Colombian local time, afternoon, warm and slightly drier), and at Italian midnight (22:00 UTC) it retrieves Colombian data from 07:00 UTC same day = 02:00 Colombian local time, the pre-dawn minimum (cool and near-saturated). Without the 15-hour shift, the cabinet would be driven by current Colombian conditions and the time-zone offset would produce a biologically inverted cycle — cool/humid during the Italian afternoon and warm/drier overnight. The shift is therefore not a stochastic delay but a deliberate phase correction that aligns the cabinet's day/night cycle with Italian local time while preserving the stochastic weather content from the Colombian source. Cross-validated against the cabinet's own measured target temperature over a representative 7-day window (n = 154 hourly pairs), the cabinet target tracks the 15 h–prior Chinchinà temperature with Pearson r = 0.73; the residual variance is dominated by the 24 °C target ceiling clamp that bounds the warmest daytime targets.
 
 The stochastic character of real weather data is a key advantage over fixed schedules. Rain events in Colombia produce corresponding setpoint changes, creating sudden environmental perturbations — simulated fog immersion events — that vary from day to day and season to season.
 
@@ -618,20 +631,21 @@ Total system power is logged by a Meross MSS310 in-line energy meter; an out-of-
 
 | Statistic | Value |
 |---|---:|
-| Total energy logged | 211.4 kWh over 94.3 days |
-| Daily consumption | **2.60 kWh/day** |
-| Monthly consumption (extrapolated) | 68.2 kWh/month |
-| Annualised electricity cost (€0.30/kWh) | **~€253/year** |
-| Mean power | 109.9 W |
-| Median power | 110.7 W |
-| 95th-percentile power | 202.6 W |
+| Total energy logged (trapezoidal integral) | 211.41 kWh over 80.3 days (2026-02-18 → 2026-05-10) |
+| Daily consumption | **2.63 kWh/day** |
+| Monthly consumption | ~80 kWh/month |
+| Annual consumption | ~960 kWh/year |
+| Annualised electricity cost (€0.30/kWh) | **~€288/year** |
+| Mean power | 110.9 W |
+| Median power | 110.8 W |
+| 95th-percentile power | 203.1 W |
 | Peak (single sample) | 492.9 W |
 
 The hour-of-day profile is bimodal: night-time draw of 60–90 W (compressor cycling on top of the ~17 W baseline of Pi + Arduino + ESP + Meross + idle fans) and a daytime peak of 170–180 W (LED-dominated) with brief excursions to ~310 W when the lights peak coincides with a compressor cycle. The maximum sample (492.9 W) corresponds to a compressor start-up inrush; mean steady-state remains below 200 W.
 
 The cabinet's expected power as a function of commanded state has been characterised explicitly so that out-of-band anomalies (such as a compressor running when commanded off) can be flagged automatically; see Section 6.6 and `terrarium-health.py` in the Design Files.
 
-To contextualise: the 2.6 kWh/day operational draw is one to two orders of magnitude below a commercial cloud-forest-capable growth chamber of equivalent volume (Percival I-30 series: 1.5–3 kWh/h continuous; Conviron CMP6010: comparable). The comparison is not perfectly fair — commercial chambers deliver tighter environmental specifications and certified validation — but for the species-conservation and naturalistic-variation use cases targeted by this design, the energy budget is qualitatively different.
+To contextualise: the 2.6 kWh/day operational draw is one to two orders of magnitude below a commercial cloud-forest-capable growth chamber of equivalent volume (Percival I-30 series: 1.5–3 kWh/h continuous; Conviron CMP6010: comparable). The comparison is not perfectly fair — commercial chambers deliver tighter environmental specifications and certified validation — but for the species-conservation and naturalistic-variation use cases targeted by this design, the energy budget is qualitatively different. Numerical figures in this section derive from the trapezoidal integral of the Meross power_consumption time-series; all kWh-dependent values in this paper and its companions are derived from a single source-of-truth block (`paper/energy_sot_2026-05-12.yaml` in the Design Files) to ensure consistency across drafts.
 
 `[PLACEHOLDER — power-vs-time-of-day plot; available on the live cabinet dashboard at `<URL>/highland/dashboard/`]`
 
@@ -668,15 +682,35 @@ To contextualise: the 2.6 kWh/day operational draw is one to two orders of magni
 
 [3] Stull, R. (2011). Wet-Bulb Temperature from Relative Humidity and Air Temperature. *Journal of Applied Meteorology and Climatology*, 50(11), 2267–2269.
 
-[4] Givnish, T. J., et al. (2014). Adaptive radiation, correlated and contingent evolution, and net species diversification in Bromeliaceae. *Molecular Phylogenetics and Evolution*, 71, 55–78.
+[4] McDowell, K., Zhong, Y., Webster, K., Gonzalez, H. J., Trimble, A. Z., & Mora, C. (2021). Comprehensive temperature controller with internet connectivity for plant growth experiments. *HardwareX*, 10, e00238.
 
-[5] Node-RED Project. (2026). https://nodered.org/
+[5] Lau, S. K., & Subbiah, J. (2020). HumidOSH: A self-contained environmental chamber with controls for relative humidity and fan speed. *HardwareX*, 8, e00141.
 
-[6] InfluxDB. (2026). https://www.influxdata.com/
+[6] Sánchez, C., Dessì, P., Duffy, M., & Lens, P. N. L. (2020). OpenTCC: An open source low-cost temperature-control chamber. *HardwareX*, 7, e00099.
 
-[7] Grafana Labs. (2026). https://grafana.com/
+[7] Yuan, S., Tang, H., Fu, L. J., Tan, J. L., Govindjee, & Guo, Y. (2022). An open Internet of Things (IoT)-based framework for feedback control of photosynthetic activities. *Photosynthetica*, 60(1), 79–87.
 
-`[PLACEHOLDER — add additional references as needed, especially: relevant HardwareX papers on environmental controllers, commercial growth chamber references, MistKing/Tapo product references]`
+[8] Iucci, T., Maliqi, D., Sousa Rosa, S., & Marques, M. P. C. (2026). A compact, modular and low-cost hydroponic greenhouse. *HardwareX*, e00777.
+
+[9] Givnish, T. J., et al. (2014). Adaptive radiation, correlated and contingent evolution, and net species diversification in Bromeliaceae. *Molecular Phylogenetics and Evolution*, 71, 55–78.
+
+[10] Hamilton, L. S., Juvik, J. O., & Scatena, F. N. (Eds.) (1995). *Tropical Montane Cloud Forests*. Ecological Studies Vol. 110, Springer-Verlag. (Definitional reference for "tropical montane cloud forest" as a biome distinct from tepuiana grassland.)
+
+[11] Bruijnzeel, L. A., Scatena, F. N., & Hamilton, L. S. (Eds.) (2011). *Tropical Montane Cloud Forests: Science for Conservation and Management*. International Hydrology Series, Cambridge University Press.
+
+[12] Taylor, P. (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. (Section *Orchidioides* key, pp. 42–59.)
+
+[13] Shafer, D. (2003). A chest-freezer growing chamber for highland *Heliamphora*. *Carnivorous Plant Newsletter*, 32, 90–92.
+
+[14] Node-RED Project. (2026). https://nodered.org/
+
+[15] InfluxDB. (2026). https://www.influxdata.com/
+
+[16] Grafana Labs. (2026). https://grafana.com/
+
+[17] Honeywell. R134a (Genetron 134a) Refrigerant — Material Safety Data Sheet. https://www.honeywell-refrigerants.com/ (cited for the R134a ODP and GWP figures in §4.3.)
+
+`[PLACEHOLDER — additional citations: full Vitrifrigo ND50 / PT14 datasheet URL once verified; Tapo P100 product page; Meross MSS310 datasheet; MistKing pump datasheet; Percival or Conviron datasheet for the growth-chamber comparison.]`
 
 ---
 
