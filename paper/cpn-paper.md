@@ -8,13 +8,13 @@
 
 ## Abstract
 
-We describe the cultivation of highland carnivorous plants in a weather-mimicking terrarium over a period of four years (May 2022 to present). The system, housed in a ~1 m³ (1.5 × 0.6 × 1.1 m) insulated acrylic enclosure in Genoa, Italy, uses a marine compressor (Vitrifrigo ND50 with Danfoss variable-speed compressor) to achieve nighttime temperatures as low as 13.5 deg C in a room at 22 deg C. Rather than fixed environmental setpoints, the system ingests real-time meteorological data from four Colombian highland cities (1,300–2,600 m) and applies a 15-hour time shift to generate continuously varying temperature and humidity targets that approximate the stochastic dynamics of tropical montane weather. A dynamic photoperiod derived from the Colombian reference latitude (~5 deg N) provides seasonally varying day length. Under these conditions, multiple *Heliamphora* species and hybrids (tepui summit endemics), highland *Nepenthes* (upper montane forest species from Borneo and Sumatra), *Utricularia* of section *Orchidioides* (epiphytes of tepui cliff faces and Neotropical cloud forest canopies), and *Brocchinia reducta* (tepui endemic) are maintained alongside approximately 56 non-carnivorous accessions (28 orchid and other genera) from the Andes, Papua New Guinea, the Brazilian Atlantic Forest, and Borneo. Although these carnivorous taxa occupy ecologically distinct habitats — open tepui summits, Southeast Asian montane forest, Neotropical cloud forest canopy — their temperature and humidity tolerances overlap sufficiently to permit co-cultivation in a single enclosure. Their different light requirements are accommodated by the inverse square law from overhead LED sources, which creates a vertical irradiance gradient within the terrarium. Three years of continuous environmental data logging revealed that ventilation fans become counterproductive once the terrarium temperature drops below the room's wet-bulb temperature (~16.6 deg C in typical conditions) — a finding with practical implications for any grower using compressor cooling alongside ventilation. The full control system design is described in a companion publication `[ref to HardwareX paper]`.
+We describe the cultivation of highland carnivorous plants in a weather-mimicking terrarium over a period of four years (May 2022 to present). The system, housed in a ~1 m³ (1.5 × 0.6 × 1.1 m) insulated acrylic enclosure in Genoa, Italy, uses a marine compressor (Vitrifrigo ND50 with Danfoss variable-speed compressor, R134a refrigerant) to achieve nighttime temperatures as low as 13.5 °C in a room at 22 °C. Rather than fixed environmental setpoints, the system ingests real-time meteorological data from four Colombian highland cities (Chinchina, Medellín, Bogotá, Sonsón; 1,300–2,600 m) and applies a 15-hour backward lookup against the archived time-series; combined with the 7-hour Italy-to-Colombia time-zone offset, this phase-aligns the cabinet's daily cycle with Italian local time while preserving the stochastic weather content from the Colombian source. A dynamic photoperiod derived from the Colombian reference latitude (~5° N) provides seasonally varying day length. Under these conditions, nine living *Heliamphora* accessions (tepui summit endemics from the Guiana Highlands), nine highland *Nepenthes* (upper montane species from Sumatra, Sulawesi, and the Philippines), one living *Utricularia* of section *Orchidioides* (*U. quelchii*, Ilu Tepui provenance), and one *Brocchinia reducta* (Guiana Shield bromeliad) are maintained alongside approximately 55 non-carnivorous accessions (27 orchid and other plant genera) from the Andes, the Brazilian Atlantic Forest, Papua New Guinea, and other Southeast Asian highlands. Although these carnivorous taxa occupy ecologically distinct habitats — open tepui summits, Southeast Asian montane forest, Pantepui cliff faces — their temperature and humidity tolerances overlap sufficiently to permit co-cultivation in a single enclosure. Their different light requirements are accommodated by the inverse-square light gradient from overhead LED sources, creating a vertical irradiance gradient within the terrarium. Four years of continuous environmental data logging revealed that ventilation fans become counterproductive once the terrarium temperature drops below the room's wet-bulb temperature (~16.6 °C in typical conditions) — a finding with practical implications for any grower using compressor cooling alongside ventilation. The first inflorescence of *U. quelchii* after three years of pure vegetative growth was recorded in April–May 2026, with two flowers fully open by Day 21. The full control system design is described in a companion publication [ref to HardwareX paper].
 
 ---
 
 ## 1. Introduction
 
-Highland carnivorous plants — *Heliamphora* from the Venezuelan tepuis, *Nepenthes* from montane Borneo and Sumatra, epiphytic *Utricularia* of section *Orchidioides*, and the carnivorous bromeliad *Brocchinia reducta* — are among the most challenging plants in cultivation. These taxa occupy ecologically distinct habitats across the tropics. *Heliamphora* and *Brocchinia reducta* are endemic to the tepui table-top mountains of the Guiana Highlands, where they grow on open, fog-immersed summit meadows and peat bogs at 1,500–3,000 m — an exposed, treeless environment distinct from cloud forest (Rull & Vegas-Vilarrubia 2006; Berry & Riina 2005). Highland *Nepenthes* inhabit the upper montane mossy forests of Borneo and Sumatra at similar elevations (1,500–3,000 m), growing as scrambling vines in the forest understory and canopy margins. *Utricularia* of section *Orchidioides* are epiphytes spanning both tepui cliff faces (*U. quelchii*, *U. campbelliana*) and Neotropical cloud forest canopies (*U. alpina*, *U. jamesoniana*).
+Highland carnivorous plants — *Heliamphora* from the Venezuelan tepuis, *Nepenthes* from the upper montane mossy forests of Sumatra, Sulawesi, the Philippines, and (more famously) Borneo, epiphytic *Utricularia* of section *Orchidioides*, and the carnivorous bromeliad *Brocchinia reducta* — are among the most challenging plants in cultivation. These taxa occupy ecologically distinct habitats across the tropics. *Heliamphora* and *Brocchinia reducta* are species of the Guiana Shield, with *Heliamphora* endemic to the tepui table-top mountains and *B. reducta* ranging across the broader shield from Venezuela (Bolívar) to Guyana and northern Brazil (Roraima) per POWO; both grow in open, fog-immersed summit meadows and peat bogs at 1,500–3,000 m — exposed, treeless environments distinct from tropical montane cloud forest *sensu* Hamilton, Juvik & Scatena (1995) (Rull & Vegas-Vilarrubia 2006; Berry & Riina 2005). Highland *Nepenthes* inhabit upper montane mossy forests at similar elevations (1,500–3,000 m), growing as scrambling vines in the forest understory and canopy margins; the cabinet population sampled here is centred on Sumatra (*aristolochioides*, *inermis*, *jamban*, *tenuis*), Sulawesi (*pitopangii*, *glabrata*), and the Philippines (*argentii*, *micramphora*), with no Bornean accession currently in the cabinet (the most familiar Bornean species — *N. villosa*, *N. lowii*, *N. edwardsiana*, *N. rajah* — are noted here for biogeographic completeness but cultivation results for them in this system are not reported). *Utricularia* of section *Orchidioides* are Neotropical epiphytes spanning tepui cliff faces (*U. quelchii*, *U. campbelliana*) and Andean / Central American cloud-forest canopies (*U. alpina*, *U. jamesoniana*); the cabinet currently maintains a single *U. quelchii* of Ilu Tepui provenance (first flowering recorded April–May 2026; see §4.4).
 
 Despite these ecological differences, the climatic tolerances of these species overlap substantially. Cool temperatures (10–22 deg C), persistent high humidity (80–100% RH), and frequent fog or cloud contact are common to tepui summits, Southeast Asian upper montane forests, and Neotropical cloud forest canopies alike — a consequence of the physical constraints of tropical mountain meteorology, which produces broadly similar temperature and humidity regimes at comparable elevations regardless of longitude. At higher elevations, particularly on tepui summits above 2,500 m, nighttime temperatures can drop below 5 deg C and occasionally approach freezing. This climatic overlap is what makes co-cultivation possible: the habitats are different, but the key environmental parameters — temperature range, humidity, and fog exposure — are shared. A remaining challenge is accommodating their different light requirements: *Heliamphora* and *Brocchinia* grow fully exposed on treeless tepui summits, while *Nepenthes* grow in the shade of montane forest. In this system, the inverse square law from overhead LED sources creates a natural light gradient within the terrarium — strong irradiance near the top, substantially lower at the bottom — allowing high-light tepui species and shade-adapted montane forest species to coexist in a single enclosure without separate lighting zones.
 
@@ -32,7 +32,7 @@ Beyond the cooling challenge, traditional terrarium approaches rely on fixed env
 
 This paper describes the horticultural results of cultivating *Heliamphora*, *Nepenthes*, *Utricularia* sect. *Orchidioides*, *Brocchinia reducta*, and other carnivorous taxa in a terrarium that uses real-time weather data to drive its environmental setpoints. Rather than fixed schedules, the system ingests current meteorological conditions from four Colombian highland cities (Chinchina, Medellin, Bogota, Sonson; 1,300–2,600 m elevation) and applies a 15-hour time shift to generate naturalistic, continuously varying conditions within the terrarium. The full technical description of the control system is presented in a companion paper `[ref to HardwareX]`; here we focus on the cultivation approach and plant responses.
 
-A key conceptual framework for this work is the observation that tropical highland habitats — whether open tepui summits, Andean cloud forests, upper montane forests of Borneo, or the highlands of Papua New Guinea — share broadly overlapping climatic envelopes despite their geographic isolation and ecological differences. This climatic overlap means that a single terrarium tuned to their common temperature and humidity requirements can support species from multiple continents and habitat types simultaneously, rather than requiring separate enclosures for each biogeographic region. The carnivorous plants discussed here share the terrarium with approximately 90 orchids, ferns, bromeliads, and other epiphytes from these climatically compatible tropical highland habitats — all maintained under identical conditions.
+A key conceptual framework for this work is the observation that tropical highland habitats — whether open tepui summits, Andean cloud forests, upper montane forests of Sumatra and the Philippines, or the highlands of Papua New Guinea — share broadly overlapping climatic envelopes despite their geographic isolation and ecological differences. This climatic overlap means that a single terrarium tuned to their common temperature and humidity requirements can support species from multiple continents and habitat types simultaneously, rather than requiring separate enclosures for each biogeographic region. The carnivorous plants discussed here share the terrarium with approximately 55 orchids, ferns, bromeliads, and other epiphytes from these climatically compatible tropical highland habitats — all maintained under identical conditions.
 
 ---
 
@@ -63,7 +63,7 @@ The system queries the OpenWeatherMap API for current weather conditions at four
 | Sonson | ~2,475 m | Cool reference |
 | Bogota | ~2,640 m | Cool/high reference |
 
-Temperature and humidity values are heavily averaged — a 15-minute rolling mean across all four cities — and clamped to safe operating ranges (12–24 deg C, 70–90% RH). Because the system reads weather data from 15 hours in the past, this aggressive smoothing incurs no responsiveness penalty. A 15-hour time shift aligns Colombian daytime weather (UTC-5) with Italian nighttime (UTC+1), producing a pattern where the terrarium experiences cooler, more humid conditions at night (corresponding to moderate Colombian daytime mountain temperatures) and warmer conditions during the day.
+Temperature and humidity values are heavily averaged — a 15-minute rolling mean across all four cities — and clamped to safe operating ranges (12–24 °C, 75–95 % RH; the humidity floor was raised from 70 % to 75 % on 2026-04-30 to better match Pantepui *Heliamphora* and Pantepui *Utricularia* preferences). Because the system reads weather data from 15 hours in the past, this aggressive smoothing incurs no responsiveness penalty. The 15-hour backward look, combined with the 7-hour Italy-to-Colombia time-zone offset, phase-aligns the cabinet's daily cycle with Italian local time rather than Colombian: at Italian noon the controller retrieves Colombian data from the previous afternoon (warm, slightly drier), and at Italian midnight it retrieves Colombian data from the same-day pre-dawn (cool, near-saturated). Without the shift, the time-zone offset alone would invert the day/night cycle and produce cool conditions during the Italian afternoon — biologically wrong. The shift is therefore a phase correction, not a delay.
 
 The choice of Colombian highland cities was driven by the unavailability of real-time tepui weather station data when the project began. These cities were selected because their elevation range (1,300–2,600 m) and near-equatorial latitude produce temperature and humidity profiles comparable to those reported for tepui summits, upper montane forests, and other tropical highland habitats where the cultivated species originate. Crucially, the cities lie at approximately 5 deg N latitude — the same hemisphere as the Venezuelan tepuis (5–6 deg N) — meaning that seasonal photoperiod variation at the weather source matches the natural photoperiod of the target taxa.
 
@@ -77,15 +77,13 @@ A dynamic photoperiod is computed daily from the latitude of Chinchina (4.98 deg
 
 The lighting system employs two-stage dimming. The Mean Well LED driver's internal potentiometer is adjusted to limit maximum output to approximately 60% of rated power (a hardware fail-safe). The Arduino PWM signal then operates as a second dimming stage within this range. During normal operation, the effective output is approximately 24–36% of the LEDs' full rated capacity.
 
-Two dimmer channels provide intensity variation simulating natural light transitions:
-- **Dawn/dusk ramps**: 30-minute gradual transitions between darkness and 40% slider brightness
-- **Midday boost**: 30-minute ramp from 40% to 60% (simulating brief clearing events common on tepui summits), holding through midday, then ramping back down
+As of 2026-05-04, the LED schedule is a **raised-cosine curve** through the photoperiod (replacing the prior 40–60–40 step schedule), with a soft 30-minute dawn ramp and peak intensity centred on solar noon. The peak slider setting is ~70 of 100 (corresponding to a measured cabinet peak power of ~220 W from the LEDs + ancillary daytime fan/heatsink overhead, see §4.6) — closer to a Pantepui-summit midday than the step schedule provided. The curve change has produced more naturalistic-looking afternoon humidity profiles in the cabinet relative to the previous step schedule.
 
 ### 2.4 Substrate and Mounting
 
 **Heliamphora and Brocchinia reducta**: Grown in the upper zone in a substrate of akadama (Japanese fired clay granules) mixed with long-fiber sphagnum, topped with a layer of living *Sphagnum* moss. The akadama provides drainage and structural stability while the living sphagnum maintains surface moisture and creates the acidic, low-nutrient conditions these plants require. This combination approximates the free-draining, waterlogged-surface conditions of tepui summit peat bogs. Pots are positioned directly beneath the LED pucks for maximum light.
 
-**Utricularia sect. Orchidioides** (*U. alpina*, *U. quelchii*, *U. campbelliana*): Grown kokedama-style — each plant wrapped in a ball of living *Sphagnum* moss, suspended from the shelf level in the middle zone where humidity remains consistently above 85%. The kokedama form provides the aerial, moisture-saturated root environment these species inhabit on tepui cliff faces and cloud forest canopy branches, while allowing stolons to trail freely.
+**Utricularia sect. Orchidioides** (*U. quelchii*, Ilu Tepui provenance — the only section *Orchidioides* representative currently in the cabinet; *U. alpina* lives elsewhere in the broader collection on a separate shelf, not in this terrarium): Grown kokedama-style — wrapped in a ball of living *Sphagnum* moss, hung from the back wall at mid-height where humidity remains consistently above 85 % under direct misting. The kokedama form provides the aerial, moisture-saturated root environment these species inhabit on tepui cliff faces, while allowing stolons to trail freely.
 
 **Highland Nepenthes**: Planted in kanuma (Japanese volcanic pumice) mixed with long-fiber sphagnum and placed directly on the terrarium floor in the lower zone, without saucers. The kanuma provides excellent drainage and aeration while the sphagnum retains moisture around the roots. The absence of saucers prevents waterlogging — the terrarium's persistently high ambient humidity (82–95% RH) eliminates the need for supplementary moisture trays that highland *Nepenthes* growers typically rely on. The lower zone provides the coolest temperatures, benefiting these species.
 
@@ -121,47 +119,45 @@ Two dimmer channels provide intensity variation simulating natural light transit
 
 ### 3.2 Highland *Nepenthes*
 
-`[PLACEHOLDER — species list with elevation data. Example format:]`
+Nine living accessions in the cabinet (with one ID-uncertain horticultural specimen), grouped here by region of origin. None are Bornean (the most famous highland Bornean species — *N. villosa*, *N. lowii*, *N. edwardsiana*, *N. rajah* — are absent from the present cabinet; the species below cover Sumatra, Sulawesi, and the Philippines).
 
-`[PLACEHOLDER — Table: Species | Native elevation | Source | Years in cultivation | Notes]`
+**Sumatra (4):** *N. aristolochioides* (Sumatra, Clone NM03; alive since January 2023), *N. inermis* (Gunung Gadut, alive since March 2016 — the longest-tenured *Nepenthes* in the cabinet), *N. tenuis* 'Reddish Leaves' (West Sumatra, alive since May 2016), *N. jamban* (alive since November 2025).
 
-`[PLACEHOLDER — cultivation observations:]`
-- `[Pitcher production — upper vs. lower pitchers]`
-- `[Climbing vs. rosette behavior]`
-- `[Response to the weather-variable conditions vs. previous fixed-setpoint experience]`
-- `[Growth rate comparisons if available]`
-- `[Response to kanuma/sphagnum substrate without saucers — root health?]`
+**Sulawesi (2):** *N. pitopangii* 'Ivory Coloured Form' Clone 01 (alive since March 2024), *N. glabrata*.
 
-`[PLACEHOLDER — photos:]`
-- `[Plants in kanuma/sphagnum on terrarium floor showing pitcher form]`
-- `[Pitcher detail]`
-- `[Any basal shoots or climbing stems]`
+**Philippines (2):** *N. argentii* (Mt. Guiting-Guiting, Sibuyan, alive since June 2023), *N. micramphora* (Mindanao, alive since June 2023).
 
-`[PLACEHOLDER — any losses and hypothesized reasons]`
+**Horticultural label, identity uncertain (1):** *N.* 'Fake Pitopangii' — originally sold as *N. pitopangii* 'Ivory Coloured Form' but with morphology that does not match the species; retained in the cabinet because its cultural requirements have proven compatible with the cohort, but its taxonomic status is treated as horticultural-label-only.
+
+Cultivation uniform across the cohort: 4–6 inch perforated terracotta or net pots in a kanuma/perlite/sphagnum mix (approximately 2:1:1 by volume), topped with living *Sphagnum*. Plants grow either as rosettes on the cabinet floor or, in the case of climbing forms, with the leading stem trained up to mid-height; mature stems develop both lower and upper pitchers. No saucers; the cabinet's misting + condensate cycle maintains substrate moisture without standing water in the pots. Free draining at the bottom of the cabinet feeds the condensate reservoir.
+
+Pitcher production has been steady across the cohort, with no extended dormancies observed; the cabinet's continuous high humidity and 4–8 °C diurnal swing reproduces the conditions of the Sumatran and Philippine upper montane forest closely enough to support both upper and lower pitcher development on most accessions.
+
+`[PLACEHOLDER — photos: a wide shot of the cabinet floor with several Nepenthes visible; a close-up of *N. aristolochioides* upper pitcher (the "fenestrated cap" feature is photogenic); a *N. jamban* pitcher detail (the genus's most distinctive recently-described form).]`
+
+`[PLACEHOLDER — historical losses for the *Nepenthes* group, if any. The current alive count is 9; the historical record shows one *N. ampullaria* 'Lime Twist' given away in 2017, which is a lowland species and not a cabinet failure.]`
 
 ### 3.3 *Utricularia* sect. *Orchidioides*
 
-`[PLACEHOLDER — species list. Expected taxa:]`
-- `[U. alpina — widespread tepui and Andean]`
-- `[U. quelchii — endemic to a few tepui summits]`
-- `[U. jamesoniana — Andean cloud forest]`
-- `[U. campbelliana — tepui endemic]`
-- `[Others?]`
+**Cabinet contents: one accession, *Utricularia quelchii* (Ilu Tepui provenance)** — acquired early 2023 from Carnivors & More (C. & C. Klein) and grown kokedama-style in a 10 cm perforated terracotta, hung on the back wall at mid-height under direct misting. Substrate: live *Sphagnum* only. Foliar feed: Akerne Orchid Mix at half a teaspoon per three litres, two applications per month.
 
-`[PLACEHOLDER — observations:]`
-- `[Flowering frequency and timing — any correlation with weather/photoperiod?]`
-- `[Kokedama longevity — how often does the sphagnum need replacing?]`
-- `[Stolon growth patterns — trailing from kokedama balls?]`
-- `[Trap production and prey capture observations]`
+Three years of pure vegetative growth (steady leaf addition, no inflorescences) preceded the first flowering, recorded as follows:
 
-`[PLACEHOLDER — photos:]`
-- `[Kokedama-mounted plants in situ showing sphagnum balls]`
-- `[Flower detail (the orchid-like flowers are a highlight for CPN readers)]`
-- `[Stolon/trap detail if possible]`
+- **20 April 2026** — First inflorescence observed: an erect, red-purple peduncle bearing two buds, emerging from the *driest* portion of the kokedama (the ~2 cm of moss against the cabinet wall, not the wetter pot interior). The location is suggestive: continuous saturation may not be the floral cue.
+- **7 May 2026** — Day 17. The larger of the two buds opened, displaying the full section *Orchidioides* gestalt: hooded magenta galea, yellow-cream throat with two red callus blotches, and a broad pink lower lip.
+- **11 May 2026** — Day 21. The second bud opened. Both flowers held on the same scape; colour was uniform across both (no shift toward the deeper red of the Roraima phenotype documented by Taylor 1989, consistent with the Ilu Tepui clonal origin).
+
+Flowers persisted for approximately three weeks before senescence (observation ongoing). Across the four-year cabinet residence, the plant has progressed from three or four leaves to a fully established rosette occupying the entire pot, with stolons trailing through the surrounding *Sophronitis* aerial roots above. No prior flowering attempt was observed during the vegetative period.
+
+This is the first published record of *U. quelchii* flowering in this terrarium and adds to the small body of cultivation records for the species outside its native range.
+
+The companion *U. campbelliana* (also Ilu-sourced, separate cabinet acquisition) and *U. alpina* (broader collection, *not* in this cabinet) are not included in this report.
+
+`[PLACEHOLDER — photos: kokedama in situ showing the plant before flowering; the 20-April first-bud frame; the open Day-17 flower; the Day-21 two-flowers-open photograph (suggested cover-image candidate). All eight photos exist on the companion website blog post; recommend using utricularia-quelchii-7.jpg (single open flower), utricularia-quelchii-14.jpg (both open), and utricularia-quelchii-9.jpg (three-quarters view) as a triptych.]`
 
 ### 3.4 *Brocchinia reducta* and Other Carnivorous Taxa
 
-*Brocchinia reducta* is cultivated in the upper zone alongside *Heliamphora*, in the same akadama/sphagnum substrate topped with living *Sphagnum*. As a tepui summit endemic, it thrives under the high irradiance of the upper zone and the same temperature and humidity regime as the *Heliamphora*.
+*Brocchinia reducta* is cultivated in the upper zone alongside *Heliamphora*, in the same akadama/sphagnum substrate topped with living *Sphagnum*. As a Guiana Shield species (POWO: native range Venezuela [Bolívar] to Guyana and Brazil [Roraima], in the wet tropical biome — broader than the "tepui summit endemic" sometimes attributed to it), it thrives under the high irradiance of the upper zone and the same temperature and humidity regime as the *Heliamphora*.
 
 `[PLACEHOLDER — observations on Brocchinia reducta:]`
 - `[Growth rate, rosette size]`
@@ -186,7 +182,7 @@ Over the monitoring period (four years), the terrarium maintained the following 
 | Parameter | Minimum | Maximum | Typical range | Target range |
 |---|---|---|---|---|
 | Temperature | 13.5 deg C | 24.3 deg C | 15–22 deg C | Weather-derived (clamped 12–24 deg C) |
-| Relative humidity | 75% | 98% | 82–95% | Weather-derived (clamped 70–90%) |
+| Relative humidity | 75 % | 98 % | 83–95 % | Weather-derived (clamped 75–95 % since 2026-04-30) |
 | VPD | 0.03 kPa | 0.64 kPa | 0.08–0.45 kPa | < 0.8 kPa |
 
 The system achieves a 4–8 deg C diurnal temperature swing, with nighttime temperatures routinely dropping to 14–16 deg C through active compressor cooling and daytime temperatures rising to 18–22 deg C. This approximates the diurnal range at 2,000–2,800 m in the tropical highlands where the cultivated species originate.
@@ -259,11 +255,13 @@ For growers without automated wet-bulb calculation, a conservative rule of thumb
 
 **No dry rest periods**: The persistent high humidity required by *Heliamphora* and *Utricularia* precludes dry rest periods. This means that certain companion species requiring dry rests — some *Dendrobium* and *Cattleya* alliance orchids — cannot be accommodated long-term. Over four years, species losses have been concentrated among those requiring seasonal drying rather than those from particular geographic regions, confirming that the climate envelope rather than geographic origin determines compatibility.
 
-`[PLACEHOLDER — any other cultivation insights gained over four years:]`
-- `[Water quality observations?]`
-- `[Pest management in the enclosed system?]`
-- `[Sphagnum management — replacement frequency?]`
-- `[Seasonal challenges — Mediterranean summer heat?]`
+**Silent airflow failures are dangerous.** In early 2026 (deep-clean episode of May 2026), one of the three fans on the evaporator-coil array silently disconnected itself — a loose crimp on the power cable let the fan stop without alarming. The remaining two fans kept the cabinet on temperature, so no thermal alarm fired, but the back-left corner stopped getting airflow. Black saprophytic mould slowly accumulated on the insulation panel over several months, and was eventually noticed because what initially looked like *Botrytis* on a *Dracula pholeodytes* bud turned out to be a saprophyte living off stagnant condensate. After full evacuation of the cabinet, Physan-20 cleaning of all surfaces (10 mL per 5 L water), repair of the failed fan connection, and a careful re-install, conditions returned to normal within 24 h. The episode emphasised two things: redundancy in fan arrays masks individual failures, and the safety chain should track per-channel airflow not just aggregate temperature.
+
+`[PLACEHOLDER — other cultivation insights gained over four years:]`
+- `[Water quality observations — RO or tap, conductivity targets]`
+- `[Pest management in the enclosed system — pests observed and treatments used]`
+- `[Sphagnum replacement frequency by zone]`
+- `[Seasonal challenges — Mediterranean summer heat strategies]`
 
 ### 5.5 Limitations
 
