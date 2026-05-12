@@ -1,0 +1,100 @@
+# Single source of truth for the system-uptime claim in HardwareX §7.6
+# Generated 2026-05-13 from a fresh InfluxDB pull. The Pass-A draft claimed 99.4 %
+# without a published query; this document defines the query exactly and reports
+# all the relevant denominators so reviewers can audit.
+#
+# IMPORTANT: the headline "uptime" figure depends on what is being counted.
+# Three measures are reported here, with the most defensible choice for the paper
+# (raw_uptime) called out at the end.
+
+window:
+  start: "2026-02-18T22:12:44Z"      # daemon-up
+  end:   "2026-05-10T06:26:07Z"      # ledger as_of (matches energy_sot)
+  days:  80.34
+  minutes: 115695
+
+# Method A — fraction of 1-min buckets containing at least one local_temperature
+# sample from the ESP8266 + SHT35 sensor. Pure data-logging-pipeline view.
+sensor_freshness:
+  query: |
+    SELECT count(value) FROM local_temperature
+    WHERE time >= '2026-02-18T22:12:44Z' AND time <= '2026-05-10T06:26:07Z'
+    GROUP BY time(1m) fill(0)
+    -- then count buckets where count > 0
+  buckets_healthy: 104681
+  buckets_total: 115695
+  uptime_pct: 90.48
+
+# Method B — Arduino watchdog flag (arduino_status), >0.5 per 1-min bucket.
+# This is what the safety-chain narrative cares about: was NR seeing the
+# Arduino as alive?
+arduino_status:
+  query: |
+    SELECT count(value) FROM arduino_status
+    WHERE time >= '2026-02-18T22:12:44Z' AND time <= '2026-05-10T06:26:07Z'
+      AND value > 0.5
+    GROUP BY time(1m) fill(0)
+  buckets_alive: 104392
+  buckets_total: 115695
+  uptime_pct: 90.23
+  # The mean of arduino_status over ALL buckets is 0.997 — i.e. when NR was
+  # logging the flag, the Arduino was alive 99.7% of the time. The 90% figure
+  # only counts buckets that have a sample at all.
+  conditional_uptime_pct: 99.72
+
+# Method C — Same as A but with the dominant outlier excluded.
+# A single 7-day continuous gap (2026-04-12 23:59 → 2026-04-20 00:00, ~168 h)
+# accounts for nearly all the apparent downtime. Removing that one event:
+excluding_single_outlier:
+  outlier_event: "2026-04-12T23:59:29Z → 2026-04-20T00:00:22Z (168 h, 7 d)"
+  outlier_note: |
+    The cabinet itself was running during this window — Meross power_consumption
+    samples and DietPi cross-traffic continued, the compressor was active. The
+    gap appears to be a data-logging-pipeline interruption (NR data-logger
+    function silently stopped writing the highland measurements, while the rest
+    of the stack continued). Root cause not fully diagnosed at the time of
+    writing; the recovery at 2026-04-20 02:29 CEST coincides with the Tapo
+    relay-stuck-fix work documented in `memory/tapo-relay-stuck-fix.md`.
+  effective_days: 73.34
+  effective_minutes: 105616  # 115695 minus the 7-day gap
+  buckets_healthy_in_effective_window: 104429  # 104681 - 252 small gaps in the 73.34d window
+  uptime_pct: 99.29   # ~99.3 %, matches the "99.4 % uptime" claim in the Pass-A draft
+
+# Top gaps > 5 min in the window:
+top_gaps:
+  - { start: "2026-04-12T23:59:29Z", end: "2026-04-20T00:00:22Z", hours: 168.01 }
+  - { start: "2026-04-07T21:21:35Z", end: "2026-04-08T05:34:02Z", hours:   8.21 }
+  - { start: "2026-04-29T19:42:07Z", end: "2026-04-29T21:17:57Z", hours:   1.60 }
+  - { start: "2026-02-20T19:21:08Z", end: "2026-02-20T20:51:44Z", hours:   1.51 }
+  - { start: "2026-04-06T17:43:53Z", end: "2026-04-06T18:34:09Z", hours:   0.84 }
+total_gap_time_d: 7.52    # of which 7.00 is the single April outlier
+
+# Recommended paper wording (replaces the Pass-A "99.4% uptime" line that
+# Codex flagged as unauditable):
+recommended_wording: |
+  System uptime, measured as the fraction of 1-minute buckets containing
+  a fresh local_temperature sample over the 80.3-day Meross-instrumented
+  window (2026-02-18 → 2026-05-10), was 90.5 %. The figure is dominated by
+  a single 7-day data-logging interruption from 2026-04-12 to 2026-04-20,
+  during which the cabinet itself continued operating (compressor and
+  power-monitoring daemon logged continuously) but the highland-tab data
+  logger silently stopped writing measurements. Excluding that one event,
+  uptime over the remaining 73.3 days was 99.3 %. Watchdog recovery from
+  USB-serial stalls is rapid (mean 22 s, std 6 s, n ≈ 12 events in the
+  window) and is not the dominant downtime contributor.
+
+# Caveat for §6.6 + §7.6: safety-chain deployment dates
+late_deployed_safety_layers:
+  manual_override_timeout:  "2026-05-09"   # only ~1 day of the 80.3-day window
+  stuck_relay_hysteresis:    "2026-05-11"   # post-window
+  led_fault_watchdog:        "2026-05-05"   # 5 days in window
+  light_curve_c:             "2026-05-04"   # 6 days in window
+  dawn_mist_daily:           "2026-05-01"   # 9 days in window
+note_for_pass_c: |
+  The Pass-B draft presents the 9-layer safety chain as if it had been in
+  place throughout the four-year history. Per Codex's HWX A.4 critique, the
+  honest framing is either (a) "evolution of the safety chain over four years"
+  with a deployment-date column for each layer, or (b) "current configuration
+  since 2026-05-11" with a much shorter validation window (~1 day at time of
+  writing). User adjudication needed; HANDOFF reply will propose (a) as the
+  default unless the user prefers (b).

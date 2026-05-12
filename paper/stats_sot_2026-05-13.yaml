@@ -1,0 +1,81 @@
+# Single source of truth — IV/2SLS + heat-balance statistics
+# Generated 2026-05-13 from analysis/02_iv_causal_model.py + memory/wetbulb-analysis.md
+# All four manuscripts that report these numbers must cite from this block.
+
+iv_2sls:
+  outcome: local_humidity (%)
+  endogenous: fan_pwm (outlet+impeller, PWM 0–255)
+  instrument: night_B (A/B treatment indicator; 0 = Night A fans-off, 1 = Night B fans-80-PWM)
+  experiment_window: "2025-12-15 to 2026-02-18 (~9 weeks; retired 2026-02-18 after the coefficient was characterised)"
+  covariates: [const, temp_room, humi_room, freezer, hour_sin, hour_cos]
+  covariance: "robust (heteroskedastic, HC3 in stage 1)"
+  software: linearmodels.iv.IV2SLS (Python)
+  n: 1353
+  r_squared: 0.0962
+  adjusted_r_squared: 0.0922
+  model_f: 823.94
+  model_f_pvalue: 0.0000
+  first_stage:
+    r_squared: 0.152
+    instrument_coefficient: -8.2235   # night_B coefficient in stage-1 OLS
+    instrument_se: 1.735
+    instrument_p_value: 0.000
+    instrument_F: 22.5                # >10 = strong (Stock-Yogo)
+  second_stage:
+    fan_pwm_coefficient: -0.0340      # per +1 PWM unit
+    fan_pwm_se: 0.0171
+    fan_pwm_t: -1.9877
+    fan_pwm_p: 0.0468
+    fan_pwm_ci95: [-0.0675, -0.0005]
+    interpretation_per_10_pwm: -0.34  # % humidity per +10 PWM (causal)
+  reduced_form:
+    night_B_coefficient: +0.280
+    night_B_ci95: [+0.055, +0.504]
+    night_B_pvalue: 0.0145
+    interpretation: "ITT effect of Night B treatment (80 PWM vs 0 PWM): +0.28 % humidity"
+  wald_estimator:
+    formula: "(reduced form) / (first stage) = 0.2796 / -8.2235 = -0.0340 per PWM"
+    matches_iv: true
+  ols_comparison:
+    biased_coefficient_per_10_pwm: +0.150
+    interpretation: "OLS attributes humidity-fan correlation backwards because PID drives fans in response to humidity; biased positive."
+  paper_wording_replacement: |
+    Replaces the Pass-A line ("each +10 PWM of fan speed causes a -0.37% reduction
+    in humidity (p < 0.05)"). The corrected value is **-0.34% per +10 PWM (95% CI:
+    [-0.68%, -0.005%], p = 0.047, n = 1353 nighttime 5-min observations; first-stage
+    F = 22.5; OLS comparison +0.15% per +10 PWM confirms reverse-causal bias of the
+    naive regression).** The experiment ran December 2025 to February 2026 and was
+    retired once the coefficient was characterised; raw data + script remain in
+    `analysis/02_iv_causal_model.py`.
+
+heat_balance:
+  status: "Citation chain incomplete — the (-2.03, +0.37, +0.58) °C/hr coefficients quoted in HWX §7.4 are from `memory/wetbulb-analysis.md` but the original regression script is not located in the current analysis/ directory."
+  numbers_quoted_in_paper:
+    freezer_effect: -2.03  # °C/hr when compressor active
+    fan_effect: +0.37      # °C/hr from outlet+impeller fans
+    passive_exchange: +0.58 # °C/hr room→terrarium passive
+  missing_for_publication: [N_hours, R_squared, per_coefficient_SE_CI, model_formula, multicollinearity_diagnostic, residual_plots]
+  recommended_paper_action: |
+    Either (a) re-run the regression from scratch on the current InfluxDB data
+    (preferred; would also bring N up from the original ~28-day window to the full
+    Meross-instrumented 80.3-day window), or (b) demote the table in HWX §7.4 from
+    "preliminary" to "indicative" and re-do the analysis in a follow-on publication.
+    Recommend (a); estimated effort ~4 h to write a clean heat-balance regression.
+    Until then, all four drafts cite the coefficients with a footnote: "preliminary
+    estimates from a single 27-day window; full reanalysis pending."
+
+cooling_test_equilibrium:
+  status: "Pass-A claimed 'equilibrium' but tests ran 9.5–9.9 h, not the 24+ h that would justify the term."
+  measured: "13.6 °C cabinet at 21.6 °C room (Δ = 8.1 K); deepest 12.3 °C"
+  recommended_wording: "Replace 'equilibrium' with 'near-equilibrium (cabinet within 0.5 °C of steady state at test end)' in all four drafts, until a 24-h test is run. A 24-h test is not blocking submission but would convert the language to fully rigorous."
+
+citations_to_repair:
+  adlassnig_2010:
+    full: "Adlassnig W, Peroutka M, Lendl T. (2010). Traps of carnivorous pitcher plants as a habitat..."
+    scope: "Strictly Roraima (Heliamphora) — *does not* cover Bogotá or any non-Pantepui location."
+    cited_at: "CPN L194 currently uses Adlassnig 2010 to support a Bogotá diurnal-range claim — this is mis-attribution."
+    fix: "For Bogotá, cite the Colombian meteorological service (IDEAM) climatology data, or for general highland-Andean climatology cite Bendix et al. 2008 (J. Trop. Ecol.) or Jarvis & Mulligan 2011 (TMCF biome chapter)."
+  jarvis_mulligan_2011:
+    full: "Jarvis A, Mulligan M (2011). The climate of cloud forests. In Bruijnzeel LA, Scatena FN, Hamilton LS (eds.) Tropical Montane Cloud Forests: Science for Conservation and Management. Cambridge UP, pp. 39-56."
+    scope: "TMCF biome-wide climatology. Cited in CPN for '50–80 % nighttime cloud-immersion frequencies'."
+    status: "Crossref-real; the specific 50–80 % figure is plausibly from the chapter but should be page-verified by the author with the actual PDF/print copy."
