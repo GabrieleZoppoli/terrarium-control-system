@@ -95,6 +95,21 @@ note_for_pass_c: |
   place throughout the four-year history. Per Codex's HWX A.4 critique, the
   honest framing is either (a) "evolution of the safety chain over four years"
   with a deployment-date column for each layer, or (b) "current configuration
-  since 2026-05-11" with a much shorter validation window (~1 day at time of
-  writing). User adjudication needed; HANDOFF reply will propose (a) as the
-  default unless the user prefers (b).
+  since 2026-05-11" with a much shorter validation window.
+
+  USER DECISION 2026-05-12: option (a). Pass C must rebuild §6.6 + §7.6 as
+  "evolution of the safety chain over four years (2022-05 → 2026-05)" with a
+  deployment-date column for every layer. Uptime is reported as 99.3 % over
+  the 80.3-d Meross-instrumented window (excluding the single 7-d April
+  data-logging gap); explicit caveat that several layers landed in the last
+  1-9 days of that window (see late_deployed_safety_layers above) and
+  therefore underwrite *future* reliability, not retrospective 80-day
+  reliability.
+
+window_framing_decision_2026_05_12: |
+  HANDOFF round-2 also asked whether the "94-day Meross-instrumented window"
+  phrasing in §7.1/§7.6/§7.7 is intentional narrative simplification or a
+  bug to sweep. USER DECISION: sweep to clarify. Pass C must replace every
+  "94-day" reference in HardwareX (and AoS/CPN/ICPS where applicable) with
+  "80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10)". The
+  94-d figure is the InfluxDB retention window, not the daemon window.

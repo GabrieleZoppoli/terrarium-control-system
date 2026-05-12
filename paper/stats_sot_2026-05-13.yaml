@@ -49,7 +49,57 @@ iv_2sls:
     `analysis/02_iv_causal_model.py`.
 
 heat_balance:
-  status: "Citation chain incomplete — the (-2.03, +0.37, +0.58) °C/hr coefficients quoted in HWX §7.4 are from `memory/wetbulb-analysis.md` but the original regression script is not located in the current analysis/ directory."
+  status: "RE-RUN 2026-05-12 — see `paper/heat_balance_run_2026-05-12.yaml` for the full structured output and `analysis/heat_balance_rerun.py` for the script. Original (-2.03, +0.37, +0.58) coefficients from a 27-day window are SUPERSEDED. The published HWX §7.4 table must be replaced with the values below."
+  rerun_2026_05_12_headline:
+    window: "2026-02-08 → 2026-05-12 (~94 d at 5-min cadence)"
+    n_5min_rows: 17773
+    covariance: "HC3 robust"
+    r_squared: 0.163
+    f_statistic: 896.9
+    coefficients:
+      fans_on:     {coef: +0.266, se: 0.070, ci95: [+0.129, +0.403], p: 0.0001}
+      freezer_on:  {coef: -1.008, se: 0.021, ci95: [-1.049, -0.966], p: 0.0000}
+      t_diff_room: {coef: +0.166, se: 0.011, ci95: [+0.144, +0.188], p: 0.0000}
+      light_on:    {coef: -0.344, se: 0.050, ci95: [-0.442, -0.246], p: 0.0000}
+    multicollinearity_note: |
+      Model 1's `fans_on × freezer_on` interaction term is degenerate with
+      `freezer_on` because fans are scheduled ON whenever freezer activates
+      (smallest eigenvalue 1.44e-27, design matrix near-singular). The
+      reported coefficients above are from re-running Model 1 without
+      the redundant interaction.
+  rerun_model_2_continuous_pwm:
+    description: |
+      Using continuous fan_pwm (0-255) instead of binary fans_on:
+      fan_pwm coefficient = +0.0002 °C/hr per PWM unit, p = 0.334, 95% CI
+      includes zero. The fan effect collapses to undetectable once it is
+      modelled at full resolution — the apparent +0.27 °C/hr in Model 1 is
+      largely the schedule signature (fans are on during the day when other
+      heat sources are also active), not a fan-specific effect.
+  pass_c_implications: |
+    HWX §7.4 currently reports (-2.03, +0.37, +0.58). Pass C must replace
+    with the rerun values:
+      • Freezer: -1.01 °C/hr (95% CI: -1.05 to -0.97; n=17773)
+      • Fans (binary): +0.27 °C/hr (95% CI: +0.13 to +0.40)
+      • Fans (continuous PWM): effectively zero (+0.0002/PWM, p=0.33)
+      • Passive: +0.17 °C/hr per °C gradient
+    The honest interpretation is that fan effect on cabinet temperature is
+    very small and largely indistinguishable from schedule confounds; the
+    cooling work is being done by the freezer (-1.01 °C/hr) and the only
+    statistically robust counter is the passive room→cabinet conduction
+    (+0.17 °C/hr per K). This SUPPORTS the wet-bulb framing — fans aren't a
+    sensible-heat term, they're modulating evaporative dynamics. CPN §5.3
+    needs to drop the +0.37 figure entirely; the per-PWM coefficient is not
+    statistically significant.
+  scope_decision_2026_05_12: |
+    The +0.37 °C/hr fan coefficient is the GLOBAL heat-balance coefficient
+    (covers fan operation across the entire dataset, regardless of wet-bulb
+    regime). It is NOT a below-WBT-only quantity. Mac-Claude's HANDOFF read
+    was correct.
+    Pass-C consequence: CPN §5.3 (L248) must be reworded — it currently
+    reads as if +0.37 is the below-WBT regime coefficient. Replace with the
+    HardwareX §7.4 framing: a single global sensible-heat fan coefficient
+    that combines with a wet-bulb interaction term (linear fade) rather
+    than a regime-specific value.
   numbers_quoted_in_paper:
     freezer_effect: -2.03  # °C/hr when compressor active
     fan_effect: +0.37      # °C/hr from outlet+impeller fans
