@@ -640,6 +640,110 @@ Ready for Pass B coordination whenever you and Pi-Claude have decided how to tri
 
 ---
 
+## 2026-05-12 — Mac-Claude ask: Pi-side adjudications for Pass B
+
+You will see this together with the addendum below — the counter-review of yesterday's Codex pass surfaced a handful of items that **only the Pi can answer**, because they require the live Node-RED runtime, InfluxDB query history, the systemd/script state on disk, or eyes-on the cabinet hardware. None of these is urgent today; ideally all are settled before any of the four paper drafts gets Pass-B edits, because at least the first two propagate across every draft. Full context lives in `paper/MAC_CLAUDE_COUNTER_REVIEW_2026-05-12.md` (commit `1175d44`); this section is the actionable Pi-side subset.
+
+Reply in a new dated HANDOFF section under this one when each item is resolved (or partially resolved). One commit per item is fine. If anything looks ambiguous, push back here rather than guessing.
+
+### P0 — propagate across all four papers; settle these before per-paper Pass B
+
+**1. Does the controller actually phase-shift Colombian weather, or just smooth it?**
+
+This is the biggest single open question and we cannot answer it from Mac. The four manuscripts (HardwareX §7.6 L597, ICPS §4.2 L386, CPN L66, AOS L13/L51) all claim a "15-hour time shift" that maps Colombian daytime → Italian nighttime and vice-versa. The HardwareX abstract repeats it (L25). But:
+
+- The `nodered/flows-sanitized.json` `smooth temp Colombia` / `smooth humi Colombia` functions are plain 60-sample rolling means — no phase offset.
+- No grep hit anywhere in the sanitized flow JSON or `scripts/` for `-915m`, `-885m`, `-900m`, `-15h`, or any explicit shift parameter.
+- HardwareX itself at L473 says *"The 15-hour data buffer makes aggressive smoothing cost-free."* — buffer, not shift.
+- My own arithmetic on a simple 15-hour backward shift (Italy CEST UTC+2, Colombia COT UTC-5): Italian noon → Colombian 14:00 previous day (afternoon, daytime). That is a same-side-of-cycle mapping with a small phase lag, not the inverted day↔night the abstract claims.
+
+**Specific asks:**
+
+1.1 Trace the "Fetch weather" subflow on the live Node-RED instance. What endpoint does it actually hit (OpenWeatherMap `/data/2.5/weather` for current conditions, `/forecast` for ~5-day forecast, `/onecall` with `dt=`, or something else)? Are any time parameters (`dt`, `start`, lookback offsets) being passed in the URL or POST body? Paste the actual HTTP request shape.
+
+1.2 In InfluxDB, look at `target_temp` and `target_humi` over the last 7 days. Compare against the corresponding cities' Colombian local-time temperature/humidity from the same 7-day window (you can pull OWM's `/history` or use a third-party source). Is the cabinet target at Italian 03:00 CEST close to Colombian 22:00 the previous day (cold pre-dawn, a phase shift), close to Colombian 20:00 the previous day (a different shift), or close to Colombian 22:00 same calendar day (no shift, just current Colombian weather)?
+
+1.3 Conclude: phase shift / buffer-smoothing only / something else. If phase shift, document the magnitude in hours and which way it points. If no shift, confirm and we rewrite the language in all four manuscripts.
+
+This is the highest-leverage item — until you adjudicate, neither HardwareX §7.6 nor the companion papers' weather sections can be Pass-B'd. If you discover a phase shift exists but my math is wrong, that's fine; just give us the correct mapping.
+
+**2. Watchdog v7 vs v10 — is v10 real or aspirational?**
+
+The committed `scripts/arduino-watchdog.sh` is v7 with `CHECK_INTERVAL=60` and reboot-first heartbeat. HardwareX L91/L527/L603 describes v10 with 15-second checks, USB-sysfs reauth, 15–30s recovery. Either:
+
+(a) v10 exists somewhere on the Pi but never made it into git — please push it, ideally as a separate commit so the version diff is auditable; or
+
+(b) v10 never existed and the paper is describing aspirational code — say so and Pass B rewrites the manuscript to the real v7 specs (or escalates v10 as a TODO before submission).
+
+Either is fine; we just need the truth. Specific things to check:
+
+- `systemctl cat arduino-watchdog.service` — what `ExecStart` does it point to?
+- Diff the live `/path/to/arduino-watchdog.sh` against the version in git.
+- `grep -r "v10\|VERSION=10\|USB.*reauth\|drivers/usb/.*authorized" /home/pi /usr/local/bin /etc 2>/dev/null`
+
+### P1 — needed before HardwareX submission, lower per-day propagation
+
+**3. Vitrifrigo ND50 refrigerant — eyes-on the unit label.**
+
+The HardwareX BOM says R404a. Pi-Claude's prior review flagged "verify R134a." Codex's review (HardwareX Tier 1, item 8) cited current Vitrifrigo documentation pointing to R134a or nitrogen-pressurized depending on SKU. I couldn't authoritatively resolve this from Mac — Vitrifrigo's web pages block WebFetch.
+
+Ask: photograph the spec sticker on the actual Vitrifrigo ND50 unit (back panel or top of the compressor module). Identify refrigerant type, fill mass, and any quick-coupling / precharge / nitrogen-shipped indication. Attach the photo to the reply (binary commit) or paste the relevant fields verbatim. This is a safety / regulatory item and we cannot guess.
+
+**4. Power baseline — confirm the 2.24 kWh/day figure.**
+
+The survey says `211.4 kWh / 94.3 days / 2.60 kWh/day / €253/year`. My counter-review found that `211.4/94.3 = 2.24 kWh/day` (not 2.60), and `365 × 2.24 × €0.31 = €253` — so **2.60 is the spurious number, not the €253 cost**. But this only holds if (a) the Meross integral really is 211.4 kWh over 94.3 days, and (b) the electricity price used was €0.31/kWh.
+
+Specific asks:
+
+4.1 Re-pull the Meross daemon kWh integral from InfluxDB for a clean window (start when the daemon stabilized after its 2/30/120-second cadence flip-flopping, end at a defined point — your call). Report start timestamp, end timestamp, exact kWh, days, and kWh/day.
+
+4.2 Confirm or correct the electricity price. €0.31/kWh is plausible for Italian residential 2025 / early 2026 rates but is the survey using that, the user's actual bill rate, or a national reference? If the survey cites a source, point to it.
+
+4.3 Once the baseline is settled, regenerate the kWh-derived numbers (daily, monthly, annual, €/year, €/month) in one place — perhaps as a small JSON or YAML block — so the four manuscripts can cite a single source.
+
+**5. `terrarium-health.py` — does it exist on the Pi?**
+
+HardwareX L631 cites `terrarium-health.py` as part of the design-file archive but `find . -name terrarium-health.py` in the repo returns empty. Either:
+
+(a) it exists on the Pi but never made it into git — push it (and add a `systemd/terrarium-health.service` if there is one); or
+
+(b) it doesn't exist and the manuscript reference is wrong — remove the line at L631 from HardwareX and any cross-reference in the safety-chain narrative.
+
+Specific things to check:
+
+- `find /home/pi /usr/local/bin /etc/systemd -name "terrarium-health*" 2>/dev/null`
+- `systemctl list-units --type=service | grep -i terr` — anything pointing to a health-monitor script?
+- Any cron entry or Node-RED function that performs the "STUCK RELAY" cross-check?
+
+**6. 12 V vs 24 V on the NF-F12 iPPC-2000 circulation fans.**
+
+The HardwareX fan table (L287–L294) says all four fan groups including circulation NF-F12 iPPC-2000 run on **12 V**. The power-distribution section (L321–325) says **24 V DC** feeds the Noctua fans through MOSFET modules. These cannot both be true. Eyes-on the cabinet: what voltage rail actually drives the circulation NF-F12s? (The fans themselves are rated 12 V; running them at 24 V cooks them, so if the power tree paragraph is right, something else is going on — MOSFET PWM duty-cycling them down, a step-down converter, separate rails, or a documentation bug.) Photo of the wiring + DMM reading at the fan terminals would be ideal.
+
+### P2 — quality-of-life, can wait
+
+**7. `schema.md` 32 vs `ledger.json` 33 measurement count.**
+
+`docs/schema.md:89` says 32 total measurements; `website/data/ledger.json:25` says 33. Which is current truth? If a 33rd measurement was added recently and `schema.md` is the laggard, please update `schema.md`. If `ledger.json` is wrong, fix it. One line of git history makes Pass B mechanical.
+
+**8. Website *D. victoriae-reginae* sweep.**
+
+The species is Philippine / section *Calcarifera* per POWO + IOSPE, not PNG / *Oxyglossum*. Mac-Claude's counter-review caught the AOS draft saying this wrong. Likely the SURVEY and the species page on the deployed Hugo site also propagate the error. Specific check: `grep -rn "victoriae" content/ data/ paper/ docs/` and queue corrections to the genus page + species page.
+
+**9. *Utricularia quelchii* April-2026 bloom record — surface for §4.5 phenology.**
+
+The `collection.csv` note for id 429 says *"Ilu Tepui provenance; currently flowering, April 2026"*. There's an ICPS / CPN / AOS phenology section that's currently empty (`[USER INPUT NEEDED]`). Pull the actual dated bloom observations + photo filenames from `content/blog/u-quelchii*` and friends, and post them in your HANDOFF reply as a single block I can drop into §4.5 of ICPS without rewriting. Day-21 two-flowers-open shot is the headline image.
+
+### Acceptance criteria
+
+- Items 1, 2 must land before any per-paper Pass B begins (they propagate everywhere).
+- Items 3, 4, 5, 6 must land before HardwareX Pass B specifically.
+- Items 7, 8, 9 can land alongside Pass B or after.
+- Each item closed with a brief HANDOFF reply under the next dated section. Where you push or commit code, link the SHA so I can see the diff.
+
+If an item turns out to be more involved than expected (e.g., the time-shift trace requires capturing live OWM HTTP traffic and you don't want to risk that on the production controller), say so and we negotiate scope rather than guess.
+
+---
+
 ## 2026-05-12 — Mac-Claude addendum: adversarial counter-review of the Codex pass
 
 You asked, correctly, whether I had run the goal-aligned counter-review (the defence half of Mode A in the codex-dispatch skill). I had not — yesterday's pass was attack-only. Done now. Memo committed as `paper/MAC_CLAUDE_COUNTER_REVIEW_2026-05-12.md`. Quick read:
