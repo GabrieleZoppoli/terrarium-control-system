@@ -22,9 +22,9 @@
 
 ## Abstract
 
-We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud-forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour backward lookup against the locally archived time-series to generate continuously varying temperature and humidity setpoints. Combined with the 7-hour Italy-to-Colombia time-zone offset, the shift produces a phase-aligned daily cycle in which Colombian afternoon highs drive cabinet warmth at Italian midday and Colombian pre-dawn lows drive cabinet cooling at Italian midnight — reproducing the stochastic weather of tropical montane environments without inverting the day/night cycle. The enclosure is a ~1 m³ acrylic cabinet (1.5 × 0.6 × 1.1 m), and a dynamic photoperiod derived from the Colombian reference latitude (~5°N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions, and a wet-bulb temperature gate that automatically disengages ventilation fans when evaporative cooling becomes thermodynamically counterproductive. A multi-layer safety chain (door-open interlock, freezer daytime gate, manual-override timeout, power cross-check with hysteresis, LED-fault watchdog, USB serial watchdog) handles operator and hardware failure modes encountered in production. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of **2.63 kWh/day (~€288/year at €0.30/kWh)**, currently maintaining **75 living accessions across 31 plant genera** drawn from three biogeographic provinces of the convergent cloud-forest biome (Neotropical highlands: Guayanan tepui, Andes, Brazilian Atlantic Forest; Southeast Asian highlands; Papua New Guinea / Oceania). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [URL — TBD on Zenodo deposit]; companion papers describe the horticultural results for carnivorous plants [ref] and orchids [ref].
+We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud-forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour backward lookup against the locally archived time-series to generate continuously varying temperature and humidity setpoints. Combined with the 7-hour Italy-to-Colombia time-zone offset, the shift produces a phase-aligned daily cycle in which Colombian afternoon highs drive cabinet warmth at Italian midday and Colombian pre-dawn lows drive cabinet cooling at Italian midnight — reproducing the stochastic weather of tropical montane environments without inverting the day/night cycle. The enclosure is a ~1 m³ acrylic cabinet (1.5 × 0.6 × 1.1 m), and a dynamic photoperiod derived from the Colombian reference latitude (~5°N) provides seasonally varying day length. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a three-regime fan control strategy that switches between humidity-driven and temperature-driven PID control depending on thermal conditions. An instrumental-variables (2SLS) characterisation of the fan-to-humidity loop quantifies the causal effect of fan PWM on cabinet humidity at −0.34 % RH per +10 PWM units (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353), and a heat-balance regression over 80.3 days at 5-min cadence (n = 17,773; HC3 robust SEs) attributes the cooling work to the marine compressor (−1.01 °C/hr when active) with fan PWM showing no statistically detectable sensible-heat effect. A multi-layer safety chain (door-open interlock, freezer daytime gate, manual-override timeout, power cross-check with hysteresis, LED-fault watchdog, USB serial watchdog) handles operator and hardware failure modes encountered in production. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of **2.63 kWh/day (~€288/year at €0.30/kWh)**, currently maintaining **75 living accessions across 31 plant genera** drawn from three biogeographic provinces of the convergent cloud-forest biome (Neotropical highlands: Guayanan tepui, Andes, Brazilian Atlantic Forest; Southeast Asian highlands; Papua New Guinea / Oceania). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [URL — TBD on Zenodo deposit]; companion papers describe the horticultural results for carnivorous plants [ref] and orchids [ref].
 
-**Keywords**: open-source hardware, cloud forest terrarium, weather simulation, PID control, wet-bulb temperature, Node-RED, environmental monitoring, Raspberry Pi
+**Keywords**: open-source hardware, cloud forest terrarium, weather simulation, PID control, instrumental variables, causal inference, Node-RED, environmental monitoring, Raspberry Pi
 
 ---
 
@@ -44,7 +44,7 @@ The system described here addresses this gap through five key innovations:
 
 2. **Three-regime PID fan control**: The controller adapts its error signal based on temperature: humidity-driven below 24 deg C, temperature-driven in a 24–25 deg C transition band to attempt evaporative cooling before compressor activation, and humidity-driven with active refrigeration above 25 deg C.
 
-3. **Wet-bulb temperature insight**: Automated detection and response to the thermodynamic limit of evaporative cooling, disengaging ventilation fans when the terrarium temperature falls below the room's wet-bulb temperature.
+3. **Causal characterisation of fan-mediated humidity control**: A randomised A/B fan-schedule experiment (n = 1,353 nighttime 5-min observations) enables an instrumental-variables (2SLS) estimate of the fan-PWM-to-humidity coefficient that is decorrelated from the PID's reaction to humidity disturbances. The companion 80.3-day heat-balance regression (n = 17,773; HC3) attributes essentially all the cooling work to the marine compressor and treats fan PWM as the humidity actuator — published quantification rather than a tuning heuristic.
 
 4. **Dynamic photoperiod**: Day length computed daily from the weather source latitude, providing seasonally varying light schedules coherent with the weather data.
 
@@ -60,7 +60,7 @@ Applications for researchers and educators include:
 
 - **Ex-situ conservation**: Maintaining cloud-forest species from multiple biogeographic regions in a single enclosure, validated over four years with 75 living accessions across 31 plant genera from three biogeographic provinces (Neotropical highlands, Southeast Asian highlands, Papua New Guinea / Oceania)
 - **Plant physiology studies**: Comprehensive data logging (33 InfluxDB measurements at 60-second intervals for continuous channels plus event-driven actuator-change logging; 3.1 million data points in the current 1-year retention window) enables analysis of plant responses to naturalistic environmental variation
-- **Control systems education**: The system demonstrates PID control, gain scheduling, hysteresis control, wet-bulb thermodynamics, multi-regime switching, and a documented production-grade safety chain in an accessible, visual programming environment (Node-RED)
+- **Control systems education**: The system demonstrates PID control with gain scheduling, hysteresis control, multi-regime switching, instrumental-variables causal estimation of an actuator-to-state coupling, and a documented production-grade safety chain in an accessible, visual programming environment (Node-RED)
 - **Template for other biomes**: The weather-mimicking architecture can be adapted to any biome by changing the reference weather stations (e.g., fog desert, alpine, lowland tropical) and the photoperiod-source latitude
 - **Low-cost alternative to growth chambers**: Total hardware cost is a fraction of commercial growth chambers (€10,000–50,000+ for Percival/Conviron-class equipment), at a measured operational footprint of **2.63 kWh/day (~€288/year at €0.30/kWh)** for environmental control comparable to or superior to those instruments in this application class
 
@@ -490,7 +490,7 @@ Under normal operation, the system requires no human intervention. The automated
 - **Mister control**: Hysteresis controller fires the mister when humidity drops below the lower threshold, with automatic fan shutdown during misting events.
 - **Compressor control**: Hysteresis controller activates the compressor when temperature exceeds 25 deg C (daytime) or the weather-capped target (nighttime).
 - **Wet-bulb gate**: After 18:00, outlet and impeller fans shut down when the terrarium temperature falls to or below the room's wet-bulb temperature.
-- **Data logging**: 16 measurements recorded every 60 seconds, plus event-driven fan PWM changes and other measurements (32 total).
+- **Data logging**: 16 measurements recorded every 60 seconds, plus event-driven fan PWM changes and other measurements (33 total InfluxDB measurements as of the current schema; see `docs/schema.md` in the Design Files).
 
 ### 6.3 Dashboard Monitoring
 
@@ -534,7 +534,7 @@ The system runs unattended for months at a time; over four years of operation, a
 
 3. **Freezer daytime gate.** Within Node-RED, the compressor is blocked from running during 08:00–20:00 CEST regardless of setpoint error. This guards against a stale or extreme nighttime target carrying over into daylight and producing runaway cooling that overshoots safe biological ranges.
 
-4. **Wet-bulb gate.** After lights-off, the outlet and impeller fans are disengaged once the cabinet temperature falls below the room's wet-bulb temperature. Fans below WBT are thermodynamically counterproductive (they import sensible heat from the room without contributing further evaporative cooling, see §7.4); leaving them running wastes energy and raises cabinet temperature.
+4. **Wet-bulb fan-off gate (deprecated rationale).** After lights-off, the outlet and impeller fans are disengaged once the cabinet temperature falls below the room's wet-bulb temperature. The gate was originally introduced under the hypothesis that sub-WBT fan operation imports room sensible heat at a measurable rate; the 80.3-day heat-balance analysis on the larger dataset (§7.4) finds no statistically detectable fan effect on cabinet-temperature derivative when fan PWM is modelled at its native resolution. The gate's current empirical role is therefore limited to reducing fan duty cycle (and, indirectly, fan-mediated room-air mixing) during the cool nocturnal window; the firmware path is retained as a deployed feature but the paper does not advance it as a load-bearing finding.
 
 5. **Manual-override timeout.** The Dashboard provides operator buttons (Auto / Pause / Max) that bypass automatic fan control. To protect against an unintended persistent override (e.g., a "pause" left active after maintenance), a watchdog reverts the override to AUTO after 30 minutes of no fresh operator input. The persistence timestamp lives in a persisted global so the timeout survives controller restarts.
 
@@ -554,7 +554,7 @@ The health-monitor reports a green/yellow/red status every five minutes and push
 
 ### 7.1 Environmental Performance
 
-Over the current 94-day monitoring window (during which the InfluxDB retention captures full per-minute resolution), the cabinet maintained:
+Two monitoring windows are reported separately across §7: the **94-day full-sensor InfluxDB-retention window** (per-minute environmental and actuator data, covering the rolling retention horizon at the time of writing) and the **80.3-day Meross-instrumented window** (2026-02-18 → 2026-05-10) for power, uptime, and heat-balance regressions that depend on the Meross daemon's deployment date. Over the 94-day full-sensor window, the cabinet maintained:
 
 | Parameter | Minimum | Maximum | Typical range | Target envelope |
 |---|---|---|---|---|
@@ -576,7 +576,7 @@ The gain-scheduled PID controller maintains humidity within ±3 % RH of the setp
 
 The gain scheduling was critical: with fixed gains, the controller exhibited ±25 PWM oscillations near the setpoint. After implementing the gain schedule (effective Kp = 7.5 within ±1.5 % of target, full Kp = 50 for errors ≥ 4 %), these oscillations were eliminated. Anti-windup limits the integral term to ±120 PWM-equivalent, and a low-pass filter (α = 0.12) attenuates derivative noise from sensor jitter.
 
-The causal effect of the fans on cabinet humidity was estimated using a controlled A/B experiment conducted from December 2025 to February 2026, in which the night fans alternated nightly between off and PWM = 80. Treating the day-of-experiment indicator as an instrumental variable in a two-stage least-squares specification removed the endogeneity bias of regressing humidity on the PID-driven fan speed (the PID drives the fans *in response to* humidity, so OLS would yield a reverse-causal coefficient). The IV/2SLS estimate was **−0.37 % humidity per +10 PWM of fan speed (p < 0.05)**. By comparison, compressor activation produces a −15.9 % long-run humidity effect — the compressor is the dominant dehumidification actuator, with the PID fans providing fine adjustment within the compressor's hysteresis band. The night-fan A/B experiment was retired in February 2026 once the coefficient was characterised; raw data and analysis scripts remain in the project repository under `analysis/02_iv_causal_model.py`. A follow-on morning-fan A/B (April–May 2026) was retired after 13 days when the treatment effect (≤ 0.5 % RH, p = 0.91) fell inside the residual noise band.
+The causal effect of the fans on cabinet humidity was estimated using a controlled A/B experiment conducted from December 2025 to February 2026, in which the night fans alternated nightly between off and PWM = 80. Treating the day-of-experiment indicator as an instrumental variable in a two-stage least-squares specification removes the endogeneity bias of regressing humidity on the PID-driven fan speed (the PID drives the fans *in response to* humidity, so OLS would yield a reverse-causal coefficient). The IV/2SLS estimate is **−0.34 % RH per +10 PWM of fan speed (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353 nighttime 5-minute observations; first-stage F = 22.5)**. The naive OLS comparator returns +0.15 % per +10 PWM — the wrong sign — confirming the reverse-causal bias of the simple regression. By comparison, compressor activation produces a −15.9 % long-run humidity effect; the compressor is the dominant dehumidification actuator, with PID-driven fans providing fine adjustment within the compressor's hysteresis band. The night-fan A/B experiment was retired in February 2026 once the coefficient was characterised; raw data and analysis scripts remain in the project repository under `analysis/02_iv_causal_model.py`. A follow-on morning-fan A/B (April–May 2026) was retired after 13 days when the treatment effect (≤ 0.5 % RH, p = 0.91) fell inside the residual noise band.
 
 `[PLACEHOLDER — Grafana screenshot showing PID response to a humidity disturbance; companion website serves a live PID-diagnostics dashboard at `<URL>/highland/dashboard/`]`
 
@@ -590,21 +590,27 @@ The three-regime strategy (Section 6.2) transitions smoothly between humidity-dr
 
 Mode transitions reset the integral, derivative, and last-error state to prevent discontinuities. The current control mode is logged to InfluxDB (`pid_control_mode`: 0 = humidity, 1 = temperature) for analysis.
 
-### 7.4 Wet-Bulb Temperature Analysis
+### 7.4 Heat-Balance Decomposition
 
-Room sensor data reveals consistent room conditions of 22.1 +/- 0.7 deg C and 57.9 +/- 5.2% RH, corresponding to a room wet-bulb temperature of 16.6 +/- 0.9 deg C (Stull, 2011 formula). The terrarium temperature crosses below this wet-bulb threshold around 20:00–21:00 each evening as the compressor drives temperatures down.
+A heat-balance regression decomposes actuator contributions to the cabinet's temperature dynamics. Model:
 
-A preliminary heat-balance regression decomposed actuator contributions to the terrarium's hourly temperature change:
+`dT_cab/dt = α₀ + α₁(T_room − T_cab) + α₂·fan_PWM + α₃·freezer_on + α₄·light_on + α₅·fan_PWM·freezer_on + ε`
 
-| Actuator | Temperature effect | Interpretation |
-|---|---|---|
-| Freezer (compressor) | -2.03 deg C/hr | Dominant cooling mechanism |
-| Fans (outlet + impeller) | +0.37 deg C/hr | Net warming (room air sensible heat) |
-| Passive heat exchange | +0.58 deg C/hr | Room-to-terrarium heat transfer |
+fit by OLS with HC3 robust standard errors to n = 17,773 5-minute observations over the 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10). Cabinet-temperature derivative computed by centred finite difference. Full structured output and script in `paper/heat_balance_run_2026-05-12.yaml` and `analysis/heat_balance_rerun.py` (Design File row 86).
 
-An extended model including the interaction between fan speed and temperature difference above wet-bulb reveals that the fan cooling effect diminishes linearly as the terrarium approaches wet-bulb, reaching zero at approximately T_above_wb = +0.3 deg C. Below this point, fans provide no evaporative cooling benefit and become a net heat source.
+| Term | Coefficient | 95 % CI | p | R² |
+|---|---:|:---:|---:|---:|
+| Compressor (freezer active) | −1.01 °C/hr | [−1.05, −0.97] | <10⁻³⁰⁰ | — |
+| Room↔cabinet passive exchange (per +1 K gradient) | +0.17 °C/hr | [+0.14, +0.19] | <10⁻⁴⁰ | — |
+| LEDs (lights on) | −0.34 °C/hr | [−0.44, −0.25] | <10⁻¹¹ | — |
+| Fan PWM (continuous, per PWM unit 0–255) | +0.0002 °C/hr | [−0.0002, +0.0005] | 0.33 | — |
+| Model fit (Model 2, full sample) | — | — | F = 545 (p < 10⁻³⁰⁰) | 0.163 |
 
-The wet-bulb temperature gate (Section 6.2) implements this finding operationally, disengaging outlet and impeller fans when the terrarium temperature falls to or below the room wet-bulb temperature after 18:00.
+The marine compressor performs essentially all of the active cooling work. The steady passive room↔cabinet exchange (+0.17 °C/hr per K gradient) is the only term that opposes compressor cycling on the temperature axis; LEDs contribute a small negative term once their power load is factored. **Fan PWM, modelled at its native resolution (0–255), shows no statistically detectable effect on the cabinet-temperature derivative** in this 80.3-day dataset (95 % CI brackets zero; p = 0.33).
+
+A comparison model substituting a binary `fans_on` indicator for the continuous PWM signal returns a positive coefficient of +0.27 °C/hr (95 % CI [+0.13, +0.40]; p = 1.4 × 10⁻⁴). This is a schedule-confound artefact, not a fan-specific effect: in this system, the outlet and impeller fans are commanded ON whenever the freezer activates and during the bright part of the day, so a binary `fans_on` regressor absorbs covariance from the freezer and the lights. The smallest eigenvalue of the binary-model design matrix is 1.44 × 10⁻²⁷, confirming near-singularity. Once the fan signal is modelled at full PWM resolution, the apparent +0.27 °C/hr "fan warming" dissolves into the freezer and light terms.
+
+The architectural reading is that **fan PWM is the high-resolution humidity actuator** (its causal effect on humidity is quantified separately in §7.2 at −0.34 % RH per +10 PWM, IV/2SLS), not a sensible-heat term. Room conditions over the same window were consistent at 22.1 ± 0.7 °C and 57.9 ± 5.2 % RH, corresponding to a wet-bulb temperature of 16.6 ± 0.9 °C (Stull 2011); the cabinet routinely crossed below this threshold at 20:00–21:00 each evening as the compressor drove temperatures down. The wet-bulb fan-off gate documented in §6.6 (layer 4) was originally introduced under the hypothesis that sub-WBT fan operation imported room sensible heat at a rate of +0.37 °C/hr derived from a 27-day preliminary regression; the full 80.3-day rerun does not support that quantity at the per-PWM resolution at which the controller actually drives the fans, and the gate's empirical benefit on cabinet temperature is statistically null in this system. The gate is retained in the deployed firmware as a documented hardware feature; the paper does not advance it as a load-bearing finding.
 
 ### 7.5 Weather Correlation
 
@@ -616,22 +622,22 @@ The stochastic character of real weather data is a key advantage over fixed sche
 
 The primary recurring fault is a USB-serial stall in which the Arduino's CP210x bridge enters a stuck state, silently halting communication after variable periods (mean inter-stall interval ≈ 36 h in the current configuration; this appears to be a hardware-level interaction with the Pi 4's internal USB hub rather than a protocol issue). The serial watchdog (`arduino-watchdog.sh`, systemd service, 15-second check interval) detects absent heartbeat bytes and triggers a USB-sysfs re-authorize on the affected port; mean recovery time from stall detection to restored I/O is 22 s (std 6 s) across the logged events in the current monitoring window.
 
-Beyond the serial watchdog, the layered safety chain described in Section 6.6 contributes the following reliability evidence over the 94-day Meross-instrumented window:
+Beyond the serial watchdog, the layered safety chain described in Section 6.6 contributes the following reliability evidence over the 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10):
 
 - **Stuck-relay detections.** Two false-positive STUCK-RELAY events fired on 2026-05-10/11 before the power-vs-commanded cross-check was hardened. Root cause: the lights-power model under-estimated draw at the raised-cosine peak. The model was refit from seven days of clean (freezer-OFF, mister-OFF) data and now lands within 4 % of the measured 220 W peak (Section 7.7); no false positives have occurred since. Three independent guards (N-sample hysteresis, transition-window suppression, fresh re-poll before action) collectively bound the auto-fix to genuine, sustained anomalies.
 - **Door-safety activations.** Door-safety mode triggered on every maintenance access (mean 2.4 events per week in the current window) and restored normal operation on every door close, with no observed false interlock and no failed restore.
 - **Manual-override timeout.** The 30-minute auto-revert was added on 2026-05-09 after an operator pressed "Pause" and did not return; the override persisted for 14 hours with all internal fans at 0 PWM. Cabinet temperature climbed to 27.8 °C (3.8 °C above the daily setpoint) for ~5 hours; no plant losses were observed but the incident was a near-miss. Since the timeout was deployed, no override has been left active beyond 30 minutes.
 - **LED transient counts.** The Mean Well dim-line connector is intermittently flaky; brief (<90 s) transients are counted separately from sustained faults. The counter typically reads 0–2/day; ≥3/day surfaces a yellow alert recommending operator inspection of the dim-line crimp.
 
-The system's operating uptime — measured as fraction of minutes with a fresh sensor reading and the Arduino watchdog healthy — was **99.4 %** over the 94-day window. The remaining 0.6 % is dominated by the post-stall recovery windows (typically clearing within one minute of detection) and a handful of planned reboots for Node-RED flow deployments.
+System uptime, measured as the fraction of 1-minute buckets containing a fresh `local_temperature` sample over the 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10), was **90.5 %** (104,681 of 115,695 buckets). The figure is dominated by a single 7-day data-logging interruption from 2026-04-12 to 2026-04-20 in which the cabinet itself continued operating (compressor cycling and Meross power readings were logged continuously) but the highland-tab data logger silently stopped writing measurements; root cause not fully diagnosed at the time of writing. Excluding that single outlier, uptime over the remaining 73.3 days was **99.3 %**. Watchdog recovery from USB-serial stalls is rapid (mean 22 s, std 6 s, n ≈ 12 events in the window) and is not the dominant downtime contributor. The Arduino watchdog flag (`arduino_status > 0.5` per 1-min bucket) was true 99.7 % of the time it was logged, confirming that the Arduino itself was alive across the window; the gap is in the Node-RED logging pipeline, not the embedded layer. Exact InfluxQL queries are listed in `paper/uptime_sot_2026-05-13.yaml` (Design Files).
 
 ### 7.7 Power Consumption
 
-Total system power is logged by a Meross MSS310 in-line energy meter; an out-of-process daemon (`meross_daemon.py`) polls the meter every 30 s and publishes via MQTT into InfluxDB. The 94-day Meross-instrumented window (2026-02-04 → 2026-05-10) yields:
+Total system power is logged by a Meross MSS310 in-line energy meter; an out-of-process daemon (`meross_daemon.py`) polls the meter at 2 s – 30 s – 120 s cadence across the window and publishes via MQTT into InfluxDB. Trapezoidal integration of `power_consumption` is density-independent, so the kWh figure is unaffected by the cadence changes (confirmed against mean × 24 h: 110.9 W × 24 = 2.66 kWh/d). The 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10) yields:
 
 | Statistic | Value |
 |---|---:|
-| Total energy logged (trapezoidal integral) | 211.41 kWh over 80.3 days (2026-02-18 → 2026-05-10) |
+| Total energy logged (trapezoidal integral) | 211.41 kWh |
 | Daily consumption | **2.63 kWh/day** |
 | Monthly consumption | ~80 kWh/month |
 | Annual consumption | ~960 kWh/year |
@@ -656,8 +662,8 @@ To contextualise: the 2.6 kWh/day operational draw is one to two orders of magni
 - Maintains 13.5–24.3 °C in a room at ~22 °C; sustains 75–98 % RH continuously, with ~1.25 h/day of fog-zone immersion (RH ≥ 95 %)
 - Produces naturalistic, stochastic environmental variation by streaming and time-shifting real Colombian highland weather
 - Computes seasonally varying photoperiod from the weather-source latitude and applies a raised-cosine LED curve centred on solar noon
-- Three-regime PID switches smoothly between humidity-driven and temperature-driven control; the wet-bulb gate prevents counterproductive fan operation at low cabinet temperatures
-- Multi-layer operational safety chain (door interlock, mister duration failsafe, freezer daytime gate, manual-override timeout, wet-bulb gate, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback) handles the production failure modes encountered over four years of operation
+- Three-regime PID switches smoothly between humidity-driven and temperature-driven control; the fan-to-humidity loop is characterised causally (IV/2SLS, §7.2) and the heat-balance attribution is published (§7.4)
+- Multi-layer operational safety chain (door interlock, mister duration failsafe, freezer daytime gate, manual-override timeout, wet-bulb fan-off gate, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback) handles the production failure modes encountered over four years of operation
 - Comprehensive data logging (33 InfluxDB measurements, 60-s cadence for continuous channels, event-driven for state changes; 3.1 million data points in the current 1-year retention window) supports experimental analysis and the published causal-inference pipelines
 - Public companion dashboard, ledger, and operational blog at `<URL>` enable independent verification of the operating state at any time
 
