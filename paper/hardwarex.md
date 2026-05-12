@@ -125,7 +125,7 @@ Applications for researchers and educators include:
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| Vitrifrigo ND50 OR2-V compressor unit | 1 | BD50F Danfoss variable-speed, R404a | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Mechanical |
+| Vitrifrigo ND50 OR2-V compressor unit | 1 | BD50F Danfoss variable-speed, R134a (HFC, ODP=0, GWP₁₀₀≈1430); factory-sealed, no F-gas certification required for installation | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Mechanical |
 | Vitrifrigo PT14 evaporator plate | 1 | 1220 x 280 mm stainless steel | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
 | Noctua NF-F12 iPPC-2000 IP67 (120 mm, 2000 RPM, 12 V) | 5 | Evaporator plate fans (x3) + circulation fans (x2) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 | Noctua 60 mm fan | 2 | Outlet fan (x1) + impeller fan (x1) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
@@ -250,7 +250,7 @@ Tilt the floor panel slightly toward a rear drainage hole. The shelf below the t
 
 #### 5.2.2 Cooling System Installation
 
-The Vitrifrigo ND50 is a split-system marine refrigeration unit shipped pre-charged with refrigerant in a sealed circuit; no F-gas handling certification is required for installation. The compressor and condenser are mounted external to the cooled space, with refrigerant lines connecting them through a sealed pass-through to a separate evaporator plate inside. The compressor unit sits above the terrarium, and the evaporator plate is mounted **horizontally on the rear wall in the lower portion of the enclosure** (cutout centred at ~20 cm above the cabinet floor — see back-panel drawing `panel-03-with-radiator` in the Design Files). This is mechanical refrigeration — not evaporative cooling.
+The Vitrifrigo ND50 is a split-system marine refrigeration unit shipped pre-charged with R134a (HFC, ozone-depletion potential = 0, GWP₁₀₀ ≈ 1430) in a sealed circuit; no F-gas handling certification is required for installation. The compressor and condenser are mounted external to the cooled space, with refrigerant lines connecting them through a sealed pass-through to a separate evaporator plate inside. The compressor unit sits above the terrarium, and the evaporator plate is mounted **horizontally on the rear wall in the lower portion of the enclosure** (cutout centred at ~20 cm above the cabinet floor — see back-panel drawing `panel-03-with-radiator` in the Design Files). This is mechanical refrigeration — not evaporative cooling.
 
 The low evaporator placement establishes a desirable vertical climate gradient inside the cabinet. Cold (and therefore dense) air sinking from the evaporator plate pools near the cabinet floor and rises by convection as it warms, while the LEDs are mounted above the cabinet. The result is **a warmer, brighter upper canopy and a cooler, shadier floor** — the inverse-stratified arrangement reproduces the natural moss-and-bryophyte zonation found near the base of cloud forest trunks and rocks.
 
@@ -320,7 +320,8 @@ Wire each fan group through an IRF520N MOSFET driver module:
 
 - **Mains (230 V AC)**: Through 3x Tapo P100 smart plugs → LED driver, MistKing pump, compressor
 - **48 V DC**: Mean Well driver → 4x ChilLED pucks
-- **24 V DC**: Separate supply → Noctua fans (via MOSFET modules), MistKing pump
+- **12 V DC**: All internal Noctua fans (NF-F12 iPPC-2000 evaporator + circulation, 60 mm outlet + impeller, NF-A12x25 condenser push/pull). The IRF520N MOSFET modules switch the 12 V power rail at 25 kHz; the fans' own 4-pin PWM inputs are left unconnected. Heatsink-fan supply (4× 12 V axial above the LED pucks) shares the same rail.
+- **24 V DC**: MistKing diaphragm pump only.
 - **12 V DC**: Separate supply → Outlet/impeller fans (via MOSFET modules), heatsink fans
 - **5 V DC**: Raspberry Pi USB → Arduino Mega, ESP8266
 
@@ -508,7 +509,7 @@ Under normal operation, the system requires no human intervention. The automated
 
 - **Electrical safety with water**: All mains wiring must use drip loops. Smart plugs and power supplies should be positioned where they cannot be splashed. The IP65-rated Mean Well driver provides moisture protection for the LED driver.
 - **DCM handling**: Dichloromethane is volatile and toxic. Use only in well-ventilated areas during construction.
-- **Compressor refrigerant**: The Vitrifrigo unit ships pre-charged and factory-sealed; no F-gas handling certification is required for installation.
+- **Compressor refrigerant**: The Vitrifrigo unit ships pre-charged with R134a and factory-sealed; no F-gas certification is required for installation. Refilling or any work on the sealed loop *does* require certification in EU/UK jurisdictions.
 
 #### Operational safety chain
 
