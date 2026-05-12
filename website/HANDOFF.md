@@ -640,6 +640,22 @@ Ready for Pass B coordination whenever you and Pi-Claude have decided how to tri
 
 ---
 
+## 2026-05-12 — Mac-Claude addendum: adversarial counter-review of the Codex pass
+
+You asked, correctly, whether I had run the goal-aligned counter-review (the defence half of Mode A in the codex-dispatch skill). I had not — yesterday's pass was attack-only. Done now. Memo committed as `paper/MAC_CLAUDE_COUNTER_REVIEW_2026-05-12.md`. Quick read:
+
+- **17 of 17 high-leverage Codex claims survived primary-source verification** (POWO + IOSPE + Crossref + local repo + collection.csv + arithmetic). Codex did not hallucinate on this corpus.
+- **One direction correction:** the survey's spurious power number is **2.60 kWh/day**, not the €253/year cost. The internally consistent triple is `211.4 kWh / 94.3 days = 2.24 kWh/day → €253/year @ €0.31/kWh`. Pass B should regenerate every kWh-dependent figure from the 2.24 baseline. (Counter-review §A.2.)
+- **One Codex finding I think is bigger than Codex realized:** the "15-hour time shift" may not be a phase shift at all — the only relevant logic I could find in `nodered/flows-sanitized.json` is a 60-sample rolling mean, and L473 of HardwareX itself says *"15-hour data buffer makes aggressive smoothing cost-free"* (buffer, not shift). My own math on a simple 15h backward shift gives Italian noon → Colombian 14:00 (afternoon, daytime), not the inverted day↔night mapping the abstract claims. **This needs Pi-Claude to adjudicate from the live Pi runtime.** If the controller doesn't phase-shift, the narrative needs correcting in all four papers plus website content. (Counter-review §C.1.)
+- **5/5 prior-art DOIs for the HardwareX novelty defence are real papers** with matching titles and authors (Crossref-verified). McDowell 2021 e00238, Lau & Subbiah 2020 e00141, Sánchez 2020 e00099, Yuan 2022 Photosynthetica 60(1):79–87, Iucci 2026 e00777. Safe to use as cited.
+- **4 things Codex didn't catch** that should be in Pass B: *Aerangis somalensis* is actually a counter-example for the convergence thesis (POWO: seasonally dry tropical biome) and currently used as cloud-forest evidence — backwards. *N. 'Fake Pitopangii'* (horticultural label, identity uncertain) is in the highland list. *U. quelchii* CSV note explicitly says *"Ilu Tepui provenance; currently flowering, April 2026"* — gold for §4.5 phenology, surfaced by neither Codex nor any draft. `systemd/meross-daemon.service` is missing from the design-file table alongside `terrarium-health.py` and `mister-failsafe.py`.
+
+**Counter-review's "Action ladder for Pass B"** (memo §"Action ladder for Pass B") proposes settling 5 items before any per-paper work: power-arithmetic anchor, time-shift adjudication, watchdog v7-vs-v10, refrigerant verification, *D. victoriae-reginae* sweep across SURVEY + website genus page + AOS. Those are the cross-cutting items; per-paper work follows.
+
+**Process note (sticking).** I should have done the counter-review yesterday as the default close-out of the codex-dispatch Mode A pattern, not waited for you to ask. Saving that as a feedback memory.
+
+---
+
 ## 2026-05-11 — Pi-Claude reply: PAT rotated, single location, all verified
 
 Got it — found exactly one consumer on the Pi, swapped the token, all three verification paths pass. Documenting here so next year's rotation is mechanical.
