@@ -109,6 +109,8 @@ Applications for researchers and educators include:
 
 ## 4. Bill of Materials
 
+> **BOM completion status (2026-05-13).** Component names, quantities, descriptions, and material types in the tables below have been mechanically cross-checked against §2 Hardware Description and §5 Build Instructions and are accurate as of this commit. **Unit cost, total cost, and source/supplier columns are pending a receipt sweep**: hardware receipts for this project are not in the repository — they sit in the author's Gmail vendor-order history and (for hardware-store items) in paper receipts. Each subsection below tags its likely receipt source with explicit Gmail-search hints so the Pass-D sweep can be completed in a single user-driven session. All quantities and component identities are unaffected by the sweep; only the cost / source columns will populate.
+
 ### 4.1 Control Electronics
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
@@ -125,6 +127,8 @@ Applications for researchers and educators include:
 | MicroSD card (32 GB+) | 1 | Pi storage | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 | USB hub (powered) | 1 | Arduino + ESP connections | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 
+*Pass-D Gmail-sweep hints for §4.1*: Raspberry Pi 4 4 GB — search `from:noreply@raspberrypi.com OR from:amazon Pi 4`; Arduino Mega clone (CP210x) and ESP8266 NodeMCU — search `AZ-Delivery OR Banggood OR Amazon Mega 2560`; Sensirion SHT35 breakout — search `Adafruit OR Mouser SHT35` (likely Adafruit board ~€20); HC-SR04P + IRF520N + reed switches + USB hub — Amazon/Banggood commodity orders, search `HC-SR04P` and `IRF520`; TP-Link Tapo P100 ×3 — search `Tapo P100 order`; Meross MSS310 — search `Meross MSS310 order`; microSD — search `SanDisk OR Samsung microSD`.
+
 ### 4.2 Lighting
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
@@ -134,6 +138,8 @@ Applications for researchers and educators include:
 | 12 V axial fan (heatsink cooling) | 4 | Convective heatsink cooling | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 | Mean Well HLG-480H-48A LED driver | 1 | 480 W, 48 V / 10 A, IP65 | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 
+*Pass-D Gmail-sweep hints for §4.2*: ChilLED Logic Puck V3 ×4 — search `chilledgrowlights.com OR ChilLED order` (likely a single order); 140 mm aluminium pin heatsink ×4 + 12 V axial fans ×4 — search `Aliexpress OR Amazon heatsink 140 mm`; Mean Well HLG-480H-48A — search `Mouser OR Meanwell HLG-480` (likely Mouser/Digi-Key).
+
 ### 4.3 Cooling
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
@@ -141,9 +147,10 @@ Applications for researchers and educators include:
 | Vitrifrigo ND50 OR2-V compressor unit | 1 | BD50F Danfoss variable-speed, R134a (HFC, ODP=0, GWP₁₀₀≈1430); factory-sealed, no F-gas certification required for installation | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Mechanical |
 | Vitrifrigo PT14 evaporator plate | 1 | 1220 x 280 mm stainless steel | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
 | Noctua NF-F12 iPPC-2000 IP67 (120 mm, 2000 RPM, 12 V) | 5 | Evaporator plate fans (x3) + circulation fans (x2) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Noctua 60 mm fan | 2 | Outlet fan (x1) + impeller fan (x1) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 | Noctua NF-A12x25 G2 PWM (120 mm, 12 V) | 2 | Condenser radiator fans in push-pull configuration | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
 | Plexiglas plate | 1 | Evaporator airflow plate, inclined 30 deg with slit below | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
+
+*Pass-D Gmail-sweep hints for §4.3*: Vitrifrigo ND50 OR2-V compressor unit + PT14 evaporator plate — search `Vitrifrigo order OR boatequipment OR Marine Outlet`; this is the highest single-item cost in the BOM, likely a single Italian marine-refrigeration supplier order (May 2022 install date). Noctua NF-F12 iPPC-2000 IP67 ×5 — search `Caseking OR Amazon NF-F12 iPPC`; Noctua NF-A12x25 G2 ×2 — search `Caseking OR Amazon NF-A12x25 G2` (separate later order from the iPPC industrial fans). Plexiglas plate — same source as the §4.6 acrylic order (local laser-cutter receipts, paper).
 
 ### 4.4 Humidification
 
@@ -154,11 +161,15 @@ Applications for researchers and educators include:
 | ZipDrip anti-drip valve | 1 | Prevents residual dripping | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
 | Tubing and fittings | 1 set | MistKing-compatible | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
 
+*Pass-D Gmail-sweep hints for §4.4*: complete MistKing system (pump + nozzles + ZipDrip + tubing) — search `mistking.com order` (typically a single bundled order; nozzle counts and quad/double/single mix are listed in the table).
+
 ### 4.5 Ventilation
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| 12 V fans (outlet + impeller) | 2 | Rear ventilation port fans | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
+| Noctua 60 mm fan (12 V) | 2 | Outlet ventilation fan (×1, pin 45) + impeller ventilation fan (×1, pin 46), rear ventilation ports per §2.2 | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
+
+*Pass-D Gmail-sweep hints for §4.5*: Noctua 60 mm fans (typically NF-A6x25 5V) ×2 — search `Caseking OR Amazon Noctua 60 mm` (may be the same Caseking order as the §4.3 NF-A12x25 G2 or a separate later top-up).
 
 ### 4.6 Enclosure
 
@@ -177,13 +188,32 @@ Applications for researchers and educators include:
 | Aluminium alloy scaffold | 1 | 2.20 x 3.20 x 0.50 m, ~300 kg | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
 | Aluminium alloy guides | 2 | Sliding door tracks | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
 
+*Pass-D Gmail-and-paper-sweep hints for §4.6*: laser-cut acrylic panels (PMMA 10/8/5 mm, mirror 2 mm, black 4 mm, perforated 3 mm) — Italian laser-cutter receipt (paper); the user's local custom shop, single panel-order invoice. XPS insulation + Mylar reflective + DCM + c-Si silicone — local hardware-store paper receipts (Leroy Merlin / Brico / Ferramenta). Aluminium scaffold + door tracks — workshop / metal-supplier paper receipt (2022 install).
+
 ### 4.7 Reservoirs and Plumbing
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
 | 40-liter reservoir | 2 | Misting supply + condensate collection | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
 
-`[PLACEHOLDER — user to verify all quantities, add any missing components, and fill in costs and supplier links]`
+*Pass-D Gmail-sweep hints for §4.7*: 40-L food-grade plastic reservoirs ×2 — search `Amazon OR DIY-store reservoir` (commodity; may be from the same MistKing order if bundled, otherwise hardware-store paper receipt).
+
+---
+
+**Top-of-BOM consolidated Pass-D action list** (single user session, ~30 min in Gmail):
+
+1. `Vitrifrigo` (ND50 OR2-V + PT14 evaporator) — single Italian marine-refrigeration supplier order, May 2022 area.
+2. `chilledgrowlights.com` — Logic Puck V3 ×4 order.
+3. `Mouser` or `Meanwell` — HLG-480H-48A LED driver.
+4. `Caseking` or `Amazon` Noctua — NF-F12 iPPC-2000 IP67 ×5 + NF-A12x25 G2 ×2 + 60 mm ×2 (likely two or three separate orders).
+5. `mistking.com` — pump + nozzles + ZipDrip + tubing bundled order.
+6. `Tapo P100` Amazon order — ×3.
+7. `Meross MSS310` Amazon order — ×1.
+8. `Adafruit` or `Mouser` SHT35 breakout — ×1.
+9. `Amazon` / `AZ-Delivery` commodity electronics order(s) — Pi 4, Arduino Mega clone, ESP8266, HC-SR04P, IRF520N, reed switches, USB hub, microSD.
+10. Paper receipts — laser-cut acrylic panels, XPS + Mylar, DCM + silicone, aluminium scaffold + door tracks, 40-L reservoirs.
+
+Once those ten threads are pulled, the cost / total / source columns can be filled mechanically. The component identities and quantities in the tables above are already verified against §2 and §5; the sweep will not change them.
 
 ---
 
