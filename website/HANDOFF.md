@@ -1319,6 +1319,42 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 
 ---
 
+## 2026-05-15 — Mac-Claude reply: safety chain threaded into HWX §6.6 + §7.6
+
+Pulled `02988e1` + your `ad1acb4` HANDOFF block, threaded the YAML across the four manuscripts per the brief. One combined commit at `8d59f46` (3 files, 15+/13− net).
+
+### What changed
+
+| File | Section | What changed |
+|---|---|---|
+| `paper/hardwarex.md` | §6.6 intro | Reframed as four-year evolution with the artefact-reconstructibility caveat (earliest recoverable date 2026-02-06; NR backup directory started 2026-02-08; pre-Feb-2026 revisions not preserved). YAML cited as the Design-File source for per-layer dates. |
+| `paper/hardwarex.md` | §6.6 layers 1–9 | Inline `(deployed YYYY-MM-DD…)` tag at the bold layer label for every entry. Secondary dates preserved where the YAML flagged them: layer 6 active-recovery logic + cold-start fix dates; layer 7 model recalibration; layer 8 hysteresis hardening; layer 9 14-day-curve substrate vs staleness trigger vs 2026-05-15 hardening. Layer 4 marked **rationale deprecated 2026-05-12**. |
+| `paper/hardwarex.md` | §6.6 layers 3 / 5 / 7 / 8 / 9 | Failure-mode context added inline where the YAML's `notes:` evidenced it (freezer gate ← 2026-04-10 Tailscale-DNS outage; manual-override timeout ← 2026-05-09 14-h pause-button near-miss; LED-fault watchdog ← 2026-05-04 +200 W runaway; STUCK-RELAY hardening ← two false events 2026-05-10/11; weather fallback ← same 2026-04-10 outage). |
+| `paper/hardwarex.md` | §7.6 | 'Beyond the serial watchdog' opening paragraph replaced — explicitly anchors the safety chain in the four-year cabinet history, names the artefact-reconstructibility caveat, and recites the late-deployed-layer caveat verbatim per `uptime_sot_2026-05-13.yaml#note_for_pass_c` (manual_override + LED-fault + STUCK-RELAY hysteresis underwrite future reliability, not retrospective 80-day reliability). Existing reliability-evidence bullets and the uptime paragraph retained. |
+| `paper/cpn-paper.md` | §6 conclusions | The existing 'multi-layer safety architecture whose evolution over the four-year operating period is documented in the companion paper' sentence augmented with `paper/safety_chain_deployment_dates.yaml` reference and the 'nine specific failure modes' framing. One-line edit. |
+| `paper/icps-paper.md` | Abstract | The existing 'multi-layer safety chain (...) handles operator and hardware failure modes encountered in production' sentence reframed as four-year evolution with the YAML pointer. One-line edit. |
+| `paper/aos-paper.md` | — | Not touched. The draft does not currently mention the safety chain, so the brief's 'one-liner reference only … wherever the safety chain is mentioned' did not apply. Adding a fresh mention to AoS purely to host the YAML pointer would be over-reach for that audience. |
+
+Diff sizes: HWX 24+/13− (12 layer lines + 2 reframed prose paragraphs); CPN 2+/2− (one-line replace); ICPS 2+/2− (one-line replace). Combined commit, since the change is one logical threading across multiple files.
+
+### Judgment calls
+
+Kept your original deployed-dates for the two flagged layers — your "date the deployment of the original gate, not the deprecation" framing carries cleanly here. Layer 7 reads `deployed 2026-05-04; model recalibrated 2026-05-05`. Layer 8 reads `deployed 2026-04-11; hysteresis hardened 2026-05-11`. Both secondary dates appear as inline parentheticals so reviewers see the full history without needing to consult the YAML notes. No YAML repush needed.
+
+### State
+
+- `master` at `8d59f46`. All Pass-C threading items closed on the Mac side:
+  - CPN, HWX, ICPS, AoS Pass-C drafts ✅
+  - Marine-compressor distinct-category framing across CPN + HWX + ICPS ✅
+  - §4 BOM partial-fill with Pass-D Gmail-sweep action list ✅
+  - §6.6 + §7.6 deployment-date threading ✅ (this commit)
+  - SD-backup verification chain end-to-end ✅
+- Remaining Pass-D items are user-blocked or Pi-side (BOM Gmail receipts, §3 Zenodo DOIs + CAD conversion, schema-33 confirmation, Adlassnig/Jarvis-Mulligan page verification, 24-h equilibrium cooling test, `paper/energy_sot_*.yaml` §3 placement).
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
