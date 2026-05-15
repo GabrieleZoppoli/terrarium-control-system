@@ -1325,3 +1325,25 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 - **Webcam** — not live yet. Placeholder at `content/highland/webcam/_index.md`. Hardware TBD.
 - **Italian translations for deep pages** — landing pages are bilingual as of 2026-04-17 but genus / doc / wishlist / invention sub-pages stay English-only. Language switcher falls back to `/it/` home for those.
 - **paper/** — still GitHub-linked; no per-page rendering yet.
+
+---
+
+## 2026-05-15 — Pi-Claude: nodered supplement refreshed + safety fixes deployed
+
+Three NR changes deployed and verified live this afternoon, plus an overdue supplement refresh:
+
+**Live deploys (2026-05-15):**
+1. **Fix D** (14:49 CEST): `weather_fallback_fn` now has 4 outputs instead of 2 — new outputs 2/3 emit `{payload, topic: ""}` to chart link-ins `7eab3f794828484d` (temp) / `3d7a389b81f434bf` (humi) when `fallbackUsed === true`. NR Dashboard target lines no longer go flat during OWM outages. Backup: `flows_backup_20260515_144852_fallback_fix_D.json`.
+2. **Fix A** (15:13 CEST, OR option): new `owm_stamp_fn_001` function node on Weather tab stamps `global.payload.owm_last_ok = Date.now()` on each OWM city fetch success (Y-wired to all 4 cities — Chinchinà / Medellin / Bogotà / Sonson). `weather_fallback_fn` staleness check now OR-combines `target_weather_updated` and `owm_last_ok` (with `lastOwm > 0` guard against first-deploy spurious trigger). Closes the gap from the 2026-05-14 incident where fallback didn't engage for 15h+10min because the 15h-shifted pipeline kept stamping TWU on stale data. Backup: `flows_backup_20260515_151348_fallback_fix_A.json`. Tag: `owm_or_staleness_2026_05_15`.
+3. **Mister python instrumentation** (15:35 CEST): added two `node.warn()` calls (entry: `Mister cmd=X`; exit: `Mister result=Y`) so every mist event leaves a journal trace. Motivated by the 2nd known dawn-mist miss today at 05:30 (first was 2026-05-01). Manual end-to-end test at 15:36 confirmed the chain is healthy when triggered — so the misses are NR's cron scheduler silently skipping the inject, not the function failing. Next miss will be diagnosable. Tag: `mister_instrumentation_2026_05_15`. Backup: `flows_backup_20260515_153543_mister_instrument.json`.
+
+**Supplement refresh:** `nodered/flows-sanitized.json` regenerated from current live `flows.json` — was Mar 8 vintage (236KB / 449 nodes / PyP100 library still in code samples) → now 279KB / 472 nodes / current `tapo.ApiClient` usage. The +23 nodes / +1 tab reflect ~2 months of changes (Light Curve C, net-watchdog wiring, connectivity monitor, door safety v2, fan-PID tuning, fallback work, Mister failsafe, etc.). Credentials scrubbed: 3× `YOUR_EMAIL` / 3× `YOUR_PASSWORD` (Tapo plugs) + 1× `YOUR_NGROK_PROFILE`. Verified no `zoppoli` / `aladino` / `gmail` residue.
+
+**Still pending / no action needed from Mac-Claude:**
+- `nodered/flows-README.md` not refreshed — may describe nodes that have moved or new structure (Light Curve C, fallback fix etc.). Worth a pass if anyone is going through the paper supplement.
+- Dawn-mist behavioral fix not applied — instrumentation only. Tomorrow's 05:30 will tell us "scheduler fired" (journal lines present) vs "scheduler skipped" (no log). If it skips again the move is to replace the NR inject with an OS-level cron POST.
+
+### State
+- Pi side: water tank at 13.9% (user's task).
+- All NR safety mechanisms confirmed live + verified post-deploy.
+- Repo will be at this commit after push.
