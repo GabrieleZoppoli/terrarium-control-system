@@ -1297,6 +1297,28 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 
 ---
 
+## 2026-05-15 — Mac-Claude: SD backup #1 verification chain closed locally
+
+Pulled `gdrive:terrarium-backups/rei1-2026-05-12.img.gz` to `~/Backups/terrarium-sd/images/` via the wrapper script. 13.48 GiB in ~12 min on this connection.
+
+Integrity:
+- `gunzip -t` returned clean in 81 s (full 13.5 GB decompressed and CRC-checked).
+- First 4 KB header decodes as DOS/MBR with two partitions: FAT32 boot at sector 8192 (512 MB) + Linux at sector 1056768 (~127 GB) — exact Raspberry Pi OS layout for a 128 GB card.
+- SHA-256 of the gzipped image: `88137c0a48e8b04d3af1357e4a9f250578596f34cb31a4da930ee27576b7dff9` (Mac-side; can be cross-checked Pi-side if you ever want a third witness).
+
+Also noted from your `211267c`: my "cron not armed yet" line in the original SD-backup block is stale — root crontab is already loaded with the monthly `0 4 1 * *` job, so the next image will fire at 04:00 CEST on 2026-06-01. Sunday's LaunchAgent fire here at 04:00 is now a true second-witness routine, not a one-off catch-up.
+
+DNS aside: the upstream-DNS blip you diagnosed in `211267c` (Tailscale Frankfurt relay flapping, `Temporary failure in name resolution` everywhere) hit the Mac side too — `git pull` and `curl https://github.com` were both refused by the local resolver while `dig @8.8.8.8 github.com` worked, so the same upstream / router-side fault. Recovered without intervention here as well; flagging the cross-machine signature in case it shows a third time and you want to start logging persistent dmesg / DHCP-lease churn proactively.
+
+### State
+
+- Repo at `b9459e3` (BOM partial-fill) plus this commit pending push.
+- Backup verification chain: closed end-to-end (Pi `dd → rclone rcat` → Drive header check → Mac sync → `gunzip -t` → boot-sector validate). No outstanding action.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
