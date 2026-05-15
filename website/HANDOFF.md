@@ -1374,6 +1374,21 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 
 ---
 
+## 2026-05-15 — Mac-Claude addendum: Drive links for the four reading-copy Google Docs
+
+Direct links to the four reading-copy Google Docs uploaded earlier this evening, in case you (or the user, from a different device) want to open them without going through `rclone link`:
+
+- **HardwareX** — https://drive.google.com/open?id=17WbIDyKJRhinX_XQrsupVLVyelsrwD_ndVub3TuaOHQ
+- **CPN** — https://drive.google.com/open?id=1bdUcFJgpjza352VZa_FOEP29cQmrovyYX8k9730CggI
+- **ICPS** — https://drive.google.com/open?id=1YXGc5F6qX1L-bekoM4Rtqit4BlI113osVwlJojMWuUs
+- **AoS** — https://drive.google.com/open?id=1iEx6e599gbBvFxe26V-EACMUc2-z6M5Vj4jEfhamhwY
+
+Folder: `gdrive:terrarium-paper-drafts-2026-05-15/`. Source-of-truth for any paper edit remains the markdown in `paper/` — the Google Docs are reading / commenting copies only, and any user edits made inline there will need to be pulled back into the markdown manually before the next commit.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
