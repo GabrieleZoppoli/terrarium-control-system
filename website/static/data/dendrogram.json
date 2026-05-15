@@ -1145,7 +1145,11 @@
                       "name": "walkeriana coerulea 'Blu Monarch' x 'ABC'",
                       "size": 1,
                       "vendor": "Lo Scrigno di Nebbia",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/cattleya/cattleya-walkeriana-coerulea-blu-monarch-x-abc.jpg",
+                        "../img/collection/cattleya/cattleya-walkeriana-coerulea-blu-monarch-x-abc-2.jpg"
+                      ]
                     },
                     {
                       "name": "walkeriana f. semialba 'Tokyo No.1' AM/AOS",
@@ -1600,7 +1604,12 @@
                         "../img/collection/dracula/dracula-raven-jet-2.jpg",
                         "../img/collection/dracula/dracula-raven-jet-3.jpg",
                         "../img/collection/dracula/dracula-raven-jet-4.jpg",
-                        "../img/collection/dracula/dracula-raven-jet-7.jpg"
+                        "../img/collection/dracula/dracula-raven-jet-7.jpg",
+                        "../img/collection/dracula/dracula-raven-jet-8.jpg",
+                        "../img/collection/dracula/dracula-raven-jet-9.jpg",
+                        "../img/collection/dracula/dracula-raven-jet-10.jpg",
+                        "../img/collection/dracula/dracula-raven-jet-11.jpg",
+                        "../img/collection/dracula/dracula-raven-jet-12.jpg"
                       ]
                     },
                     {
@@ -2099,7 +2108,9 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/restrepia/restrepia-vasquezii.jpg",
-                        "../img/collection/restrepia/restrepia-vasquezii-2.jpg"
+                        "../img/collection/restrepia/restrepia-vasquezii-2.jpg",
+                        "../img/collection/restrepia/restrepia-vasquezii-3.jpg",
+                        "../img/collection/restrepia/restrepia-vasquezii-4.jpg"
                       ]
                     },
                     {
@@ -3614,7 +3625,8 @@
                         "../img/collection/utricularia/utricularia-quelchii-13.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-14.jpg",
                         "../img/collection/utricularia/utricularia-quelchii-15.jpg",
-                        "../img/collection/utricularia/utricularia-quelchii-16.jpg"
+                        "../img/collection/utricularia/utricularia-quelchii-16.jpg",
+                        "../img/collection/utricularia/utricularia-quelchii-17.jpg"
                       ]
                     },
                     {

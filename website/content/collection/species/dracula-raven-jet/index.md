@@ -17,7 +17,7 @@ sources:
     notes: "Hybrid: D. vampira × D. roezlii"
 photos:
   - img/collection/dracula/dracula-raven-jet.jpg
-primary_photo: img/collection/dracula/dracula-raven-jet.jpg
+primary_photo: img/collection/dracula/dracula-raven-jet-10.jpg
 genus_page: /collection/genera/dracula/
 ---
 

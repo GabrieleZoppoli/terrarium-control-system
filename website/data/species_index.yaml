@@ -32,6 +32,10 @@
   genus: Calopogon
   primary_photo: img/collection/calopogon/calopogon-tuberosus.jpg
   provenance: Eastern North American sphagnum bogs
+"cattleya-walkeriana-coerulea-blu-monarch-x-abc":
+  taxon: "Cattleya walkeriana coerulea 'Blu Monarch' x 'ABC'"
+  genus: Cattleya
+  primary_photo: img/collection/cattleya/cattleya-walkeriana-coerulea-blu-monarch-x-abc.jpg
 "cephalotus-follicularis":
   taxon: Cephalotus follicularis
   genus: Cephalotus
@@ -102,7 +106,7 @@
 "dracula-raven-jet":
   taxon: "Dracula Raven 'Jet'"
   genus: Dracula
-  primary_photo: img/collection/dracula/dracula-raven-jet.jpg
+  primary_photo: img/collection/dracula/dracula-raven-jet-10.jpg
   provenance: Dark-flowered Dracula hybrid
 "dracula-simia":
   taxon: Dracula simia

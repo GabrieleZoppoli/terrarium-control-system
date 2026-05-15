@@ -62,6 +62,16 @@
       "extras": []
     }
   ],
+  "cattleya": [
+    {
+      "taxon": "Cattleya walkeriana coerulea 'Blu Monarch' x 'ABC'",
+      "slug": "cattleya-walkeriana-coerulea-blu-monarch-x-abc",
+      "primary": "cattleya-walkeriana-coerulea-blu-monarch-x-abc.jpg",
+      "extras": [
+        "cattleya-walkeriana-coerulea-blu-monarch-x-abc-2.jpg"
+      ]
+    }
+  ],
   "cephalotus": [
     {
       "taxon": "Cephalotus f. 'Eden Black'",
@@ -235,7 +245,12 @@
         "dracula-raven-jet-4.jpg",
         "dracula-raven-jet-5.jpg",
         "dracula-raven-jet-6.jpg",
-        "dracula-raven-jet-7.jpg"
+        "dracula-raven-jet-7.jpg",
+        "dracula-raven-jet-8.jpg",
+        "dracula-raven-jet-9.jpg",
+        "dracula-raven-jet-10.jpg",
+        "dracula-raven-jet-11.jpg",
+        "dracula-raven-jet-12.jpg"
       ]
     },
     {
@@ -791,7 +806,9 @@
       "slug": "restrepia-vasquezii",
       "primary": "restrepia-vasquezii.jpg",
       "extras": [
-        "restrepia-vasquezii-2.jpg"
+        "restrepia-vasquezii-2.jpg",
+        "restrepia-vasquezii-3.jpg",
+        "restrepia-vasquezii-4.jpg"
       ]
     }
   ],
@@ -1015,7 +1032,8 @@
         "utricularia-quelchii-13.jpg",
         "utricularia-quelchii-14.jpg",
         "utricularia-quelchii-15.jpg",
-        "utricularia-quelchii-16.jpg"
+        "utricularia-quelchii-16.jpg",
+        "utricularia-quelchii-17.jpg"
       ]
     },
     {
