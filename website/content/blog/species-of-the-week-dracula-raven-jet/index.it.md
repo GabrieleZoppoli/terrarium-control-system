@@ -6,13 +6,13 @@ tags: ["dracula", "species-of-the-week", "orchids", "highland", "hybrids"]
 showReadingTime: true
 ---
 
-Il *Dracula* Raven 'Jet' è un ibrido primario, *D. vampira* × *D. roezlii*. A occhio si presenta come tre caude di sepalo quasi nere, con un centro giallo lamelloso e, in mezzo, un piccolo labello rosa simile a un cappello di fungo.
+La *Dracula* Raven 'Jet' è un ibrido primario, *D. vampira* × *D. roezlii*. A occhio si presenta come tre caude di sepalo quasi nere, con un centro giallo lamelloso e, in mezzo, un piccolo labello rosa simile a un cappello di fungo.
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-10.jpg" caption="Il fiore intero in mano. Tre sepali aperti, colonna gialla, labello rosa sotto le lamelle." >}}
 
 ## Sepali, non petali
 
-Nei *Dracula* le tre grandi strutture caudate che si vedono sono **sepali**, fuse alla base in una piccola coppa. I petali ci sono — due — ma sono minuscoli, dentro la coppa, ai lati della colonna. Quindi: tutto ciò che si vede in alto sono sepali, più la colonna gialla e il labello rosa. Niente petali nel campo visivo.
+Nelle *Dracula* le tre grandi strutture caudate che si vedono sono **sepali**, fusi alla base in una piccola coppa. I petali ci sono — due — ma sono minuscoli, dentro la coppa, ai lati della colonna. Quindi: tutto ciò che si vede in alto sono sepali, più la colonna gialla e il labello rosa. Niente petali nel campo visivo.
 
 ## Il grex
 
@@ -23,7 +23,7 @@ Attenzione, sono cose diverse: il *nome del grex* (Raven) e il *nome del cultiva
 ## Il nome
 
 - **Genere *Dracula*** — Luer, 1978. "Piccolo drago", per l'aspetto delle caude allungate e per la faccia da scimmia/vampiro dentro la coppa fiorale.
-- ***vampira*** — vampiro. Sotto quasi tutte le luci, le venature scure sul fondo verde dei sepali lo fanno apparire tale.
+- ***vampira*** — vampiro. Sotto quasi tutte le luci, le venature scure sul fondo verde dei sepali la fanno sembrare tale.
 - ***roezlii*** — dedicata a **Benedikt Roezl** (1824–1885), botanico e cercatore di orchidee ceco. Scoprì più di 800 specie nelle Americhe, perse una mano in un incidente con la canna da zucchero all'Avana, fondò nel 1880 la rivista *Flora*.[^roezl]
 - **'Jet'** — nome di colore. Una postilla: il *jet* (in italiano *giaietto*, una lignite nera molto compatta) ha sempre un sottotono caldo, marrone-nero, mai un nero neutro. Il nome del cultivar è quindi più preciso di quanto sembri.
 
@@ -47,7 +47,7 @@ I due genitori stanno a cavallo del confine Ecuador–Colombia, entrambi a quote
 
 ## Come è arrivata qui
 
-Ecuagenera. Divisione montata su sfagno. Fiorisce regolarmente una volta all'anno da quando si è ambientata: gli steli scendono attraverso lo sfagno, come succede in quasi tutti i *Dracula*.
+Ecuagenera. Divisione montata su sfagno. Fiorisce regolarmente una volta all'anno da quando si è ambientata: gli steli scendono attraverso lo sfagno, come succede in quasi tutte le *Dracula*.
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-12.jpg" caption="In basso a destra nel terrario di altopiano. Sopra le radici delle *Heliamphora*, intorno le piante vicine. Sullo sfondo il rivestimento riflettente." class="fig-inline" >}}
 
@@ -61,12 +61,12 @@ Ecuagenera. Divisione montata su sfagno. Fiorisce regolarmente una volta all'ann
 - In piena ombra. In natura *D. vampira* vive nello strato più scuro della foresta.
 - Cestino, non vaso: i fiori pendenti devono poter uscire dal substrato.
 
-Sta in basso a destra nel [terrario di altopiano](/it/highland/), accanto al *D. pholeodytes* e sotto le *Heliamphora*.
+Sta in basso a destra nel [terrario di altopiano](/it/highland/), accanto alla *D. pholeodytes* e sotto le *Heliamphora*.
 
 ## Note
 
 - L'impollinazione tramite moscerini micetofili è documentata per una sola specie di *Dracula* (*D. lafleurii*): sepali e labello imitano funghi a lamelle e attirano *Drosophilidae* che si riproducono nei corpi fruttiferi.[^endara] Su Raven, e sui due genitori, nessuno studio di campo — ma la forma del labello dell'ibrido è inequivocabilmente fungina.
-- Gli ibridi primari di *Dracula* tendono a essere vigorosi e più tolleranti dei due genitori presi singolarmente. *D. vampira* in particolare è noto per fare il difficile in coltivazione; Raven ne eredita l'aspetto, ma il carattere è quello di *D. roezlii*.
+- Gli ibridi primari di *Dracula* tendono a essere vigorosi e più tolleranti dei due genitori presi singolarmente. *D. vampira* in particolare è nota per essere difficile in coltivazione; Raven ne eredita l'aspetto, ma il carattere è quello di *D. roezlii*.
 
 ## Riferimenti
 
