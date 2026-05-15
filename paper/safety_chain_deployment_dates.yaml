@@ -1,0 +1,207 @@
+# Safety-chain deployment dates — single source of truth for HardwareX §6.6 + §7.6
+# Generated 2026-05-15 to support the Pass-C reframe of the safety chain as
+# "evolution over four years (2022-05 → 2026-05)" per uptime_sot_2026-05-13.yaml
+# `note_for_pass_c` USER DECISION 2026-05-12.
+#
+# Schema per Mac-Claude HANDOFF 2026-05-13. One entry per safety-chain layer in
+# the order they appear in the current §6.6 list; deprecated layers retained for
+# narrative completeness and footnoted in the prose.
+#
+# Date precedence used here:
+#  1. NR flow backup filenames in /home/pi/.node-red/flows_backup_<YYYYMMDD>_*.json
+#     are the most reliable (filename date = day the backup was taken just
+#     before the change was deployed).
+#  2. Systemd unit-file mtimes in /etc/systemd/system/*.service for daemon-style
+#     layers (mtime = first install since the file was placed by hand).
+#  3. Memory journal entries in ~/.claude/projects/-home-pi/memory/*.md, which
+#     pin specific incidents and tag commits.
+#  4. Repo git log against scripts/ (only useful for Pass-C-era artefacts; the
+#     terrarium-paper repo was reorganised on 2026-04-16 and earlier history
+#     for these scripts is not preserved in-repo — original deployment to
+#     /usr/local/bin pre-dates the in-repo copy in several cases).
+#
+# All dates Europe/Rome local; "deployed" is the day the layer first ran in
+# production, not the day the YAML or paper documented it.
+
+layers:
+  - id: door_safety_interlock
+    label: "Door safety interlock"
+    deployed: "2026-02-16"
+    git_evidence: "/home/pi/.node-red/flows_backup_20260216_234244_doorsafety.json (pre-deploy snapshot, 23:42 CEST); follow-up tweaks 20260217_*_circulation/fanrestore/debounce_charts; memory/door-safety.md"
+    status: active
+    notes: |
+      Two reed switches on the sliding doors are read by the Arduino; Node-RED
+      cuts fans/freezer/mister and forces LEDs to 60% on door-open, restores
+      on close, with a 3-second debounce. Operator-initiated maintenance
+      override (Dashboard fan-mode = manual Max/Pause) bypasses the fan stop
+      by design; the manual-override timeout (layer 5) bounds that bypass.
+
+  - id: mister_duration_failsafe
+    label: "Mister duration failsafe"
+    deployed: "2026-04-16"
+    git_evidence: "/usr/local/bin/mister-failsafe.py (file mtime 2026-04-16 22:58 CEST, no prior .bak files); cron entry under user pi: `* * * * * /usr/local/bin/mister-failsafe.py`; in-repo copy first appears in commit eb718d2 (2026-04-16 23:07, 'Add analysis scripts, daemons, and ESP water-level firmware')"
+    status: active
+    notes: |
+      Out-of-process Python script, runs every minute via cron. Force-commands
+      the mister Tapo OFF when reported on_time exceeds 150 s (longest normal
+      cycle is 90 s). Independent of Node-RED; protects against NR hangs,
+      stuck Tapo relays, and controller misconfiguration.
+
+  - id: freezer_daytime_gate
+    label: "Freezer daytime gate"
+    deployed: "2026-04-11"
+    git_evidence: "memory/freezer-daytime-gate.md ('Freezer Daytime Time Gate (2026-04-11)'); deployed in immediate response to the 2026-04-10 OWM/DNS staleness incident that was the same day's predecessor backup `flows_backup_20260410_staleness.json`"
+    status: active
+    notes: |
+      Node-RED rule blocking the freezer Tapo plug from running during
+      08:00-20:00 CEST regardless of setpoint error. Added one day after the
+      2026-04-10 18 h Tailscale-DNS outage froze the OWM target at 17.7°C and
+      the freezer ran continuously through the morning chasing a stale
+      nighttime setpoint.
+
+  - id: wet_bulb_fan_off_gate
+    label: "Wet-bulb fan-off gate"
+    deployed: "2026-02-25"
+    git_evidence: "/home/pi/.node-red/flows_backup_20260225_three_regime_photoperiod.json (first backup containing 'wbt' tokens, n=7; preceding backup flows_backup_20260224_pre_dimmer_restore.json contains 0); memory/wetbulb-analysis.md (hypothesis from 2026-02-24, gate landed with the three-regime PID work the next day)"
+    status: deprecated_2026_05_12
+    notes: |
+      After lights-off, outlet+impeller fans were disengaged once cabinet
+      temperature fell below the room's wet-bulb. Original hypothesis: sub-WBT
+      fan operation imports room sensible heat at +0.37 °C/hr (27-day prelim,
+      R²=0.24). The 80.3-day rerun in heat_balance_run_2026-05-12.yaml finds
+      no detectable per-PWM fan effect on cabinet-temperature derivative, so
+      the load-bearing causal claim is withdrawn (Codex e2deb06 / cce0bff
+      consensus, USER DECISION 2026-05-12). The firmware path is retained as
+      a documented hardware feature; the paper does not advance it as a
+      finding. Subsequent variant `wbt_gate_freezer_latch` (backup
+      20260507_142519) added freezer-latched gating but is part of the same
+      deprecated-rationale layer.
+
+  - id: manual_override_timeout
+    label: "Manual-override timeout"
+    deployed: "2026-05-09"
+    git_evidence: "uptime_sot_2026-05-13.yaml#late_deployed_safety_layers.manual_override_timeout: '2026-05-09'; memory/manual-fan-mode-30min-revert.md (tag manual_mode_30min_revert_2026_05_09); incident triggering deployment was a 14-h pause-button left active on 2026-05-09"
+    status: active
+    notes: |
+      Watchdog reverts the Dashboard fan-mode toggle (Auto/Pause/Max) to AUTO
+      after 30 minutes of no fresh operator input. Persistence timestamp
+      lives in a persisted global so the timeout survives controller
+      restarts. Deployed after a 2026-05-09 near-miss in which Pause was
+      left active for 14 h, internal fans at 0 PWM, cabinet temperature
+      climbed to 27.8 °C (3.8 °C above setpoint) for ~5 h.
+
+  - id: arduino_usb_serial_watchdog
+    label: "Arduino USB-serial watchdog"
+    deployed: "2026-02-06"
+    git_evidence: "/etc/systemd/system/arduino-watchdog.service (file mtime 2026-02-06 00:42 CEST, systemctl is-enabled = enabled); /usr/local/bin/arduino-watchdog.sh (current Apr 8 mtime is the v10 cold-start fix, see memory/watchdog-cold-start-fix.md); recovery-path (USB sysfs prod) added 2026-02-17 per memory/serial-stall-investigation.md"
+    status: active
+    notes: |
+      Bash script run as systemd service. Monitors Arduino heartbeat byte on
+      A0; on >30 s silence, performs a USB sysfs re-authorize on the affected
+      port (mean recovery 22 s, std 6 s). Initial systemd unit installed
+      2026-02-06 as a simple connection monitor; the active recovery logic
+      (USB sysfs prod, Watchdog v10) was added 2026-02-17 in response to the
+      recurring CP210x stall first diagnosed in the serial-stall investigation
+      that week. Cold-start bug (silently no-op on stale-at-startup) fixed
+      2026-04-08.
+
+  - id: led_fault_watchdog
+    label: "LED-fault watchdog"
+    deployed: "2026-05-04"
+    git_evidence: "/home/pi/.node-red/flows_backup_20260504_224307_led_fault_watchdog.json (pre-deploy snapshot 22:43 CEST); model-recalibration backups 20260505_101751_led_watchdog_model.json + 20260505_133929_watchdog_recalib.json the next day; uptime_sot_2026-05-13.yaml#late_deployed_safety_layers.led_fault_watchdog: '2026-05-05' (which is the model-recalibration date, not initial deploy); memory/led-fault-watchdog.md"
+    status: active
+    notes: |
+      Node-RED `led_watchdog_fn_001` monitors Meross-reported power against
+      commanded dim-line state; sustained mismatch ≥3 Meross samples (~90 s)
+      flags a fault and disables the LED Tapo plug. Initial flat-threshold
+      (140 W) version deployed 2026-05-04 in response to the +200 W Mean Well
+      runaway observed 18:16 CEST that day. Replaced 2026-05-05 with a
+      model-based detector (`expected = base + 2.8 × eff_slider + 170 W if
+      freezer-on`) after the flat threshold false-tripped during normal
+      Curve C peak draw. The `late_deployed_safety_layers` field in
+      uptime_sot uses 2026-05-05 because that is the date of the
+      currently-deployed model; the layer itself first ran 2026-05-04.
+
+  - id: power_vs_commanded_check
+    label: "Power-vs-commanded cross-check (STUCK-RELAY)"
+    deployed: "2026-04-11"
+    git_evidence: "memory/health-automation.md ('Automated Health Check (2026-04-11)', `*/5 * * * * /usr/local/bin/terrarium-health.py`); earliest preserved script backup /usr/local/bin/terrarium-health.py.bak_20260419_104646 confirms cron-resident by 2026-04-19; in-repo copy first appears in commit e62143 (2026-05-12, 'scripts+docs+paper: terrarium-health.py + schema=33 + energy SoT'); STUCK-RELAY hysteresis hardening is the 2026-05-11 date in uptime_sot, see memory/terrarium-health-stuck-relay-fix-2026-05-11.md (tag stuck_relay_hysteresis_2026_05_11)"
+    status: active
+    notes: |
+      Out-of-process Python monitor runs every 5 minutes via cron, comparing
+      the Meross MSS310 instantaneous power reading against an expected
+      wattage computed from commanded Tapo state and current dimmer slider.
+      Initial deployment 2026-04-11 with a single-sample cross-check and a
+      coarse expected range. Power model refit and three false-positive
+      guards added 2026-05-11 after two false STUCK-RELAY AUTO-FIX events on
+      2026-05-10/11 (Tapo/Meross polling-skew races): (i) 3-sample N-of-K
+      hysteresis, (ii) 120-s transition-window suppression around freezer
+      cmd changes, (iii) fresh Tapo re-poll immediately before any auto-fix
+      action. The uptime_sot `stuck_relay_hysteresis: 2026-05-11` field is
+      the hardening date; the layer itself has been resident since
+      2026-04-11.
+
+  - id: weather_staleness_fallback
+    label: "Weather staleness fallback"
+    deployed: "2026-04-10"
+    git_evidence: "/home/pi/.node-red/flows_backup_20260410_staleness.json (pre-deploy snapshot, deployed same day in response to the 2026-04-10 18 h Tailscale-DNS / OWM outage); memory/weather-staleness-fallback.md ('On 2026-04-10... staleness check'); historical-curve substrate from 2026-03-05 — see /home/pi/.node-red/flows_backup_20260305_hist_curves.json"
+    status: active
+    notes: |
+      Node-RED rule that detects when the OpenWeatherMap pipeline has not
+      refreshed the setpoint in 10 minutes (staleness threshold; was
+      originally null/undefined-only) and substitutes a smoothed 14-day
+      historical daily curve for the live data. The 14-day curve substrate
+      itself was deployed 2026-03-05; the 10-minute staleness trigger that
+      makes this a safety layer (rather than a passive default) was added
+      2026-04-10 after the Tailscale-DNS outage froze targets at the
+      previous valid value for 18 h. Further hardening on 2026-05-14/15
+      after a fresh OWM outage exposed that the fallback only wrote globals
+      and did not drive the freezer hysteresis threshold or the OWM-
+      staleness branch of the trigger; see memory/incident-2026-05-14-
+      fallback-hysteresis-fix.md and memory/fallback-fixes-plan-2026-05-15.md
+      (Fix A, Fix D both applied 2026-05-15).
+
+# How to read this file alongside uptime_sot_2026-05-13.yaml
+#
+# uptime_sot.late_deployed_safety_layers names FIVE entries with explicit dates:
+#   manual_override_timeout: 2026-05-09
+#   stuck_relay_hysteresis:  2026-05-11
+#   led_fault_watchdog:      2026-05-05
+#   light_curve_c:           2026-05-04
+#   dawn_mist_daily:         2026-05-01
+#
+# Of those five:
+#  - manual_override_timeout is layer 5 here; same date.
+#  - stuck_relay_hysteresis is the 2026-05-11 hardening date for layer 8;
+#    the underlying check (layer 8) is older — 2026-04-11.
+#  - led_fault_watchdog is the model-recalibration date for layer 7; the layer
+#    itself first ran on 2026-05-04 (flat-threshold version).
+#  - light_curve_c and dawn_mist_daily are NOT safety-chain layers and are
+#    therefore not represented here. They are environmental-control changes
+#    that happened to land in the same window.
+#
+# The remaining four layers (door, mister, freezer-daytime, USB-watchdog,
+# wet-bulb, weather-fallback — six dates total) are pinned by NR backup
+# filenames and systemd unit mtimes, not in uptime_sot.
+
+# Provenance summary
+#
+# Earliest layer:  2026-02-06  (arduino_usb_serial_watchdog systemd install)
+# Most-recent:     2026-05-09  (manual_override_timeout)
+# Deprecated:      2026-05-12  (wet_bulb_fan_off_gate, decision date)
+# Total layers:    9 (8 active, 1 deprecated_rationale)
+# Window spanned:  ~3.1 months of the 80.3-day Meross-instrumented window
+#                  (2026-02-18 → 2026-05-10) — three layers (manual_override,
+#                  led_fault, stuck_relay_hysteresis) landed in the last 1-9
+#                  days of that window and therefore underwrite *future*
+#                  reliability, not retrospective 80-day reliability, per
+#                  uptime_sot.note_for_pass_c USER DECISION 2026-05-12.
+#
+# Important caveat (matches uptime_sot framing): the cabinet has been running
+# since May 2022 (corrected from "late 2022" 2026-05-02). The safety chain
+# evolved over those four years; eight of the nine layers above were added in
+# response to specific real-world failure modes encountered during operation,
+# not designed up-front. Pre-2026-02 deployment of any of these layers is not
+# reconstructible from the artefacts available on disk (the NR backup
+# directory was started 2026-02-08 as the new flow-edit-discipline practice
+# took hold; earlier flows.json revisions were not preserved).
