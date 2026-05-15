@@ -47,7 +47,7 @@ So the parents straddle the Ecuador–Colombia border, both on cloud-forest midd
 
 ## How mine got here
 
-Ecuagenera. Sphagnum-mounted division. Has bloomed annually since it settled — flowers come from pendant inflorescences pushing down through the sphagnum, the way most *Dracula* do.
+Ecuagenera. Arrived as a division, roots wrapped in long-fibre sphagnum for shipping. Now in a hanging basket on pure long-fibre sphagnum. Has bloomed annually since it settled — flowers come from pendant inflorescences pushing down through the sphagnum, the way most *Dracula* do.
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-12.jpg" caption="Hung in the lower right of the highland cabinet — flower at the right, *Heliamphora* roots above, neighbours all around. Reflective backing behind." class="fig-inline" >}}
 
@@ -58,7 +58,7 @@ Ecuagenera. Sphagnum-mounted division. Has bloomed annually since it settled —
 - Constant airflow — both parents come from places where mist sits but never stagnates.
 - Rainwater or RO only. Sphagnum never dries, never stays sodden either.
 - Deep shade. *D. vampira* in habitat is in the dimmest stratum of the cloud forest.
-- Basket, not pot — pendant flowers need room to push past the substrate.
+- Hanging basket on pure long-fibre sphagnum, no mix — pendant flowers need room to push past the substrate.
 
 Lives in the lower right of the [highland cabinet](/highland/), next to *D. pholeodytes* and below the *Heliamphora*.
 

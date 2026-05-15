@@ -47,7 +47,7 @@ I due genitori stanno a cavallo del confine Ecuador–Colombia, entrambi a quote
 
 ## Come è arrivata qui
 
-Ecuagenera. Divisione montata su sfagno. Fiorisce regolarmente una volta all'anno da quando si è ambientata: gli steli scendono attraverso lo sfagno, come succede in quasi tutte le *Dracula*.
+Ecuagenera. Arrivata come divisione, radici avvolte in sfagno a fibra lunga per la spedizione. Ora in cestino appeso, sfagno a fibra lunga puro. Fiorisce regolarmente una volta all'anno da quando si è ambientata: gli steli scendono attraverso lo sfagno, come succede in quasi tutte le *Dracula*.
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-12.jpg" caption="In basso a destra nel terrario di altopiano. Sopra le radici delle *Heliamphora*, intorno le piante vicine. Sullo sfondo il rivestimento riflettente." class="fig-inline" >}}
 
@@ -59,7 +59,7 @@ Ecuagenera. Divisione montata su sfagno. Fiorisce regolarmente una volta all'ann
 - Solo acqua piovana o osmotica.
 - Lo sfagno non si asciuga mai, ma non resta nemmeno fradicio.
 - In piena ombra. In natura *D. vampira* vive nello strato più scuro della foresta.
-- Cestino, non vaso: i fiori pendenti devono poter uscire dal substrato.
+- Cestino appeso, sfagno a fibra lunga puro, nessun mix: i fiori pendenti devono poter uscire dal substrato.
 
 Sta in basso a destra nel [terrario di altopiano](/it/highland/), accanto alla *D. pholeodytes* e sotto le *Heliamphora*.
 
