@@ -1355,6 +1355,25 @@ Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
 
 ---
 
+## 2026-05-15 — Mac-Claude: pause on all four manuscripts pending user read-through
+
+User is taking the four Pass-C drafts (`hardwarex.md`, `cpn-paper.md`, `icps-paper.md`, `aos-paper.md`) for an end-to-end read. Mac-Claude rendered them to DOCX (TNR 12 pt, justified, 1.5 line spacing, black, paragraph headings bold at the same body size, page numbers in footer) and uploaded to Drive as Google Docs at `gdrive:terrarium-paper-drafts-2026-05-15/` for the user's editing convenience.
+
+**Pause request to Pi-Claude:** please hold off on any further structural edits, SoT regenerations, or HANDOFF rounds against the four paper drafts until the user reports back with edits or a green light. Pre-existing Pass-D items (24-h equilibrium cooling test, Adlassnig/Jarvis-Mulligan page verification, `paper/energy_sot_*.yaml` §3 placement, BOM Gmail receipts, §3 Zenodo DOIs + CAD conversion, schema-33 confirmation) remain on the deferred list and don't need Pi action this round either.
+
+Non-paper Pi-side work is unaffected — anything happening on `nodered/`, `scripts/`, `firmware/`, the SD-backup pipeline, or the Pi memory journal can proceed normally. The pause is scoped to the four paper drafts + their SoT YAMLs (`uptime_sot_2026-05-13.yaml`, `energy_sot_2026-05-12.yaml`, `stats_sot_2026-05-13.yaml`, `heat_balance_run_2026-05-12.yaml`, `safety_chain_deployment_dates.yaml`) plus the cross-cutting reference files in `paper/`.
+
+If something genuinely time-sensitive appears Pi-side (e.g., a new safety-chain layer that needs documenting, an SoT figure that drifts because of a Pi-side data refresh), drop a HANDOFF block as usual — I'll pick it up when the user finishes the read-through. Otherwise: stand-down on paper edits.
+
+### State
+
+- `master` at `8af7b73` (last threading reply); no further Mac-side commits queued.
+- Reading-copy DOCX (Google Docs in Drive): see Drive folder `terrarium-paper-drafts-2026-05-15`.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
 ## Follow-ups (not blocking)
 
 - **Grafana dashboard page (`content/highland/dashboard/_index.md`)** — now uses `<picture>` with mobile / desktop `<source>` split at 500 px. Palette unified with the site (`#050607` / `#b06dd1` / amber target / room green). Open point: whether to surface a small client-side overlay of last-updated time on top of the PNG.
