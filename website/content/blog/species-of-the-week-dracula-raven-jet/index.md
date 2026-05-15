@@ -10,18 +10,38 @@ showReadingTime: true
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-10.jpg" caption="The full flower in hand. Three sepals fanned, yellow column, pink labellum below the gills." >}}
 
+## Sepals, not petals
+
+In *Dracula* the three big tail-bearing organs are **sepals**, fused at the base into a small cup. Petals exist — two of them — but they sit tiny and inconspicuous inside the cup, flanking the column. Everything you see in the hero photo above is sepal, sepal, sepal, plus the yellow column and the pink labellum.
+
 ## The grex
 
 Registered with the RHS in 2005 by **J. Leathers**.[^rhs] Primary hybrid — both parents are species, no further crosses in the pedigree. Vendors keep calling it *"the blackest of all the Draculas"*; the framing is marketing, but the pigmentation is real enough that the claim does the rounds in the trade.
 
-The grex name `Raven` and the cultivar name `'Raven' FCC/AOS` are different things — easy to confuse. The cultivar `'Raven'` is one selected clone within the Raven grex; it picked up an FCC from the AOS. `'Jet'`, `'Lenore'` and others are sibling clones from the same crosses. Mine carries the `'Jet'` tag from Ecuagenera.
+The grex name Raven and the cultivar name 'Raven' FCC/AOS are different things — easy to confuse. The cultivar 'Raven' is one selected clone within the Raven grex; it picked up an FCC from the AOS. 'Jet', 'Lenore' and others are sibling clones from the same crosses. Mine carries the 'Jet' tag from Ecuagenera.
 
 ## The name
 
 - **Genus *Dracula*** — Luer, 1978. "Little dragon", from the look of the elongated sepal tails and the monkey/vampire face inside the cup.
 - ***vampira*** — vampire. The dark veining over a green sepal base reads that way under most lighting.
 - ***roezlii*** — honoring **Benedikt Roezl** (1824–1885), Czech orchid collector. Discovered 800+ orchid species across the Americas, lost a hand in a sugarcane accident in Havana, founded the journal *Flora* in 1880.[^roezl]
-- **'Jet'** — color name. Pure black.
+- **'Jet'** — color name. With one footnote: pure jet (lignite) is a warm brown-black, not a neutral one. So the cultivar name is more accurate than it sounds.
+
+## The color, exactly
+
+Not jet black. Sepal tissue, sampled hex by hex:
+
+- Typical pixel: **#2D1614** — RGB(45, 22, 20). Hue 5°. Lightness 13%, saturation 39%.
+- Shadows: **#190E0C**. Highlights: **#493A1B**.
+- Red-dominant pixels: **80.9%** of the sepal field.
+
+A very dark warm red-brown. Closest Pantone textile codes: **19-1314 TCX "Chocolate Plum"** (≈ #311F1D) and **19-1101 TCX "Hot Chocolate"** (≈ #341C16). Closer to dried Amarone than to ink.
+
+The lower sepal reads as oxblood/garnet under cabinet light — the *D. roezlii* contribution. The other two go almost-black with reddish veining, which is *D. vampira*'s.
+
+{{< figure src="/img/collection/dracula/dracula-raven-jet-9.jpg" caption="Column close-up. Yellow gilled ring inside the cup, pink mushroom-cap labellum. Inverted-leopard yellow papillae visible at the sepal base — bright flecks on a dark field, on all three sepals." class="fig-inline" >}}
+
+The papillae are easy to miss at a distance but obvious in macro: small, scattered, almost lime-yellow, concentrated where each sepal meets the cup. All three sepals carry them.
 
 ## Where the parents are from
 
@@ -34,6 +54,8 @@ So the parents straddle the Ecuador–Colombia border, both on cloud-forest midd
 ## How mine got here
 
 Ecuagenera. Sphagnum-mounted division. Has bloomed annually since it settled — flowers come from pendant inflorescences pushing down through the sphagnum, the way most *Dracula* do.
+
+{{< figure src="/img/collection/dracula/dracula-raven-jet-12.jpg" caption="Hung in the lower right of the highland cabinet — flower at the right, *Heliamphora* roots above, neighbours all around. Reflective backing behind." class="fig-inline" >}}
 
 ## Growing it
 
@@ -48,9 +70,7 @@ Lives in the lower right of the [highland cabinet](/highland/), next to *D. phol
 
 ## Notes
 
-- The "Blackest of all the Draculas" reputation is not invented marketing — both parents independently contribute dark pigmentation. *D. vampira* has the heavy purple-black veining, *D. roezlii* the warm garnet body color. Crossed, the sepals come out near-uniform black with the column and labellum providing the only contrast.
-- {{< figure src="/img/collection/dracula/dracula-raven-jet-9.jpg" caption="Column close-up. The gilled yellow ring sits inside the cup; the labellum is the pink mushroom-cap below." >}}
-- Fungus-gnat pollination is documented for one *Dracula* species (*D. lafleurii*) — sepals and labellum mimic gilled mushrooms, attracting *Drosophilidae* that breed in fungal fruiting bodies.[^endara] No fieldwork on Raven or either of its parents, but the labellum shape on this hybrid is unmistakably mushroom-like. Make of that what you will.
+- Fungus-gnat pollination is documented for one *Dracula* species (*D. lafleurii*) — sepals and labellum mimic gilled mushrooms, attracting *Drosophilidae* that breed in fungal fruiting bodies.[^endara] No fieldwork on Raven or either of its parents, but the labellum shape on this hybrid is unmistakably mushroom-like.
 - Primary hybrids of *Dracula* tend to be vigorous and more forgiving than either parent. *D. vampira* in particular is notorious for sulking in cultivation; Raven inherits the look but is closer to *D. roezlii*'s temperament.
 
 ## Links

@@ -12,6 +12,7 @@
 {{- $src := .Get "src" -}}
 {{- $alt := .Get "alt" | default (.Get "caption") -}}
 {{- $caption := .Get "caption" -}}
+{{- $class := .Get "class" -}}
 
 {{- /* Resolve relative filenames against the page bundle. */ -}}
 {{- $imgURL := $src -}}
@@ -21,7 +22,7 @@
   {{- end -}}
 {{- end -}}
 
-<figure>
+<figure{{ with $class }} class="{{ . }}"{{ end }}>
   <img src="{{ $imgURL }}" alt="{{ $alt }}" loading="lazy">
   {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
 </figure>

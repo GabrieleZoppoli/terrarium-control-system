@@ -1565,6 +1565,64 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
   text-align: center;
 }
 .blog-post__body figure img { margin: 0 auto 0.5rem; }
+/* Smaller in-body figures — for detail shots and habitat photos that
+   shouldn't dominate the reading column. Hero figure (first one) stays
+   full-width. */
+.blog-post__body figure.fig-inline { max-width: 520px !important; margin: 1.6rem auto; }
+.blog-post__body figure.fig-inline img { width: 100% !important; max-width: 520px !important; }
+/* Click-to-enlarge cue: images in blog posts open in a lightbox. */
+.blog-post__body figure img { cursor: zoom-in; transition: filter 0.18s ease; }
+.blog-post__body figure img:hover { filter: brightness(1.06); }
+
+/* Minimal lightbox overlay — full-viewport image + arrow nav. */
+.lightbox-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none; align-items: center; justify-content: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+.lightbox-overlay.is-open { display: flex; }
+.lightbox-overlay img {
+  max-width: 92vw; max-height: 92vh;
+  object-fit: contain;
+  border-radius: var(--r-2);
+  box-shadow: 0 12px 60px rgba(0,0,0,0.7);
+}
+.lightbox-overlay__caption {
+  position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+  max-width: 80vw;
+  color: var(--text-2, #ccc);
+  font-family: var(--font-display, serif);
+  font-style: italic; font-size: var(--step-sm, 0.9rem);
+  text-align: center; line-height: 1.4;
+  padding: 0.4rem 0.9rem;
+  background: rgba(0,0,0,0.4);
+  border-radius: var(--r-2);
+}
+.lightbox-overlay__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: 0;
+  color: rgba(255,255,255,0.6);
+  font-size: 3rem; line-height: 1;
+  padding: 0 1.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+.lightbox-overlay__nav:hover { color: rgba(255,255,255,0.95); }
+.lightbox-overlay__nav--prev { left: 0; }
+.lightbox-overlay__nav--next { right: 0; }
+.lightbox-overlay__close {
+  position: absolute; top: 1rem; right: 1.4rem;
+  background: none; border: 0;
+  color: rgba(255,255,255,0.7); font-size: 2rem; line-height: 1;
+  cursor: pointer;
+}
+.lightbox-overlay__close:hover { color: white; }
+@media (max-width: 640px) {
+  .blog-post__body figure.fig-inline { max-width: 100%; }
+  .lightbox-overlay__nav { font-size: 2rem; padding: 0 0.8rem; }
+}
 .blog-post__body figcaption {
   font-family: var(--font-display);
   font-style: italic;

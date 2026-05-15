@@ -10,18 +10,38 @@ showReadingTime: true
 
 {{< figure src="/img/collection/dracula/dracula-raven-jet-10.jpg" caption="Il fiore intero in mano. Tre sepali aperti, colonna gialla, labello rosa sotto le lamelle." >}}
 
+## Sepali, non petali
+
+Nei *Dracula* i tre grandi organi che portano le caude sono **sepali**, fusi alla base in una piccola coppa. I petali ci sono — sono due — ma sono minuscoli e poco appariscenti, dentro la coppa, ai lati della colonna. Tutto ciò che si vede nella foto sopra è sepalo, sepalo, sepalo, più la colonna gialla e il labello rosa.
+
 ## Il grex
 
 Registrato dalla RHS nel 2005 da **J. Leathers**.[^rhs] Ibrido primario — entrambi i genitori sono specie, nessun incrocio successivo nel pedigree. I vivaisti continuano a chiamarlo *"il più nero di tutti i Dracula"*; è un'etichetta da catalogo, ma la pigmentazione tiene abbastanza da legittimare la formula.
 
-Attenzione: il nome del grex `Raven` e il cultivar `'Raven' FCC/AOS` sono due cose diverse. Il cultivar `'Raven'` è uno dei cloni selezionati all'interno del grex omonimo: ha ottenuto un FCC dall'AOS. `'Jet'`, `'Lenore'` e altri sono cloni gemelli derivati dagli stessi incroci. Il mio porta l'etichetta `'Jet'` da Ecuagenera.
+Attenzione: il nome del grex Raven e il cultivar 'Raven' FCC/AOS sono due cose diverse. Il cultivar 'Raven' è uno dei cloni selezionati all'interno del grex omonimo: ha ottenuto un FCC dall'AOS. 'Jet', 'Lenore' e altri sono cloni gemelli derivati dagli stessi incroci. Il mio porta l'etichetta 'Jet' da Ecuagenera.
 
 ## Il nome
 
 - **Genere *Dracula*** — Luer, 1978. "Piccolo drago", dall'aspetto delle caude allungate e dalla faccia da scimmia/vampiro che sta dentro la coppa fiorale.
 - ***vampira*** — vampiro. Le venature scure sul sepalo verde di fondo lo rendono tale in quasi tutte le luci.
 - ***roezlii*** — in onore di **Benedikt Roezl** (1824–1885), botanico e cercatore di orchidee ceco. Scoprì oltre 800 specie di orchidee nelle Americhe, perse una mano in un incidente con la canna da zucchero all'Avana, fondò la rivista *Flora* nel 1880.[^roezl]
-- **'Jet'** — nome di colore. Nero puro.
+- **'Jet'** — nome di colore. Con una nota a piè di pagina: il *jet* vero (lignite) è un nero caldo, tendente al bruno, non un nero neutro. Il nome del cultivar è quindi più accurato di quanto sembri.
+
+## Il colore, esatto
+
+Non è jet black. Tessuto sepalo, campionato hex per hex:
+
+- Pixel tipico: **#2D1614** — RGB(45, 22, 20). Tinta 5°. Luminanza 13%, saturazione 39%.
+- Ombre: **#190E0C**. Alte luci: **#493A1B**.
+- Pixel rosso-dominanti: **80,9%** della superficie sepalare.
+
+Un rosso-bruno molto scuro caldo. Codici Pantone tessili più vicini: **19-1314 TCX "Chocolate Plum"** (≈ #311F1D) e **19-1101 TCX "Hot Chocolate"** (≈ #341C16). Più Amarone secco che inchiostro.
+
+Il sepalo inferiore vira al rosso oxblood/granato sotto luce da terrario — il contributo di *D. roezlii*. Gli altri due restano quasi-neri con venature rosse, che è la firma di *D. vampira*.
+
+{{< figure src="/img/collection/dracula/dracula-raven-jet-9.jpg" caption="Dettaglio della colonna. Anello giallo a lamelle dentro la coppa, labello rosa a forma di fungo. Papille giallo-lime visibili alla base — macchie leopardo invertite, chiare su fondo scuro, su tutti e tre i sepali." class="fig-inline" >}}
+
+Le papille sono facili da mancare a distanza, evidenti in macro: piccole, sparse, quasi giallo-lime, concentrate dove ciascun sepalo si attacca alla coppa. Tutti e tre i sepali le portano.
 
 ## Da dove vengono i genitori
 
@@ -34,6 +54,8 @@ I due genitori coprono dunque il confine Ecuador–Colombia, entrambi a media-al
 ## Come è arrivata qui
 
 Ecuagenera. Divisione su sfagno. Fiorisce ogni anno da quando si è ambientata — gli steli scendono attraverso lo sfagno, come fanno quasi tutti i *Dracula*.
+
+{{< figure src="/img/collection/dracula/dracula-raven-jet-12.jpg" caption="In basso a destra nel terrario di altopiano — fiore a destra, radici di *Heliamphora* in alto, vicini di casa tutto intorno. Sullo sfondo il rivestimento riflettente." class="fig-inline" >}}
 
 ## Coltivazione
 
@@ -49,8 +71,6 @@ Vive in basso a destra nel [terrario di altopiano](/it/highland/), accanto al *D
 
 ## Note
 
-- Il primato di *"il più nero dei Dracula"* non è invenzione commerciale: entrambi i genitori contribuiscono indipendentemente alla pigmentazione scura. *D. vampira* porta le venature viola-nere, *D. roezlii* il colore di fondo granato caldo. Incrociati, i sepali risultano quasi uniformemente neri; colonna e labello restano gli unici contrasti.
-- {{< figure src="/img/collection/dracula/dracula-raven-jet-9.jpg" caption="Dettaglio della colonna. L'anello giallo a lamelle sta dentro la coppa; il labello è il cappello-fungo rosa subito sotto." >}}
 - L'impollinazione tramite moscerini dei funghi è documentata per una sola specie di *Dracula* (*D. lafleurii*) — sepali e labello imitano funghi a lamelle e attirano *Drosophilidae* che si riproducono nei corpi fruttiferi fungini.[^endara] Nessuno studio di campo su Raven né sui genitori, ma la forma del labello di questo ibrido è inequivocabilmente fungina.
 - Gli ibridi primari di *Dracula* tendono a essere vigorosi e più tolleranti di entrambi i genitori. *D. vampira* in particolare è famoso per fare il difficile in coltivazione; Raven ne eredita l'aspetto ma il carattere è più vicino a *D. roezlii*.
 
