@@ -27,15 +27,9 @@ The grex name Raven and the cultivar name 'Raven' FCC/AOS are different things �
 - ***roezlii*** — honoring **Benedikt Roezl** (1824–1885), Czech orchid collector. Discovered 800+ orchid species across the Americas, lost a hand in a sugarcane accident in Havana, founded the journal *Flora* in 1880.[^roezl]
 - **'Jet'** — color name. With one footnote: pure jet (lignite) is a warm brown-black, not a neutral one. So the cultivar name is more accurate than it sounds.
 
-## The color, exactly
+## On the color
 
-Not jet black. Sepal tissue, sampled hex by hex:
-
-- Typical pixel: **#2D1614** — RGB(45, 22, 20). Hue 5°. Lightness 13%, saturation 39%.
-- Shadows: **#190E0C**. Highlights: **#493A1B**.
-- Red-dominant pixels: **80.9%** of the sepal field.
-
-A very dark warm red-brown. Closest Pantone textile codes: **19-1314 TCX "Chocolate Plum"** (≈ #311F1D) and **19-1101 TCX "Hot Chocolate"** (≈ #341C16). Closer to dried Amarone than to ink.
+Not jet black. Held against a Pantone palette, the closest match is **"Chocolate Plum"** — a very dark warm red-brown. Definitely not a neutral black: a clear red bias right through the whole sepal field. Dried Amarone, not ink.
 
 The lower sepal reads as oxblood/garnet under cabinet light — the *D. roezlii* contribution. The other two go almost-black with reddish veining, which is *D. vampira*'s.
 

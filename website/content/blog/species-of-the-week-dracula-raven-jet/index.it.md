@@ -27,15 +27,9 @@ Attenzione, sono cose diverse: il *nome del grex* (Raven) e il *nome del cultiva
 - ***roezlii*** — dedicata a **Benedikt Roezl** (1824–1885), botanico e cercatore di orchidee ceco. Scoprì più di 800 specie nelle Americhe, perse una mano in un incidente con la canna da zucchero all'Avana, fondò nel 1880 la rivista *Flora*.[^roezl]
 - **'Jet'** — nome di colore. Una postilla: il *jet* (in italiano *giaietto*, una lignite nera molto compatta) ha sempre un sottotono caldo, marrone-nero, mai un nero neutro. Il nome del cultivar è quindi più preciso di quanto sembri.
 
-## Il colore esatto
+## Sul colore
 
-Non è nero pieno. Tessuto sepalare, campionato hex per hex:
-
-- Pixel tipico: **#2D1614** — RGB(45, 22, 20). Tinta 5°. Luminanza 13%, saturazione 39%.
-- Ombre: **#190E0C**. Alte luci: **#493A1B**.
-- Pixel rosso-dominanti: **80,9%** della superficie sepalare.
-
-Un rosso-bruno scurissimo, caldo. I codici Pantone tessili più vicini sono **19-1314 TCX "Chocolate Plum"** (≈ #311F1D) e **19-1101 TCX "Hot Chocolate"** (≈ #341C16). Più Amarone invecchiato che inchiostro.
+Non è nero pieno. Confrontando i sepali con una palette Pantone, quello che più gli somiglia è **"Chocolate Plum"** — un rosso-bruno scurissimo, caldo. Non un nero neutro: c'è un bias rosso evidente su tutta la superficie sepalare. Più Amarone invecchiato che inchiostro.
 
 Il sepalo inferiore, alla luce del terrario, vira sull'oxblood/granato: il contributo di *D. roezlii*. Gli altri due restano quasi neri con venature rosse, che è la firma di *D. vampira*.
 
