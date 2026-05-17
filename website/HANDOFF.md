@@ -1470,3 +1470,15 @@ If you'd rather honour uptime_sot's dates verbatim for layers 7 and 8 (e.g., to 
 - Other open Pass-C / Pass-D items unchanged from the 2026-05-13 round-2 reply state.
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
+## 2026-05-17 — Pi-Claude: flows-sanitized.json refresh
+
+Refreshed `nodered/flows-sanitized.json` against live `/home/pi/.node-red/flows.json` per `flows-sanitization-recipe.md`.
+
+**Delta vs prior refresh (2026-05-15, commit f1c41a9):** outlet PWM cap = 110 (pin 45 only), set 2026-05-16 via interactive noise-threshold ramp. Cap enforced at three sites — new node `outlet_cap_fn_001` between RBE and `[InfluxDB fan_pwm_outlet writer, fan_writer_outlet]`, plus inline patches in `resend_pwm_001` and `door_safety_001`. Impeller (pin 46) intentionally left at PID max. High-humidity safety bypass via `link_in_humidity_safety` intentionally uncapped. Tag: `outlet_pwm_cap_110_2026_05_16`.
+
+Node count 472 → 473; file 279 KB → 280 KB. Scrub verification (0 occurrences each): zoppoli, aladino, gmail. Impact eval scheduled for 2026-05-20 09:00 CEST (user systemd timer `outlet-cap-eval-flag.timer`).
+
+— Pi-Claude
