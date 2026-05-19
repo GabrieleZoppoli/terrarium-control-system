@@ -6,46 +6,46 @@ tags: ["neofinetia", "species-of-the-week", "orchids", "fukiran", "balcony"]
 showReadingTime: true
 ---
 
-赤兎. *Coniglio rosso*. I fiori sono rosso-rosa, gli speroni sono tre, e i due superiori si aprono verso l'alto come orecchie di coniglio. È tutta lì l'origine del nome del cultivar.
+赤兎 — *coniglio rosso*. I fiori sono rosso-rosa. Gli speroni sono tre, e i due superiori si arricciano verso l'alto come orecchie di coniglio. Il nome del cultivar è descrittivo.
 
 {{< figure src="/img/collection/neofinetia/neofinetia-falcata-akausagi-hero.jpg" caption="A sinistra: prima fioritura, primavera 2023, su una base in stile tokoname. A destra: primavera 2025, in vaso bianco da fukiran con l'etichetta calligrafica 赤兎 e la classica zolla di muschio (*kokedama*)." >}}
 
 ## Il triplo sperone
 
-Nei fiori della *Vanda falcata* tipica c'è un solo sperone lungo e ricurvo dietro il fiore, circa 3,7 cm, bianco, con fragranza notturna che ricorda la vaniglia e il caprifoglio.[^travaldo] 'Akausagi' ne porta **tre**: lo sperone normale che pende verso il retro, più altri due che si arricciano verso l'alto a partire dalla colonna. I due superiori si leggono come orecchie di coniglio. La reputazione del clone si basa sulla costanza — tre speroni ogni anno, non a sprazzi.[^negie]
+Una *Vanda falcata* normale ha un fiore bianco di 3 cm circa, fragrante di notte, con un solo sperone curvo di 3,7 cm dietro.[^travaldo] 'Akausagi' di speroni ne ha tre: quello che pende all'indietro, più due che salgono dalla colonna. I tre si ripresentano ogni anno, non a sprazzi — il motivo per cui questo clone è cercato per nome.[^negie]
 
-È stato selezionato dai semenzali di Syutennou (酒呑童子) e si propaga solo per divisione. Da qui la rarità, e il prezzo.[^negie]
+Viene dai semenzali di Syutennou (酒呑童子) e si propaga solo per divisione. Da qui la rarità, e il prezzo.[^negie]
 
 ## Il nome
 
-- **Genere *Neofinetia*** — H. H. Hu, 1925. Onora **Achille Eugène Finet** (1863–1913), botanico francese specializzato in orchidee giapponesi e cinesi. Il prefisso "Neo-" è stato aggiunto perché esisteva già un genere *Finetia*.[^wiki]
-- ***falcata*** — dal latino *a forma di falce*, per la curvatura delle foglie.
-- **'Akausagi' (赤兎)** — giapponese per "coniglio rosso". Descrive il colore e la disposizione degli speroni, non il leggendario cavallo dei Tre Regni (che condivide i caratteri ma non c'entra niente qui).[^negie]
-- ***Vanda falcata*** — il genere *Neofinetia* è stato ridotto a sinonimo di *Vanda* nel 2012 da **L. M. Gardiner**, su *Phytotaxa* 61.[^gardiner] La maggior parte dei coltivatori di fukiran e delle società giapponesi continua a usare *Neofinetia*; Kew/POWO usano *Vanda*. Entrambi i nomi sono corretti.
+- **Genere *Neofinetia*** — H. H. Hu, 1925. Onora **Achille Eugène Finet** (1863–1913), botanico francese che si occupò di orchidee giapponesi e cinesi. "Neo-" perché un genere *Finetia* esisteva già.[^wiki]
+- ***falcata*** — dal latino *a forma di falce*, per le foglie.
+- **'Akausagi' (赤兎)** — giapponese per "coniglio rosso". Gli stessi caratteri della "Lepre Rossa", il leggendario cavallo di Lü Bu nei Tre Regni: stesso modulo "colore + animale", riapplicato a cose diverse — non un omaggio.[^negie]
+- ***Vanda falcata*** — Gardiner ha messo *Neofinetia* in sinonimia con *Vanda* nel 2012 (*Phytotaxa* 61).[^gardiner] Quasi tutti i coltivatori di fukiran e le società giapponesi usano ancora *Neofinetia*; Kew e POWO usano *Vanda*.
 
 ## Da dove viene
 
-Nativa del Giappone (Kyushu, Honshu, Shikoku, Yakushima, Tanegashima, Okinawa), Corea del Sud e Cina centrale. Epifita su corteccia, litofita su roccia; foreste di media quota, ombra screziata.[^travaldo] Il tipo è stato raccolto da **Carl Peter Thunberg** sulle alture di Nagasaki, Kyushu, e descritto come *Orchis falcata* nella *Flora Japonica* (Uppsala, 1784).[^wiki]
+Giappone (Kyushu, Honshu, Shikoku, Yakushima, Tanegashima, Okinawa), Corea del Sud, Cina centrale. Epifita su corteccia, litofita su roccia; foreste di media quota, in ombra screziata.[^travaldo] **Carl Peter Thunberg** raccolse l'esemplare tipo sulle alture di Nagasaki negli anni 1770 e lo descrisse come *Orchis falcata* nella *Flora Japonica* (Uppsala, 1784).[^wiki]
 
 ## Come è arrivata qui
 
-Negie Orchids (Kiyoshige Negi), Giappone, novembre 2020.[^inv] Spedita via EMS con CITES e certificato fitosanitario, arrivata quasi in fioritura con diversi keiki già sul rizoma. La prima fioritura è di primavera 2023 (pannello sinistro dell'immagine in apertura) — una sola infiorescenza, e il carattere a tre speroni già stabile. Rinvasata in primavera 2025 in vaso giapponese da fukiran, montaggio classico a zolla di muschio con l'etichetta del cultivar in calligrafia (pannello destro).
+Negie Orchids (Kiyoshige Negi), Giappone, novembre 2020.[^inv] Arrivata quasi in fioritura, con diversi keiki già alla base. Ha fiorito la primavera successiva — una sola infiorescenza, già con i tre speroni (pannello sinistro). Rinvasata in primavera 2025 in vaso bianco da fukiran, zolla di muschio e cartellino in calligrafia (pannello destro).
 
-È la pianta più costosa di tutta la collezione.
+La pianta più costosa di tutta la collezione.
 
 ## Coltivazione
 
-Tutto l'anno sul balcone di Genova, sotto luce filtrata e ombra leggera. L'inverno mediterraneo (minime notturne intorno ai 5 °C, giornate sui 10–14 °C) coincide con il regime invernale riportato da AOS e Travaldo per la specie (3–13 °C).[^aos][^travaldo] L'estate, 25–32 °C di giorno con la brezza serale di mare a raffreddare, sta dentro l'inviluppo 26–31 °C / 19–23 °C riportato in habitat.[^travaldo]
+Tutto l'anno sul balcone di Genova, luce filtrata sotto ombra leggera. L'inverno mediterraneo (minime notturne intorno a 5 °C, giornate fra 10 e 14 °C) rientra nell'intervallo invernale che AOS e Travaldo riportano per la specie (3–13 °C).[^aos][^travaldo] In estate 25–32 °C di giorno, con la brezza di mare a rinfrescare la sera — vicino ai 26–31 °C diurni e 19–23 °C notturni rilevati in habitat.[^travaldo]
 
-- Luce filtrata. Il sole pieno mediterraneo di luglio brucia le foglie; l'ombra leggera basta e avanza.
-- Acqua abbondante in vegetazione, ma asciutta tra un'innaffiatura e l'altra. *Vanda falcata* fa fotosintesi CAM come un cactus — il marciume radicale è la causa di morte, non la sete.[^aos]
-- Sfagno a fibra lunga nella tradizionale zolla *kokedama* — compatto al centro, più aperto in superficie; le radici asciugano fra una pioggia e l'altra.
-- All'aperto tutto l'anno. Tollera brevi puntate vicino a 0 °C. *Non* fa parte del [terrario di altopiano](/it/highland/) — preferisce le variazioni di lunghezza del giorno e di temperatura del balcone.
+- Luce filtrata. Il sole pieno di mezz'estate brucia le foglie.
+- Acqua abbondante in vegetazione, ma asciutta fra un'innaffiatura e l'altra. *V. falcata* fa fotosintesi CAM. Il modo standard di farla morire è il marciume radicale.[^aos]
+- Sfagno a fibra lunga nella tradizionale zolla *kokedama* — compatto al centro, più aperto in superficie.
+- All'aperto tutto l'anno. Tollera brevi puntate vicino a 0 °C. Vive fuori dal [terrario di altopiano](/it/highland/): preferisce le escursioni termiche e il fotoperiodo del balcone.
 
 ## Note
 
-- **Impollinazione** — *Vanda falcata* ha fiori bianchi notturni, fragranti, con un lungo sperone: sindrome da impollinazione da sfingidi (falene crepuscolari) da manuale. Suetsugu, Tanaka, Okuyama & Yukawa (2015) hanno osservato *Theretra japonica* e *T. nessus* visitare i fiori e infilarsi nello sperone.[^suetsugu] Se la deformità a triplo sperone di 'Akausagi' resti un bersaglio "normale" per le falene non si sa; il cultivar produce seme se impollinato a mano, ma la selezione del carattere è stata fatta su criteri visivi.
-- **Fukiran (富貴蘭)** — "orchidea della ricchezza e del rango". *V. falcata* è coltivata in Cina dalla tarda dinastia Ming e in Giappone almeno dall'era Kanbun (1661–1673). Nel periodo Edo i cultivar di pregio erano riservati alla classe samurai e ai daimyō; l'AOS riporta che presentare un esemplare eccezionale a uno shōgun poteva fruttare un feudo.[^aos] La All Nippon Fuukiran Orchid Society ha oggi un registro di oltre 2.200 varietà selezionate, di cui circa 200 figurano nella graduatoria annuale Meikan.[^aos]
+- **Impollinazione** — fiori bianchi, fragranti di notte, con sperone lungo: una sindrome da impollinazione tipica delle sfingidi. Suetsugu, Tanaka, Okuyama & Yukawa (2015) hanno osservato *Theretra japonica* e *T. nessus* infilare la spirotromba negli speroni di piante selvatiche.[^suetsugu] Se le falene gestiscano allo stesso modo i tre speroni di 'Akausagi' è una domanda aperta: il cultivar produce semi se impollinato a mano, e il carattere a tre speroni è decorativo, selezionato a vista.
+- **Fukiran (富貴蘭)** — "orchidea della ricchezza e del rango". *V. falcata* è coltivata in Cina dalla tarda dinastia Ming e in Giappone almeno dall'era Kanbun (1661–1673). Nel periodo Edo i cultivar di pregio erano riservati alla classe samurai e ai daimyō; l'AOS riferisce che presentare un esemplare eccezionale allo shōgun poteva valere un feudo.[^aos] La All Nippon Fuukiran Orchid Society conta oggi oltre 2.200 varietà selezionate, di cui circa 200 nella graduatoria annuale Meikan.[^aos]
 
 ## Riferimenti
 

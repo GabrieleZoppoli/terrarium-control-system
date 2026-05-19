@@ -6,46 +6,46 @@ tags: ["neofinetia", "species-of-the-week", "orchids", "fukiran", "balcony"]
 showReadingTime: true
 ---
 
-赤兎. *Red rabbit*. The flowers are pinkish-red, the spurs come in threes, and the upper two branch upward like rabbit ears. That is the whole story behind the cultivar name.
+赤兎 — *red rabbit*. The flowers are pinkish-red. The spurs come in threes, and the upper two curl upward like rabbit ears. The cultivar name is literal.
 
 {{< figure src="/img/collection/neofinetia/neofinetia-falcata-akausagi-hero.jpg" caption="Left: first bloom, spring 2023, on a tokoname-style display stand. Right: spring 2025, in a white fukiran pot with the 赤兎 calligraphy tag and the classic moss-mound (*kokedama*) planting." >}}
 
 ## The triple spur
 
-Standard *Vanda falcata* flowers have a single long curved spur trailing behind the back of the bloom — roughly 3.7 cm, white, with nocturnal vanilla-honeysuckle fragrance.[^travaldo] 'Akausagi' carries **three**: the normal trailing spur, plus two more curling upward from the column area. The upper two read as rabbit ears. The clone's reputation rests on consistency — three spurs every year, not occasionally.[^negie]
+A normal *Vanda falcata* flower is about 3 cm across, white, fragrant at night, with one long curved spur of ~3.7 cm trailing behind.[^travaldo] 'Akausagi' has three spurs: the trailing one plus two more curling upward from the column. The three come every year, not just occasionally — the reason this clone is the one fukiran growers ask for by name.[^negie]
 
-It was selected from Syutennou (酒呑童子) seedlings and is propagated only by division. That is the structural reason it stays rare and expensive.[^negie]
+It came out of Syutennou (酒呑童子) seedlings. Propagated only by division — hence the rarity and the price.[^negie]
 
 ## The name
 
-- **Genus *Neofinetia*** — H. H. Hu, 1925. The genus honors **Achille Eugène Finet** (1863–1913), a French botanist who specialized in Japanese and Chinese orchids. "Neo-" was prefixed because an earlier genus *Finetia* already existed.[^wiki]
-- ***falcata*** — Latin *sickle-shaped*, after the curved leaves.
-- **'Akausagi' (赤兎)** — Japanese for "red rabbit". Describes the colour and the spur arrangement, not the legendary horse of the Three Kingdoms (which shares the characters but is unrelated here).[^negie]
-- ***Vanda falcata*** — *Neofinetia* was reduced to synonymy with *Vanda* in 2012 by **L. M. Gardiner** in *Phytotaxa* 61.[^gardiner] Most fukiran growers and Japanese societies still use *Neofinetia*; Kew/POWO use *Vanda*. Both are correct.
+- **Genus *Neofinetia*** — H. H. Hu, 1925. Honors **Achille Eugène Finet** (1863–1913), a French botanist of Japanese and Chinese orchids. "Neo-" because an earlier genus *Finetia* already had the name.[^wiki]
+- ***falcata*** — Latin *sickle-shaped*, after the leaves.
+- **'Akausagi' (赤兎)** — Japanese for "red rabbit". The same characters as Lü Bu's legendary "Red Hare" horse from the Three Kingdoms — coincidental reuse of a stock "colour + animal" compound, not a reference.[^negie]
+- ***Vanda falcata*** — Gardiner sank *Neofinetia* into *Vanda* in 2012 (*Phytotaxa* 61).[^gardiner] Most fukiran growers and Japanese societies still use *Neofinetia*; Kew and POWO use *Vanda*.
 
 ## Where it's from
 
-Native to Japan (Kyushu, Honshu, Shikoku, Yakushima, Tanegashima, Okinawa), South Korea, and central China. Epiphyte on tree bark, lithophyte on rocks; mid-elevation forests, dappled shade.[^travaldo] The type specimen was collected by **Carl Peter Thunberg** on the hills above Nagasaki, on Kyushu, and described as *Orchis falcata* in *Flora Japonica* (Uppsala, 1784).[^wiki]
+Japan (Kyushu, Honshu, Shikoku, Yakushima, Tanegashima, Okinawa), South Korea, central China. Epiphyte on tree bark, lithophyte on rock; mid-elevation forests, dappled shade.[^travaldo] **Carl Peter Thunberg** collected the type on the hills above Nagasaki in the mid-1770s; published it as *Orchis falcata* in *Flora Japonica* (Uppsala, 1784).[^wiki]
 
 ## How mine got here
 
-Negie Orchids (Kiyoshige Negi), Japan, November 2020.[^inv] Shipped EMS with CITES and phytosanitary paperwork, arrived near-blooming size with several keikis already on the rhizome. First flower the following spring (left panel of the hero) — one inflorescence, the three-spur character already locked in. Repotted in spring 2025 into a Japanese fukiran pot, classic moss-mound planting with the cultivar tag in calligraphy (right panel).
+Negie Orchids (Kiyoshige Negi), Japan, November 2020.[^inv] Arrived near blooming size, several keikis already at the base. First flower the following spring — one inflorescence, three spurs (left panel of the hero). Repotted in spring 2025 into a white Japanese fukiran pot, moss-mound planting, calligraphy tag (right panel).
 
-This is the single most expensive plant in the collection.
+The single most expensive plant in the collection.
 
 ## Growing it
 
-Year-round on the Genoa balcony, in filtered sunlight under light shade. Mediterranean winters (overnight lows ~5 °C, daytime ~10–14 °C) overlap the species' winter range as cited by AOS and Travaldo (3–13 °C).[^aos][^travaldo] Summer days 25–32 °C, evening sea-breeze cool-down — within the 26–31 °C / 19–23 °C summer envelope reported for habitat.[^travaldo]
+Year-round on the Genoa balcony, filtered sun under light shade. The Mediterranean winter (overnight lows ~5 °C, daytime 10–14 °C) sits inside the 3–13 °C winter range AOS and Travaldo report for the species.[^aos][^travaldo] Summer days 25–32 °C, cooler at night from the sea breeze — close to the 26–31 °C / 19–23 °C envelope cited for habitat.[^travaldo]
 
-- Bright filtered light. Direct mid-summer Mediterranean sun burns the leaves; light shade is enough.
-- Heavy water in growth, dry between waterings. *Vanda falcata* runs CAM photosynthesis like a cactus — root rot is the failure mode, not drought.[^aos]
-- Long-fibre sphagnum in the traditional fukiran *kokedama* mound — tight at the core, looser at the surface; roots run dry between rains.
-- Outdoors year-round. Tolerates short dips toward 0 °C. *Not* part of the [highland cabinet](/highland/) — it prefers the day-length and temperature swings of the open balcony.
+- Filtered light. Direct mid-summer Mediterranean sun burns the leaves.
+- Heavy water in growth, dry between waterings. *V. falcata* runs CAM photosynthesis. The usual failure is root rot.[^aos]
+- Long-fibre sphagnum in the traditional *kokedama* mound — tight at the core, looser at the surface.
+- Outdoors year-round. Tolerates short dips toward 0 °C. Lives outside the [highland cabinet](/highland/) — open-air day-length and temperature swings suit it better.
 
 ## Notes
 
-- **Pollination** — *Vanda falcata* has nocturnal, fragrant, long-spurred white flowers, the textbook hawkmoth syndrome. Suetsugu, Tanaka, Okuyama & Yukawa (2015) recorded *Theretra japonica* and *T. nessus* visiting and probing the spurs.[^suetsugu] Whether the triple-spurred deformity of 'Akausagi' still reads as a normal target to the moths is unknown; the cultivar will set seed by hand-pollination, but the trait was selected on visual grounds.
-- **Fukiran (富貴蘭)** — "orchid of wealth and rank". *V. falcata* has been cultivated in China since the late Ming Dynasty and in Japan since at least the Kanbun era (1661–1673). Edo-period tradition restricted the prized cultivars to the samurai and daimyō class; AOS notes that presenting an exceptional specimen to a shogun could earn the bearer an estate.[^aos] The All Nippon Fuukiran Orchid Society now lists over 2,200 selected varieties, ~200 of which sit on its annual Meikan ranking.[^aos]
+- **Pollination** — nocturnal fragrance, long spur, white flower: a hawkmoth-pollination syndrome. Suetsugu, Tanaka, Okuyama & Yukawa (2015) recorded *Theretra japonica* and *T. nessus* probing the spurs of wild-type plants.[^suetsugu] Whether moths handle 'Akausagi' the same way is an open question — the cultivar sets seed by hand-pollination, and the triple-spur character is decorative, selected by eye.
+- **Fukiran (富貴蘭)** — "orchid of wealth and rank". *V. falcata* has been cultivated in China since the late Ming and in Japan at least since the Kanbun era (1661–1673). Edo-period tradition restricted the prized cultivars to the samurai and daimyō class; AOS reports that a specimen presented to a shogun could earn the giver an estate.[^aos] The All Nippon Fuukiran Orchid Society now lists over 2,200 selected varieties, around 200 on its annual Meikan ranking.[^aos]
 
 ## Links
 
