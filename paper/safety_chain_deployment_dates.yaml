@@ -161,6 +161,61 @@ layers:
       fallback-hysteresis-fix.md and memory/fallback-fixes-plan-2026-05-15.md
       (Fix A, Fix D both applied 2026-05-15).
 
+  - id: serial_link_integrity
+    label: "Pi↔Arduino serial-link integrity (CRC-8 + atomic writes + retry)"
+    deployed: "2026-05-18"
+    git_evidence: "Failure-class start date pinned to the custom-serial migration: /home/pi/.node-red/flows_backup_20260216_234244_doorsafety.json is the earliest backup with serial-out + multi-line bundler function nodes (2 bundlers, 1 serial-out); the immediately prior backup /home/pi/.node-red/flows_backup_20260213_heartbeat.json has zero serial-out nodes (Firmata era, different protocol, different failure surface). Hardening pre-deploy snapshot: /home/pi/.node-red/flows_backup_20260518_*_serial_hardening.json. Pi-side flow changes captured in nodered/flows-sanitized.json commit dce7151 (CRC routine references: 0→9, crc8: 0→7). Arduino-side: ~/arduino-terrarium/arduino-terrarium.ino (CRC validation in command parser, ERR_CRC response). memory/serial-checksum-2026-05-18.md, memory/serial-hardening-A-B-2026-05-18.md, memory/serial-retry-2026-05-18.md."
+    status: active
+    notes: |
+      Three-part hardening of the Pi→Mega command path: (A) every Pi-side
+      write() is an atomic single-line payload, one \n-terminated command
+      per syscall, no bundling; (B) every command carries a CRC-8 byte the
+      Mega validates before acting, replying ERR_CRC on mismatch; (C) Pi
+      retries on every ERR class, not only on timeout. Defence-in-depth:
+      kernel packet-splitting of multi-line bundles (the diagnosed root
+      cause) is precluded by (A) at the OS layer; even if (A) regressed,
+      (B) at the controller layer would catch a partial command before any
+      GPIO write. Failure class closed: kernel splitting of multi-line
+      write() bundles at unlucky byte boundaries → Arduino parser sees
+      truncated commands (e.g. "P8,1" rather than "P8,134") → wrong PWM
+      latched for one ramp tick → visible brightness or fan-speed spike.
+      Artefact-pinned long-tail between failure-class onset and root-cause
+      fix is 91 days (2026-02-16 → 2026-05-18); the bug was intermittent
+      and was previously hypothesised as hardware/EMI rather than an OS-
+      layer write-splitting artefact. Note: an earlier draft of this notes
+      field referenced "presumably since 2022-05" (system build start);
+      Mac-Claude correctly flagged this as not artefact-pinned, since the
+      Firmata-era protocol (pre 2026-02-16) used binary length-prefixed
+      framing where a split write fails the length check rather than
+      latching a corrupted command. Overnight verification 2026-05-18 →
+      2026-05-19: 13 h of arduino-watchdog journal silence (zero [WARN],
+      zero USB reset), first spike-free dim-down across the 17:25–17:57
+      CEST window on record (pin 8 traced 132 → 134 monotonically vs the
+      intermittent up-kicks observed previously).
+
+  - id: mister_water_gate
+    label: "Mister water gate (ESP tank-level precondition)"
+    deployed: "2026-05-18"
+    git_evidence: "Pre-deploy snapshot: /home/pi/.node-red/flows_backup_20260518_*_esp_water_gate.json. Pi-side flow changes captured in nodered/flows-sanitized.json commit dce7151. Failure-mode incident referenced in MEMORY.md (Pi-Claude memory journal): '2026-03-02 pump-dry-run mode'. ESP firmware producing the gating signal: /home/pi/esp-water-level/esp-water-level.ino (MQTT topic esp/mistertank/tank_percent, 10 s cadence). memory/esp-water-gate-2026-05-18.md."
+    status: active
+    notes: |
+      Gate function upstream of the Mister python node that rejects any
+      mister "on" command if either (a) the ESP MQTT tank_percent message
+      is older than 5 minutes (stale-sensor case) or (b) tank_percent is
+      below 10% (low-reservoir case). All mist sources — humidity-driven
+      trigger, dawn-mist cron inject, manual Dashboard button — funnel
+      through the same gate, so the precondition is checked once at the
+      authority boundary rather than per-source. Closes the failure mode
+      seen 2026-03-02: pump dry-run while reservoir was empty. Layer 2
+      (mister_duration_failsafe) bounds the duration of any started mist
+      but does not prevent starting one without water; this layer prevents
+      the damage class entirely whenever the upstream signal is available.
+      Complementary to layer 2, not redundant: layer 2 limits worst-case
+      damage; this layer eliminates the precondition for that damage. If
+      the ESP signal itself fails (stale >5 min), the gate fails closed —
+      mister is blocked rather than allowed unconditionally — which is the
+      safer default for a damage-on-false-positive failure shape.
+
 # How to read this file alongside uptime_sot_2026-05-13.yaml
 #
 # uptime_sot.late_deployed_safety_layers names FIVE entries with explicit dates:
@@ -180,22 +235,43 @@ layers:
 #    therefore not represented here. They are environmental-control changes
 #    that happened to land in the same window.
 #
-# The remaining four layers (door, mister, freezer-daytime, USB-watchdog,
-# wet-bulb, weather-fallback — six dates total) are pinned by NR backup
-# filenames and systemd unit mtimes, not in uptime_sot.
+# The remaining layers (door, mister-failsafe, freezer-daytime, USB-watchdog,
+# wet-bulb, weather-fallback, serial_link_integrity, mister_water_gate —
+# eight dates total) are pinned by NR backup filenames and systemd unit
+# mtimes, not in uptime_sot. The last two were added 2026-05-19 in response
+# to the 2026-05-18 audit-fix marathon; both have NR backup snapshots
+# (flows_backup_20260518_*_serial_hardening.json, flows_backup_20260518_*_
+# esp_water_gate.json) plus a failure-class start date pinned to the prior
+# Firmata-era backup that does NOT contain the failure surface
+# (flows_backup_20260213_heartbeat.json: zero serial-out nodes).
 
 # Provenance summary
 #
 # Earliest layer:  2026-02-06  (arduino_usb_serial_watchdog systemd install)
-# Most-recent:     2026-05-09  (manual_override_timeout)
+# Most-recent:     2026-05-18  (serial_link_integrity, mister_water_gate —
+#                              joint, both landed in the 2026-05-18 audit-fix
+#                              marathon)
 # Deprecated:      2026-05-12  (wet_bulb_fan_off_gate, decision date)
-# Total layers:    9 (8 active, 1 deprecated_rationale)
-# Window spanned:  ~3.1 months of the 80.3-day Meross-instrumented window
-#                  (2026-02-18 → 2026-05-10) — three layers (manual_override,
-#                  led_fault, stuck_relay_hysteresis) landed in the last 1-9
-#                  days of that window and therefore underwrite *future*
-#                  reliability, not retrospective 80-day reliability, per
-#                  uptime_sot.note_for_pass_c USER DECISION 2026-05-12.
+# Total layers:    11 (10 active, 1 deprecated_rationale)
+# Window spanned:  ~3.4 months. Five layers underwrite *future* reliability
+#                  rather than retrospective 80-day reliability, per
+#                  uptime_sot.note_for_pass_c USER DECISION 2026-05-12:
+#                    - manual_override_timeout      (2026-05-09, last day of
+#                                                    the 80.3-day Meross-
+#                                                    instrumented window
+#                                                    2026-02-18 → 2026-05-10)
+#                    - stuck_relay_hysteresis       (2026-05-11 hardening of
+#                                                    layer 8, 1 day past
+#                                                    window end)
+#                    - led_fault_watchdog           (2026-05-05 model
+#                                                    recalibration of layer 7;
+#                                                    layer first ran 2026-05-04)
+#                    - serial_link_integrity        (2026-05-18, 8 days past
+#                                                    window end — see notes
+#                                                    on the 91-day failure-
+#                                                    class long-tail)
+#                    - mister_water_gate            (2026-05-18, 8 days past
+#                                                    window end)
 #
 # Important caveat (matches uptime_sot framing): the cabinet has been running
 # since May 2022 (corrected from "late 2022" 2026-05-02). The safety chain
