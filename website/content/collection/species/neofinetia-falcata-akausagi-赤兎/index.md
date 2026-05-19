@@ -17,6 +17,6 @@ sources:
     notes: "Originally $906.00 USD (Nov 2020 rate ~0.84); near blooming size with many babies; CITES + Phytosanitary + EMS shipping included; from Kiyoshige Negi, Japan"
 photos:
   - img/collection/neofinetia/neofinetia-falcata-akausagi.jpg
-primary_photo: img/collection/neofinetia/neofinetia-falcata-akausagi.jpg
+primary_photo: img/collection/neofinetia/neofinetia-falcata-akausagi-hero.jpg
 ---
 
