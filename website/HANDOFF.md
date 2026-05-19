@@ -1482,3 +1482,38 @@ Refreshed `nodered/flows-sanitized.json` against live `/home/pi/.node-red/flows.
 Node count 472 → 473; file 279 KB → 280 KB. Scrub verification (0 occurrences each): zoppoli, aladino, gmail. Impact eval scheduled for 2026-05-20 09:00 CEST (user systemd timer `outlet-cap-eval-flag.timer`).
 
 — Pi-Claude
+
+---
+
+## 2026-05-19 — Pi-Claude: post-marathon sync (flows + gitignore)
+
+User requested full sync after confirming overnight behaviour was clean ("absolutely perfect"). Commit `dce7151`.
+
+**What's captured in `nodered/flows-sanitized.json` (473 nodes, 280 → 292 KB):**
+
+The 2026-05-18 audit-fix marathon (~40 changes) is now in the repo. Highlights:
+- **Serial layer (Pi ↔ Mega)** — CRC-8 routine (9 references, was 0) + atomic single-line `write()` per command + retry-on-every-`ERR`. Resolved the long-standing "evening dim-down brightness spike" (root cause: kernel splitting 55-byte multi-line bundles at unlucky byte boundaries, not hardware/EMI). Pin 8 traced cleanly 132 → 134 across yesterday's 17:25–17:57 CEST dim-down — first spike-free dim-down on record.
+- **LED watchdog** — reset from 12-day locked state via `POST /inject/led_watchdog_reset_001`. Silent for 13 h since (= healthy).
+- **ESP water gate** — Pi-side mister blocked if `tank_percent` stale >5 min or <10%. Closes the 2026-03-02 pump-dry-run failure mode.
+- **Tier 1-3 NaN guards** — 28 → 35 `NaN` occurrences in the sanitised file. Flow audit B1-B4 + Tier 1-3 defensive guards.
+- **Arduino sketch (separate from flows.json)** — Bug 3 (pin 8 default 0 → 255 so LEDs are off at boot, not full-bright) + Bug 5 (Timer 1/5 channels disconnected at init, no MOSFET glitches during sketch upload). Tracked in `~/arduino-terrarium/`, not this repo.
+- **outlet PWM cap = 110** retained from 2026-05-16 (impact eval still scheduled 2026-05-20).
+
+**Reverted same day (2026-05-18, also captured by absence):** B4 30 s heartbeat window — was too tight given corruption-induced gaps, caused false USB resets.
+
+**`.gitignore` defence-in-depth** — added `flows_cred.json`, `nodered/flows_cred.json`, `*.cred`, `secrets/`. Today's safety was incidental (creds live at `/home/pi/.node-red/flows_cred.json` outside the repo); any future copy/symlink into `nodered/` would have committed creds. Explicit > incidental.
+
+**Overnight verification (13 h post-deploy, 2026-05-18 18:23 → 2026-05-19 07:09 CEST):**
+- Arduino watchdog: zero `[WARN]`, zero USB resets, zero `REBOOT`. Quietest stretch in weeks.
+- 17 freezer cycles, no chatter; longest sustained block 22:28 → 02:38 CEST (4h10m through coldest window).
+- Tracking error ±1 °C all night. Deepest 12.97 °C at 04:00 CEST (near the 12.3 °C cooling-test floor).
+- 14 humidity-driven mist events + dawn mist fired on schedule at 05:30:00 CEST.
+- Single transient DNS timeout at 06:58 CEST, no escalation.
+
+### State
+
+- Pi side: nothing pending after this push. Sanitised supplement is current.
+- **Papers untouched** per the 2026-05-15 pause for user read-through.
+- Two untracked PNGs at `website/static/img/highland/dashboard/` (desktop.png 1600×900, mobile.png 960×2200, both dated 2026-04-17, unreferenced anywhere in `website/`). Pi-Claude held off on committing — provenance unclear, may be intended for a page that doesn't exist yet, or stale. **If they're yours, please commit; if stale, please remove.**
+
+— Pi-Claude
