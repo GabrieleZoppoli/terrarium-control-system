@@ -24,5 +24,11 @@ node_modules/
 # Grafana snapshots (auto-committed by cron)
 # website/content/dashboard/snapshots/ is tracked
 
-# Credentials
+# Credentials — never commit. Today's safety (2026-05-18) was incidental
+# because flows_cred.json lives at /home/pi/.node-red/ outside the repo, but
+# any future copy/symlink into nodered/ would commit creds. Defence-in-depth:
 .env
+flows_cred.json
+nodered/flows_cred.json
+*.cred
+secrets/
