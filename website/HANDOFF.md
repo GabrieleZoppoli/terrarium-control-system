@@ -1648,3 +1648,45 @@ Acknowledged — not touching `website/data/collection.csv`, `dendrogram.json`, 
 - All paper edits remain paused per 2026-05-15 directive — the YAML expansion above is per your explicit delegation in `93be848` Q1, not a pause break.
 
 — Pi-Claude
+
+---
+
+## 2026-05-19 evening — Pi-Claude: SD-backup cascade incident + watchdog hardenings
+
+Self-inflicted incident this afternoon while validating the never-yet-executed SD-backup script. Full forensic write-up: `memory/incident-2026-05-19-fan-cascade.md`. Headlines below for your visibility — none of this touches `paper/` (the pause holds) but the safety-chain story has evolved, which may matter for HWX §6.6/§7.6 Pass-D threading whenever the read-through resumes.
+
+### What happened
+
+Validation run of `/usr/local/bin/sd-backup-to-gdrive.sh` filled the SD card at 17:18 CEST because the script writes the staged `.img.gz` to `/var/tmp/` — on the same card it's imaging. (It worked on 2026-05-12 because the SD's unused space was still compressible enough; a week of NR/InfluxDB churn raised the entropy of the unused FS regions past the threshold.) ENOSPC cascaded through NR → InfluxDB write pipeline → `arduino-watchdog.sh` (which reads `arduino_status` from InfluxDB to verify serial liveness — when the writes failed, it concluded the Arduino was dead) → seven USB-resets between 20:30 and 20:36 CEST → fans physically off for ~10-15 s per cycle because yesterday's Bug-5 sketch fix disconnects Timer 1/5 PWM channels at Arduino init. Then the LED Power Watchdog (layer 7) tripped on the stale `payload.freezer_status=false` global and locked itself OUT (LOCKED state) at 20:42:36 CEST, surfaced as an email alert at 22:05 CEST. Resolution required: NR restart, InfluxDB restart, manual LED watchdog reset injection.
+
+### Three fixes deployed Pi-side tonight
+
+1. **`arduino-watchdog.sh#get_heartbeat_age()` — added an InfluxDB probe gate.** Before consulting `arduino_status`, the watchdog now first queries a known-fresh measurement (`local_temperature`). If that probe is also empty, InfluxDB or NR is the problem rather than the Arduino, and the watchdog refuses to USB-reset. Backup at `/usr/local/bin/arduino-watchdog.sh.bak_20260519_214433`. Closes the dependency-loop class where a detector's liveness signal goes through the same broken subsystem as the subject's data.
+
+2. **`sd-backup-to-gdrive.sh` — full rewrite to stream `dd | pigz | rclone rcat` directly to gdrive.** No local temp file means no `/var/tmp/` fill possible means the entire cascade chain cannot recur from this root cause. Added per-stage `PIPESTATUS` checks, partial-remote cleanup on failure, and a `MIN_SIZE_BYTES=100 MB` sanity check to catch "upload succeeded with garbage" cases. Backup at `/usr/local/bin/sd-backup-to-gdrive.sh.bak_20260519_215339`. Validation dry-run currently streaming (started 22:15 CEST); will update memory when the background task completes.
+
+3. **`led_watchdog_fn_001` (NR function node) — conservative trip threshold + auto-recovery from LOCKED.** Introduces `maxPlausibleTripW(ctx)` which computes the trip threshold under the worst-case variant of stale-prone inputs (currently just `freezer_status` — the binary that desynced today). Lock decisions now require the actual to exceed expected under EVERY plausible input variant; today's exact failure shape (`freezer_status=false` reported but actually true, actual=108W) would no longer trip because max-plausible expected = 32+0+170 = 202W with trip threshold 262W >> 108W. The LOCKED state now also self-tests on every Meross sample (30s) — after 3 consecutive samples below max-plausible threshold (~90s), auto-clears to IDLE and restores Tapo state per scheduler intent. Tag: `led_fault_watchdog_2026_05_19_stale_input`. Deployed via atomic `POST /flows` with `Node-RED-Deployment-Type: nodes` (no NR restart needed; rev `4572fb19…` → `7f44938a…`). One hardening deferred: live Tapo cross-check before locking — would require LED watchdog → subflow → python_function refactor for async polling; tracked in memory entry as future work.
+
+### Implications for the paper (no action needed now; capture for read-through resumption)
+
+The 2026-05-19 LED watchdog hardening is a substantive change to layer 7 (`led_fault_watchdog`) in `paper/safety_chain_deployment_dates.yaml`. The deployed date (2026-05-04) is unchanged — this is a hardening of an existing layer, same pattern as `stuck_relay_hysteresis` hardening of layer 8 (`power_vs_commanded_check`) on 2026-05-11 that you already accept in the YAML. When you resume Pass-D threading:
+
+- The `led_fault_watchdog` notes field could append a `**Hardening 2026-05-19:**` paragraph mentioning the conservative `maxPlausibleTripW` threshold + the LOCKED auto-recovery, in the same shape the existing layer 8 notes describe the stuck-relay-hysteresis hardening.
+- The §7.6 "underwrites future not retrospective reliability" list grows by one — the 2026-05-19 hardening of layer 7 should be added alongside the other late-landing changes. Pi-Claude can write the YAML edit when you give the go; not done preemptively because the read-through pause is still in effect and a layer-notes edit is not Q1-style explicitly-delegated work.
+- The incident itself is also worth a sentence somewhere in §7.6 as an instance of the safety chain working as designed under cascading failures (the watchdog DID lock when its inputs said it should; the design flaw was in the inputs not the watchdog, and the system was diagnosable + recoverable within hours). User-facing prose decision — defer to you.
+
+### What's in this commit
+
+- `nodered/flows-sanitized.json` — refreshed from live (+6.7 KB, captures the LED watchdog hardening; `maxPlausibleTripW` references: 0 → 5, `LOCKED_AUTORECOVER_SAMPLES`: 0 → 5, tag occurrence: 0 → 1)
+- This HANDOFF entry.
+
+Pi-side-only changes (NOT in this commit, recorded only in memory): `arduino-watchdog.sh`, `sd-backup-to-gdrive.sh`. The `paper/safety_chain_deployment_dates.yaml` layer-7 notes update is NOT in this commit either — see "Implications" above; awaiting your go.
+
+### State
+
+- `master` at `d4c7ec7` + this commit pending push.
+- Pi side: SD-backup validation streaming in background; will update `sd-backup-rclone` memory when it completes (success or failure).
+- All paper edits remain paused per 2026-05-15 directive.
+- Dendrogram side untouched (explicit hold per your 2026-05-19 note).
+
+— Pi-Claude
