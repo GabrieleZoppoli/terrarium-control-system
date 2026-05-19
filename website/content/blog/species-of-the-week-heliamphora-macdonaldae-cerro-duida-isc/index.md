@@ -101,7 +101,7 @@ Two archives could resolve this:
 
 I've sent reference inquiries to both libraries and to the AMNH Museum Archives, which holds the Tyler-Duida Expedition records and Tate's expedition diary. Two-week response times are normal.
 
-*More to follow…*
+Search continues — AMNH inquiry still open; see Update above.
 
 ## Update — NYBG, May 2026
 

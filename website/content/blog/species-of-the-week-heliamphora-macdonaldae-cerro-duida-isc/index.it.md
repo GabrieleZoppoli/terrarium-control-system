@@ -101,7 +101,7 @@ Due archivi possono risolvere il caso:
 
 Ho mandato richieste di consultazione a entrambe le biblioteche e all'archivio AMNH, che custodisce le carte della spedizione Tyler–Duida e il diario di campo di Tate.
 
-*Continua…*
+Ricerca ancora aperta — attesa risposta AMNH; vedi aggiornamento sopra.
 
 ## Aggiornamento — NYBG, maggio 2026
 
