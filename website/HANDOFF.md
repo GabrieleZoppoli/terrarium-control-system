@@ -1601,3 +1601,50 @@ If the cap turned out to be a regression rather than a win, flag that in the ent
 - Deferred for Pass-D threading once read-through resumes: HWX §6.6 + §7.6 layers 10–11 (after you append the YAML rows), plus the existing Pass-D list from 2026-05-15.
 
 Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---
+
+## 2026-05-19 — Pi-Claude: Q1-Q3 closed out
+
+All three actioned. Pulled `93be848`, executed below, pushed.
+
+### Q1 — done. Layers 10 + 11 appended (commit `a3a6cee`)
+
+YAML grown from 9 to 11 entries. Both rows authored Pi-side per your delegation; both follow the existing schema verbatim (`id` / `label` / `deployed` / `git_evidence` / `status` / `notes`).
+
+**On the phrasing caveat for layer 10's notes — your call was correct.** I had artefact evidence tighter than the 2026-02-08 lower bound you offered as a fallback. The relevant grep across NR backups:
+
+| backup | serial-out nodes | multi-line bundlers |
+|---|---|---|
+| `flows_backup_20260212_arduino_status.json` | 0 | 0 |
+| `flows_backup_20260213_heartbeat.json` | 0 | 0 |
+| `flows_backup_before_serial.json` (explicit pre-migration snapshot) | 0 | 0 |
+| `flows_backup_20260216_234244_doorsafety.json` | **1** | **2** |
+| `flows_backup_20260217_085137_circulation.json` | 1 | 3 |
+| (every subsequent backup) | 1 | ≥3 |
+
+So the failure surface (multi-line write pattern + custom-serial Pi→Mega path) first appears in artefact-form on 2026-02-16, the day of the Firmata → custom-serial migration. The four-year framing is gone from the notes; the new line reads "Artefact-pinned long-tail between failure-class onset and root-cause fix is 91 days (2026-02-16 → 2026-05-18)", with an explicit note that the earlier "presumably since 2022-05" draft was dropped per your caveat because Firmata used binary length-prefixed framing where a split write fails the length check rather than latching a corrupted command. The paper-worthy point — intermittent kernel-boundary bug, multi-month survival in a real-world deployment, prior diagnostic hypotheses of hardware/EMI — survives at 91 days.
+
+**Footer updates:** most-recent 2026-05-09 → 2026-05-18 (joint, both new layers); total 9 → 11 (10 active + 1 deprecated_rationale); the "underwrites future not retrospective reliability" line now lists five (was three) late-landing layers — manual_override, stuck_relay_hysteresis, led_fault_watchdog, serial_link_integrity, mister_water_gate. The "How to read this file alongside uptime_sot" section's "remaining four layers (... — six dates total)" count was already an arithmetic mismatch in the original (lists six items, says four); updated to "eight dates total" and the new layers added to the enumeration.
+
+Ready for your Pass-D threading whenever the read-through pause lifts. The two new rows' notes are written to give §6.6 prose self-contained material (failure mode → mechanism → defence-in-depth shape → artefact-pinned long-tail), so threading should be additive rather than requiring rewrite of prose around the existing 9 rows.
+
+### Q2 — done. PNGs removed (no commit needed; they were untracked)
+
+`website/static/img/highland/dashboard/desktop.png` + `mobile.png` deleted from the Pi working tree, then the empty `dashboard/` directory removed. Your forensic note matches my read — the 1600×900 desktop tracks your `snapshot-desktop` board exactly, the 960×2200 mobile is a stale prototype. They've been sitting untracked since 2026-04-17 with no references anywhere; deletion is a no-op from git's perspective (working-tree-only change), so no commit is needed for the removal itself.
+
+### Q3 — noted. Defaulting to (a)
+
+Will land a structured handoff entry once `outlet-cap-eval-flag.timer` fires at 09:00 CEST 2026-05-20 and the comparison numbers are computable. Will follow the `mist-tuning-audit-2026-05-11.md` shape (per-period mean / median / 95th percentile RH-error against target, stratified by stratum: sealed-day, sealed-night, mixing-day, mixing-night, freezer-on, freezer-off — same six strata as the mist analysis). If the cap is a regression I'll prefix the HANDOFF entry title with **`MATERIAL FINDING:`** per the `211267c` convention.
+
+### Re: your "dendrogram-side regen drift" note
+
+Acknowledged — not touching `website/data/collection.csv`, `dendrogram.json`, `photo_manifest.json`, or any `content/collection/*.md` from the Pi side. The "DO NOT TOUCH" list in the prompt to you from the user this morning already includes the dendrogram corner, but I'll add a explicit hold note in any future Pi-side commits that brush near `website/data/` or `content/collection/`.
+
+### State
+
+- `master` at `a3a6cee` + this commit pending push.
+- Pi side: nothing pending after this push. Outlet-cap eval is on a systemd timer; will reactivate the conversation when it fires.
+- All paper edits remain paused per 2026-05-15 directive — the YAML expansion above is per your explicit delegation in `93be848` Q1, not a pause break.
+
+— Pi-Claude
