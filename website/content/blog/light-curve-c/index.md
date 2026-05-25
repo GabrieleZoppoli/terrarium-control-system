@@ -176,3 +176,84 @@ Expected effect on a clear-night cooling fight: half the events × similar laten
 - Plant-side: I don't expect to see anything on a 1-day timescale, but at the 2026-05-25 followup I'll inspect the upper tier (Heliamphora, highland Nepenthes) for any photoinhibition tinging or pitcher abortion, and the lower-tier orchids for any leaf-tip burn.
 
 The full post-curve hour-of-day assessment runs at 2026-05-25 as planned.
+
+---
+
+## Followup — 2026-05-25 (T+21 days)
+
+Three weeks in. Genoa stepped from spring to summer abruptly on 2026-05-22 (room mean +2.7 °C overnight, every day since pushing further). To keep the PRE/POST comparison season-controlled, the followup window stops on **2026-05-21** — leaving 17 post-curve days of pre-summer data against 21 pre-curve baseline days.
+
+- **PRE Curve C**: 2026-04-13 → 2026-05-03 (21 days)
+- **POST Curve C**: 2026-05-05 → 2026-05-21 (17 days)
+- 2026-05-04 excluded as deployment day, 05-22 onward excluded as summer regime.
+
+### Descriptives — median + IQR
+
+Means and standard deviations would be the wrong summary here. The afternoon RH distribution has long upper tails (sealed-cabinet morning highs spilling into the afternoon bins) and the POST window picks up wider day-to-day variability as Genoa drifts upward. Medians + IQRs are cleaner.
+
+| Metric (15:00–18:00 CEST) | PRE Curve C | POST Curve C | Δ median |
+|---|---|---|---|
+| Cabinet RH | **84.90 %** [IQR 82.67 – 88.52] | **83.55 %** [IQR 78.30 – 88.27] | **−1.36 pp** |
+| Cabinet temp | 20.25 °C [19.71 – 21.18] | 21.45 °C [20.26 – 22.24] | +1.20 °C |
+| Outlet fan PWM | 66 [56 – 98] | 110 [85.5 – 213] | +44 |
+| Mist events / day | 8 [IQR 0 – 12] | 10 [IQR 5 – 14] | +2 |
+
+POST RH IQR widens at the bottom — the lower quartile drops from 82.67 % to 78.30 %. The PID is now running the outlet fans hard enough to occasionally push the cabinet a few percent below the median, but no individual 5-min sample below the 75 % floor in this dataset, so the floor clamp never engaged.
+
+### The headline picture
+
+{{< figure src="afternoon-creep.png" caption="Cabinet humidity, hour-of-day median ± IQR (PRE vs POST Curve C). Highlighted band = 15:00–18:00 creep window. The POST median sits 1–2 pp below PRE throughout the afternoon; the climb slope is similar." >}}
+
+The afternoon climb from ~14:00 onward is the original creep that prompted the redesign. PRE climbs from ~83 % at 14:00 to ~88-89 % at 18-19. POST climbs from ~81 % to ~86 %, on a similar slope but starting lower and ending lower. The IQR bands tell the rest of the story: POST runs noticeably wider, especially below the median — the curve generates enough LED heat that the PID-driven outlet exchange occasionally drives the cabinet drier than typical, on the days the room can absorb the moisture.
+
+Zooming out to the full day:
+
+{{< figure src="humidity-prepost.png" caption="Cabinet humidity, full-day hour-of-day median ± IQR. The curve's effect is concentrated in the 11:00–19:00 window where the LED-heat lever operates. The early-morning sealed-cabinet peak around 06:00 is actually a few percentage points *higher* POST — likely a side-effect of seasonally warming Genoa nights making the freezer cycle harder, generating more condensation/recovery activity. Outside the curve's window of effect, ambient is doing the driving." >}}
+
+### Was the room warming during the POST window?
+
+Yes. Genoa was unusually cool through April and slowly warmed through May. By the second half of the POST window, room WBT averaged ~1 °C warmer than during the PRE window. Because the cabinet is air-coupled to the room through the outlet+impeller fans, **warmer room WBT pushes cabinet RH up**. So the curve was simultaneously fighting two things: the afternoon creep it was designed to fix, and a slow ambient warming pushing in the opposite direction.
+
+To isolate the curve's contribution, I regression-adjusted for room WBT.
+
+### Unadjusted vs WBT-adjusted regression
+
+OLS on 5-minute observations within the 15:00–18:00 window, cluster-robust standard errors by day (samples within a day share weather noise):
+
+| Model | POST coefficient | room covariate(s) | R² |
+|---|---|---|---|
+| Unadjusted: `cabinet_RH ~ POST` | **−4.40 pp** [95 % CI −7.64, −1.17], p = 0.008 | — | 0.21 |
+| Adjusted: `cabinet_RH ~ POST + room_WBT` | **−4.08 pp** [95 % CI −6.71, −1.45], p = 0.002 | room_WBT: **+2.33 pp/°C** (p < 10⁻⁵) | 0.42 |
+| Saturated: `cabinet_RH ~ POST + room_T + room_RH` | −4.15 pp [−7.86, −0.45], p = 0.028 | room_T n.s.; room_RH: **+0.34 pp/%** (p < 10⁻⁸) | 0.42 |
+
+Three things worth saying:
+
+**1.** The unadjusted and WBT-adjusted POST coefficients are close (−4.40 vs −4.08). The room warming explains a small portion of the unadjusted delta but not most of it. The curve genuinely pushed afternoon cabinet RH down ~4 pp at the mean.
+
+**2.** The OLS-mean delta (~−4 pp) is much larger than the marginal-median delta (−1.36 pp). Means are sensitive to upper-tail RH spikes; the curve appears to have flattened those more aggressively than it shifted the central tendency. Both numbers are honest descriptions of different aspects of the same effect.
+
+**3.** Saturated model reveals: **room dry-bulb temperature does not independently predict cabinet RH once room RH is controlled.** The cabinet's RH at any moment is, on the ambient side, driven by room humidity — not by room heat. Physically: it's the moisture inflow from impeller-driven air exchange that matters, and at this temperature range absolute moisture goes with RH, not T.
+
+### Room humidity as the dominant ambient driver
+
+That last finding is the result I hadn't expected. The cabinet is less thermally isolated from Genoa than I'd implicitly assumed when picking peak heights — what the cabinet "feels" from the room is mostly the room's water vapor content. Per +1 percentage point of room RH, cabinet RH at the same moment is +0.34 pp higher. Over a typical summer-vs-winter swing of, say, 20 pp room RH, that's ~7 pp on the cabinet — bigger than the curve's effect.
+
+Practical implication: the seasonal Genoa indoor humidity cycle will move the cabinet more than the LED-heat lever can compensate for, in either direction. The curve is a useful tool to flatten the afternoon shape, but bulk humidity tracking is dominated by ambient. Worth remembering when next tempted to tune the curve further.
+
+### Verdict
+
+Three converging pieces of evidence:
+
+- **Raw descriptive (median)**: afternoon RH ~1.4 pp lower, IQR wider at the bottom, the creep is still there but starts and ends lower.
+- **OLS, WBT-adjusted (mean)**: the curve's pure effect on afternoon cabinet RH is **−4.08 pp** (95 % CI [−6.71, −1.45], p = 0.002), with cluster-robust SE accounting for within-day autocorrelation.
+- **Cabinet temperature**: +1.20 °C median in the afternoon, comfortably within the 24 °C target ceiling — the T-PID has not had to engage during daytime.
+
+The experiment did what it was supposed to do, and the regression analysis revealed something extra: room humidity is the largest single ambient predictor of cabinet humidity. The cabinet's air-coupling to Genoa via the impeller/outlet fans dominates the LED heat lever for bulk humidity tracking.
+
+### What's next
+
+- **Summer-onset window (2026-05-22 onward)**: not analyzed here on purpose. Will revisit in 4–6 weeks when there's a clean summer-regime sample. Expecting the cabinet to track Genoa upward, and the freezer to engage during daytime — the regime the May 2026 PID and outlet-cap design changes were preemptively built for.
+- **Plant tier check at 2026-06-15 (six-week mark)**: upper-tier *Heliamphora* and *Nepenthes* for photoinhibition; lower-tier orchids for leaf-tip burn. No symptoms at three weeks.
+- **Mist count delta isn't cleanly attributable.** The regime-aware mist tuning landed the same week as Curve C, so the +2 events/day median could be either. Need a longer baseline of post-tuning, post-curve days to disentangle.
+
+Analysis script (with the WBT-adjusted regression): `~/terrarium-analysis/light_curve_followup_3w.py`. Raw data via InfluxDB `highland`.
