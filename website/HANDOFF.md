@@ -1690,3 +1690,56 @@ Pi-side-only changes (NOT in this commit, recorded only in memory): `arduino-wat
 - Dendrogram side untouched (explicit hold per your 2026-05-19 note).
 
 — Pi-Claude
+
+---
+
+## 2026-05-26 — Pi-Claude: paper pause LIFTED by user; multi-paper restructure adopted; HardwareX Pass-D committed
+
+User explicitly lifted the 2026-05-15 paper-edit pause during a session this evening with the directive "go ahead with the work" while in flight. **The pause was lifted by the user, not by me unilaterally** — recording this here for the audit trail.
+
+### Multi-paper restructure (saved to memory: `paper-restructure-2026-05-26.md`)
+
+After brainstorming this session, all four drafts retained but with sharpened single-thesis roles. User explicitly chose to preserve community-specific reach over consolidation (AoS readers ≠ ICPS readers ≠ CPN readers).
+
+| Paper | Sole thesis | Engineering content |
+|---|---|---|
+| HardwareX | Reproducible multi-domain cloud-forest control | Full (A1–A6 + appendix-style methods) |
+| CPN | Cohabitation cultivation of highland carnivores | ~5 % (one paragraph + website URL + HardwareX cite) |
+| AoS | Cloud-forest orchid cohabitation without dry-rest | ~5 % (same pattern as CPN) |
+| ICPS | Open-source freeware for convergent ex-situ refugia | Synthesis via citations, conservation-flagship framing |
+
+**Key user clarification mid-discussion:** plant-enthusiast papers should NOT center on software/firmware details — the website + photos + blog posts carry the engineering load. ICPS retains the synthesis but is re-chartered from "fatter HardwareX" to conservation/community novelty pitch.
+
+### HardwareX Pass-D (commit `a9a7a99`, pushed to master)
+
+Factual sync to current deployed architecture + novelty sharpening. No section reordering, no removed content. 43 lines inserted, 28 deleted. Highlights:
+
+- **Two-regime PID** (was three-regime). The 2026-05-25 change (Hot regime = T-PID throughout compressor engagement) is now documented in §7.3 with explicit historical note about the prior three-regime design.
+- **Eleven-layer safety chain** (was nine). Layers 10 (Pi↔Arduino serial-link CRC integrity, 2026-05-18) and 11 (mister water gate, 2026-05-18) added with full per-layer descriptions in §6.6. Counts updated in abstract, §1 innovation #5, §6.6 intro, §7.6, §7.8.
+- **Detector-fragility taxonomy** (dependency-loop / state-desync / stale-input-latch) framed as paper-level novelty. New paragraph after §6.6 intro; each new layer description tags its fragility class and mitigation.
+- **Light Curve C** (deployed 2026-05-04, +23 % daily PAR) explicitly named in abstract, §1 innovation #4, §6.2 daily ops, §3 design files.
+- **Weather fallback 6-h rebuild** clarified — fallback is itself a rolling 14-day curve, not static. Mentioned in abstract, §6.2, §6.6 layer 9.
+- **Citation web for the four papers** wired: refs [18] CPN, [19] AoS, [20] ICPS, [21] companion website (Zenodo DOI TBD). Inline `[ref]` placeholders replaced. Website explicitly framed as the canonical engineering reference for the plant-enthusiast companions.
+
+### Items for Mac-Claude when the website work resumes
+
+The HardwareX commit elevates the website from "showcase" to **citable engineering artefact**. This affects three things that fall on your side:
+
+1. **Canonical "How it works" page.** Plant-enthusiast papers (CPN, AoS) will direct readers to the website for engineering depth instead of re-describing the system. There needs to be one stable, deep-linkable page (e.g., `highland/how-it-works/` or `highland/docs/architecture/`) that serves as the canonical engineering reference. Currently the `highland/docs/` content auto-synced by `build.sh` is the closest thing — that may be the right page to polish and stabilise.
+
+2. **URL stability for citation.** Once the papers go to journal review, the URL structure can't drift. If you plan to restructure the site again, do it before HardwareX is submitted, not after. The `/highland/dashboard/` and `/highland/docs/` paths are already referenced in HardwareX inline (`<URL>` placeholders).
+
+3. **Zenodo DOI snapshot plan.** HardwareX requires (and the three companion papers benefit from) a persistent identifier. Plan to snapshot the website + the paper repo to Zenodo near submission time. The HardwareX Specifications Table and refs [18]–[21] already reserve a "Zenodo DOI assigned at deposit" slot.
+
+### Consensus Pro availability
+
+User has Consensus Pro on their Mac side and other Claudes they work with have the connector. Pi-Claude does NOT have it (only WebSearch + PubMed). Flagged in HardwareX references section: three lit-review candidates that would strengthen the novelty argument if Consensus Pro pulls clean results: (a) verify the "no real-time meteorological data + time-zone phase shift" novelty claim against broader lit, (b) prior art on raised-cosine LED schedules in growth-chamber lit, (c) IV/2SLS in environmental-control or growth-chamber lit (would confirm the methods-novelty framing if rare).
+
+### State
+
+- `master` at `a9a7a99` (pushed). Includes HardwareX Pass-D.
+- CPN, AoS, ICPS untouched in this commit — pending restructure passes per memory `paper-restructure-2026-05-26.md`.
+- Memory updated: `paper-restructure-2026-05-26.md`, MEMORY.md index line refreshed.
+- Pi side: all infra steady, sitrep digest emails active (07:00 + 21:00 CEST).
+
+— Pi-Claude
