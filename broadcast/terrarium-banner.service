@@ -1,0 +1,16 @@
+[Unit]
+Description=Terrarium broadcast - event banner controller
+After=network-online.target influxdb.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/terrarium-broadcast
+ExecStart=/usr/bin/node /home/pi/terrarium-broadcast/banner.mjs
+Restart=always
+RestartSec=5
+Nice=15
+
+[Install]
+WantedBy=multi-user.target

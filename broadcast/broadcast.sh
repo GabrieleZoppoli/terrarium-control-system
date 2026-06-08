@@ -23,6 +23,11 @@ FONT="${FONT:-/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf}"
 OUT="${1:-/tmp/p2_test.mp4}"
 DURATION="${2:-}"
 
+# Live event banner: ffmpeg re-reads this file every frame (drawtext reload=1).
+# Empty file => no banner. The banner controller (banner.mjs) writes it.
+BANNER_FILE="${BANNER_FILE:-/tmp/hcf_banner.txt}"
+touch "$BANNER_FILE"
+
 # Canvas 1920x1080. Camera region 1248px (65%), dashboard 672px (35%).
 VBITRATE="${VBITRATE:-4500k}"
 FPS="${FPS:-25}"
@@ -49,7 +54,8 @@ FILTER="\
 [1:v]scale=672:1080,setsar=1[dash];\
 [cam][dash]hstack=inputs=2[base];\
 [base]drawtext=fontfile=${FONT}:text='HIGHLAND CLOUD FOREST':x=30:y=26:fontsize=38:fontcolor=white:box=1:boxcolor=black@0.45:boxborderw=14,\
-drawtext=fontfile=${FONT}:text='%{localtime}':x=30:y=82:fontsize=24:fontcolor=white@0.88:box=1:boxcolor=black@0.32:boxborderw=9[v]"
+drawtext=fontfile=${FONT}:text='%{localtime}':x=30:y=82:fontsize=24:fontcolor=white@0.88:box=1:boxcolor=black@0.32:boxborderw=9,\
+drawtext=fontfile=${FONT}:textfile=${BANNER_FILE}:reload=1:x=(1248-tw)/2:y=h-150:fontsize=46:fontcolor=white:box=1:boxcolor=black@0.6:boxborderw=22[v]"
 
 exec ffmpeg -hide_banner -loglevel "${LOGLEVEL:-warning}" \
   -f mpjpeg -thread_queue_size 64 -i "$CAM_URL" \
