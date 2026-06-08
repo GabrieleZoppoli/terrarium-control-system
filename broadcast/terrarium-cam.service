@@ -1,0 +1,26 @@
+[Unit]
+Description=Terrarium webcam (ustreamer MJPEG stream)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=video
+# MJPEG passthrough from the UVC camera -> low CPU. Binds to the LAN on :8080.
+ExecStart=/usr/bin/ustreamer \
+  --device=/dev/video0 \
+  --format=MJPEG \
+  --resolution=1920x1080 \
+  --desired-fps=30 \
+  --host=0.0.0.0 \
+  --port=8080 \
+  --drop-same-frames=30 \
+  --slowdown \
+  --persistent
+Restart=always
+RestartSec=3
+Nice=5
+
+[Install]
+WantedBy=multi-user.target
