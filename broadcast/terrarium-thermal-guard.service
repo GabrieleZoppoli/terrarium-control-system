@@ -1,0 +1,14 @@
+[Unit]
+Description=Highland Cloud Forest - broadcast thermal guard
+After=multi-user.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/home/pi/terrarium-broadcast/thermal-guard.sh
+Restart=always
+RestartSec=10
+Nice=5
+
+[Install]
+WantedBy=multi-user.target

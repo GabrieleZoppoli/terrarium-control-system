@@ -1,0 +1,27 @@
+[Unit]
+Description=Highland Cloud Forest - 24/7 YouTube broadcast
+After=network-online.target terrarium-cam.service terrarium-dash.service terrarium-banner.service influxdb.service
+Wants=network-online.target
+# Bring the input services up with the stream (camera, dashboard grabber, banner)
+Requires=terrarium-cam.service terrarium-dash.service terrarium-banner.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/terrarium-broadcast
+# stream.env defines STREAM_URL=rtmp://a.rtmp.youtube.com/live2/<KEY>
+EnvironmentFile=/home/pi/terrarium-broadcast/stream.env
+# Wait for the dashboard grabber's port before starting ffmpeg (it cold-starts ~25s)
+ExecStartPre=/bin/bash -c 'for i in $(seq 1 45); do ss -ltn | grep -q ":8090 " && exit 0; sleep 1; done; exit 0'
+ExecStart=/home/pi/terrarium-broadcast/broadcast.sh ${STREAM_URL}
+Restart=always
+RestartSec=10
+
+# --- isolation: the climate-control loop ALWAYS wins (plants > pixels) ---
+CPUQuota=200%
+Nice=10
+IOSchedulingClass=idle
+MemoryMax=1500M
+
+[Install]
+WantedBy=multi-user.target
