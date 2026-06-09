@@ -57,14 +57,20 @@ INPUTS=(-f mpjpeg -thread_queue_size 512 -i "$CAM_URL"
 MAPS=(-map "[v]")
 ACODEC=()
 if [ "$AUDIO" = "1" ]; then
-  INPUTS+=(-thread_queue_size 4096 -f alsa -ac 1 -ar 44100 -i "$MIC"
-           -stream_loop -1 -i "$AMBIENT")
-  # mic: resync (async resample absorbs ALSA jitter/xruns) + de-rumble + gentle
-  # compression/limit;  ambient: quieter bed;  mix
-  FILTER="$FILTER;\
-[2:a]aresample=async=1000:min_hard_comp=0.100:first_pts=0,highpass=f=110,acompressor=threshold=-20dB:ratio=3:attack=15:release=250,alimiter=limit=0.9,volume=0.85[mic];\
-[3:a]volume=0.55[amb];\
-[mic][amb]amix=inputs=2:duration=first:normalize=0[a]"
+  # NO live microphone (privacy: never broadcast household conversation).
+  # Audio source is AUDIO_SRC:
+  #   - default: the looped generated nature bed (calm, continuous)
+  #   - the soundscape engine (tcp PCM on :8092) once wired, which swells
+  #     "very natural rain" during misting cycles. See soundscape.mjs.
+  AUDIO_SRC="${AUDIO_SRC:-bed}"
+  if [ "$AUDIO_SRC" = "bed" ]; then
+    INPUTS+=(-stream_loop -1 -i "$AMBIENT")
+    FILTER="$FILTER;[2:a]volume=0.7[a]"
+  else
+    # raw PCM from the soundscape engine (already mixed bed + reactive rain)
+    INPUTS+=(-thread_queue_size 4096 -f s16le -ar 44100 -ch_layout stereo -i "$AUDIO_SRC")
+    FILTER="$FILTER;[2:a]volume=1.0[a]"
+  fi
   MAPS+=(-map "[a]")
   ACODEC=(-c:a aac -b:a "$ABITRATE" -ar 44100)
 fi
