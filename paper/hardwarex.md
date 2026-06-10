@@ -366,7 +366,9 @@ Wire each fan group through an IRF520N MOSFET driver module:
 
 **Safety**: All electrical lines running near or above the terrarium must incorporate drip loops (U-shaped cable routing below connection points) to prevent water ingress.
 
-`[PLACEHOLDER — wiring diagram/schematic]`
+![System connection diagram: Raspberry Pi 4 (Node-RED/InfluxDB/Grafana/MQTT) linked by USB serial to the Arduino Mega (PWM to the IRF520N MOSFET fan rails and the LED driver, door reed switches in) and by Wi-Fi/MQTT to the ESP8266 sensor node, the three Tapo P100 mains plugs, the Meross energy monitor, and the OpenWeatherMap feed.](figures/fig6_system_wiring.png)
+
+*Figure 5.3 — System connection diagram (signal and power paths), generated from the documented architecture by `analysis/publication_figures.py`. This is a block-level connection map, not a full electrical schematic; the detailed acrylic-panel drawings are in the design files (`S6-panel-drawings-*.docx`), and the exact MOSFET-gate and power-rail wiring follows the pin assignments in §5.3.1 and the per-channel notes in §5.3.2.*
 
 ### 5.4 Software Installation
 

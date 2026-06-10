@@ -59,8 +59,10 @@ Maximum-cooling-capacity test reports (near-equilibrium 13.6 °C at room 21.6 °
 ### publication_figures.py
 Generates the HardwareX manuscript figures from InfluxDB into `../paper/figures/`:
 24 h and 7 d environmental cycles, hour-of-day power profile + ECDF, PID humidity
-tracking + fan response, and the 11-layer safety-chain deployment timeline
-(`fig1`–`fig5`). Uses only stdlib + numpy + matplotlib; re-run any time.
+tracking + fan response, the 11-layer safety-chain deployment timeline, and a
+system connection (block) diagram (`fig1`–`fig6`). Uses only stdlib + numpy +
+matplotlib; re-run any time. `fig6` is drawn from the documented architecture
+(no InfluxDB) — a signal/power connection map, not a full electrical schematic.
 
 **Note on the IV/2SLS coefficient:** the canonical (SoT-corrected) causal estimate
 is **−0.34 % RH per +10 PWM** (95 % CI −0.68 to −0.005; p=0.047; n=1,353), per

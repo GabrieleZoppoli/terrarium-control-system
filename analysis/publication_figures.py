@@ -309,6 +309,75 @@ def fig_safety_chain():
     print("wrote", p, f"({len(parsed)} layers)")
 
 
+def fig_wiring():
+    """System-connection (block) diagram from the documented architecture.
+
+    Not a full electrical schematic — a signal/power connection map. The
+    detailed acrylic-panel and electrical drawings are in the design files.
+    """
+    from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+    fig, ax = plt.subplots(figsize=(7.6, 6.2))
+    ax.set_xlim(0, 100)
+    ax.set_ylim(0, 100)
+    ax.axis("off")
+
+    def box(x, y, w, h, label, fc):
+        ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle="round,pad=0.4,rounding_size=2",
+                                    fc=fc, ec="#444", lw=1.0))
+        ax.text(x + w / 2, y + h / 2, label, ha="center", va="center", fontsize=7.2)
+
+    def arrow(p1, p2, label="", color="#555", style="-|>", off=0):
+        ax.add_patch(FancyArrowPatch(p1, p2, arrowstyle=style, mutation_scale=10,
+                                     color=color, lw=1.1, shrinkA=2, shrinkB=2))
+        if label:
+            mx, my = (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+            ax.text(mx + off, my + 1.5, label, ha="center", va="bottom",
+                    fontsize=6.0, color=color)
+
+    PI, AR, ESP = "#cdb4e8", "#bfe0c4", "#bcd4ef"
+    PLUG, ACT, SENS = "#f4d6a8", "#e8e8e8", "#f3c6c6"
+
+    box(36, 80, 28, 12, "Raspberry Pi 4 (8 GB)\nNode-RED · InfluxDB · Grafana\nMosquitto MQTT · watchdog", PI)
+    box(4, 56, 24, 11, "Arduino Mega 2560\n(CP210x USB)", AR)
+    box(72, 56, 24, 11, "ESP8266\n(NodeMCU)", ESP)
+
+    # actuators off Arduino
+    box(2, 30, 27, 9, "IRF520N MOSFETs ×4\n→ Noctua 12 V fan rails:\noutlet P45 · impeller P46\nevap P44 · circ P12", ACT)
+    box(2, 14, 27, 8, "Mean Well HLG-320H-48B\n→ 4× ChilLED Logic Puck V3\n(pin 8, ~490 Hz dim)", ACT)
+    box(2, 4, 27, 6, "Door reed switches ×2\n(D22 / D24, pull-up)", SENS)
+
+    # sensors off ESP
+    box(70, 38, 28, 9, "SHT35 (I²C)\ntemperature / humidity", SENS)
+    box(70, 26, 28, 8, "HC-SR04P\nwater level", SENS)
+
+    # plugs / mains off Pi (Wi-Fi)
+    box(36, 60, 28, 8, "Tapo P100 ×3 (Wi-Fi mains)\nlights · mister · compressor", PLUG)
+    box(36, 46, 28, 8, "Meross MSS310 (Wi-Fi)\nenergy monitor", PLUG)
+    box(36, 30, 28, 10, "Mains loads:\nLED driver · MistKing pump\nVitrifrigo ND50 compressor", ACT)
+
+    box(36, 14, 28, 7, "OpenWeatherMap API\n4 Colombian cities", "#ffffff")
+
+    arrow((30, 62), (36, 80), "USB serial\n115200, CRC-8", "#7a4fb0", off=-4)
+    arrow((72, 62), (50, 80), "MQTT (Wi-Fi)", "#3b7dd8", off=4)
+    arrow((50, 80), (50, 68), "Wi-Fi", "#b06a1a")
+    arrow((50, 60), (50, 54), "")
+    arrow((50, 46), (50, 80), "MQTT power", "#b06a1a", off=8)
+    arrow((50, 30), (50, 21), "")
+    arrow((50, 14), (50, 80), "HTTPS", "#4c9a5a", off=10)
+    arrow((16, 56), (16, 39), "PWM 25 kHz")
+    arrow((16, 30), (16, 22), "")
+    arrow((10, 56), (10, 10), "D22/D24", "#a23")
+    arrow((84, 56), (84, 47), "")
+    arrow((84, 56), (84, 34), "")
+
+    ax.text(50, 97, "System connection diagram", ha="center", fontsize=10)
+    p = os.path.join(OUT, "fig6_system_wiring.png")
+    fig.savefig(p)
+    plt.close(fig)
+    print("wrote", p)
+
+
 if __name__ == "__main__":
     fig_environmental(24, "5m", "fig1_environmental_24h.png",
                       "Representative 24-hour cabinet cycle")
@@ -317,4 +386,5 @@ if __name__ == "__main__":
     fig_power()
     fig_pid()
     fig_safety_chain()
+    fig_wiring()
     print("done.")

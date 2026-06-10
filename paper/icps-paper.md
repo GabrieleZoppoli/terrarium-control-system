@@ -149,7 +149,7 @@ The call to action is for the plant-conservation and controlled-environment-agri
 
 ## Acknowledgments
 
-[AUTHOR TO PROVIDE: acknowledgments text — suggest acknowledging plant sources/vendors, any institutional support, the carnivorous-plant and orchid communities, and any reviewers or beta-testers of the open-source release.]
+I thank the specialist nurseries that supplied legally and ethically sourced, artificially-propagated material — including, for the cloud-forest taxa, Andreas Wistuba, Christian & Claudia Klein / Carnivors & More, and Ecuagenera — and the open-source software communities behind Node-RED, InfluxDB, Grafana, Mosquitto, and the Raspberry Pi and Arduino projects, on which the freely-licensed control system is built. I also thank the carnivorous-plant and orchid growing communities, whose shared cultivation experience shaped the species selection and the no-dry-rest design discussed here. *[Author to add or amend: institutional support, individual collaborators, and any reviewers or beta-testers of the open-source release the author wishes to thank.]*
 
 Portions of this manuscript were prepared with the assistance of an AI language model (Anthropic Claude). The system design, construction, data collection, plant cultivation, and all horticultural and conservation arguments are entirely the work of the author(s).
 
@@ -167,7 +167,13 @@ Rull, V. & Vegas-Vilarrúbia, T. 2006. Unexpected biodiversity loss under global
 
 Rull, V., Montoya, E., Nogué, S., Safont, E. & Vegas-Vilarrúbia, T. 2019. Climatic and ecological history of Pantepui and surrounding areas. In: Rull, V. & Vegas-Vilarrúbia, T. (eds.), *Biodiversity of Pantepui: The Pristine "Lost World" of the Neotropical Guiana Highlands.* Academic Press, pp. 37–57.
 
-[AUTHOR TO PROVIDE: if a quantitative habitat-microclimate figure is cited in §2.1 beyond the lapse-rate/cloud-immersion generalities (e.g., a specific tepui temperature band), add Adlassnig et al. 2010 (Roraima *Heliamphora nutans* microclimate) as in the companion papers. Companion-paper references (HardwareX, CPN, AoS) to be inserted with final titles, journals, and DOIs once those drafts are assigned identifiers.]
+Zoppoli, G. (submitted-a). Weather-Mimicking Terrarium for Cloud Forest Species: An Open-Source Climate Simulation System Using Real-Time Meteorological Data. *HardwareX* (companion engineering paper). DOI on acceptance.
+
+Zoppoli, G. (submitted-b). Weather-Mimicking Terrarium Cultivation of Highland Carnivorous Plants: Four Years of *Heliamphora*, *Nepenthes*, and *Utricularia* sect. *Orchidioides*. *Carnivorous Plant Newsletter* (companion paper).
+
+Zoppoli, G. (submitted-c). Cloud Forest in a Box: Growing Highland Orchids with Real-Time Weather Simulation. *Orchids* (American Orchid Society) (companion paper).
+
+*If a specific quantitative tepui microclimate figure is added to the convergence section beyond the lapse-rate/cloud-immersion generalities, cite Adlassnig et al. (2010), Roraima* Heliamphora nutans *microclimate, as in the companion CPN paper.*
 
 ---
 

@@ -137,18 +137,18 @@ The companion website, **https://highlandcloudforest.com**, is the living counte
 
 ## References
 
-1. Zoppoli, G. (in press). Weather-Mimicking Terrarium for Cloud Forest Species: An Open-Source Climate Simulation System Using Real-Time Meteorological Data. *HardwareX*. `[AUTHOR TO PROVIDE: volume/article number/DOI once accepted.]`
-2. Zoppoli, G. (in press). [Companion *Carnivorous Plant Newsletter* article — *Heliamphora*, highland *Nepenthes*, and *Utricularia* in the weather-mimicking cabinet]. *Carnivorous Plant Newsletter*. `[AUTHOR TO PROVIDE: final title, volume/issue, and page range once published.]`
+1. Zoppoli, G. (submitted). Weather-Mimicking Terrarium for Cloud Forest Species: An Open-Source Climate Simulation System Using Real-Time Meteorological Data. *HardwareX*. (Volume/article number and DOI to be added on acceptance.)
+2. Zoppoli, G. (submitted). Weather-Mimicking Terrarium Cultivation of Highland Carnivorous Plants: Four Years of *Heliamphora*, *Nepenthes*, and *Utricularia* sect. *Orchidioides*. *Carnivorous Plant Newsletter*. (Volume/issue and pages to be added on publication.)
 3. POWO (2026). *Dendrobium victoriae-reginae* — Plants of the World Online. Royal Botanic Gardens, Kew. https://powo.science.kew.org
 4. POWO (2026). *Dracula vampira* — Plants of the World Online. Royal Botanic Gardens, Kew. (Native range: Ecuador.)
 5. IOSPE (2026). *Dendrobium victoriae-reginae* (sect. *Calcarifera*) — Internet Orchid Species Photo Encyclopedia. https://www.orchidspecies.com
 6. Taylor, P. (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. (Cited for *U. quelchii* / section *Orchidioides*.)
 
-`[AUTHOR TO PROVIDE: any additional orchid-nomenclature or AOS-house-style references the editor requires; confirm whether *Orchids* prefers RHS or Kew/POWO authority for the Sophronitis/Cattleya names used here.]`
+*Nomenclature follows Plants of the World Online (POWO, Royal Botanic Gardens Kew) for species names and POWO/IOSPE for sectional placement; registered grex and cultivar names follow the RHS Orchid Register. The* Sophronitis *names are retained at genus* Sophronitis *as used in the horticultural trade and on the project's accession records, with the* Cattleya *s.l. synonymy noted at first mention. The AOS editorial office may substitute its preferred house authority on review.*
 
 ---
 
-*`[AUTHOR TO PROVIDE: author contact information (postal/email) per AOS submission requirements. The author bio in the masthead is complete; this is the separate contact block AOS asks for.]`*
+*Contact: Gabriele Zoppoli, gabriele.zoppoli@unige.it (University of Genoa and IRCCS Ospedale Policlinico San Martino, Genoa, Italy). [Author to add the postal mailing address AOS requests on the separate submission form.]*
 
 **Ranked image set.** *Orchids* is photo-led, so the article is built around the strongest images first. AOS requires 6-megapixel-minimum JPEGs as separate files with captions in a separate document; the web-resized assets below identify the masters the author should submit. Existing assets are under `website/static/img/`.
 
