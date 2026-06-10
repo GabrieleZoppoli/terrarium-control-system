@@ -41,6 +41,33 @@ Same as 03 but adjusted for room temperature and humidity:
 - Balance check on room conditions
 - **Adjusted: evening cooling -0.75 to -1.4°C, late-night warming +0.3 to +0.55°C**
 
+### heat_balance_rerun.py
+Re-run of the heat-balance regression (2026-05-12) over the full 80.3-day
+Meross-instrumented window (n=17,773, HC3 robust SEs). Supersedes the earlier
+27-day coefficients. Canonical results in `paper/heat_balance_run_2026-05-12.yaml`:
+compressor -1.01 °C/hr; passive room↔cabinet +0.17 °C/hr per K; continuous
+fan PWM effect statistically null (p=0.33).
+
+### wetbulb_analysis.py / deconvolution.py
+Wet-bulb characterization and thermal deconvolution (2026-02-24). Establish the
+~16.6 °C evaporative-cooling floor at room 22 °C / 58 % RH.
+
+### cooling_test_report.py / cooling_test_publication.py
+Maximum-cooling-capacity test reports (near-equilibrium 13.6 °C at room 21.6 °C,
+Δ≈8.1 K; deepest 12.3 °C).
+
+### publication_figures.py
+Generates the HardwareX manuscript figures from InfluxDB into `../paper/figures/`:
+24 h and 7 d environmental cycles, hour-of-day power profile + ECDF, PID humidity
+tracking + fan response, and the 11-layer safety-chain deployment timeline
+(`fig1`–`fig5`). Uses only stdlib + numpy + matplotlib; re-run any time.
+
+**Note on the IV/2SLS coefficient:** the canonical (SoT-corrected) causal estimate
+is **−0.34 % RH per +10 PWM** (95 % CI −0.68 to −0.005; p=0.047; n=1,353), per
+`paper/stats_sot_2026-05-13.yaml`. The "−0.37 %" quoted under `02_iv_causal_model.py`
+above is the original first-run value, retained here for script provenance; cite the
+SoT value in any publication.
+
 ## Dependencies
 
 ```bash

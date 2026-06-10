@@ -1743,3 +1743,54 @@ User has Consensus Pro on their Mac side and other Claudes they work with have t
 - Pi side: all infra steady, sitrep digest emails active (07:00 + 21:00 CEST).
 
 — Pi-Claude
+
+---
+
+## 2026-06-10 — Pi-Claude: all four papers brought to submission-ready state (autonomous finishing pass)
+
+User set a session goal to finish the papers — analyses, charts/tables, committed code, references, and supplementary materials all complete. This pass executed the multi-paper restructure (`memory/paper-restructure-2026-05-26.md`) plus the remaining Pass-B items across all four drafts. Two commits on `master`: `ec2ab16` (HardwareX + author metadata + figures) and the supplement commit (firmware/watchdog/flows-README/.zenodo.json), with a third paper-edits commit to follow once this entry lands.
+
+### What's done (Pi side)
+
+**HardwareX (`paper/hardwarex.md`) — submission-ready except photos:**
+- Authors/affiliation/ORCID + corresponding email filled; license aligned to **CERN-OHL-S-2.0** (matches repo LICENSE; was incorrectly "Permissive/P" in the draft).
+- **§4 BOM filled from a Gmail receipt sweep.** Total hardware ≈ **€2,865 (≈US$3,050)**; ~€2,190 receipt-confirmed, ~€675 estimated (locally-sourced enclosure materials + 4 commodity electronics with no digital receipt). Per-subsection provenance notes + a consolidated cost summary added.
+- **Two artefact corrections** surfaced by the receipts (both flagged for your/the user's confirmation below): LED driver is a **Mean Well HLG-320H-48B (320 W)**, not the "HLG-480H-48A (480 W)" the draft carried (320 W fits 4×100 W pucks at ~60 % ceiling and the measured ~220 W LED peak); controller is a **Raspberry Pi 4 Model B (8 GB)**, not 4 GB (confirmed against the running hardware `Rev 1.4`, 8 GB).
+- **5 publication figures generated from InfluxDB** (`analysis/publication_figures.py` → `paper/figures/fig1–fig5`): 24 h + 7 d environmental cycles, hour-of-day power profile + ECDF, PID humidity tracking + fan response, and the 11-layer safety-chain deployment timeline. All wired into §7 with captions, replacing the Grafana-screenshot placeholders.
+- **References completed + literature-novelty check resolved.** Added Chalabi 1996 (closest weather-driven-control prior art), Annunziata 2017 + Stamford 2024 (raised-cosine LED is established practice — the novelty is deriving it from the *weather-source* latitude, not the curve shape), Grace 2021 + Wang 2023 (IV/2SLS precedent), and product/datasheet refs. All three flagged novelty claims survive the survey (see §1 and the references-section note).
+- `<URL>` resolved to `https://highlandcloudforest.com`; design-file DOI placeholders point at the GitHub repo + "Zenodo at deposit". Acknowledgments drafted (author to personalize).
+
+**ICPS (`paper/icps-paper.md`) — re-chartered (529→181 lines).** Rebuilt from "fatter HardwareX + every taxon" into the **conservation/freeware flagship**: leads with freeware-for-conservation, keeps the convergence thesis (careful tepui-≠-TMCF framing intact), cuts the engineering and per-taxon re-description to citations of HardwareX/CPN/AoS, and adds a cross-biome cohabitation **Table 1** (its signature figure) + a citizen-science ex-situ-refugia argument. Counts verified 75/31, four biogeographic regions.
+
+**CPN + AoS (`paper/cpn-paper.md`, `paper/aos-paper.md`) — trimmed to ~5 % engineering + filled.** Engineering content cut to one cited paragraph (HardwareX + this website); biogeography corrected (Nepenthes = Sumatra/Sulawesi/Philippines, no Borneo); *U. quelchii* bloom record from the blog; losses/CITES provenance from `collection.csv`. AoS elevates the **no-dry-rest** design choice as a featured section and corrects the species frame (*D. victoriae-reginae* = Philippine/*Calcarifera*; *D. vampira* demoted to hybrid-parent mention only; *A. somalensis* removed; *D. cuthbertsonii* 'Yellow' id=267 confirmed alive vs the lost id=123). First-hand cultivation observations were **not** fabricated — they're left as explicit `[AUTHOR TO PROVIDE]` tags.
+
+**Supplementary/code now matches the deployed system + paper claims:**
+- Synced deployed → repo: `firmware/arduino-terrarium/arduino-terrarium.ino` (now has the 2026-05-18 CRC-8 NMEA framing the paper's §6.6 layer 10 describes), `scripts/arduino-watchdog.sh` + `systemd/arduino-watchdog.service` (2026-05-18/19 InfluxDB-probe-gate + restart-rate-limit hardenings). No secrets in any synced file (scanned).
+- `nodered/flows-README.md` refreshed (Light Curve C, `tapo` lib not `PyP100`, Meross daemon, two-regime PID, recent-architecture-changes section).
+- `analysis/README.md` updated to document `publication_figures.py`, `heat_balance_rerun.py`, wetbulb/cooling scripts, and the SoT-corrected IV value (−0.34 %/+10 PWM).
+- `.zenodo.json` deposit metadata added (CERN-OHL-S-2.0).
+- `CITATION.cff` author/abstract filled.
+
+### Mac-Claude: photos are your turf — here's the consolidated ask
+
+The good news: **the website already has the assets for almost every figure slot.** The CPN and AoS drafts now contain inline `FIGURE` callouts citing concrete existing asset paths (e.g. `collection/sophronitis/sophronitis-coccinea-big-one-x-hinomaru-4n-gmwoc.jpg` for the AoS flagship; `highland/interior/interior_2026-04-20_coccinea-bloom.jpg`; `highland/interior/interior_2026-05-01_deep-clean.jpg`). What's needed from you:
+1. **Select + place** the cited existing assets into each paper's figure slots and write final captions (AOS needs 6-MP masters, not the web-resized versions).
+2. **Capture the `[PHOTO NEEDED]` gaps** — AoS has 10 (notably: a cork-mount wall group shot; *Restrepia trichoglossa var. xanthina*; **no `collection/phragmipedium/` directory exists at all** for *P. kovachii* — shoot one or drop that lowest-ranked image); CPN has 4 (substrate/mounting close-ups, a wide cabinet-floor *Nepenthes* shot, *N. aristolochioides* upper-pitcher detail). HardwareX still has 3 figure placeholders that are yours: step-by-step assembly photos (§5), a wiring schematic (§5.3), and assembly-process photos.
+3. **Build & deploy** as usual.
+
+### Decisions needed (user) — flagged, not blocking the drafts
+
+1. **LED driver model** — receipts show **HLG-320H-48B (320 W)**, not 480 W. Confirm the 480 W wasn't bought separately in cash; otherwise the 320 W correction stands (it's the physically consistent one).
+2. **Raspberry Pi RAM** — corrected to **8 GB** (confirmed on the live Pi). MEMORY had "4 GB"; updating.
+3. **Electricity tariff** — €0.30/kWh assumed (→ €288/yr). Confirm vs your actual bill (€0.31 → €298/yr); `energy_sot` flags this as open.
+4. ***Aerangis somalensis* in `collection.csv`** — its `location` is still `highland` (raw filter → 76/32); the papers use the correct 75/31 by excluding it. **The CSV is the laggard** — please set its location to the fog-shelf value (your turf; I did not touch `collection.csv`).
+5. **First-hand cultivation observations** — CPN and AoS have `[AUTHOR TO PROVIDE]` tags for per-species flowering/pitcher cadence, water quality, pest management, summer-heat strategy, and acknowledgments. These are your records; nothing was invented.
+6. **Zenodo deposit** — `.zenodo.json` is ready; the actual deposit + DOI minting is a user account action. Companion-paper cross-citations carry "DOI at deposit" placeholders until then.
+
+### DO NOT TOUCH (Pi-side held off; yours)
+- `website/static/data/collection.csv`, `website/data/dendrogram.json`, `website/data/photo_manifest.json`, anything under `content/collection/`, and all `static/img/` assets — untouched this pass. The species facts in the papers were *read* from `collection.csv`, never written to it.
+
+### Recovery
+All paper edits are in the commits noted above; `git log --oneline` shows them. To revert any single draft: `git checkout <hash> -- paper/<file>.md`.
+
+— Pi-Claude
