@@ -1,8 +1,11 @@
 # Weather-Mimicking Terrarium for Cloud Forest Species: An Open-Source Climate Simulation System Using Real-Time Meteorological Data
 
-**Authors**: `[PLACEHOLDER — author names and affiliations]`
+**Authors**: Gabriele Zoppoli¹·² (ORCID: 0000-0002-1619-1708)
 
-**Corresponding author**: `[PLACEHOLDER — email]`
+¹ Department of Internal Medicine and Medical Specialties (DiMI), University of Genoa, Genoa, Italy
+² IRCCS Ospedale Policlinico San Martino, Genoa, Italy
+
+**Corresponding author**: gabriele.zoppoli@unige.it
 
 ---
 
@@ -14,15 +17,15 @@
 | **Subject area** | Environmental science and ecology; Biological sciences (botany, conservation); Engineering (control systems) |
 | **Hardware type** | Environmental monitoring and control |
 | **Closest commercial analogue** | Terrarium controllers (MistKing HygroStat, TerraControl Pro); growth chambers (Percival, Conviron) |
-| **Open-source license** | CERN Open Hardware Licence v2 — Permissive (CERN-OHL-P-2.0) |
-| **Cost of hardware** | `[PLACEHOLDER — total estimated cost in EUR/USD]` |
-| **Source file repository** | `[PLACEHOLDER — Zenodo DOI after upload]` |
+| **Open-source license** | CERN Open Hardware Licence v2 — Strongly Reciprocal (CERN-OHL-S-2.0) |
+| **Cost of hardware** | ≈ €2,865 (≈ US$3,050); itemised, mostly receipt-sourced BOM in §4 |
+| **Source file repository** | GitHub: https://github.com/GabrieleZoppoli/terrarium-control-system; archival Zenodo DOI assigned at deposit |
 
 ---
 
 ## Abstract
 
-We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud-forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour backward lookup against the locally archived time-series to generate continuously varying temperature and humidity setpoints. Combined with the 7-hour Italy-to-Colombia time-zone offset, the shift produces a phase-aligned daily cycle in which Colombian afternoon highs drive cabinet warmth at Italian midday and Colombian pre-dawn lows drive cabinet cooling at Italian midnight — reproducing the stochastic weather of tropical montane environments without inverting the day/night cycle. The enclosure is a ~1 m³ acrylic cabinet (1.5 × 0.6 × 1.1 m), and a dynamic photoperiod derived from the Colombian reference latitude (~5°N) drives a raised-cosine LED schedule (Light Curve C, deployed 2026-05-04) that provides seasonally varying day length and a +23 % daily-integrated-PAR uplift over the prior step schedule. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a two-regime PID fan-control strategy (humidity-driven below 24 °C, temperature-driven at or above 24 °C, with the temperature-driven regime persisting through compressor engagement so that fans continue to act as a ceiling-defence cooling actuator). An instrumental-variables (2SLS) characterisation of the fan-to-humidity loop quantifies the causal effect of fan PWM on cabinet humidity at −0.34 % RH per +10 PWM units (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353), and a heat-balance regression over 80.3 days at 5-min cadence (n = 17,773; HC3 robust SEs) attributes the cooling work to the marine compressor (−1.01 °C/hr when active) with fan PWM showing no statistically detectable sensible-heat effect. An eleven-layer safety chain, evolved reactively in response to specific in-production failure modes and audited against a three-class detector-fragility taxonomy (dependency-loop / state-desync / stale-input-latch), handles operator and hardware failure modes. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of **2.63 kWh/day (~€288/year at €0.30/kWh)**, currently maintaining **75 living accessions across 31 plant genera** drawn from three biogeographic provinces of the convergent cloud-forest biome (Neotropical highlands: Guayanan tepui, Andes, Brazilian Atlantic Forest; Southeast Asian highlands; Papua New Guinea / Oceania). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Permissive (CERN-OHL-P-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [21] (citable Zenodo DOI assigned at deposit); companion papers describe the horticultural results for carnivorous plants [18] and orchids [19], and the conservation/freeware-flagship synthesis appears in [20].
+We present the design, construction, and four-year validation of an open-source weather-mimicking terrarium system that simulates highland cloud-forest climates using real-time meteorological data. The system ingests current weather from four Colombian highland cities (1,300–2,600 m elevation) and applies a 15-hour backward lookup against the locally archived time-series to generate continuously varying temperature and humidity setpoints. Combined with the 7-hour Italy-to-Colombia time-zone offset, the shift produces a phase-aligned daily cycle in which Colombian afternoon highs drive cabinet warmth at Italian midday and Colombian pre-dawn lows drive cabinet cooling at Italian midnight — reproducing the stochastic weather of tropical montane environments without inverting the day/night cycle. The enclosure is a ~1 m³ acrylic cabinet (1.5 × 0.6 × 1.1 m), and a dynamic photoperiod derived from the Colombian reference latitude (~5°N) drives a raised-cosine LED schedule (Light Curve C, deployed 2026-05-04) that provides seasonally varying day length and a +23 % daily-integrated-PAR uplift over the prior step schedule. The control system — built entirely on open-source software (Node-RED, InfluxDB, Grafana) running on a Raspberry Pi with an Arduino Mega for hardware I/O — implements a two-regime PID fan-control strategy (humidity-driven below 24 °C, temperature-driven at or above 24 °C, with the temperature-driven regime persisting through compressor engagement so that fans continue to act as a ceiling-defence cooling actuator). An instrumental-variables (2SLS) characterisation of the fan-to-humidity loop quantifies the causal effect of fan PWM on cabinet humidity at −0.34 % RH per +10 PWM units (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353), and a heat-balance regression over 80.3 days at 5-min cadence (n = 17,773; HC3 robust SEs) attributes the cooling work to the marine compressor (−1.01 °C/hr when active) with fan PWM showing no statistically detectable sensible-heat effect. An eleven-layer safety chain, evolved reactively in response to specific in-production failure modes and audited against a three-class detector-fragility taxonomy (dependency-loop / state-desync / stale-input-latch), handles operator and hardware failure modes. The system has operated continuously since May 2022 (four years at time of writing) at a measured power draw of **2.63 kWh/day (~€288/year at €0.30/kWh)**, currently maintaining **75 living accessions across 31 plant genera** drawn from three biogeographic provinces of the convergent cloud-forest biome (Neotropical highlands: Guayanan tepui, Andes, Brazilian Atlantic Forest; Southeast Asian highlands; Papua New Guinea / Oceania). All design files, control flows, firmware, dashboards, and analysis scripts are released under the CERN Open Hardware Licence v2 Strongly Reciprocal (CERN-OHL-S-2.0). Live cabinet conditions, build photographs, and operational logs are maintained at a companion website [21] (citable Zenodo DOI assigned at deposit); companion papers describe the horticultural results for carnivorous plants [18] and orchids [19], and the conservation/freeware-flagship synthesis appears in [20].
 
 **Keywords**: open-source hardware, cloud forest terrarium, weather simulation, PID control, instrumental variables, causal inference, Node-RED, environmental monitoring, Raspberry Pi
 
@@ -36,7 +39,7 @@ Traditional terrarium controllers rely on fixed environmental setpoints (e.g., 1
 
 Commercial terrarium controllers such as the MistKing HygroStat and similar products provide basic hysteresis control of humidity and temperature, but none ingest real-time weather data to produce dynamic setpoints. At the other end of the spectrum, laboratory growth chambers (Percival, Conviron) offer precise environmental control at costs of EUR 10,000–50,000+, with proprietary software that limits customization and data access.
 
-A number of open-source environmental control systems have been described in HardwareX and adjacent venues, providing relevant reference designs but stopping short of the weather-mimicking concept. McDowell et al. (2021) [4] describe an internet-connected temperature controller for plant-growth experiments, providing a clean open-hardware template for sensor + actuator + remote-management but with fixed-setpoint control. Lau & Subbiah (2020) [5] present HumidOSH, a self-contained environmental chamber with relative-humidity and fan-speed control, focused on a single bench-top humidity envelope rather than diurnal or weather-driven variation. Sánchez et al. (2020) [6] document OpenTCC, a low-cost open-source temperature-control chamber demonstrating that compressor or Peltier hardware can be controlled cleanly from an open stack, again with fixed setpoints. Yuan et al. (2022) [7] develop an IoT framework for feedback control of photosynthetic activity in *Arabidopsis* — the closest conceptual prior art, since it closes a control loop on a biological signal rather than a programmed schedule, but it does not ingest external weather data. Iucci et al. (2026) [8] describe a compact modular hydroponic greenhouse with environmental sensing and control, aimed at production rather than ex-situ conservation of native-climate species. To our knowledge, **no published open-source system ingests real-time meteorological data from a geographically distinct reference site and applies a time-zone-aware phase shift to drive continuously varying environmental setpoints**, which is the gap the present design fills for terrarium-scale ex-situ conservation of cloud-forest taxa.
+A number of open-source environmental control systems have been described in HardwareX and adjacent venues, providing relevant reference designs but stopping short of the weather-mimicking concept. McDowell et al. (2021) [4] describe an internet-connected temperature controller for plant-growth experiments, providing a clean open-hardware template for sensor + actuator + remote-management but with fixed-setpoint control. Lau & Subbiah (2020) [5] present HumidOSH, a self-contained environmental chamber with relative-humidity and fan-speed control, focused on a single bench-top humidity envelope rather than diurnal or weather-driven variation. Sánchez et al. (2020) [6] document OpenTCC, a low-cost open-source temperature-control chamber demonstrating that compressor or Peltier hardware can be controlled cleanly from an open stack, again with fixed setpoints. Yuan et al. (2022) [7] develop an IoT framework for feedback control of photosynthetic activity in *Arabidopsis* — the closest conceptual prior art, since it closes a control loop on a biological signal rather than a programmed schedule, but it does not ingest external weather data. Iucci et al. (2026) [8] describe a compact modular hydroponic greenhouse with environmental sensing and control, aimed at production rather than ex-situ conservation of native-climate species. Weather-informed control has a longer history in commercial horticulture — Chalabi et al. (1996) [22] generate optimal greenhouse heating setpoints from meteorological-office *forecasts*, and recent building-control work synthesises deliberately stochastic HVAC setpoint trajectories for dataset diversity [23] — but in both cases the external or synthetic data optimises operation against the cultivation site's *own* local climate rather than reconstructing the climate of a *remote* biome, and neither applies a time-zone phase correction. To our knowledge, **no published open-source system ingests real-time meteorological data from a geographically distinct reference site and applies a time-zone-aware phase shift to drive continuously varying environmental setpoints that reproduce a remote biome's diurnal climate envelope**, which is the gap the present design fills for terrarium-scale ex-situ conservation of cloud-forest taxa.
 
 The system described here addresses this gap through six key innovations:
 
@@ -46,7 +49,7 @@ The system described here addresses this gap through six key innovations:
 
 3. **Causal characterisation of fan-mediated humidity control**: A randomised A/B fan-schedule experiment (n = 1,353 nighttime 5-min observations) enables an instrumental-variables (2SLS) estimate of the fan-PWM-to-humidity coefficient that is decorrelated from the PID's reaction to humidity disturbances. The companion 80.3-day heat-balance regression (n = 17,773; HC3) attributes essentially all the cooling work to the marine compressor and treats fan PWM as the humidity actuator — published quantification rather than a tuning heuristic.
 
-4. **Dynamic photoperiod with raised-cosine LED schedule**: Day length is computed daily from the weather-source latitude, clamped to a biologically reasonable 10–14 h envelope, and bounds a raised-cosine LED brightness curve (Light Curve C, deployed 2026-05-04) centred on the source-latitude solar noon. The curve delivers a +23 % daily-integrated-PAR uplift over the prior step-schedule design and produces a smoother diurnal radiant load that the cooling chain can track without on/off transients at lights-on and lights-off.
+4. **Dynamic photoperiod with raised-cosine LED schedule**: Day length is computed daily from the weather-source latitude, clamped to a biologically reasonable 10–14 h envelope, and bounds a raised-cosine LED brightness curve (Light Curve C, deployed 2026-05-04) centred on the source-latitude solar noon. Sinusoidal/raised-cosine diurnal light profiles are established good practice in controlled-environment horticulture — they approximate natural sunlight better than square-wave schedules and improve photosynthetic efficiency at equal daily light integral [24, 25]; the contribution here is not the curve shape but its derivation from the *weather-source* latitude and its integration with the weather-mimicking pipeline. The curve delivers a +23 % daily-integrated-PAR uplift over this system's prior step-schedule design and produces a smoother diurnal radiant load that the cooling chain can track without on/off transients at lights-on and lights-off.
 
 5. **Eleven-layer safety chain with documented evolution + detector-fragility taxonomy**: Independent safety layers (door interlock, mister duration failsafe, freezer daytime gate, wet-bulb fan-off gate, manual-override timeout, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback, Pi↔Arduino serial-link CRC integrity, mister water-level gate) accumulated over four years of operation in response to specific in-production failure modes. The deployment dates and incident provenance for each layer are recorded in a paper-bound single-source-of-truth YAML (`paper/safety_chain_deployment_dates.yaml`). A three-class detector-fragility taxonomy (dependency-loop, state-desync, stale-input-latch) audits each layer's failure modes against the others.
 
@@ -72,22 +75,22 @@ Applications for researchers and educators include:
 
 | File name | File type | Open-source license | Location |
 |---|---|---|---|
-| `nodered/flows-sanitized.json` | Node-RED flow configuration | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `firmware/arduino-terrarium.ino` | Arduino Mega firmware (C++) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `grafana/*.json` | Grafana dashboard exports (4 dashboards) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `scripts/arduino-watchdog.sh` | Serial watchdog script v10 (Bash) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `systemd/arduino-watchdog.service` | Systemd unit for the watchdog | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `scripts/meross_daemon.py` | Meross MSS310 power-monitor daemon (Python, polled, publishes to MQTT + InfluxDB) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `systemd/meross-daemon.service` | Systemd unit for the Meross daemon | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `scripts/terrarium-health.py` | Health-monitor cron script (Gmail + WhatsApp alerts; STUCK-RELAY auto-fix; LED-fault watchdog readout) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `scripts/mister-failsafe.py` | Mister cron failsafe (Tapo plug force-OFF if `on_time > 150 s`) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `scripts/snapshot-capture.sh` | Snapshot capture for the public companion-site mirror | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `docs/schema.md` | InfluxDB measurement schema (33 measurements) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `docs/architecture.md` | System architecture documentation, including the layered safety chain | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `docs/pid-controller.md` | PID algorithm documentation (gain schedule, anti-windup, manual-override semantics) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `analysis/*.py` | Analysis scripts (OLS heat-balance, IV/2SLS causal estimate, wet-bulb characterization, cooling-test reports) | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `paper/energy_sot_*.yaml` | Single-source-of-truth block for the Meross-measured kWh figures cited throughout the manuscript | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
-| `S6-panel-drawings-*.docx` | Acrylic panel technical drawings | CERN-OHL-P-2.0 | `[Zenodo DOI — TBD]` |
+| `nodered/flows-sanitized.json` | Node-RED flow configuration | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `firmware/arduino-terrarium.ino` | Arduino Mega firmware (C++) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `grafana/*.json` | Grafana dashboard exports (4 dashboards) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `scripts/arduino-watchdog.sh` | Serial watchdog script v10 (Bash) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `systemd/arduino-watchdog.service` | Systemd unit for the watchdog | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `scripts/meross_daemon.py` | Meross MSS310 power-monitor daemon (Python, polled, publishes to MQTT + InfluxDB) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `systemd/meross-daemon.service` | Systemd unit for the Meross daemon | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `scripts/terrarium-health.py` | Health-monitor cron script (Gmail + WhatsApp alerts; STUCK-RELAY auto-fix; LED-fault watchdog readout) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `scripts/mister-failsafe.py` | Mister cron failsafe (Tapo plug force-OFF if `on_time > 150 s`) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `scripts/snapshot-capture.sh` | Snapshot capture for the public companion-site mirror | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `docs/schema.md` | InfluxDB measurement schema (33 measurements) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `docs/architecture.md` | System architecture documentation, including the layered safety chain | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `docs/pid-controller.md` | PID algorithm documentation (gain schedule, anti-windup, manual-override semantics) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `analysis/*.py` | Analysis scripts (OLS heat-balance, IV/2SLS causal estimate, wet-bulb characterization, cooling-test reports) | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `paper/energy_sot_*.yaml` | Single-source-of-truth block for the Meross-measured kWh figures cited throughout the manuscript | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
+| `S6-panel-drawings-*.docx` | Acrylic panel technical drawings | CERN-OHL-S-2.0 | GitHub repo; Zenodo at deposit |
 
 **flows-sanitized.json**: Complete Node-RED flow configuration (~435 nodes across 7 tabs) with credentials removed. Covers all control logic: weather integration, PID fan control with two-regime switching, wet-bulb gate, dynamic photoperiod with Light Curve C, door safety, regime-aware mister hysteresis with water-level gate, data logging, and dashboard UI.
 
@@ -111,111 +114,100 @@ Applications for researchers and educators include:
 
 ## 4. Bill of Materials
 
-> **BOM completion status (2026-05-13).** Component names, quantities, descriptions, and material types in the tables below have been mechanically cross-checked against §2 Hardware Description and §5 Build Instructions and are accurate as of this commit. **Unit cost, total cost, and source/supplier columns are pending a receipt sweep**: hardware receipts for this project are not in the repository — they sit in the author's Gmail vendor-order history and (for hardware-store items) in paper receipts. Each subsection below tags its likely receipt source with explicit Gmail-search hints so the Pass-D sweep can be completed in a single user-driven session. All quantities and component identities are unaffected by the sweep; only the cost / source columns will populate.
+> **BOM status (2026-06).** Component names, quantities, descriptions, and material types were cross-checked against §2 Hardware Description and §5 Build Instructions; costs and suppliers were then reconstructed from the author's e-mail order archive. Receipt-confirmed prices are given as exact figures with the vendor and order month; items without a recovered digital receipt (the locally-sourced enclosure materials in §4.6 and four small commodity electronics) are marked "(est.)" and use retail estimates. Per-subsection provenance notes follow each table, and a consolidated cost summary with the total appears after §4.7.
 
 ### 4.1 Control Electronics
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| Raspberry Pi 4 Model B (4 GB) | 1 | Main controller | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Arduino Mega 2560 (clone, CP210x USB) | 1 | GPIO interface | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| ESP8266 (NodeMCU or generic) | 1 | Sensor data acquisition | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Sensirion SHT35 breakout | 1 | Temperature/humidity sensor | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| HC-SR04P ultrasonic sensor | 1 | Water level monitoring | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| IRF520N MOSFET driver module | 4 | Fan power switching | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Magnetic reed switch | 2 | Door sensors | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| TP-Link Tapo P100 smart plug | 3 | Mains switching (lights, mister, compressor) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Meross MSS310 smart plug | 1 | Energy monitoring | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| MicroSD card (32 GB+) | 1 | Pi storage | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| USB hub (powered) | 1 | Arduino + ESP connections | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
+| Raspberry Pi 4 Model B (8 GB) | 1 | Main controller (acquired as a starter kit incl. 128 GB microSD, PSU, case, fan) | €153.98 | €153.98 | Amazon.it, 2021-01 | Electronics |
+| Arduino Mega 2560 (clone, CP210x USB) | 1 | GPIO interface | €18 (est.) | €18 | retail estimate | Electronics |
+| ESP8266 (NodeMCU, ESP-12F) | 1 | Sensor data acquisition | €6.00 | €6.00 | Amazon.it, 2022-05 (3-pack €17.99) | Electronics |
+| Sensirion SHT35 (waterproof probe) | 1 | Temperature/humidity sensor | €32.29 | €32.29 | Amazon.it, 2022-01 | Electronics |
+| HC-SR04P ultrasonic sensor | 1 | Water level monitoring | €5 (est.) | €5 | retail estimate | Electronics |
+| IRF520N MOSFET driver module | 4 | Fan power switching | €1.40 | €5.60 | Amazon.it, 2020-11 (10-pack €13.99) | Electronics |
+| Magnetic reed switch | 2 | Door sensors | €3 (est.) | €6 | retail estimate | Electronics |
+| TP-Link Tapo P100 smart plug | 3 | Mains switching (lights, mister, compressor) | €9.90 | €29.70 | Amazon.it, 2021-12 | Electronics |
+| Meross MSS310 smart plug | 1 | Energy monitoring | €37.22 | €37.22 | Amazon.it, 2024-01 | Electronics |
+| MicroSD card (128 GB) | 1 | Pi storage | — | (bundled in Pi kit) | Amazon.it, 2021-01 | Electronics |
+| USB hub (powered) | 1 | Arduino + ESP connections | €20 (est.) | €20 | retail estimate | Electronics |
 
-*Pass-D Gmail-sweep hints for §4.1*: Raspberry Pi 4 4 GB — search `from:noreply@raspberrypi.com OR from:amazon Pi 4`; Arduino Mega clone (CP210x) and ESP8266 NodeMCU — search `AZ-Delivery OR Banggood OR Amazon Mega 2560`; Sensirion SHT35 breakout — search `Adafruit OR Mouser SHT35` (likely Adafruit board ~€20); HC-SR04P + IRF520N + reed switches + USB hub — Amazon/Banggood commodity orders, search `HC-SR04P` and `IRF520`; TP-Link Tapo P100 ×3 — search `Tapo P100 order`; Meross MSS310 — search `Meross MSS310 order`; microSD — search `SanDisk OR Samsung microSD`.
+*§4.1 provenance:* all prices except the four small commodity items (Arduino Mega clone, HC-SR04P, reed switches, USB hub) are receipt-confirmed from the author's order history. The Raspberry Pi was acquired as an 8 GB starter kit (board + 128 GB microSD + PSU + case + fan, €153.98), so the microSD is bundled rather than a separate line. The 8 GB board is confirmed against the running hardware (`Raspberry Pi 4 Model B Rev 1.4`, 8 GB). ESP8266 and IRF520N unit prices are derived from confirmed multi-pack orders.
 
 ### 4.2 Lighting
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| ChilLED Logic Puck V3 (100 W) | 4 | LED grow light modules (244x Samsung LM301B) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| 140 mm aluminium pin heatsink | 4 | Passive thermal management | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
-| 12 V axial fan (heatsink cooling) | 4 | Convective heatsink cooling | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Mean Well HLG-480H-48A LED driver | 1 | 480 W, 48 V / 10 A, IP65 | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
+| ChilLED Logic Puck V3 (100 W) | 4 | LED grow light modules (244x Samsung LM301B) | €55 | €220 | Rapid LED, 2019-11 | Electronics |
+| 140 mm aluminium pin heatsink | 4 | Passive thermal management | €18 | €72 | Rapid LED, 2019-11 | Metal |
+| 12 V axial fan (heatsink cooling) | 4 | Convective heatsink cooling | €10 (est.) | €40 | retail estimate | Electronics |
+| Mean Well HLG-320H-48B LED driver | 1 | 320 W, 48 V, 3-in-1 dimming, IP65/IP67 | €106.99 | €106.99 | Conrad, 2022-03 | Electronics |
 
-*Pass-D Gmail-sweep hints for §4.2*: ChilLED Logic Puck V3 ×4 — search `chilledgrowlights.com OR ChilLED order` (likely a single order); 140 mm aluminium pin heatsink ×4 + 12 V axial fans ×4 — search `Aliexpress OR Amazon heatsink 140 mm`; Mean Well HLG-480H-48A — search `Mouser OR Meanwell HLG-480` (likely Mouser/Digi-Key).
+*§4.2 provenance:* the ChilLED Logic Puck V3 modules and 140 mm pin heatsinks were purchased from Rapid LED (order 2019-11) at US$58 / ≈ €55 per puck and US$19 / ≈ €18 per heatsink; the original order covered eleven units, of which four are installed in this build, so the BOM lists and prices the four installed. **The LED driver is a Mean Well HLG-320H-48B (320 W constant-voltage, 48 V, 3-in-1 dimmable), receipt-confirmed (Conrad, 2022-03, €106.99) — corrected here from an earlier "HLG-480H-48A (480 W)" placeholder, which was never receipt-sourced. A 320 W driver is consistent with the four 100 W pucks held to a ≈60 % hardware ceiling (≈240 W nominal) and with the measured ≈220 W midday LED-only draw reported in §7.1.** The four small 12 V heatsink fans are a retail estimate.
 
 ### 4.3 Cooling
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| Vitrifrigo ND50 OR2-V compressor unit | 1 | BD50F Danfoss variable-speed, R134a (HFC, ODP=0, GWP₁₀₀≈1430); factory-sealed, no F-gas certification required for installation | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Mechanical |
-| Vitrifrigo PT14 evaporator plate | 1 | 1220 x 280 mm stainless steel | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
-| Noctua NF-F12 iPPC-2000 IP67 (120 mm, 2000 RPM, 12 V) | 5 | Evaporator plate fans (x3) + circulation fans (x2) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Noctua NF-A12x25 G2 PWM (120 mm, 12 V) | 2 | Condenser radiator fans in push-pull configuration | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
-| Plexiglas plate | 1 | Evaporator airflow plate, inclined 30 deg with slit below | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
+| Vitrifrigo ND50 OR2-V compressor unit | 1 | BD50F Danfoss variable-speed, R134a (HFC, ODP=0, GWP₁₀₀≈1430); factory-sealed, no F-gas certification required for installation | €745 (incl. evaporator) | €745 | Ryan Energia, 2021-01 | Mechanical |
+| Vitrifrigo PT14 evaporator plate | 1 | 1220 x 280 mm stainless steel | — | (bundled with compressor) | Ryan Energia, 2021-01 | Metal |
+| Noctua NF-F12 iPPC-2000 IP67 (120 mm, 2000 RPM, 12 V) | 5 | Evaporator plate fans (x3) + circulation fans (x2) | €38.07 | €190.35 | Amazon.it, 2023-01 | Electronics |
+| Noctua NF-A12x25 PWM (120 mm, 12 V) | 2 | Condenser radiator fans in push-pull configuration | €29.89 | €59.78 | Amazon.it, 2022-05 | Electronics |
+| Plexiglas plate | 1 | Evaporator airflow plate, inclined 30 deg with slit below | — | (incl. §4.6 acrylic order) | local fabricator | Plastic |
 
-*Pass-D Gmail-sweep hints for §4.3*: Vitrifrigo ND50 OR2-V compressor unit + PT14 evaporator plate — search `Vitrifrigo order OR boatequipment OR Marine Outlet`; this is the highest single-item cost in the BOM, likely a single Italian marine-refrigeration supplier order (May 2022 install date). Noctua NF-F12 iPPC-2000 IP67 ×5 — search `Caseking OR Amazon NF-F12 iPPC`; Noctua NF-A12x25 G2 ×2 — search `Caseking OR Amazon NF-A12x25 G2` (separate later order from the iPPC industrial fans). Plexiglas plate — same source as the §4.6 acrylic order (local laser-cutter receipts, paper).
+*§4.3 provenance:* the Vitrifrigo ND50 OR2-V cooling unit and PT14 evaporator plate were a single €745 invoice (Ryan Energia S.r.l.s., PayPal, January 2021) — the highest single line in the BOM. The Noctua NF-F12 iPPC-2000 IP67 unit price (€38.07) is receipt-confirmed for a 2-fan order; the five-fan line total applies that confirmed unit price. The condenser fans are Noctua NF-A12x25 PWM (2 × €29.89, 2022-05); the "G2" suffix used in earlier drafts is dropped, as the purchase predates the NF-A12x25 G2 release.
 
 ### 4.4 Humidification
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| MistKing Standard diaphragm pump (24 V) | 1 | Misting system pump | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Mechanical |
-| MistKing nozzle assemblies | ~20 | Quad (x1), double (x6), single (x4) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic/metal |
-| ZipDrip anti-drip valve | 1 | Prevents residual dripping | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Tubing and fittings | 1 set | MistKing-compatible | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
+| MistKing Standard diaphragm pump (24 V) | 1 | Misting system pump (in complete system order) | €381.70 (system) | €381.70 | mistking.com, 2021-01 | Mechanical |
+| MistKing nozzle assemblies | ~20 | Quad (x1), double (x6), single (x4) | — | €120.72 (add-on order) | mistking.com, 2022-10 | Plastic/metal |
+| ZipDrip anti-drip valve | 1 | Prevents residual dripping | — | (incl. MistKing orders) | mistking.com | Plastic |
+| Tubing and fittings | 1 set | MistKing-compatible | — | (incl. MistKing orders) | mistking.com | Plastic |
 
-*Pass-D Gmail-sweep hints for §4.4*: complete MistKing system (pump + nozzles + ZipDrip + tubing) — search `mistking.com order` (typically a single bundled order; nozzle counts and quad/double/single mix are listed in the table).
+*§4.4 provenance:* the misting hardware came in two receipt-confirmed MistKing (Jungle Hobbies Ltd.) orders — the initial complete system (order #3477, €381.70, January 2021: pump, nozzles, ZipDrip, tubing) and a later nozzle/tubing add-on (order #3911, €120.72, October 2022) — for a combined €502.42.
 
 ### 4.5 Ventilation
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| Noctua 60 mm fan (12 V) | 2 | Outlet ventilation fan (×1, pin 45) + impeller ventilation fan (×1, pin 46), rear ventilation ports per §2.2 | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Electronics |
+| Noctua NF-A6x25 FLX (60 mm, 12 V) | 2 | Outlet ventilation fan (×1, pin 45) + impeller ventilation fan (×1, pin 46), rear ventilation ports per §2.2 | €14.90 | €29.80 | Amazon.it, 2022-02 | Electronics |
 
-*Pass-D Gmail-sweep hints for §4.5*: Noctua 60 mm fans (typically NF-A6x25 5V) ×2 — search `Caseking OR Amazon Noctua 60 mm` (may be the same Caseking order as the §4.3 NF-A12x25 G2 or a separate later top-up).
+*§4.5 provenance:* the two 60 mm ventilation fans are receipt-confirmed Noctua NF-A6x25 FLX (2 × €14.90, 2022-02).
 
 ### 4.6 Enclosure
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| Clear acrylic (PMMA) 10 mm | ~2 m^2 | Floor, back wall, side panels, inner back | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Clear acrylic (PMMA) 8 mm | ~1 m^2 | Sliding doors, shelf, support tracks | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Clear acrylic (PMMA) 5 mm | ~0.5 m^2 | Shelf lips, brackets, triangles | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Silver mirror acrylic 2 mm | ~0.5 m^2 | Reflective panels (x5 + add-ons) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Black acrylic 4 mm | ~0.5 m^2 | Light-blocking baffles (add-on set) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| Perforated acrylic (Square 15) 3 mm | ~0.5 m^2 | Ventilation grilles, shelf floor | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
-| XPS insulation (1 cm) | ~2 m^2 | Exterior thermal insulation | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Foam |
-| Diamond Mylar reflective sheeting | ~2 m^2 | Laminated to XPS insulation | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic/foil |
-| Dichloromethane (DCM) | ~100 mL | Solvent welding (use with ventilation!) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Chemical |
-| Crystalline silicone sealant (c-Si) | 1 tube | Joint sealing (NOT acetoxy silicone) | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Chemical |
-| Aluminium alloy scaffold | 1 | 2.20 x 3.20 x 0.50 m, ~300 kg | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
-| Aluminium alloy guides | 2 | Sliding door tracks | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Metal |
+| Clear acrylic (PMMA) 10 mm | ~2 m^2 | Floor, back wall, side panels, inner back | — | see note | local fabricator | Plastic |
+| Clear acrylic (PMMA) 8 mm | ~1 m^2 | Sliding doors, shelf, support tracks | — | see note | local fabricator | Plastic |
+| Clear acrylic (PMMA) 5 mm | ~0.5 m^2 | Shelf lips, brackets, triangles | — | see note | local fabricator | Plastic |
+| Silver mirror acrylic 2 mm | ~0.5 m^2 | Reflective panels (x5 + add-ons) | — | see note | local fabricator | Plastic |
+| Black acrylic 4 mm | ~0.5 m^2 | Light-blocking baffles (add-on set) | — | see note | local fabricator | Plastic |
+| Perforated acrylic (Square 15) 3 mm | ~0.5 m^2 | Ventilation grilles, shelf floor | — | see note | local fabricator | Plastic |
+| XPS insulation (1 cm) | ~2 m^2 | Exterior thermal insulation | — | see note | hardware store | Foam |
+| Diamond Mylar reflective sheeting | ~2 m^2 | Laminated to XPS insulation | — | see note | hardware store | Plastic/foil |
+| Dichloromethane (DCM) | ~100 mL | Solvent welding (use with ventilation!) | — | see note | hardware store | Chemical |
+| Crystalline silicone sealant (c-Si) | 1 tube | Joint sealing (NOT acetoxy silicone) | — | see note | hardware store | Chemical |
+| Aluminium alloy scaffold | 1 | 2.20 x 3.20 x 0.50 m, ~300 kg | — | see note | metal supplier | Metal |
+| Aluminium alloy guides | 2 | Sliding door tracks | — | see note | metal supplier | Metal |
 
-*Pass-D Gmail-and-paper-sweep hints for §4.6*: laser-cut acrylic panels (PMMA 10/8/5 mm, mirror 2 mm, black 4 mm, perforated 3 mm) — Italian laser-cutter receipt (paper); the user's local custom shop, single panel-order invoice. XPS insulation + Mylar reflective + DCM + c-Si silicone — local hardware-store paper receipts (Leroy Merlin / Brico / Ferramenta). Aluminium scaffold + door tracks — workshop / metal-supplier paper receipt (2022 install).
+*§4.6 provenance:* the enclosure materials were sourced locally in Genoa — laser-cut acrylic panels (PMMA 10/8/5 mm, mirror 2 mm, black 4 mm, perforated 3 mm, plus the §4.3 Plexiglas evaporator plate) from a custom fabricator; XPS insulation, Diamond Mylar, dichloromethane, and crystalline silicone from hardware stores; the aluminium scaffold and door guides from a metal supplier. These purchases (2021–2022) are documented by paper/in-person receipts not present in the digital order record, so per-line prices are not individually reconstructed. The aggregate enclosure-and-structure materials cost is estimated at **€450–600**; the midpoint (≈€525) is carried into the Specifications-Table total.
 
 ### 4.7 Reservoirs and Plumbing
 
 | Component | Qty | Description | Unit cost | Total cost | Source | Material type |
 |---|---|---|---|---|---|---|
-| 40-liter reservoir | 2 | Misting supply + condensate collection | `[PLACEHOLDER]` | `[PLACEHOLDER]` | `[PLACEHOLDER]` | Plastic |
+| 40-liter reservoir | 2 | Misting supply + condensate collection | €30 (est.) | €60 | retail estimate | Plastic |
 
-*Pass-D Gmail-sweep hints for §4.7*: 40-L food-grade plastic reservoirs ×2 — search `Amazon OR DIY-store reservoir` (commodity; may be from the same MistKing order if bundled, otherwise hardware-store paper receipt).
+*§4.7 provenance:* the two 40-L food-grade reservoirs are commodity items without a recovered digital receipt; €30 each is a retail estimate.
 
 ---
 
-**Top-of-BOM consolidated Pass-D action list** (single user session, ~30 min in Gmail):
+**BOM cost summary.** Subsection totals (build-installed quantities): control electronics ≈ €314; lighting ≈ €439; cooling ≈ €995; humidification ≈ €502; ventilation ≈ €30; enclosure and structure ≈ €525 (estimated midpoint, see §4.6); reservoirs ≈ €60. **Total hardware cost ≈ €2,865 (≈ US$3,050).** Of this, roughly €2,190 is receipt-confirmed from the author's digital order history (the Vitrifrigo cooling unit, ChilLED pucks and heatsinks, Mean Well driver, all Noctua fans, MistKing system, Raspberry Pi kit, SHT35, Tapo and Meross plugs, ESP8266, IRF520N modules), and the remainder (≈€675) is estimated for items without a recovered digital receipt — the locally-sourced enclosure/acrylic/scaffold materials (§4.6) and four small commodity electronics (Arduino Mega clone, HC-SR04P, reed switches, powered USB hub) and the reservoirs. Estimated lines are flagged "(est.)" in the tables above. The cost remains one to two orders of magnitude below a commercial growth chamber of comparable volume (§7.7).
 
-1. `Vitrifrigo` (ND50 OR2-V + PT14 evaporator) — single Italian marine-refrigeration supplier order, May 2022 area.
-2. `chilledgrowlights.com` — Logic Puck V3 ×4 order.
-3. `Mouser` or `Meanwell` — HLG-480H-48A LED driver.
-4. `Caseking` or `Amazon` Noctua — NF-F12 iPPC-2000 IP67 ×5 + NF-A12x25 G2 ×2 + 60 mm ×2 (likely two or three separate orders).
-5. `mistking.com` — pump + nozzles + ZipDrip + tubing bundled order.
-6. `Tapo P100` Amazon order — ×3.
-7. `Meross MSS310` Amazon order — ×1.
-8. `Adafruit` or `Mouser` SHT35 breakout — ×1.
-9. `Amazon` / `AZ-Delivery` commodity electronics order(s) — Pi 4, Arduino Mega clone, ESP8266, HC-SR04P, IRF520N, reed switches, USB hub, microSD.
-10. Paper receipts — laser-cut acrylic panels, XPS + Mylar, DCM + silicone, aluminium scaffold + door tracks, 40-L reservoirs.
-
-Once those ten threads are pulled, the cost / total / source columns can be filled mechanically. The component identities and quantities in the tables above are already verified against §2 and §5; the sweep will not change them.
+*Provenance note for reviewers:* costs were reconstructed in June 2026 from the author's e-mail order archive. The component identities and quantities were verified against §2 and §5 independently of cost. Two corrections arose from the receipt reconstruction and are reflected above: the LED driver is a **Mean Well HLG-320H-48B (320 W)**, not a 480 W unit, and the controller is a **Raspberry Pi 4 Model B (8 GB)** acquired as a starter kit (the 8 GB board is confirmed against the running hardware).
 
 ---
 
@@ -285,7 +277,7 @@ Tilt the floor panel slightly toward a rear drainage hole. The shelf below the t
 
 2. Mount 12 V axial fans above each heatsink for supplementary convective cooling.
 
-3. Wire the four pucks in parallel to the Mean Well HLG-480H-48A LED driver (480 W, 48 V / 10 A, IP65).
+3. Wire the four pucks in parallel to the Mean Well HLG-320H-48B LED driver (320 W, 48 V constant-voltage, 3-in-1 dimmable, IP65/IP67). The 320 W rating comfortably supplies the four 100 W pucks held to the ≈60 % hardware ceiling (≈240 W nominal).
 
 4. Adjust the Mean Well driver's internal potentiometer to limit maximum output to approximately 60% of rated power. This hardware ceiling provides a fail-safe: even if the software erroneously commands 100% brightness, the LEDs cannot exceed ~60%, protecting shade-adapted species.
 
@@ -608,7 +600,13 @@ The cabinet achieves a meaningful diurnal temperature swing despite the room run
 
 Light operates on a raised-cosine schedule with a 60 % hardware ceiling (Mean Well driver potentiometer) and a software-controlled PWM ramp on top. The photoperiod is computed daily from the Chinchina reference latitude (4.98 °N), clamped to 10–14 h to provide seasonal variation without the abrupt cliffs that would occur at extreme equatorial latitudes. The dim curve is centred on solar noon (≈13:15 CEST at the cabinet's installation site) and produces a peak measured cabinet power draw of 220 W ± 3 W (n = 255 measurements at midday, freezer and mister off). Direct measurement of canopy PPFD (μmol·m⁻²·s⁻¹) and integrated daily DLI (mol·m⁻²·d⁻¹) is pending the installation of a quantum sensor and will be reported in the final submission.
 
-`[PLACEHOLDER — Grafana screenshots: representative 24-hour and 7-day temperature/humidity cycles; available from companion website `<URL>/highland/dashboard/` for current snapshots]`
+![Representative 24-hour cabinet cycle: cabinet temperature, relative humidity, and VPD tracking their weather-derived targets, with room conditions overlaid and the photoperiod shaded. Generated by `analysis/publication_figures.py` from InfluxDB.](figures/fig1_environmental_24h.png)
+
+*Figure 7.1a — Representative 24-hour cabinet cycle (5-minute resolution). Amber dashed = weather-derived target; green = room; shaded band = lights-on photoperiod.*
+
+![Representative 7-day cabinet cycle showing the stochastic, weather-driven diurnal setpoints and the cabinet's tracking of them at 1-hour resolution.](figures/fig2_environmental_7d.png)
+
+*Figure 7.1b — Representative 7-day cabinet cycle (1-hour resolution). The day-to-day variation in target amplitude is the stochastic weather content streamed from the Colombian reference cities; live snapshots at https://highlandcloudforest.com/highland/dashboard/.*
 
 ### 7.2 PID Controller Stability
 
@@ -616,9 +614,11 @@ The gain-scheduled PID controller maintains humidity within ±3 % RH of the setp
 
 The gain scheduling was critical: with fixed gains, the controller exhibited ±25 PWM oscillations near the setpoint. After implementing the gain schedule (effective Kp = 7.5 within ±1.5 % of target, full Kp = 50 for errors ≥ 4 %), these oscillations were eliminated. Anti-windup limits the integral term to ±120 PWM-equivalent, and a low-pass filter (α = 0.12) attenuates derivative noise from sensor jitter.
 
-The causal effect of the fans on cabinet humidity was estimated using a controlled A/B experiment conducted from December 2025 to February 2026, in which the night fans alternated nightly between off and PWM = 80. Treating the day-of-experiment indicator as an instrumental variable in a two-stage least-squares specification removes the endogeneity bias of regressing humidity on the PID-driven fan speed (the PID drives the fans *in response to* humidity, so OLS would yield a reverse-causal coefficient). The IV/2SLS estimate is **−0.34 % RH per +10 PWM of fan speed (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353 nighttime 5-minute observations; first-stage F = 22.5)**. The naive OLS comparator returns +0.15 % per +10 PWM — the wrong sign — confirming the reverse-causal bias of the simple regression. By comparison, compressor activation produces a −15.9 % long-run humidity effect; the compressor is the dominant dehumidification actuator, with PID-driven fans providing fine adjustment within the compressor's hysteresis band. The night-fan A/B experiment was retired in February 2026 once the coefficient was characterised; raw data and analysis scripts remain in the project repository under `analysis/02_iv_causal_model.py`. A follow-on morning-fan A/B (April–May 2026) was retired after 13 days when the treatment effect (≤ 0.5 % RH, p = 0.91) fell inside the residual noise band.
+The causal effect of the fans on cabinet humidity was estimated using a controlled A/B experiment conducted from December 2025 to February 2026, in which the night fans alternated nightly between off and PWM = 80. Treating the day-of-experiment indicator as an instrumental variable in a two-stage least-squares specification removes the endogeneity bias of regressing humidity on the PID-driven fan speed (the PID drives the fans *in response to* humidity, so OLS would yield a reverse-causal coefficient). Instrumental-variable estimation is well established for reciprocal-causation problems in ecology [26] and for closed-loop control data [27], but is rarely applied to characterise a PID-endogenous actuator coupling in controlled-environment horticulture. The IV/2SLS estimate is **−0.34 % RH per +10 PWM of fan speed (95 % CI: −0.68 to −0.005; p = 0.047; n = 1,353 nighttime 5-minute observations; first-stage F = 22.5)**. The naive OLS comparator returns +0.15 % per +10 PWM — the wrong sign — confirming the reverse-causal bias of the simple regression. By comparison, compressor activation produces a −15.9 % long-run humidity effect; the compressor is the dominant dehumidification actuator, with PID-driven fans providing fine adjustment within the compressor's hysteresis band. The night-fan A/B experiment was retired in February 2026 once the coefficient was characterised; raw data and analysis scripts remain in the project repository under `analysis/02_iv_causal_model.py`. A follow-on morning-fan A/B (April–May 2026) was retired after 13 days when the treatment effect (≤ 0.5 % RH, p = 0.91) fell inside the residual noise band.
 
-`[PLACEHOLDER — Grafana screenshot showing PID response to a humidity disturbance; companion website serves a live PID-diagnostics dashboard at `<URL>/highland/dashboard/`]`
+![A representative 24-hour record of cabinet relative humidity tracking its weather-derived target, with the PID fan PWM output on the right axis. Intervals where the controller is in temperature-PID mode are shaded.](figures/fig4_pid_response.png)
+
+*Figure 7.2 — PID humidity tracking and fan response over a representative 24 hours. Cabinet RH (purple) tracks target RH (amber dashed); grey = fan PWM (right axis); orange shading = temperature-PID intervals. A live PID-diagnostics dashboard is served at https://highlandcloudforest.com/highland/dashboard/.*
 
 ### 7.3 Two-Regime Fan Control
 
@@ -663,6 +663,10 @@ The primary recurring fault is a USB-serial stall in which the Arduino's CP210x 
 
 Beyond the serial watchdog, the eleven-layer safety chain described in Section 6.6 evolved over the four-year operating history of the cabinet (May 2022 to present) in response to specific failure modes encountered during operation — the chain was built reactively rather than designed up-front, and is audited against a three-class detector-fragility taxonomy (dependency-loop, state-desync, stale-input-latch) before each layer is added or modified. The earliest *reconstructible* deployment is 2026-02-06 (Arduino USB-serial watchdog systemd install); per-layer deployment dates are listed in §6.6 above and triangulated from artefact evidence in `paper/safety_chain_deployment_dates.yaml`. The Node-RED flow-backup directory began on 2026-02-08 as a flow-edit-discipline practice, and pre-February-2026 revisions of these layers are not preserved on disk; the four-year framing therefore refers to the cabinet's continuous operating history, not to artefact-reconstructible safety-chain history. Five of the eleven layers — the manual-override timeout (layer 5, 2026-05-09), the LED-fault watchdog (layer 7, 2026-05-04 with 2026-05-05 model recalibration), the STUCK-RELAY hysteresis hardening on the power-vs-commanded cross-check (layer 8, 2026-05-11), the Pi↔Arduino serial-link CRC integrity (layer 10, 2026-05-18), and the mister water gate (layer 11, 2026-05-18) — landed during or after the 80.3-day Meross-instrumented window, so they underwrite *future* reliability rather than retrospective 80-day reliability per `uptime_sot_2026-05-13.yaml#note_for_pass_c`.
 
+![Timeline of the eleven safety layers ordered by deployment date, from the 2026-02-06 USB-serial watchdog to the 2026-05-18 serial-link CRC integrity and mister water gate.](figures/fig5_safety_chain_timeline.png)
+
+*Figure 7.6 — Safety-chain evolution. Each layer is plotted at its artefact-reconstructible deployment date (`paper/safety_chain_deployment_dates.yaml`); the chain accreted reactively in response to specific in-production failures rather than being designed up front. Dates earlier than 2026-02 are not artefact-reconstructible because the Node-RED flow-backup discipline began 2026-02-08.*
+
 The reliability evidence the chain has accumulated over the 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10) is summarised in the following entries:
 
 - **Stuck-relay detections.** Two false-positive STUCK-RELAY events fired on 2026-05-10/11 before the power-vs-commanded cross-check was hardened. Root cause: the lights-power model under-estimated draw at the raised-cosine peak. The model was refit from seven days of clean (freezer-OFF, mister-OFF) data and now lands within 4 % of the measured 220 W peak (Section 7.7); no false positives have occurred since. Three independent guards (N-sample hysteresis, transition-window suppression, fresh re-poll before action) collectively bound the auto-fix to genuine, sustained anomalies.
@@ -694,7 +698,9 @@ The cabinet's expected power as a function of commanded state has been character
 
 To contextualise: the 2.6 kWh/day operational draw is one to two orders of magnitude below a commercial cloud-forest-capable growth chamber of equivalent volume (Percival I-30 series: 1.5–3 kWh/h continuous; Conviron CMP6010: comparable). The comparison is not perfectly fair — commercial chambers deliver tighter environmental specifications and certified validation — but for the species-conservation and naturalistic-variation use cases targeted by this design, the energy budget is qualitatively different. Numerical figures in this section derive from the trapezoidal integral of the Meross power_consumption time-series; all kWh-dependent values in this paper and its companions are derived from a single source-of-truth block (`paper/energy_sot_2026-05-12.yaml` in the Design Files) to ensure consistency across drafts.
 
-`[PLACEHOLDER — power-vs-time-of-day plot; available on the live cabinet dashboard at `<URL>/highland/dashboard/`]`
+![Left: hour-of-day power profile (median and interquartile range) over the 80.3-day Meross-instrumented window, showing the night compressor-cycling baseline and the midday LED-dominated peak. Right: cumulative distribution of hourly mean power.](figures/fig3_power_profile.png)
+
+*Figure 7.7 — Power consumption over the 80.3-day Meross-instrumented window (2026-02-18 → 2026-05-10). Left: hour-of-day profile (median ± IQR, UTC) — the bimodal night-baseline/midday-peak structure described above. Right: ECDF of hourly mean power (median 109 W, p95 184 W; the higher p95 of 203 W in the table reflects the full 2 s-resolution distribution, which the hourly averaging in this figure smooths).*
 
 ### 7.8 Capabilities and Limitations
 
@@ -706,7 +712,7 @@ To contextualise: the 2.6 kWh/day operational draw is one to two orders of magni
 - Two-regime PID switches between humidity-driven (T < 24 °C) and temperature-driven (T ≥ 24 °C) control, with the temperature regime persisting through compressor engagement as a daytime ceiling-defence cooling actuator; the fan-to-humidity loop is characterised causally (IV/2SLS, §7.2) and the heat-balance attribution is published (§7.4)
 - Eleven-layer operational safety chain (door interlock, mister duration failsafe, freezer daytime gate, wet-bulb fan-off gate, manual-override timeout, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback, Pi↔Arduino serial-link CRC integrity, mister water gate) audited against a three-class detector-fragility taxonomy, handles the production failure modes encountered over four years of operation
 - Comprehensive data logging (33 InfluxDB measurements, 60-s cadence for continuous channels, event-driven for state changes; 3.1 million data points in the current 1-year retention window) supports experimental analysis and the published causal-inference pipelines
-- Public companion dashboard, ledger, and operational blog at `<URL>` enable independent verification of the operating state at any time
+- Public companion dashboard, ledger, and operational blog at https://highlandcloudforest.com enable independent verification of the operating state at any time
 
 **Limitations**:
 
@@ -765,10 +771,38 @@ To contextualise: the 2.6 kWh/day operational draw is one to two orders of magni
 
 [21] **Companion website (Zenodo DOI to be assigned at deposit)** — Live cabinet readings, photographic build documentation, the operational blog (including the 2026-05-04 Light Curve C deployment writeup and 21-day followup analysis), and the public-mirror snapshot pipeline. The website is the canonical reference for engineering details cited by the plant-enthusiast companion papers [18, 19], permitting their main bodies to remain focused on horticultural outcomes.
 
-`[PLACEHOLDER — additional product/datasheet citations: full Vitrifrigo ND50 / PT14 datasheet URL once verified; Tapo P100 product page; Meross MSS310 datasheet; MistKing pump datasheet; Percival or Conviron datasheet for the growth-chamber comparison. **Lit-check candidates for Consensus Pro**: (a) verify the novelty claim in §1 that "no published open-source system ingests real-time meteorological data from a geographically distinct reference site and applies a time-zone-aware phase shift to drive continuously varying environmental setpoints"; (b) prior art on raised-cosine LED schedules in growth-chamber literature; (c) IV/2SLS or instrumental-variables methods in environmental-control or growth-chamber papers (rarely cited in this venue class — confirming this would strengthen the methods-novelty claim).]`
+[22] Chalabi, Z. S., Bailey, B. J., & Wilkinson, D. J. (1996). A real-time optimal control algorithm for greenhouse heating. *Computers and Electronics in Agriculture*, 15(1), 1–13. (Closest weather-informed-control prior art: generates optimal greenhouse heating setpoints from meteorological-office forecasts against the local climate.)
+
+[23] Domingo, F., et al. (2026). A reproducible method to generate multi-building, multi-climate HVAC operation datasets with a stochastic exploratory controller. *MethodsX*. (Synthetic stochastic setpoint trajectories for dataset diversity — contrast with the present design's reconstruction of a remote biome's real weather.)
+
+[24] Annunziata, M. G., Apelt, F., Carillo, P., et al. (2017). Getting back to nature: a reality check for experiments in controlled environments. *Journal of Experimental Botany*, 68(16), 4463–4477. (Establishes that sinusoidal diurnal light profiles better approximate sunlight than square-wave schedules; basis for the raised-cosine LED curve.)
+
+[25] Stamford, J. D., Stevens, J., Mullineaux, P. M., & Lawson, T. (2024). Sinusoidal LED light recipes can improve rocket edible biomass and reduce electricity costs in indoor growth environments. *Frontiers in Plant Science*, 15. (Sinusoidal LED schedule capped at a peak intensity increases biomass while reducing energy — corroborates the raised-cosine design choice.)
+
+[26] Grace, J. B. (2021). Instrumental variable methods in structural equation models. *Methods in Ecology and Evolution*, 12(7), 1148–1161. (Precedent for instrumental-variable / 2SLS causal estimation applied to ecological and environmental systems with reciprocal causation.)
+
+[27] Wang, Y., Yang, Y., et al. (2023). Data-driven predictive control using closed-loop data: an instrumental-variable approach. *IEEE Control Systems Letters*, 7. (Instrumental-variable methods applied to closed-loop control data, the methodological analogue of decomposing the PID-endogenous fan/humidity loop in §7.2.)
+
+### Product and datasheet references
+
+[28] Vitrifrigo S.r.l. Ventilated horizontal refrigeration unit ND50 OR2-V (BD50F compressor) and PT14 evaporator plate — manufacturer product page. https://www.vitrifrigo.com/en_us/ventilated-horizontal-refrigeration-unit-nd50-or2v-vitrifrigo (accessed 2026-06).
+
+[29] MEAN WELL Enterprises Co. HLG-320H series (HLG-320H-48B, 320 W, 48 V, 3-in-1 dimmable, IP65/IP67) constant-voltage/constant-current LED driver — datasheet. https://www.meanwell.com/productPdf.aspx?i=458 (HLG-320H series; accessed 2026-06).
+
+[30] TP-Link. Tapo P100 mini smart Wi-Fi plug — product page. https://www.tapo.com/en/product/smart-plug/tapo-p100/ (accessed 2026-06).
+
+[31] Meross. MSS310 smart Wi-Fi plug with energy monitor — product page. https://www.meross.com/ (model MSS310; accessed 2026-06).
+
+[32] Jungle Hobbies Ltd. (MistKing). Starter / Ultimate misting system, Standard diaphragm pump, ZipDrip valve, and nozzle assemblies — product pages. https://www.mistking.com/ (accessed 2026-06).
+
+[33] ChilLED Grow Lights. Logic Puck V3 (100 W, 244× Samsung LM301B) LED grow-light module — product page. https://chilledgrowlights.com/ (accessed 2026-06).
+
+[34] Percival Scientific, Inc. Plant growth chambers (I-30 series) — manufacturer specifications. https://www.percival-scientific.com/ ; Conviron, Controlled Environments Ltd., CMP6010 plant growth chamber — manufacturer specifications. https://www.conviron.com/ (cited for the growth-chamber cost/energy comparison in §7.7; accessed 2026-06).
+
+*Literature-novelty check (resolved):* a structured search of the controlled-environment-agriculture, greenhouse-control, and causal-inference literature (June 2026) confirms that (a) weather-informed control exists but optimises against the *local* site climate or uses synthetic stochastic setpoints [22, 23] rather than reconstructing a *remote* biome via a time-zone phase shift; (b) sinusoidal/raised-cosine diurnal LED schedules are established good practice [24, 25] — the present design's contribution is deriving the curve's day-length and phase from the *weather-source* latitude and integrating it with the weather-mimicking pipeline, not the curve shape itself; and (c) instrumental-variable / 2SLS causal estimation has precedent in ecology [26] and closed-loop control [27] but is rarely applied to characterise PID-endogenous actuator couplings in controlled-environment horticulture, which is the methods contribution of §7.2.
 
 ---
 
 ## Acknowledgments
 
-`[PLACEHOLDER]`
+This work builds on the open-source ecosystems of Node-RED, InfluxDB, Grafana, and the Arduino and Raspberry Pi communities, without which a hobbyist-scale yet research-grade controller would not have been feasible. Live Colombian weather data are provided by the OpenWeatherMap API. The author thanks the specialist plant nurseries that supplied legally and ethically sourced, artificially-propagated material, and the highland-plant and carnivorous-plant hobbyist communities whose shared cultivation knowledge informed the species selection and care regime. *[Author to add any personal, institutional, or individual acknowledgments — e.g. specific collaborators, beta-testers of the open-source release, or facility support.]*

@@ -3,10 +3,11 @@ title: "Highland Cloud Forest Terrarium Control System"
 message: "If you use this software, please cite it as below."
 type: software
 authors:
-  - family-names: "[USER INPUT NEEDED]"
-    given-names: "[USER INPUT NEEDED]"
-    email: "[USER INPUT NEEDED]"
-    orcid: "[USER INPUT NEEDED — optional]"
+  - family-names: "Zoppoli"
+    given-names: "Gabriele"
+    email: "gabriele.zoppoli@unige.it"
+    orcid: "https://orcid.org/0000-0002-1619-1708"
+    affiliation: "University of Genoa and IRCCS Ospedale Policlinico San Martino, Genoa, Italy"
 repository-code: "https://github.com/GabrieleZoppoli/terrarium-control-system"
 url: "https://gabrielezoppoli.github.io/terrarium-control-system/"
 license: CERN-OHL-S-2.0
@@ -26,4 +27,5 @@ abstract: >-
   highland cloud forest climates in enclosed terrariums. Uses real-time
   Colombian weather data with a 15-hour time shift, a gain-scheduled
   PID controller, marine compressor cooling, and dynamic photoperiod
-  to maintain ~120 cloud forest species from five continents.
+  to maintain 75 living accessions across 31 plant genera from three
+  biogeographic provinces of the convergent cloud-forest biome.

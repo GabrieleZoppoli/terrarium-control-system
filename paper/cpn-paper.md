@@ -1,8 +1,8 @@
 # Weather-Mimicking Terrarium Cultivation of Highland Carnivorous Plants: Four Years of *Heliamphora*, *Nepenthes*, and *Utricularia* sect. *Orchidioides*
 
-**Authors**: `[PLACEHOLDER — author names and affiliations]`
+**Authors**: Gabriele Zoppoli — Department of Internal Medicine and Medical Specialties (DiMI), University of Genoa, Genoa, Italy; IRCCS Ospedale Policlinico San Martino, Genoa, Italy
 
-**Corresponding author**: `[PLACEHOLDER — email]`
+**Corresponding author**: gabriele.zoppoli@unige.it
 
 ---
 

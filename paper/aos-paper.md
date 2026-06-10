@@ -1,8 +1,8 @@
 # Cloud Forest in a Box: Growing Highland Orchids with Real-Time Weather Simulation
 
-**Author**: `[PLACEHOLDER — author name]`
+**Author**: Gabriele Zoppoli
 
-`[PLACEHOLDER — author bio, 2-3 sentences: affiliation, location, growing experience]`
+*Gabriele Zoppoli is a physician-scientist — MD, PhD, and Associate Professor of Internal Medicine at the University of Genoa, Italy. Away from the hospital he maintains a living collection of more than 380 accessions of carnivorous plants, miniature orchids, and Tillandsia in Genoa, with the cloud-forest species housed in the open-source, weather-driven highland cabinet described in this article.*
 
 ---
 

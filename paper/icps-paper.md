@@ -1,8 +1,8 @@
 # Weather-Mimicking Terrarium for Convergent Cloud Forest Species: Open-Source Climate Simulation, Compressor Cooling, and Four Years of Co-Cultivating Highland Carnivorous Plants, Orchids, and Epiphytes
 
-**Authors**: [USER INPUT NEEDED — author names and affiliations]
+**Authors**: Gabriele Zoppoli — Department of Internal Medicine and Medical Specialties (DiMI), University of Genoa, Genoa, Italy; IRCCS Ospedale Policlinico San Martino, Genoa, Italy
 
-**Corresponding author**: [USER INPUT NEEDED — email]
+**Corresponding author**: gabriele.zoppoli@unige.it
 
 ---
 
