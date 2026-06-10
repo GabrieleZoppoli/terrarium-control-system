@@ -2,6 +2,10 @@
 Description=Arduino Mega + Node-RED Watchdog
 After=network.target nodered.service
 Wants=nodered.service
+# 2026-05-18: explicit restart rate-limit (default 5/10s is too tight for
+# Restart=always; rapid crashes silently entered a permanent failed state).
+StartLimitIntervalSec=300
+StartLimitBurst=10
 
 [Service]
 Type=simple

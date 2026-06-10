@@ -1,0 +1,43 @@
+{
+  "title": "Highland Cloud Forest Terrarium Control System — open-source weather-mimicking climate controller",
+  "description": "<p>Complete design files, control flows, firmware, dashboards, and analysis scripts for an open-source environmental control system that simulates tropical highland cloud-forest climates in an enclosed terrarium. The system ingests real-time Colombian highland weather with a time-zone-aware phase shift, drives a marine-compressor cooling loop and a raised-cosine LED photoperiod, and runs entirely on Node-RED, InfluxDB and Grafana on a Raspberry Pi with an Arduino Mega for hardware I/O. This archive accompanies the HardwareX engineering paper and the companion horticultural papers (Carnivorous Plant Newsletter, Orchids/AOS, ICPS).</p>",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "CERN-OHL-S-2.0",
+  "creators": [
+    {
+      "name": "Zoppoli, Gabriele",
+      "affiliation": "University of Genoa and IRCCS Ospedale Policlinico San Martino, Genoa, Italy",
+      "orcid": "0000-0002-1619-1708"
+    }
+  ],
+  "keywords": [
+    "open-source hardware",
+    "cloud forest terrarium",
+    "weather simulation",
+    "PID control",
+    "instrumental variables",
+    "causal inference",
+    "Node-RED",
+    "environmental monitoring",
+    "Raspberry Pi",
+    "ex-situ conservation",
+    "convergent cloud forest",
+    "Heliamphora",
+    "highland Nepenthes",
+    "Dracula orchids"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "https://github.com/GabrieleZoppoli/terrarium-control-system",
+      "scheme": "url"
+    },
+    {
+      "relation": "isDocumentedBy",
+      "identifier": "https://highlandcloudforest.com",
+      "scheme": "url"
+    }
+  ],
+  "notes": "License: CERN Open Hardware Licence v2 — Strongly Reciprocal (CERN-OHL-S-2.0), matching the repository LICENSE. Hardware cost ≈ €2,865; system in continuous operation since May 2022."
+}

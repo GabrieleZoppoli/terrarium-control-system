@@ -61,25 +61,53 @@ get_nr_uptime() {
 
 # Read heartbeat timestamp directly from InfluxDB
 # Returns seconds since last alive heartbeat, or 9999 if unknown
+# Hardened 2026-05-18:
+#   A4: if `influx` CLI binary is missing/broken, return 0 (assume alive) so we
+#       do NOT enter an infinite USB-reset loop driven by an infrastructure
+#       failure that has nothing to do with the Arduino.
+#   B4: 30 s query window (was 5 min) — Arduino heartbeats every 2 s; a 30 s
+#       window is populated when alive and empty when not. Removes the
+#       "4m59-old `1` reported as alive" failure mode.
 get_heartbeat_age() {
+    if ! command -v influx >/dev/null 2>&1; then
+        log "WARN" "influx CLI missing — assuming Arduino alive (will not USB-reset)"
+        echo 0
+        return
+    fi
+
+    # Hardening 2026-05-19: distinguish "Arduino dead" from "InfluxDB / NR
+    # write pipeline broken". Probe InfluxDB itself with a known-fresh
+    # non-arduino measurement first. If the probe is empty, InfluxDB is the
+    # problem (or NR can't write to it) — we cannot trust the arduino_status
+    # staleness signal, so assume alive and refuse to USB-reset. Without this
+    # gate, an InfluxDB outage manifests as a USB-reset storm that physically
+    # interrupts the fans every ~60 s via the Bug-5-fix-driven pin disconnect
+    # at Arduino init. See memory/incident-2026-05-19-fan-cascade.md.
+    local probe
+    probe=$(influx -database highland -execute \
+        "SELECT last(value) FROM local_temperature WHERE time > now() - 5m" \
+        2>/dev/null | tail -1)
+    if [ -z "$probe" ]; then
+        log "WARN" "InfluxDB probe (local_temperature) empty — InfluxDB or NR write pipeline likely broken; assuming Arduino alive (will not USB-reset)"
+        echo 0
+        return
+    fi
+
     local result status_val
     result=$(influx -database highland -execute \
         "SELECT last(value) FROM arduino_status WHERE time > now() - 5m" \
         2>/dev/null | tail -1)
 
     if [ -z "$result" ]; then
-        echo 9999
+        echo 60
         return
     fi
 
     status_val=$(echo "$result" | awk '{print $NF}')
 
     if [ "$status_val" = "1" ]; then
-        echo 0  # alive right now
+        echo 0
     else
-        # Dead — how long? Check when it was last 1
-        local last_alive_time now_epoch
-        # Just report "stale" — exact duration doesn't matter, we act fast
         echo 60
     fi
 }
@@ -183,10 +211,9 @@ while true; do
     hb_age=$(get_heartbeat_age)
 
     if [ "$hb_age" -eq 0 ]; then
-        # Healthy — reset tracking
-        if [ "$LAST_HEARTBEAT_OK" -eq 0 ]; then
-            log "INFO" "Heartbeat OK"
-        fi
+        # Healthy — reset tracking. (Dead "Heartbeat OK" log-once branch removed
+        # 2026-05-18 — LAST_HEARTBEAT_OK is bootstrapped to nonzero at startup,
+        # so the -eq 0 check was unreachable.)
         LAST_HEARTBEAT_OK=$(date +%s)
     else
         # Stale heartbeat

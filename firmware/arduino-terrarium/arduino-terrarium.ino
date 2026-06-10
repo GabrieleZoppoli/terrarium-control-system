@@ -3,8 +3,15 @@
 //
 // Protocol (115200 baud, newline-terminated text):
 //   Pi → Arduino:
-//     P<pin>,<value>   Set PWM (pins 8,12,44,45,46 only, value 0-255)
-//     Q                Query all pin states
+//     P<pin>,<value>*HH        Required. NMEA-style framing + CRC-8 checksum.
+//                              HH = 2-hex-char CRC-8 (poly 0x07, init 0x00, no reflect, no xorout)
+//                              over all preceding bytes. Mismatched checksum is rejected with
+//                              ERR,CHKSUM,got,want and the previous PWM is preserved.
+//                              Bare commands without *HH are rejected with ERR,NOSUM
+//                              (backwards-compat removed 2026-05-18 PM after observing
+//                              slip-throughs where corruption stripped the suffix and the
+//                              bare-format fallback executed a wrong PWM value).
+//     Q                        Query all pin states (checksum optional, same rules)
 //   Arduino → Pi:
 //     READY            Boot complete
 //     H,<value>        Heartbeat with A0 reading (every 2s)
@@ -13,6 +20,7 @@
 //     OK,P<pin>,<value>  PWM command acknowledged
 //     S,P8=<v>,P12=<v>,P44=<v>,P45=<v>,P46=<v>,R=<c>/<f>/<o>/<i>  Full status (response to Q)
 //     R,<circ>,<freeze>,<outlet>,<impeller>  Fan RPM (every 2s)
+//     ERR,CHKSUM,<got>,<want>  Checksum verification failed for last command
 //
 // PWM frequencies:
 //   Pin 8 (Timer 4): default ~490 Hz (fine for LED dimmer)
@@ -102,6 +110,55 @@ uint8_t pinToIndex(uint8_t pin) {
   return 255;
 }
 
+// --- Checksum helpers (CRC-8, poly 0x07) ----------------------------------
+// Returns 0-15 for '0'-'9' and 'A'-'F'/'a'-'f', or 255 if not a hex digit.
+uint8_t hexDigit(char c) {
+  if (c >= '0' && c <= '9') return c - '0';
+  if (c >= 'A' && c <= 'F') return 10 + (c - 'A');
+  if (c >= 'a' && c <= 'f') return 10 + (c - 'a');
+  return 255;
+}
+
+// CRC-8 with polynomial 0x07, init 0x00, no reflection, no xorout
+// (the "CRC-8/SMBUS" style — same as ITU-T I.432.1 generic CRC-8).
+// Bit-by-bit; ~16 cycles/byte on AVR. Cheap for ≤32-byte commands.
+uint8_t crc8(const uint8_t *data, size_t len) {
+  uint8_t crc = 0;
+  for (size_t i = 0; i < len; i++) {
+    crc ^= data[i];
+    for (uint8_t j = 0; j < 8; j++) {
+      crc = (crc & 0x80) ? (uint8_t)((crc << 1) ^ 0x07) : (uint8_t)(crc << 1);
+    }
+  }
+  return crc;
+}
+
+// Strip and verify a trailing "*HH" checksum from cmdBuf (NUL-terminated).
+// Returns:
+//    0  -> no checksum present (legacy command); buf is unchanged.
+//    1  -> checksum present and matches; '*' has been overwritten with '\0'
+//          so the command portion behaves as before for the rest of parsing.
+//   -1  -> checksum present but invalid; outGot/outWant filled.
+// Bug 7 fix (2026-05-18): require '*' to be at exactly strlen-3, not just
+// "some '*' anywhere via strrchr". A stray '*' mid-string used to be matched
+// (followed by length check failure → ERR,CHKSUM,0,0) when ERR,UNKNOWN would
+// be more honest.
+int8_t verifyChecksum(char *buf, uint8_t *outGot, uint8_t *outWant) {
+  size_t n = strlen(buf);
+  if (n < 3 || buf[n-3] != '*') return 0;  // no suffix at the canonical position
+  char *star = &buf[n-3];
+  uint8_t hi = hexDigit(star[1]);
+  uint8_t lo = hexDigit(star[2]);
+  if (hi == 255 || lo == 255) return -1;
+  uint8_t want = (hi << 4) | lo;
+  uint8_t got = crc8((const uint8_t *)buf, (size_t)(star - buf));
+  if (outGot)  *outGot  = got;
+  if (outWant) *outWant = want;
+  if (got != want) return -1;
+  *star = '\0';   // strip suffix so existing parsing keeps working
+  return 1;
+}
+
 // Set PWM for Timer 1 pin 12 (OC1B) using direct register access
 // Maps 0-255 input to 0-TIMER_TOP_25K range
 // When value=0: disconnect output compare and force pin LOW to avoid
@@ -172,10 +229,12 @@ void setupTimer1() {
   // TOP value for 25 kHz
   ICR1 = TIMER_TOP_25K;
 
-  // Enable only channel B (pin 12), non-inverting
-  TCCR1A |= (1 << COM1B1);
-
-  // Initialize to 0
+  // Bug 5 fix (2026-05-18): leave COM1B1 DISCONNECTED at setup time and pin LOW.
+  // The previous order (enable COM1B1 → then OCR1B = 0) produced exactly the
+  // BOTTOM-pulse MOSFET-gate glitch that setTimer1PWM(0) was built to avoid,
+  // for the ~1s window between timer start and the first NR PWM command.
+  TCCR1A &= ~(1 << COM1B1);   // start DISCONNECTED
+  digitalWrite(12, LOW);       // force pin LOW
   OCR1B = 0;
 
   sei();
@@ -204,12 +263,16 @@ void setupTimer5() {
   // TOP value for 25 kHz
   ICR5 = TIMER_TOP_25K;
 
-  // Enable outputs: non-inverting mode for channels A, B, C
-  TCCR5A |= (1 << COM5A1);  // Pin 46 (OC5A)
-  TCCR5A |= (1 << COM5B1);  // Pin 45 (OC5B)
-  TCCR5A |= (1 << COM5C1);  // Pin 44 (OC5C)
-
-  // Initialize all channels to 0
+  // Bug 5 fix (2026-05-18): leave COM5x1 DISCONNECTED at setup time and pins LOW
+  // for the same reason as Timer 1 above — engaging the channel before writing
+  // OCR = 0 emits glitch pulses at BOTTOM for the boot window. setTimer5PWM(v)
+  // will engage COM5x1 when v != 0.
+  TCCR5A &= ~(1 << COM5A1);
+  TCCR5A &= ~(1 << COM5B1);
+  TCCR5A &= ~(1 << COM5C1);
+  digitalWrite(44, LOW);
+  digitalWrite(45, LOW);
+  digitalWrite(46, LOW);
   OCR5A = 0;
   OCR5B = 0;
   OCR5C = 0;
@@ -221,9 +284,13 @@ void setup() {
   Serial.begin(115200);
 
   // LED dimmer — standard analogWrite (~490 Hz, fine for LED driver)
+  // Bug 3 fix (2026-05-18): pin 8 uses inverted PWM (255 = LED OFF, 0 = LED FULL).
+  // Initialising to 0 made the LEDs go to FULL brightness for the entire boot
+  // window (1 s setup delay + first NR command latency). Initialise to 255 so
+  // the safe state is OFF; NR's first PWM command will set the actual value.
   pinMode(PIN_DIMMER, OUTPUT);
-  analogWrite(PIN_DIMMER, 0);
-  pwmValues[0] = 0;
+  analogWrite(PIN_DIMMER, 255);
+  pwmValues[0] = 255;
 
   // Circulation fans — 25 kHz via Timer 1
   setupTimer1();
@@ -269,7 +336,35 @@ void processCommand() {
   if (cmdLen == 0) return;
   cmdBuf[cmdLen] = '\0';
 
+  // Required trailing "*HH" CRC-8 suffix. Bare commands (no *) are rejected
+  // with ERR,NOSUM; suffix present but mismatched -> ERR,CHKSUM,got,want.
+  // The previously-set PWM is preserved on any rejection. Backwards-compat
+  // for bare commands removed 2026-05-18 PM (was the most common slip-through
+  // path: corruption stripping the suffix made the bare-format fallback
+  // execute a corrupted value).
+  uint8_t got = 0, want = 0;
+  int8_t cs = verifyChecksum(cmdBuf, &got, &want);
+  if (cs == 0) {
+    if (txReady()) Serial.println("ERR,NOSUM");
+    return;
+  }
+  if (cs < 0) {
+    if (txReady()) {
+      Serial.print("ERR,CHKSUM,");
+      Serial.print(got);
+      Serial.print(",");
+      Serial.println(want);
+    }
+    return;
+  }
+
+  // Bug 1 fix (2026-05-18): every reply path now guarded by txReady(). Previously
+  // only ERR,CHKSUM/ERR,OVERFLOW were guarded; the ~70-byte Q reply and ACKs
+  // could block the main loop on a stalled USB bridge, starving tach ISRs,
+  // door polling, and heartbeats. PWM mutation still happens — only the ACK
+  // is dropped when TX is back-pressured (the Pi can retry Q if it cares).
   if (cmdBuf[0] == 'Q') {
+    if (!txReady()) return;
     // Query all states
     Serial.print("S,P8=");
     Serial.print(pwmValues[0]);
@@ -294,7 +389,7 @@ void processCommand() {
     // Parse P<pin>,<value>
     char *comma = strchr(cmdBuf + 1, ',');
     if (comma == NULL) {
-      Serial.println("ERR,NOCOMMA");
+      if (txReady()) Serial.println("ERR,NOCOMMA");
       return;
     }
     *comma = '\0';
@@ -304,8 +399,10 @@ void processCommand() {
     // Validate pin
     uint8_t idx = pinToIndex((uint8_t)pin);
     if (idx == 255) {
-      Serial.print("ERR,BADPIN,");
-      Serial.println(pin);
+      if (txReady()) {
+        Serial.print("ERR,BADPIN,");
+        Serial.println(pin);
+      }
       return;
     }
 
@@ -323,34 +420,45 @@ void processCommand() {
     }
     pwmValues[idx] = (uint8_t)value;
 
-    // Acknowledge
-    Serial.print("OK,P");
-    Serial.print(pin);
-    Serial.print(",");
-    Serial.println(value);
+    // Acknowledge — ACK dropped if TX back-pressured (PWM was applied already)
+    if (txReady()) {
+      Serial.print("OK,P");
+      Serial.print(pin);
+      Serial.print(",");
+      Serial.println(value);
+    }
   }
   else {
-    Serial.print("ERR,UNKNOWN,");
-    Serial.println(cmdBuf);
+    if (txReady()) {
+      Serial.print("ERR,UNKNOWN,");
+      Serial.println(cmdBuf);
+    }
   }
 }
 
 void readSerial() {
+  // Bug 8 fix (2026-05-18): on overflow, discard everything until next newline.
+  // Without this, the first 32 bytes of any post-overflow re-sync command were
+  // silently consumed before the newline. discardUntilNewline survives across
+  // readSerial() calls because it's static.
+  static bool discardUntilNewline = false;
   while (Serial.available()) {
     char c = Serial.read();
     if (c == '\n' || c == '\r') {
-      if (cmdLen > 0) {
+      if (!discardUntilNewline && cmdLen > 0) {
         processCommand();
-        cmdLen = 0;
       }
+      cmdLen = 0;
+      discardUntilNewline = false;
+    } else if (discardUntilNewline) {
+      // drop bytes until we see a newline
+    } else if (cmdLen < sizeof(cmdBuf) - 1) {
+      cmdBuf[cmdLen++] = c;
     } else {
-      if (cmdLen < sizeof(cmdBuf) - 1) {
-        cmdBuf[cmdLen++] = c;
-      } else {
-        // Buffer overflow — discard
-        cmdLen = 0;
-        if (txReady()) Serial.println("ERR,OVERFLOW");
-      }
+      // Buffer overflow — enter discard mode until newline arrives
+      discardUntilNewline = true;
+      cmdLen = 0;
+      if (txReady()) Serial.println("ERR,OVERFLOW");
     }
   }
 }
@@ -427,9 +535,15 @@ void checkDoors() {
       changed = true;
     }
 
-    if (now - lastDoorReport >= DOOR_REPORT_INTERVAL) {
+    // Bug 6 fix (2026-05-18): also reset lastDoorReport when we emitted a
+    // change-driven message. Previously, after any door transition, the next
+    // poll iteration would fire the "periodic" branch with `!changed` true
+    // and re-emit both door states unnecessarily.
+    if (changed) {
       lastDoorReport = now;
-      if (!changed && txReady()) {
+    } else if (now - lastDoorReport >= DOOR_REPORT_INTERVAL) {
+      lastDoorReport = now;
+      if (txReady()) {
         Serial.print("D22,");
         Serial.println(lastDoorLeft);
         Serial.print("D24,");

@@ -2,7 +2,7 @@
 
 ## Overview
 
-`flows-sanitized.json` contains the complete Node-RED control logic for the highland cloud forest terrarium, organized across 7 flow tabs. Credentials have been replaced with placeholders.
+`flows-sanitized.json` contains the complete Node-RED control logic for the highland cloud forest terrarium, organized across 7 flow tabs (~486 nodes as of the current export). Credentials have been replaced with placeholders. This guide was refreshed June 2026 to match the deployed system; see "Recent architecture changes" at the end for features that supersede earlier descriptions.
 
 ## Before Importing
 
@@ -43,11 +43,13 @@ Note: `node-red-contrib-ioplugin` is no longer required (Firmata protocol was re
 
 ### 3. Install Python Dependencies
 
-The Tapo smart plug control uses Python function nodes, and the Meross power monitor uses a standalone script:
+The Tapo smart plug control uses Python function nodes (via the maintained `tapo` async library), and the Meross power monitor runs as a standalone systemd daemon:
 
 ```bash
-pip3 install PyP100 meross-iot
+pip3 install tapo meross-iot
 ```
+
+Note: earlier revisions used the unmaintained `PyP100` library; the deployed system uses `tapo` (async `ApiClient`). The Meross integration is now a long-running daemon (`meross_daemon.py`) publishing to MQTT, not an inline `exec` of a one-shot script.
 
 ### 4. Install External Services
 
@@ -119,18 +121,19 @@ The `meross_script.py` requires Meross cloud credentials. Edit the script and re
 ## Flow Tab Descriptions
 
 ### Tab 1: Lights
-Controls the photoperiod schedule and LED dimming with sunrise/sunset and midday intensity variation.
+Computes a dynamic, latitude-derived photoperiod and drives a raised-cosine LED brightness curve (Light Curve C).
 
 **Key nodes**:
-- **BigTimer**: Fixed schedule 06:25–20:05 (times in minutes-since-midnight: starttime=385, endtime=1205)
-- **Dynamic Dimmer #1**: Dawn/dusk ramp (slider 0↔40, 40 steps × 45s = 30 min)
-- **Dynamic Dimmer #2**: Midday ramp (slider 40↔60, 20 steps × 90s = 30 min)
-- **Function nodes**: Dawn/Dusk/Midday start=0/start=1 nodes force explicit ramp direction
-- **Startup brightness**: Detects mid-ramp restarts, issues partial start for on-schedule completion
-- **Pin 8 writer**: Sends `P8,<value>` via serial; door safety gated (forces PWM 102 when doors open)
-- **Python function**: Tapo P100 plug control with door safety gate
+- **Photoperiod Calculator** (`photo_calc_fn_001`): Computes daily day length from the Chinchiná reference latitude (4.98° N), clamped to 10–14 h, centred on solar noon (~13:15 CEST); exposes `photo_light_on/off`, `photo_sunrise/sunset` globals.
+- **Unified Light Scheduler** (`light_sched_fn_001`): Handles the Tapo on/off transitions only (replaced the earlier BigTimer fixed schedule).
+- **Light Curve C** (`light_curve_fn_001` + 60 s tick): Raised-cosine brightness curve, floor 35 / peak 70 at solar noon, written to the slider → inverted PWM on pin 8. Replaced the prior two-step dynamic-dimmer ramp (disabled 2026-05-04).
+- **Startup brightness** (`b7f27d1dd5437650`): On a mid-ramp restart, computes the elapsed fraction and issues a partial `start` so the curve completes on schedule.
+- **Pin 8 writer**: Sends `P8,<value>` via serial; door-safety gated (forces PWM 102 ≈ 60 % when doors open).
+- **Python function**: Tapo plug control (door-safety gated).
 
-**Flow**: BigTimer triggers on/off → Tapo plug powers LEDs → Dimmer ramps PWM for sunrise/midday/sunset effect
+**Flow**: scheduler powers the LED plug on/off → Light Curve C continuously sets pin-8 PWM along the raised-cosine profile for a smooth sunrise → midday-peak → sunset radiant load.
+
+Note: the `node-red-contrib-dynamic-dimmer` package is retained in the dependency list for backward compatibility but is no longer on the active light path (superseded by Light Curve C).
 
 ### Tab 2: Humidity
 Ingests sensor data, calculates VPD, manages mister.
@@ -145,23 +148,23 @@ Ingests sensor data, calculates VPD, manages mister.
 - **Mist counter**: Tracks daily mist events with persistence across reboots
 
 ### Tab 3: Temperature
-Manages compressor-based cooling.
+Manages compressor-based cooling with a target-relative hysteresis and a daytime gate.
 
 **Key nodes**:
-- **Target temperature**: Derived from Colombian weather data (clamped 12--24°C)
-- **Temperature difference**: target − actual
-- **Hysteresis**: Controls compressor on/off based on temperature error
-- **Python function**: Tapo P100 plug control for compressor (with door safety gate)
+- **Target temperature**: Derived from Colombian weather data (clamped 12–24 °C) at night.
+- **Freezer daytime gate** (`within-time-switch` → `Freezer target 24.75°C`): Between astronomical dawn and dusk the target is held at a hardcoded 24.75 °C (ON ≥ 25.25 °C, OFF ≤ 24.25 °C); the daytime gate is overridden when cabinet T ≥ 25 °C so cooling is never blocked when the cabinet runs warm.
+- **Hysteresis** (±0.5 °C around the active target): Controls compressor on/off.
+- **Python function**: Tapo plug control for the compressor (door-safety gated).
 
 ### Tab 4: Fans
 Core PID controller, door safety, and fan management.
 
 **Key nodes**:
-- **PID Controller** (function): Gain-scheduled humidity-based fan speed (Kp=50, Ki=0.5, Kd=10)
-- **Day/Night Check**: Within-time-switch, 04:00–00:00 (midnight)
-- **Night Mode (A/B Suspended)**: Always outputs 0. A/B code preserved in comments with reactivation instructions
-- **Mister Interlock** (function): Stops all fans when mister is active (deletes topic to avoid RBE conflicts)
-- **Manual Override**: Dashboard slider, bypasses all automatic control
+- **PID Controller** (function): Gain-scheduled fan speed with a **two-regime** error signal — humidity-driven below 24 °C, temperature-driven at/above 24 °C (persisting through compressor engagement as a ceiling-defence cooling actuator). Gain schedule: effective Kp 7.5 within ±1.5 % of target, full Kp 50 for errors ≥ 4 %; MAX_SPEED 255, BASE_SPEED 50.
+- **Day/Night Check**: Within-time-switch, 04:00–00:00 (midnight); fans off 00:00–04:00.
+- **Night Mode (A/B Suspended)**: Outputs 0. A/B code preserved in comments with reactivation instructions.
+- **Mister Interlock** (function): On a mist event, sets outlet/impeller (P45/P46) to 50 PWM and coil fans (P44/P12) to 0 (deletes topic to avoid RBE conflicts).
+- **Manual Override**: Dashboard Auto/Pause/Max buttons; a 30-minute watchdog (`manual_mode_watchdog_fn_001`) auto-reverts a left-on override back to auto.
 - **Fan writers**: 4 serial output nodes — outlet (P45), impeller (P46), freezer (P44), circulation (P12), all door-safety gated
 - **RBE nodes**: Report-by-exception logging for fan PWM changes
 - **Door controller**: OR-tracks both doors, 3-second debounce
@@ -200,9 +203,9 @@ Data logging, serial communication, power monitoring, and system diagnostics.
 **Key nodes**:
 - **Serial config**: 115200 baud, newline delimiter, `/dev/ttyACM0`
 - **Serial parser**: Routes incoming serial data — heartbeat (→ arduino_status), doors (→ door controller)
-- **Data Logger** (function): 14 outputs, reads global context every 60 seconds
-- **InfluxDB out** (×14+): One per measurement, writing to `highland` database
-- **Meross power monitoring**: 120s inject → exec meross_script.py → parse → UI text + InfluxDB
+- **Data Logger** (function): 16 outputs, reads global context every 60 seconds (continuous channels); fan-PWM channels are logged separately via RBE on value change.
+- **InfluxDB out** (×16+): One per measurement, writing to `highland` database (33 documented measurements across all sources; see `docs/schema.md`).
+- **Meross power monitoring**: the `meross_daemon.py` systemd service polls the MSS310 (2–120 s cadence) and publishes to MQTT `meross/power/watts`; an MQTT-In node writes `power_consumption` to InfluxDB. (Replaces the earlier `exec`-of-`meross_script.py` approach.)
 - **Mist counter persistence**: Startup inject → restore function → UI text nodes
 - **Resend PWM**: Periodic re-send of current fan states to prevent stale serial
 - **Send to All Fans**: Manual 4-output node for debugging (outlet, impeller, freezer, circulation)
@@ -221,4 +224,16 @@ Data logging, serial communication, power monitoring, and system diagnostics.
 
 **Door safety won't deactivate**: Check both reed switches — `door_safety_active` stays true until both D22 and D24 read HIGH (closed). The debounce requires doors to be stably closed.
 
-**Fans stuck at 0 after misting**: This was a known RBE topic bug, now fixed. Ensure the "Stop All Fans" function deletes `msg.topic` rather than setting it to `"mister_override"`.
+**Fans stuck at 0 after misting**: This was a known RBE topic bug, now fixed. Ensure the mister-interlock function deletes `msg.topic` rather than setting it to `"mister_override"`.
+
+## Recent architecture changes
+
+Features in the deployed system that supersede older descriptions a reader may find in earlier exports or the original paper draft:
+
+- **Lighting**: the two-step dynamic-dimmer ramp was replaced on 2026-05-04 by a latitude-derived dynamic photoperiod (`photo_calc_fn_001`) plus a raised-cosine brightness curve (Light Curve C, `light_curve_fn_001`). The fixed BigTimer schedule was replaced by `light_sched_fn_001`.
+- **Fan control**: the PID error signal is two-regime (humidity below 24 °C, temperature at/above 24 °C, persisting through compressor engagement). The outlet fan (pin 45) is capped at 110 PWM for quiet daytime baseline, with the cap lifted at T ≥ 24 °C.
+- **Cooling**: the compressor has a daytime gate (hardcoded 24.75 °C target, dawn→dusk) overridden at T ≥ 25 °C.
+- **Safety chain**: eleven layers (door interlock, mister duration failsafe, freezer daytime gate, wet-bulb fan-off gate [deprecated rationale], manual-override timeout, USB-serial watchdog, LED-fault watchdog, power-vs-commanded cross-check, weather staleness fallback, Pi↔Arduino serial CRC integrity, mister water-level gate). Deployment chronology in `paper/safety_chain_deployment_dates.yaml`.
+- **Serial link**: every Pi→Mega command carries a CRC-8 byte and is written as a single atomic line; the Mega replies `ERR_CRC` on mismatch.
+- **Weather fallback**: a rolling 14-day historical diurnal curve, rebuilt every 6 hours from the InfluxDB archive, transparently replaces the live feed when the pipeline is stale.
+- **Plug control**: `tapo` async `ApiClient` (not `PyP100`); Meross via the `meross_daemon.py` systemd service.
