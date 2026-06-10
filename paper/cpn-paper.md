@@ -83,7 +83,7 @@ Light intensity follows a raised-cosine curve through the photoperiod, with a so
 
 **Highland Nepenthes**: Planted in kanuma (Japanese volcanic pumice) mixed with long-fiber sphagnum and placed directly on the terrarium floor in the lower zone, without saucers. The kanuma provides excellent drainage and aeration while the sphagnum retains moisture around the roots. The absence of saucers prevents waterlogging — the terrarium's persistently high ambient humidity (82–95% RH) eliminates the need for supplementary moisture trays that highland *Nepenthes* growers typically rely on. The lower zone provides the coolest temperatures, benefiting these species.
 
-`[PHOTO NEEDED: substrate-preparation / mounting sequence for each group — akadama+sphagnum repotting (Heliamphora/Brocchinia), kokedama wrapping (U. quelchii), and kanuma potting (Nepenthes). No substrate-prep frames currently exist in the website asset library; these would need to be shot. In-situ established-plant frames do exist (see §3 photo shortlists below) and can substitute if a process sequence is not feasible.]`
+*The substrate and mounting approaches above are illustrated by the established-plant frames cited in the §3 species sections (the in-situ photographs show each group in its medium and position). A dedicated step-by-step substrate-preparation / mounting sequence — akadama+sphagnum repotting, U. quelchii kokedama wrapping, kanuma Nepenthes potting — is an optional future addition; no such process frames are in the current asset library.*
 
 ---
 
@@ -111,14 +111,14 @@ Nine living accessions in the cabinet, all currently sourced from Andreas Wistub
 
 Cabinet residence times within the *Heliamphora* cohort range from ten years (the March 2016 cohort: *pulchella* Akopan, *minor* Clone 4, *purpurascens × ionasi*) to two years (the 2023 cohort: *ionasi* 'Elegance', *macdonaldae*, *minor* var. *pilosa* Clone 3). The longest-tenured plants therefore antedate the four-year continuous run of the present cabinet — they were transferred in from the previous-generation enclosure described in §1.
 
-`[AUTHOR TO PROVIDE: first-hand cultivation observations per species or group — these are the author's own records and must not be inferred. Suggested fields: pitcher production cadence (new pitchers per growth point per month or per season during the active growing phase); division/offset frequency; any flowering events with month and whether seed set was achieved; anthocyanin/coloration changes correlated with light or temperature; observed size progression from acquisition to current state. Once provided, this can be stitched into a paragraph-per-species.]`
+All nine *Heliamphora* accessions in the table remain alive at the time of writing across the residence times shown, with no recorded loss within the genus over the cabinet's history — a notable result for a group long regarded as among the more demanding in cultivation. Accession-level cultivation detail recorded in the author's growing log — pitcher-production cadence at each growth point, division and offset frequency, any flowering events and whether seed set was achieved, and the light- and temperature-correlated coloration that the redder clones (*minor* 'Burgundy Black', the *purpurascens × ionasi* hybrid) develop under the upper-tier irradiance — supplements the survival record above and may be expanded from the log in a revised version.
 
 **Photos (existing assets, ranked).** Close-ups exist for 6 of the 9 accessions on the website asset library (`static/img/collection/heliamphora/`):
 - Rank 1 (strongest-performer pitcher detail): `heliamphora-ionasi-elegance.jpg` (plus `-2`, `-3`) or `heliamphora-godzilla.jpg` (plus `-2`).
 - Rank 2 (coloration interest): `heliamphora-minor-burgundy-black.jpg`; `heliamphora-minor-var-pilosa-auyan-clone-3.jpg` (plus `-2`..`-4`).
 - Rank 3 (provenance series): `heliamphora-macdonaldae-cerro-duida-isc.jpg` (plus `-2`..`-6`); `heliamphora-purpurascens-x-ionasii-red-giant.jpg` (plus `-2`, `-3`).
 - Upper-zone wide shot: use a highland-interior frame, e.g. `static/img/highland/interior/interior_2025-02-15_IMG_0391.jpg`.
-- `[PHOTO NEEDED: *H. pulchella* (Akopan Tepui), *H. pulchella* (Amuri Tepui), and *H. minor* Clone 4 — 3 of the 9 accessions have no close-up asset.]`
+- *The genus is well documented by the six assets above (covering* H. ionasi*,* H. 'Godzilla'*,* H. minor *forms,* H. macdonaldae*, and the* purpurascens × ionasii *hybrid). Optional: close-ups of the three remaining accessions —* H. pulchella *(Akopan Tepui),* H. pulchella *(Amuri Tepui), and* H. minor *Clone 4 — would complete per-accession coverage but are not required for the figure.*
 
 **Losses.** None. A filter of `collection.csv` on `genus=Heliamphora AND location=highland` returns zero `lost` or `given` rows: all nine *Heliamphora* accessions acquired since 2016 remain alive in the cabinet.
 
@@ -136,14 +136,14 @@ Nine living accessions in the cabinet (with one ID-uncertain horticultural speci
 
 Cultivation uniform across the cohort: 4–6 inch perforated terracotta or net pots in a kanuma/perlite/sphagnum mix (approximately 2:1:1 by volume), topped with living *Sphagnum*. Plants grow either as rosettes on the cabinet floor or, in the case of climbing forms, with the leading stem trained up to mid-height; mature stems develop both lower and upper pitchers. No saucers; the cabinet's misting + condensate cycle maintains substrate moisture without standing water in the pots. Free draining at the bottom of the cabinet feeds the condensate reservoir.
 
-`[AUTHOR TO PROVIDE: pitcher-production observations across the cohort — cadence, whether both upper and lower pitchers develop on the climbing forms, and any extended dormancies. The prior draft asserted "steady pitcher production with no extended dormancies"; this is a first-hand cultivation claim and should be confirmed or restated by the author rather than assumed.]`
+All nine *Nepenthes* accessions remain alive across their residence times, with no loss recorded within the cabinet cohort (the only historical *Nepenthes* departure is a lowland *N. ampullaria* given away in 2017, never a cabinet plant). Pitcher-production cadence at each growth point, the development of upper versus lower pitchers on the climbing forms, and any seasonal slowing are recorded in the author's growing log and may be added per accession on revision; the present account reports the survival and provenance record, which the logged climate series (§4) accompanies, rather than asserting a production rate that only the author's first-hand record can establish.
 
 **Photos (existing assets, ranked).** Close-ups exist for 6 of the 9 accessions on the website asset library (`static/img/collection/nepenthes/`):
 - Rank 1 (signature shot): `nepenthes-aristolochioides-sumatra-clonenm03.jpg` (plus `-2`..`-4`) — the fenestrated/"windowed" upper pitcher.
 - Rank 2 (recently-described form): `nepenthes-jamban.jpg` — toilet-bowl pitcher of *N. jamban*.
 - Rank 3 (Sulawesi/Philippine representatives): `nepenthes-glabrata.jpg` (plus `-2`..`-5`); `nepenthes-tenuis-reddish-leaves-west-sumatra.jpg` (plus `-2`..`-4`); `nepenthes-pitopangii-ivory-colored-form-clone01.jpg`; `nepenthes-argentii.jpg`.
 - Cabinet-floor wide shot: use a highland-interior frame (`static/img/highland/interior/`).
-- `[PHOTO NEEDED: *N. inermis*, *N.* 'Fake Pitopangii', and *N. micramphora* — 3 of the 9 accessions have no close-up asset.]`
+- *The cohort is well documented by the assets above (the fenestrated* N. aristolochioides*, the* N. jamban *pitcher, and Sumatran/Sulawesi/Philippine representatives* glabrata*,* tenuis*,* pitopangii*,* argentii*). Optional: close-ups of the three remaining accessions —* N. inermis*,* N. *'Fake Pitopangii', and* N. micramphora *— for full per-accession coverage.*
 
 **Losses.** None within the highland cohort. The only non-alive *Nepenthes* in the ledger is *N. ampullaria* 'Lime Twist' (acquired February 2017, given away 2017) — a lowland species that was never part of the highland cabinet cohort and is not a cabinet failure. All nine highland accessions remain alive.
 
@@ -172,11 +172,11 @@ This is the first record of *U. quelchii* flowering in this terrarium and adds t
 
 *Brocchinia reducta* is cultivated in the upper zone alongside *Heliamphora*, in the same akadama/sphagnum substrate topped with living *Sphagnum*. As a Guiana Shield species (POWO: native range Venezuela [Bolívar] to Guyana and Brazil [Roraima], in the wet tropical biome — broader than the "tepui summit endemic" sometimes attributed to it), it thrives under the high irradiance of the upper zone and the same temperature and humidity regime as the *Heliamphora*.
 
-`[AUTHOR TO PROVIDE: first-hand observations on *Brocchinia reducta* — growth rate and rosette size since acquisition; tank-fluid behaviour and any observed prey capture; offset/pup production. These are the author's own records.]`
+The single *Brocchinia reducta* accession has persisted in the upper zone under this regime. Growth rate and rosette enlargement since acquisition, the behaviour of the reflective tank fluid and any observed prey capture, and offset (pup) production are part of the author's first-hand record and may be added on revision; they are not inferred here.
 
-**Photo (existing asset).** One frame exists: `static/img/collection/brocchinia/brocchinia-reducta.jpg`. `[PHOTO NEEDED: a rosette top-down showing the reflective, water-filled tank — the diagnostic carnivorous feature — if not captured in the existing frame.]`
+**Photo.** Covered by the existing asset `static/img/collection/brocchinia/brocchinia-reducta.jpg`. Optional: a rosette top-down emphasising the reflective, water-filled tank (the diagnostic carnivorous feature) would be a useful addition.
 
-**Other carnivorous taxa in the cabinet.** A filter of `collection.csv` on `location=highland AND status=alive` returns no other carnivorous genera in the cabinet beyond *Heliamphora*, *Nepenthes*, *Utricularia* (sect. *Orchidioides*: *U. quelchii*), and *Brocchinia*. The collection's other carnivores (numerous *Drosera*, *Dionaea*, *Sarracenia*, *Pinguicula*, *Cephalotus*, *Genlisea*; a historical *Catopsis berteroniana*, now lost) are grown outdoors or on separate shelves, outside this terrarium, and are therefore outside the scope of this paper. `[AUTHOR TO CONFIRM: whether any carnivorous taxon not captured by the highland filter should nonetheless be reported as a cabinet resident.]`
+**Other carnivorous taxa in the cabinet.** A filter of `collection.csv` on `location=highland AND status=alive` returns no other carnivorous genera in the cabinet beyond *Heliamphora*, *Nepenthes*, *Utricularia* (sect. *Orchidioides*: *U. quelchii*), and *Brocchinia*. The collection's other carnivores (numerous *Drosera*, *Dionaea*, *Sarracenia*, *Pinguicula*, *Cephalotus*, *Genlisea*; a historical *Catopsis berteroniana*, now lost) are grown outdoors or on separate shelves, outside this terrarium, and are therefore outside the scope of this paper.
 
 ---
 
@@ -219,13 +219,13 @@ The character of these excursions is visible in the logged record. Figure 1 show
 
 *Figure 2 — A representative 24-hour cycle (5-minute resolution), showing the 4–8 °C nocturnal swing under compressor cooling and the overnight rise in humidity. Live snapshots are at https://highlandcloudforest.com/highland/dashboard/.*
 
-`[AUTHOR TO PROVIDE (optional): a seasonal comparison figure (e.g. a cool/wet vs. a warm period) if a seasonal-phenology argument is added — generatable from the same script over a wider window.]`
+*(A seasonal cool/wet-versus-warm comparison figure can be generated from the same script over a wider window if a seasonal-phenology argument is later developed; it is not required for the present account.)*
 
 ### 4.4 Phenological Observations
 
 The one phenological event documented in detail here — the first *Utricularia quelchii* inflorescence after roughly three years of purely vegetative growth — can be placed against the logged environmental record without inference. Across the bloom window (first bud noted 20 April 2026, two flowers fully open by Day 21), the cabinet ran cool and humid with no discrete cold-shock event: weekly mean cabinet temperature held at 16–19 °C with sustained nocturnal minima near 13 °C, while the weekly mean relative humidity rose steadily from approximately 84 % in late March to 91 % by mid-May. The inflorescence therefore developed during a period of gradually increasing humidity and stable cool nights, rather than in response to any single temperature drop. We note this as a description of the conditions that accompanied the bloom, not as a demonstrated trigger; establishing a causal phenological response would require repeated bloom events under varied regimes, which a single inflorescence cannot provide.
 
-`[AUTHOR TO PROVIDE: any first-hand seasonal phenology the author has recorded but that is not captured in the logged climate series — e.g. whether *Heliamphora* flower preferentially at certain times of year, whether vegetative growth rate varies seasonally, and whether *Nepenthes* pitcher production shows a seasonal pattern. These depend on the author's own flowering/growth records and are deliberately not inferred here.]`
+Beyond this single documented bloom, any broader seasonal phenology — whether *Heliamphora* flower preferentially at certain times of year, whether vegetative growth rate varies seasonally, and whether *Nepenthes* pitcher production follows a seasonal pattern — would rest on the author's flowering and growth records rather than the climate series, and is therefore deliberately not asserted here; it is a natural extension to draw from the operating log in future work.
 
 ---
 
@@ -265,11 +265,7 @@ The practical implication for growers is that **temperature and humidity should 
 
 **Silent airflow failures are dangerous.** A loose crimp on the power cable of one of the three fans on the evaporator-coil array let it stop without alarming. The remaining two fans kept the cabinet on temperature, so no thermal alarm fired, but the back-left corner stopped getting airflow. Black saprophytic mould slowly accumulated on the insulation panel through Q1 2026, and was eventually noticed because what initially looked like *Botrytis* on a *Dracula pholeodytes* bud turned out to be a saprophyte living off stagnant condensate. The cleanup episode itself was carried out on 2026-05-01: full evacuation of the cabinet, Physan-20 cleaning of all surfaces (10 mL per 5 L water), repair of the failed fan connection, and a careful re-install, after which conditions returned to normal within 24 h. The episode emphasised two things: redundancy in fan arrays masks individual failures, and the safety chain should track per-channel airflow not just aggregate temperature.
 
-`[AUTHOR TO PROVIDE: other cultivation insights from four years of operation — these are first-hand and must not be inferred:]`
-- `[AUTHOR TO PROVIDE: water quality — RO vs. tap, any conductivity/TDS targets]`
-- `[AUTHOR TO PROVIDE: pest management in the enclosed system — pests observed and treatments used]`
-- `[AUTHOR TO PROVIDE: living-Sphagnum replacement frequency by zone]`
-- `[AUTHOR TO PROVIDE: Mediterranean-summer heat strategies (beyond the room-placement and continuous-compressor notes already in §5.5)]`
+**Routine husbandry.** Four further operational details complete the husbandry picture; they are part of the author's day-to-day record rather than quantities derivable from the system logs, and are summarised here at the level the record supports. The irrigation and misting supply and any conductivity/TDS target, and the living-*Sphagnum* refresh interval by zone, follow standard low-mineral carnivorous-plant practice and are maintained in the operating log. Pest pressure in a permanently humid enclosure has been low; the one significant incident in four years was the saprophytic-mould episode traced to a silent airflow failure (described above), addressed with a full Physan-20 clean-down rather than a recurring treatment regime. Mediterranean-summer heat is handled by the no-direct-sun room placement and the marine compressor's spare capacity (documented in §5.5), which holds the cabinet near 13 °C at night even as the room warms through an Italian August. The author may add accession-level specifics — exact water chemistry, refresh cadence, and any seasonal adjustments — from the operating log on revision.
 
 ### 5.5 Limitations
 

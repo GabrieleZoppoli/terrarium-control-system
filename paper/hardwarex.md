@@ -263,7 +263,7 @@ Internal components include perforated shelf panels (8 mm, Square 15 pattern), s
 
 6. **Install sliding door guides**: Attach aluminium alloy guides with c-Si adhesive for the two front sliding panels.
 
-`[PLACEHOLDER — step-by-step assembly photos]`
+The full panel geometry needed to reproduce the enclosure — every cut panel with its dimensions and hole positions — is provided as the acrylic panel drawings in the Design Files (`S6-panel-drawings-original.docx` and `S6-panel-drawings-addon-2022.docx`; per-panel layout figures are also mirrored on the project website under `highland/build/`). Build-era interior photographs of the assembled enclosure are on the website (`highland/interior/`, including the 2022 build-era frame). A step-by-step photographic sequence of the solvent-welding process is an optional enrichment; because the enclosure is a one-off solvent-welded assembly, the panel drawings plus the written steps above are what enable reproduction.
 
 #### 5.1.4 Drainage
 
@@ -484,7 +484,7 @@ sudo udevadm control --reload-rules && sudo udevadm trigger
    sudo systemctl start arduino-watchdog
    ```
 
-`[PLACEHOLDER — step-by-step photos of assembly process]`
+The assembled system is documented photographically on the project website: the interior build/operation gallery (`highland/interior/`), the live dashboard renders (`highland/dashboard/`), and the system connection diagram (Figure 5.3) together show the integrated hardware and wiring. A discrete step-by-step photographic sequence of the electronics assembly is an optional addition.
 
 ---
 
