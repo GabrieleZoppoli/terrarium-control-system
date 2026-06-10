@@ -209,7 +209,17 @@ The diurnal swing has several functional consequences:
 
 Rain events in the Colombian reference cities produce sudden setpoint changes in the terrarium — temperature drops of several degrees within an hour accompanied by humidity targets approaching saturation. While these perturbations differ mechanistically from tepui fog immersion (Section 2.2), they produce temperature and humidity excursions of similar magnitude and duration to those recorded during cloud immersion events in tropical montane environments (Jarvis & Mulligan 2011). Some experienced *Heliamphora* growers associate rapid temperature drops with improved vigor, though this has not been formally tested.
 
-`[AUTHOR TO PROVIDE: figures from the logged InfluxDB/Grafana data. The underlying series exist and are exportable; specific frames to select are (1) a representative 7-day temperature and humidity trace with weather-driven excursions visible; (2) a 24-hour diurnal cycle showing the 4–8 °C swing and the humidity pattern; (3) a seasonal comparison (e.g., a cool/wet vs. warm period). These are data-export-and-render tasks, not first-hand observations, and can be generated from the system logs.]`
+The character of these excursions is visible in the logged record. Figure 1 shows a representative 7-day window in which the cabinet's temperature and humidity track the weather-driven targets, with the day-to-day variation in target amplitude reflecting the stochastic Colombian weather rather than a fixed schedule. Figure 2 shows a single 24-hour cycle, with the 4–8 °C nocturnal drop under compressor cooling and the corresponding rise in humidity toward saturation overnight.
+
+![Representative 7-day cabinet record: temperature, relative humidity, and VPD tracking weather-driven targets, with room conditions overlaid.](figures/fig2_environmental_7d.png)
+
+*Figure 1 — A representative 7-day record (1-hour resolution). Cabinet (purple) tracks the weather-derived target (amber); the day-to-day change in amplitude is the stochastic weather content from the Colombian reference cities. Generated from InfluxDB by `analysis/publication_figures.py`.*
+
+![Representative 24-hour cabinet cycle showing the nocturnal temperature drop and humidity rise.](figures/fig1_environmental_24h.png)
+
+*Figure 2 — A representative 24-hour cycle (5-minute resolution), showing the 4–8 °C nocturnal swing under compressor cooling and the overnight rise in humidity. Live snapshots are at https://highlandcloudforest.com/highland/dashboard/.*
+
+`[AUTHOR TO PROVIDE (optional): a seasonal comparison figure (e.g. a cool/wet vs. a warm period) if a seasonal-phenology argument is added — generatable from the same script over a wider window.]`
 
 ### 4.4 Phenological Observations
 
