@@ -1,0 +1,1274 @@
+{
+  "dashboard": {
+    "uid": "terrarium-main-v2",
+    "title": "Terrarium Roraima",
+    "tags": ["terrarium", "roraima", "monitoring"],
+    "timezone": "browser",
+    "refresh": "10s",
+    "time": {"from": "now-24h", "to": "now"},
+    "fiscalYearStartMonth": 0,
+    "liveNow": false,
+    "style": "dark",
+    "schemaVersion": 39,
+    "version": 1,
+    "editable": true,
+    "graphTooltip": 1,
+    "panels": [
+      {
+        "id": 1,
+        "title": "Temperature",
+        "type": "gauge",
+        "gridPos": {"x": 0, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"local_temperature\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 10,
+            "max": 26,
+            "unit": "°C",
+            "decimals": 1,
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "continuous-GrYlRd"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#0056d6"},
+                {"value": 10, "color": "#0056d6"},
+                {"value": 16, "color": "#2ca02c"},
+                {"value": 22, "color": "#e6e600"},
+                {"value": 25, "color": "#e32400"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 2,
+        "title": "Humidity",
+        "type": "gauge",
+        "gridPos": {"x": 4, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"local_humidity\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 60,
+            "max": 100,
+            "unit": "%",
+            "decimals": 1,
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#e32400"},
+                {"value": 60, "color": "#e32400"},
+                {"value": 75, "color": "#e6e600"},
+                {"value": 85, "color": "#2ca02c"},
+                {"value": 95, "color": "#e6e600"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 3,
+        "title": "VPD",
+        "type": "gauge",
+        "gridPos": {"x": 8, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"vpd\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 1.2,
+            "unit": "kPa",
+            "decimals": 2,
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#e6e600"},
+                {"value": 0, "color": "#e6e600"},
+                {"value": 0.4, "color": "#2ca02c"},
+                {"value": 0.8, "color": "#e6e600"},
+                {"value": 1.0, "color": "#ff7f0e"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 4,
+        "title": "Room Stats",
+        "type": "stat",
+        "gridPos": {"x": 12, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"room_temperature\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Room T"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"room_humidity\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Room RH"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#2ca02c"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#2ca02c"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Room T"},
+              "properties": [
+                {"id": "unit", "value": "°C"},
+                {"id": "decimals", "value": 1}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Room RH"},
+              "properties": [
+                {"id": "unit", "value": "%"},
+                {"id": "decimals", "value": 1}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "graphMode": "none",
+          "textMode": "value_and_name",
+          "orientation": "vertical",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "colorMode": "value"
+        }
+      },
+      {
+        "id": 5,
+        "title": "Water Level",
+        "type": "bargauge",
+        "gridPos": {"x": 16, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"water_level_local\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "min": 0,
+            "max": 100,
+            "unit": "%",
+            "decimals": 0,
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#e32400"},
+                {"value": 0, "color": "#e32400"},
+                {"value": 20, "color": "#e6e600"},
+                {"value": 50, "color": "#2ca02c"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "orientation": "vertical",
+          "displayMode": "gradient",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "showUnfilled": true,
+          "valueMode": "color"
+        }
+      },
+      {
+        "id": 6,
+        "title": "Power Draw",
+        "type": "stat",
+        "gridPos": {"x": 20, "y": 0, "w": 4, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"power_consumption\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "W",
+            "decimals": 0,
+            "noValue": "STALE — feed down",
+            "color": {
+              "mode": "thresholds"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#2ca02c"},
+                {"value": 0, "color": "#2ca02c"},
+                {"value": 100, "color": "#e6e600"},
+                {"value": 200, "color": "#ff7f0e"},
+                {"value": 300, "color": "#d62728"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "area",
+          "colorMode": "background",
+          "textMode": "auto",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 7,
+        "title": "Temperature Trends",
+        "type": "timeseries",
+        "gridPos": {"x": 0, "y": 6, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"local_temperature\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Actual"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"target_temperature_computed\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Target"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"room_temperature\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Room"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "°C",
+            "color": {
+              "mode": "fixed"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Actual"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0056d6"}},
+                {"id": "custom.fillOpacity", "value": 15}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Target"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e32400"}},
+                {"id": "custom.lineStyle", "value": {"fill": "dash", "dash": [10, 10]}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Room"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c"}}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 8,
+        "title": "Humidity Trends",
+        "type": "timeseries",
+        "gridPos": {"x": 12, "y": 6, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"local_humidity\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Actual"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"target_humidity_computed\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Target"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"room_humidity\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Room"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "%",
+            "color": {
+              "mode": "fixed"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Actual"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0056d6"}},
+                {"id": "custom.fillOpacity", "value": 15}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Target"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e32400"}},
+                {"id": "custom.lineStyle", "value": {"fill": "dash", "dash": [10, 10]}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Room"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c"}}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 9,
+        "title": "VPD with Optimal Band",
+        "type": "timeseries",
+        "gridPos": {"x": 0, "y": 14, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"vpd\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "VPD"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT 0.4 AS \"Optimal Low\" FROM \"vpd\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Optimal Low"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT 0.8 AS \"Optimal High\" FROM \"vpd\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Optimal High"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "kPa",
+            "color": {
+              "mode": "fixed"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "VPD"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#9467bd"}},
+                {"id": "custom.lineWidth", "value": 2}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Optimal Low"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c33"}},
+                {"id": "custom.lineStyle", "value": {"fill": "dash", "dash": [5, 5]}},
+                {"id": "custom.lineWidth", "value": 1},
+                {"id": "custom.fillBelowTo", "value": "Optimal High"},
+                {"id": "custom.fillOpacity", "value": 15}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Optimal High"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c33"}},
+                {"id": "custom.lineStyle", "value": {"fill": "dash", "dash": [5, 5]}},
+                {"id": "custom.lineWidth", "value": 1}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 10,
+        "title": "Fan Speed + Equipment Overlay",
+        "type": "timeseries",
+        "gridPos": {"x": 12, "y": 14, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"fan_speed\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Fan PWM"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") * 100 FROM \"freezer_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Freezer"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") * 100 FROM \"mister_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Mister"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") * 100 FROM \"light_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Lights"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "fixed"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Fan PWM"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0056d6"}},
+                {"id": "custom.axisSoftMin", "value": 0},
+                {"id": "custom.axisSoftMax", "value": 255},
+                {"id": "custom.fillOpacity", "value": 10}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Freezer"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0eb8c0"}},
+                {"id": "custom.lineInterpolation", "value": "stepAfter"},
+                {"id": "custom.axisPlacement", "value": "right"},
+                {"id": "custom.fillOpacity", "value": 10}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Mister"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c"}},
+                {"id": "custom.lineInterpolation", "value": "stepAfter"},
+                {"id": "custom.axisPlacement", "value": "right"},
+                {"id": "custom.fillOpacity", "value": 10}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Lights"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e6e600"}},
+                {"id": "custom.lineInterpolation", "value": "stepAfter"},
+                {"id": "custom.axisPlacement", "value": "right"},
+                {"id": "custom.fillOpacity", "value": 10}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 11,
+        "title": "Equipment State Timeline",
+        "type": "state-timeline",
+        "gridPos": {"x": 0, "y": 22, "w": 16, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"freezer_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Freezer"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"mister_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Mister"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"light_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Lights"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_speed\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Fan Speed"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "fillOpacity": 80,
+              "lineWidth": 0
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#808080"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Freezer"},
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "0": {"text": "OFF", "color": "#808080", "index": 0},
+                        "1": {"text": "ON", "color": "#0eb8c0", "index": 1}
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Mister"},
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "0": {"text": "OFF", "color": "#808080", "index": 0},
+                        "1": {"text": "ON", "color": "#2ca02c", "index": 1}
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Lights"},
+              "properties": [
+                {
+                  "id": "mappings",
+                  "value": [
+                    {
+                      "type": "value",
+                      "options": {
+                        "0": {"text": "OFF", "color": "#808080", "index": 0},
+                        "1": {"text": "ON", "color": "#e6e600", "index": 1}
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Fan Speed"},
+              "properties": [
+                {
+                  "id": "color",
+                  "value": {"mode": "continuous-blues"}
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 12,
+        "title": "Colombian Weather",
+        "type": "stat",
+        "gridPos": {"x": 16, "y": 22, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"temperature\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Chinchina T"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"temperature_bogota\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Bogota T"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"temperature_medellin\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Medellin T"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"temperature_sonson\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Sonson T"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"humidity\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "E",
+            "alias": "Chinchina RH"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#ff7f0e"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Chinchina T"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#ff7f0e"}},
+                {"id": "unit", "value": "°C"},
+                {"id": "decimals", "value": 1}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Bogota T"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#bcbd22"}},
+                {"id": "unit", "value": "°C"},
+                {"id": "decimals", "value": 1}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Medellin T"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#17becf"}},
+                {"id": "unit", "value": "°C"},
+                {"id": "decimals", "value": 1}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Sonson T"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e377c2"}},
+                {"id": "unit", "value": "°C"},
+                {"id": "decimals", "value": 1}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Chinchina RH"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#ff7f0e"}},
+                {"id": "unit", "value": "%"},
+                {"id": "decimals", "value": 1}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "graphMode": "none",
+          "textMode": "value_and_name",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "colorMode": "value"
+        }
+      },
+      {
+        "id": 13,
+        "title": "Temperature Deviation",
+        "type": "timeseries",
+        "gridPos": {"x": 0, "y": 28, "w": 8, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"difference_temperature\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Temp Deviation"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "°C",
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#e32400"
+            },
+            "custom": {
+              "lineWidth": 1,
+              "fillOpacity": 10,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": true,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"},
+              "thresholdsStyle": {
+                "mode": "area"
+              }
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "red"},
+                {"value": -2, "color": "red"},
+                {"value": -1, "color": "green"},
+                {"value": 0, "color": "green"},
+                {"value": 1, "color": "green"},
+                {"value": 2, "color": "red"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 14,
+        "title": "Humidity Deviation",
+        "type": "timeseries",
+        "gridPos": {"x": 8, "y": 28, "w": 8, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"difference_humidity\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Humidity Deviation"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "%",
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#0056d6"
+            },
+            "custom": {
+              "lineWidth": 1,
+              "fillOpacity": 10,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": true,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"},
+              "thresholdsStyle": {
+                "mode": "area"
+              }
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "red"},
+                {"value": -10, "color": "red"},
+                {"value": -5, "color": "green"},
+                {"value": 0, "color": "green"},
+                {"value": 5, "color": "green"},
+                {"value": 10, "color": "red"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 15,
+        "title": "Mist Events (24h)",
+        "type": "stat",
+        "gridPos": {"x": 16, "y": 28, "w": 8, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT count(\"value\") FROM \"mist_event\" WHERE $timeFilter GROUP BY time(1d) fill(0)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#2ca02c"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#2ca02c"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "area",
+          "colorMode": "background",
+          "textMode": "value",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 101,
+        "title": "Water Level — 7d trend",
+        "type": "timeseries",
+        "gridPos": {"x": 0, "y": 35, "w": 12, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"water_level_local\" WHERE time > now() - 7d GROUP BY time(15m) fill(none)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Tank %"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "%",
+            "min": 0,
+            "decimals": 1,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#0056d6"
+            },
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 15,
+              "lineInterpolation": "smooth",
+              "showPoints": "never",
+              "spanNulls": false,
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "scaleDistribution": {"type": "linear"},
+              "thresholdsStyle": {
+                "mode": "line"
+              }
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#e32400"},
+                {"value": 5, "color": "#e6e600"},
+                {"value": 10, "color": "#2ca02c"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 102,
+        "title": "Freezer ON — last 24h",
+        "type": "stat",
+        "gridPos": {"x": 12, "y": 35, "w": 6, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\")*24 FROM \"freezer_status\" WHERE time > now() - 24h",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "ON hours"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "h",
+            "decimals": 1,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#0eb8c0"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#0eb8c0"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "none",
+          "colorMode": "value",
+          "textMode": "value_and_name",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 103,
+        "title": "Mist A/B events — 7d",
+        "type": "stat",
+        "gridPos": {"x": 18, "y": 35, "w": 6, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT count(\"arm\") FROM \"mist_ab\" WHERE \"arm\"=0 AND time > now() - 7d",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "10s arm"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT count(\"arm\") FROM \"mist_ab\" WHERE \"arm\"=1 AND time > now() - 7d",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "20s arm"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "none",
+            "decimals": 0,
+            "color": {
+              "mode": "fixed",
+              "fixedColor": "#2ca02c"
+            },
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "#2ca02c"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "none",
+          "textMode": "value_and_name",
+          "orientation": "vertical",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "colorMode": "value"
+        }
+      }
+    ],
+    "templating": {
+      "list": []
+    },
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "links": []
+  },
+  "folderId": 0,
+  "overwrite": true
+}

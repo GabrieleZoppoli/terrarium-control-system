@@ -1,0 +1,797 @@
+{
+  "dashboard": {
+    "uid": "terrarium-eng-v2",
+    "title": "Engineering & Diagnostics",
+    "tags": ["terrarium", "engineering", "diagnostics"],
+    "timezone": "browser",
+    "refresh": "30s",
+    "time": {"from": "now-7d", "to": "now"},
+    "fiscalYearStartMonth": 0,
+    "liveNow": false,
+    "style": "dark",
+    "schemaVersion": 39,
+    "version": 1,
+    "editable": true,
+    "graphTooltip": 1,
+    "panels": [
+      {
+        "id": 1,
+        "type": "timeseries",
+        "title": "PID Error vs Output",
+        "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"difference_humidity\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Humidity Error"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"fan_speed\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Fan Speed (PID)"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_pwm_outlet\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Outlet PWM"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "color": {"mode": "fixed"}
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Humidity Error"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e32400"}},
+                {"id": "custom.axisPlacement", "value": "left"},
+                {"id": "unit", "value": "percent"}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Fan Speed (PID)"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0056d6"}},
+                {"id": "custom.axisPlacement", "value": "right"},
+                {"id": "unit", "value": "none"}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Outlet PWM"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c"}},
+                {"id": "custom.lineStyle", "value": {"fill": "dash", "dash": [10, 10]}},
+                {"id": "custom.axisPlacement", "value": "right"}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 2,
+        "type": "state-timeline",
+        "title": "PID Control Mode",
+        "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"pid_control_mode\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Mode"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "Humidity", "color": "#0056d6", "index": 0},
+                  "1": {"text": "Temperature", "color": "#e32400", "index": 1}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "auto",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 3,
+        "type": "timeseries",
+        "title": "Fan PWM Channels",
+        "gridPos": {"x": 0, "y": 8, "w": 24, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_pwm_circulation\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Circulation"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_pwm_freezer\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Evaporator"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_pwm_outlet\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Outlet"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"fan_pwm_impeller\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Impeller"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "lineInterpolation": "stepAfter",
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "color": {"mode": "fixed"},
+            "min": 0,
+            "max": 255
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Circulation"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0056d6"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Evaporator"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#0eb8c0"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Outlet"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#2ca02c"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Impeller"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#ff7f0e"}}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 4,
+        "type": "timeseries",
+        "title": "Power Consumption",
+        "gridPos": {"x": 0, "y": 16, "w": 12, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"power_consumption\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Watts"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "watt",
+            "color": {"mode": "fixed", "fixedColor": "#d62728"},
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 20,
+              "gradientMode": "scheme",
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 5,
+        "type": "state-timeline",
+        "title": "Freezer Duty Cycle",
+        "gridPos": {"x": 12, "y": 16, "w": 6, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"freezer_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Freezer"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "OFF", "color": "#808080", "index": 0},
+                  "1": {"text": "ON", "color": "#0eb8c0", "index": 1}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 6,
+        "type": "state-timeline",
+        "title": "Mister Duty Cycle",
+        "gridPos": {"x": 18, "y": 16, "w": 6, "h": 7},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"mister_status\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Mister"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "OFF", "color": "#808080", "index": 0},
+                  "1": {"text": "ON", "color": "#2ca02c", "index": 1}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 7,
+        "type": "timeseries",
+        "title": "Colombian Weather — Temperature",
+        "gridPos": {"x": 0, "y": 23, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"temperature\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Chinchina"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"temperature_bogota\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Bogota"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"temperature_medellin\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Medellin"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"temperature_sonson\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Sonson"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "celsius",
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "color": {"mode": "fixed"}
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Chinchina"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#ff7f0e"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Bogota"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#bcbd22"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Medellin"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#17becf"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Sonson"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e377c2"}}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 8,
+        "type": "timeseries",
+        "title": "Colombian Weather — Humidity",
+        "gridPos": {"x": 12, "y": 23, "w": 12, "h": 8},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"humidity\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Chinchina"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"humidity_bogota\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "B",
+            "alias": "Bogota"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"humidity_medellin\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "C",
+            "alias": "Medellin"
+          },
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"humidity_sonson\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "D",
+            "alias": "Sonson"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent",
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 0,
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            },
+            "color": {"mode": "fixed"}
+          },
+          "overrides": [
+            {
+              "matcher": {"id": "byName", "options": "Chinchina"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#ff7f0e"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Bogota"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#bcbd22"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Medellin"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#17becf"}}
+              ]
+            },
+            {
+              "matcher": {"id": "byName", "options": "Sonson"},
+              "properties": [
+                {"id": "color", "value": {"mode": "fixed", "fixedColor": "#e377c2"}}
+              ]
+            }
+          ]
+        },
+        "options": {
+          "tooltip": {"mode": "multi", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 9,
+        "type": "state-timeline",
+        "title": "Arduino Heartbeat (arduino_status)",
+        "gridPos": {"x": 0, "y": 31, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"arduino_status\" WHERE $timeFilter GROUP BY time(1m) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Arduino"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "DOWN", "color": "#d62728", "index": 1},
+                  "1": {"text": "OK", "color": "#2ca02c", "index": 0}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 10,
+        "type": "state-timeline",
+        "title": "Lights-off Fan Gate",
+        "gridPos": {"x": 8, "y": 31, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"wbt_shutdown_active\" WHERE $timeFilter GROUP BY time($__interval) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Gate"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "Passing", "color": "#2ca02c", "index": 0},
+                  "1": {"text": "Blocked", "color": "#ff7f0e", "index": 1}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "auto",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 11,
+        "type": "stat",
+        "title": "Night Test Mode",
+        "gridPos": {"x": 16, "y": 31, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"night_test_mode\" WHERE $timeFilter",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "Normal", "index": 0},
+                  "1": {"text": "A/B Active", "index": 1}
+                }
+              }
+            ],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"},
+                {"value": 1, "color": "orange"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "none",
+          "textMode": "value",
+          "colorMode": "background",
+          "reduceOptions": {
+            "calcs": ["lastNotNull"],
+            "fields": "",
+            "values": false
+          },
+          "justifyMode": "auto",
+          "orientation": "auto"
+        }
+      },
+      {
+        "id": 110,
+        "type": "state-timeline",
+        "title": "Connectivity OK",
+        "gridPos": {"x": 0, "y": 37, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"connectivity_ok\" WHERE $timeFilter GROUP BY time(1m) fill(previous)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Connectivity"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "fillOpacity": 70,
+              "lineWidth": 0
+            },
+            "color": {"mode": "fixed"},
+            "mappings": [
+              {
+                "type": "value",
+                "options": {
+                  "0": {"text": "FAIL", "color": "#d62728", "index": 1},
+                  "1": {"text": "OK", "color": "#2ca02c", "index": 0}
+                }
+              }
+            ]
+          },
+          "overrides": []
+        },
+        "options": {
+          "showValue": "never",
+          "rowHeight": 0.8,
+          "mergeValues": true,
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom"}
+        }
+      },
+      {
+        "id": 111,
+        "type": "timeseries",
+        "title": "DNS latency ms",
+        "gridPos": {"x": 8, "y": 37, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT mean(\"value\") FROM \"connectivity_dns_ms\" WHERE $timeFilter GROUP BY time($__interval) fill(none)",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "DNS ms"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ms",
+            "color": {"mode": "fixed", "fixedColor": "#ff7f0e"},
+            "custom": {
+              "lineWidth": 2,
+              "fillOpacity": 10,
+              "spanNulls": false,
+              "drawStyle": "line",
+              "pointSize": 5,
+              "showPoints": "never",
+              "stacking": {"mode": "none"},
+              "axisPlacement": "auto",
+              "scaleDistribution": {"type": "linear"}
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "tooltip": {"mode": "single", "sort": "none"},
+          "legend": {"displayMode": "list", "placement": "bottom", "calcs": []}
+        }
+      },
+      {
+        "id": 112,
+        "type": "stat",
+        "title": "Room feed (DietPi)",
+        "gridPos": {"x": 16, "y": 37, "w": 8, "h": 6},
+        "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+        "targets": [
+          {
+            "datasource": {"type": "influxdb", "uid": "fdd36b30-261a-4440-b6ef-b0ca2fb3ae8d"},
+            "query": "SELECT last(\"value\") FROM \"room_temperature\" WHERE time > now() - 10m",
+            "rawQuery": true,
+            "resultFormat": "time_series",
+            "refId": "A",
+            "alias": "Room T"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "unit": "°C",
+            "decimals": 1,
+            "noValue": "DietPi DOWN",
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"value": null, "color": "green"}
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "options": {
+          "graphMode": "none",
+          "textMode": "auto",
+          "colorMode": "value",
+          "reduceOptions": {
+            "values": false,
+            "calcs": ["lastNotNull"],
+            "fields": ""
+          },
+          "justifyMode": "auto",
+          "orientation": "auto"
+        }
+      }
+    ]
+  },
+  "folderId": 0,
+  "overwrite": true
+}

@@ -14,12 +14,12 @@ from datetime import datetime, timezone, timedelta
 from email.mime.text import MIMEText
 
 # ── Config ──────────────────────────────────────────────────────────────
-GMAIL_ADDRESS = "REDACTED — Gmail sender address"
+GMAIL_ADDRESS  = "REDACTED — Gmail sender address"
 GMAIL_APP_PASS = "REDACTED — set Gmail app password before deployment"
-GMAIL_TO = "REDACTED — Gmail recipient address"
+GMAIL_TO       = "REDACTED — Gmail recipient address"
 
 PHONE = "REDACTED — E.164 phone for WhatsApp alerts"
-CALLMEBOT_KEY = "REDACTED — get from callmebot.com"  # Set to "" to disable WhatsApp
+CALLMEBOT_KEY = "REDACTED — get from callmebot.com"           # Set to "" to disable WhatsApp
 
 STATE_FILE = "/home/pi/.terrarium-health-state.json"
 GREEN_INTERVAL = 6 * 3600   # 6 hours
@@ -35,7 +35,7 @@ STUCK_HYSTERESIS_SAMPLES = 3    # require 3 consecutive cycles (~15 min) of exce
 STUCK_TRANSITION_WINDOW = 120   # seconds after a freezer cmd state change during which STUCK check is suppressed
 
 TAPO_EMAIL = "REDACTED — Tapo account email"
-TAPO_PASS = "REDACTED — Tapo account password"
+TAPO_PASS  = "REDACTED — Tapo account password"
 INFLUX_URL = "http://localhost:8086/query?db=highland"
 
 PLUGS = {"freezer": "192.168.1.196", "lights": "192.168.1.55", "mister": "192.168.1.199"}
@@ -126,9 +126,14 @@ async def get_tapo_states():
 
 
 def get_sensors():
+    # Continuous channels (5-min window — staleness flagged on these).
+    # fan_speed (the humidity-PID global) is intentionally NOT queried: it goes
+    # stale at night when the lights-off/freezer-latched gate forces outlet+
+    # impeller to 0 but the PID's last-computed value stays cached. Per-pin
+    # fan_pwm_* is the truth — fetched separately below with RBE handling.
     q = ("SELECT last(value) FROM local_temperature, local_humidity, "
          "target_temperature_computed, target_humidity_computed, "
-         "fan_speed, freezer_status, light_status WHERE time > now() - 5m")
+         "freezer_status, light_status WHERE time > now() - 5m")
     data = influx_query(q)
     if not data or "results" not in data:
         return None
@@ -139,16 +144,70 @@ def get_sensors():
         sensors[series["name"]] = {
             "value": series["values"][0][1],
             "age": now_epoch - ts_epoch,
+            "rbe": False,
         }
+
+    # Per-pin fan PWMs (RBE — only logged on change, so age is meaningless for
+    # staleness. 12-h window catches the common case where freezer state and
+    # gate state haven't transitioned recently).
+    q2 = ("SELECT last(value) FROM fan_pwm_circulation, fan_pwm_freezer, "
+          "fan_pwm_outlet, fan_pwm_impeller WHERE time > now() - 12h")
+    data2 = influx_query(q2)
+    if data2 and "results" in data2:
+        for series in data2["results"][0].get("series", []):
+            ts_epoch = parse_influx_ts(series["values"][0][0])
+            sensors[series["name"]] = {
+                "value": series["values"][0][1],
+                "age": now_epoch - ts_epoch,
+                "rbe": True,
+            }
+
+    # Room feed (DietPi -> main Pi InfluxDB, ~60s cadence). 30d window is
+    # deliberate: a 5-min query returns nothing when the feed dies, making the
+    # outage invisible (it was, for 9.5 days, 2026-06-01->11). Age drives a
+    # dedicated yellow in validate(); the "room" flag exempts these entries
+    # from the generic 90/120s staleness loop.
+    q3 = ("SELECT last(value) FROM room_temperature, room_humidity "
+          "WHERE time > now() - 30d")
+    data3 = influx_query(q3)
+    if data3 and "results" in data3:
+        for series in data3["results"][0].get("series", []):
+            ts_epoch = parse_influx_ts(series["values"][0][0])
+            sensors[series["name"]] = {
+                "value": series["values"][0][1],
+                "age": now_epoch - ts_epoch,
+                "rbe": False,
+                "room": True,
+            }
+
     return sensors if sensors else None
 
 
 def get_water_level():
+    """Read calibrated water level. ESP publishes a raw value (despite the
+    'tank_percent' MQTT topic name) that NR remaps to a true display %.
+
+    Two-point calibration verified 2026-05-23 afternoon
+    (memory water-recalib-2026-05-23.md):
+      RAW_EMPTY = 29.7   anchor at pump-intake water level (morning dry-fire)
+      RAW_AT_60 = 70.2   measured after +23 L fill (~62% of ~37 L usable)
+      scale     = 60 / (70.2 - 29.7) = 1.481
+                                       (slope drifted from 2026-03-02's 1.676)
+
+    Tank is ~45 L total but ~8 L sit below the pump intake (dead zone). By
+    design, display 0% == 0% USABLE (not 0% physical). The water<5 / water<15
+    thresholds in validate() are evaluated against this corrected %, never raw.
+    NR source: `water_recal_fn_001` function in flows.json — keep both in sync."""
     out, _ = run("mosquitto_sub -t 'esp/mistertank/tank_percent' -C 1 -W 5", timeout=8)
     try:
-        return float(out)
+        raw = float(out)
     except (ValueError, TypeError):
         return None
+    RAW_EMPTY = 29.7
+    RAW_AT_60 = 70.2
+    scale = 60.0 / (RAW_AT_60 - RAW_EMPTY)  # 1.481
+    corrected = (raw - RAW_EMPTY) * scale
+    return max(0.0, min(100.0, corrected))
 
 
 def get_service_active(name):
@@ -157,16 +216,18 @@ def get_service_active(name):
 
 
 def get_nr_uptime():
-    out, _ = run("systemctl show nodered --property=ActiveEnterTimestamp")
-    m = re.search(r"=(.+)$", out)
-    if not m:
-        return None
+    """Service uptime in seconds. Uses the monotonic clock so DST transitions
+    don't make us report uptime off by 1 hour (the old version hardcoded CEST
+    via datetime, which silently became wrong every Oct-Mar)."""
+    out, _ = run("systemctl show nodered --property=ActiveEnterTimestampMonotonic --value")
     try:
-        parts = m.group(1).strip().split()
-        dt = datetime.strptime(" ".join(parts[1:3]), "%Y-%m-%d %H:%M:%S")
-        dt = dt.replace(tzinfo=CEST)
-        return time.time() - dt.timestamp()
-    except Exception:
+        mono_us = int(out.strip())  # microseconds since boot
+        if mono_us == 0:
+            return None  # service never started
+        with open("/proc/uptime") as f:
+            sys_uptime_s = float(f.read().split()[0])
+        return max(0.0, sys_uptime_s - (mono_us / 1_000_000.0))
+    except (ValueError, IOError, OSError):
         return None
 
 
@@ -233,7 +294,7 @@ def get_wifi_pm():
 # ── Smart validation ────────────────────────────────────────────────────
 
 def validate(now_cest, sensors, tapo, pings, water, arduino_age,
-             meross_watts, nr_active, wd_active, meross_active, state=None):
+             meross_watts, meross_age, nr_active, wd_active, meross_active, state=None):
     """Cross-check values against automation logic for current time."""
     warns = []
     h = now_cest.hour + now_cest.minute / 60.0
@@ -261,20 +322,38 @@ def validate(now_cest, sensors, tapo, pings, water, arduino_age,
         warns.append(("red", "InfluxDB unreachable or no recent data"))
         return warns
 
-    temp   = sensors.get("local_temperature", {}).get("value")
-    humi   = sensors.get("local_humidity", {}).get("value")
-    tgt_t  = sensors.get("target_temperature_computed", {}).get("value")
-    tgt_h  = sensors.get("target_humidity_computed", {}).get("value")
-    fans   = sensors.get("fan_speed", {}).get("value")
-    frzr   = sensors.get("freezer_status", {}).get("value")
-    light  = sensors.get("light_status", {}).get("value")
+    temp     = sensors.get("local_temperature", {}).get("value")
+    humi     = sensors.get("local_humidity", {}).get("value")
+    tgt_t    = sensors.get("target_temperature_computed", {}).get("value")
+    tgt_h    = sensors.get("target_humidity_computed", {}).get("value")
+    fan_circ = sensors.get("fan_pwm_circulation", {}).get("value")
+    fan_frz  = sensors.get("fan_pwm_freezer", {}).get("value")
+    frzr     = sensors.get("freezer_status", {}).get("value")
+    light    = sensors.get("light_status", {}).get("value")
 
-    # Sensor freshness
+    # Sensor freshness - RBE channels (fan_pwm_*) are exempt; their age is
+    # meaningless because they only log on value change. Room-feed channels
+    # have their own dedicated check below.
     for name, s in sensors.items():
+        if s.get("rbe"):
+            continue
+        if s.get("room"):
+            continue
         if s["age"] > 120:
             warns.append(("red", f"{name} STALE ({s['age']:.0f}s)"))
         elif s["age"] > 90:
             warns.append(("yellow", f"{name} aging ({s['age']:.0f}s)"))
+
+    # Room feed (DietPi) staleness ladder - longer thresholds than cabinet
+    # sensors because the DietPi can be offline for hours without affecting
+    # cabinet control, but the operator should know.
+    room_age = sensors.get("room_temperature", {}).get("age")
+    if room_age is None:
+        warns.append(("yellow", "room feed: no data in 30d window (DietPi?)"))
+    elif room_age > 86400:
+        warns.append(("yellow", f"room feed STALE {room_age/86400:.1f}d (DietPi down?)"))
+    elif room_age > 900:
+        warns.append(("yellow", f"room feed STALE {room_age/60:.0f}min (DietPi?)"))
 
     # Lights vs Tapo consistency
     tapo_light = tapo.get("lights", {}).get("on")
@@ -291,9 +370,64 @@ def validate(now_cest, sensors, tapo, pings, water, arduino_age,
         if frzr == 0 and temp > tgt_t + 1.5 and not (8 <= h < 20):
             warns.append(("yellow", f"Freezer OFF but temp {temp:.1f}C >> target {tgt_t:.1f}C"))
 
-    # Fan schedule — NOTE: fan_speed global is stale at night (keeps last PID
-    # value, not actual GPIO output), so we cannot reliably detect fan anomalies
-    # from this value alone. Only warn if fans are clearly wrong AND fresh.
+    # Freezer vs Tapo consistency (added 2026-05-15 — caught freezer stuck ON
+    # while NR commanded OFF for 1h44m; existing power-based stuck check only
+    # watches the Tapo→power direction, missing "OFF command never delivered").
+    # Uses same hysteresis (3 polls / ~15 min) as the power-based STUCK check
+    # to absorb Tapo poll lag during legitimate ON/OFF transitions.
+    tapo_fz_state = tapo.get("freezer", {}).get("on")
+    if frzr is not None and tapo_fz_state is not None:
+        # Mirror the power-based STUCK check: suppress during legitimate
+        # ON->OFF / OFF->ON transitions to avoid false-positive while Tapo
+        # poll cache catches up to the new cmd. Hysteresis alone (3 samples)
+        # could still false-alert under sustained Tapo session-refresh lag.
+        if bool(frzr) != tapo_fz_state and not freezer_changed_recently(STUCK_TRANSITION_WINDOW):
+            mism_n = (state or {}).get("freezer_state_mismatch_count", 0) + 1
+            if state is not None:
+                state["freezer_state_mismatch_count"] = mism_n
+            if mism_n >= STUCK_HYSTERESIS_SAMPLES:
+                warns.append(("red",
+                    f"STUCK FREEZER PLUG: NR commands {'ON' if frzr else 'OFF'} but "
+                    f"Tapo {'ON' if tapo_fz_state else 'OFF'} for {mism_n} consecutive polls "
+                    f"(~{mism_n*5} min) — command not delivered"))
+            else:
+                warns.append(("yellow",
+                    f"Freezer state mismatch: NR={int(frzr)} Tapo="
+                    f"{'ON' if tapo_fz_state else 'OFF'} (sample {mism_n}/{STUCK_HYSTERESIS_SAMPLES}) — watching"))
+        else:
+            if state is not None and state.get("freezer_state_mismatch_count", 0) > 0:
+                state["freezer_state_mismatch_count"] = 0
+
+    # Fan baseline tracking — circulation (P12) and freezer-evaporator (P44)
+    # fans should track freezer state: 255 when freezer ON, baseline 140 when
+    # freezer OFF (current setting since 2026-05-06; was 220 in early May, 200
+    # in late April). A non-zero mismatch is a 🟡 — could be a baseline-edit
+    # regression in NR, a missed PWM command, or stale RBE that hasn't caught
+    # up to a recent freezer transition.
+    #
+    # Zero values are NOT warned: 0 means an intentional override is active
+    # (door safety, mister cycle, or a manual NR-side disable). The cron has
+    # no visibility into those — outlet/impeller validation is omitted for
+    # the same reason (lights-off/freezer-latched gate + door safety make
+    # 5-min cron windows noisy).
+    CIRC_FRZ_BASELINE = 140
+    if frzr is not None:
+        if frzr == 1:
+            if fan_circ is not None and int(fan_circ) not in (0, 255):
+                warns.append(("yellow",
+                    f"fan_pwm_circulation={int(fan_circ)} but freezer ON (expected 255)"))
+            if fan_frz is not None and int(fan_frz) not in (0, 255):
+                warns.append(("yellow",
+                    f"fan_pwm_freezer={int(fan_frz)} but freezer ON (expected 255)"))
+        elif frzr == 0:
+            if fan_circ is not None and int(fan_circ) not in (0, CIRC_FRZ_BASELINE):
+                warns.append(("yellow",
+                    f"fan_pwm_circulation={int(fan_circ)} but freezer OFF "
+                    f"(expected {CIRC_FRZ_BASELINE})"))
+            if fan_frz is not None and int(fan_frz) not in (0, CIRC_FRZ_BASELINE):
+                warns.append(("yellow",
+                    f"fan_pwm_freezer={int(fan_frz)} but freezer OFF "
+                    f"(expected {CIRC_FRZ_BASELINE})"))
 
     # Mister stuck
     mister = tapo.get("mister", {})
@@ -327,7 +461,10 @@ def validate(now_cest, sensors, tapo, pings, water, arduino_age,
     #
     # New model: P_expected = base + lights_overhead + LED_slope * slider + freezer + mister
     # Conservative (under-estimates slightly so STUCK threshold has headroom).
-    if meross_watts is not None:
+    # Power cross-check: REQUIRE fresh meross sample. A stale reading (daemon
+    # stopped, MQTT broker blip) could miss a real stuck-relay event OR
+    # false-alert on a cached pre-stop spike. Cap at 120s = 4 samples at 30s.
+    if meross_watts is not None and meross_age is not None and meross_age < 120:
         tapo_fz = tapo.get("freezer", {}).get("on", False)
         tapo_lt = tapo.get("lights", {}).get("on", False)
         tapo_ms = tapo.get("mister", {}).get("on", False)
@@ -336,7 +473,7 @@ def validate(now_cest, sensors, tapo, pings, water, arduino_age,
         base_w           = 9
         daytime_fans_w   = 13 if tapo_lt else 0   # cabinet fans + LED heatsink fans, idle while lights on
         freezer_w        = 110 if tapo_fz else 0
-        mister_w         = 5   if tapo_ms else 0
+        mister_w         = 30  if tapo_ms else 0  # 2026-05-21: was 5W; misting pump actually draws ~30W (user calibration)
         lights_dim_w     = ((slider or 0) * 2.71) if tapo_lt else 0
         expected_w = base_w + daytime_fans_w + freezer_w + lights_dim_w + mister_w
         excess = meross_watts - expected_w
@@ -406,7 +543,7 @@ async def auto_fix_stuck_relay(warnings, state):
     """Cycle stuck Tapo relays detected by power cross-check.
 
     ON→OFF for relays stuck ON (e.g. freezer compressor won't stop).
-    OFF→ON for relays stuck OFF (e.g. lights not receiving power).
+    OFF→ON for relays stuck OFF — currently only the ON→OFF (freezer) path is implemented; the lights branch below is reachable code but no validate() warning produces a matching 'lights ... stuck OFF' string, so it never fires (2026-05-18).
     15-min cooldown between attempts.
     """
     stuck = [w for w in warnings if w[1].startswith("STUCK RELAY")]
@@ -428,7 +565,7 @@ async def auto_fix_stuck_relay(warnings, state):
     for _, msg in stuck:
         if "freezer" in msg.lower():
             plug, cycle = "freezer", "on_off"
-        elif "lights" in msg.lower() and "stuck OFF" in msg:
+        elif False and "lights" in msg.lower() and "stuck OFF" in msg:  # NEVER fires — feature not implemented; left in place for future implementation
             plug, cycle = "lights", "off_on"
         else:
             continue
@@ -542,15 +679,20 @@ def build_report(now_cest, pings, tapo, sensors, water,
         def fv(key, fmt):
             v = sensors.get(key, {}).get("value")
             return format(v, fmt) if isinstance(v, (int, float)) else "?"
-        max_age = max(s["age"] for s in sensors.values())
+        # Only continuous channels count toward staleness; RBE fan_pwm_* are exempt.
+        cont_ages = [s["age"] for s in sensors.values() if not s.get("rbe")]
+        max_age = max(cont_ages) if cont_ages else 0
         s_lvl = "red" if max_age > 120 else ("yellow" if max_age > 90 else "")
         lines.append(f"{worst(s_lvl)} SENSORS  "
                      f"temp={fv('local_temperature','.1f')}C  "
                      f"humi={fv('local_humidity','.0f')}%  "
                      f"tgt_t={fv('target_temperature_computed','.1f')}C  "
                      f"tgt_h={fv('target_humidity_computed','.0f')}%  "
-                     f"fans={fv('fan_speed','.0f')}  "
-                     f"(all <{int(max_age)+1}s)")
+                     f"fans=circ:{fv('fan_pwm_circulation','.0f')} "
+                     f"frz:{fv('fan_pwm_freezer','.0f')} "
+                     f"out:{fv('fan_pwm_outlet','.0f')} "
+                     f"imp:{fv('fan_pwm_impeller','.0f')}  "
+                     f"(cont <{int(max_age)+1}s)")
     else:
         lines.append("🔴 SENSORS  InfluxDB unreachable")
 
@@ -649,7 +791,8 @@ def load_state():
         with open(STATE_FILE) as f:
             return json.load(f)
     except (FileNotFoundError, json.JSONDecodeError):
-        return {"last_green": 0, "last_alert": 0, "last_alert_hash": ""}
+        return {"last_green": 0, "last_alert": 0, "last_alert_hash": "",
+                "current_severity": "green"}
 
 
 def save_state(state):
@@ -703,13 +846,18 @@ def send_whatsapp(msg):
         return False
 
 
-def send_alert(report, overall):
-    """Send via all configured channels. Returns True if at least one succeeded."""
-    subject = {
-        "green": "🟢 Terrarium OK",
-        "yellow": "🟡 Terrarium Warning",
-        "red": "🔴 Terrarium Alert",
-    }.get(overall, "Terrarium Health")
+def send_alert(report, overall, subject_override=None):
+    """Send via all configured channels. Returns True if at least one succeeded.
+    subject_override lets callers send a 'cleared' / 'escalated' subject without
+    inventing a fake `overall` level."""
+    if subject_override is not None:
+        subject = subject_override
+    else:
+        subject = {
+            "green": "🟢 Terrarium OK",
+            "yellow": "🟡 Terrarium Warning",
+            "red": "🔴 Terrarium Alert",
+        }.get(overall, "Terrarium Health")
 
     ok = False
     ok = send_gmail(subject, report) or ok
@@ -744,7 +892,7 @@ async def main():
 
     # Validate
     warnings = validate(now_cest, sensors, tapo, pings, water, arduino_age,
-                        meross_watts, nr_active, wd_active, meross_active, state)
+                        meross_watts, meross_age, nr_active, wd_active, meross_active, state)
 
     # External fault flags (NR LED watchdog writes /tmp/led-fault.flag)
     warnings.extend(get_led_fault_warning())
@@ -775,20 +923,55 @@ async def main():
     class_text = re.sub(r"-?[0-9]+(?:\.[0-9]+)?", "#", class_text)
     alert_hash = hashlib.md5(class_text.encode()).hexdigest()[:8]
 
-    if overall in ("red", "yellow"):
+    # Severity-aware dispatch (2026-05-22, tag:yellow_edge_trigger_2026_05_22):
+    #   - YELLOW is EDGE-TRIGGERED: send once on entry, silent during persistence,
+    #     send a "cleared" email on yellow→green. No 30-min repeats while warning
+    #     persists. Avoids the alert-fatigue from yellow-as-red.
+    #   - RED keeps existing behaviour: 2-cycle persistence then 30-min cooldown
+    #     repeats until resolved.
+    #   - GREEN periodic report every GREEN_INTERVAL when nothing is wrong.
+    prev_severity = state.get("current_severity", "green")
+
+    if overall == "red":
         prev = state.get("last_class_hash", "")
         state["last_class_hash"] = alert_hash
-        # Require two consecutive cycles of the same anomaly class.
         persistent = (prev == alert_hash)
         if persistent and should_send(overall, alert_hash, state):
             if send_alert(full_report, overall):
                 state["last_alert"] = time.time()
                 state["last_alert_hash"] = alert_hash
-    else:
+                state["current_severity"] = "red"
+    elif overall == "yellow":
+        prev = state.get("last_class_hash", "")
+        state["last_class_hash"] = alert_hash
+        persistent = (prev == alert_hash)
+        # Send ONLY on entry into yellow (after the 2-cycle persistence check).
+        # Once we have emailed about this yellow episode, stay silent until
+        # the warning either escalates to red (handled above) or clears to green.
+        if persistent and prev_severity != "yellow":
+            if send_alert(full_report, "yellow"):
+                state["last_alert"] = time.time()
+                state["last_alert_hash"] = alert_hash
+                state["current_severity"] = "yellow"
+        elif persistent:
+            # Already in yellow — keep severity sticky, suppress repeats.
+            state["current_severity"] = "yellow"
+    else:  # green
         state["last_class_hash"] = ""
-        if should_send("green", "", state):
-            if send_alert(full_report, overall):
-                state["last_green"] = time.time()
+        if prev_severity == "yellow":
+            # Resolution email — fire once on yellow→green transition.
+            cleared_report = ("✅ Previously-yellow warning(s) cleared.\n\n" + full_report)
+            if send_alert(cleared_report, "green",
+                          subject_override="✅ Terrarium WARNING cleared"):
+                state["current_severity"] = "green"
+                state["last_green"] = time.time()  # counts as a periodic green too
+        else:
+            # Already green (or red→green: red doesn't need a resolution email
+            # under the current contract — the next periodic green report covers it).
+            state["current_severity"] = "green"
+            if should_send("green", "", state):
+                if send_alert(full_report, overall):
+                    state["last_green"] = time.time()
 
     save_state(state)
 
