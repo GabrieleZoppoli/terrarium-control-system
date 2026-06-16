@@ -1,11 +1,11 @@
 {
-  "accessions": 400,
-  "alive": 296,
+  "accessions": 404,
+  "alive": 300,
   "genera": 91,
   "alive_genera": 70,
-  "species_photographed": 114,
+  "species_photographed": 120,
   "genera_photographed": 54,
-  "dendrogram_accessions": 386,
-  "dendrogram_genera": 88,
+  "dendrogram_accessions": 403,
+  "dendrogram_genera": 91,
   "dendrogram_families": 25
 }

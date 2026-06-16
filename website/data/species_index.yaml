@@ -327,6 +327,10 @@
   taxon: Pinguicula jaumavensis x cyclosecta
   genus: Pinguicula
   primary_photo: img/collection/pinguicula/pinguicula-jaumavensis-x-cyclosecta.jpg
+"pinguicula-laueana-crimson-flower":
+  taxon: "Pinguicula laueana 'Crimson Flower'"
+  genus: Pinguicula
+  primary_photo: img/collection/pinguicula/pinguicula-laueana-crimson-flower.jpg
 "pinguicula-moctezumae":
   taxon: Pinguicula moctezumae
   genus: Pinguicula
@@ -363,15 +367,30 @@
   genus: Sarracenia
   primary_photo: img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg
   provenance: Alabama cultivar; white-topped
+"sarracenia-waccamaw":
+  taxon: "Sarracenia 'Waccamaw'"
+  genus: Sarracenia
+  primary_photo: img/collection/sarracenia/sarracenia-waccamaw.jpg
+  provenance: SE US coastal plain
 "sarracenia-flava-var-flava-goldie":
   taxon: "Sarracenia flava var. flava 'Goldie'"
   genus: Sarracenia
   primary_photo: img/collection/sarracenia/sarracenia-flava-var-flava-goldie.jpg
   provenance: SE US coastal plain; all-yellow selection
+"sarracenia-x-metallized":
+  taxon: "Sarracenia x 'Metallized'"
+  genus: Sarracenia
+  primary_photo: img/collection/sarracenia/sarracenia-x-metallized.jpg
+  provenance: SE US coastal plain
 "sarracenia-moorei-leah-wilkerson":
   taxon: "Sarracenia × moorei 'Leah Wilkerson'"
   genus: Sarracenia
   primary_photo: img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson.jpg
+  provenance: SE US coastal plain
+"sarracenia-saurus":
+  taxon: Sarracenia × Saurus
+  genus: Sarracenia
+  primary_photo: img/collection/sarracenia/sarracenia-x-saurus.jpg
   provenance: SE US coastal plain
 "schoenorchis-pachyacris":
   taxon: Schoenorchis pachyacris
@@ -399,10 +418,18 @@
   taxon: Tillandsia didisticha
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-didisticha.jpg
+"tillandsia-pruinosa":
+  taxon: Tillandsia pruinosa
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-pruinosa.jpg
 "tillandsia-roezlii":
   taxon: Tillandsia roezlii
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-roezlii.jpg
+"tillandsia-seleriana":
+  taxon: Tillandsia seleriana
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-seleriana.jpg
 "tillandsia-tectorum-f-caulescens":
   taxon: Tillandsia tectorum f. caulescens
   genus: Tillandsia

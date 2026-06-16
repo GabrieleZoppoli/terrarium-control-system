@@ -4,7 +4,10 @@
       "taxon": "Aldrovanda vesiculosa",
       "slug": "aldrovanda-vesiculosa",
       "primary": "aldrovanda-vesiculosa.jpg",
-      "extras": []
+      "extras": [
+        "aldrovanda-vesiculosa-2.jpg",
+        "aldrovanda-vesiculosa-3.jpg"
+      ]
     }
   ],
   "amorphophallus": [
@@ -125,7 +128,12 @@
       "slug": "cymbidium-goeringii-tian-cao",
       "primary": "cymbidium-goeringii-tian-cao.jpg",
       "extras": [
-        "cymbidium-goeringii-tian-cao-2.jpg"
+        "cymbidium-goeringii-tian-cao-2.jpg",
+        "cymbidium-goeringii-tian-cao-3.jpg",
+        "cymbidium-goeringii-tian-cao-4.jpg",
+        "cymbidium-goeringii-tian-cao-5.jpg",
+        "cymbidium-goeringii-tian-cao-6.jpg",
+        "cymbidium-goeringii-tian-cao-7.jpg"
       ]
     }
   ],
@@ -562,7 +570,11 @@
         "neofinetia-falcata-akausagi-11.jpg",
         "neofinetia-falcata-akausagi-12.jpg",
         "neofinetia-falcata-akausagi-13.jpg",
-        "neofinetia-falcata-akausagi-14.jpg"
+        "neofinetia-falcata-akausagi-14.jpg",
+        "neofinetia-falcata-akausagi-15.jpg",
+        "neofinetia-falcata-akausagi-16.jpg",
+        "neofinetia-falcata-akausagi-17.jpg",
+        "neofinetia-falcata-akausagi-18.jpg"
       ]
     }
   ],
@@ -738,13 +750,20 @@
       "taxon": "Pinguicula agnata x gypsicola",
       "slug": "pinguicula-agnata-x-gypsicola",
       "primary": "pinguicula-agnata-x-gypsicola.jpg",
-      "extras": []
+      "extras": [
+        "pinguicula-agnata-x-gypsicola-2.jpg",
+        "pinguicula-agnata-x-gypsicola-3.jpg",
+        "pinguicula-agnata-x-gypsicola-4.jpg",
+        "pinguicula-agnata-x-gypsicola-5.jpg"
+      ]
     },
     {
       "taxon": "Pinguicula cyclosecta",
       "slug": "pinguicula-cyclosecta",
       "primary": "pinguicula-cyclosecta.jpg",
-      "extras": []
+      "extras": [
+        "pinguicula-cyclosecta-2.jpg"
+      ]
     },
     {
       "taxon": "Pinguicula debbertiana",
@@ -760,6 +779,12 @@
         "pinguicula-jaumavensis-x-cyclosecta-2.jpg",
         "pinguicula-jaumavensis-x-cyclosecta-3.jpg"
       ]
+    },
+    {
+      "taxon": "Pinguicula laueana 'Crimson Flower'",
+      "slug": "pinguicula-laueana-crimson-flower",
+      "primary": "pinguicula-laueana-crimson-flower.jpg",
+      "extras": []
     },
     {
       "taxon": "Pinguicula moctezumae",
@@ -832,6 +857,14 @@
       "extras": []
     },
     {
+      "taxon": "Sarracenia 'Waccamaw'",
+      "slug": "sarracenia-waccamaw",
+      "primary": "sarracenia-waccamaw.jpg",
+      "extras": [
+        "sarracenia-waccamaw-2.jpg"
+      ]
+    },
+    {
       "taxon": "Sarracenia flava var. flava 'Goldie'",
       "slug": "sarracenia-flava-var-flava-goldie",
       "primary": "sarracenia-flava-var-flava-goldie.jpg",
@@ -842,7 +875,8 @@
         "sarracenia-flava-var-flava-goldie-5.jpg",
         "sarracenia-flava-var-flava-goldie-6.jpg",
         "sarracenia-flava-var-flava-goldie-7.jpg",
-        "sarracenia-flava-var-flava-goldie-8.jpg"
+        "sarracenia-flava-var-flava-goldie-8.jpg",
+        "sarracenia-flava-var-flava-goldie-9.jpg"
       ]
     },
     {
@@ -855,6 +889,14 @@
       ]
     },
     {
+      "taxon": "Sarracenia x 'Metallized'",
+      "slug": "sarracenia-x-metallized",
+      "primary": "sarracenia-x-metallized.jpg",
+      "extras": [
+        "sarracenia-x-metallized-2.jpg"
+      ]
+    },
+    {
       "taxon": "Sarracenia × moorei 'Leah Wilkerson'",
       "slug": "sarracenia-x-moorei-leah-wilkerson",
       "primary": "sarracenia-x-moorei-leah-wilkerson.jpg",
@@ -863,6 +905,16 @@
         "sarracenia-x-moorei-leah-wilkerson-3.jpg",
         "sarracenia-x-moorei-leah-wilkerson-4.jpg",
         "sarracenia-x-moorei-leah-wilkerson-5.jpg"
+      ]
+    },
+    {
+      "taxon": "Sarracenia × Saurus",
+      "slug": "sarracenia-x-saurus",
+      "primary": "sarracenia-x-saurus.jpg",
+      "extras": [
+        "sarracenia-x-saurus-2.jpg",
+        "sarracenia-x-saurus-3.jpg",
+        "sarracenia-x-saurus-4.jpg"
       ]
     }
   ],
@@ -958,12 +1010,26 @@
       "extras": []
     },
     {
+      "taxon": "Tillandsia pruinosa",
+      "slug": "tillandsia-pruinosa",
+      "primary": "tillandsia-pruinosa.jpg",
+      "extras": [
+        "tillandsia-pruinosa-2.jpg"
+      ]
+    },
+    {
       "taxon": "Tillandsia roezlii",
       "slug": "tillandsia-roezlii",
       "primary": "tillandsia-roezlii.jpg",
       "extras": [
         "tillandsia-roezlii-2.jpg"
       ]
+    },
+    {
+      "taxon": "Tillandsia seleriana",
+      "slug": "tillandsia-seleriana",
+      "primary": "tillandsia-seleriana.jpg",
+      "extras": []
     },
     {
       "taxon": "Tillandsia tectorum f. caulescens",
@@ -975,7 +1041,9 @@
       "taxon": "Tillandsia tricholepis",
       "slug": "tillandsia-tricholepis",
       "primary": "tillandsia-tricholepis.jpg",
-      "extras": []
+      "extras": [
+        "tillandsia-tricholepis-2.jpg"
+      ]
     }
   ],
   "tolumnia": [

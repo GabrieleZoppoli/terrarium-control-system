@@ -639,7 +639,11 @@
                       "name": "pruinosa",
                       "size": 1,
                       "vendor": "Dötterer Pflanzen",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-pruinosa.jpg",
+                        "../img/collection/tillandsia/tillandsia-pruinosa-2.jpg"
+                      ]
                     },
                     {
                       "name": "pueblensis",
@@ -681,7 +685,10 @@
                       "name": "seleriana",
                       "size": 1,
                       "vendor": "",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-seleriana.jpg"
+                      ]
                     },
                     {
                       "name": "setiformis",
@@ -749,7 +756,8 @@
                       "vendor": "",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/tillandsia/tillandsia-tricholepis.jpg"
+                        "../img/collection/tillandsia/tillandsia-tricholepis.jpg",
+                        "../img/collection/tillandsia/tillandsia-tricholepis-2.jpg"
                       ]
                     },
                     {
@@ -829,6 +837,12 @@
                       "photos": [
                         "../img/collection/brocchinia/brocchinia-reducta.jpg"
                       ]
+                    },
+                    {
+                      "name": "hechtioides 'Small Pygmy form'",
+                      "size": 1,
+                      "vendor": "Giardino Carnivoro",
+                      "status": "alive"
                     }
                   ]
                 }
@@ -1437,7 +1451,12 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg",
-                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg"
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-4.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-5.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-6.jpg",
+                        "../img/collection/cymbidium/cymbidium-goeringii-tian-cao-7.jpg"
                       ]
                     }
                   ]
@@ -1886,7 +1905,10 @@
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-11.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-12.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-13.jpg",
-                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-14.jpg"
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-14.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-15.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-16.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-17.jpg"
                       ]
                     },
                     {
@@ -2232,7 +2254,9 @@
                       "vendor": "Un Angolo di Deserto",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/aldrovanda/aldrovanda-vesiculosa.jpg"
+                        "../img/collection/aldrovanda/aldrovanda-vesiculosa.jpg",
+                        "../img/collection/aldrovanda/aldrovanda-vesiculosa-2.jpg",
+                        "../img/collection/aldrovanda/aldrovanda-vesiculosa-3.jpg"
                       ]
                     }
                   ]
@@ -3004,7 +3028,11 @@
                       "name": "'Waccamaw'",
                       "size": 1,
                       "vendor": "eBay (secret_garden_carnivores)",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/sarracenia/sarracenia-waccamaw.jpg",
+                        "../img/collection/sarracenia/sarracenia-waccamaw-2.jpg"
+                      ]
                     },
                     {
                       "name": "'Wilkerson's White Knight'",
@@ -3061,7 +3089,8 @@
                         "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-5.jpg",
                         "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-6.jpg",
                         "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-7.jpg",
-                        "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-8.jpg"
+                        "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-8.jpg",
+                        "../img/collection/sarracenia/sarracenia-flava-var-flava-goldie-9.jpg"
                       ]
                     },
                     {
@@ -3182,7 +3211,13 @@
                       "name": "× Saurus",
                       "size": 1,
                       "vendor": "eBay (semiraridalmondo)",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/sarracenia/sarracenia-x-saurus.jpg",
+                        "../img/collection/sarracenia/sarracenia-x-saurus-2.jpg",
+                        "../img/collection/sarracenia/sarracenia-x-saurus-3.jpg",
+                        "../img/collection/sarracenia/sarracenia-x-saurus-4.jpg"
+                      ]
                     },
                     {
                       "name": "× alata 'Night' × leucophylla × alata Night",
@@ -3236,6 +3271,16 @@
                         "../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form.jpg",
                         "../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-2.jpg",
                         "../img/collection/sarracenia/sarracenia-flava-var-ornata-fo6-filiformis-v-bordin-aberrant-form-3.jpg"
+                      ]
+                    },
+                    {
+                      "name": "x 'Metallized'",
+                      "size": 1,
+                      "vendor": "Daniele Righetti (Stranger Plants)",
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/sarracenia/sarracenia-x-metallized.jpg",
+                        "../img/collection/sarracenia/sarracenia-x-metallized-2.jpg"
                       ]
                     }
                   ]
@@ -3334,7 +3379,11 @@
                       "vendor": "Giardino Carnivoro",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola.jpg"
+                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola.jpg",
+                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola-2.jpg",
+                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola-3.jpg",
+                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola-4.jpg",
+                        "../img/collection/pinguicula/pinguicula-agnata-x-gypsicola-5.jpg"
                       ]
                     },
                     {
@@ -3349,7 +3398,8 @@
                       "vendor": "",
                       "status": "dead",
                       "photos": [
-                        "../img/collection/pinguicula/pinguicula-cyclosecta.jpg"
+                        "../img/collection/pinguicula/pinguicula-cyclosecta.jpg",
+                        "../img/collection/pinguicula/pinguicula-cyclosecta-2.jpg"
                       ]
                     },
                     {
@@ -3415,7 +3465,10 @@
                       "name": "laueana 'Crimson Flower'",
                       "size": 1,
                       "vendor": "Diflora",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/pinguicula/pinguicula-laueana-crimson-flower.jpg"
+                      ]
                     },
                     {
                       "name": "medusina",
@@ -3506,6 +3559,18 @@
                       "photos": [
                         "../img/collection/pinguicula/pinguicula-moctezumae.jpg"
                       ]
+                    },
+                    {
+                      "name": "'Razzberry Blonde'",
+                      "size": 1,
+                      "vendor": "Giardino Carnivoro",
+                      "status": "alive"
+                    },
+                    {
+                      "name": "laueana × emarginata",
+                      "size": 1,
+                      "vendor": "Giardino Carnivoro",
+                      "status": "alive"
                     }
                   ]
                 },
