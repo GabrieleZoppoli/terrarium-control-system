@@ -32,7 +32,7 @@ Secondo POWO è presente in Cina, sull'Himalaya, in Giappone, Corea, Myanmar e V
 
 Orticola, a maggio, da [Piante Pazze](https://www.piantepazze.it/). È arrivata in un vaso nero da vivaio. L'ho tenuta un mese, poi l'ho rinvasata, e ho trovato alcune radici marcite sotto la superficie, cosa che un vaso nero nasconde finché non è troppo tardi. Ma spuntavano anche nuovi apici radicali, e due nuovi getti.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg" caption="Il vaso nero da vivaio in cui è arrivata, le radici fuori vista." class="fig-inline" >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg" caption="Il vaso nero da vivaio in cui è arrivata, le radici fuori vista." >}}
 
 Il vaso nuovo è un vaso cinese da cymbidium in plastica trasparente, alto e stretto, 135 mm al bordo, le pareti bucherellate. Una decina di euro per cinque su AliExpress, e in Europa non li ho trovati. La forma si adatta alle radici carnose e profonde del cymbidium, e i fori e la parete trasparente offrono drenaggio, aria e una finestra su radici e umidità.
 
@@ -42,17 +42,17 @@ Substrato da Geosism, tutto setacciato prima.[^grit] Una quantità impressionant
 - una miscela bonsai 2–5 mm nel mezzo, in prevalenza **akadama** con kiryuzuna e pomice hyuga.
 - **kanuma** 1–2 mm in superficie, pomice acida che trattiene l'acqua.
 
-{{< figure src="substrate-column.jpg" caption="La colonna di substrato vista attraverso la parete trasparente, il kanuma in cima sopra gli inerti più grossi. La pianta è appena sopra l'inquadratura." class="fig-inline" >}}
+{{< figure src="substrate-column.jpg" caption="La colonna di substrato vista attraverso la parete trasparente, il kanuma in cima sopra gli inerti più grossi. La pianta è appena sopra l'inquadratura." class="trio" >}}
 
-{{< figure src="substrate-bottom.jpg" caption="Il fondo, kiryuzuna da 10 mm, la frazione più grossa, per il drenaggio. La condensa che imperla l'interno è l'indicatore di umidità." class="fig-inline" >}}
+{{< figure src="substrate-bottom.jpg" caption="Il fondo, kiryuzuna da 10 mm, la frazione più grossa, per il drenaggio. La condensa che imperla l'interno è l'indicatore di umidità." class="trio" >}}
 
-{{< figure src="substrate-middle.jpg" caption="Lo strato di mezzo, la miscela Geosism da 2–5 mm, in prevalenza akadama con kiryuzuna e pomice hyuga." class="fig-inline" >}}
+{{< figure src="substrate-middle.jpg" caption="Lo strato di mezzo, la miscela Geosism da 2–5 mm, in prevalenza akadama con kiryuzuna e pomice hyuga." class="trio" >}}
 
 Il kanuma fa anche da spia dell'irrigazione. Schiarisce asciugandosi, scurisce da bagnato, e la parete trasparente mostra la condensa sul fondo del vaso. Innaffio a fondo ogni 3–4 giorni, quando il kanuma in cima si è asciugato e quella condensa sta sparendo.
 
 Sul bordo, del muschio raccolto da un parcheggio asfaltato esposto a ovest, a Genova, di quello che cuoce al sole del pomeriggio e resiste, quindi dovrebbe reggere un davanzale soleggiato. Lavato, poi un bagno in tebuconazolo. Ne sono usciti alcuni moscerini del terriccio, ma un paio di giorni all'aperto, al sole filtrato, e il problema è sparito.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-6.jpg" caption="Due nuovi getti alla base, appena dopo l'innaffiatura, gli pseudobulbi scoperti sopra il kanuma." class="fig-inline" >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-6.jpg" caption="Due nuovi getti alla base, appena dopo l'innaffiatura, gli pseudobulbi scoperti sopra il kanuma." >}}
 
 ## Coltivazione
 

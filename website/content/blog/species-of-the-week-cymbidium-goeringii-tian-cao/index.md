@@ -32,7 +32,7 @@ POWO maps it across China, the Himalaya, Japan, Korea, Myanmar and Vietnam.[^pow
 
 Orticola, this May, from [Piante Pazze](https://www.piantepazze.it/). It came in a black nursery pot. I grew it on for a month, then repotted, and found some roots had rotted under the surface, the kind of thing a black pot hides until it spreads. New root tips were pushing too, and two new growths.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg" caption="The black nursery pot it came in, roots out of sight." class="fig-inline" >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg" caption="The black nursery pot it came in, roots out of sight." >}}
 
 The new pot is a clear-plastic Chinese cymbidium pot, tall and narrow, 135 mm at the rim, the walls pierced with holes. Around €10 for five off AliExpress, and not something I could find in Europe. The shape fits the deep, fleshy cymbidium roots, and the holes and clear wall give drainage, air, and a window on roots and moisture.
 
@@ -42,17 +42,17 @@ Substrate from Geosism, all sieved first.[^grit] A startling amount of dust, so 
 - a 2–5 mm bonsai mix in the middle, mostly **akadama** with kiryuzuna and hyuga pumice.
 - 1–2 mm **kanuma** on top, an acidic pumice that holds water.
 
-{{< figure src="substrate-column.jpg" caption="The substrate column read through the clear wall, kanuma capping the coarser grades. The plant is just above the frame." class="fig-inline" >}}
+{{< figure src="substrate-column.jpg" caption="The substrate column read through the clear wall, kanuma capping the coarser grades. The plant is just above the frame." class="trio" >}}
 
-{{< figure src="substrate-bottom.jpg" caption="The bottom, 10 mm kiryuzuna, the coarsest grade, for fast drainage. The condensation beading inside is the moisture gauge." class="fig-inline" >}}
+{{< figure src="substrate-bottom.jpg" caption="The bottom, 10 mm kiryuzuna, the coarsest grade, for fast drainage. The condensation beading inside is the moisture gauge." class="trio" >}}
 
-{{< figure src="substrate-middle.jpg" caption="The middle, the 2–5 mm Geosism mix, mostly akadama with kiryuzuna and hyuga pumice." class="fig-inline" >}}
+{{< figure src="substrate-middle.jpg" caption="The middle, the 2–5 mm Geosism mix, mostly akadama with kiryuzuna and hyuga pumice." class="trio" >}}
 
 The kanuma doubles as the water gauge. It pales as it dries, darkens when wet, and the clear wall shows the condensation low in the pot. I water through every 3–4 days, once the top kanuma has gone dry and that condensation is fading.
 
 On the rim, moss off a west-facing asphalt car park in Genoa, the kind that bakes in afternoon sun and survives, so it should take a sunny windowsill. Washed, then dipped in tebuconazole. A few fungus gnats hatched out of it, but a couple of days in filtered open-air sun cleared them.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-6.jpg" caption="Two new growths at the base, just after watering, pseudobulbs proud of the kanuma." class="fig-inline" >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-6.jpg" caption="Two new growths at the base, just after watering, pseudobulbs proud of the kanuma." >}}
 
 ## Growing it
 

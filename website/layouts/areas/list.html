@@ -52,7 +52,11 @@
 .area-card img, .area-card .no-hero {
   width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block;
 }
-.area-card .no-hero { background: linear-gradient(135deg, #1a1f28, #0c0f14); }
+.area-card .no-hero {
+  background: linear-gradient(135deg, #1a1f28, #0c0f14);
+  display: flex; align-items: center; justify-content: center;
+}
+.area-card .no-hero::after { content: "🌿"; font-size: 30px; opacity: 0.28; }
 .area-card .meta { padding: 12px 14px; }
 .area-card h2 { margin: 0 0 4px 0; font-size: 18px; }
 .area-card p { margin: 0; color: var(--muted, #888); font-size: 14px; }
