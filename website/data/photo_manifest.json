@@ -33,6 +33,12 @@
   ],
   "brocchinia": [
     {
+      "taxon": "Brocchinia hechtioides 'Small Pygmy form'",
+      "slug": "brocchinia-hechtioides-small-pygmy-form",
+      "primary": "brocchinia-hechtioides-small-pygmy-form.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Brocchinia reducta",
       "slug": "brocchinia-reducta",
       "primary": "brocchinia-reducta.jpg",
@@ -574,7 +580,13 @@
         "neofinetia-falcata-akausagi-15.jpg",
         "neofinetia-falcata-akausagi-16.jpg",
         "neofinetia-falcata-akausagi-17.jpg",
-        "neofinetia-falcata-akausagi-18.jpg"
+        "neofinetia-falcata-akausagi-18.jpg",
+        "neofinetia-falcata-akausagi-19.jpg",
+        "neofinetia-falcata-akausagi-20.jpg",
+        "neofinetia-falcata-akausagi-21.jpg",
+        "neofinetia-falcata-akausagi-22.jpg",
+        "neofinetia-falcata-akausagi-23.jpg",
+        "neofinetia-falcata-akausagi-24.jpg"
       ]
     }
   ],
@@ -1030,6 +1042,14 @@
       "slug": "tillandsia-seleriana",
       "primary": "tillandsia-seleriana.jpg",
       "extras": []
+    },
+    {
+      "taxon": "Tillandsia streptocarpa",
+      "slug": "tillandsia-streptocarpa",
+      "primary": "tillandsia-streptocarpa.jpg",
+      "extras": [
+        "tillandsia-streptocarpa-2.jpg"
+      ]
     },
     {
       "taxon": "Tillandsia tectorum f. caulescens",

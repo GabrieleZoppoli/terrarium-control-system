@@ -14,6 +14,10 @@
   taxon: Angraecum didieri
   genus: Angraecum
   primary_photo: img/collection/angraecum/angraecum-didieri.jpg
+"brocchinia-hechtioides-small-pygmy-form":
+  taxon: "Brocchinia hechtioides 'Small Pygmy form'"
+  genus: Brocchinia
+  primary_photo: img/collection/brocchinia/brocchinia-hechtioides-small-pygmy-form.jpg
 "brocchinia-reducta":
   taxon: Brocchinia reducta
   genus: Brocchinia
@@ -52,7 +56,7 @@
 "cymbidium-goeringii-tian-cao":
   taxon: "Cymbidium goeringii 'Tian Cao'"
   genus: Cymbidium
-  primary_photo: img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg
+  primary_photo: img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg
 "dendrobium-betty-goto-f-coerulea":
   taxon: Dendrobium Betty Goto f. coerulea
   genus: Dendrobium
@@ -430,6 +434,10 @@
   taxon: Tillandsia seleriana
   genus: Tillandsia
   primary_photo: img/collection/tillandsia/tillandsia-seleriana.jpg
+"tillandsia-streptocarpa":
+  taxon: Tillandsia streptocarpa
+  genus: Tillandsia
+  primary_photo: img/collection/tillandsia/tillandsia-streptocarpa.jpg
 "tillandsia-tectorum-f-caulescens":
   taxon: Tillandsia tectorum f. caulescens
   genus: Tillandsia

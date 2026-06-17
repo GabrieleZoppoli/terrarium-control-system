@@ -7,7 +7,9 @@
     "5.jpg"
   ],
   "windowsill": [],
-  "fog-shelves": [],
+  "fog-shelves": [
+    "1.jpg"
+  ],
   "highland-terrarium": [
     "1.jpg",
     "2.jpg",
@@ -24,7 +26,8 @@
     "13.jpg",
     "14.jpg",
     "15.jpg",
-    "16.jpg"
+    "16.jpg",
+    "17.jpg"
   ],
   "mini-ponds": []
 }

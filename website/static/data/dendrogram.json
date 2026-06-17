@@ -724,7 +724,11 @@
                       "name": "streptocarpa",
                       "size": 1,
                       "vendor": "Dötterer Pflanzen",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/tillandsia/tillandsia-streptocarpa.jpg",
+                        "../img/collection/tillandsia/tillandsia-streptocarpa-2.jpg"
+                      ]
                     },
                     {
                       "name": "streptophylla",
@@ -842,7 +846,10 @@
                       "name": "hechtioides 'Small Pygmy form'",
                       "size": 1,
                       "vendor": "Giardino Carnivoro",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/brocchinia/brocchinia-hechtioides-small-pygmy-form.jpg"
+                      ]
                     }
                   ]
                 }
@@ -1908,7 +1915,13 @@
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-14.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-15.jpg",
                         "../img/collection/neofinetia/neofinetia-falcata-akausagi-16.jpg",
-                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-17.jpg"
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-17.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-18.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-19.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-20.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-21.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-22.jpg",
+                        "../img/collection/neofinetia/neofinetia-falcata-akausagi-23.jpg"
                       ]
                     },
                     {
