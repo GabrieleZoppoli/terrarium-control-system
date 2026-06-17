@@ -1574,54 +1574,52 @@ a.card { border-bottom: 1px solid var(--border-subtle); }
 .blog-post__body figure img { cursor: zoom-in; transition: filter 0.18s ease; }
 .blog-post__body figure img:hover { filter: brightness(1.06); }
 
-/* Reading column: a narrower body with brighter, regular-weight text. On
-   desktop the in-body figures float right at a smaller size so the prose
-   reads down the left; the hero (first figure) stays full width. On mobile
-   everything stacks full width. */
+/* Reading column: a narrower body with brighter, regular-weight text held
+   to a comfortable measure. Figures are centred, never floated. The hero
+   and the leaf macro run full width; everything else sits at a medium size;
+   the three substrate close-ups share one centred row. All stack on mobile. */
 .blog-post__body {
-  max-width: 800px;
+  max-width: 820px;
   margin-left: auto;
   margin-right: auto;
   color: #d6d6d6;
 }
 .blog-post__body p,
+.blog-post__body ul,
+.blog-post__body ol,
+.blog-post__body h2,
+.blog-post__body h3,
+.blog-post__body blockquote {
+  max-width: 68ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.blog-post__body p,
 .blog-post__body li { font-weight: 400; }
 
+.blog-post__body figure { max-width: 600px; margin: 1.8rem auto; }
+.blog-post__body figure.wide { max-width: 100%; }
+
 @media (min-width: 641px) {
-  .blog-post__body figure {
-    float: right;
-    clear: right;
-    width: 42%;
-    max-width: 340px;
-    margin: 0.35rem 0 1rem 1.9rem;
-  }
-  .blog-post__body figure:first-of-type {
-    float: none;
-    clear: both;
-    width: auto;
-    max-width: 100%;
-    margin: 1.2rem auto 1.8rem;
-  }
-  /* The three substrate close-ups go in one in-flow row, not floated,
-     so they don't pile up the right margin. */
+  /* centre the in-flow trio row without a wrapper: centre the body box,
+     then pin the text blocks back to the left. */
+  .blog-post__body { text-align: center; }
+  .blog-post__body p,
+  .blog-post__body ul,
+  .blog-post__body ol,
+  .blog-post__body h2,
+  .blog-post__body h3,
+  .blog-post__body blockquote { text-align: left; }
   .blog-post__body figure.trio {
-    float: none;
     display: inline-block;
-    width: 31.5%;
-    max-width: 245px;
-    margin: 0 0.6% 1rem;
     vertical-align: top;
+    width: 31%;
+    max-width: 245px;
+    margin: 0 0.5% 1rem;
   }
-  .blog-post__body figure.trio + p { clear: both; }
-  .blog-post__body h2 { clear: both; }
 }
 @media (max-width: 640px) {
-  .blog-post__body figure {
-    float: none;
-    width: 100%;
-    max-width: 100%;
-    margin: 1.4rem auto;
-  }
+  .blog-post__body figure { max-width: 100%; }
 }
 
 /* Minimal lightbox overlay — full-viewport image + arrow nav. */

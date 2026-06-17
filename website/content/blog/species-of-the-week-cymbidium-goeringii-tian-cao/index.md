@@ -8,7 +8,7 @@ showReadingTime: true
 
 A grassy terrestrial in a tall clear pot, on a wooden stand. *Cymbidium goeringii* is the Chinese spring orchid, in cultivation for more than a thousand years, prized for foliage and scent. 'Tian Cao' is a cream-margined selection. Repotting it turned into its own project.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg" caption="Repotted, on a display stand. The pot is a tall, clear-plastic Chinese cymbidium pot, the walls pierced with holes." >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg" caption="Repotted, on a display stand. The pot is a tall, clear-plastic Chinese cymbidium pot, the walls pierced with holes." class="wide" >}}
 
 ## The name
 
@@ -22,7 +22,7 @@ One plant carries a German surname, a Mandarin reading, and a Japanese place nam
 
 POWO maps it across China, the Himalaya, Japan, Korea, Myanmar and Vietnam.[^powo] IOSPE also lists Taiwan and the Ryukyus.[^iospe] A woodland terrestrial of shaded, often rocky slopes, rooting in thin humus over rock. Small ovoid pseudobulbs, linear leaves with finely toothed margins, the serration running right down the cream edge.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg" caption="The *fukurin* margin, a cream band down a finely toothed leaf edge. This is the trait the selection is grown for." >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg" caption="The *fukurin* margin, a cream band down a finely toothed leaf edge. This is the trait the selection is grown for." class="wide" >}}
 
 ## The spring orchid
 

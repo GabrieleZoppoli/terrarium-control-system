@@ -8,7 +8,7 @@ showReadingTime: true
 
 Un'orchidea terrestre dalle foglie erbacee in un vaso alto e trasparente, su una base di legno. *Cymbidium goeringii* è l'orchidea di primavera cinese, in coltivazione da più di mille anni, apprezzata per il fogliame e il profumo. 'Tian Cao' è una selezione dal margine crema. Rinvasarla è diventato un piccolo progetto a sé.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg" caption="Rinvasata, su una base da esposizione. È il classico vaso cinese da cymbidium, in plastica trasparente, con le pareti bucherellate." >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg" caption="Rinvasata, su una base da esposizione. È il classico vaso cinese da cymbidium, in plastica trasparente, con le pareti bucherellate." class="wide" >}}
 
 ## Il nome
 
@@ -22,7 +22,7 @@ Una pianta porta un cognome tedesco, una lettura mandarina e il nome di un luogo
 
 Secondo POWO è presente in Cina, sull'Himalaya, in Giappone, Corea, Myanmar e Vietnam.[^powo] IOSPE elenca anche Taiwan e le Ryukyu.[^iospe] Una terrestre di pendii boscosi e spesso rocciosi, in ombra luminosa, radicata in poco humus sopra la roccia. Pseudobulbi piccoli e ovoidi, foglie lineari dal margine finemente seghettato, con la seghettatura che corre proprio lungo il bordo crema.
 
-{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg" caption="Il margine *fukurin*, una banda crema lungo il bordo fogliare finemente seghettato. È il carattere per cui la selezione viene coltivata." >}}
+{{< figure src="/img/collection/cymbidium/cymbidium-goeringii-tian-cao-2.jpg" caption="Il margine *fukurin*, una banda crema lungo il bordo fogliare finemente seghettato. È il carattere per cui la selezione viene coltivata." class="wide" >}}
 
 ## L'orchidea di primavera
 
