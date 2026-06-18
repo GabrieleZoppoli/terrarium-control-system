@@ -2,7 +2,7 @@
 title: "Altre piante"
 description: "Darlingtonia, ninfee, orchidee rustiche, felci e piante varie"
 tags: ["balcone", "acquatica", "varie"]
-genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
+genera: ["Darlingtonia", "Paphiopedilum"]
 ---
 
 ## Darlingtonia
@@ -13,11 +13,9 @@ genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
 
 ## Piante acquatiche
 
-Ninfee, iris e specie galleggianti — vasi su balcone e laghetto, all'aperto tutto l'anno.
+Specie galleggianti e carnivore acquatiche — vasi su balcone e laghetto, all'aperto tutto l'anno. ([*Nymphaea*](/it/collection/genera/nymphaea/) e [*Iris*](/it/collection/genera/iris/) hanno una pagina propria.)
 
-{{< collection-species "Nymphaea" >}}
-
-{{< collection-species "Iris" >}}
+{{< collection-species "Aldrovanda" >}}
 
 {{< collection-species "Azolla" >}}
 
@@ -51,8 +49,6 @@ Scarpette, ibridi *Cymbidium* e orchidee da intermedio-caldo che non rientrano n
 
 ## Felci
 
-{{< collection-species "Platycerium" >}}
-
 {{< collection-species "Davallia" >}}
 
 {{< collection-species "Lecanopteris" >}}
@@ -83,9 +79,7 @@ Conifere, rose, *Byblis* sub-carnivora dell'Australia occidentale, *Catopsis*, *
 
 {{< collection-photos "Rosa" >}}
 
-{{< collection-photos "Iris" >}}
-
-{{< collection-photos "Nymphaea" >}}
+{{< collection-photos "Aldrovanda" >}}
 
 {{< collection-photos "Drosophyllum" >}}
 

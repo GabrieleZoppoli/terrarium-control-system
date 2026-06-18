@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/holcoglossum/holcoglossum-amesianum.jpg
 primary_photo: img/collection/holcoglossum/holcoglossum-amesianum.jpg
+genus_page: /collection/genera/holcoglossum/
 ---
 

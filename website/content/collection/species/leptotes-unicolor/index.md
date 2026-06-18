@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/leptotes/leptotes-unicolor.jpg
 primary_photo: img/collection/leptotes/leptotes-unicolor.jpg
+genus_page: /collection/genera/leptotes/
 ---
 

@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/iris/iris-louisiana-bout-midnight.jpg
 primary_photo: img/collection/iris/iris-louisiana-bout-midnight.jpg
+genus_page: /collection/genera/iris/
 ---
 

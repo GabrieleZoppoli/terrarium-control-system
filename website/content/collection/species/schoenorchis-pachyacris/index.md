@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/schoenorchis/schoenorchis-pachyacris.jpg
 primary_photo: img/collection/schoenorchis/schoenorchis-pachyacris.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

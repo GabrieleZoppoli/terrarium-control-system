@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/aldrovanda/aldrovanda-vesiculosa.jpg
 primary_photo: img/collection/aldrovanda/aldrovanda-vesiculosa.jpg
+genus_page: /collection/genera/outdoor/
 ---
 

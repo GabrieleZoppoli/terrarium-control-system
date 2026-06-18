@@ -1,27 +1,11 @@
 ---
 title: "Other Genera"
-description: "Utricularia, Pinguicula, Drosera, Genlisea, Cephalotus, Sphagnum, and companion plants"
+description: "Genlisea, Amorphophallus, Ficus, and companion plants"
 tags: ["carnivorous", "companion"]
-genera: ["Utricularia", "Pinguicula", "Drosera", "Genlisea", "Cephalotus", "Sphagnum"]
+genera: ["Genlisea", "Amorphophallus", "Ficus"]
 ---
 
-## Utricularia
-
-Bladderworts. The epiphytic *Orchidioides* clade — tepui cliff faces and Neotropical cloud-forest canopies — sits in the highland terrarium kokedama-style; terrestrial species live elsewhere. Three of four sect. *Orchidioides* species were lost — the most significant single cultivation failure in the collection. The hybrid *U.* × *nelumbifolia* × *reniformis* is the survivor of that group; *U. quelchii* is the recent re-acquisition that finally bloomed.
-
-{{< collection-species "Utricularia" >}}
-
-## Cephalotus
-
-Western Australian pitcher plants — grown outside the terrarium. The 'Eden Black' cuttings did not establish (×2 attempts).
-
-{{< collection-species "Cephalotus" >}}
-
-## Pinguicula
-
-Primarily Mexican species and hybrids. The tropical *P. primuliflora* and large *P. gigantea* proved unreliable; the Diflora and Un Angolo di Deserto runs land more consistently.
-
-{{< collection-species "Pinguicula" >}}
+The carnivorous genera with their own pages — [*Pinguicula*](/collection/genera/pinguicula/), [*Utricularia*](/collection/genera/utricularia/), [*Drosera*](/collection/genera/drosera/), [*Cephalotus*](/collection/genera/cephalotus/), and the [*Sphagnum*](/collection/genera/sphagnum/) ground layer — moved to dedicated pages. What remains here are the smaller groups and the non-carnivorous companions.
 
 ## Genlisea
 
@@ -29,17 +13,13 @@ Corkscrew plants — subterranean trap specialists. High mortality on this run s
 
 {{< collection-species "Genlisea" >}}
 
-## Drosera
+## Amorphophallus
 
-Sundews. *D. capensis* forms are the most reliable; notable survivors include three tuberous Australian species from Allen Lowrie.
+{{< collection-species "Amorphophallus" >}}
 
-{{< collection-species "Drosera" >}}
+## Ficus
 
-## Sphagnum
-
-Living moss layers in the terrarium and in carnivorous plant pots.
-
-{{< collection-species "Sphagnum" >}}
+{{< collection-species "Ficus" >}}
 
 ## Carnivorous plant vendors
 
@@ -56,12 +36,8 @@ Major sources for the carnivorous plant collection:
 
 ## Photos
 
-{{< collection-photos "Utricularia" >}}
-
-{{< collection-photos "Pinguicula" >}}
-
-{{< collection-photos "Cephalotus" >}}
-
 {{< collection-photos "Genlisea" >}}
 
-{{< collection-photos "Drosera" >}}
+{{< collection-photos "Amorphophallus" >}}
+
+{{< collection-photos "Ficus" >}}

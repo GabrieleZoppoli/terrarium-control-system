@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/brocchinia/brocchinia-reducta.jpg
 primary_photo: img/collection/brocchinia/brocchinia-reducta.jpg
+genus_page: /collection/genera/brocchinia/
 ---
 

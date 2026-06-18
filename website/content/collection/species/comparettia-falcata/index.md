@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/comparettia/comparettia-falcata.jpg
 primary_photo: img/collection/comparettia/comparettia-falcata.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

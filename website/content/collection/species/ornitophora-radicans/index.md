@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/ornitophora/ornitophora-radicans.jpg
 primary_photo: img/collection/ornitophora/ornitophora-radicans.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/calopogon/calopogon-tuberosus.jpg
 primary_photo: img/collection/calopogon/calopogon-tuberosus.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

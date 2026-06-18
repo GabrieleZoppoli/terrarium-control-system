@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/masdevallia/masdevallia-decumana.jpg
 primary_photo: img/collection/masdevallia/masdevallia-decumana.jpg
+genus_page: /collection/genera/dracula/
 ---
 

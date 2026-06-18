@@ -24,5 +24,6 @@ sources:
 photos:
   - img/collection/lepanthopsis/lepanthopsis-astrophora.jpg
 primary_photo: img/collection/lepanthopsis/lepanthopsis-astrophora.jpg
+genus_page: /collection/genera/lepanthopsis/
 ---
 

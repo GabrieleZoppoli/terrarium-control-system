@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/brocchinia/brocchinia-hechtioides-small-pygmy-form.jpg
 primary_photo: img/collection/brocchinia/brocchinia-hechtioides-small-pygmy-form.jpg
+genus_page: /collection/genera/brocchinia/
 ---
 

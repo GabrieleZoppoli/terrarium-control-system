@@ -17,7 +17,11 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from genus_pages import build_map  # noqa: E402  (canonical genus -> page URL)
 
 WEB = Path(__file__).resolve().parent.parent
 CSV_PATH = WEB / "static" / "data" / "collection.csv"
@@ -77,15 +81,6 @@ def provenance_for(taxon: str, genus: str, species: str, pool_key: str,
         return lookup[genus]
     return PROVENANCE_BY_POOL[pool_key]
 
-# Genera that have their own genus page on the site. Anything else routes
-# to /collection/genera/ so we never emit a 404 link.
-GENUS_PAGES = {
-    "heliamphora", "nepenthes", "sarracenia", "dionaea", "dracula",
-    "sophronitis", "dendrobium", "tillandsia", "cephalotus", "utricularia",
-    "pinguicula",
-}
-
-
 def slug(text: str) -> str:
     s = text.lower().strip()
     s = re.sub(r"[^\w\s-]", "", s)
@@ -123,6 +118,7 @@ def find_photo(genus: str, taxon: str) -> str | None:
 
 
 def build_pools() -> dict:
+    genus_map = build_map()  # canonical genus(slug) -> page URL
     provenance_lookup = load_provenance()
     pools: dict[str, list] = {k: [] for k in LOCATION_TO_POOL.values()}
     seen: dict[str, set] = {k: set() for k in LOCATION_TO_POOL.values()}
@@ -145,12 +141,7 @@ def build_pools() -> dict:
             src = find_photo(genus, taxon)
             if not src:
                 continue
-            genus_slug = slug(genus)
-            href = (
-                f"/collection/genera/{genus_slug}/"
-                if genus_slug in GENUS_PAGES
-                else "/collection/genera/"
-            )
+            href = genus_map.get(slug(genus), "/collection/genera/")
             provenance = provenance_for(taxon, genus, species, pool_key, provenance_lookup)
             if provenance == PROVENANCE_BY_POOL[pool_key]:
                 missing_provenance.append(taxon)

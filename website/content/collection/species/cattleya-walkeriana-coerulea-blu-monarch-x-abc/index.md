@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/cattleya/cattleya-walkeriana-coerulea-blu-monarch-x-abc.jpg
 primary_photo: img/collection/cattleya/cattleya-walkeriana-coerulea-blu-monarch-x-abc.jpg
+genus_page: /collection/genera/sophronitis/
 ---
 

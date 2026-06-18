@@ -23,7 +23,11 @@ from __future__ import annotations
 import csv
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from genus_pages import build_map  # noqa: E402  (canonical genus -> page URL)
 
 WEB = Path(__file__).resolve().parent.parent
 CSV_PATH     = WEB / "static" / "data" / "collection.csv"
@@ -40,13 +44,6 @@ LOCATION_LABEL = {
     "windowsill": "Windowsill",
     "seasonal":   "Seasonal",
 }
-
-GENUS_PAGES = {
-    "heliamphora", "nepenthes", "sarracenia", "dionaea", "dracula",
-    "sophronitis", "dendrobium", "tillandsia", "cephalotus", "utricularia",
-    "pinguicula",
-}
-
 
 def slug(text: str) -> str:
     s = text.lower().strip()
@@ -167,6 +164,7 @@ def main() -> None:
 
     provenance_lookup = load_provenance()
     hero_overrides = load_hero_overrides()
+    genus_map = build_map()  # canonical genus(slug) -> page URL
 
     # Group CSV rows by taxon (alive only)
     by_taxon: dict[str, dict] = {}
@@ -210,12 +208,7 @@ def main() -> None:
         entry["primary_photo"] = hero_overrides.get(entry["slug"], photos_info["primary"])
         entry["provenance"] = provenance_for(taxon, entry["genus"], provenance_lookup)
 
-        genus_slug = slug(entry["genus"])
-        entry["genus_page"] = (
-            f"/collection/genera/{genus_slug}/"
-            if genus_slug in GENUS_PAGES
-            else ""
-        )
+        entry["genus_page"] = genus_map.get(slug(entry["genus"]), "")
 
         write_index(entry["slug"], entry)
         index_rows.append((entry["slug"], taxon, entry["genus"], entry["primary_photo"], entry["provenance"]))

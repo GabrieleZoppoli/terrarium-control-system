@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/rosa/rosa-sorbet-fruite.jpg
 primary_photo: img/collection/rosa/rosa-sorbet-fruite.jpg
+genus_page: /collection/genera/outdoor/
 ---
 

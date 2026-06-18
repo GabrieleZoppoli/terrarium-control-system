@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/restrepia/restrepia-vasquezii.jpg
 primary_photo: img/collection/restrepia/restrepia-vasquezii.jpg
+genus_page: /collection/genera/restrepia/
 ---
 

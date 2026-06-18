@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/maxillaria/maxillaria-sophronitis.jpg
 primary_photo: img/collection/maxillaria/maxillaria-sophronitis.jpg
+genus_page: /collection/genera/maxillaria/
 ---
 

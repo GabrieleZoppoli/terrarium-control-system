@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/oerstedella/oerstedella-centradenia.jpg
 primary_photo: img/collection/oerstedella/oerstedella-centradenia.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

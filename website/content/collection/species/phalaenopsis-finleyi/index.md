@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/phalaenopsis/phalaenopsis-finleyi.jpg
 primary_photo: img/collection/phalaenopsis/phalaenopsis-finleyi.jpg
+genus_page: /collection/genera/phalaenopsis/
 ---
 

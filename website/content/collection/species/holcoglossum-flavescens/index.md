@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/holcoglossum/holcoglossum-flavescens.jpg
 primary_photo: img/collection/holcoglossum/holcoglossum-flavescens.jpg
+genus_page: /collection/genera/holcoglossum/
 ---
 

@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/angraecum/angraecum-didieri.jpg
 primary_photo: img/collection/angraecum/angraecum-didieri.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

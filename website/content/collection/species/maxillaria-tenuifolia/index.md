@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/maxillaria/maxillaria-tenuifolia.jpg
 primary_photo: img/collection/maxillaria/maxillaria-tenuifolia.jpg
+genus_page: /collection/genera/maxillaria/
 ---
 

@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/phalaenopsis/phalaenopsis-lobbii.jpg
 primary_photo: img/collection/phalaenopsis/phalaenopsis-lobbii.jpg
+genus_page: /collection/genera/phalaenopsis/
 ---
 

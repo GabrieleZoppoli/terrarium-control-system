@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/habenaria/habenaria-radiata.jpg
 primary_photo: img/collection/habenaria/habenaria-radiata.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

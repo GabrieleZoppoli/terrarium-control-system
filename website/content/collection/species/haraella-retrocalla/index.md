@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/haraella/haraella-retrocalla.jpg
 primary_photo: img/collection/haraella/haraella-retrocalla.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

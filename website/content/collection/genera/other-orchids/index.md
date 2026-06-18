@@ -1,9 +1,11 @@
 ---
 title: "Other Orchids"
-description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, Cymbidium, and more"
+description: "Neofinetia allies, Pleurothallidinae, Southeast-Asian miniatures, Cymbidium, and more"
 tags: ["orchid"]
-genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia", "Cymbidium"]
+genera: ["Neostylis", "Pleurothallis", "Platystele", "Oncidium", "Tolumnia", "Cymbidium", "Gastrochilus", "Comparettia", "Haraella"]
 ---
+
+Several orchid genera now have their own pages — [*Phalaenopsis*](/collection/genera/phalaenopsis/), [*Neofinetia*](/collection/genera/neofinetia/), [*Holcoglossum*](/collection/genera/holcoglossum/), [*Vanda*](/collection/genera/vanda/), [*Bulbophyllum*](/collection/genera/bulbophyllum/), [*Maxillaria*](/collection/genera/maxillaria/), [*Lepanthopsis*](/collection/genera/lepanthopsis/), [*Leptotes*](/collection/genera/leptotes/), [*Restrepia*](/collection/genera/restrepia/). What remains here are the single-accession genera grouped by region and clade.
 
 ## Cymbidium goeringii (Asian highland orchid tradition)
 
@@ -13,29 +15,13 @@ Vendor for the cultivar below: [Piante Pazze](https://www.piantepazze.it/) (Marc
 
 {{< collection-species "Cymbidium" >}}
 
-## Neofinetia & Allies (Japanese Wind Orchids)
+## Neofinetia allies (Japanese wind-orchid hybrids)
 
-Small vandaceous orchids prized for their fragrance and elegant form — the *fūkiran* tradition is built around them.
-
-{{< collection-species "Neofinetia" >}}
+Intergeneric hybrids built on *Neofinetia* — see the [*Neofinetia*](/collection/genera/neofinetia/) page for the species itself.
 
 {{< collection-species "Neostylis" >}}
 
 {{< collection-species "Darwinara" >}}
-
-## Holcoglossum
-
-{{< collection-species "Holcoglossum" >}}
-
-## Vanda
-
-{{< collection-species "Vanda" >}}
-
-## Phalaenopsis species
-
-Species-form *Phalaenopsis* — all miniatures, very different from commercial hybrids.
-
-{{< collection-species "Phalaenopsis" >}}
 
 ## Southeast Asian species
 
@@ -57,6 +43,8 @@ Mounted miniatures and oddities from the Indo-Malayan region.
 
 {{< collection-species "Vandachostylis" >}}
 
+{{< collection-species "Trichoglottis" >}}
+
 {{< collection-species "Haraella" >}}
 
 ## Pleurothallidinae & Neotropical orchids
@@ -64,8 +52,6 @@ Mounted miniatures and oddities from the Indo-Malayan region.
 {{< collection-species "Platystele" >}}
 
 {{< collection-species "Pleurothallis" >}}
-
-{{< collection-species "Lepanthopsis" >}}
 
 {{< collection-species "Comparettia" >}}
 
@@ -89,15 +75,13 @@ Mounted miniatures and oddities from the Indo-Malayan region.
 
 {{< collection-species "Tolumnia" >}}
 
-{{< collection-species "Maxillaria" >}}
+{{< collection-species "Ornitophora" >}}
 
 {{< collection-species "Mediocalcar" >}}
 
 {{< collection-species "Aerangis" >}}
 
 {{< collection-species "Angraecum" >}}
-
-{{< collection-species "Bulbophyllum" >}}
 
 ## Orchid vendors
 
@@ -119,33 +103,15 @@ Major sources for the orchid collection:
 
 {{< collection-photos "Cymbidium" >}}
 
-{{< collection-photos "Phalaenopsis" >}}
-
-{{< collection-photos "Bulbophyllum" >}}
-
 {{< collection-photos "Paphiopedilum" >}}
-
-{{< collection-photos "Neofinetia" >}}
 
 {{< collection-photos "Neostylis" >}}
 
-{{< collection-photos "Holcoglossum" >}}
-
-{{< collection-photos "Vanda" >}}
-
 {{< collection-photos "Oncidium" >}}
-
-{{< collection-photos "Maxillaria" >}}
-
-{{< collection-photos "Restrepia" >}}
-
-{{< collection-photos "Lepanthopsis" >}}
 
 {{< collection-photos "Platystele" >}}
 
 {{< collection-photos "Macroclinium" >}}
-
-{{< collection-photos "Leptotes" >}}
 
 {{< collection-photos "Angraecum" >}}
 
@@ -170,5 +136,9 @@ Major sources for the orchid collection:
 {{< collection-photos "Tolumnia" >}}
 
 {{< collection-photos "Calopogon" >}}
+
+{{< collection-photos "Ornitophora" >}}
+
+{{< collection-photos "Trichoglottis" >}}
 
 {{< collection-photos "Haraella" >}}

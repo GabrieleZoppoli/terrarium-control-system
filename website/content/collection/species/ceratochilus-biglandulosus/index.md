@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/ceratochilus/ceratochilus-biglandulosus.jpg
 primary_photo: img/collection/ceratochilus/ceratochilus-biglandulosus.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

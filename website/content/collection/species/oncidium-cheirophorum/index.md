@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/oncidium/oncidium-cheirophorum.jpg
 primary_photo: img/collection/oncidium/oncidium-cheirophorum.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

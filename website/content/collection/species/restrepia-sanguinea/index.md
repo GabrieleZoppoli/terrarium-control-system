@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/restrepia/restrepia-sanguinea.jpg
 primary_photo: img/collection/restrepia/restrepia-sanguinea.jpg
+genus_page: /collection/genera/restrepia/
 ---
 

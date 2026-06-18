@@ -62,27 +62,31 @@ enableGitInfo = true
     showRecent = true
     recentLimit = 5
     # Curated featured-photo mosaic on the homepage. Each entry renders as a tile
-    # linking to the matching genus page. Paths are relative to static/.
+    # linking to the genus's page. The destination URL is NOT stored here — it is
+    # resolved at build time from data/genus_pages.yaml via the `genus` field
+    # (see layouts/index.html), so every tile, the rotating pool, and the species
+    # pages share one source of truth and can never drift to a 404. Paths are
+    # relative to static/. Regenerate the map with scripts/genus_pages.py.
     featuredMosaic = [
-      { src = "img/collection/heliamphora/heliamphora-macdonaldae.jpg", alt = "Heliamphora macdonaldae", taxon = "Heliamphora macdonaldae", tepui = "Venezuelan tepuis", href = "/collection/genera/heliamphora/" },
-      { src = "img/collection/dracula/dracula-pholeodytes.jpg", alt = "Dracula pholeodytes", taxon = "Dracula pholeodytes", tepui = "Colombian Andes", href = "/collection/genera/dracula/" },
-      { src = "img/collection/nepenthes/nepenthes-argentii.jpg", alt = "Nepenthes argentii", taxon = "Nepenthes argentii", tepui = "Mindanao, 2,300 m", href = "/collection/genera/nepenthes/" },
-      { src = "img/collection/sophronitis/sophronitis-coccinea-4n.jpg", alt = "Sophronitis coccinea 4N", taxon = "Sophronitis coccinea 4N", tepui = "Brazilian campos rupestres", href = "/collection/genera/sophronitis/" },
-      { src = "img/collection/nepenthes/nepenthes-jamban.jpg", alt = "Nepenthes jamban pitcher", taxon = "Nepenthes jamban", tepui = "Sumatra · 'toilet pitcher' endemic", href = "/collection/genera/nepenthes/" },
-      { src = "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg", alt = "Dendrobium cuthbertsonii yellow", taxon = "Dendrobium cuthbertsonii 'Yellow'", tepui = "New Guinea highlands", href = "/collection/genera/dendrobium/" },
-      { src = "img/collection/masdevallia/masdevallia-decumana.jpg", alt = "Masdevallia decumana", taxon = "Masdevallia decumana", tepui = "Andean cloud forest", href = "/collection/genera/other-orchids/" },
-      { src = "img/collection/utricularia/utricularia-alpina.jpg", alt = "Utricularia alpina", taxon = "Utricularia alpina", tepui = "Guayana highlands, epiphyte", href = "/collection/genera/other-genera/" },
-      { src = "img/collection/comparettia/comparettia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", href = "/collection/genera/other-orchids/" },
-      { src = "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg", alt = "Heliamphora ionasi Elegance", taxon = "Heliamphora ionasi 'Elegance'", tepui = "Ilu-Tepui, Venezuela", href = "/collection/genera/heliamphora/" },
+      { src = "img/collection/heliamphora/heliamphora-macdonaldae.jpg", alt = "Heliamphora macdonaldae", taxon = "Heliamphora macdonaldae", tepui = "Venezuelan tepuis", genus = "Heliamphora" },
+      { src = "img/collection/dracula/dracula-pholeodytes.jpg", alt = "Dracula pholeodytes", taxon = "Dracula pholeodytes", tepui = "Colombian Andes", genus = "Dracula" },
+      { src = "img/collection/nepenthes/nepenthes-argentii.jpg", alt = "Nepenthes argentii", taxon = "Nepenthes argentii", tepui = "Mindanao, 2,300 m", genus = "Nepenthes" },
+      { src = "img/collection/sophronitis/sophronitis-coccinea-4n.jpg", alt = "Sophronitis coccinea 4N", taxon = "Sophronitis coccinea 4N", tepui = "Brazilian campos rupestres", genus = "Sophronitis" },
+      { src = "img/collection/nepenthes/nepenthes-jamban.jpg", alt = "Nepenthes jamban pitcher", taxon = "Nepenthes jamban", tepui = "Sumatra · 'toilet pitcher' endemic", genus = "Nepenthes" },
+      { src = "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow.jpg", alt = "Dendrobium cuthbertsonii yellow", taxon = "Dendrobium cuthbertsonii 'Yellow'", tepui = "New Guinea highlands", genus = "Dendrobium" },
+      { src = "img/collection/masdevallia/masdevallia-decumana.jpg", alt = "Masdevallia decumana", taxon = "Masdevallia decumana", tepui = "Andean cloud forest", genus = "Masdevallia" },
+      { src = "img/collection/utricularia/utricularia-alpina.jpg", alt = "Utricularia alpina", taxon = "Utricularia alpina", tepui = "Guayana highlands, epiphyte", genus = "Utricularia" },
+      { src = "img/collection/comparettia/comparettia-falcata.jpg", alt = "Comparettia falcata", taxon = "Comparettia falcata", tepui = "Neotropical epiphyte", genus = "Comparettia" },
+      { src = "img/collection/heliamphora/heliamphora-ionasi-elegance.jpg", alt = "Heliamphora ionasi Elegance", taxon = "Heliamphora ionasi 'Elegance'", tepui = "Ilu-Tepui, Venezuela", genus = "Heliamphora" },
     ]
     # Species kept outside the highland cabinet (outdoor bed / balcony / aquatic)
     featuredMosaicOutdoor = [
-      { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", href = "/collection/genera/sarracenia/" },
-      { src = "img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg", alt = "Sarracenia moorei Leah Wilkerson on the balcony at night", taxon = "Sarracenia × moorei 'Leah Wilkerson'", tepui = "Outdoor bed · balcony, Genova", href = "/collection/genera/sarracenia/" },
-      { src = "img/collection/dionaea/dionaea-muscipula-alien.jpg", alt = "Dionaea muscipula Alien", taxon = "Dionaea muscipula 'Alien'", tepui = "Carolina bog · outdoor bed", href = "/collection/genera/dionaea/" },
-      { src = "img/collection/dionaea/dionaea-muscipula-dracula.jpg", alt = "Dionaea muscipula Dracula", taxon = "Dionaea muscipula 'Dracula'", tepui = "Red-throated cultivar · outdoor bed", href = "/collection/genera/dionaea/" },
-      { src = "img/collection/aldrovanda/aldrovanda-vesiculosa.jpg", alt = "Aldrovanda vesiculosa", taxon = "Aldrovanda vesiculosa", tepui = "Aquatic carnivore · outdoor bowl", href = "/collection/genera/outdoor/" },
-      { src = "img/collection/nymphaea/nymphaea-pygmaea-helvola.jpg", alt = "Nymphaea pygmaea Helvola", taxon = "Nymphaea pygmaea 'Helvola'", tepui = "Miniature water lily · outdoor pond", href = "/collection/genera/outdoor/" },
+      { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", genus = "Sarracenia" },
+      { src = "img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg", alt = "Sarracenia moorei Leah Wilkerson on the balcony at night", taxon = "Sarracenia × moorei 'Leah Wilkerson'", tepui = "Outdoor bed · balcony, Genova", genus = "Sarracenia" },
+      { src = "img/collection/dionaea/dionaea-muscipula-alien.jpg", alt = "Dionaea muscipula Alien", taxon = "Dionaea muscipula 'Alien'", tepui = "Carolina bog · outdoor bed", genus = "Dionaea" },
+      { src = "img/collection/dionaea/dionaea-muscipula-dracula.jpg", alt = "Dionaea muscipula Dracula", taxon = "Dionaea muscipula 'Dracula'", tepui = "Red-throated cultivar · outdoor bed", genus = "Dionaea" },
+      { src = "img/collection/aldrovanda/aldrovanda-vesiculosa.jpg", alt = "Aldrovanda vesiculosa", taxon = "Aldrovanda vesiculosa", tepui = "Aquatic carnivore · outdoor bowl", genus = "Aldrovanda" },
+      { src = "img/collection/nymphaea/nymphaea-pygmaea-helvola.jpg", alt = "Nymphaea pygmaea Helvola", taxon = "Nymphaea pygmaea 'Helvola'", tepui = "Miniature water lily · outdoor pond", genus = "Nymphaea" },
     ]
 
   [params.article]

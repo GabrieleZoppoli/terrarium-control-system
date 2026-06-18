@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/vanda/vanda-coerulescens.jpg
 primary_photo: img/collection/vanda/vanda-coerulescens.jpg
+genus_page: /collection/genera/vanda/
 ---
 

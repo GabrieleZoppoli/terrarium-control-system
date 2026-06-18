@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/bulbophyllum/bulbophyllum-makoyanum.jpg
 primary_photo: img/collection/bulbophyllum/bulbophyllum-makoyanum.jpg
+genus_page: /collection/genera/bulbophyllum/
 ---
 

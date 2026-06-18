@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/neofinetia/neofinetia-falcata.jpg
 primary_photo: img/collection/neofinetia/neofinetia-falcata.jpg
+genus_page: /collection/genera/neofinetia/
 ---
 

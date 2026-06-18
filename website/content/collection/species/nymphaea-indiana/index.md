@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/nymphaea/nymphaea-indiana.jpg
 primary_photo: img/collection/nymphaea/nymphaea-indiana.jpg
+genus_page: /collection/genera/nymphaea/
 ---
 

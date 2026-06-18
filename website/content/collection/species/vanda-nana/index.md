@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/vanda/vanda-nana.jpg
 primary_photo: img/collection/vanda/vanda-nana.jpg
+genus_page: /collection/genera/vanda/
 ---
 

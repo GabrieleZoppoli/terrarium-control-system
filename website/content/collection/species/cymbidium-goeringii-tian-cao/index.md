@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/cymbidium/cymbidium-goeringii-tian-cao.jpg
 primary_photo: img/collection/cymbidium/cymbidium-goeringii-tian-cao-3.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

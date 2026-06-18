@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/platystele/platystele-baqueroi.jpg
 primary_photo: img/collection/platystele/platystele-baqueroi.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

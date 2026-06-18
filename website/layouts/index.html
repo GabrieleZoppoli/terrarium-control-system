@@ -103,7 +103,7 @@
     </header>
     <div class="home-mosaic__grid">
       {{- range . }}
-      <a class="mosaic-tile" href="{{ .href | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+      <a class="mosaic-tile" href="{{ (index site.Data.genus_pages (lower .genus)) | default "/collection/genera/" | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
         <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
         <div class="mosaic-tile__caption">
           <span class="taxon"><em>{{ .taxon }}</em></span>
@@ -126,7 +126,7 @@
     </header>
     <div class="home-mosaic__grid home-mosaic__grid--outdoor">
       {{- range . }}
-      <a class="mosaic-tile" href="{{ .href | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
+      <a class="mosaic-tile" href="{{ (index site.Data.genus_pages (lower .genus)) | default "/collection/genera/" | relURL }}" aria-label="{{ .taxon }} — {{ .tepui }}">
         <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy" decoding="async">
         <div class="mosaic-tile__caption">
           <span class="taxon"><em>{{ .taxon }}</em></span>

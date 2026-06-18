@@ -1,9 +1,11 @@
 ---
 title: "Altre orchidee"
-description: "Neofinetia, Holcoglossum, Vanda, Phalaenopsis species, Pleurothallidinae, Cymbidium e altre"
+description: "Affini di Neofinetia, Pleurothallidinae, miniature del sud-est asiatico, Cymbidium e altro"
 tags: ["orchidea"]
-genera: ["Neofinetia", "Holcoglossum", "Vanda", "Phalaenopsis", "Pleurothallis", "Platystele", "Lepanthopsis", "Oncidium", "Tolumnia", "Cymbidium"]
+genera: ["Neostylis", "Pleurothallis", "Platystele", "Oncidium", "Tolumnia", "Cymbidium", "Gastrochilus", "Comparettia", "Haraella"]
 ---
+
+Diversi generi di orchidee hanno ora una pagina propria — [*Phalaenopsis*](/it/collection/genera/phalaenopsis/), [*Neofinetia*](/it/collection/genera/neofinetia/), [*Holcoglossum*](/it/collection/genera/holcoglossum/), [*Vanda*](/it/collection/genera/vanda/), [*Bulbophyllum*](/it/collection/genera/bulbophyllum/), [*Maxillaria*](/it/collection/genera/maxillaria/), [*Lepanthopsis*](/it/collection/genera/lepanthopsis/), [*Leptotes*](/it/collection/genera/leptotes/), [*Restrepia*](/it/collection/genera/restrepia/). Qui restano i generi con un solo esemplare, raggruppati per regione e per clade.
 
 ## Cymbidium goeringii (tradizione orchidofila d'alta quota asiatica)
 
@@ -13,29 +15,13 @@ Vivaista per il cultivar qui sotto: [Piante Pazze](https://www.piantepazze.it/) 
 
 {{< collection-species "Cymbidium" >}}
 
-## Neofinetia e affini (orchidee del vento giapponesi)
+## Affini di Neofinetia (ibridi dell'orchidea del vento giapponese)
 
-Piccole orchidee vandacee, apprezzate per il profumo e il portamento elegante — la tradizione *fūkiran* si costruisce intorno a loro.
-
-{{< collection-species "Neofinetia" >}}
+Ibridi intergenerici costruiti su *Neofinetia* — per la specie, vedi la pagina di [*Neofinetia*](/it/collection/genera/neofinetia/).
 
 {{< collection-species "Neostylis" >}}
 
 {{< collection-species "Darwinara" >}}
-
-## Holcoglossum
-
-{{< collection-species "Holcoglossum" >}}
-
-## Vanda
-
-{{< collection-species "Vanda" >}}
-
-## Phalaenopsis (specie botaniche)
-
-*Phalaenopsis* di forma specie — tutte miniature, molto diverse dagli ibridi commerciali.
-
-{{< collection-species "Phalaenopsis" >}}
 
 ## Specie del sud-est asiatico
 
@@ -57,6 +43,8 @@ Miniature montate e curiosità della regione indo-malese.
 
 {{< collection-species "Vandachostylis" >}}
 
+{{< collection-species "Trichoglottis" >}}
+
 {{< collection-species "Haraella" >}}
 
 ## Pleurothallidinae e orchidee neotropicali
@@ -64,8 +52,6 @@ Miniature montate e curiosità della regione indo-malese.
 {{< collection-species "Platystele" >}}
 
 {{< collection-species "Pleurothallis" >}}
-
-{{< collection-species "Lepanthopsis" >}}
 
 {{< collection-species "Comparettia" >}}
 
@@ -89,15 +75,13 @@ Miniature montate e curiosità della regione indo-malese.
 
 {{< collection-species "Tolumnia" >}}
 
-{{< collection-species "Maxillaria" >}}
+{{< collection-species "Ornitophora" >}}
 
 {{< collection-species "Mediocalcar" >}}
 
 {{< collection-species "Aerangis" >}}
 
 {{< collection-species "Angraecum" >}}
-
-{{< collection-species "Bulbophyllum" >}}
 
 ## Vivai di orchidee
 
@@ -119,33 +103,15 @@ Le fonti principali della collezione orchidofila:
 
 {{< collection-photos "Cymbidium" >}}
 
-{{< collection-photos "Phalaenopsis" >}}
-
-{{< collection-photos "Bulbophyllum" >}}
-
 {{< collection-photos "Paphiopedilum" >}}
-
-{{< collection-photos "Neofinetia" >}}
 
 {{< collection-photos "Neostylis" >}}
 
-{{< collection-photos "Holcoglossum" >}}
-
-{{< collection-photos "Vanda" >}}
-
 {{< collection-photos "Oncidium" >}}
-
-{{< collection-photos "Maxillaria" >}}
-
-{{< collection-photos "Restrepia" >}}
-
-{{< collection-photos "Lepanthopsis" >}}
 
 {{< collection-photos "Platystele" >}}
 
 {{< collection-photos "Macroclinium" >}}
-
-{{< collection-photos "Leptotes" >}}
 
 {{< collection-photos "Angraecum" >}}
 
@@ -170,5 +136,9 @@ Le fonti principali della collezione orchidofila:
 {{< collection-photos "Tolumnia" >}}
 
 {{< collection-photos "Calopogon" >}}
+
+{{< collection-photos "Ornitophora" >}}
+
+{{< collection-photos "Trichoglottis" >}}
 
 {{< collection-photos "Haraella" >}}

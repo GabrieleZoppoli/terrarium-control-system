@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/paphiopedilum/paphiopedilum-delenatii-vinicolor.jpg
 primary_photo: img/collection/paphiopedilum/paphiopedilum-delenatii-vinicolor.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

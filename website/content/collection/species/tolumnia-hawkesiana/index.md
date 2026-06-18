@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/tolumnia/tolumnia-hawkesiana.jpg
 primary_photo: img/collection/tolumnia/tolumnia-hawkesiana.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

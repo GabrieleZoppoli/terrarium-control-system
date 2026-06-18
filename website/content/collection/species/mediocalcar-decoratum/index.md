@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/mediocalcar/mediocalcar-decoratum.jpg
 primary_photo: img/collection/mediocalcar/mediocalcar-decoratum.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

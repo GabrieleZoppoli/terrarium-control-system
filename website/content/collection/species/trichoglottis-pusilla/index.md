@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/trichoglottis/trichoglottis-pusilla.jpg
 primary_photo: img/collection/trichoglottis/trichoglottis-pusilla.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

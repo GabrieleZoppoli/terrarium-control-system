@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/amorphophallus/amorphophallus-konjak.jpg
 primary_photo: img/collection/amorphophallus/amorphophallus-konjak.jpg
+genus_page: /collection/genera/other-genera/
 ---
 

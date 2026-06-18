@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/macroclinium/macroclinium-manabinum.jpg
 primary_photo: img/collection/macroclinium/macroclinium-manabinum.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

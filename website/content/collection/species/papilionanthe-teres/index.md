@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/papilionanthe/papilionanthe-teres.jpg
 primary_photo: img/collection/papilionanthe/papilionanthe-teres.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/bulbophyllum/bulbophyllum-thiurum.jpg
 primary_photo: img/collection/bulbophyllum/bulbophyllum-thiurum.jpg
+genus_page: /collection/genera/bulbophyllum/
 ---
 

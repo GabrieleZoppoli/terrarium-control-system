@@ -2,7 +2,7 @@
 title: "Other Plants"
 description: "Darlingtonia, water lilies, hardy orchids, ferns, and miscellaneous plants"
 tags: ["outdoor", "aquatic", "miscellaneous"]
-genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
+genera: ["Darlingtonia", "Paphiopedilum"]
 ---
 
 ## Darlingtonia
@@ -13,11 +13,9 @@ genera: ["Darlingtonia", "Nymphaea", "Paphiopedilum"]
 
 ## Aquatic plants
 
-Water lilies, irises, and floating species — pond and balcony pots, year-round outdoor.
+Floating species and aquatic carnivores — pond and balcony pots, year-round outdoor. ([*Nymphaea*](/collection/genera/nymphaea/) and [*Iris*](/collection/genera/iris/) have their own pages.)
 
-{{< collection-species "Nymphaea" >}}
-
-{{< collection-species "Iris" >}}
+{{< collection-species "Aldrovanda" >}}
 
 {{< collection-species "Azolla" >}}
 
@@ -51,8 +49,6 @@ Slippers, cymbidium hybrids, and intermediate-warm orchids that don't fit the hi
 
 ## Ferns
 
-{{< collection-species "Platycerium" >}}
-
 {{< collection-species "Davallia" >}}
 
 {{< collection-species "Lecanopteris" >}}
@@ -83,9 +79,7 @@ Conifers, roses, sub-carnivorous Western-Australian *Byblis*, *Catopsis*, *Droso
 
 {{< collection-photos "Rosa" >}}
 
-{{< collection-photos "Iris" >}}
-
-{{< collection-photos "Nymphaea" >}}
+{{< collection-photos "Aldrovanda" >}}
 
 {{< collection-photos "Drosophyllum" >}}
 

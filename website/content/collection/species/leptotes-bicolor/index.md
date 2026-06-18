@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/leptotes/leptotes-bicolor.jpg
 primary_photo: img/collection/leptotes/leptotes-bicolor.jpg
+genus_page: /collection/genera/leptotes/
 ---
 

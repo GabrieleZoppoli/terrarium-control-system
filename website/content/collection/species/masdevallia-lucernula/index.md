@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/masdevallia/masdevallia-lucernula.jpg
 primary_photo: img/collection/masdevallia/masdevallia-lucernula.jpg
+genus_page: /collection/genera/dracula/
 ---
 

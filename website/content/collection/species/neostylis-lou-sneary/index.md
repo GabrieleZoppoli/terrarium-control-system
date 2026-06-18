@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/neostylis/neostylis-lou-sneary.jpg
 primary_photo: img/collection/neostylis/neostylis-lou-sneary.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

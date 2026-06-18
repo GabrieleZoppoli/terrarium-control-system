@@ -17,5 +17,6 @@ sources:
 photos:
   - img/collection/ficus/ficus-microcarpa.jpg
 primary_photo: img/collection/ficus/ficus-microcarpa.jpg
+genus_page: /collection/genera/other-genera/
 ---
 

@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/neofinetia/neofinetia-falcata-akausagi.jpg
 primary_photo: img/collection/neofinetia/neofinetia-falcata-akausagi-hero.jpg
+genus_page: /collection/genera/neofinetia/
 ---
 

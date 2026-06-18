@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/masdevallia/masdevallia-devils-heart.jpg
 primary_photo: img/collection/masdevallia/masdevallia-devils-heart.jpg
+genus_page: /collection/genera/dracula/
 ---
 

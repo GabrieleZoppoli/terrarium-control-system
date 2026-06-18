@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/gastrochilus/gastrochilus-japonicus.jpg
 primary_photo: img/collection/gastrochilus/gastrochilus-japonicus.jpg
+genus_page: /collection/genera/other-orchids/
 ---
 

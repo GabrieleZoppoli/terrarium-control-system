@@ -18,5 +18,6 @@ sources:
 photos:
   - img/collection/genlisea/genlisea-africana.jpg
 primary_photo: img/collection/genlisea/genlisea-africana.jpg
+genus_page: /collection/genera/other-genera/
 ---
 

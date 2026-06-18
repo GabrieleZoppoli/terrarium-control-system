@@ -1,27 +1,11 @@
 ---
 title: "Altri generi"
-description: "Utricularia, Pinguicula, Drosera, Genlisea, Cephalotus, Sphagnum e piante accompagnatrici"
+description: "Genlisea, Amorphophallus, Ficus e piante accompagnatrici"
 tags: ["carnivora", "accompagnatrice"]
-genera: ["Utricularia", "Pinguicula", "Drosera", "Genlisea", "Cephalotus", "Sphagnum"]
+genera: ["Genlisea", "Amorphophallus", "Ficus"]
 ---
 
-## Utricularia
-
-Utricolarie. Il clade epifito *Orchidioides* — pareti dei tepui e chiome di foresta nebulosa neotropicale — vive nel terrario d'alta quota a kokedama; le specie terrestri stanno altrove. Tre delle quattro specie della sez. *Orchidioides* sono state perse — il singolo fallimento colturale più rilevante della collezione. Sopravvive l'ibrido *U.* × *nelumbifolia* × *reniformis*; *U. quelchii* è il riacquisto recente che ha finalmente fiorito.
-
-{{< collection-species "Utricularia" >}}
-
-## Cephalotus
-
-Pianta-brocca dell'Australia occidentale — coltivata fuori dal terrario. Le talee 'Eden Black' non hanno attecchito (×2 tentativi).
-
-{{< collection-species "Cephalotus" >}}
-
-## Pinguicula
-
-Soprattutto specie e ibridi messicani. La tropicale *P. primuliflora* e la grande *P. gigantea* si sono rivelate poco affidabili; gli arrivi da Diflora e Un Angolo di Deserto sono i più costanti.
-
-{{< collection-species "Pinguicula" >}}
+I generi carnivori con una pagina propria — [*Pinguicula*](/it/collection/genera/pinguicula/), [*Utricularia*](/it/collection/genera/utricularia/), [*Drosera*](/it/collection/genera/drosera/), [*Cephalotus*](/it/collection/genera/cephalotus/) e lo strato di [*Sphagnum*](/it/collection/genera/sphagnum/) — sono passati a pagine dedicate. Qui restano i gruppi più piccoli e le compagne non carnivore.
 
 ## Genlisea
 
@@ -29,17 +13,13 @@ Piante a cavatappi — specialiste di trappole sotterranee. La mortalità alta s
 
 {{< collection-species "Genlisea" >}}
 
-## Drosera
+## Amorphophallus
 
-Drosere. Le forme di *D. capensis* sono le più affidabili; fra i sopravvissuti notevoli, tre specie tuberose australiane di Allen Lowrie.
+{{< collection-species "Amorphophallus" >}}
 
-{{< collection-species "Drosera" >}}
+## Ficus
 
-## Sphagnum
-
-Strato di muschio vivo nel terrario e nei vasi delle carnivore.
-
-{{< collection-species "Sphagnum" >}}
+{{< collection-species "Ficus" >}}
 
 ## Vivai di piante carnivore
 
@@ -56,12 +36,8 @@ Le fonti principali della collezione carnivora:
 
 ## Foto
 
-{{< collection-photos "Utricularia" >}}
-
-{{< collection-photos "Pinguicula" >}}
-
-{{< collection-photos "Cephalotus" >}}
-
 {{< collection-photos "Genlisea" >}}
 
-{{< collection-photos "Drosera" >}}
+{{< collection-photos "Amorphophallus" >}}
+
+{{< collection-photos "Ficus" >}}
