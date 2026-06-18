@@ -111,7 +111,7 @@ Il secondo bocciolo si è aperto, quattro giorni dopo il primo. Entrambi i fiori
 
 ---
 
-*La specie della settimana è una rubrica continua. Le uscite precedenti sotto il tag* `species-of-the-week`*; pagina per-specie con provenienza e foto su [`/it/collection/species/utricularia-quelchii/`](/it/collection/species/utricularia-quelchii/).*
+*La specie della settimana è una rubrica continua. Le uscite precedenti sotto il tag* `species-of-the-week`*; pagina per-specie con provenienza e foto su [`/collection/species/utricularia-quelchii/`](/collection/species/utricularia-quelchii/).*
 
 [^powo]: *Plants of the World Online*. *Utricularia quelchii* N.E.Br., *Trans. Linn. Soc. London, Bot.* 6: 53 (1901). Areale: Venezuela meridionale, Guyana, Brasile (Cerro de la Neblina). Forma di vita: litofita o epifita tuberosa. <https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:260834-2> (consultato 2026-05-07).
 [^taylor]: Taylor, P. (1989). *The Genus Utricularia — A Taxonomic Monograph*. Kew Bulletin Additional Series XIV. Royal Botanic Gardens, Kew. Trattamento di riferimento; chiave alla sezione *Orchidioides* alle pp. 42–59.

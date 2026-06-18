@@ -49,7 +49,7 @@
 <meta property="og:site_name" content="{{ .Site.Title }}">
 <meta property="og:type" content="{{ if .IsHome }}website{{ else if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:locale" content="{{ replace .Site.LanguageCode "-" "_" | default "en_US" }}">
+<meta property="og:locale" content="{{ replace .Site.Language.Lang "-" "_" | default "en_US" }}">
 {{- with $desc }}<meta property="og:description" content="{{ . }}">{{ end }}
 {{- with $ogImage }}
 <meta property="og:image" content="{{ . }}">
@@ -78,7 +78,7 @@
       "@type" "WebSite"
       "name" .Site.Title
       "url" .Permalink
-      "inLanguage" (.Site.LanguageCode | default "en")
+      "inLanguage" (.Site.Language.Lang | default "en")
       "author" $author_obj
   -}}
   {{- with $desc }}{{ $ld = merge $ld (dict "description" .) }}{{ end -}}

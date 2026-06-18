@@ -57,7 +57,7 @@ Tutto l'anno sul balcone di Genova, luce filtrata sotto ombra leggera. L'inverno
 
 ---
 
-*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/it/collection/species/neofinetia-falcata-akausagi-赤兎/`](/it/collection/species/neofinetia-falcata-akausagi-赤兎/).*
+*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/collection/species/neofinetia-falcata-akausagi-赤兎/`](/collection/species/neofinetia-falcata-akausagi-赤兎/).*
 
 [^travaldo]: Travaldo's Blog — *Neofinetia falcata* care and culture (2018). Fiore ~3 cm con sperone curvo di 3,7 cm; fragranza notturna; areale Kyushu, Honshu, Shikoku, Yakushima, Tanegashima, Okinawa, Corea del Sud, Cina centrale; località tipo Nagasaki.
 [^negie]: Negie Orchids — scheda *Neofinetia falcata 'Akausagi'*. Selezione dai semenzali di Syutennou; fiori rossi con tre speroni costanti ogni anno; i due superiori si aprono come orecchie di coniglio.

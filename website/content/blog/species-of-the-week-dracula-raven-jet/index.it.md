@@ -77,7 +77,7 @@ Sta in basso a destra nel [terrario di altopiano](/it/highland/), accanto alla *
 
 ---
 
-*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/it/collection/species/dracula-raven-jet/`](/it/collection/species/dracula-raven-jet/).*
+*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/collection/species/dracula-raven-jet/`](/collection/species/dracula-raven-jet/).*
 
 [^rhs]: International Orchid Register, Royal Horticultural Society. *Dracula* Raven, originatore J. Leathers, registrato 2005. Genitori *D. vampira* × *D. roezlii*.
 [^roezl]: Wikipedia, *Benedikt Roezl*. 13 agosto 1824 – 14 ottobre 1885. Botanico e collezionista di orchidee ceco.

@@ -135,7 +135,7 @@ Quindi nessuna delle due piste al NYBG produce un nome: né il libro di cassa de
 
 ---
 
-*La "specie della settimana" è una serie in corso. Puntate precedenti sotto il tag* `species-of-the-week`*; scheda della specie con provenienza e foto su [`/it/collection/species/heliamphora-macdonaldae-cerro-duida-isc/`](/it/collection/species/heliamphora-macdonaldae-cerro-duida-isc/).*
+*La "specie della settimana" è una serie in corso. Puntate precedenti sotto il tag* `species-of-the-week`*; scheda della specie con provenienza e foto su [`/collection/species/heliamphora-macdonaldae-cerro-duida-isc/`](/collection/species/heliamphora-macdonaldae-cerro-duida-isc/).*
 
 [^wistuba]: Wistuba, A. *Heliamphora macdonaldae (Cerro Duida, Venezuela)*. <https://wistuba.com/Heliamphora-macdonaldae-Cerro-Duida-Venezuela/AW-H-mcd.2> (consultato 2026-04-28).
 [^musekautas]: Museikautas. *Heliamphora macdonaldae — The Forgotten Marsh Pitcher Plant*. <https://www.musekautas.lt/?p=4959>.

@@ -137,3 +137,12 @@ feat_easier:           "Easier enclosures"
 feat_dendrogram:       "Dendrogram"
 feat_by_genus:         "By genus"
 feat_wishlists:        "Wishlists"
+
+# Species detail page
+nav_collection:        "Collection"
+species_section:       "Species"
+species_facts:         "Acquisition & location"
+sotw_kicker:           "Species of the week"
+species_sotw_callout:  "A deep-dive write-up on this species is published as a blog post:"
+species_see_all_pre:   "See all"
+species_see_all_post:  "in the collection"

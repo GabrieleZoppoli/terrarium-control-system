@@ -53,7 +53,7 @@ Non esiste un modo che non passi per un terrario refrigerato.
 
 ---
 
-*La "specie della settimana" è una serie in corso. Puntate precedenti sotto il tag* `species-of-the-week`*; scheda della specie con provenienza e foto su [`/it/collection/species/dracula-pholeodytes/`](/it/collection/species/dracula-pholeodytes/).*
+*La "specie della settimana" è una serie in corso. Puntate precedenti sotto il tag* `species-of-the-week`*; scheda della specie con provenienza e foto su [`/collection/species/dracula-pholeodytes/`](/collection/species/dracula-pholeodytes/).*
 
 [^iospe]: Pfahl, J. *Internet Orchid Species Photo Encyclopedia*. <http://www.orchidspecies.com/dracpholeodytes.htm>
 [^powo]: *Plants of the World Online*. *Dracula pholeodytes* Luer & R.Escobar. <https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:84003-2> (consultato 2026-04-23).

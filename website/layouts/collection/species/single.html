@@ -38,9 +38,9 @@
 
   {{- if $blogEntry }}
   <aside class="species-featured-callout">
-    <span class="kicker">Species of the week</span>
+    <span class="kicker">{{ i18n "sotw_kicker" }}</span>
     <p>
-      A deep-dive write-up on this species is published as a blog post:
+      {{ i18n "species_sotw_callout" }}
       <a href="{{ $blogEntry.url | relLangURL }}"><strong>{{ $blogEntry.title }}</strong></a>.
     </p>
   </aside>
@@ -71,8 +71,7 @@
     </ul>
     {{- with $p.genus_page }}
     <p class="species-genus-link">
-      See all <em>{{ $p.genus }}</em> in the collection →
-      <a href="{{ . | relLangURL }}">{{ $p.genus }} genus page</a>
+      <a href="{{ . | relLangURL }}">{{ i18n "species_see_all_pre" }} <em>{{ $p.genus }}</em> {{ i18n "species_see_all_post" }} <span aria-hidden="true">→</span></a>
     </p>
     {{- end }}
   </section>

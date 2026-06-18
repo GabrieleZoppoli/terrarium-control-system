@@ -71,7 +71,7 @@ Sul bordo, del muschio raccolto da un parcheggio asfaltato esposto a ovest, a Ge
 
 ---
 
-*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/it/collection/species/cymbidium-goeringii-tian-cao/`](/it/collection/species/cymbidium-goeringii-tian-cao/).*
+*La specie della settimana è una rubrica fissa. Tutte le uscite sotto il tag* `species-of-the-week` *; pagina di scheda con provenienza e foto a [`/collection/species/cymbidium-goeringii-tian-cao/`](/collection/species/cymbidium-goeringii-tian-cao/).*
 
 [^cymb]: Wikipedia — *Cymbidium*. Genere eretto da Olof Swartz, 1799 (*Nova Acta Regiae Soc. Sci. Upsal.*); il nome significa "piccola barca", in riferimento al labello.
 [^powo]: POWO — *Cymbidium goeringii* (Rchb.f.) Rchb.f. Basionimo *Maxillaria goeringii* Rchb.f., *Bot. Zeitung* (Berlin) 3: 334 (1845); combinazione in W.G.Walpers, *Ann. Bot. Syst.* 3: 547 (1852). Areale nativo (testuale): "China North-Central, China South-Central, China Southeast, East Himalaya, Japan, Korea, Myanmar, Nepal, Vietnam, West Himalaya".
