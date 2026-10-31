@@ -39,11 +39,13 @@ terrarium-control-system/
 |   +-- meross_daemon.py        # Persistent power monitoring daemon (MQTT)
 |   +-- meross_script.py        # Legacy power script (replaced by daemon)
 |   +-- snapshot-capture.sh     # Grafana dashboard screenshots
+|   +-- terrarium-health.py     # 5-min health check + alert emails
+|   +-- terrarium-report.py     # Daily baseline-aware report email (docs/reporting.md)
 +-- systemd/
 |   +-- arduino-watchdog.service # USB serial health monitor
 |   +-- meross-daemon.service    # Persistent power monitoring
 +-- analysis/                   # Statistical analysis scripts
-+-- docs/                       # Architecture, schema, PID docs
++-- docs/                       # Architecture, schema, PID, reporting docs
 +-- website/                    # Hugo site (Blowfish theme)
 ```
 

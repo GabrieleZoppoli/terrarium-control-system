@@ -16,7 +16,10 @@ Modes:
 
 Used by:
   - /health Claude skill (terminal/markdown)
-  - 7AM + 9PM cron digests (email mode)
+
+The 07:00 / 21:00 email digests moved to terrarium-report.py, which compares
+each number with the same hours on previous days (see docs/reporting.md).
+--email still works here but is no longer scheduled.
 """
 
 import argparse

@@ -4,25 +4,52 @@
 Cron: */5 * * * * /usr/local/bin/terrarium-health.py
 
 Sends alerts via Gmail (primary) and/or CallMeBot WhatsApp (if unbanned):
-- Every 6 hours: green status report
 - Immediately: on any yellow/red alert (30min cooldown per unique alert)
+- Optional periodic green report every TERRARIUM_GREEN_EMAIL_HOURS (default
+  off: the daily terrarium-report.py email is the heartbeat now)
+
+Every cycle appends one JSON line to the health ledger
+(~/.terrarium-health-ledger.jsonl). terrarium-report.py reads it to build
+alert episodes and the water-tank trend.
+
+Credentials: /etc/terrarium/secrets.env (see terrarium-secrets.env.example).
+The constants below are only fallbacks.
 """
 
 import asyncio, hashlib, json, os, re, smtplib, subprocess, sys, time
 import urllib.parse, urllib.request
 from datetime import datetime, timezone, timedelta
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from html import escape as html_escape
 
 # ── Config ──────────────────────────────────────────────────────────────
-GMAIL_ADDRESS  = "REDACTED — Gmail sender address"
-GMAIL_APP_PASS = "REDACTED — set Gmail app password before deployment"
-GMAIL_TO       = "REDACTED — Gmail recipient address"
+# KEY=VALUE secrets file shared with terrarium-report.py. Values there win
+# over the fallbacks below, so the repo copy of this script can be deployed
+# as-is.
+for _p in (os.environ.get("TERRARIUM_SECRETS", ""), "/etc/terrarium/secrets.env",
+           os.path.expanduser("~/.config/terrarium/secrets.env")):
+    if _p and os.path.isfile(_p):
+        with open(_p) as _f:
+            for _line in _f:
+                _line = _line.strip()
+                if _line and not _line.startswith("#") and "=" in _line:
+                    _k, _v = _line.split("=", 1)
+                    os.environ.setdefault(_k.strip(), _v.strip().strip('"').strip("'"))
+        break
 
-PHONE = "REDACTED — E.164 phone for WhatsApp alerts"
-CALLMEBOT_KEY = "REDACTED — get from callmebot.com"           # Set to "" to disable WhatsApp
+GMAIL_ADDRESS  = os.environ.get("TERRARIUM_GMAIL_ADDRESS",  "REDACTED — Gmail sender address")
+GMAIL_APP_PASS = os.environ.get("TERRARIUM_GMAIL_APP_PASS", "REDACTED — set Gmail app password before deployment")
+GMAIL_TO       = os.environ.get("TERRARIUM_GMAIL_TO",       "REDACTED — Gmail recipient address")
+
+PHONE = os.environ.get("TERRARIUM_WHATSAPP_PHONE", "REDACTED — E.164 phone for WhatsApp alerts")
+CALLMEBOT_KEY = os.environ.get("TERRARIUM_CALLMEBOT_KEY", "REDACTED — get from callmebot.com")  # "" disables WhatsApp
 
 STATE_FILE = "/home/pi/.terrarium-health-state.json"
-GREEN_INTERVAL = 6 * 3600   # 6 hours
+LEDGER_FILE = os.environ.get("TERRARIUM_LEDGER", "/home/pi/.terrarium-health-ledger.jsonl")
+LEDGER_KEEP_DAYS = 21
+# Periodic "all green" email. 0 = off (default): the daily report covers it.
+GREEN_INTERVAL = float(os.environ.get("TERRARIUM_GREEN_EMAIL_HOURS", "0") or 0) * 3600
 ALERT_COOLDOWN = 1800       # 30 min same alert
 POWER_FIX_COOLDOWN = 900    # 15 min between relay auto-fix attempts
 
@@ -34,12 +61,19 @@ POWER_FIX_COOLDOWN = 900    # 15 min between relay auto-fix attempts
 STUCK_HYSTERESIS_SAMPLES = 3    # require 3 consecutive cycles (~15 min) of excess >70W before STUCK RED
 STUCK_TRANSITION_WINDOW = 120   # seconds after a freezer cmd state change during which STUCK check is suppressed
 
-TAPO_EMAIL = "REDACTED — Tapo account email"
-TAPO_PASS  = "REDACTED — Tapo account password"
+TAPO_EMAIL = os.environ.get("TERRARIUM_TAPO_EMAIL", "REDACTED — Tapo account email")
+TAPO_PASS  = os.environ.get("TERRARIUM_TAPO_PASS",  "REDACTED — Tapo account password")
 INFLUX_URL = "http://localhost:8086/query?db=highland"
 
 PLUGS = {"freezer": "192.168.1.196", "lights": "192.168.1.55", "mister": "192.168.1.199"}
-CEST = timezone(timedelta(hours=2))
+# Local time for the schedule checks in validate() (lights / freezer windows).
+# Was a fixed UTC+2, which put those checks an hour off from late October to
+# late March.
+try:
+    from zoneinfo import ZoneInfo
+    CEST = ZoneInfo("Europe/Rome")
+except Exception:
+    CEST = timezone(timedelta(hours=2))
 
 # ── Helpers ─────────────────────────────────────────────────────────────
 
@@ -803,18 +837,25 @@ def save_state(state):
 def should_send(level, alert_hash, state):
     now = time.time()
     if level == "green":
+        if GREEN_INTERVAL <= 0:
+            return False
         return now - state.get("last_green", 0) >= GREEN_INTERVAL
     if alert_hash != state.get("last_alert_hash", ""):
         return True
     return now - state.get("last_alert", 0) >= ALERT_COOLDOWN
 
 
-def send_gmail(subject, body):
-    if GMAIL_APP_PASS == "XXXXXX":
+def send_gmail(subject, body, html=None):
+    if GMAIL_APP_PASS == "XXXXXX" or GMAIL_APP_PASS.startswith("REDACTED"):
         print("Gmail not configured (APP_PASS placeholder)", file=sys.stderr)
         return False
     try:
-        msg = MIMEText(body, "plain", "utf-8")
+        if html:
+            msg = MIMEMultipart("alternative")
+            msg.attach(MIMEText(body, "plain", "utf-8"))
+            msg.attach(MIMEText(html, "html", "utf-8"))
+        else:
+            msg = MIMEText(body, "plain", "utf-8")
         msg["Subject"] = subject
         msg["From"] = GMAIL_ADDRESS
         msg["To"] = GMAIL_TO
@@ -846,23 +887,97 @@ def send_whatsapp(msg):
         return False
 
 
-def send_alert(report, overall, subject_override=None):
+def alert_subject(overall, warnings):
+    """Name the problem in the subject instead of a generic 'Alert'."""
+    emoji = {"green": "🟢", "yellow": "🟡", "red": "🔴"}.get(overall, "")
+    if not warnings:
+        return {"green": "🟢 Terrarium OK", "yellow": "🟡 Terrarium Warning",
+                "red": "🔴 Terrarium Alert"}.get(overall, "Terrarium Health")
+    ranked = sorted(warnings, key=lambda w: w[0] != "red")
+    subj = f"{emoji} Terrarium: {ranked[0][1]}"
+    if len(ranked) > 1:
+        subj += f" (+{len(ranked) - 1} more)"
+    return subj[:140]
+
+
+def alert_html(report, overall, warnings, since=None, banner=None):
+    """Email-friendly HTML: what's wrong first, the full status block after."""
+    col = {"red": ("#8e1b1b", "#fdecea", "#c62828"),
+           "yellow": ("#7a4b00", "#fff4e0", "#e0a030"),
+           "green": ("#1b5e20", "#e8f5e9", "#2e7d32")}
+    tc, bg, bd = col.get(overall, col["yellow"])
+    parts = ['<div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;'
+             'max-width:640px;color:#1f2328;font-size:14px;line-height:1.45">']
+    title = banner or {"red": "Needs action now", "yellow": "Warning",
+                       "green": "All clear"}.get(overall, "Status")
+    sub = ""
+    if since:
+        mins = int((time.time() - since) / 60)
+        sub = (f'<div style="font-size:12px;color:#57606a">Problem started '
+               f'{datetime.fromtimestamp(since, CEST).strftime("%H:%M")} ({mins} min ago)</div>')
+    parts.append(f'<div style="background:{bg};border-left:6px solid {bd};padding:12px 14px;'
+                 f'border-radius:6px"><div style="font-size:18px;font-weight:600;color:{tc}">'
+                 f'{html_escape(title)}</div>{sub}</div>')
+    if warnings:
+        parts.append('<ul style="margin:10px 0;padding-left:20px">')
+        for level, msg in sorted(warnings, key=lambda w: w[0] != "red"):
+            c = col.get(level, col["yellow"])[0]
+            parts.append(f'<li style="margin:4px 0;color:{c}"><b>{html_escape(msg)}</b></li>')
+        parts.append('</ul>')
+    parts.append('<pre style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;'
+                 'background:#f6f8fa;padding:10px;border-radius:6px;white-space:pre-wrap">'
+                 + html_escape(report) + '</pre></div>')
+    return "".join(parts)
+
+
+def send_alert(report, overall, subject_override=None, warnings=None, since=None,
+               banner=None):
     """Send via all configured channels. Returns True if at least one succeeded.
     subject_override lets callers send a 'cleared' / 'escalated' subject without
     inventing a fake `overall` level."""
-    if subject_override is not None:
-        subject = subject_override
-    else:
-        subject = {
-            "green": "🟢 Terrarium OK",
-            "yellow": "🟡 Terrarium Warning",
-            "red": "🔴 Terrarium Alert",
-        }.get(overall, "Terrarium Health")
+    subject = subject_override or alert_subject(overall, warnings or [])
+    html = alert_html(report, overall, warnings or [], since, banner)
 
     ok = False
-    ok = send_gmail(subject, report) or ok
+    ok = send_gmail(subject, report, html) or ok
     ok = send_whatsapp(report) or ok
     return ok
+
+
+# ── Ledger (read by terrarium-report.py) ───────────────────────────────
+
+def problem_since(now):
+    """Start time of the current non-green run, from the ledger, or None."""
+    since = None
+    try:
+        with open(LEDGER_FILE) as f:
+            rows = [json.loads(l) for l in f.readlines()[-600:] if l.strip()]
+    except (OSError, ValueError):
+        return None
+    prev_ts = now
+    for r in reversed(rows):
+        if r.get("overall") == "green" or prev_ts - r.get("ts", 0) > 15 * 60:
+            break
+        since = r["ts"]
+        prev_ts = r["ts"]
+    return since
+
+
+def append_ledger(entry):
+    try:
+        with open(LEDGER_FILE, "a") as f:
+            f.write(json.dumps(entry, separators=(",", ":")) + "\n")
+        # Trim once the file passes ~3 MB (about three weeks of 5-min rows)
+        if os.path.getsize(LEDGER_FILE) > 3_000_000:
+            cutoff = time.time() - LEDGER_KEEP_DAYS * 86400
+            with open(LEDGER_FILE) as f:
+                keep = [l for l in f if l.strip() and json.loads(l).get("ts", 0) >= cutoff]
+            tmp = LEDGER_FILE + ".tmp"
+            with open(tmp, "w") as f:
+                f.writelines(keep)
+            os.replace(tmp, LEDGER_FILE)
+    except (OSError, ValueError) as e:
+        print(f"ledger write failed: {e}", file=sys.stderr)
 
 
 # ── Main ────────────────────────────────────────────────────────────────
@@ -910,7 +1025,7 @@ async def main():
         meross_active, meross_watts, meross_age,
         mister_cron, wifi_pm, warnings)
 
-    ts = now_cest.strftime("%H:%M CEST")
+    ts = now_cest.strftime("%H:%M %Z")
     full_report = f"🌿 Terrarium — {ts}\n{report}"
     print(full_report)
 
@@ -931,13 +1046,17 @@ async def main():
     #     repeats until resolved.
     #   - GREEN periodic report every GREEN_INTERVAL when nothing is wrong.
     prev_severity = state.get("current_severity", "green")
+    now_ts = time.time()
+    since = problem_since(now_ts) if overall != "green" else None
+    sent = None
 
     if overall == "red":
         prev = state.get("last_class_hash", "")
         state["last_class_hash"] = alert_hash
         persistent = (prev == alert_hash)
         if persistent and should_send(overall, alert_hash, state):
-            if send_alert(full_report, overall):
+            if send_alert(full_report, overall, warnings=warnings, since=since):
+                sent = "red"
                 state["last_alert"] = time.time()
                 state["last_alert_hash"] = alert_hash
                 state["current_severity"] = "red"
@@ -949,7 +1068,8 @@ async def main():
         # Once we have emailed about this yellow episode, stay silent until
         # the warning either escalates to red (handled above) or clears to green.
         if persistent and prev_severity != "yellow":
-            if send_alert(full_report, "yellow"):
+            if send_alert(full_report, "yellow", warnings=warnings, since=since):
+                sent = "yellow"
                 state["last_alert"] = time.time()
                 state["last_alert_hash"] = alert_hash
                 state["current_severity"] = "yellow"
@@ -962,7 +1082,9 @@ async def main():
             # Resolution email — fire once on yellow→green transition.
             cleared_report = ("✅ Previously-yellow warning(s) cleared.\n\n" + full_report)
             if send_alert(cleared_report, "green",
-                          subject_override="✅ Terrarium WARNING cleared"):
+                          subject_override="✅ Terrarium warning cleared",
+                          banner="Warning cleared"):
+                sent = "cleared"
                 state["current_severity"] = "green"
                 state["last_green"] = time.time()  # counts as a periodic green too
         else:
@@ -971,9 +1093,25 @@ async def main():
             state["current_severity"] = "green"
             if should_send("green", "", state):
                 if send_alert(full_report, overall):
+                    sent = "green"
                     state["last_green"] = time.time()
 
     save_state(state)
+
+    def _num(key):
+        v = (sensors or {}).get(key, {}).get("value")
+        return round(v, 2) if isinstance(v, (int, float)) else None
+
+    append_ledger({
+        "ts": int(now_ts),
+        "overall": overall,
+        "warnings": [[lvl, msg] for lvl, msg in warnings],
+        "water": round(water, 1) if water is not None else None,
+        "temp": _num("local_temperature"),
+        "humi": _num("local_humidity"),
+        "power": round(meross_watts) if isinstance(meross_watts, (int, float)) else None,
+        "sent": sent,
+    })
 
 
 if __name__ == "__main__":
