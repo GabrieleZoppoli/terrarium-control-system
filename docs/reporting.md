@@ -31,6 +31,21 @@ is wrong with the Pi.
 
 ## Install on the Pi
 
+One command, run on the Pi as user `pi` (ssh in, or a terminal on the Pi):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/GabrieleZoppoli/terrarium-control-system/claude/raspberry-pi-terrarium-debug-zsiv9y/scripts/install-reporting.sh | bash
+```
+
+`scripts/install-reporting.sh` checks the running health script matches the
+repo (it stops rather than overwrite Pi-only edits), moves the existing
+passwords into `/etc/terrarium/secrets.env`, installs both scripts with
+backups, test-runs the report, and swaps the sitrep crontab lines for the
+report ones. Add `-s -- --send-test` after `bash` to also email a report
+straight away. It prints the commands to undo everything at the end.
+
+### Manual install
+
 ```bash
 # 1. Secrets (shared by both scripts)
 sudo mkdir -p /etc/terrarium
