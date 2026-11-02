@@ -21,7 +21,7 @@
 set -euo pipefail
 
 BRANCH="${BRANCH:-claude/raspberry-pi-terrarium-debug-zsiv9y}"
-BASE_COMMIT="1298807f762f92eea36d04e3e3916ae09d4a3665"   # repo version before this change
+BASE_COMMIT="3ca9181e7235acefca4ced1535aaf27a4e4f676e"   # health check as deployed on the Pi
 RAW="https://raw.githubusercontent.com/GabrieleZoppoli/terrarium-control-system"
 BIN_DIR="${BIN_DIR:-/usr/local/bin}"
 ETC_DIR="${ETC_DIR:-/etc/terrarium}"
