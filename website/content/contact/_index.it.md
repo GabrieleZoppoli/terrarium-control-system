@@ -7,14 +7,14 @@ weight: 50
 narrow: true
 ---
 
-Sono contento di ricevere messaggi — per proposte di scambio, consigli colturali, domande sulla costruzione del terrario, collaborazioni sul versante oncologico, una correzione al sito o una presentazione.
+Sono contento di ricevere messaggi: proposte di scambio, domande colturali, domande sulla costruzione del terrario, collaborazioni sul versante oncologico, una correzione al sito o una presentazione.
 
 <div class="contact-grid">
 
   <a class="contact-card" href="mailto:gabriele.zoppoli@unige.it">
     <span class="kicker">Email principale</span>
     <span class="title">gabriele.zoppoli@unige.it</span>
-    <span class="body">Il canale migliore per qualsiasi cosa richieda più di una frase — lavoro, coltivazione, domande lunghe.</span>
+    <span class="body">Il canale migliore per qualsiasi cosa richieda più di una frase: lavoro, coltivazione, domande lunghe.</span>
   </a>
 
   <a class="contact-card" href="https://github.com/GabrieleZoppoli/terrarium-control-system/issues/new">
@@ -53,15 +53,15 @@ Sono contento di ricevere messaggi — per proposte di scambio, consigli coltura
 
 Se sei un **coltivatore**, un **costruttore di terrari** o un **appassionato di elettronica** alla ricerca di contesto, l'orientamento più rapido è questo:
 
-- [Sezione Terrario](../highland/) — panoramica del sistema, architettura, note sul PID, flussi.
-- [Collezione](../collection/) — dendrogramma, foto per genere, wishlist.
-- [Invenzioni](../inventions/) — raffreddatore zeer-pot per *Darlingtonia*, trucco del substrato per *Drosera regia*, involucri più semplici da costruire.
-- [Repository GitHub](https://github.com/GabrieleZoppoli/terrarium-control-system) — tutto, hardware aperto (CERN-OHL-S v2) e codice aperto.
+- [Sezione Terrario](../highland/): panoramica del sistema, architettura, note sul PID, flussi.
+- [Collezione](../collection/): dendrogramma, foto per genere, wishlist.
+- [Invenzioni](../inventions/): raffreddatore zeer-pot per *Darlingtonia*, allestimento per *Drosera regia*, ripiani nebulizzati.
+- [Repository GitHub](https://github.com/GabrieleZoppoli/terrarium-control-system): tutto, hardware e codice aperti sotto licenza CERN-OHL-S v2.
 
-Per **richieste di scambio** — includi la specie, il nome del cultivar/clone quando è rilevante, e una foto. Propago alcune piante per divisione; vendo raramente.
+Per **richieste di scambio**, indica la specie, il nome del cultivar o del clone quando è rilevante, e una foto. Propago alcune piante per divisione; vendo raramente.
 
 ## Dove
 
-Genova, Italia. Il terrario vive a casa; le vasche all'aperto di *Sarracenia* e *Dionaea* sono sullo stesso balcone. Il laboratorio è all'Università di Genova — Viale Benedetto XV, 6, 16132 Genova — e la clinica all'[IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
+Genova, Italia. Il terrario vive a casa; le vasche all'aperto di *Sarracenia* e *Dionaea* sono sullo stesso balcone. Il laboratorio è all'Università di Genova (Viale Benedetto XV, 6, 16132 Genova) e la clinica all'[IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
 
 Per qualsiasi altra cosa, una mail è il canale migliore.

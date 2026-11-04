@@ -24,7 +24,7 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
   <a href="https://github.com/GabrieleZoppoli/terrarium-control-system" rel="external">Source &amp; firmware</a>
 </nav>
 
-A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulates highland cloud forest weather using real-time Colombian meteorological data (time-shifted 15 hours). Marine refrigeration drives nighttime temperatures to ~13.5 °C in a room at 22 °C. About 70 species (≈85 accessions counting clonal lines) coexist under the same regime — *Heliamphora*, highland *Nepenthes*, *Dracula*, *Sophronitis*, New Guinea *Dendrobium*, miniature Pleurothallidinae, and more.
+A 1.5 × 0.6 × 1.1 m insulated acrylic cabinet in Genoa, Italy, that reproduces highland cloud-forest weather from real-time Colombian meteorological data, shifted by 15 hours. A marine compressor takes night temperatures to about 13.5 °C in a room at 22 °C. About 70 species (≈85 accessions counting clonal lines) live under the same regime: *Heliamphora*, highland *Nepenthes*, *Dracula*, *Sophronitis*, New Guinea *Dendrobium*, miniature Pleurothallidinae and others.
 
 {{< highland-live >}}
 
@@ -34,15 +34,15 @@ A 1.5 × 0.6 × 1.1 m insulated acrylic enclosure in Genoa, Italy, that simulate
 
 <figure class="moment">
   <a href="/highland/photos/"><img src="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" alt="Heliamphora pitchers under the grow lights, June 2023" loading="lazy"></a>
-  <figcaption>June 2023 — thirteen months in. See the <a href="/highland/photos/">full timeline</a> for how it got here.</figcaption>
+  <figcaption>June 2023, thirteen months in. The <a href="/highland/photos/">full timeline</a> shows the build.</figcaption>
 </figure>
 
 ## The residents
 
-A small selection of the genera hosted in the cabinet. Each links to its page with provenance, sources, and full photo grid.
+Six of the genera in the cabinet. Each links to its page with provenance, sources and photos.
 
 <ul class="highland-residents">
-  <li><a href="/collection/genera/heliamphora/"><img src="/img/collection/heliamphora/heliamphora-macdonaldae.jpg" alt="Heliamphora macdonaldae" loading="lazy"><span><em>Heliamphora</em><small>tepui sun pitchers</small></span></a></li>
+  <li><a href="/collection/genera/heliamphora/"><img src="/img/collection/heliamphora/heliamphora-macdonaldae.jpg" alt="Heliamphora macdonaldae" loading="lazy"><span><em>Heliamphora</em><small>tepui pitcher plants</small></span></a></li>
   <li><a href="/collection/genera/dracula/"><img src="/img/collection/dracula/dracula-pholeodytes.jpg" alt="Dracula pholeodytes" loading="lazy"><span><em>Dracula</em><small>Andean cloud-forest orchids</small></span></a></li>
   <li><a href="/collection/genera/nepenthes/"><img src="/img/collection/nepenthes/nepenthes-argentii.jpg" alt="Nepenthes argentii" loading="lazy"><span><em>Nepenthes</em><small>highland tropical pitchers</small></span></a></li>
   <li><a href="/collection/genera/sophronitis/"><img src="/img/collection/sophronitis/sophronitis-coccinea-4n.jpg" alt="Sophronitis coccinea 4N" loading="lazy"><span><em>Sophronitis</em><small>Brazilian rock-dwelling miniatures</small></span></a></li>
@@ -52,16 +52,16 @@ A small selection of the genera hosted in the cabinet. Each links to its page wi
 
 ## Sections
 
-- **[Photos →](photos/)** — Chronological interior timeline, eight shots from foil-lined build stage to mature ecosystem
-- **[Documentation →](docs/)** — Architecture, PID controller, InfluxDB schema, Node-RED flows
-- **[Dashboard →](dashboard/)** — Grafana snapshot panels (mobile + desktop) and current conditions
-- **[Live UI →](live/)** — Near-live view of the Node-RED control panel, refreshed every 15 minutes
-- **[Webcam](webcam/)** — Live view inside the terrarium *(coming soon)*
+- **[Photos →](photos/)**: interior timeline, ten shots from the foil-lined build stage to today
+- **[Documentation →](docs/)**: architecture, PID controller, InfluxDB schema, Node-RED flows
+- **[Dashboard →](dashboard/)**: Grafana snapshots (mobile and desktop) and current conditions
+- **[Live UI →](live/)**: the Node-RED control panel, refreshed every 15 minutes
+- **[Webcam](webcam/)**: live view inside the terrarium *(coming soon)*
 
 ## The paper
 
-A multi-paper publication is in progress targeting *HardwareX* (full system), *Carnivorous Plant Newsletter* (CP horticulture), *Orchids* (popular orchid piece), and a comprehensive synthesis. Drafts in [`paper/`](https://github.com/GabrieleZoppoli/terrarium-control-system/tree/main/paper) on the repo.
+Papers on the system are in preparation for *HardwareX* (the full system), *Carnivorous Plant Newsletter* (carnivorous-plant horticulture) and *Orchids* (the orchids), plus a synthesis. Drafts are in [`paper/`](https://github.com/GabrieleZoppoli/terrarium-control-system/tree/main/paper) on the repo.
 
 ## Source code
 
-All control flows, firmware, dashboards, and analysis scripts: [GitHub repo](https://github.com/GabrieleZoppoli/terrarium-control-system) — CERN-OHL-P-2.0 license.
+All control flows, firmware, dashboards and analysis scripts: [GitHub repo](https://github.com/GabrieleZoppoli/terrarium-control-system), CERN-OHL-S v2 licence.

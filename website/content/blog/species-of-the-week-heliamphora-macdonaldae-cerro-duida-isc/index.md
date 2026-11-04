@@ -72,7 +72,7 @@ Two mixes across the decade.
 
 From 2016 to early 2023, in the chiller-cabinet years: **lapillus + pumice + bark, with about 50 % long-fibre sphagnum**. Worked fine — the *pulchella*, the *minor* clones and the *purpurascens* × *ionasii* came through it intact.
 
-From 2023, in the new highland cabinet: **kanuma plus long-fibre sphagnum, standing in no more than 1 cm of RO water**. The kanuma+LFS mix is markedly more aerated than the older blend, and that's the half I'd point at as the load-bearing change.
+From 2023, in the new highland cabinet: **kanuma plus long-fibre sphagnum, standing in no more than 1 cm of RO water**. The kanuma+LFS mix is markedly more aerated than the older blend, and that is the change that matters.
 
 Tepui summits are weathered Precambrian quartz arenite — acidic, porous, nutrient-poor sand and grit, with a sphagnum mat overlaid in the wettest spots. *Heliamphora* roots evolved to drink from a substrate that's permanently damp but freely drained, never anaerobic. The pitchers themselves drain overflow through the waist hole for the same reason the roots can't tolerate stagnation: the ecology runs on flow, not on standing water.
 

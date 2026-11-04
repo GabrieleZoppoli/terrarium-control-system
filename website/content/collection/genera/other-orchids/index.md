@@ -9,7 +9,7 @@ Several orchid genera now have their own pages — [*Phalaenopsis*](/collection/
 
 ## Cymbidium goeringii (Asian highland orchid tradition)
 
-A different lineage from the rest of this page — temperate-climate Asian *Cymbidium*, with a thousand-year cultivation tradition in China and Japan. Strict cold dormancy (0–14 °C from winter solstice) is the non-negotiable: without it the buds blast.
+A different lineage from the rest of this page: temperate-climate Asian *Cymbidium*, with a thousand-year cultivation tradition in China and Japan. It needs a cold dormancy (0–14 °C from the winter solstice); without it the buds blast.
 
 Vendor for the cultivar below: [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD).
 
@@ -17,7 +17,7 @@ Vendor for the cultivar below: [Piante Pazze](https://www.piantepazze.it/) (Marc
 
 ## Neofinetia allies (Japanese wind-orchid hybrids)
 
-Intergeneric hybrids built on *Neofinetia* — see the [*Neofinetia*](/collection/genera/neofinetia/) page for the species itself.
+Intergeneric hybrids built on *Neofinetia*; the species has its own [*Neofinetia*](/collection/genera/neofinetia/) page.
 
 {{< collection-species "Neostylis" >}}
 

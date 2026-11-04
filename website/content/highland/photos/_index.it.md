@@ -4,7 +4,7 @@ description: "Cronologia fotografica del terrario d'alta quota, dalla fase di co
 ogImage: "img/highland/interior/interior_2023-06-24_20230624_122929.jpg"
 ---
 
-Un registro cronologico del terrario — non curato per composizione, solo le prove accumulate che le piante, l'hardware e la collaborazione a tre fra coltivatore, suocera e macchina stanno tutti ancora funzionando.
+Un registro cronologico del terrario, non curato per composizione: le fotografie che mi è capitato di scattare, con le piante e l'hardware lungo quattro anni.
 
 Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per aprirla a piena risoluzione in una nuova scheda.
 
@@ -13,7 +13,7 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     <a href="/img/highland/interior/interior_2022-05-10_20220510_100623.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2022-05-10_20220510_100623.jpg" alt="Terrario d'alta quota, maggio 2022 — pareti in alluminio, prime piante in posizione" loading="lazy">
     </a>
-    <p><strong>Maggio 2022.</strong> Interno in fase di costruzione — isolante in alluminio ancora a vista, prima ondata di piante installata. Sulla destra, attraverso il vetro, si vede il secondo terrario (più piccolo).</p>
+    <p><strong>Maggio 2022.</strong> Interno in fase di costruzione, isolante in alluminio ancora a vista, prime piante installate. Sulla destra, attraverso il vetro, si vede il secondo terrario (più piccolo).</p>
   </li>
   <li>
     <a href="/img/highland/interior/interior_2023-01-05_20230105_181548.jpg" target="_blank" rel="noopener">
@@ -25,7 +25,7 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     <a href="/img/highland/interior/interior_2023-03-15_20230315_070203.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2023-03-15_20230315_070203.jpg" alt="Interno terrario, marzo 2023 — vista frontale con Heliamphora visibili" loading="lazy">
     </a>
-    <p><strong>Marzo 2023.</strong> I primi ascidi di <em>Heliamphora</em> cominciano a catturare la luce — ripiano in alto a destra. Sulla sinistra si vede il radiatore (stanza a ~22&nbsp;°C durante il ciclo notturno).</p>
+    <p><strong>Marzo 2023.</strong> I primi ascidi di <em>Heliamphora</em> cominciano a catturare la luce, ripiano in alto a destra. Sulla sinistra si vede il radiatore (stanza a ~22&nbsp;°C durante il ciclo notturno).</p>
   </li>
   <li>
     <a href="/img/highland/interior/interior_2023-04-11_20230411_175451.jpg" target="_blank" rel="noopener">
@@ -37,19 +37,19 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     <a href="/img/highland/interior/interior_2023-04-11_20230411_175639.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2023-04-11_20230411_175639.jpg" alt="Terrario visto dall'alto, aprile 2023 — disposizione fitta sul ripiano inferiore" loading="lazy">
     </a>
-    <p><strong>Aprile 2023.</strong> Vista dall'alto del ripiano inferiore — pompa e tubi visibili sulla sinistra, ugello nebulizzatore al centro in alto, epifite sparse sulla griglia.</p>
+    <p><strong>Aprile 2023.</strong> Vista dall'alto del ripiano inferiore: pompa e tubi sulla sinistra, ugello nebulizzatore al centro in alto, epifite sparse sulla griglia.</p>
   </li>
   <li class="featured">
     <a href="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2023-06-24_20230624_122929.jpg" alt="Ascidi di Heliamphora illuminati dai LED, giugno 2023" loading="lazy">
     </a>
-    <p><strong>Giugno 2023.</strong> <em>Heliamphora</em> sotto il LED puck — lo scatto diventato hero della home. Tredici mesi dentro e la colorazione è il pieno gradiente rosso-giallo di una pianta da tepui.</p>
+    <p><strong>Giugno 2023.</strong> <em>Heliamphora</em> sotto il LED puck, lo scatto diventato immagine di apertura della home. Tredici mesi dall'avvio, gli ascidi mostrano il pieno gradiente rosso-giallo di una pianta da tepui.</p>
   </li>
   <li>
     <a href="/img/highland/interior/interior_2024-01-07_IMG-20240107-WA0009.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2024-01-07_IMG-20240107-WA0009.jpg" alt="Terrario, gennaio 2024 — ghirlanda di Natale e libri sopra" loading="lazy">
     </a>
-    <p><strong>Gennaio 2024.</strong> Venti mesi. La ghirlanda di Natale ancora al suo posto, libreria sopra carica all'inverosimile — il terrario è ormai parte dell'appartamento, non un corpo estraneo.</p>
+    <p><strong>Gennaio 2024.</strong> Venti mesi. La ghirlanda di Natale ancora al suo posto, libreria sopra carica all'inverosimile.</p>
   </li>
   <li>
     <a href="/img/highland/interior/interior_2025-02-15_IMG_0391.jpg" target="_blank" rel="noopener">
@@ -67,8 +67,8 @@ Ogni immagine è CC BY-SA 4.0, filigranata di conseguenza. Click su una foto per
     <a href="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" target="_blank" rel="noopener">
       <img src="/img/highland/interior/interior_2026-05-01_deep-clean.jpg" alt="Terrario highland, maggio 2026 — prima grande pulizia da quando il terrario è in funzione" loading="lazy">
     </a>
-    <p><strong>Maggio 2026.</strong> Prima grande pulizia da quando il terrario è in funzione — due anni di velo minerale e un angolo di muffa nera ripuliti, una ventola staccata ricrimpata, ripiano in policarbonato rimesso al suo posto. Il racconto completo nel <a href="/it/blog/highland-cabinet-deep-clean/"><em>build log</em></a>.</p>
+    <p><strong>Maggio 2026.</strong> Prima grande pulizia da quando il terrario è in funzione: due anni di velo minerale e un angolo di muffa nera ripuliti, una ventola staccata ricrimpata, ripiano in policarbonato rimesso al suo posto. Il racconto completo nel <a href="/it/blog/highland-cabinet-deep-clean/"><em>build log</em></a>.</p>
   </li>
 </ul>
 
-Le foto non sono *cronologicamente esaustive* — sono quelle che ho scattato al volo nei momenti giusti e che hanno ancora qualcosa da raccontare. Documentazione più regolare prevista quando la webcam sul Pi sarà operativa.
+La serie non è esaustiva: sono le foto scattate al momento giusto. Una documentazione più regolare è prevista quando la webcam sarà operativa.

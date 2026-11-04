@@ -9,7 +9,7 @@ Diversi generi di orchidee hanno ora una pagina propria — [*Phalaenopsis*](/it
 
 ## Cymbidium goeringii (tradizione orchidofila d'alta quota asiatica)
 
-Un lignaggio diverso dal resto della pagina — *Cymbidium* asiatico da clima temperato, con una tradizione coltivazionale millenaria in Cina e Giappone. La dormienza fredda (0–14 °C dal solstizio d'inverno) è il punto non negoziabile: senza, i boccioli blastano.
+Un lignaggio diverso dal resto della pagina: *Cymbidium* asiatico da clima temperato, con una tradizione di coltivazione millenaria in Cina e Giappone. Ha bisogno di una dormienza fredda (0–14 °C dal solstizio d'inverno); senza, i boccioli abortiscono.
 
 Vivaista per il cultivar qui sotto: [Piante Pazze](https://www.piantepazze.it/) (Marco Toffoletti, Treppo Grande UD).
 
@@ -17,7 +17,7 @@ Vivaista per il cultivar qui sotto: [Piante Pazze](https://www.piantepazze.it/) 
 
 ## Affini di Neofinetia (ibridi dell'orchidea del vento giapponese)
 
-Ibridi intergenerici costruiti su *Neofinetia* — per la specie, vedi la pagina di [*Neofinetia*](/it/collection/genera/neofinetia/).
+Ibridi intergenerici costruiti su *Neofinetia*; la specie ha una sua pagina, [*Neofinetia*](/it/collection/genera/neofinetia/).
 
 {{< collection-species "Neostylis" >}}
 

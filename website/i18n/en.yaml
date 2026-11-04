@@ -1,6 +1,6 @@
 # Site chrome — English
 home_kicker:           "Open-source highland cloud forest · Living botanical collection"
-home_title:            "Climate, invention, and a <em>living collection</em> in three overlapping worlds."
+home_title:            "A cloud-forest terrarium, a few inventions, and a <em>living collection</em>."
 
 # Home stats strip
 stat_accessions:       "Accessions"
@@ -12,11 +12,11 @@ stat_logging:          "Logging cadence"
 stat_operational:      "Operational since"
 
 # Home hero
-hero_sotw_kicker:      "Species of the week · click for the deep-dive"
+hero_sotw_kicker:      "Species in the spotlight · click for the full post"
 
 # Home mosaic
 mosaic_kicker:         "Selected species · click through to the genus page"
-mosaic_title:          "A living atlas of convergent highlands."
+mosaic_title:          "Highland species from three continents, under one climate."
 mosaic_cta:            "Explore the full phylogenetic dendrogram"
 mosaic_outdoor_kicker: "Outside the Highland terrarium"
 mosaic_outdoor_title:  "Species that prefer the open balcony."
@@ -46,7 +46,7 @@ footer_github:         "GitHub"
 footer_email:          "Email"
 footer_meta:           "Living collection · highland terrarium · bespoke open hardware"
 footer_counter_label:  "reads"
-footer_rss_title:      "RSS feed — new species, build logs, and posts"
+footer_rss_title:      "RSS feed: new species, build logs and posts"
 footer_cc_title:       "All original content licensed under Creative Commons Attribution-ShareAlike 4.0 International"
 
 # Language switcher
@@ -56,11 +56,11 @@ lang_it:               "Italiano"
 
 # Dendrogram mobile CTA
 dendro_mobile_title:   "Pinch to zoom · tap the button for full-screen."
-dendro_mobile_body:    "399 species labels around a radial tree doesn't fit a phone screen. Open it full-screen — pinch to zoom, tap a node to focus, tap the centre to reset."
+dendro_mobile_body:    "Four hundred leaf labels around a radial tree do not fit a phone screen. Open it full-screen: pinch to zoom, tap a node to focus, tap the centre to reset."
 dendro_mobile_button:  "Full screen"
 dendro_mobile_meta_1:  "Or browse the collection"
 dendro_mobile_meta_2:  "by genus"
-dendro_mobile_meta_3:  "— works great on mobile."
+dendro_mobile_meta_3:  "on a phone."
 dendro_hint:           "Best explored on desktop · scroll to zoom, drag to pan, hover a tip for photos · "
 dendro_hint_open:      "open in its own tab"
 
@@ -103,29 +103,29 @@ home_live_cta_dashboard: "24-hour Grafana"
 # Home ledger — live totals from the Pi's InfluxDB
 ledger_kicker:         "Live from the running log"
 ledger_per_month:      "per month"
-ledger_title:          "Every mist cycle and watt-hour, counted."
+ledger_title:          "Running totals"
 ledger_intro:          "Measurements started in @SINCE@. The current marine-fridge cabinet has been running since late 2022, and replaced a chiller-cooled tank that ran from 2016."
 
 ledger_mist_label:     "Mist cycles"
-ledger_mist_caption:   "Each cycle is triggered when the cabinet humidity drifts below the Colombian-curve target. Duration became regime-aware on 2026-05-05: 10 s by day, 20 s at night. Per-event RH gain ≈ +2 % overnight (sealed cabinet, freezer fighting back) or +3–4 % by day (fans exchanging air with the drier room). Water volume per cycle is still being calibrated."
+ledger_mist_caption:   "Each cycle fires when cabinet humidity drops below the Colombian-curve target. Since 2026-05-05 the duration depends on the regime: 10 s by day, 20 s at night. RH gain per event is about +2 % overnight (sealed cabinet, compressor running) and +3–4 % by day (fans exchanging air with the drier room). Water volume per cycle is still being calibrated."
 
 ledger_kwh_label:      "Electricity"
 ledger_kwh_unit:       "kWh"
-ledger_kwh_caption:    "Meross MSS310 on the whole power strip — compressor, 4× ChilLED grow lights, fans, Pi, sensors. Mean ~110 W continuous: 60–90 W overnight, ~220 W midday peak under the raised-cosine LED curve (peak slider 70 at solar noon, in place since 2026-05-04)."
+ledger_kwh_caption:    "Meross MSS310 on the whole power strip: compressor, 4× ChilLED grow lights, fans, Pi, sensors. Mean ~110 W continuous: 60–90 W overnight, ~220 W midday peak under the raised-cosine LED curve (peak slider 70 at solar noon, in place since 2026-05-04)."
 
 ledger_cost_label:     "Electricity bill"
-ledger_cost_caption:   "At Italian residential rates (~€0.30/kWh) — about a month of daily cappuccinos."
+ledger_cost_caption:   "At Italian residential rates (~€0.30/kWh)."
 
-ledger_co2_label:      "CO₂ quietly scrubbed"
+ledger_co2_label:      "CO₂ fixed by the plants"
 ledger_co2_unit:       "kg"
-ledger_co2_caption:    "≈ a 50-km drive in a small car, offset by the plants. Modelled from 400 plants × ~0.36 g/day."
+ledger_co2_caption:    "Modelled, not measured: 75 plants × ~0.36 g/day. A small fraction of what the cabinet's electricity emits."
 
 ledger_data_label:     "Sensor readings"
 ledger_data_unit:      "million"
-ledger_data_caption:   "33 signals × 1 per minute, straight into InfluxDB."
+ledger_data_caption:   "33 signals, one reading per minute, into InfluxDB."
 
 ledger_fog_label:      "Hours near-saturated"
-ledger_fog_caption:    "Cumulative time at ≥ 95% RH — the threshold where epiphytic moss starts to drink."
+ledger_fog_caption:    "Cumulative time at ≥ 95 % RH, the threshold above which epiphytic moss takes up water."
 
 # Home featured-links (per-section quick access)
 feat_live_ui:          "Live UI"
@@ -142,7 +142,7 @@ feat_wishlists:        "Wishlists"
 nav_collection:        "Collection"
 species_section:       "Species"
 species_facts:         "Acquisition & location"
-sotw_kicker:           "Species of the week"
-species_sotw_callout:  "A deep-dive write-up on this species is published as a blog post:"
+sotw_kicker:           "Species in the spotlight"
+species_sotw_callout:  "A full write-up on this species is published as a blog post:"
 species_see_all_pre:   "See all"
 species_see_all_post:  "in the collection"

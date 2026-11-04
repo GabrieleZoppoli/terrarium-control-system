@@ -12,7 +12,7 @@ The former genera *Sophronitis* and *Laelia* (now subsumed into *Cattleya* sensu
 
 ## Position in Terrarium
 
-**Upper to middle zone** -- moderate to high light. In nature these grow on exposed rock faces or as epiphytes on the windward side of stunted trees.
+**Upper to middle zone**: moderate to high light. In nature these grow on exposed rock faces or as epiphytes on the windward side of stunted trees.
 
 ## Mounting
 
@@ -41,11 +41,11 @@ Cork bark mounts. The compact rosette habit and wiry roots adapt well to mounted
 
 ## Cultivation notes
 
-Combined survival rate: 77 % (10 of 13). The double loss of *S. pygmaea* — the smallest species in the genus — points to a limit rather than to bad luck: the plant is simply too small and too slow to forgive any root-moisture error over 48 hours. The larger *Sophronitis* and all *Cattleya* accessions, including the **f. aurea ('Atsumi' × 'Perfection') — SM/JOGA Japan selection** *S. coccinea*, have thrived. The loss of *L. briegeri* was a transport event (CITES shipment from Ecuador, arrived already deflated) not a cultivation failure.
+Combined survival rate: 77 % (10 of 13). The double loss of *S. pygmaea*, the smallest species in the genus, points to a limit: the plant is too small and too slow to forgive a root-moisture error lasting 48 hours. The larger *Sophronitis* and all the *Cattleya*, including *S. coccinea* **f. aurea ('Atsumi' × 'Perfection'), an SM/JOGA selection from Japan**, have done well. *L. briegeri* was lost in transport (a CITES shipment from Ecuador that arrived already collapsed).
 
-Flowering is reliable and heavy in autumn, often with a lighter second flush in spring. Colour saturation tracks the night-minimum temperature more strongly than any other variable — the 'Atsumi' × 'Perfection' cross, in particular, holds a deeper vermilion when pushed three degrees cooler at night than when kept in the default regime.
+Flowering is reliable and heavy in autumn, often with a lighter second flush in spring. Colour saturation tracks the night minimum more than any other variable: the 'Atsumi' × 'Perfection' cross holds a deeper vermilion when kept three degrees cooler at night.
 
-No dry rest is enforced, and none of the surviving accessions have shown the spongy, hollow growth that literature associates with "over-watered" sophronitis — as long as air movement stays strong (a 24 V muffin fan runs continuously at the top of the cabinet) and the cork mount is allowed to go from soaking to "just-not-dripping" between mist cycles.
+No dry rest is given, and none of the surviving plants have shown the spongy, hollow growth associated with over-watered *Sophronitis*, as long as air movement stays strong (a 24 V fan runs continuously at the top of the cabinet) and the cork mount goes from soaking to just-not-dripping between mist cycles.
 
 ## Photos
 

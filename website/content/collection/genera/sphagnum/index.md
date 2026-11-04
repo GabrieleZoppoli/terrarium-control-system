@@ -1,6 +1,6 @@
 ---
 title: "Sphagnum"
-description: "Living sphagnum moss — terrarium and CP-pot ground layer"
+description: "Living sphagnum moss: the ground layer in the terrarium and in the carnivorous-plant pots"
 tags: ["moss", "companion"]
 genera: ["Sphagnum"]
 ---

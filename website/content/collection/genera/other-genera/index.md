@@ -5,11 +5,11 @@ tags: ["carnivorous", "companion"]
 genera: ["Genlisea", "Amorphophallus", "Ficus"]
 ---
 
-The carnivorous genera with their own pages — [*Pinguicula*](/collection/genera/pinguicula/), [*Utricularia*](/collection/genera/utricularia/), [*Drosera*](/collection/genera/drosera/), [*Cephalotus*](/collection/genera/cephalotus/), and the [*Sphagnum*](/collection/genera/sphagnum/) ground layer — moved to dedicated pages. What remains here are the smaller groups and the non-carnivorous companions.
+The carnivorous genera with their own pages ([*Pinguicula*](/collection/genera/pinguicula/), [*Utricularia*](/collection/genera/utricularia/), [*Drosera*](/collection/genera/drosera/), [*Cephalotus*](/collection/genera/cephalotus/), and the [*Sphagnum*](/collection/genera/sphagnum/) ground layer) have moved to their own pages. What remains here are the smaller groups and the non-carnivorous companions.
 
 ## Genlisea
 
-Corkscrew plants — subterranean trap specialists. High mortality on this run suggests the terrarium may be too cool for most species.
+Corkscrew plants, with subterranean traps. High mortality so far suggests the terrarium is too cool for most species.
 
 {{< collection-species "Genlisea" >}}
 

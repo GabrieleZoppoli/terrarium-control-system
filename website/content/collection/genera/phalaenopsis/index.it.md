@@ -7,7 +7,7 @@ genera: ["Phalaenopsis"]
 
 ## Panoramica
 
-*Phalaenopsis* di forma specie — tutte miniature, molto diverse dagli ibridi commerciali.
+*Phalaenopsis* botaniche, tutte miniature, molto diverse dagli ibridi commerciali.
 
 ## Specie in collezione
 

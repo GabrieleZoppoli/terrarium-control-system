@@ -7,7 +7,7 @@ genera: ["Brocchinia"]
 
 ## Panoramica
 
-*Brocchinia* (Bromeliaceae) — bromelie a cisterna delle Highlands della Guayana, fra cui la carnivora *B. reducta*.
+*Brocchinia* (Bromeliaceae) sono bromelie a cisterna degli altopiani della Guayana, fra cui la carnivora *B. reducta*.
 
 ## Specie in collezione
 

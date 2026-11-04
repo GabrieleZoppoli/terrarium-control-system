@@ -7,7 +7,7 @@ genera: ["Platycerium"]
 
 ## Panoramica
 
-Felci corna d'alce (*Platycerium*, Polypodiaceae) — epifite coltivate montate.
+Felci corna d'alce (*Platycerium*, Polypodiaceae), epifite coltivate montate.
 
 ## Specie in collezione
 

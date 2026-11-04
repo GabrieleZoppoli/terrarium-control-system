@@ -1,20 +1,20 @@
 ---
 title: "Setup per Drosera regia"
-description: "Ambiente dedicato per la Drosera Re"
+description: "Ambiente dedicato per Drosera regia"
 status: "building"
 ---
 
-*Drosera regia* — la Drosera Re — è il gigante del genere, con foglie che arrivano a 60 cm in piante mature. Endemica di una piccola area della valle di Bain's Kloof nel Western Cape sudafricano, tollera condizioni di tipo mediterraneo ma con requisiti specifici che non combaciano con il regime tropicale d'alta quota del terrario principale.
+*Drosera regia* è il gigante del genere, con foglie che arrivano a 60 cm nelle piante mature. Endemica di una piccola area della valle di Bain's Kloof nel Western Cape sudafricano, tollera condizioni di tipo mediterraneo, ma le sue esigenze non si adattano al regime tropicale d'alta quota del terrario principale.
 
-## Perché un setup separato?
+## Perché un allestimento separato
 
 *D. regia* dà il meglio con:
 
-- Notti fresche (8–15 °C) e giornate moderatamente calde (20–28 °C) — mediterranee, non tropicali
+- Notti fresche (8–15 °C) e giornate moderatamente calde (20–28 °C), un regime mediterraneo più che tropicale
 - Luce forte e diretta
-- Un periodo di dormienza invernale pronunciato — incompatibile con la politica "nessun riposo secco" del terrario d'alta quota
-- Substrato torboso povero di minerali, mantenuto sul lato più asciutto rispetto alle altre *Drosera*
+- Una dormienza invernale pronunciata, che il terrario d'alta quota non offre
+- Substrato torboso povero di minerali, tenuto più asciutto che per le altre *Drosera*
 
 ## Stato
 
-*In costruzione. Dettagli del setup, ricetta del substrato e progressione della crescita saranno aggiunti.*
+*In costruzione. Dettagli dell'allestimento, ricetta del substrato e andamento della crescita saranno aggiunti.*

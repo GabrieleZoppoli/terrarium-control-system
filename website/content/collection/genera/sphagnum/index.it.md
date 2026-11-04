@@ -1,6 +1,6 @@
 ---
 title: "Sphagnum"
-description: "Sfagno vivo — strato di base del terrario e dei vasi delle carnivore"
+description: "Sfagno vivo: strato di base del terrario e dei vasi delle carnivore"
 tags: ["muschio", "accompagnatrice"]
 genera: ["Sphagnum"]
 ---

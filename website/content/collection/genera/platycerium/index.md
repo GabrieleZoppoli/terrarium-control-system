@@ -7,7 +7,7 @@ genera: ["Platycerium"]
 
 ## Overview
 
-Staghorn ferns (*Platycerium*, Polypodiaceae) — epiphytes grown mounted.
+Staghorn ferns (*Platycerium*, Polypodiaceae), epiphytes grown mounted.
 
 ## Species in Collection
 

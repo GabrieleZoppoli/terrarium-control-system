@@ -1,7 +1,7 @@
 ---
 title: "Deep clean: four years in, two of them with mold building"
 date: 2026-05-01T01:00:00+02:00
-description: "Four years online — the last two with mold quietly accumulating in a stagnant corner — and the highland cabinet finally got its first deep clean. Triggered by what I'd taken for botrytis on a Dracula and traced back to a single fan that had silently disconnected itself months ago."
+description: "Four years online, the last two with mold accumulating in a stagnant corner, and the highland cabinet got its first deep clean. Triggered by what I'd taken for botrytis on a Dracula and traced back to a single fan that had silently disconnected itself months ago."
 tags: ["build-log", "highland-terrarium", "maintenance", "nepenthes", "physan"]
 showReadingTime: true
 ---

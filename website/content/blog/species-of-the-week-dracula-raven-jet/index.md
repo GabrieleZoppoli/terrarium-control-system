@@ -16,7 +16,7 @@ In *Dracula* the three big tail-bearing organs are **sepals**, fused at the base
 
 ## The grex
 
-Registered with the RHS in 2005 by **J. Leathers**.[^rhs] Primary hybrid — both parents are species, no further crosses in the pedigree. Vendors keep calling it *"the blackest of all the Draculas"*; the framing is marketing, but the pigmentation is real enough that the claim does the rounds in the trade.
+Registered with the RHS in 2005 by **J. Leathers**.[^rhs] Primary hybrid — both parents are species, no further crosses in the pedigree. Vendors keep calling it *"the blackest of all the Draculas"*; the framing is marketing, but the pigmentation is dark enough that the claim has stuck.
 
 The grex name Raven and the cultivar name 'Raven' FCC/AOS are different things — easy to confuse. The cultivar 'Raven' is one selected clone within the Raven grex; it picked up an FCC from the AOS. 'Jet', 'Lenore' and others are sibling clones from the same crosses. Mine carries the 'Jet' tag from Ecuagenera.
 

@@ -48,12 +48,12 @@
       {{- if not $href -}}{{- $href = $candidate -}}{{- end -}}
     <a class="home-hero__figure home-hero__figure--featured"
        href="{{ $href }}"
-       aria-label="{{ i18n "hero_sotw_kicker" | default "Species of the week" }}: {{ $feat.taxon }}">
+       aria-label="{{ i18n "hero_sotw_kicker" | default "Species in the spotlight" }}: {{ $feat.taxon }}">
       <img src="{{ $feat.primary_photo | relURL }}"
            alt="{{ $feat.taxon }}{{ with $feat.provenance }} — {{ . }}{{ end }}"
            loading="eager" decoding="async">
       <figcaption>
-        <span class="kicker">{{ i18n "hero_sotw_kicker" | default "Species of the week" }}</span>
+        <span class="kicker">{{ i18n "hero_sotw_kicker" | default "Species in the spotlight" }}</span>
         <em>{{ $feat.taxon }}</em>{{ with $feat.provenance }} · {{ . }}{{ end }}
       </figcaption>
     </a>
@@ -77,7 +77,7 @@
     <div><dt>{{ i18n "stat_genera" }}</dt><dd>{{ $s.genera }}</dd></div>
     <div><dt>{{ i18n "stat_species_photo" }}</dt><dd>{{ $s.species_photographed }}</dd></div>
     <div><dt>{{ i18n "stat_volume" }}</dt><dd>1,000 <small style="font-size:0.6em;color:var(--text-3)">L</small></dd></div>
-    <div><dt>{{ i18n "stat_operational" }}</dt><dd>2023</dd></div>
+    <div><dt>{{ i18n "stat_operational" }}</dt><dd>2022</dd></div>
   </dl>
 
   {{- /* Live strip — current readings from the Pi. Same partial used by

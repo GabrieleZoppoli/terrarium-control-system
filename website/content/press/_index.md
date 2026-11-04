@@ -6,18 +6,18 @@ narrow: true
 showTableOfContents: false
 ---
 
-Everything on this site that I made — the photographs, the text, the phylogenetic dataset, the schematics — is published under the **[Creative Commons BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/)**. You are free to republish, adapt, or build on it. All I ask is attribution and a same-licensed share. This page is a shortcut for journalists, bloggers, plant-society editors, and anyone who'd like to feature the work without emailing me first for permission.
+Everything on this site that I made (the photographs, the text, the phylogenetic dataset, the schematics) is published under the **[Creative Commons BY-SA 4.0 license](https://creativecommons.org/licenses/by-sa/4.0/)**. You are free to republish, adapt or build on it, with attribution and under the same licence. This page is for journalists, bloggers, plant-society editors and anyone who wants to feature the work without emailing me first for permission.
 
-## Bios — copy-ready
+## Bios, copy-ready
 
 **One line.**
-> Gabriele Zoppoli is a physician scientist in Genoa who keeps a 380+ accession collection of carnivorous plants, miniature orchids, and *Tillandsia*, with the cloud-forest species housed in a self-built, open-source highland terrarium.
+> Gabriele Zoppoli is a physician scientist in Genoa who keeps a 400+ accession collection of carnivorous plants, miniature orchids and *Tillandsia*, with the cloud-forest species housed in a self-built, open-source highland terrarium.
 
 **Two sentences.**
-> Gabriele Zoppoli is Associate Professor of Internal Medicine at the University of Genoa and a clinician-scientist at IRCCS Ospedale Policlinico San Martino, with research in liquid biopsy for breast cancer. Outside the hospital he maintains a 380+ accession living collection of carnivorous plants, miniature orchids, and *Tillandsia* — the cloud-forest species under a self-built, open-source highland terrarium; the outdoor and warm-growing plants on the balcony and on windowsills. Documented [here](/).
+> Gabriele Zoppoli is Associate Professor of Internal Medicine at the University of Genoa and a clinician-scientist at IRCCS Ospedale Policlinico San Martino, with research in liquid biopsy for breast cancer. Outside the hospital he maintains a 400+ accession living collection of carnivorous plants, miniature orchids and *Tillandsia*: the cloud-forest species in a self-built, open-source highland terrarium, the outdoor and warm-growing plants on the balcony and on windowsills. Documented [here](/).
 
 **~60 words.**
-> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy — cell-free DNA and single-molecule sequencing — for breast cancer. In Genoa he grows over 380 accessions of carnivorous plants, miniature orchids, and *Tillandsia*, split between an open-source cloud-forest terrarium, outdoor beds, and a rack of fog shelves.
+> Gabriele Zoppoli, MD PhD, is Associate Professor of Internal Medicine at the University of Genoa and Molecular Tumor Board coordinator at IRCCS Ospedale Policlinico San Martino, with earlier stints at the NIH/NCI in Bethesda and Institut Jules Bordet in Brussels. His research is on liquid biopsy (cell-free DNA and single-molecule sequencing) for breast cancer. In Genoa he grows over 400 accessions of carnivorous plants, miniature orchids and *Tillandsia*, split between an open-source cloud-forest terrarium, outdoor beds and a rack of fog shelves.
 
 ## Portrait
 
@@ -26,7 +26,7 @@ Everything on this site that I made — the photographs, the text, the phylogene
   <figcaption>Portrait · Genova, 2025 · <a href="/img/author.jpg">download JPEG</a></figcaption>
 </figure>
 
-Additional crops (square, 3:2 landscape, 16:9) are available on request — [email me](mailto:gabriele.zoppoli@unige.it) with the size and intended use.
+Additional crops (square, 3:2 landscape, 16:9) are available on request: [email me](mailto:gabriele.zoppoli@unige.it) with the size and intended use.
 
 ## Hero photographs
 
@@ -68,24 +68,24 @@ For a broader selection, the homepage [featured mosaic](/) and the [Heliamphora]
 **Suggested attribution.** Any of:
 
 - *Photo: Gabriele Zoppoli · CC BY-SA 4.0*
-- *© Gabriele Zoppoli, CC BY-SA 4.0 · highlandcloud.forest* *(replace with the canonical URL of this site)*
+- *© Gabriele Zoppoli, CC BY-SA 4.0 · highlandcloudforest.com*
 - For print: *G. Zoppoli, 2025 · CC BY-SA 4.0*
 
 **Derivatives.** You may crop, colour-correct, and integrate photographs into print or digital pieces. If you modify an image substantively, note it in the caption.
 
-**ShareAlike.** If you produce a derivative work, it should be licensed under CC BY-SA 4.0 (or compatible) — this is what keeps the ecosystem of plant photography open.
+**ShareAlike.** A derivative work must be licensed under CC BY-SA 4.0 or a compatible licence.
 
-**What is *not* under this license.** Third-party embeds (Google Fonts, D3.js, the Blowfish theme) retain their own upstream licenses. The terrarium control code is [CERN-OHL-P-2.0](https://github.com/GabrieleZoppoli/terrarium-control-system).
+**What is *not* under this license.** Third-party embeds (Google Fonts, D3.js, the Blowfish theme) retain their own upstream licenses. The terrarium hardware, firmware and control flows are under [CERN-OHL-S v2](https://github.com/GabrieleZoppoli/terrarium-control-system).
 
 ## Data
 
 The plant inventory and phylogenetic dendrogram are downloadable as structured data:
 
-- **Flat inventory (CSV)** — [`collection.csv`](/data/collection.csv)
-- **Dendrogram (JSON, D3 hierarchy)** — [`dendrogram.json`](/data/dendrogram.json)
+- **Flat inventory (CSV)**: [`collection.csv`](/data/collection.csv)
+- **Dendrogram (JSON, D3 hierarchy)**: [`dendrogram.json`](/data/dendrogram.json)
 
 These are CC BY-SA 4.0 and indexed as a [schema.org Dataset](https://schema.org/Dataset) on the [dendrogram page](/collection/dendrogram/) for Google Scholar discovery.
 
 ## Contact
 
-For interview requests, high-resolution files beyond what's linked here, loan of a specific image for a cover, or corrections of fact — [gabriele.zoppoli@unige.it](mailto:gabriele.zoppoli@unige.it). I reply, usually within a few days.
+For interview requests, high-resolution files beyond those linked here, a specific image for a cover, or corrections of fact: [gabriele.zoppoli@unige.it](mailto:gabriele.zoppoli@unige.it). I usually reply within a few days.

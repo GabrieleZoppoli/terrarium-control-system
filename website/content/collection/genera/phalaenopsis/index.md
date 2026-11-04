@@ -7,7 +7,7 @@ genera: ["Phalaenopsis"]
 
 ## Overview
 
-Species-form *Phalaenopsis* — all miniatures, very different from commercial hybrids.
+Botanical *Phalaenopsis*, all miniatures, very different from the commercial hybrids.
 
 ## Species in Collection
 

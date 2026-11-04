@@ -13,7 +13,7 @@ genera: ["Darlingtonia", "Paphiopedilum"]
 
 ## Piante acquatiche
 
-Specie galleggianti e carnivore acquatiche — vasi su balcone e laghetto, all'aperto tutto l'anno. ([*Nymphaea*](/it/collection/genera/nymphaea/) e [*Iris*](/it/collection/genera/iris/) hanno una pagina propria.)
+Specie galleggianti e carnivore acquatiche, nel laghetto e in vasi sul balcone, all'aperto tutto l'anno. ([*Nymphaea*](/it/collection/genera/nymphaea/) e [*Iris*](/it/collection/genera/iris/) hanno una pagina propria.)
 
 {{< collection-species "Aldrovanda" >}}
 
@@ -57,7 +57,7 @@ Scarpette, ibridi *Cymbidium* e orchidee da intermedio-caldo che non rientrano n
 
 ## Varie
 
-Conifere, rose, *Byblis* sub-carnivora dell'Australia occidentale, *Catopsis*, *Drosophyllum*, *Roridula* — le compagne non-proprio-CP e gli accenti da balcone.
+Conifere, rose, le protocarnivore *Byblis*, *Catopsis*, *Drosophyllum* e *Roridula*, e le compagne da balcone.
 
 {{< collection-species "Picea" >}}
 

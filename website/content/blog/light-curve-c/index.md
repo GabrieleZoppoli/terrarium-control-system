@@ -142,7 +142,7 @@ A few small improvements landed today, in order of how much they matter:
 
 ### Mist tuning, derived from 21 days of mist-event data
 
-The cooling miss on the 04 → 05 night surfaced a chronic pattern: the cabinet was being misted ~17–22 times per night, each event landing the RH a little **above** target, then drifting back, then re-firing. A textbook hunting loop. Adding latent heat each cycle made the freezer's job harder.
+The cooling miss on the 04 → 05 night showed up a chronic pattern: the cabinet was being misted ~17–22 times per night, each event landing the RH a little **above** target, then drifting back, then re-firing. A textbook hunting loop. Adding latent heat each cycle made the freezer's job harder.
 
 I pulled 21 days of `mist_event` timestamps and stratified by simultaneous state, computing per-event ΔRH = peak[+30…+180 s] − baseline[−60…0 s]:
 
@@ -165,7 +165,7 @@ wbt_shutdown_active == 0 (day, mixing):    fire at  Δ ≥ 1,  10 s mist on-time
 
 Threshold now matches gain in both regimes. At night the cabinet drifts down ~2 % between events, the trigger fires, and the +2 % mist lands the RH right at target — no overshoot, no immediate re-trigger. Daytime keeps the same trigger frequency but halves the per-event water + latent heat injection, since each daytime event was overshooting by 2–3 % anyway.
 
-A methodological caveat I owe the data: my first instinct was to "regression-adjust" the daytime strata to a common room state and conclude the per-event gain was secretly the same (~+2.3 %) in all three regimes. That would have justified a single uniform tuning. But adjusting B and C to a 58 % RH room they never actually operate in (they live at 47–49 %) is extrapolation, not interpretation — the underlying physics genuinely differ between sealed and mixing regimes. The honest number is the per-stratum raw mean in each stratum's own room conditions, and those are different. Hence two rules.
+A methodological caveat I owe the data: my first instinct was to "regression-adjust" the daytime strata to a common room state and conclude the per-event gain was secretly the same (~+2.3 %) in all three regimes. That would have justified a single uniform tuning. But adjusting B and C to a 58 % RH room they never actually operate in (they live at 47–49 %) is extrapolation, not interpretation; the physics differ between sealed and mixing regimes. The right number is the per-stratum raw mean in each stratum's own room conditions, and those are different. Hence two rules.
 
 Expected effect on a clear-night cooling fight: half the events × similar latent kJ per event ≈ ~13 W less average heat injection during the freezer's hardest 9-hour window. Not enough on its own to fix the dead P44 evaporator fan that triggered the 04→05 night undershoot, but it's a free improvement and removes one of the two superimposed loads on the freezer.
 
@@ -228,9 +228,9 @@ OLS on 5-minute observations within the 15:00–18:00 window, cluster-robust sta
 
 Three things worth saying:
 
-**1.** The unadjusted and WBT-adjusted POST coefficients are close (−4.40 vs −4.08). The room warming explains a small portion of the unadjusted delta but not most of it. The curve genuinely pushed afternoon cabinet RH down ~4 pp at the mean.
+**1.** The unadjusted and WBT-adjusted POST coefficients are close (−4.40 vs −4.08). The room warming explains a small portion of the unadjusted delta but not most of it. The curve pushed afternoon cabinet RH down ~4 pp at the mean.
 
-**2.** The OLS-mean delta (~−4 pp) is much larger than the marginal-median delta (−1.36 pp). Means are sensitive to upper-tail RH spikes; the curve appears to have flattened those more aggressively than it shifted the central tendency. Both numbers are honest descriptions of different aspects of the same effect.
+**2.** The OLS-mean delta (~−4 pp) is much larger than the marginal-median delta (−1.36 pp). Means are sensitive to upper-tail RH spikes; the curve appears to have flattened those more aggressively than it shifted the central tendency. The two numbers describe different aspects of the same effect.
 
 **3.** Saturated model reveals: **room dry-bulb temperature does not independently predict cabinet RH once room RH is controlled.** The cabinet's RH at any moment is, on the ambient side, driven by room humidity — not by room heat. Physically: it's the moisture inflow from impeller-driven air exchange that matters, and at this temperature range absolute moisture goes with RH, not T.
 

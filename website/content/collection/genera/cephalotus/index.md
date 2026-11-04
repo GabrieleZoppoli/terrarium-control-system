@@ -7,7 +7,7 @@ genera: ["Cephalotus"]
 
 ## Overview
 
-Western Australian pitcher plants — grown outside the terrarium. The 'Eden Black' cuttings did not establish (×2 attempts).
+The Western Australian pitcher plant, grown on the fog shelves outside the terrarium. Two batches of 'Eden Black' cuttings failed to establish.
 
 ## Species in Collection
 

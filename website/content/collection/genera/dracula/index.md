@@ -8,11 +8,11 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 
 ## Overview
 
-*Dracula* and *Masdevallia* orchids inhabit the mossy cloud forests of the Colombian and Ecuadorian Andes at 1,500--2,500 m elevation. *Dracula*'s bizarre, often face-like flowers hang downward from pendulous inflorescences that emerge from below the mount -- a strategy for pollination by fungus gnats attracted to the mushroom-like lip.
+*Dracula* and *Masdevallia* orchids inhabit the mossy cloud forests of the Colombian and Ecuadorian Andes at 1,500--2,500 m elevation. *Dracula* flowers, often face-like, hang from pendulous inflorescences that emerge below the mount; the mushroom-like lip attracts fungus gnats, which pollinate them.
 
 ## Position in Terrarium
 
-**Lower zone** -- shade, lowest light intensity. In nature these grow in deep forest understory where light is heavily filtered. The terrarium's light gradient provides the necessary shade without artificial screening.
+**Lower zone**: shade, the lowest light in the cabinet. In nature they grow in the forest understorey under heavily filtered light.
 
 ## Mounting
 
@@ -28,16 +28,16 @@ Cork bark with a sphagnum moss pad. *Dracula* mounted with inflorescences able t
 
 ## Cultivation notes
 
-*Dracula* has kept a perfect survival record (6/6) here, while *Masdevallia* sits at 71 % (5/7). The two losses — *M. glandulosa* and *M. coccinea* 'Anchota' — were both plants whose natural range is on the warmer, lower edge of cloud forest; both struggled to take on new growth in the terrarium's cooler night regime and were probably mis-placed rather than mis-grown. The rest live mounted on cork with a pad of living sphagnum and produce new leaves on a roughly three-month cycle.
+*Dracula* has kept a perfect survival record (6/6) here, while *Masdevallia* sits at 71 % (5/7). The two losses, *M. glandulosa* and *M. coccinea* 'Anchota', were both plants from the warmer, lower edge of cloud forest; both struggled to make new growth under the terrarium's cool nights and were probably in the wrong place rather than badly grown. The rest live mounted on cork with a pad of living sphagnum and produce new leaves on a roughly three-month cycle.
 
 Notes from provenance:
 
-- **D. simia** — "mounted when available". Flowers are produced singly on pendulous inflorescences that reach downwards out of the sphagnum mat; the photographs on this site catch the flower as it drops through the mount, which is how the plant wants to present it.
-- **D. lotax** — a temperate grower in a very small form, pairs well with *Masdevallia* in the same zone.
-- **D. Raven 'Jet'** — a hybrid of *D. vampira* × *D. roezlii*. Flowers very dark, almost black, with the white callus glands of *vampira* reduced.
-- **D. "Fake" hirsuta 'Yellow'** — acquired under *hirsuta* but the bloom reads more like *hirsuta* f. *xanthina*. Kept as a label-uncertain accession until it flowers a second time.
+- **D. simia**: flowers singly on pendulous inflorescences that come down out of the sphagnum mat; the photographs on this site catch the flower as it drops through the mount.
+- **D. lotax**: a very small cool grower, kept with the *Masdevallia* in the same zone.
+- **D. Raven 'Jet'**: a hybrid of *D. vampira* × *D. roezlii*. Flowers very dark, almost black, with the white callus glands of *vampira* reduced.
+- **D. "Fake" hirsuta 'Yellow'**: acquired as *hirsuta*, but the flower looks more like *hirsuta* f. *xanthina*. Kept as a label-uncertain accession until it flowers a second time.
 
-Flowering is near-continuous across the group in autumn and winter, slows through summer, and does not respond strongly to any manipulation I've tried. The one observation that's been consistent: *Masdevallia* inflorescence production is tightly coupled to the *night-minimum* temperature, not the daytime maximum — a 3 °C change in the overnight setpoint is worth more than twice that during the day.
+Flowering is near-continuous across the group in autumn and winter, slows through summer, and does not respond much to anything I have tried. One consistent observation: *Masdevallia* spike production tracks the night minimum, not the daytime maximum. A 3 °C change in the overnight setpoint is worth more than twice that during the day.
 
 ## Photos
 

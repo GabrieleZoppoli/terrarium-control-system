@@ -1,7 +1,7 @@
 ---
 title: "Grande pulizia: quattro anni dopo, di cui due con muffa che cresce"
 date: 2026-05-01T01:00:00+02:00
-description: "Quattro anni in funzione — gli ultimi due con muffa che si accumulava in silenzio in un angolo stagnante — e il terrario highland ha avuto finalmente la sua prima grande pulizia. Innescata da quello che avevo preso per una botrytis su una Dracula e ricondotta a una sola ventola che si era staccata in silenzio mesi fa."
+description: "Quattro anni in funzione, gli ultimi due con muffa che si accumulava in un angolo stagnante, e il terrario highland ha avuto la sua prima grande pulizia. Innescata da quello che avevo preso per una botrytis su una Dracula e ricondotta a una sola ventola che si era staccata mesi fa."
 tags: ["build-log", "highland-terrarium", "maintenance", "nepenthes", "physan"]
 showReadingTime: true
 ---

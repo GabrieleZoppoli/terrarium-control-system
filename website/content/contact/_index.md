@@ -7,14 +7,14 @@ weight: 50
 narrow: true
 ---
 
-I'm happy to hear from you — for trade proposals, cultivation advice, build questions about the highland cabinet, collaboration on the oncology side, a correction on the site, or an introduction.
+I'm happy to hear from you: trade proposals, cultivation questions, build questions about the highland cabinet, collaboration on the oncology side, a correction to the site, or an introduction.
 
 <div class="contact-grid">
 
   <a class="contact-card" href="mailto:gabriele.zoppoli@unige.it">
     <span class="kicker">Primary email</span>
     <span class="title">gabriele.zoppoli@unige.it</span>
-    <span class="body">Best for anything that benefits from a thread — work, cultivation, long questions.</span>
+    <span class="body">Best for anything that needs a thread: work, cultivation, long questions.</span>
   </a>
 
   <a class="contact-card" href="https://github.com/GabrieleZoppoli/terrarium-control-system/issues/new">
@@ -53,15 +53,15 @@ I'm happy to hear from you — for trade proposals, cultivation advice, build qu
 
 If you're a **grower**, a **terrarium builder**, or a **hobbyist electronics person** looking for context, the fastest orientation is:
 
-- [Highland section](../highland/) — system overview, architecture, PID notes, flows.
-- [Collection](../collection/) — dendrogram, per-genus photos, wishlists.
-- [Inventions](../inventions/) — zeer-pot *Darlingtonia* cooler, *Drosera regia* substrate trick, easier-to-build enclosures.
-- [GitHub repo](https://github.com/GabrieleZoppoli/terrarium-control-system) — everything, open hardware (CERN-OHL-S v2) and open code.
+- [Highland section](../highland/): system overview, architecture, PID notes, flows.
+- [Collection](../collection/): dendrogram, per-genus photos, wishlists.
+- [Inventions](../inventions/): zeer-pot *Darlingtonia* cooler, *Drosera regia* setup, fog shelves.
+- [GitHub repo](https://github.com/GabrieleZoppoli/terrarium-control-system): everything, open hardware and code under CERN-OHL-S v2.
 
-For **trade inquiries** — please include species, cultivar/clone name where relevant, and a photo. I propagate some things as offsets; I rarely sell.
+For **trade inquiries**, please include species, cultivar or clone name where relevant, and a photo. I propagate some things as offsets; I rarely sell.
 
 ## Location
 
-Genoa (Genova), Italy. The terrarium lives at home; the outdoor beds of *Sarracenia* and *Dionaea* are on the same balcony. The lab is at the University of Genoa — Viale Benedetto XV, 6, 16132 Genova — and the clinic at [IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
+Genoa (Genova), Italy. The terrarium lives at home; the outdoor beds of *Sarracenia* and *Dionaea* are on the same balcony. The lab is at the University of Genoa (Viale Benedetto XV, 6, 16132 Genova) and the clinic at [IRCCS Ospedale Policlinico San Martino](https://www.ospedalesanmartino.it), Largo Rosanna Benzi 10.
 
 For anything else, email is the best default.

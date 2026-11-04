@@ -7,7 +7,7 @@ genera: ["Neofinetia"]
 
 ## Panoramica
 
-Piccole orchidee vandacee, apprezzate per il profumo e il portamento elegante — la tradizione *fūkiran* si costruisce intorno a loro. *Neofinetia* è oggi inclusa in *Vanda*.
+Piccole orchidee vandacee, apprezzate per il profumo e il portamento; la tradizione giapponese *fūkiran* si costruisce intorno a loro. *Neofinetia* è oggi inclusa in *Vanda*.
 
 ## Specie in collezione
 

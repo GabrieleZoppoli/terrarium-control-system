@@ -1,5 +1,5 @@
 ---
 title: "Highland terrarium"
 area_slug: "highland-terrarium"
-description: "The active-cooled highland chamber — roughly 70 species from Andean cloud forests and equivalent montane biomes."
+description: "The actively cooled highland cabinet: roughly 70 species from cloud forests and equivalent montane habitats."
 ---

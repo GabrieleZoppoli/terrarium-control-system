@@ -7,7 +7,7 @@ genera: ["Cephalotus"]
 
 ## Panoramica
 
-Pianta-brocca dell'Australia occidentale — coltivata fuori dal terrario. Le talee 'Eden Black' non hanno attecchito (×2 tentativi).
+La pianta-brocca dell'Australia occidentale, coltivata sui ripiani nebulizzati fuori dal terrario. Due lotti di talee 'Eden Black' non hanno attecchito.
 
 ## Specie in collezione
 

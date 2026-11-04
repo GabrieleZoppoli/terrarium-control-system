@@ -5,11 +5,11 @@ tags: ["carnivora", "accompagnatrice"]
 genera: ["Genlisea", "Amorphophallus", "Ficus"]
 ---
 
-I generi carnivori con una pagina propria — [*Pinguicula*](/it/collection/genera/pinguicula/), [*Utricularia*](/it/collection/genera/utricularia/), [*Drosera*](/it/collection/genera/drosera/), [*Cephalotus*](/it/collection/genera/cephalotus/) e lo strato di [*Sphagnum*](/it/collection/genera/sphagnum/) — sono passati a pagine dedicate. Qui restano i gruppi più piccoli e le compagne non carnivore.
+I generi carnivori con una pagina propria ([*Pinguicula*](/it/collection/genera/pinguicula/), [*Utricularia*](/it/collection/genera/utricularia/), [*Drosera*](/it/collection/genera/drosera/), [*Cephalotus*](/it/collection/genera/cephalotus/) e lo strato di [*Sphagnum*](/it/collection/genera/sphagnum/)) sono passati a pagine dedicate. Qui restano i gruppi più piccoli e le compagne non carnivore.
 
 ## Genlisea
 
-Piante a cavatappi — specialiste di trappole sotterranee. La mortalità alta su questo lotto suggerisce che il terrario possa essere troppo freddo per la maggior parte delle specie.
+Piante a cavatappi, con trappole sotterranee. La mortalità alta finora suggerisce che il terrario sia troppo freddo per la maggior parte delle specie.
 
 {{< collection-species "Genlisea" >}}
 

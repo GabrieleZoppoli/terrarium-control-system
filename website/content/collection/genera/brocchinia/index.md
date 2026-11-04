@@ -7,7 +7,7 @@ genera: ["Brocchinia"]
 
 ## Overview
 
-*Brocchinia* (Bromeliaceae) — tank bromeliads of the Guayana Highlands, including the carnivorous *B. reducta*.
+*Brocchinia* (Bromeliaceae) are tank bromeliads of the Guayana Highlands, including the carnivorous *B. reducta*.
 
 ## Species in Collection
 

@@ -3,10 +3,10 @@ title: "Inventions & Side Projects"
 description: "Self-watering Zeer pot for Darlingtonia, simpler maintenance environments, Drosera regia setup"
 ---
 
-Smaller plant-keeping experiments outside the main highland terrarium. Each project explores a specific cultivation problem with its own purpose-built solution.
+Smaller plant-keeping projects outside the highland terrarium, each built around one cultivation problem.
 
 ## Projects
 
-- **[Self-watering Zeer Pot for Darlingtonia](zeer-pot-darlingtonia/)** — A passive evaporative cooler housing a *Darlingtonia californica* root system; cools the roots without electricity by exploiting clay-pot evaporation, with a self-replenishing water reservoir. *(Building)*
-- **[Drosera regia Setup](drosera-regia/)** — Dedicated environment for the King Sundew, which has its own specific requirements distinct from the highland terrarium. *(Building)*
-- **[Easier Maintenance Environments](easier-environments/)** — Lower-effort enclosures for less demanding species: jars, simple terraria, and containers tuned for hands-off maintenance.
+- **[Self-watering Zeer pot for Darlingtonia](zeer-pot-darlingtonia/)**: a passive evaporative cooler around the root ball of *Darlingtonia californica*. Clay-pot evaporation cools the roots without electricity; a reservoir tops itself up. *(Building)*
+- **[Drosera regia setup](drosera-regia/)**: a dedicated environment for the king sundew, whose requirements differ from the highland terrarium. *(Building)*
+- **[Fog shelves](easier-environments/)**: open glass shelves with ultrasonic misters for species that need humidity but not cold.

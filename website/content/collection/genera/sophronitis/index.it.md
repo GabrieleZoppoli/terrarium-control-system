@@ -12,7 +12,7 @@ I vecchi generi *Sophronitis* e *Laelia* (ora riassorbiti in *Cattleya sensu lat
 
 ## Posizione nel terrario
 
-**Zona medio-alta** — luce da moderata a forte. In natura crescono su pareti rocciose esposte o come epifite sul lato sopravento di alberi bonsaizzati dal vento.
+**Zona medio-alta**: luce da moderata a forte. In natura crescono su pareti rocciose esposte o come epifite sul lato sopravento di alberi bonsaizzati dal vento.
 
 ## Supporto
 
@@ -41,11 +41,11 @@ Montate su corteccia di sughero. Il portamento compatto a rosetta e le radici fi
 
 ## Note di coltivazione
 
-Tasso di sopravvivenza combinato: 77 % (10 su 13). La doppia perdita di *S. pygmaea* — la specie più piccola del genere — indica un limite, più che sfortuna: la pianta è semplicemente troppo piccola e lenta per perdonare un errore di umidità radicale che duri oltre 48 ore. Le *Sophronitis* più grandi e tutti gli esemplari di *Cattleya*, compresa la **f. aurea ('Atsumi' × 'Perfection') — selezione SM/JOGA Giappone** di *S. coccinea*, hanno prosperato. La perdita di *L. briegeri* è stata un evento di trasporto (spedizione CITES dall'Ecuador, arrivata già collassata), non un fallimento di coltivazione.
+Tasso di sopravvivenza combinato: 77 % (10 su 13). La doppia perdita di *S. pygmaea*, la specie più piccola del genere, indica un limite: la pianta è troppo piccola e lenta per perdonare un errore di umidità radicale che duri 48 ore. Le *Sophronitis* più grandi e tutte le *Cattleya*, compresa *S. coccinea* **f. aurea ('Atsumi' × 'Perfection'), selezione SM/JOGA giapponese**, sono andate bene. *L. briegeri* è andata perduta nel trasporto (spedizione CITES dall'Ecuador, arrivata già collassata).
 
-La fioritura è affidabile e abbondante in autunno, spesso con una seconda emissione più leggera in primavera. La saturazione del colore dipende dalla temperatura minima notturna più che da qualsiasi altra variabile — l'incrocio 'Atsumi' × 'Perfection' in particolare mantiene un vermiglio più profondo quando viene portato 3 °C più fresco di notte rispetto al regime di default.
+La fioritura è affidabile e abbondante in autunno, spesso con una seconda emissione più leggera in primavera. La saturazione del colore dipende dalla minima notturna più che da qualsiasi altra variabile: l'incrocio 'Atsumi' × 'Perfection' mantiene un vermiglio più profondo se tenuto 3 °C più fresco di notte.
 
-Non impongo alcun riposo secco, e nessuno degli esemplari sopravvissuti ha mostrato la crescita spugnosa e cava che la letteratura associa alle sofroniti "annaffiate troppo" — a patto che il ricircolo d'aria resti forte (una ventola muffin a 24 V gira continuamente in cima al terrario) e che il supporto di sughero passi da "inzuppato" a "quasi-non-gocciolante" fra un ciclo di nebulizzazione e l'altro.
+Non impongo alcun riposo secco, e nessuno degli esemplari sopravvissuti ha mostrato la crescita spugnosa e cava associata alle *Sophronitis* annaffiate troppo, a patto che il ricircolo d'aria resti forte (una ventola a 24 V gira continuamente in cima al terrario) e che il sughero passi da inzuppato a quasi-non-gocciolante fra un ciclo di nebulizzazione e l'altro.
 
 ## Foto
 

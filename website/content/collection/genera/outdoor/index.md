@@ -13,7 +13,7 @@ genera: ["Darlingtonia", "Paphiopedilum"]
 
 ## Aquatic plants
 
-Floating species and aquatic carnivores — pond and balcony pots, year-round outdoor. ([*Nymphaea*](/collection/genera/nymphaea/) and [*Iris*](/collection/genera/iris/) have their own pages.)
+Floating species and aquatic carnivores, in the pond and in balcony pots, outdoors year-round. ([*Nymphaea*](/collection/genera/nymphaea/) and [*Iris*](/collection/genera/iris/) have their own pages.)
 
 {{< collection-species "Aldrovanda" >}}
 
@@ -57,7 +57,7 @@ Slippers, cymbidium hybrids, and intermediate-warm orchids that don't fit the hi
 
 ## Miscellaneous
 
-Conifers, roses, sub-carnivorous Western-Australian *Byblis*, *Catopsis*, *Drosophyllum*, *Roridula* — the not-quite-CP companions and the outdoor accents.
+Conifers, roses, the protocarnivorous *Byblis*, *Catopsis*, *Drosophyllum* and *Roridula*, and the outdoor companions.
 
 {{< collection-species "Picea" >}}
 

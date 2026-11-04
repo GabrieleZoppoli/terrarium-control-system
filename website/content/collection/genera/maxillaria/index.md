@@ -7,7 +7,7 @@ genera: ["Maxillaria"]
 
 ## Overview
 
-*Maxillaria* (Orchidaceae) — a large Neotropical genus; the collection keeps compact species.
+*Maxillaria* (Orchidaceae) is a large Neotropical genus; the collection keeps compact species.
 
 ## Species in Collection
 

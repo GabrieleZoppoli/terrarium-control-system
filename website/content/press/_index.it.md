@@ -6,18 +6,18 @@ narrow: true
 showTableOfContents: false
 ---
 
-Tutto ciò che su questo sito è mio — le fotografie, i testi, il dataset filogenetico, gli schemi — è pubblicato con licenza **[Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**. Sei libero di ripubblicarlo, adattarlo o costruirci sopra. Chiedo soltanto l'attribuzione e la stessa licenza. Questa pagina è una scorciatoia per giornalisti, blogger, redattori di associazioni di appassionati, e chiunque voglia riprendere il lavoro senza dovermi scrivere prima.
+Tutto ciò che su questo sito è mio (le fotografie, i testi, il dataset filogenetico, gli schemi) è pubblicato con licenza **[Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**. Si può ripubblicare, adattare o riutilizzare, con attribuzione e con la stessa licenza. Questa pagina è per giornalisti, blogger, redattori di associazioni di appassionati e chiunque voglia riprendere il lavoro senza dovermi scrivere prima.
 
-## Bio — pronte da copiare
+## Bio pronte da copiare
 
 **Una riga.**
-> Gabriele Zoppoli è un medico-ricercatore a Genova che coltiva una collezione di oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, con le specie di foresta nebulosa ospitate in un terrario d'alta quota open-source, costruito da lui.
+> Gabriele Zoppoli è un medico-ricercatore a Genova che coltiva una collezione di oltre 400 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, con le specie di foresta nebulosa ospitate in un terrario d'alta quota open-source, costruito da lui.
 
 **Due frasi.**
-> Gabriele Zoppoli è Professore Associato di Medicina Interna all'Università di Genova e clinico-ricercatore all'IRCCS Ospedale Policlinico San Martino, con ricerca sulla biopsia liquida nel tumore della mammella. Fuori dall'ospedale cura una collezione di oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia* — le specie di foresta nebulosa in un terrario d'alta quota open-source costruito da lui; le altre sul balcone e sui davanzali di casa. Documentato [qui](/).
+> Gabriele Zoppoli è Professore Associato di Medicina Interna all'Università di Genova e clinico-ricercatore all'IRCCS Ospedale Policlinico San Martino, con ricerca sulla biopsia liquida nel tumore della mammella. Fuori dall'ospedale cura una collezione di oltre 400 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*: le specie di foresta nebulosa in un terrario d'alta quota open-source costruito da lui, le altre sul balcone e sui davanzali di casa. Documentato [qui](/).
 
 **~60 parole.**
-> Gabriele Zoppoli, MD PhD, è Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'IRCCS Ospedale Policlinico San Martino, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La sua ricerca è sulla biopsia liquida — DNA libero circolante e sequenziamento a singola molecola — nel tumore della mammella. A Genova coltiva oltre 380 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, distribuiti fra un terrario di foresta nebulosa open-source, le fioriere all'aperto e un rack di ripiani nebulizzati.
+> Gabriele Zoppoli, MD PhD, è Professore Associato di Medicina Interna all'Università di Genova e coordinatore del Molecular Tumor Board dell'IRCCS Ospedale Policlinico San Martino, dopo periodi di formazione al NIH/NCI di Bethesda e all'Institut Jules Bordet di Bruxelles. La sua ricerca è sulla biopsia liquida (DNA libero circolante e sequenziamento a singola molecola) nel tumore della mammella. A Genova coltiva oltre 400 esemplari fra piante carnivore, orchidee miniatura e *Tillandsia*, distribuiti fra un terrario di foresta nebulosa open-source, le fioriere all'aperto e una serie di ripiani nebulizzati.
 
 ## Ritratto
 
@@ -26,7 +26,7 @@ Tutto ciò che su questo sito è mio — le fotografie, i testi, il dataset filo
   <figcaption>Ritratto · Genova, 2025 · <a href="/img/author.jpg">scarica JPEG</a></figcaption>
 </figure>
 
-Ritagli ulteriori (quadrato, 3:2 orizzontale, 16:9) disponibili su richiesta — [scrivimi](mailto:gabriele.zoppoli@unige.it) indicando formato e uso previsto.
+Ritagli ulteriori (quadrato, 3:2 orizzontale, 16:9) disponibili su richiesta: [scrivimi](mailto:gabriele.zoppoli@unige.it) indicando formato e uso previsto.
 
 ## Fotografie hero
 
@@ -68,24 +68,24 @@ Per una selezione più ampia, il [mosaico della homepage](/) e le pagine di [Hel
 **Attribuzione suggerita.** Una delle seguenti:
 
 - *Foto: Gabriele Zoppoli · CC BY-SA 4.0*
-- *© Gabriele Zoppoli, CC BY-SA 4.0 · highlandcloud.forest* *(sostituire con l'URL canonico del sito)*
+- *© Gabriele Zoppoli, CC BY-SA 4.0 · highlandcloudforest.com*
 - Per la stampa: *G. Zoppoli, 2025 · CC BY-SA 4.0*
 
 **Derivati.** Puoi ritagliare, correggere il colore e integrare le fotografie in contenuti stampati o digitali. Se l'immagine è modificata in modo sostanziale, segnalalo in didascalia.
 
-**ShareAlike.** Un'opera derivata va pubblicata con licenza CC BY-SA 4.0 (o compatibile) — è questo che tiene aperto l'ecosistema della fotografia botanica.
+**ShareAlike.** Un'opera derivata va pubblicata con licenza CC BY-SA 4.0 o compatibile.
 
-**Cosa *non* rientra in questa licenza.** Gli elementi di terze parti (Google Fonts, D3.js, il tema Blowfish) mantengono le licenze originali. Il codice di controllo del terrario è [CERN-OHL-P-2.0](https://github.com/GabrieleZoppoli/terrarium-control-system).
+**Cosa *non* rientra in questa licenza.** Gli elementi di terze parti (Google Fonts, D3.js, il tema Blowfish) mantengono le licenze originali. Hardware, firmware e flussi di controllo del terrario sono sotto licenza [CERN-OHL-S v2](https://github.com/GabrieleZoppoli/terrarium-control-system).
 
 ## Dati
 
 L'inventario delle piante e il dendrogramma filogenetico sono scaricabili come dati strutturati:
 
-- **Inventario tabellare (CSV)** — [`collection.csv`](/data/collection.csv)
-- **Dendrogramma (JSON, gerarchia D3)** — [`dendrogram.json`](/data/dendrogram.json)
+- **Inventario tabellare (CSV)**: [`collection.csv`](/data/collection.csv)
+- **Dendrogramma (JSON, gerarchia D3)**: [`dendrogram.json`](/data/dendrogram.json)
 
 Sono CC BY-SA 4.0 e indicizzati come [Dataset schema.org](https://schema.org/Dataset) nella [pagina del dendrogramma](/collection/dendrogram/) per l'indicizzazione Google Scholar.
 
 ## Contatti
 
-Per richieste di intervista, file ad alta risoluzione oltre quelli linkati qui, prestito di un'immagine specifica per una copertina o correzioni di fatto — [gabriele.zoppoli@unige.it](mailto:gabriele.zoppoli@unige.it). Rispondo, di solito entro qualche giorno.
+Per richieste di intervista, file ad alta risoluzione oltre quelli linkati qui, un'immagine specifica per una copertina o correzioni di fatto: [gabriele.zoppoli@unige.it](mailto:gabriele.zoppoli@unige.it). Di solito rispondo entro qualche giorno.

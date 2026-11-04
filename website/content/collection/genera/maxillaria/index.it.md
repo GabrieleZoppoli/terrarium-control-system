@@ -7,7 +7,7 @@ genera: ["Maxillaria"]
 
 ## Panoramica
 
-*Maxillaria* (Orchidaceae) — ampio genere neotropicale; la collezione tiene specie compatte.
+*Maxillaria* (Orchidaceae) è un ampio genere neotropicale; la collezione tiene specie compatte.
 
 ## Specie in collezione
 
