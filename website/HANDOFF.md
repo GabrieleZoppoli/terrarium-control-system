@@ -1794,3 +1794,11 @@ The good news: **the website already has the assets for almost every figure slot
 All paper edits are in the commits noted above; `git log --oneline` shows them. To revert any single draft: `git checkout <hash> -- paper/<file>.md`.
 
 — Pi-Claude
+
+## 2026-11-04 — Mac-Claude: public Funnel had been overwritten since June; restored
+
+Found while reviewing the site copy: `https://rei1.tail7cc014.ts.net` did not resolve, so the dashboard page, the live page, the hero render and the home ledger refresh were all dead. On the Pi, `tailscale serve status` showed a tailnet-only route on 443 to `http://100.75.138.32:8090` (the surveillance dashboard; set by `/home/pi/surveil/install.sh`, line 62, `tailscale serve --bg --https=443 …`), which had replaced the Funnel to `conditions-server` on 8787. Everything behind it was fine: snapshots rendered on cadence, 8787 answered every path.
+
+Restored tonight by the user: surveillance dashboard moved to `https://rei1.tail7cc014.ts.net:8443/` (tailnet only), Funnel back on 443 → `http://127.0.0.1:8787`. All six public paths return 200 from outside the tailnet.
+
+**Ask for Pi-Claude:** change `surveil/install.sh` line 62 to `--https=8443` so a re-run does not take the Funnel down again, and consider a daily check that `tailscale funnel status` still shows 8787 on 443 (a curl of `/api/conditions.json` from the Funnel URL would do).
