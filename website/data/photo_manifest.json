@@ -159,7 +159,9 @@
         "dendrobium-cuthbertsonii-yellow-3.jpg",
         "dendrobium-cuthbertsonii-yellow-4.jpg",
         "dendrobium-cuthbertsonii-yellow-5.jpg",
-        "dendrobium-cuthbertsonii-yellow-6.jpg"
+        "dendrobium-cuthbertsonii-yellow-6.jpg",
+        "dendrobium-cuthbertsonii-yellow-7.jpg",
+        "dendrobium-cuthbertsonii-yellow-8.jpg"
       ]
     },
     {
@@ -168,7 +170,11 @@
       "primary": "dendrobium-cyanocentrum-blau.jpg",
       "extras": [
         "dendrobium-cyanocentrum-blau-2.jpg",
-        "dendrobium-cyanocentrum-blau-3.jpg"
+        "dendrobium-cyanocentrum-blau-3.jpg",
+        "dendrobium-cyanocentrum-blau-4.jpg",
+        "dendrobium-cyanocentrum-blau-5.jpg",
+        "dendrobium-cyanocentrum-blau-6.jpg",
+        "dendrobium-cyanocentrum-blau-7.jpg"
       ]
     },
     {
@@ -177,7 +183,9 @@
       "primary": "dendrobium-hellwigianum.jpg",
       "extras": [
         "dendrobium-hellwigianum-2.jpg",
-        "dendrobium-hellwigianum-3.jpg"
+        "dendrobium-hellwigianum-3.jpg",
+        "dendrobium-hellwigianum-4.jpg",
+        "dendrobium-hellwigianum-5.jpg"
       ]
     },
     {
@@ -198,7 +206,12 @@
       "slug": "dendrobium-victoriae-reginae",
       "primary": "dendrobium-victoriae-reginae.jpg",
       "extras": [
-        "dendrobium-victoriae-reginae-2.jpg"
+        "dendrobium-victoriae-reginae-2.jpg",
+        "dendrobium-victoriae-reginae-3.jpg",
+        "dendrobium-victoriae-reginae-4.jpg",
+        "dendrobium-victoriae-reginae-5.jpg",
+        "dendrobium-victoriae-reginae-6.jpg",
+        "dendrobium-victoriae-reginae-7.jpg"
       ]
     }
   ],
@@ -619,7 +632,9 @@
       "extras": [
         "nepenthes-aristolochioides-sumatra-clonenm03-2.jpg",
         "nepenthes-aristolochioides-sumatra-clonenm03-3.jpg",
-        "nepenthes-aristolochioides-sumatra-clonenm03-4.jpg"
+        "nepenthes-aristolochioides-sumatra-clonenm03-4.jpg",
+        "nepenthes-aristolochioides-sumatra-clonenm03-5.jpg",
+        "nepenthes-aristolochioides-sumatra-clonenm03-6.jpg"
       ]
     },
     {
@@ -630,8 +645,16 @@
         "nepenthes-glabrata-2.jpg",
         "nepenthes-glabrata-3.jpg",
         "nepenthes-glabrata-4.jpg",
-        "nepenthes-glabrata-5.jpg"
+        "nepenthes-glabrata-5.jpg",
+        "nepenthes-glabrata-6.jpg",
+        "nepenthes-glabrata-7.jpg"
       ]
+    },
+    {
+      "taxon": "Nepenthes inermis (Gunung Gadut)",
+      "slug": "nepenthes-inermis-gunung-gadut",
+      "primary": "nepenthes-inermis-gunung-gadut.jpg",
+      "extras": []
     },
     {
       "taxon": "Nepenthes jamban",
@@ -640,10 +663,29 @@
       "extras": []
     },
     {
+      "taxon": "Nepenthes micramphora",
+      "slug": "nepenthes-micramphora",
+      "primary": "nepenthes-micramphora.jpg",
+      "extras": [
+        "nepenthes-micramphora-2.jpg",
+        "nepenthes-micramphora-3.jpg"
+      ]
+    },
+    {
       "taxon": "Nepenthes pitopangii 'Ivory Colored Form' Clone01",
       "slug": "nepenthes-pitopangii-ivory-colored-form-clone01",
       "primary": "nepenthes-pitopangii-ivory-colored-form-clone01.jpg",
-      "extras": []
+      "extras": [
+        "nepenthes-pitopangii-ivory-colored-form-clone01-2.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-3.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-4.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-5.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-6.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-7.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-8.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-9.jpg",
+        "nepenthes-pitopangii-ivory-colored-form-clone01-10.jpg"
+      ]
     },
     {
       "taxon": "Nepenthes tenuis 'Reddish Leaves' (West Sumatra)",
@@ -693,7 +735,10 @@
       "taxon": "Oncidium eurycline",
       "slug": "oncidium-eurycline",
       "primary": "oncidium-eurycline.jpg",
-      "extras": []
+      "extras": [
+        "oncidium-eurycline-2.jpg",
+        "oncidium-eurycline-3.jpg"
+      ]
     }
   ],
   "ornitophora": [
@@ -866,7 +911,12 @@
       "taxon": "Sarracenia 'Hurricane Creek White' clone F",
       "slug": "sarracenia-hurricane-creek-white-clone-f",
       "primary": "sarracenia-hurricane-creek-white-clone-f.jpg",
-      "extras": []
+      "extras": [
+        "sarracenia-hurricane-creek-white-clone-f-2.jpg",
+        "sarracenia-hurricane-creek-white-clone-f-3.jpg",
+        "sarracenia-hurricane-creek-white-clone-f-4.jpg",
+        "sarracenia-hurricane-creek-white-clone-f-5.jpg"
+      ]
     },
     {
       "taxon": "Sarracenia 'Waccamaw'",
@@ -874,6 +924,14 @@
       "primary": "sarracenia-waccamaw.jpg",
       "extras": [
         "sarracenia-waccamaw-2.jpg"
+      ]
+    },
+    {
+      "taxon": "Sarracenia 'Wilkerson's White Knight'",
+      "slug": "sarracenia-wilkersons-white-knight",
+      "primary": "sarracenia-wilkersons-white-knight.jpg",
+      "extras": [
+        "sarracenia-wilkersons-white-knight-2.jpg"
       ]
     },
     {
@@ -993,6 +1051,17 @@
       ]
     }
   ],
+  "spiranthes": [
+    {
+      "taxon": "Spiranthes cernua var. odorata 'Chadds Ford'",
+      "slug": "spiranthes-cernua-var-odorata-chadds-ford",
+      "primary": "spiranthes-cernua-var-odorata-chadds-ford.jpg",
+      "extras": [
+        "spiranthes-cernua-var-odorata-chadds-ford-2.jpg",
+        "spiranthes-cernua-var-odorata-chadds-ford-3.jpg"
+      ]
+    }
+  ],
   "tillandsia": [
     {
       "taxon": "Tillandsia 'Love Knot'",
@@ -1092,7 +1161,10 @@
       "slug": "utricularia-alpina",
       "primary": "utricularia-alpina.jpg",
       "extras": [
-        "utricularia-alpina-2.jpg"
+        "utricularia-alpina-2.jpg",
+        "utricularia-alpina-3.jpg",
+        "utricularia-alpina-4.jpg",
+        "utricularia-alpina-5.jpg"
       ]
     },
     {

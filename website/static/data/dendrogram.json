@@ -222,7 +222,7 @@
                       "name": "pungens 'Glauca Globosa'",
                       "size": 1,
                       "vendor": "Vivai le Georgiche",
-                      "status": "alive"
+                      "status": "dead"
                     }
                   ]
                 }
@@ -946,7 +946,12 @@
                       "name": "cernua var. odorata 'Chadds Ford'",
                       "size": 1,
                       "vendor": "Gartenbau Carow",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/spiranthes/spiranthes-cernua-var-odorata-chadds-ford.jpg",
+                        "../img/collection/spiranthes/spiranthes-cernua-var-odorata-chadds-ford-2.jpg",
+                        "../img/collection/spiranthes/spiranthes-cernua-var-odorata-chadds-ford-3.jpg"
+                      ]
                     }
                   ]
                 },
@@ -1013,7 +1018,9 @@
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-3.jpg",
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-4.jpg",
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-5.jpg",
-                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-6.jpg"
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-6.jpg",
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-7.jpg",
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-8.jpg"
                       ]
                     },
                     {
@@ -1024,7 +1031,11 @@
                       "photos": [
                         "../img/collection/dendrobium/dendrobium-cyanocentrum-blau.jpg",
                         "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-2.jpg",
-                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-3.jpg"
+                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-3.jpg",
+                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-4.jpg",
+                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-5.jpg",
+                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-6.jpg",
+                        "../img/collection/dendrobium/dendrobium-cyanocentrum-blau-7.jpg"
                       ]
                     },
                     {
@@ -1035,7 +1046,9 @@
                       "photos": [
                         "../img/collection/dendrobium/dendrobium-hellwigianum.jpg",
                         "../img/collection/dendrobium/dendrobium-hellwigianum-2.jpg",
-                        "../img/collection/dendrobium/dendrobium-hellwigianum-3.jpg"
+                        "../img/collection/dendrobium/dendrobium-hellwigianum-3.jpg",
+                        "../img/collection/dendrobium/dendrobium-hellwigianum-4.jpg",
+                        "../img/collection/dendrobium/dendrobium-hellwigianum-5.jpg"
                       ]
                     },
                     {
@@ -1084,7 +1097,12 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/dendrobium/dendrobium-victoriae-reginae.jpg",
-                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-2.jpg"
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-2.jpg",
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-3.jpg",
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-4.jpg",
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-5.jpg",
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-6.jpg",
+                        "../img/collection/dendrobium/dendrobium-victoriae-reginae-7.jpg"
                       ]
                     }
                   ]
@@ -1346,7 +1364,9 @@
                       "vendor": "Orchideria di Morosolo",
                       "status": "dead",
                       "photos": [
-                        "../img/collection/oncidium/oncidium-eurycline.jpg"
+                        "../img/collection/oncidium/oncidium-eurycline.jpg",
+                        "../img/collection/oncidium/oncidium-eurycline-2.jpg",
+                        "../img/collection/oncidium/oncidium-eurycline-3.jpg"
                       ]
                     }
                   ]
@@ -1762,7 +1782,7 @@
                       "name": "stobartiana",
                       "size": 1,
                       "vendor": "Claessen Orchids",
-                      "status": "alive"
+                      "status": "dead"
                     },
                     {
                       "name": "wilsonii",
@@ -1783,7 +1803,7 @@
                       "name": "malipoensis",
                       "size": 1,
                       "vendor": "Celandroni Orchidee",
-                      "status": "alive"
+                      "status": "dead"
                     },
                     {
                       "name": "honghenensis",
@@ -2198,7 +2218,7 @@
                       "name": "retrocalla",
                       "size": 1,
                       "vendor": "Großräschener Orchideen",
-                      "status": "alive",
+                      "status": "dead",
                       "photos": [
                         "../img/collection/haraella/haraella-retrocalla.jpg",
                         "../img/collection/haraella/haraella-retrocalla-2.jpg",
@@ -2265,7 +2285,7 @@
                       "name": "vesiculosa",
                       "size": 1,
                       "vendor": "Un Angolo di Deserto",
-                      "status": "alive",
+                      "status": "dead",
                       "photos": [
                         "../img/collection/aldrovanda/aldrovanda-vesiculosa.jpg",
                         "../img/collection/aldrovanda/aldrovanda-vesiculosa-2.jpg",
@@ -2697,7 +2717,9 @@
                         "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03.jpg",
                         "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-2.jpg",
                         "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-3.jpg",
-                        "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-4.jpg"
+                        "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-4.jpg",
+                        "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-5.jpg",
+                        "../img/collection/nepenthes/nepenthes-aristolochioides-sumatra-clonenm03-6.jpg"
                       ]
                     },
                     {
@@ -2710,14 +2732,19 @@
                         "../img/collection/nepenthes/nepenthes-glabrata-2.jpg",
                         "../img/collection/nepenthes/nepenthes-glabrata-3.jpg",
                         "../img/collection/nepenthes/nepenthes-glabrata-4.jpg",
-                        "../img/collection/nepenthes/nepenthes-glabrata-5.jpg"
+                        "../img/collection/nepenthes/nepenthes-glabrata-5.jpg",
+                        "../img/collection/nepenthes/nepenthes-glabrata-6.jpg",
+                        "../img/collection/nepenthes/nepenthes-glabrata-7.jpg"
                       ]
                     },
                     {
                       "name": "inermis (Gunung Gadut)",
                       "size": 1,
                       "vendor": "Andreas Wistuba",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/nepenthes/nepenthes-inermis-gunung-gadut.jpg"
+                      ]
                     },
                     {
                       "name": "jamban",
@@ -2732,7 +2759,12 @@
                       "name": "micramphora",
                       "size": 1,
                       "vendor": "Giardino Carnivoro",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/nepenthes/nepenthes-micramphora.jpg",
+                        "../img/collection/nepenthes/nepenthes-micramphora-2.jpg",
+                        "../img/collection/nepenthes/nepenthes-micramphora-3.jpg"
+                      ]
                     },
                     {
                       "name": "pitopangii 'Ivory Colored Form' Clone:01",
@@ -2740,7 +2772,16 @@
                       "vendor": "Andreas Wistuba",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01.jpg"
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-2.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-3.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-4.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-5.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-6.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-7.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-8.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-9.jpg",
+                        "../img/collection/nepenthes/nepenthes-pitopangii-ivory-colored-form-clone01-10.jpg"
                       ]
                     },
                     {
@@ -3004,7 +3045,11 @@
                       "vendor": "Luca Gambini",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg"
+                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg",
+                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f-2.jpg",
+                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f-3.jpg",
+                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f-4.jpg",
+                        "../img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f-5.jpg"
                       ]
                     },
                     {
@@ -3051,7 +3096,11 @@
                       "name": "'Wilkerson's White Knight'",
                       "size": 1,
                       "vendor": "Davide Tavecchio",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/sarracenia/sarracenia-wilkersons-white-knight.jpg",
+                        "../img/collection/sarracenia/sarracenia-wilkersons-white-knight-2.jpg"
+                      ]
                     },
                     {
                       "name": "alata 'Black tubes, pubescent form'",
@@ -3455,7 +3504,7 @@
                       "name": "immaculata",
                       "size": 1,
                       "vendor": "Diflora",
-                      "status": "alive"
+                      "status": "dead"
                     },
                     {
                       "name": "jaumavensis x cyclosecta",
@@ -3577,7 +3626,7 @@
                       "name": "'Razzberry Blonde'",
                       "size": 1,
                       "vendor": "Giardino Carnivoro",
-                      "status": "alive"
+                      "status": "dead"
                     },
                     {
                       "name": "laueana × emarginata",
@@ -3597,7 +3646,10 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/utricularia/utricularia-alpina.jpg",
-                        "../img/collection/utricularia/utricularia-alpina-2.jpg"
+                        "../img/collection/utricularia/utricularia-alpina-2.jpg",
+                        "../img/collection/utricularia/utricularia-alpina-3.jpg",
+                        "../img/collection/utricularia/utricularia-alpina-4.jpg",
+                        "../img/collection/utricularia/utricularia-alpina-5.jpg"
                       ]
                     },
                     {
