@@ -81,7 +81,7 @@ enableGitInfo = true
     ]
     # Species kept outside the highland cabinet (outdoor bed / balcony / aquatic)
     featuredMosaicOutdoor = [
-      { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", genus = "Sarracenia" },
+      { src = "img/collection/sarracenia/sarracenia-hurricane-creek-white-clone-f-5.jpg", alt = "Sarracenia Hurricane Creek White", taxon = "Sarracenia 'Hurricane Creek White'", tepui = "Gulf-coast hybrid · outdoor bed", genus = "Sarracenia" },
       { src = "img/collection/sarracenia/sarracenia-x-moorei-leah-wilkerson-5.jpg", alt = "Sarracenia moorei Leah Wilkerson on the balcony at night", taxon = "Sarracenia × moorei 'Leah Wilkerson'", tepui = "Outdoor bed · balcony, Genova", genus = "Sarracenia" },
       { src = "img/collection/dionaea/dionaea-muscipula-alien.jpg", alt = "Dionaea muscipula Alien", taxon = "Dionaea muscipula 'Alien'", tepui = "Carolina bog · outdoor bed", genus = "Dionaea" },
       { src = "img/collection/dionaea/dionaea-muscipula-dracula.jpg", alt = "Dionaea muscipula Dracula", taxon = "Dionaea muscipula 'Dracula'", tepui = "Red-throated cultivar · outdoor bed", genus = "Dionaea" },

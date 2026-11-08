@@ -3,7 +3,9 @@
   - Terrarium pool fills tiles in .home-mosaic__grid (not --outdoor).
   - Balcony pool fills tiles in .home-mosaic__grid--outdoor.
   - One random tile per mosaic swaps every ROTATE_MS with crossfade.
-  - No swap to an already-visible image; no consecutive swaps of same tile.
+  - No swap to a plant already visible anywhere on the page (matched by taxon
+    name, so a second photo of the same plant never appears alongside the
+    first); no consecutive swaps of same tile.
   - Honors prefers-reduced-motion.
 */}}
 <script>
@@ -33,12 +35,28 @@
     catch (_) { return urlOrPath.charAt(0) === '/' ? urlOrPath : '/' + urlOrPath; }
   }
 
-  function visibleSrcs(grid) {
-    var out = {};
-    grid.querySelectorAll('.mosaic-tile img').forEach(function (img) {
-      out[pathOf(img.src || img.getAttribute('src') || '')] = true;
+  // Letters and digits only, so "Sarracenia 'Hurricane Creek White'" and
+  // "Sarracenia 'Hurricane Creek White' clone F" compare cleanly.
+  function taxonKey(t) {
+    return (t || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  }
+
+  // Every tile on the page, both mosaics: photo paths and taxon keys.
+  function visibleNow() {
+    var srcs = {}, taxa = [];
+    document.querySelectorAll('.mosaic-tile').forEach(function (tile) {
+      var img = tile.querySelector('img');
+      if (img) srcs[pathOf(img.src || img.getAttribute('src') || '')] = true;
+      var t = tile.querySelector('.mosaic-tile__caption .taxon');
+      var k = taxonKey(t ? t.textContent : '');
+      if (k) taxa.push(k);
     });
-    return out;
+    return { srcs: srcs, taxa: taxa };
+  }
+
+  // Same plant if one name is the other plus a qualifier (clone, form, …).
+  function samePlant(a, b) {
+    return a === b || a.indexOf(b) === 0 || b.indexOf(a) === 0;
   }
 
   function fadeSwap(tile, entry) {
@@ -68,7 +86,7 @@
     var lastTileIdx = -1;
     setInterval(function () {
       if (document.hidden) return;
-      var visible = visibleSrcs(grid);
+      var visible = visibleNow();
       var tileIdx;
       for (var i = 0; i < 4; i++) {
         tileIdx = Math.floor(Math.random() * tiles.length);
@@ -76,7 +94,9 @@
       }
       lastTileIdx = tileIdx;
       var candidates = pool.filter(function (e) {
-        return !visible[pathOf(e.src)];
+        if (visible.srcs[pathOf(e.src)]) return false;
+        var k = taxonKey(e.taxon);
+        return !visible.taxa.some(function (v) { return samePlant(k, v); });
       });
       if (!candidates.length) return;
       var entry = candidates[Math.floor(Math.random() * candidates.length)];

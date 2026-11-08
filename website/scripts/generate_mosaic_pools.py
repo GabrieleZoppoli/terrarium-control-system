@@ -28,6 +28,9 @@ CSV_PATH = WEB / "static" / "data" / "collection.csv"
 IMG_ROOT = WEB / "static" / "img" / "collection"
 OUT_PATH = WEB / "static" / "data" / "mosaic_pools.json"
 PROVENANCE_YAML = WEB / "data" / "mosaic_provenance.yaml"
+# Hand-picked photo per taxon (same "taxon": "file.jpg" format); without an
+# entry the first file in sorted order is used, which is often the -2 shot.
+PHOTO_YAML = WEB / "data" / "mosaic_photos.yaml"
 
 LOCATION_TO_POOL = {
     "highland": "terrarium",
@@ -40,17 +43,17 @@ PROVENANCE_BY_POOL = {
 }
 
 
-def load_provenance() -> dict[str, str]:
+def load_provenance(path: Path = PROVENANCE_YAML) -> dict[str, str]:
     """Hand-curated taxon → provenance-caption lookup.
 
     Pure-Python mini-parser — the file uses a simple `"key": "value"` /
     `key: value` style per line, with '#' line comments. This avoids a
     PyYAML dependency for a file that's effectively a flat dict.
     """
-    if not PROVENANCE_YAML.is_file():
+    if not path.is_file():
         return {}
     out: dict[str, str] = {}
-    for raw in PROVENANCE_YAML.read_text(encoding="utf-8").splitlines():
+    for raw in path.read_text(encoding="utf-8").splitlines():
         s = raw.strip()
         if not s or s.startswith("#"):
             continue
@@ -120,6 +123,7 @@ def find_photo(genus: str, taxon: str) -> str | None:
 def build_pools() -> dict:
     genus_map = build_map()  # canonical genus(slug) -> page URL
     provenance_lookup = load_provenance()
+    photo_lookup = load_provenance(PHOTO_YAML)
     pools: dict[str, list] = {k: [] for k in LOCATION_TO_POOL.values()}
     seen: dict[str, set] = {k: set() for k in LOCATION_TO_POOL.values()}
     missing_provenance: list[str] = []
@@ -139,6 +143,11 @@ def build_pools() -> dict:
             if taxon in seen[pool_key]:
                 continue
             src = find_photo(genus, taxon)
+            chosen = photo_lookup.get(taxon)
+            if chosen and (IMG_ROOT / slug(genus) / chosen).is_file():
+                src = f"img/collection/{slug(genus)}/{chosen}"
+            elif chosen:
+                print(f"[warn] mosaic_photos.yaml: {chosen} not found for {taxon}")
             if not src:
                 continue
             href = genus_map.get(slug(genus), "/collection/genera/")

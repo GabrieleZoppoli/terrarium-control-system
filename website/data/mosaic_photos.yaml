@@ -1,0 +1,3 @@
+# Photo used for a taxon in the homepage rotating mosaic (generate_mosaic_pools.py).
+# "Taxon exactly as in collection.csv": "file name in static/img/collection/<genus>/"
+"Sarracenia 'Hurricane Creek White' clone F": "sarracenia-hurricane-creek-white-clone-f-5.jpg"
