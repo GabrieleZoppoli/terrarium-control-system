@@ -2759,3 +2759,36 @@ figure.moment figcaption {
   .bio-portrait { box-shadow: none; }
   .home-stats dd, .highland-stats dd, h1, h2, h3 { color: #111; }
 }
+
+/* Blog: photo rows and species fact lines (first used in five-small-dendrobiums).
+   .quad = four close-ups in one row (2 x 2 on phones); .pair = two photos side
+   by side. Widths leave room for the whitespace between inline-blocks. */
+.blog-post__body figure.quad,
+.blog-post__body figure.pair {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 0.5% 1.2rem;
+}
+.blog-post__body figure.quad { width: 23%; max-width: 200px; }
+.blog-post__body figure.pair { width: 47%; max-width: 390px; }
+.blog-post__body figure.quad img,
+.blog-post__body figure.pair img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  margin: 0 0 0.45rem;
+}
+.blog-post__body figure.quad figcaption { font-style: italic; letter-spacing: 0.02em; }
+@media (max-width: 640px) {
+  .blog-post__body figure.quad { width: 47%; max-width: none; }
+}
+.blog-post__body .species-facts {
+  font-family: var(--font-mono);
+  font-size: var(--step-xs);
+  color: var(--text-3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: -0.4rem;
+  margin-bottom: 1.4rem;
+  text-align: left;
+}
