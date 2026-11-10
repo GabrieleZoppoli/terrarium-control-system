@@ -97,4 +97,4 @@ After cleaning, 85 % of February and 73 % of May-June half-hours remain.
   0.06 °C of the best model.
 * Cleaning does not change any conclusion. It cuts the scatter around the
   daily curve (0.58 -> 0.44 °C in May-June), nearly doubles the thermal
-  model's fit there (R² 0.32 -> 0.56) and lowers forecast error by 15-25 %.
+  model's fit there (R² 0.32 -> 0.56) and lowers forecast error by 13-27 %.
