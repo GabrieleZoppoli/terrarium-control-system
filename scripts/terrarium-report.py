@@ -132,16 +132,21 @@ class Metric:
     agg: str = "mean"        # "mean" or "count" (events per window)
     min_delta: float = 0.0   # smallest change worth calling unusual
     z_floor: float = 0.1     # floor on the spread so a flat week isn't hypersensitive
+    hour_floor: float = 0.0  # same floor for single hours (noisier); 0 = 3 x z_floor
     scale: float = 1.0       # e.g. 0/1 status → % of time
 
 
 METRICS = [
-    Metric("temp",    "local_temperature", "Temperature",  "°C",  1, min_delta=0.5, z_floor=0.3),
-    Metric("humi",    "local_humidity",    "Humidity",     "%",   0, min_delta=3.0, z_floor=2.0),
+    # Floors calibrated on about 40 days of 2026 data (analysis/timeseries): with the
+    # first guesses (0.3 °C / 2 %) a normal day was flagged about 1 time in 5
+    # and 13-19 % of single hours were. These values flag about 1 day in 14
+    # and 1-2 % of hours.
+    Metric("temp",    "local_temperature", "Temperature",  "°C",  1, min_delta=1.0, z_floor=0.7, hour_floor=1.2),
+    Metric("humi",    "local_humidity",    "Humidity",     "%",   0, min_delta=4.0, z_floor=3.0, hour_floor=5.0),
     Metric("vpd",     "vpd",               "VPD",          "kPa", 2, min_delta=0.08, z_floor=0.04),
     Metric("room_t",  "room_temperature",  "Room temp",    "°C",  1, min_delta=1.0, z_floor=0.5),
     Metric("room_h",  "room_humidity",     "Room humidity","%",   0, min_delta=5.0, z_floor=3.0),
-    Metric("freezer", "freezer_status",    "Freezer duty", "%",   0, min_delta=8.0, z_floor=4.0, scale=100.0),
+    Metric("freezer", "freezer_status",    "Freezer duty", "%",   0, min_delta=8.0, z_floor=6.0, scale=100.0),
     Metric("power",   "power_consumption", "Power",        "W",   0, min_delta=10.0, z_floor=5.0),
     Metric("mist",    "mist_event",        "Mist events",  "",    0, agg="count", min_delta=3.0, z_floor=1.5),
 ]
@@ -382,7 +387,7 @@ def analyse_metric(ix, m, now, hours, now_value):
         if r[1] is None:
             continue
         v = r[1] * m.scale
-        hz = robust_z(v, ref, m.z_floor)
+        hz = robust_z(v, ref, m.hour_floor or 3 * m.z_floor)
         if hz is not None and abs(hz) >= Z_WARN and abs(v - median(ref)) >= m.min_delta:
             odd.append({"ts": r[0], "value": v, "expected": median(ref), "z": hz})
     out["odd_hours"] = odd
