@@ -94,7 +94,9 @@
       "taxon": "Cephalotus follicularis",
       "slug": "cephalotus-follicularis",
       "primary": "cephalotus-follicularis.jpg",
-      "extras": []
+      "extras": [
+        "cephalotus-follicularis-2.jpg"
+      ]
     }
   ],
   "ceratochilus": [
@@ -161,7 +163,10 @@
         "dendrobium-cuthbertsonii-yellow-5.jpg",
         "dendrobium-cuthbertsonii-yellow-6.jpg",
         "dendrobium-cuthbertsonii-yellow-7.jpg",
-        "dendrobium-cuthbertsonii-yellow-8.jpg"
+        "dendrobium-cuthbertsonii-yellow-8.jpg",
+        "dendrobium-cuthbertsonii-yellow-9.jpg",
+        "dendrobium-cuthbertsonii-yellow-10.jpg",
+        "dendrobium-cuthbertsonii-yellow-11.jpg"
       ]
     },
     {
@@ -229,6 +234,14 @@
       "extras": []
     },
     {
+      "taxon": "Dionaea muscipula 'Petite Dragon'",
+      "slug": "dionaea-muscipula-petite-dragon",
+      "primary": "dionaea-muscipula-petite-dragon.jpg",
+      "extras": [
+        "dionaea-muscipula-petite-dragon-2.jpg"
+      ]
+    },
+    {
       "taxon": "Dionaea muscipula Pom Pom",
       "slug": "dionaea-muscipula-pom-pom",
       "primary": "dionaea-muscipula-pom-pom.jpg",
@@ -285,7 +298,9 @@
       "slug": "dracula-simia",
       "primary": "dracula-simia.jpg",
       "extras": [
-        "dracula-simia-2.jpg"
+        "dracula-simia-2.jpg",
+        "dracula-simia-3.jpg",
+        "dracula-simia-4.jpg"
       ]
     },
     {
@@ -538,7 +553,9 @@
       "taxon": "Maxillaria sophronitis",
       "slug": "maxillaria-sophronitis",
       "primary": "maxillaria-sophronitis.jpg",
-      "extras": []
+      "extras": [
+        "maxillaria-sophronitis-2.jpg"
+      ]
     },
     {
       "taxon": "Maxillaria tenuifolia",
@@ -623,7 +640,14 @@
       "taxon": "Nepenthes argentii",
       "slug": "nepenthes-argentii",
       "primary": "nepenthes-argentii.jpg",
-      "extras": []
+      "extras": [
+        "nepenthes-argentii-2.jpg",
+        "nepenthes-argentii-3.jpg",
+        "nepenthes-argentii-4.jpg",
+        "nepenthes-argentii-5.jpg",
+        "nepenthes-argentii-6.jpg",
+        "nepenthes-argentii-7.jpg"
+      ]
     },
     {
       "taxon": "Nepenthes aristolochioides (Sumatra) CloneNM03",
@@ -728,7 +752,8 @@
       "slug": "oncidium-cheirophorum",
       "primary": "oncidium-cheirophorum.jpg",
       "extras": [
-        "oncidium-cheirophorum-2.jpg"
+        "oncidium-cheirophorum-2.jpg",
+        "oncidium-cheirophorum-3.jpg"
       ]
     },
     {
@@ -880,7 +905,8 @@
       "slug": "restrepia-sanguinea",
       "primary": "restrepia-sanguinea.jpg",
       "extras": [
-        "restrepia-sanguinea-2.jpg"
+        "restrepia-sanguinea-2.jpg",
+        "restrepia-sanguinea-3.jpg"
       ]
     },
     {
@@ -1168,6 +1194,12 @@
       ]
     },
     {
+      "taxon": "Utricularia longifolia",
+      "slug": "utricularia-longifolia",
+      "primary": "utricularia-longifolia.jpg",
+      "extras": []
+    },
+    {
       "taxon": "Utricularia prehensilis",
       "slug": "utricularia-prehensilis",
       "primary": "utricularia-prehensilis.jpg",
@@ -1231,7 +1263,10 @@
       "taxon": "Vanda nana",
       "slug": "vanda-nana",
       "primary": "vanda-nana.jpg",
-      "extras": []
+      "extras": [
+        "vanda-nana-2.jpg",
+        "vanda-nana-3.jpg"
+      ]
     }
   ]
 }

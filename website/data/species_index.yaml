@@ -92,6 +92,11 @@
   genus: Dionaea
   primary_photo: img/collection/dionaea/dionaea-muscipula-dracula.jpg
   provenance: Carolinas endemic; red-teeth cultivar
+"dionaea-muscipula-petite-dragon":
+  taxon: "Dionaea muscipula 'Petite Dragon'"
+  genus: Dionaea
+  primary_photo: img/collection/dionaea/dionaea-muscipula-petite-dragon.jpg
+  provenance: Carolinas endemic
 "dracula-lotax":
   taxon: Dracula lotax
   genus: Dracula
@@ -468,6 +473,10 @@
   taxon: Utricularia alpina
   genus: Utricularia
   primary_photo: img/collection/utricularia/utricularia-alpina.jpg
+"utricularia-longifolia":
+  taxon: Utricularia longifolia
+  genus: Utricularia
+  primary_photo: img/collection/utricularia/utricularia-longifolia.jpg
 "utricularia-prehensilis":
   taxon: Utricularia prehensilis
   genus: Utricularia

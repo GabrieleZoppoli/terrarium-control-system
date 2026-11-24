@@ -36,7 +36,7 @@
       "provenance": "New Guinea cloud forest, sect. Oxyglossum"
     },
     {
-      "src": "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-2.jpg",
+      "src": "img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-10.jpg",
       "alt": "Dendrobium cuthbertsonii 'Yellow'",
       "taxon": "Dendrobium cuthbertsonii 'Yellow'",
       "href": "/collection/genera/dendrobium/",
@@ -176,7 +176,7 @@
       "provenance": "Masdevallia hybrid cultivar"
     },
     {
-      "src": "img/collection/maxillaria/maxillaria-sophronitis.jpg",
+      "src": "img/collection/maxillaria/maxillaria-sophronitis-2.jpg",
       "alt": "Maxillaria sophronitis",
       "taxon": "Maxillaria sophronitis",
       "href": "/collection/genera/maxillaria/",
@@ -218,7 +218,7 @@
       "provenance": "West Sumatran highlands, miniature"
     },
     {
-      "src": "img/collection/nepenthes/nepenthes-argentii.jpg",
+      "src": "img/collection/nepenthes/nepenthes-argentii-2.jpg",
       "alt": "Nepenthes argentii",
       "taxon": "Nepenthes argentii",
       "href": "/collection/genera/nepenthes/",
@@ -344,6 +344,13 @@
       "taxon": "Dionaea muscipula 'Alien'",
       "href": "/collection/genera/dionaea/",
       "provenance": "Carolinas endemic; atypical trap form"
+    },
+    {
+      "src": "img/collection/dionaea/dionaea-muscipula-petite-dragon-2.jpg",
+      "alt": "Dionaea muscipula 'Petite Dragon'",
+      "taxon": "Dionaea muscipula 'Petite Dragon'",
+      "href": "/collection/genera/dionaea/",
+      "provenance": "Carolinas endemic"
     },
     {
       "src": "img/collection/habenaria/habenaria-radiata.jpg",
