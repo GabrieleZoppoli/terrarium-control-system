@@ -60,8 +60,8 @@
   var badge = el('badge'), btn = el('btn'), priv = el('private'), off = el('offline');
   var note = el('note'), chips = el('chips'), bar = el('bar');
 
-  var LIVE_MS = 30000, STILL_MS = 180000, POLL_MS = 10000, POLL_LIVE_MS = 2000, SLOW_MS = 60000;
-  var COOLDOWN_S = 60, BUSY_DEFAULT_S = 30;
+  var LIVE_MS = 1800000, STILL_MS = 180000, POLL_MS = 10000, POLL_LIVE_MS = 2000, SLOW_MS = 60000;
+  var COOLDOWN_S = 5, BUSY_DEFAULT_S = 30;
   var MARGIN_S = 3;            // added to every client-side cooldown so we never ask early
 
   var state = 'loading';       // loading | live | still | private | offline
@@ -90,12 +90,10 @@
 
   function updateBadge() {
     if (state === 'live') {
-      var left = Math.max(0, Math.ceil((liveEnd - Date.now()) / 1000));
       badge.setAttribute('data-live', 'true');
-      badge.textContent = L('live') + ' · 0:' + pad(left) + ' ' + L('left');
+      badge.textContent = L('live');
       badge.hidden = false;
-      bar.hidden = false;
-      bar.style.width = Math.max(0, Math.min(100, (liveEnd - Date.now()) / LIVE_MS * 100)) + '%';
+      bar.hidden = true;   // continuous live: no countdown
     } else if (state === 'still' && status && status.still_taken_at) {
       var t = Date.parse(status.still_taken_at);
       badge.setAttribute('data-live', 'false');
@@ -259,9 +257,9 @@
       if (!s.public) {
         if (state !== 'private') enterPrivate();
       } else if (state === 'private' || state === 'offline' || state === 'loading') {
-        if (!started) startLive(); else enterStill(0, false);
+        startLive();                        // doors closed again: back to live
       } else if (state === 'still') {
-        updateBadge();
+        if (Date.now() >= btnReadyAt && !retryTimer) startLive(); else updateBadge();
       }
       if (gen === pollGen) pollTimer = setTimeout(poll, state === 'live' ? POLL_LIVE_MS : POLL_MS);
     }).catch(function () {
@@ -281,7 +279,7 @@
   document.addEventListener('visibilitychange', function () {
     if (!visible()) {
       clearTimeout(pollTimer); pollTimer = 0; pollGen++;    // stop every poll chain
-      if (state === 'live') enterStill(COOLDOWN_S, false);   // free the Pi's slot
+      if (state === 'live') enterStill(0, false);   // free the Pi's slot
       else { clearTimeout(retryTimer); retryTimer = 0; }      // the visitor left: no auto-retry
       session++;                                             // drop in-flight live/HEAD results
     } else {

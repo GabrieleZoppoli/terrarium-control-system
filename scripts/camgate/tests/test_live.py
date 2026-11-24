@@ -9,7 +9,7 @@ from PIL import Image
 
 from camgate.camera import CameraError
 from camgate import live
-from camgate.config import LIVE_COOLDOWN_S, LIVE_MAX_VIEWERS, Crop
+from camgate.config import LIVE_COOLDOWN_S, LIVE_MAX_VIEWERS, LIVE_SESSION_S, Crop
 from camgate.live import Busy, Cooldown, LiveHub, Private
 from camgate.policy import Decision
 
@@ -97,14 +97,14 @@ class LiveHubTest(unittest.TestCase):
         self.harnesses.append(h)
         return h
 
-    def test_session_ends_after_30s(self):
+    def test_session_ends_at_backstop(self):
         h = self.make()
         s = h.hub.open_session("a")
         it = s.frames()
         next(it)
-        h.now = 29.0
+        h.now = LIVE_SESSION_S - 1.0
         next(it)
-        h.now = 30.5
+        h.now = LIVE_SESSION_S + 0.5
         with self.assertRaises(StopIteration):
             next(it)
         self.assertEqual(h.hub.slots_free(), LIVE_MAX_VIEWERS)
@@ -150,7 +150,7 @@ class LiveHubTest(unittest.TestCase):
         h = self.make(source=FakeSource(stall_after=1))
         it = h.hub.open_session("a").frames()
         next(it)
-        h.now = 31.0
+        h.now = LIVE_SESSION_S + 1.0
         t0 = time.monotonic()
         with self.assertRaises(StopIteration):
             next(it)
@@ -179,7 +179,7 @@ class LiveHubTest(unittest.TestCase):
         h.now = 10.0
         with self.assertRaises(Busy) as cm:
             h.hub.open_session("d")
-        self.assertEqual(cm.exception.retry_after_s, 20)
+        self.assertEqual(cm.exception.retry_after_s, LIVE_SESSION_S - 10)
 
     def test_max_viewers_override(self):
         h = self.make(max_viewers=1)
@@ -190,7 +190,7 @@ class LiveHubTest(unittest.TestCase):
     def test_busy_retry_after_floored_at_1(self):
         h = self.make(max_viewers=1)
         h.hub.open_session("a")
-        h.now = 29.9
+        h.now = LIVE_SESSION_S - 0.1
         with self.assertRaises(Busy) as cm:
             h.hub.open_session("b")
         self.assertEqual(cm.exception.retry_after_s, 1)
@@ -212,7 +212,7 @@ class LiveHubTest(unittest.TestCase):
         h = self.make()
         it = h.hub.open_session("a").frames()
         next(it)
-        h.now = 31.0
+        h.now = LIVE_SESSION_S + 1.0
         with self.assertRaises(StopIteration):
             next(it)
         with self.assertRaises(Cooldown):
@@ -224,13 +224,13 @@ class LiveHubTest(unittest.TestCase):
         s = h.hub.open_session("a")
         h.now = 5.0
         s.close()
-        h.now = 15.5
+        h.now = 6.5
         for _ in range(3):  # repeated reads neither consume nor extend it
-            self.assertEqual(h.hub.cooldown_retry_s("a"), LIVE_COOLDOWN_S - 10)
+            self.assertEqual(h.hub.cooldown_retry_s("a"), LIVE_COOLDOWN_S - 1)
         self.assertIsNone(h.hub.cooldown_retry_s("b"))
         with self.assertRaises(Cooldown) as cm:
             h.hub.open_session("a")
-        self.assertEqual(cm.exception.retry_after_s, LIVE_COOLDOWN_S - 10)
+        self.assertEqual(cm.exception.retry_after_s, LIVE_COOLDOWN_S - 1)
         h.now = 5.0 + LIVE_COOLDOWN_S
         self.assertIsNone(h.hub.cooldown_retry_s("a"))
         h.hub.open_session("a")
@@ -241,11 +241,11 @@ class LiveHubTest(unittest.TestCase):
         h.now = 10.0
         h.hub.open_session("b")
         h.now = 12.0
-        self.assertEqual(h.hub.busy_retry_s(), 18)  # "a" ends at 30
+        self.assertEqual(h.hub.busy_retry_s(), LIVE_SESSION_S - 12)  # "a" ends first
         self.assertEqual(h.hub.slots_free(), 0)  # read-only: nothing opened or ended
         with self.assertRaises(Busy) as cm:
             h.hub.open_session("c")
-        self.assertEqual(cm.exception.retry_after_s, 18)
+        self.assertEqual(cm.exception.retry_after_s, LIVE_SESSION_S - 12)
 
     def test_busy_retry_s_floor_without_sessions(self):
         h = self.make()

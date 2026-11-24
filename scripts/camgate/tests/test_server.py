@@ -14,7 +14,7 @@ import inspect
 
 from camgate.__main__ import TICK_S, make_cached_crop_fn, make_status_fn, tick_loop
 from camgate.camera import StillKeeper
-from camgate.config import Crop, NO_CROP
+from camgate.config import LIVE_COOLDOWN_S, LIVE_SESSION_S, Crop, NO_CROP
 from camgate.frames import placeholder_jpeg
 from camgate.live import LiveHub
 from camgate.policy import Decision, DoorSignal, ShowMe
@@ -203,7 +203,7 @@ class ServerTest(unittest.TestCase):
             self.assertEqual((r.status, body), (429, b""))
             self.assertEqual(r.getheader("X-Live-Refusal"), "cooldown")
             ra = int(r.getheader("Retry-After"))
-            self.assertTrue(55 <= ra <= 60, ra)
+            self.assertTrue(LIVE_COOLDOWN_S - 5 <= ra <= LIVE_COOLDOWN_S, ra)
         r, _ = self.env.get("/cam/live.mjpg", method="HEAD", headers={"X-Forwarded-For": "8.8.8.8"})
         self.assertEqual(r.status, 200)  # other visitors unaffected
         before = dict(self.env.hub._cooldowns)
@@ -226,7 +226,7 @@ class ServerTest(unittest.TestCase):
         self.assertEqual((r.status, body), (429, b""))
         self.assertEqual(r.getheader("X-Live-Refusal"), "busy")
         ra = int(r.getheader("Retry-After"))
-        self.assertTrue(25 <= ra <= 30, ra)
+        self.assertTrue(LIVE_SESSION_S - 5 <= ra <= LIVE_SESSION_S, ra)
         self.assertEqual(env.hub.slots_free(), 0)
 
     def test_retry_after_exposed_to_cors_on_every_response(self):

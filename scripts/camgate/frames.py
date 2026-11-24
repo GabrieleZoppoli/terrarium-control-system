@@ -27,7 +27,8 @@ def crop_jpeg(jpeg: bytes, crop) -> bytes:
             if box[2] > img.width or box[3] > img.height:
                 raise ValueError("crop exceeds frame size")
             img = img.crop(box)
-        return _encode(img)
+        # The camera is mounted upside down and has no hardware flip.
+        return _encode(img.transpose(Image.Transpose.ROTATE_180))
 
 
 def blur_jpeg(jpeg: bytes) -> bytes:

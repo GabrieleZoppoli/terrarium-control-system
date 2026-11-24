@@ -42,6 +42,16 @@ class FrameTests(unittest.TestCase):
         r, g, b = out.getpixel((1340, 540))
         self.assertFalse(r > 200 and g < 100 and b < 100)
 
+    def test_output_is_rotated_180_after_crop(self):
+        # Crop straddles the blue/red edge: red is on the right of the raw crop,
+        # so after a 180 degree turn it must be on the left.
+        out = Image.open(io.BytesIO(crop_jpeg(make_frame(), Crop(400, 200, 1144, 0)))).convert("RGB")
+        self.assertEqual(out.size, (400, 200))
+        r, g, b = out.getpixel((50, 100))
+        self.assertTrue(r > 200 and g < 100 and b < 100)
+        r, g, b = out.getpixel((350, 100))
+        self.assertFalse(r > 200 and g < 100 and b < 100)
+
     def test_crop_offset(self):
         out = Image.open(io.BytesIO(crop_jpeg(make_frame(), Crop(500, 400, 1400, 100)))).convert("RGB")
         self.assertEqual(out.size, (500, 400))
