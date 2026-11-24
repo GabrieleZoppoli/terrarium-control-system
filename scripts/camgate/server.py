@@ -67,6 +67,12 @@ class _Handler(http.server.BaseHTTPRequestHandler):
                 self._still(head)
             elif route == "/cam/live.mjpg":
                 self._live_head() if head else self._live()
+            elif route == "/internal/archive-gate.json":  # outside /cam/: loopback-only
+                fn = self.server.archive_gate_fn
+                if fn is None:
+                    self._json(404, {"error": "not_found"}, body=not head)
+                else:
+                    self._json(200, fn(), body=not head)
             else:
                 self._json(404, {"error": "not_found"}, body=not head)
         except OSError:  # timeout, broken pipe, reset: nothing more to say to this client
@@ -168,8 +174,9 @@ class _Server(http.server.ThreadingHTTPServer):
     allow_reuse_address = True
 
 
-def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT, timeout=10):
+def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT, timeout=10, archive_gate_fn=None):
     handler = type("Handler", (_Handler,), {"timeout": timeout})
     srv = _Server((host, port), handler)
     srv.keeper, srv.hub, srv.status_fn = keeper, hub, status_fn
+    srv.archive_gate_fn = archive_gate_fn
     return srv

@@ -6,6 +6,7 @@ import threading
 import time
 
 from .camera import SnapshotSource, StillKeeper, StreamSource
+from .archive_gate import ArchiveGate
 from .config import LIVE_MAX_VIEWERS, PORT, SURVEIL_CONF, load_crop
 from .live import LiveHub
 from .policy import decide, showme_active
@@ -57,13 +58,19 @@ def make_status_fn(store, keeper, hub, crop_fn, clock=time.time):
     return status_fn
 
 
-def tick_loop(keeper, interval=TICK_S, stop=None):
+def tick_loop(keeper, interval=TICK_S, stop=None, gate=None, decide_fn=None, clock=time.time):
     stop = stop or threading.Event()
     while not stop.is_set():
         try:
             keeper.tick()
         except Exception:
             log.exception("keeper.tick failed")
+        if gate is not None and decide_fn is not None:
+            try:
+                now = clock()
+                gate.observe(now, decide_fn(now))
+            except Exception:
+                log.exception("archive gate observe failed")
         stop.wait(interval)
 
 
@@ -79,8 +86,17 @@ def main():
     decide_fn = lambda now: decide(now, *store.snapshot(), crop_fn())
     keeper = StillKeeper(SnapshotSource(), decide_fn, crop_fn)
     hub = LiveHub(StreamSource(), decide_fn, crop_fn, max_viewers=max_viewers)
-    threading.Thread(target=tick_loop, args=(keeper,), name="camgate-tick", daemon=True).start()
-    srv = make_server(keeper, hub, make_status_fn(store, keeper, hub, crop_fn), port=port)
+    gate = ArchiveGate()
+    threading.Thread(
+        target=tick_loop,
+        args=(keeper,),
+        kwargs={"gate": gate, "decide_fn": decide_fn},
+        name="camgate-tick",
+        daemon=True,
+    ).start()
+    srv = make_server(
+        keeper, hub, make_status_fn(store, keeper, hub, crop_fn), port=port, archive_gate_fn=lambda: gate.state(time.time())
+    )
     log.info("camgate listening on 127.0.0.1:%d", port)
     try:
         srv.serve_forever()
