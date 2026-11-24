@@ -36,7 +36,14 @@ class StreamSource:
 
 
 class StillKeeper:
-    """Holds the last already-cropped still; the blur is derived from it."""
+    """Holds the last already-cropped still; the blur is derived from it.
+
+    A still is "suspect" once any private decision has been seen after it was
+    taken: it may have been captured during door-signal latency and show the
+    gardener. A suspect still is only ever served blurred, even while public,
+    until a still captured after the private period replaces it; seeing a
+    private decision also makes the next capture due at once.
+    """
 
     def __init__(self, source, decide_fn: Callable, crop_fn: Callable, clock=time.time):
         self._source = source
@@ -48,19 +55,33 @@ class StillKeeper:
         self._still: Optional[bytes] = None
         self._blurred: Optional[bytes] = None
         self._taken_at: Optional[float] = None
+        self._suspect = False
+        self._private_seen = 0  # bumped on every private decision observed
+
+    def _saw_private_locked(self) -> None:
+        self._suspect = True
+        self._private_seen += 1
+        self._next_due = float("-inf")
+
+    def _saw_private(self) -> None:
+        with self._lock:
+            self._saw_private_locked()
 
     def tick(self) -> None:
         start = self._clock()
+        if not self._decide(start).public:
+            self._saw_private()
+            return
         with self._lock:
             if start < self._next_due:
                 return
-        if not self._decide(start).public:
-            return
+            seen = self._private_seen
         try:
             frame = self._source.fetch()
         except Exception:
             return
         if not self._decide(self._clock()).public:
+            self._saw_private()
             return
         crop = self._crop()
         if crop is None:
@@ -70,9 +91,12 @@ class StillKeeper:
         except Exception:
             return
         with self._lock:
+            if self._private_seen != seen:
+                return  # a private decision was seen during the fetch; retry next tick
             self._still = cropped
             self._blurred = None
             self._taken_at = start
+            self._suspect = False
             self._next_due = start + STILL_REFRESH_S
 
     def taken_at(self) -> Optional[float]:
@@ -83,9 +107,11 @@ class StillKeeper:
     def current(self):
         public = self._decide(self._clock()).public
         with self._lock:
+            if not public:
+                self._saw_private_locked()
             if self._still is None:
                 return placeholder_jpeg(), None
-            if public:
+            if public and not self._suspect:
                 return self._still, self._taken_at
             if self._blurred is None:
                 self._blurred = blur_jpeg(self._still)
