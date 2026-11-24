@@ -14,6 +14,7 @@ CAP_GB = 40
 FLOOR_GB = 15
 BURST_N = 3
 BURST_GAP_S = 0.3
+GATE_SETTLE_S = 3.5        # signal lag: door -> Arduino -> NR -> MQTT -> camgate + 3 s staleness
 GATE_URL = "http://127.0.0.1:8788/internal/archive-gate.json"
 CONDITIONS_URL = "http://127.0.0.1:8787/api/conditions.json"
 SNAPSHOT_URL = "http://127.0.0.1:8080/snapshot"

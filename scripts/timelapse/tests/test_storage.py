@@ -31,6 +31,24 @@ class StorageTest(unittest.TestCase):
         self.assertEqual(p.read_bytes(), b"xyz")
         self.assertEqual([x.name for x in p.parent.iterdir()], ["b.jpg"])
 
+    def test_write_new_refuses_overwrite(self):
+        p = self.root / "a" / "b.jpg"
+        storage.write_new(p, b"one")
+        with self.assertRaises(FileExistsError):
+            storage.write_new(p, b"two")
+        self.assertEqual(p.read_bytes(), b"one")
+        self.assertEqual([x.name for x in p.parent.iterdir()], ["b.jpg"])
+
+    def test_corrupt_sidecar_is_kept(self):
+        d = self.root / "day"
+        d.mkdir()
+        (d / "day.json").write_text("{not json")
+        storage.append_sidecar(d, {"a": 1})
+        self.assertEqual(json.loads((d / "day.json").read_text()), {"frames": [{"a": 1}]})
+        kept = [x for x in d.iterdir() if x.name.startswith("day.json.corrupt-")]
+        self.assertEqual(len(kept), 1)
+        self.assertEqual(kept[0].read_text(), "{not json")
+
     def test_sidecar_appends(self):
         d = self.root / "day"
         storage.append_sidecar(d, {"a": 1})

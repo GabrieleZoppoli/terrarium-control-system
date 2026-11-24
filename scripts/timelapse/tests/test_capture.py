@@ -28,6 +28,7 @@ def make_jpeg():
 
 
 GOOD_GATE = {"ok": True, "reason": None, "last_not_ok_at": NOW_EPOCH - 5000, "now": NOW_EPOCH}
+SETTLED = dict(GOOD_GATE, now=NOW_EPOCH + 10)   # read after the settle delay
 
 
 class CaptureTest(unittest.TestCase):
@@ -38,7 +39,7 @@ class CaptureTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        self.gates = [GOOD_GATE, GOOD_GATE]
+        self.gates = [GOOD_GATE, SETTLED]
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -94,7 +95,7 @@ class CaptureTest(unittest.TestCase):
         self.assertEqual(e["phase"], "plateau")
         self.assertEqual(e["files"], ["frames/2026/11/24/1200-%d.jpg" % i for i in range(3)])
         self.assertEqual(len(e["sharpness"]), 3)
-        self.assertEqual(sleeps, [0.3, 0.3])
+        self.assertEqual(sleeps, [0.3, 0.3, 3.5])
 
     def test_light_schedule_unknown(self):
         r = self.run_at(8, light_window=lambda: None)
@@ -161,9 +162,65 @@ class CaptureTest(unittest.TestCase):
         self.assertEqual(list(self.root.rglob("*")), [])
 
     def test_gate_unchanged_but_same_value_ok(self):
-        g2 = dict(GOOD_GATE, now=NOW_EPOCH + 1)
+        g2 = dict(GOOD_GATE, now=NOW_EPOCH + 4)
         r = self.run_at(8, gates=[GOOD_GATE, g2])
         self.assertIsNone(r["skipped"])
+
+    def test_gate_unsettled_discards(self):
+        for now2 in (NOW_EPOCH + 1, NOW_EPOCH + 3.4, None, "x"):
+            g2 = dict(GOOD_GATE, now=now2)
+            r = self.run_at(8, gates=[GOOD_GATE, g2])
+            self.assertEqual(r["skipped"], "gate_unsettled", now2)
+            self.assertEqual(r["saved"], [])
+        self.assertEqual(list(self.root.rglob("*")), [])
+
+    def test_settle_sleep_after_last_snapshot(self):
+        order = []
+        d = self.deps(sleep=lambda s: order.append(("sleep", s)),
+                      fetch_snapshot=lambda: (order.append("snap"), self.jpeg)[1])
+        capture.capture_once(datetime(2026, 11, 24, 12, 0), d)
+        self.assertEqual(order, ["snap", ("sleep", capture.config.BURST_GAP_S), "snap",
+                                 ("sleep", capture.config.BURST_GAP_S), "snap",
+                                 ("sleep", capture.config.GATE_SETTLE_S)])
+
+    def test_door_opens_only_on_second_read(self):
+        g2 = dict(SETTLED, ok=False, reason="door_open")
+        r = self.run_at(12, gates=[GOOD_GATE, g2])
+        self.assertEqual(r["skipped"], "gate_door_open")
+        self.assertEqual(list(self.root.rglob("*")), [])
+
+    def test_existing_frame_untouched(self):
+        d = self.root / "frames/2026/11/24"
+        d.mkdir(parents=True)
+        (d / "0800.jpg").write_bytes(b"EARLIER")
+        r = self.run_at(8)
+        self.assertEqual(r["skipped"], "frame_exists")
+        self.assertEqual(r["saved"], [])
+        self.assertEqual((d / "0800.jpg").read_bytes(), b"EARLIER")
+        self.assertEqual([p.name for p in d.iterdir()], ["0800.jpg"])
+
+    def test_collision_mid_burst_removes_only_own_files(self):
+        d = self.root / "frames/2026/11/24"
+        d.mkdir(parents=True)
+        (d / "1200-2.jpg").write_bytes(b"EARLIER")
+        r = self.run_at(12)
+        self.assertEqual(r["skipped"], "frame_exists")
+        self.assertEqual([p.name for p in d.iterdir()], ["1200-2.jpg"])
+        self.assertEqual((d / "1200-2.jpg").read_bytes(), b"EARLIER")
+
+    def test_sidecar_failure_rolls_back_only_own(self):
+        d = self.root / "frames/2026/11/24"
+        d.mkdir(parents=True)
+        (d / "0759.jpg").write_bytes(b"EARLIER")
+        with mock.patch("timelapse.capture.storage.append_sidecar", side_effect=OSError("x")):
+            r = self.run_at(8)
+        self.assertEqual(r["skipped"], "write_error")
+        self.assertEqual([p.name for p in d.iterdir()], ["0759.jpg"])
+
+    def test_sidecar_time_has_offset(self):
+        self.run_at(8)
+        t = self.sidecar()[0]["time"]
+        self.assertRegex(t, r"^2026-11-24T08:00:00[+-]\d\d:\d\d$")
 
     def test_camera_error(self):
         def boom():

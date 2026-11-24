@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import tempfile
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Optional
@@ -35,16 +36,47 @@ def write_atomic(path, data: bytes) -> None:
         raise
 
 
+def write_new(path, data: bytes) -> None:
+    """Publish a new file without ever replacing an existing one.
+
+    Raises FileExistsError if path exists (os.link refuses to overwrite)."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=str(path.parent), prefix="." + path.name + ".")
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(data)
+            f.flush()
+            os.fsync(f.fileno())
+        os.link(tmp, path)
+    finally:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+
+
 def append_sidecar(day_dir, entry: dict) -> None:
     day_dir = Path(day_dir)
     p = day_dir / "day.json"
     frames = []
     try:
-        loaded = json.loads(p.read_text())
-        if isinstance(loaded, dict) and isinstance(loaded.get("frames"), list):
+        text = p.read_text()
+    except FileNotFoundError:
+        text = None
+    except OSError:
+        text = ""
+    if text is not None:
+        try:
+            loaded = json.loads(text)
+            if not (isinstance(loaded, dict) and isinstance(loaded.get("frames"), list)):
+                raise ValueError("bad shape")
             frames = loaded["frames"]
-    except (OSError, ValueError):
-        pass
+        except ValueError:
+            try:   # never silently replace: keep the unreadable file for inspection
+                os.replace(p, day_dir / ("day.json.corrupt-%d" % int(time.time())))
+            except OSError:
+                pass
     frames.append(entry)
     write_atomic(p, json.dumps({"frames": frames}, indent=1).encode())
 

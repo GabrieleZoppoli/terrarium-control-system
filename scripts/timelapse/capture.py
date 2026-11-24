@@ -86,12 +86,18 @@ def capture_once(now: datetime, deps: Deps) -> dict:
     except Exception:
         return _skip("camera_error")
 
+    snap_ts = deps.clock()
+    deps.sleep(config.GATE_SETTLE_S)   # let a door opened just before the snapshot surface
     gate2 = deps.read_gate()
     reason = conditions.gate_check(gate2, deps.clock())
     if reason:
         return _skip(reason)
     if gate2.get("last_not_ok_at") != gate.get("last_not_ok_at"):
         return _skip("gate_changed")
+    gn = gate2.get("now")
+    if not isinstance(gn, (int, float)) or isinstance(gn, bool) or \
+            not gn >= snap_ts + config.GATE_SETTLE_S:
+        return _skip("gate_unsettled")
 
     try:
         with Image.open(io.BytesIO(shots[0])) as im:
@@ -118,23 +124,25 @@ def capture_once(now: datetime, deps: Deps) -> dict:
         return _skip("lossless_error")
 
     paths = [storage.frame_path(root, now, None if n == 1 else i) for i in range(n)]
+    created = []
     try:
         for p, o in zip(paths, outs):
-            storage.write_atomic(p, o)
+            storage.write_new(p, o)
+            created.append(p)
         storage.append_sidecar(paths[0].parent, {
-            "time": now.isoformat(timespec="seconds"),
+            "time": now.astimezone().isoformat(timespec="seconds"),
             "files": [str(p.relative_to(root)) for p in paths],
             "phase": ph,
             "geometry": lossless.archive_geometry(snapped),
             "sharpness": sharp,
         })
-    except Exception:
-        for p in paths:
+    except Exception as e:
+        for p in created:      # only what this run created; never an earlier frame
             try:
                 p.unlink()
             except OSError:
                 pass
-        return _skip("write_error")
+        return _skip("frame_exists" if isinstance(e, FileExistsError) else "write_error")
     return {"saved": [str(p) for p in paths], "skipped": None}
 
 
