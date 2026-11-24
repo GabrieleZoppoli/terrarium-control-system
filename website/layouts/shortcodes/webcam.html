@@ -7,8 +7,9 @@
   data-l-live="{{ i18n "webcamLive" }}" data-l-left="{{ i18n "webcamLeft" }}"
   data-l-updated="{{ i18n "webcamUpdatedAgo" }}" data-l-updated-now="{{ i18n "webcamUpdatedNow" }}"
   data-l-watch="{{ i18n "webcamWatchAgain" }}" data-l-busy="{{ i18n "webcamBusy" }}"
+  data-l-busy-retry="{{ i18n "webcamBusyRetry" }}"
   data-l-offline="{{ i18n "webcamOffline" }}" data-l-night="{{ i18n "webcamNight" }}"
-  data-l-on="{{ i18n "webcamLightsOn" }}" data-l-off="{{ i18n "webcamLightsOff" }}"
+  data-l-on="{{ i18n "webcamLightsOn" }}"
   aria-label="{{ i18n "webcamAria" }}">
   <div class="webcam__frame" data-state="loading">
     <img class="webcam__img" alt="{{ i18n "webcamAlt" }}" decoding="async" hidden>
@@ -59,18 +60,21 @@
   var badge = el('badge'), btn = el('btn'), priv = el('private'), off = el('offline');
   var note = el('note'), chips = el('chips'), bar = el('bar');
 
-  var LIVE_MS = 30000, STILL_MS = 180000, POLL_MS = 10000, SLOW_MS = 60000;
+  var LIVE_MS = 30000, STILL_MS = 180000, POLL_MS = 10000, POLL_LIVE_MS = 2000, SLOW_MS = 60000;
   var COOLDOWN_S = 60, BUSY_DEFAULT_S = 30;
+  var MARGIN_S = 3;            // added to every client-side cooldown so we never ask early
 
   var state = 'loading';       // loading | live | still | private | offline
   var status = null;           // last good status.json
   var statusOk = true;
-  var liveEnd = 0, tickTimer = 0, liveTimer = 0, pollTimer = 0, stillTimer = 0;
+  var liveEnd = 0, tickTimer = 0, liveTimer = 0, pollTimer = 0, stillTimer = 0, retryTimer = 0;
   var btnReadyAt = 0;          // epoch ms when "watch again" is allowed
   var busyNote = false;
   var cond = null;
   var started = false;         // live has been attempted at least once
   var session = 0;             // invalidates stale async results
+  var pollGen = 0;             // only the newest poll chain reschedules
+  var autoRetried = false;     // the one automatic retry after "busy" has been used
 
   function visible() { return document.visibilityState !== 'hidden'; }
   function url(name) { return CAM + name; }
@@ -116,6 +120,7 @@
     var wait = Math.ceil((btnReadyAt - Date.now()) / 1000);
     btn.disabled = wait > 0;
     btn.textContent = L('watch') + (wait > 0 ? ' (' + wait + ')' : '');
+    note.textContent = retryTimer ? L('busy-retry') : L('busy');
     note.hidden = !(busyNote && wait > 0);
   }
 
@@ -130,15 +135,12 @@
     }
     if (typeof cond.temperature_c === 'number') add(cond.temperature_c.toFixed(1) + ' °C');
     if (typeof cond.humidity_rh === 'number') add(cond.humidity_rh.toFixed(0) + ' % RH');
-    if (typeof cond.lights === 'boolean') {
-      add(cond.lights ? L('on') : L('off'));
-      if (!cond.lights) add('🌙 ' + L('night'));
-    }
+    if (typeof cond.lights === 'boolean') add(cond.lights ? L('on') : '🌙 ' + L('night'));
   }
 
   function clearTimers() {
-    clearInterval(tickTimer); clearTimeout(liveTimer); clearTimeout(stillTimer);
-    tickTimer = liveTimer = stillTimer = 0;
+    clearInterval(tickTimer); clearTimeout(liveTimer); clearTimeout(stillTimer); clearTimeout(retryTimer);
+    tickTimer = liveTimer = stillTimer = retryTimer = 0;
   }
 
   function enterPrivate() {
@@ -157,15 +159,25 @@
     renderChips(); updateBadge();
   }
 
-  // cooldownS: seconds before "watch again" is allowed; busy: show the busy note
-  function enterStill(cooldownS, busy) {
+  // cooldownS: seconds before "watch again" is allowed (MARGIN_S is added);
+  // busy: show the busy note; retry: try live once by itself when the wait is over
+  function enterStill(cooldownS, busy, retry) {
     clearTimers(); session++;
     setState('still');
     priv.hidden = true; off.hidden = true;
     busyNote = !!busy;
-    btnReadyAt = Date.now() + (cooldownS || 0) * 1000;
+    var waitMs = cooldownS > 0 ? (cooldownS + MARGIN_S) * 1000 : 0;
+    btnReadyAt = Date.now() + waitMs;
     showStill();   // replacing img.src also drops any MJPEG connection
     tickTimer = setInterval(updateBadge, 1000);
+    if (retry) {
+      retryTimer = setTimeout(function () {
+        retryTimer = 0;
+        if (state !== 'still' || !visible()) return;
+        autoRetried = true;
+        startLive();
+      }, waitMs);
+    }
     stillTimer = setTimeout(function again() {
       if (state !== 'still') return;
       if (visible()) showStill();
@@ -184,7 +196,11 @@
       if (r.status === 403) { enterPrivate(); return; }
       if (r.status === 429) {
         var ra = parseInt(r.headers.get('Retry-After'), 10);
-        enterStill(isNaN(ra) ? BUSY_DEFAULT_S : ra, true);
+        if (r.headers.get('X-Live-Refusal') === 'cooldown') {
+          enterStill(isNaN(ra) ? COOLDOWN_S : ra, false);   // our own cooldown, not busy
+        } else {
+          enterStill(isNaN(ra) ? BUSY_DEFAULT_S : ra, true, !autoRetried);
+        }
         return;
       }
       if (!r.ok) { enterStill(COOLDOWN_S, false); return; }
@@ -196,6 +212,8 @@
   }
 
   function beginStream(my) {
+    if (!visible()) { enterStill(0, false); return; }   // tab hid while HEAD was in flight
+    autoRetried = false;
     setState('live');
     priv.hidden = true; off.hidden = true; note.hidden = true; busyNote = false;
     liveEnd = Date.now() + LIVE_MS;
@@ -206,6 +224,7 @@
     liveTimer = setTimeout(function () {
       if (my === session) enterStill(COOLDOWN_S, false);
     }, LIVE_MS);
+    poll();   // switch the status poll to the fast live cadence
   }
 
   img.addEventListener('error', function () {
@@ -223,17 +242,19 @@
 
   btn.addEventListener('click', function () {
     if (Date.now() < btnReadyAt) return;
+    autoRetried = false;
     startLive();
   });
 
   function poll() {
-    clearTimeout(pollTimer);
+    clearTimeout(pollTimer); pollTimer = 0;
+    var gen = ++pollGen;
     if (!visible()) return;                 // resumed by visibilitychange
     fetch(url('status.json'), { cache: 'no-store' }).then(function (r) {
       if (!r.ok) throw new Error('status ' + r.status);
       return r.json();
     }).then(function (s) {
-      var wasOffline = !statusOk;
+      if (gen !== pollGen) return;          // a newer chain owns the schedule
       statusOk = true; status = s;
       if (!s.public) {
         if (state !== 'private') enterPrivate();
@@ -242,8 +263,9 @@
       } else if (state === 'still') {
         updateBadge();
       }
-      pollTimer = setTimeout(poll, POLL_MS);
+      if (gen === pollGen) pollTimer = setTimeout(poll, state === 'live' ? POLL_LIVE_MS : POLL_MS);
     }).catch(function () {
+      if (gen !== pollGen) return;
       statusOk = false;
       if (state !== 'offline') enterOffline();
       pollTimer = setTimeout(poll, SLOW_MS);
@@ -258,8 +280,10 @@
 
   document.addEventListener('visibilitychange', function () {
     if (!visible()) {
-      clearTimeout(pollTimer);
+      clearTimeout(pollTimer); pollTimer = 0; pollGen++;    // stop every poll chain
       if (state === 'live') enterStill(COOLDOWN_S, false);   // free the Pi's slot
+      else { clearTimeout(retryTimer); retryTimer = 0; }      // the visitor left: no auto-retry
+      session++;                                             // drop in-flight live/HEAD results
     } else {
       loadConditions();
       poll();
