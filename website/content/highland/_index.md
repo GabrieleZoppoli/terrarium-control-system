@@ -9,10 +9,20 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 <div class="highland-hero">
   {{< webcam-tile >}}
   <a class="highland-hero__dashboard" href="/highland/dashboard/" aria-label="Live 24-hour Grafana dashboard">
-    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png" alt="Live 24-hour Grafana — temperature, humidity, VPD, actuator state" loading="eager" decoding="async">
-    <figcaption>Live 24-hour Grafana · auto-refreshed every 15 min</figcaption>
+    <img src="https://rei1.tail7cc014.ts.net/highland/hero-chart.png" data-refresh="60" onerror="this.onerror=null;this.src='https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png'" alt="Last 24 hours inside the terrarium: temperature, humidity, VPD, freezer and mister" loading="eager" decoding="async">
+    <figcaption>Last 24 hours · updated every minute</figcaption>
   </a>
 </div>
+<script>
+setInterval(function () {
+  if (document.visibilityState !== 'visible') return;
+  var img = document.querySelector('.highland-hero__dashboard img[data-refresh]');
+  if (!img || img.src.indexOf('hero-chart.png') < 0) return;
+  var next = new Image();
+  next.onload = function () { img.src = next.src; };
+  next.src = 'https://rei1.tail7cc014.ts.net/highland/hero-chart.png?t=' + Date.now();
+}, 60000);
+</script>
 
 <nav class="highland-hero-links" aria-label="Build, docs, and source">
   <a href="/highland/photos/">Build timeline</a>

@@ -9,10 +9,20 @@ ogImage: "img/collection/dracula/dracula-pholeodytes.jpg"
 <div class="highland-hero">
   {{< webcam-tile >}}
   <a class="highland-hero__dashboard" href="/it/highland/dashboard/" aria-label="Dashboard Grafana live delle ultime 24 ore">
-    <img src="https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png" alt="Grafana live — temperatura, umidità, VPD, stato attuatori sulle ultime 24 ore" loading="eager" decoding="async">
-    <figcaption>Grafana live · aggiornata ogni 15 min</figcaption>
+    <img src="https://rei1.tail7cc014.ts.net/highland/hero-chart.png" data-refresh="60" onerror="this.onerror=null;this.src='https://rei1.tail7cc014.ts.net/highland/grafana-latest-hero.png'" alt="Ultime 24 ore nel terrario: temperatura, umidità, VPD, freezer e nebulizzatore" loading="eager" decoding="async">
+    <figcaption>Ultime 24 ore · aggiornato ogni minuto</figcaption>
   </a>
 </div>
+<script>
+setInterval(function () {
+  if (document.visibilityState !== 'visible') return;
+  var img = document.querySelector('.highland-hero__dashboard img[data-refresh]');
+  if (!img || img.src.indexOf('hero-chart.png') < 0) return;
+  var next = new Image();
+  next.onload = function () { img.src = next.src; };
+  next.src = 'https://rei1.tail7cc014.ts.net/highland/hero-chart.png?t=' + Date.now();
+}, 60000);
+</script>
 
 <nav class="highland-hero-links" aria-label="Costruzione, documentazione e sorgente">
   <a href="/it/highland/photos/">Cronologia della costruzione</a>

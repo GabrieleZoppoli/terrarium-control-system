@@ -1,5 +1,5 @@
 --- /home/pi/snap-renderer/conditions-server.py.bak_20261124-113203	2026-05-18 18:13:32.642500501 +0200
-+++ /home/pi/snap-renderer/conditions-server.py	2026-11-24 12:31:47.589526869 +0100
++++ /home/pi/snap-renderer/conditions-server.py	2026-11-24 14:04:57.342614345 +0100
 @@ -9,6 +9,7 @@
    /highland/grafana-latest-mobile.png      → Grafana mobile snapshot PNG
  """
@@ -8,7 +8,15 @@
  import http.server
  import json
  import os
-@@ -322,8 +323,52 @@
+@@ -28,6 +29,7 @@
+     "grafana-latest-desktop.png",
+     "grafana-latest-mobile.png",
+     "grafana-latest-hero.png",
++    "hero-chart.png",
+ }
+ 
+ # Which measurements to surface. Compressor = freezer_status (0/1).
+@@ -322,8 +324,52 @@
          # don't HEAD this endpoint, and the extra bytes are small.
          self.do_GET()
  
