@@ -2,7 +2,13 @@ import os
 import tempfile
 import unittest
 
-from camgate.config import NO_CROP, Crop, load_crop
+from camgate.config import NO_CROP, SERIAL_STALE_S, Crop, load_crop
+
+
+class ConstantsTests(unittest.TestCase):
+    def test_serial_stale_is_10s(self):
+        # Ruling R12: firmware heartbeat every 2 s, so 10 s of silence is stale.
+        self.assertEqual(SERIAL_STALE_S, 10.0)
 
 
 class LoadCropTests(unittest.TestCase):

@@ -30,10 +30,10 @@ class DecideTests(unittest.TestCase):
         self.assertEqual(decide(NOW, DoorSignal(False, 5, 997.0), None, CROP), Decision(True, "ok"))
 
     def test_serial_stale_is_private(self):
-        self.assertEqual(decide(NOW, DoorSignal(False, 91, 999.5), None, CROP), Decision(False, "serial_stale"))
+        self.assertEqual(decide(NOW, DoorSignal(False, 10.1, 999.5), None, CROP), Decision(False, "serial_stale"))
 
     def test_serial_boundary_is_strict(self):
-        self.assertEqual(decide(NOW, DoorSignal(False, 90, 999.5), None, CROP), Decision(True, "ok"))
+        self.assertEqual(decide(NOW, DoorSignal(False, 10, 999.5), None, CROP), Decision(True, "ok"))
 
     def test_nan_values_fail_closed(self):
         nan = float("nan")
