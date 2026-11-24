@@ -1,0 +1,66 @@
+--- /usr/local/bin/terrarium-report.py.bak
++++ /usr/local/bin/terrarium-report.py
+@@ -993,6 +993,18 @@
+     return rows
+ 
+ 
++def _timelapse_section():
++    """Flowers section from /opt/terrarium-timelapse; any failure leaves the report unchanged."""
++    try:
++        if "/opt/terrarium-timelapse" not in sys.path:
++            sys.path.append("/opt/terrarium-timelapse")
++        from timelapse.report_section import timelapse_section
++        r = timelapse_section("/var/lib/terrarium-timelapse", datetime.now())
++        return {"lines": [str(x) for x in r.get("lines") or []], "checkin": r.get("checkin")}
++    except Exception:
++        return {"lines": [], "checkin": None}
++
++
+ def render_text(rep):
+     L = []
+     when = local(rep.generated).strftime("%a %d %b %Y %H:%M")
+@@ -1048,6 +1060,10 @@
+              + f" · up {fmt_dur(s.get('uptime_s'))}")
+     if not rep.data.get("ledger"):
+         L.append("  (health ledger not found: alert episodes and water trend unavailable)")
++    tl = _timelapse_section()["lines"]
++    if tl:
++        L.append("")
++        L.extend(tl)
+     return "\n".join(L)
+ 
+ 
+@@ -1197,6 +1213,12 @@
+         P.append('<div style="font-size:12px;color:#7a4b00;margin-top:4px">Health ledger not found, '
+                  'so alert episodes and the water trend are missing. Deploy the updated terrarium-health.py.</div>')
+ 
++    tl = _timelapse_section()["lines"]
++    if tl:
++        P.append('<h3 style="margin:18px 0 6px;font-size:15px">' + e(tl[0].title()) + '</h3>')
++        for ln in tl[1:]:
++            P.append('<div style="font-size:13px;color:#424a53">' + e(ln.strip()) + '</div>')
++
+     P.append(f'<div style="font-size:11px;color:#8c959f;margin-top:20px;border-top:1px solid #eaeef2;padding-top:8px">'
+              f'terrarium-report.py · "Usual" = median of the same {rep.hours} h window on each of the previous '
+              f'{BASELINE_DAYS} days; flagged when the robust z-score is ≥ {Z_WARN:g} and the change is large '
+@@ -1224,6 +1246,20 @@
+     msg["To"] = to
+     msg.attach(MIMEText(render_text(rep), "plain", "utf-8"))
+     msg.attach(MIMEText(render_html(rep), "html", "utf-8"))
++    try:  # time-lapse check-in image: wrap in multipart/mixed
++        ck = _timelapse_section()["checkin"]
++        if ck:
++            from email.mime.image import MIMEImage
++            with open(ck, "rb") as fh:
++                img = MIMEImage(fh.read(), _subtype="jpeg")
++            img.add_header("Content-Disposition", "attachment", filename=os.path.basename(ck))
++            mixed = MIMEMultipart("mixed")
++            mixed["Subject"], mixed["From"], mixed["To"] = msg["Subject"], msg["From"], msg["To"]
++            mixed.attach(msg)
++            mixed.attach(img)
++            msg = mixed
++    except Exception:
++        pass
+     for attempt in range(3):
+         try:
+             with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as s:

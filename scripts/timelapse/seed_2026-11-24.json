@@ -1,0 +1,121 @@
+{
+  "geometry": "1168x1080+176+0/rot180",
+  "items": {
+    "f1": {
+      "id": "f1",
+      "kind": "flower",
+      "label": "Heliamphora",
+      "stalk": "centre",
+      "state": "bud",
+      "x": 470,
+      "y": 318,
+      "first_seen": "2026-11-24",
+      "opened_on": null,
+      "ended_on": null,
+      "confirmed": true,
+      "needs_owner": false,
+      "streak": 0,
+      "history": [
+        {
+          "date": "2026-11-24",
+          "state": "bud",
+          "confidence": 1.0,
+          "source": "owner"
+        }
+      ]
+    },
+    "f2": {
+      "id": "f2",
+      "kind": "flower",
+      "label": "Heliamphora",
+      "stalk": "centre",
+      "state": "opening",
+      "x": 695,
+      "y": 445,
+      "first_seen": "2026-11-24",
+      "opened_on": null,
+      "ended_on": null,
+      "confirmed": true,
+      "needs_owner": false,
+      "streak": 0,
+      "history": [
+        {
+          "date": "2026-11-24",
+          "state": "opening",
+          "confidence": 1.0,
+          "source": "owner"
+        }
+      ]
+    },
+    "f3": {
+      "id": "f3",
+      "kind": "flower",
+      "label": "Heliamphora",
+      "stalk": "centre",
+      "state": "bud",
+      "x": 555,
+      "y": 405,
+      "first_seen": "2026-11-24",
+      "opened_on": null,
+      "ended_on": null,
+      "confirmed": true,
+      "needs_owner": false,
+      "streak": 0,
+      "history": [
+        {
+          "date": "2026-11-24",
+          "state": "bud",
+          "confidence": 1.0,
+          "source": "owner"
+        }
+      ]
+    },
+    "f4": {
+      "id": "f4",
+      "kind": "flower",
+      "label": "Heliamphora",
+      "stalk": "right",
+      "state": "open",
+      "x": 985,
+      "y": 640,
+      "first_seen": "2026-11-24",
+      "opened_on": "2026-11-24",
+      "ended_on": null,
+      "confirmed": true,
+      "needs_owner": false,
+      "streak": 0,
+      "history": [
+        {
+          "date": "2026-11-24",
+          "state": "open",
+          "confidence": 1.0,
+          "source": "owner"
+        }
+      ]
+    },
+    "f5": {
+      "id": "f5",
+      "kind": "flower",
+      "label": "Heliamphora",
+      "stalk": "right",
+      "state": "opening",
+      "x": 905,
+      "y": 510,
+      "first_seen": "2026-11-24",
+      "opened_on": null,
+      "ended_on": null,
+      "confirmed": true,
+      "needs_owner": false,
+      "streak": 0,
+      "history": [
+        {
+          "date": "2026-11-24",
+          "state": "opening",
+          "confidence": 1.0,
+          "source": "owner"
+        }
+      ]
+    }
+  },
+  "runs": []
+}

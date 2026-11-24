@@ -90,7 +90,10 @@ class Env:
                 "still_taken_at": None,
             }
         )
-        self.srv = make_server(self.keeper, self.hub, self.status, port=0, timeout=timeout)
+        self.gate_state = {"ok": True, "reason": "ok", "last_not_ok_at": 1.0, "now": 2.0}
+        self.srv = make_server(
+            self.keeper, self.hub, self.status, port=0, timeout=timeout, archive_gate_fn=lambda: self.gate_state
+        )
         self.port = self.srv.server_address[1]
         threading.Thread(target=self.srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
 
@@ -125,6 +128,15 @@ class ServerTest(unittest.TestCase):
     def setUp(self):
         self.env = Env()
         self.addCleanup(self.env.close)
+
+    def test_archive_gate_internal_route(self):
+        r, body = self.env.get("/internal/archive-gate.json")
+        self.assertEqual(r.status, 200)
+        self.assertEqual(set(json.loads(body)), {"ok", "reason", "last_not_ok_at", "now"})
+
+    def test_archive_gate_not_under_cam(self):
+        r, _ = self.env.get("/cam/internal/archive-gate.json")
+        self.assertEqual(r.status, 404)
 
     def test_status_json_shape(self):
         r, body = self.env.get("/cam/status.json")
