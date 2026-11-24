@@ -26,6 +26,13 @@ class TestDots(unittest.TestCase):
         r, g, b = im.getpixel((100 + 8, 100))
         self.assertTrue(r > 200 and g > 100 and b < 120)
 
+    def test_no_pending_when_disabled(self):
+        out = annotate.draw_dots(_jpeg(), [{"id": "3", "x": 100, "y": 100, "needs_owner": True}],
+                                 show_pending=False)
+        r, g, b = Image.open(io.BytesIO(out)).convert("RGB").getpixel((108, 100))
+        self.assertFalse(r > 200 and g > 100 and b < 120)
+        self.assertTrue(r < 90)
+
     def test_out_of_frame_ok(self):
         annotate.draw_dots(_jpeg(), [{"id": "1", "x": -5, "y": 9999}])
 

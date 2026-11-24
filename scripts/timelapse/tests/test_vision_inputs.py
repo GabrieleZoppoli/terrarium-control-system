@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from timelapse import vision
 
@@ -49,6 +49,31 @@ class TestPickBest(unittest.TestCase):
             self.assertIsNone(vision.pick_best(Path(t)))
 
 
+    def test_ignores_invalid(self):
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t) / "frames" / "2026" / "11" / "24"
+            d.mkdir(parents=True)
+            for n in ("1000.jpg", "1100.jpg", ".hid.jpg", "1300.jpg"):
+                _img(d / n)
+            fr = [
+                {"phase": "plateau", "files": ["x/ghost.jpg"], "sharpness": [999.0]},
+                {"phase": "plateau", "files": ["x/.hid.jpg"], "sharpness": [998.0]},
+                {"phase": "plateau", "files": ["x/1100.jpg", "x/1300.jpg"], "sharpness": [997.0]},
+                {"phase": "plateau", "files": ["x/1300.jpg"], "sharpness": ["abc"]},
+                {"phase": "plateau", "files": "oops", "sharpness": None},
+                {"phase": "plateau"},
+                "junk",
+                {"phase": "plateau", "files": ["x/1000.jpg"], "sharpness": [2.0]},
+            ]
+            (d / "day.json").write_text(json.dumps({"frames": fr}))
+            self.assertEqual(vision.pick_best(d), d / "1000.jpg")
+        with tempfile.TemporaryDirectory() as t:
+            d = Path(t)
+            (d / "day.json").write_text(json.dumps({"frames": [
+                {"phase": "plateau", "files": ["ghost.jpg"], "sharpness": [1.0]}, "junk"]}))
+            self.assertIsNone(vision.pick_best(d))
+
+
 REG = {"items": {
     "1": {"id": "1", "state": "open", "stalk": "A", "x": 5, "y": 500},
     "2": {"id": "2", "state": "bud", "stalk": "B", "x": 600, "y": 540, "needs_owner": True},
@@ -69,6 +94,60 @@ class TestInputs(unittest.TestCase):
             self.assertEqual(Image.open(w / "overview.jpg").size, (584, 540))
             out = vision.build_inputs(a, None, REG, w)
             self.assertEqual(len(out), 3)
+
+    def _pair(self, t):
+        today = Image.new("RGB", (1168, 1080), (0, 0, 255))
+        yest = Image.new("RGB", (1168, 1080), (255, 0, 0))
+        ImageDraw.Draw(today).rectangle([0, 0, 40, 40], fill=(0, 255, 0))
+        ImageDraw.Draw(today).rectangle([580, 520, 620, 560], fill=(0, 255, 0))
+        a, b = Path(t) / "a.jpg", Path(t) / "b.jpg"
+        today.save(a, "JPEG", quality=95)
+        yest.save(b, "JPEG", quality=95)
+        return a, b
+
+    @staticmethod
+    def _near(px, want, tol=40):
+        return all(abs(p - w) <= tol for p, w in zip(px, want))
+
+    def test_crop_geometry(self):
+        reg = {"items": {
+            "1": {"id": "1", "state": "open", "stalk": "A", "x": 5, "y": 5},
+            "2": {"id": "2", "state": "bud", "stalk": "B", "x": 600, "y": 540},
+            "3": {"id": "3", "state": "gone", "stalk": "C", "x": 300, "y": 300}}}
+        with tempfile.TemporaryDirectory() as t:
+            a, b = self._pair(t)
+            w = Path(t) / "w"
+            vision.build_inputs(a, b, reg, w)
+            self.assertFalse((w / "item-3.jpg").exists())
+            g, bl, r = (0, 255, 0), (0, 0, 255), (255, 0, 0)
+            im = Image.open(w / "item-2.jpg").convert("RGB")
+            self.assertEqual(im.size, (1600, 800))
+            self.assertTrue(self._near(im.getpixel((400, 400)), g))
+            self.assertTrue(self._near(im.getpixel((100, 100)), bl))
+            self.assertTrue(self._near(im.getpixel((1200, 400)), r))
+            self.assertTrue(self._near(im.getpixel((900, 100)), r))
+            e = Image.open(w / "item-1.jpg").convert("RGB")
+            self.assertEqual(e.size, (1600, 800))
+            self.assertTrue(self._near(e.getpixel((20, 20)), g))
+            self.assertTrue(self._near(e.getpixel((700, 700)), bl))
+            self.assertTrue(self._near(e.getpixel((1000, 700)), r))
+            self.assertTrue(self._near(e.getpixel((1590, 790)), r))
+
+    def test_overview_dot_position(self):
+        reg = {"items": {"1": {"id": "1", "state": "open", "stalk": "A", "x": 400, "y": 300}}}
+        with tempfile.TemporaryDirectory() as t:
+            a, b = self._pair(t)
+            vision.build_inputs(a, b, reg, Path(t) / "w")
+            ov = Image.open(Path(t) / "w" / "overview.jpg").convert("RGB")
+            self.assertTrue(min(ov.getpixel((200, 150))) > 220)
+            self.assertFalse(min(ov.getpixel((200, 170))) > 220)
+
+    def test_prompt_content(self):
+        s = vision.build_prompt(REG, ["overview.jpg", "item-1.jpg", "item-2.jpg"])
+        for k in ("pink", "joint", "0 and 1", "bud", "opening", "open", "fading", "gone",
+                  "hidden", "id 1", "id 2"):
+            self.assertIn(k, s)
+        self.assertNotIn("id 3", s)
 
     def test_prompt(self):
         s = vision.build_prompt(REG, ["overview.jpg", "item-1.jpg", "item-2.jpg"])

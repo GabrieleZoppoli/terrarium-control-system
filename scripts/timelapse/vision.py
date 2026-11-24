@@ -27,6 +27,9 @@ def pick_best(day_dir) -> Optional[Path]:
             if phase not in cands:
                 continue
             files, sharp = fr["files"], fr["sharpness"]
+            if not isinstance(files, list) or not isinstance(sharp, list) \
+                    or len(files) != len(sharp):
+                continue
             for f, s in zip(files, sharp):
                 if not isinstance(f, str) or isinstance(s, bool):
                     continue
