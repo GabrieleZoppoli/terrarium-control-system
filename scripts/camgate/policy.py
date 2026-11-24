@@ -27,6 +27,9 @@ def _showme_active(now, showme):
     return showme.until > now and showme.until - now <= SHOWME_MAX_S
 
 
+showme_active = _showme_active  # public name for status reporting
+
+
 def decide(now, doors, showme, crop):
     """Return the public/private decision. `crop is None` means invalid CROP."""
     if crop is None:

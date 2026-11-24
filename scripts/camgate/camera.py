@@ -75,6 +75,11 @@ class StillKeeper:
             self._taken_at = start
             self._next_due = start + STILL_REFRESH_S
 
+    def taken_at(self) -> Optional[float]:
+        """Epoch of the held still, without computing any blur."""
+        with self._lock:
+            return self._taken_at
+
     def current(self):
         public = self._decide(self._clock()).public
         with self._lock:

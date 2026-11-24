@@ -1,5 +1,6 @@
 import io
 import unittest
+from unittest import mock
 
 from PIL import Image
 
@@ -175,6 +176,15 @@ class StillKeeperTest(unittest.TestCase):
         self.assertNotEqual(h.keeper.current()[0], public)
         h.decision = PUBLIC
         self.assertEqual(h.keeper.current()[0], public)
+
+    def test_taken_at_accessor_does_not_blur(self):
+        h = Harness()
+        self.assertIsNone(h.keeper.taken_at())
+        h.keeper.tick()
+        h.decision = PRIVATE
+        with mock.patch("camgate.camera.blur_jpeg") as blur:
+            self.assertEqual(h.keeper.taken_at(), 0)
+        blur.assert_not_called()
 
 
 if __name__ == "__main__":

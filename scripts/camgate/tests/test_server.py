@@ -1,0 +1,345 @@
+import http.client
+import io
+import json
+import threading
+import time
+import unittest
+
+from PIL import Image
+
+from camgate.__main__ import make_cached_crop_fn, make_status_fn, tick_loop
+from camgate.camera import StillKeeper
+from camgate.config import Crop, NO_CROP
+from camgate.frames import placeholder_jpeg
+from camgate.live import LiveHub
+from camgate.policy import Decision, DoorSignal, ShowMe
+from camgate.server import make_server
+from camgate.signals import SignalStore
+
+PUBLIC = Decision(True, "ok")
+PRIVATE = Decision(False, "doors_open")
+CROP = Crop(1344, 1080, 0, 0)
+
+
+def _frame(n):
+    img = Image.new("RGB", (1920, 1080), (10, 120, 30))
+    img.paste(((n * 37) % 256, 30, 30), (0, 0, 400, 1080))
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG", quality=80)
+    return buf.getvalue()
+
+
+FRAMES = [_frame(i) for i in range(3)]
+
+
+def size(jpeg):
+    with Image.open(io.BytesIO(jpeg)) as im:
+        return im.size
+
+
+class FakeSnap:
+    def fetch(self):
+        return FRAMES[0]
+
+
+class FakeStream:
+    def __init__(self, fail=False):
+        self.fail = fail
+
+    def frames(self):
+        if self.fail:
+            from camgate.camera import CameraError
+
+            raise CameraError("down")
+        n = 0
+        while True:
+            yield FRAMES[n % 3]
+            n += 1
+            time.sleep(0.02)
+
+
+class Env:
+    def __init__(self, max_viewers=3, fail_stream=False, status_fn=None):
+        self.decision = PUBLIC
+        self.crop = CROP
+        dec = lambda t: self.decision
+        crop = lambda: self.crop
+        self.keeper = StillKeeper(FakeSnap(), dec, crop)
+        self.hub = LiveHub(FakeStream(fail_stream), dec, crop, max_viewers=max_viewers, startup_timeout_s=1.0)
+        self.status = status_fn or (
+            lambda: {
+                "public": self.decision.public,
+                "reason": self.decision.reason,
+                "showme": False,
+                "live_slots_free": self.hub.slots_free(),
+                "still_taken_at": None,
+            }
+        )
+        self.srv = make_server(self.keeper, self.hub, self.status, port=0)
+        self.port = self.srv.server_address[1]
+        threading.Thread(target=self.srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
+
+    def close(self):
+        self.srv.shutdown()
+        self.srv.server_close()
+
+    def conn(self):
+        return http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+
+    def get(self, path, method="GET", headers=None):
+        c = self.conn()
+        c.request(method, path, headers=headers or {})
+        r = c.getresponse()
+        body = r.read()
+        c.close()
+        return r, body
+
+
+def read_part(resp):
+    """Read one multipart part from an open live response; return jpeg bytes."""
+    assert resp.fp.readline().strip() == b"--frame"
+    assert resp.fp.readline().strip() == b"Content-Type: image/jpeg"
+    n = int(resp.fp.readline().split(b":")[1])
+    assert resp.fp.readline() == b"\r\n"
+    data = resp.fp.read(n)
+    assert resp.fp.readline() == b"\r\n"
+    return data
+
+
+class ServerTest(unittest.TestCase):
+    def setUp(self):
+        self.env = Env()
+        self.addCleanup(self.env.close)
+
+    def test_status_json_shape(self):
+        r, body = self.env.get("/cam/status.json")
+        self.assertEqual(r.status, 200)
+        self.assertEqual(set(json.loads(body)), {"public", "reason", "showme", "live_slots_free", "still_taken_at"})
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+        self.assertEqual(r.getheader("Cache-Control"), "no-store")
+
+    def test_still_is_cropped(self):
+        self.env.keeper.tick()
+        r, body = self.env.get("/cam/still.jpg")
+        self.assertEqual(r.status, 200)
+        self.assertEqual(r.getheader("Content-Type"), "image/jpeg")
+        self.assertEqual(r.getheader("Cache-Control"), "no-store")
+        self.assertEqual(size(body), (1344, 1080))
+
+    def test_still_head_has_no_body(self):
+        r, body = self.env.get("/cam/still.jpg", method="HEAD")
+        self.assertEqual((r.status, body), (200, b""))
+
+    def test_live_private_is_403(self):
+        self.env.decision = PRIVATE
+        r, body = self.env.get("/cam/live.mjpg")
+        self.assertEqual(r.status, 403)
+        self.assertEqual(json.loads(body), {"error": "private"})
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+        self.assertEqual(r.getheader("Cache-Control"), "no-store")
+
+    def test_live_busy_is_429_with_retry(self):
+        env = Env(max_viewers=1)
+        self.addCleanup(env.close)
+        c = env.conn()
+        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": "1.1.1.1"})
+        first = c.getresponse()
+        self.assertEqual(first.status, 200)
+        self.addCleanup(c.close)
+        r, body = env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "2.2.2.2"})
+        self.assertEqual(r.status, 429)
+        obj = json.loads(body)
+        self.assertEqual(obj["error"], "busy")
+        self.assertIsInstance(obj["retry_after_s"], int)
+        self.assertEqual(r.getheader("Retry-After"), str(obj["retry_after_s"]))
+
+    def test_live_cooldown_is_429(self):
+        c = self.env.conn()
+        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9, 10.0.0.1"})
+        resp = c.getresponse()
+        read_part(resp)
+        resp.close()
+        c.close()
+        for _ in range(50):  # wait until the server has noticed the close
+            if self.env.hub.slots_free() == 3:
+                break
+            time.sleep(0.1)
+        r, body = self.env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9"})
+        self.assertEqual(r.status, 429)
+        self.assertEqual(json.loads(body)["error"], "cooldown")
+
+    def test_live_camera_unavailable_is_503(self):
+        env = Env(fail_stream=True)
+        self.addCleanup(env.close)
+        r, body = env.get("/cam/live.mjpg")
+        self.assertEqual(r.status, 503)
+        self.assertEqual(json.loads(body), {"error": "camera_unavailable"})
+        self.assertEqual(env.hub.slots_free(), 3)
+
+    def test_live_headers_and_close_frees_slot(self):
+        c = self.env.conn()
+        c.request("GET", "/cam/live.mjpg")
+        r = c.getresponse()
+        self.assertEqual(r.status, 200)
+        self.assertEqual(r.getheader("Content-Type"), "multipart/x-mixed-replace; boundary=frame")
+        self.assertEqual(r.getheader("X-Accel-Buffering"), "no")
+        self.assertEqual(r.getheader("Cache-Control"), "no-store")
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+        read_part(r)
+        self.assertEqual(self.env.hub.slots_free(), 2)
+        r.close()
+        c.close()
+        for _ in range(50):
+            if self.env.hub.slots_free() == 3:
+                break
+            time.sleep(0.1)
+        self.assertEqual(self.env.hub.slots_free(), 3)
+
+    def test_live_head_does_not_open_session(self):
+        r, body = self.env.get("/cam/live.mjpg", method="HEAD")
+        self.assertEqual((r.status, body), (200, b""))
+        self.assertEqual(r.getheader("Content-Type"), "multipart/x-mixed-replace; boundary=frame")
+        self.assertEqual(self.env.hub.slots_free(), 3)
+        r2, _ = self.env.get("/cam/live.mjpg", method="HEAD")
+        self.assertEqual(r2.status, 200)  # no cooldown consumed
+        self.env.decision = PRIVATE
+        r3, _ = self.env.get("/cam/live.mjpg", method="HEAD")
+        self.assertEqual(r3.status, 403)
+
+    def test_live_stream_ends_on_door_open(self):
+        c = self.env.conn()
+        c.request("GET", "/cam/live.mjpg")
+        r = c.getresponse()
+        read_part(r)
+        self.env.decision = PRIVATE
+        t0 = time.monotonic()
+        try:
+            while r.fp.read(65536):
+                pass
+        except Exception:
+            pass
+        self.assertLess(time.monotonic() - t0, 1.5)
+        c.close()
+
+    def test_every_route_is_cropped(self):
+        self.env.keeper.tick()
+        _, still = self.env.get("/cam/still.jpg")
+        self.assertEqual(size(still), (1344, 1080))
+        c = self.env.conn()
+        c.request("GET", "/cam/live.mjpg")
+        r = c.getresponse()
+        for _ in range(3):
+            self.assertEqual(size(read_part(r)), (1344, 1080))
+        c.close()
+
+    def test_startup_without_signals_serves_placeholder(self):
+        store = SignalStore()
+        crop = lambda: CROP
+        dec = lambda now: __import__("camgate.policy", fromlist=["decide"]).decide(now, *store.snapshot(), crop())
+        keeper = StillKeeper(FakeSnap(), dec, crop)
+        hub = LiveHub(FakeStream(), dec, crop)
+        env_srv = make_server(keeper, hub, make_status_fn(store, keeper, hub, crop), port=0)
+        threading.Thread(target=env_srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
+        self.addCleanup(env_srv.server_close)
+        self.addCleanup(env_srv.shutdown)
+        port = env_srv.server_address[1]
+
+        def get(path):
+            c = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+            c.request("GET", path)
+            r = c.getresponse()
+            body = r.read()
+            c.close()
+            return r, body
+
+        keeper.tick()
+        r, body = get("/cam/still.jpg")
+        self.assertEqual(body, placeholder_jpeg())
+        st = json.loads(get("/cam/status.json")[1])
+        self.assertFalse(st["public"])
+        self.assertEqual(st["reason"], "door_state_unknown")
+        self.assertIsNone(st["still_taken_at"])
+        self.assertEqual(get("/cam/live.mjpg")[0].status, 403)
+
+    def test_unknown_path_404(self):
+        r, _ = self.env.get("/nope")
+        self.assertEqual(r.status, 404)
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+        r, _ = self.env.get("/cam/other")
+        self.assertEqual(r.status, 404)
+        self.assertEqual(r.getheader("Cache-Control"), "no-store")
+
+    def test_status_error_is_500_not_leak(self):
+        def boom():
+            raise RuntimeError("x")
+
+        env = Env(status_fn=boom)
+        self.addCleanup(env.close)
+        with self.assertLogs("camgate.server", level="ERROR"):
+            r, body = env.get("/cam/status.json")
+        self.assertEqual(r.status, 500)
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+
+
+class MainHelpersTest(unittest.TestCase):
+    def test_status_fn_composition(self):
+        store = SignalStore()
+        store.set_connected(True)
+        now = 1_000_000.0
+        store.set_doors(DoorSignal(False, 1.0, now))
+        store.set_showme(ShowMe(True, now + 100))
+        crop = lambda: CROP
+        keeper = StillKeeper(FakeSnap(), lambda t: Decision(True, "ok"), crop, clock=lambda: 1763979300.0)
+        keeper.tick()
+        hub = LiveHub(FakeStream(), lambda t: Decision(True, "ok"), crop, max_viewers=2)
+        st = make_status_fn(store, keeper, hub, crop, clock=lambda: now)()
+        self.assertEqual(st["public"], True)
+        self.assertEqual(st["reason"], "showme")
+        self.assertTrue(st["showme"])
+        self.assertEqual(st["live_slots_free"], 2)
+        self.assertEqual(st["still_taken_at"], "2025-11-24T10:15:00Z")
+        # showme "on" but expired is not active
+        store.set_showme(ShowMe(True, now - 1))
+        st = make_status_fn(store, keeper, hub, crop, clock=lambda: now)()
+        self.assertFalse(st["showme"])
+        self.assertEqual(st["reason"], "ok")
+
+    def test_crop_cache_rereads_after_ttl_and_catches_errors(self):
+        t = [0.0]
+        calls = []
+
+        def loader(path):
+            calls.append(path)
+            if len(calls) == 3:
+                raise OSError("boom")
+            return CROP if len(calls) == 1 else NO_CROP
+
+        fn = make_cached_crop_fn("/x", ttl=10, clock=lambda: t[0], loader=loader)
+        self.assertEqual(fn(), CROP)
+        t[0] = 9.9
+        self.assertEqual(fn(), CROP)
+        self.assertEqual(len(calls), 1)
+        t[0] = 10.0
+        self.assertIs(fn(), NO_CROP)
+        t[0] = 20.0
+        with self.assertLogs("camgate", level="ERROR"):
+            self.assertIsNone(fn())
+
+    def test_tick_loop_survives_exceptions(self):
+        stop = threading.Event()
+        n = []
+
+        class K:
+            def tick(self):
+                n.append(1)
+                if len(n) >= 3:
+                    stop.set()
+                raise RuntimeError("x")
+
+        with self.assertLogs("camgate", level="ERROR"):
+            tick_loop(K(), interval=0.01, stop=stop)
+        self.assertEqual(len(n), 3)
+
+
+if __name__ == "__main__":
+    unittest.main()
