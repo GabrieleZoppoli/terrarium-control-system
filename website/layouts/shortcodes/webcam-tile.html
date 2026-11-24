@@ -1,0 +1,27 @@
+{{- /* Highland hero tile: the camera's current still, refreshed every few seconds.
+       Falls back to a static photo if the Pi is unreachable. */ -}}
+{{- $cam := replace site.Params.liveConditionsURL "/api/conditions.json" "/cam/" -}}
+{{- $fallback := "/img/collection/dracula/dracula-pholeodytes.jpg" -}}
+<a class="highland-hero__interior highland-hero__cam" href="{{ "highland/webcam/" | relLangURL }}" aria-label="{{ i18n "webcamTileAria" }}">
+  <img data-cam="{{ $cam }}" data-fallback="{{ $fallback }}" src="{{ $cam }}still.jpg" alt="{{ i18n "webcamAlt" }}" loading="eager" decoding="async">
+  <span class="highland-hero__live" aria-hidden="true">{{ i18n "webcamLive" }}</span>
+  <figcaption>{{ i18n "webcamTileCaption" }}</figcaption>
+</a>
+<script>
+(function () {
+  var img = document.currentScript.previousElementSibling.querySelector('img');
+  var cam = img.getAttribute('data-cam'), failed = false;
+  img.addEventListener('error', function () {
+    if (failed) return;
+    failed = true;
+    img.src = img.getAttribute('data-fallback');
+    img.parentNode.classList.add('highland-hero__cam--offline');
+  });
+  setInterval(function () {
+    if (failed || document.visibilityState !== 'visible') return;
+    var next = new Image();
+    next.onload = function () { img.src = next.src; };
+    next.src = cam + 'still.jpg?t=' + Date.now();
+  }, 5000);
+})();
+</script>

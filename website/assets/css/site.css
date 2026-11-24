@@ -2792,3 +2792,17 @@ figure.moment figcaption {
   margin-bottom: 1.4rem;
   text-align: left;
 }
+
+/* Live camera tile in the highland hero */
+.highland-hero__live {
+  position: absolute; top: .75rem; left: .75rem;
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .2rem .6rem; border-radius: 999px;
+  font: 600 .75rem/1.4 system-ui, sans-serif; letter-spacing: .04em;
+  color: #fff; background: rgba(0, 0, 0, .55);
+}
+.highland-hero__live::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  background: #ff3b30; box-shadow: 0 0 0 3px rgba(255, 59, 48, .3);
+}
+.highland-hero__cam--offline .highland-hero__live { display: none; }

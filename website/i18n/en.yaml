@@ -150,6 +150,8 @@ species_see_all_post:  "in the collection"
 # Webcam page
 webcamAria:            "Live camera"
 webcamAlt:             "Live view inside the terrarium"
+webcamTileAria:       "Live webcam inside the terrarium"
+webcamTileCaption:     "Live from inside the cabinet · tap to watch"
 webcamLive:            "LIVE"
 webcamLeft:            "left"
 webcamUpdatedAgo:      "updated {n} min ago"

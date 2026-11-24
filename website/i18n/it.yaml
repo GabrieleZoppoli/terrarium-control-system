@@ -150,6 +150,8 @@ species_see_all_post:  "in collezione"
 # Pagina webcam
 webcamAria:            "Webcam in diretta"
 webcamAlt:             "Vista in diretta dell'interno del terrario"
+webcamTileAria:       "Webcam in diretta dentro al terrario"
+webcamTileCaption:     "In diretta dall'interno del terrario · tocca per guardare"
 webcamLive:            "LIVE"
 webcamLeft:            "rimanenti"
 webcamUpdatedAgo:      "aggiornata {n} min fa"
