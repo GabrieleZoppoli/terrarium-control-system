@@ -1,12 +1,18 @@
 """Vision inputs: best frame pick, overview/crops, prompt."""
 import io
 import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+from datetime import date as _date, timedelta
 from pathlib import Path
 from typing import Optional
 
 from PIL import Image, ImageDraw
 
-from . import annotate
+from . import annotate, config, registry, storage
 
 CROP = 400
 GRID = 100
@@ -165,3 +171,197 @@ def build_prompt(reg: dict, files: list) -> str:
         "Answer ONLY with JSON of exactly this shape, no other text:\n"
         '{"items":[{"id","state","confidence","x","y"}],'
         '"new":[{"state","confidence","x","y","note"}]}\n')
+
+
+class VisionError(Exception):
+    pass
+
+
+def run_claude(prompt: str, workdir, timeout=config.VISION_TIMEOUT_S) -> str:
+    env = dict(os.environ)
+    for k in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN"):
+        env.pop(k, None)
+    cmd = [config.CLAUDE_BIN, "-p", prompt, "--output-format", "json",
+           "--allowedTools", "Read"]
+    try:
+        p = subprocess.run(cmd, cwd=str(workdir), env=env, capture_output=True,
+                           text=True, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        raise VisionError("claude timed out")
+    except OSError as e:
+        raise VisionError("claude not runnable: %s" % e)
+    if p.returncode != 0:
+        raise VisionError("claude exit %s" % p.returncode)
+    try:
+        out = json.loads(p.stdout)
+    except ValueError:
+        raise VisionError("claude output not JSON")
+    if not isinstance(out, dict) or out.get("is_error"):
+        raise VisionError("claude reported an error")
+    res = out.get("result")
+    if not isinstance(res, str):
+        raise VisionError("claude result missing")
+    return res
+
+
+def _first_object(text: str):
+    start = text.find("{")
+    while start != -1:
+        depth, in_str, esc = 0, False, False
+        for i in range(start, len(text)):
+            c = text[i]
+            if in_str:
+                if esc:
+                    esc = False
+                elif c == "\\":
+                    esc = True
+                elif c == '"':
+                    in_str = False
+            elif c == '"':
+                in_str = True
+            elif c == "{":
+                depth += 1
+            elif c == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(text[start:i + 1])
+                    except ValueError:
+                        break
+        start = text.find("{", start + 1)
+    return None
+
+
+def parse_result(text, known_ids) -> dict:
+    if not isinstance(text, str):
+        raise VisionError("no text")
+    obj = _first_object(text.replace("```json", " ").replace("```", " "))
+    if not isinstance(obj, dict):
+        raise VisionError("no JSON object in answer")
+    items, new = obj.get("items"), obj.get("new")
+    if not isinstance(items, list) or not isinstance(new, list):
+        raise VisionError("items/new missing")
+    items = [i for i in items if isinstance(i, dict) and i.get("id") in known_ids]
+    return {"items": items, "new": new}
+
+
+def _geometry_of(day_dir: Path, frame: Path):
+    try:
+        for fr in json.loads((day_dir / "day.json").read_text())["frames"]:
+            if any(Path(f).name == frame.name for f in fr.get("files", [])):
+                return fr.get("geometry")
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        pass
+    return None
+
+
+def _day_dir(root, d):
+    return Path(root) / "frames" / d.strftime("%Y/%m/%d")
+
+
+def _summary(before, after, result):
+    lines = []
+    for r in result["items"]:
+        iid = r.get("id")
+        b, a = before["items"].get(iid), after["items"].get(iid)
+        if not b or not a:
+            continue
+        who = "%s %s" % (iid, b.get("label") or "")
+        if b.get("stalk"):
+            who += " (%s)" % b["stalk"]
+        conf = r.get("confidence")
+        if a.get("needs_owner") and not b.get("needs_owner") or \
+                (isinstance(conf, (int, float)) and conf < config.CONFIDENT):
+            lines.append("%s: unsure (%.2f) \u2014 needs you" % (iid, float(conf)))
+        else:
+            lines.append("%s: %s \u2192 %s (%.2f)" % (who.strip(), b.get("state"),
+                                                       a.get("state"), float(conf)))
+    for iid in sorted(set(after["items"]) - set(before["items"])):
+        it = after["items"][iid]
+        lines.append("%s: new %s candidate (%.2f) \u2014 needs you" % (
+            iid, it.get("state"), float(it["history"][-1]["confidence"])))
+    return lines
+
+
+def daily(date, root, runner=run_claude, registry_path=None) -> dict:
+    root = Path(root)
+    regp = Path(registry_path) if registry_path else root / "registry.json"
+    ds = date.isoformat()
+    status_path = root / "status" / ("vision-%s.json" % ds)
+
+    def finish(status, why="", summary=(), pending=()):
+        st = {"status": status, "why": why, "summary": list(summary),
+              "pending": list(pending)}
+        storage.write_atomic(status_path, (json.dumps(st, indent=2) + "\n").encode())
+        return st
+
+    tdir = _day_dir(root, date)
+    today = pick_best(tdir)
+    if today is None:
+        return finish("no_frame", "no usable frame today")
+    work = None
+    try:
+        reg = registry.load(regp)
+        geom = _geometry_of(tdir, today)
+        ydir = _day_dir(root, date - timedelta(days=1))
+        yest = pick_best(ydir)
+        if yest is not None and _geometry_of(ydir, yest) != geom:
+            yest = None
+        tmpbase = root / "tmp"
+        try:
+            tmpbase.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            tmpbase = None
+        work = Path(tempfile.mkdtemp(prefix="vision-", dir=str(tmpbase) if tmpbase else None))
+        files = build_inputs(today, yest, reg, work)
+        prompt = build_prompt(reg, files)
+        text = runner(prompt, work)
+        result = parse_result(text, set(reg.get("items", {})))
+        try:
+            after = registry.apply_vision(reg, ds, result, geom)
+        except ValueError as e:
+            if "already applied" in str(e):
+                return finish("already_done", "already applied for %s" % ds)
+            raise VisionError("apply_vision: %s" % e)
+        except TypeError as e:
+            raise VisionError("apply_vision: %s" % e)
+        registry.save(regp, after)
+        pending = [i for i, it in sorted(after["items"].items())
+                   if it.get("needs_owner")]
+        summ = _summary(reg, after, result)
+        if after.get("runs") and after["runs"][-1].get("status") == "geometry_changed":
+            summ.insert(0, "camera geometry changed \u2014 every item needs you")
+        if pending:
+            dots = [it for it in after["items"].values() if it.get("state") != "gone"]
+            img = annotate.draw_dots(today.read_bytes(), dots, show_pending=True)
+            storage.write_atomic(root / "status" / ("checkin-%s.jpg" % ds), img)
+        return finish("ok", "", summ, pending)
+    except VisionError as e:
+        return finish("vision_failed", str(e)[:200])
+    except Exception as e:  # never leave the registry half-written
+        return finish("vision_failed", "%s: %s" % (type(e).__name__, str(e)[:150]))
+    finally:
+        if work is not None:
+            shutil.rmtree(work, ignore_errors=True)
+
+
+def main() -> int:
+    root = Path(config.ARCHIVE_ROOT)
+    try:
+        st = daily(_date.today(), root)
+        line = "%s %s %s pending=%s" % (_date.today().isoformat(), st["status"],
+                                        st.get("why", ""), ",".join(st["pending"]))
+    except BaseException as e:
+        line = "%s error %s: %s" % (_date.today().isoformat(), type(e).__name__, e)
+    try:
+        lp = root / "logs" / "vision.log"
+        lp.parent.mkdir(parents=True, exist_ok=True)
+        with open(lp, "a") as f:
+            f.write(line + "\n")
+    except OSError:
+        pass
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
