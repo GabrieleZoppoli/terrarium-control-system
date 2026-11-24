@@ -1,0 +1,222 @@
+{
+  "_note": "camgate Node-RED nodes (Task 8). Import 'nodes' via Menu > Import, then add the wire_additions by hand (or via Admin API). Deployed 2026-11-24 additively; existing nodes untouched.",
+  "broker_config_reused": "280303304ebeda9f",
+  "wire_additions": [
+    {
+      "from": "serial_parser_001",
+      "output": 0,
+      "append_target": "cam_door_pub_001",
+      "meaning": "heartbeat H, (serial liveness only)"
+    },
+    {
+      "from": "serial_parser_001",
+      "output": 1,
+      "append_target": "cam_door_pub_001",
+      "meaning": "door_left 0|1, 1=OPEN"
+    },
+    {
+      "from": "serial_parser_001",
+      "output": 2,
+      "append_target": "cam_door_pub_001",
+      "meaning": "door_right 0|1, 1=OPEN"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "cam_comment_001",
+      "type": "comment",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera privacy (camgate): doors + show-me over MQTT",
+      "info": "Feeds camgate (127.0.0.1:8788). Doors retained on terrarium/camera/doors every 1 s;\nshow-me retained on terrarium/camera/showme, auto-off 30 min, off on every NR start.\nopen stays null until each door has reported once (fail closed).",
+      "x": 340,
+      "y": 2380,
+      "wires": []
+    },
+    {
+      "id": "cam_tick_001",
+      "type": "inject",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera tick 1 s",
+      "props": [
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "1",
+      "crontab": "",
+      "once": true,
+      "onceDelay": "1",
+      "topic": "tick",
+      "x": 140,
+      "y": 2460,
+      "wires": [
+        [
+          "cam_door_pub_001",
+          "cam_showme_timer_001"
+        ]
+      ]
+    },
+    {
+      "id": "cam_door_pub_001",
+      "type": "function",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera Door Publisher",
+      "func": "// Camera Door Publisher -> terrarium/camera/doors (camgate privacy gate).\n// Inputs: door_left / door_right (payload 1 = OPEN, 0 = closed), the serial\n// heartbeat (no topic: only refreshes serial liveness) and a 1 s \"tick\".\n// Fail closed: a door that has not reported since state was created is null,\n// so \"open\" is null and camgate keeps the camera private.\nconst now = Date.now() / 1000;\nlet left = context.get('left');\nlet right = context.get('right');\nif (left === undefined) left = null;\nif (right === undefined) right = null;\n\nif (msg.topic === 'door_left' || msg.topic === 'door_right') {\n    const p = msg.payload;   // strict: '' / null / junk must not read as closed\n    const val = (p === 0 || p === '0') ? 0 : (p === 1 || p === '1') ? 1 : null;\n    if (msg.topic === 'door_left') { left = val; context.set('left', val); }\n    else { right = val; context.set('right', val); }\n    context.set('last_serial_ts', now);\n} else if (msg.topic === 'tick') {\n    // publish below\n} else {\n    // heartbeat: serial link is alive; do not publish (avoid flooding)\n    context.set('last_serial_ts', now);\n    return null;\n}\n\nconst last = context.get('last_serial_ts');\nconst age = (typeof last === 'number' && isFinite(last)) ? Math.max(0, now - last) : 1e9;\nconst open = (left === null || right === null) ? null : !!(left || right);\nreturn {\n    topic: 'terrarium/camera/doors',\n    payload: { open: open, left: left, right: right, serial_age_s: age, ts: now }\n};\n",
+      "outputs": 1,
+      "timeout": 0,
+      "noerr": 0,
+      "initialize": "",
+      "finalize": "",
+      "libs": [],
+      "x": 400,
+      "y": 2420,
+      "wires": [
+        [
+          "cam_doors_mqtt_001"
+        ]
+      ]
+    },
+    {
+      "id": "cam_doors_mqtt_001",
+      "type": "mqtt out",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera doors (MQTT)",
+      "topic": "terrarium/camera/doors",
+      "qos": "1",
+      "retain": "true",
+      "respTopic": "",
+      "contentType": "",
+      "userProps": "",
+      "correl": "",
+      "expiry": "",
+      "broker": "280303304ebeda9f",
+      "x": 660,
+      "y": 2420,
+      "wires": []
+    },
+    {
+      "id": "cam_showme_startup_001",
+      "type": "inject",
+      "z": "0ff01249801c9e0e",
+      "name": "Show-me off at start",
+      "props": [
+        {
+          "p": "topic",
+          "vt": "str"
+        }
+      ],
+      "repeat": "",
+      "crontab": "",
+      "once": true,
+      "onceDelay": "2",
+      "topic": "startup",
+      "x": 150,
+      "y": 2540,
+      "wires": [
+        [
+          "cam_showme_timer_001"
+        ]
+      ]
+    },
+    {
+      "id": "cam_showme_switch_001",
+      "type": "ui_switch",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera show-me",
+      "label": "Camera show-me (30 min)",
+      "tooltip": "Show the website camera regardless of doors; auto-off after 30 min",
+      "group": "ea1ace4c9b8c8e61",
+      "order": 15,
+      "width": "3",
+      "height": "1",
+      "passthru": false,
+      "decouple": "false",
+      "topic": "showme",
+      "topicType": "str",
+      "style": "",
+      "onvalue": "true",
+      "onvalueType": "bool",
+      "onicon": "",
+      "oncolor": "",
+      "offvalue": "false",
+      "offvalueType": "bool",
+      "officon": "",
+      "offcolor": "",
+      "animate": false,
+      "className": "",
+      "x": 150,
+      "y": 2600,
+      "wires": [
+        [
+          "cam_showme_timer_001"
+        ]
+      ]
+    },
+    {
+      "id": "cam_showme_timer_001",
+      "type": "function",
+      "z": "0ff01249801c9e0e",
+      "name": "Show-me timer",
+      "func": "// Show-me timer -> terrarium/camera/showme. Auto-off after 1800 s.\n// Outputs: [0] MQTT showme, [1] switch reset (switch passthru is off, so this\n// never re-emits), [2] countdown text.\n// The 1800 s timer is a deadline (\"until\", in node context) checked by the\n// 1 s tick, so no setTimeout handle has to survive deploys or restarts.\n// On every Node-RED start the \"startup\" inject publishes off, so a retained\n// \"on\" cannot outlive a restart.\nconst MAX_S = 1800;\nconst now = Date.now() / 1000;\n\nfunction off() {\n    context.set('until', null);\n    context.set('shown_min', null);\n    return [\n        { topic: 'terrarium/camera/showme', payload: { on: false, until: null, ts: now } },\n        { payload: false },\n        { payload: 'off' }\n    ];\n}\n\nif (msg.topic === 'startup') return off();\n\nif (msg.topic === 'tick') {\n    const until = context.get('until');\n    if (typeof until !== 'number') return null;          // inactive\n    if (now >= until) return off();                        // expired\n    const mins = Math.ceil((until - now) / 60);\n    if (mins === context.get('shown_min')) return null;   // no UI change\n    context.set('shown_min', mins);\n    return [null, null, { payload: mins + ' min left' }];\n}\n\n// From the \"Camera show-me\" switch.\nif (msg.payload === true) {\n    const until = now + MAX_S;\n    context.set('until', until);\n    context.set('shown_min', MAX_S / 60);\n    return [\n        { topic: 'terrarium/camera/showme', payload: { on: true, until: until, ts: now } },\n        null,\n        { payload: (MAX_S / 60) + ' min left' }\n    ];\n}\nreturn off();\n",
+      "outputs": 3,
+      "timeout": 0,
+      "noerr": 0,
+      "initialize": "",
+      "finalize": "",
+      "libs": [],
+      "x": 400,
+      "y": 2560,
+      "wires": [
+        [
+          "cam_showme_mqtt_001"
+        ],
+        [
+          "cam_showme_switch_001"
+        ],
+        [
+          "cam_showme_text_001"
+        ]
+      ]
+    },
+    {
+      "id": "cam_showme_mqtt_001",
+      "type": "mqtt out",
+      "z": "0ff01249801c9e0e",
+      "name": "Camera show-me (MQTT)",
+      "topic": "terrarium/camera/showme",
+      "qos": "1",
+      "retain": "true",
+      "respTopic": "",
+      "contentType": "",
+      "userProps": "",
+      "correl": "",
+      "expiry": "",
+      "broker": "280303304ebeda9f",
+      "x": 670,
+      "y": 2520,
+      "wires": []
+    },
+    {
+      "id": "cam_showme_text_001",
+      "type": "ui_text",
+      "z": "0ff01249801c9e0e",
+      "group": "ea1ace4c9b8c8e61",
+      "order": 16,
+      "width": "3",
+      "height": "1",
+      "name": "Show-me countdown",
+      "label": "",
+      "format": "{{msg.payload}}",
+      "layout": "row-left",
+      "className": "",
+      "style": false,
+      "font": "",
+      "fontSize": 16,
+      "color": "#000000",
+      "x": 660,
+      "y": 2600,
+      "wires": []
+    }
+  ]
+}
