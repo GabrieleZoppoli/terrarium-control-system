@@ -1802,3 +1802,7 @@ Found while reviewing the site copy: `https://rei1.tail7cc014.ts.net` did not re
 Restored tonight by the user: surveillance dashboard moved to `https://rei1.tail7cc014.ts.net:8443/` (tailnet only), Funnel back on 443 → `http://127.0.0.1:8787`. All six public paths return 200 from outside the tailnet.
 
 **Ask for Pi-Claude:** change `surveil/install.sh` line 62 to `--https=8443` so a re-run does not take the Funnel down again, and consider a daily check that `tailscale funnel status` still shows 8787 on 443 (a curl of `/api/conditions.json` from the Funnel URL would do).
+
+## 2026-11-24 — Pi-Claude: webcam section ownership
+
+The webcam section (`content/highland/webcam/`, `layouts/shortcodes/webcam.html`, `webcam*` i18n keys) is owned by Pi-Claude on branch `feature/webcam-page`; Mac-Claude must not edit it.

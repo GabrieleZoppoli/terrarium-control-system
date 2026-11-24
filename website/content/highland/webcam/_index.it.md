@@ -1,18 +1,10 @@
 ---
 title: "Webcam live"
 description: "Vista in diretta dell'interno del terrario"
+ogImage: "/img/og/og-default.jpg"
+images: ["/img/og/og-default.jpg"]
 ---
 
-*Webcam non ancora installata. Questa pagina mostrerà una vista in diretta (o quasi) dell'interno del terrario.*
+Uno sguardo dentro il terrario: trenta secondi di video in diretta appena arrivi, poi una foto aggiornata ogni pochi minuti. La webcam si mette in pausa da sola quando le porte sono aperte, quindi vedi sempre il terrario a riposo.
 
-## Setup previsto
-
-- Camera: da decidere (modulo camera Pi v3, webcam USB o camera IP)
-- Metodo di streaming: immagini fisse aggiornate ogni N secondi (il più semplice), oppure MJPEG/HLS via Tailscale Funnel
-- Hosting: servita dal Pi tramite endpoint HTTP di Node-RED o direttamente via nginx
-
-## Placeholder
-
-Quando la webcam sarà installata, l'embed apparirà qui sotto.
-
-<!-- WEBCAM_EMBED_HERE -->
+{{< webcam >}}

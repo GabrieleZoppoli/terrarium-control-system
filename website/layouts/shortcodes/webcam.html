@@ -1,0 +1,274 @@
+{{- /* Live webcam. Talks to camgate (privacy gatekeeper on the Pi) through the
+       public Funnel: <base>/cam/status.json, still.jpg, live.mjpg. */ -}}
+{{- $cond := site.Params.liveConditionsURL | default "" -}}
+{{- $base := $cond | replaceRE "/api/conditions\\.json$" "" -}}
+{{- if $base -}}
+<section class="webcam" data-cam="{{ $base }}/cam/" data-conditions="{{ $cond }}"
+  data-l-live="{{ i18n "webcamLive" }}" data-l-left="{{ i18n "webcamLeft" }}"
+  data-l-updated="{{ i18n "webcamUpdatedAgo" }}" data-l-updated-now="{{ i18n "webcamUpdatedNow" }}"
+  data-l-watch="{{ i18n "webcamWatchAgain" }}" data-l-busy="{{ i18n "webcamBusy" }}"
+  data-l-offline="{{ i18n "webcamOffline" }}" data-l-night="{{ i18n "webcamNight" }}"
+  data-l-on="{{ i18n "webcamLightsOn" }}" data-l-off="{{ i18n "webcamLightsOff" }}"
+  aria-label="{{ i18n "webcamAria" }}">
+  <div class="webcam__frame" data-state="loading">
+    <img class="webcam__img" alt="{{ i18n "webcamAlt" }}" decoding="async" hidden>
+    <div class="webcam__badge" data-el="badge" hidden></div>
+    <button type="button" class="webcam__btn" data-el="btn" hidden>{{ i18n "webcamWatchAgain" }}</button>
+    <div class="webcam__card webcam__card--private" data-el="private" hidden>
+      <b>{{ i18n "webcamPrivateTitle" }}</b>
+      <span>{{ i18n "webcamPrivateBody" }}</span>
+    </div>
+    <div class="webcam__card webcam__card--offline" data-el="offline" hidden>
+      <span>{{ i18n "webcamOffline" }}</span>
+    </div>
+    <div class="webcam__note" data-el="note" hidden>{{ i18n "webcamBusy" }}</div>
+    <div class="webcam__chips" data-el="chips"></div>
+    <div class="webcam__bar" data-el="bar" hidden></div>
+  </div>
+</section>
+<style>
+.webcam { margin: 1.5rem 0; max-width: 720px; }
+.webcam__frame { position: relative; overflow: hidden; border-radius: 10px; aspect-ratio: 1344 / 1080; background: #111; color: #fff; font: 500 13px/1.4 system-ui, sans-serif; }
+.webcam__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.webcam__frame[data-state="private"] .webcam__img { filter: blur(14px) brightness(.6); }
+.webcam__frame[data-state="offline"] .webcam__img { display: none; }
+.webcam__badge { position: absolute; top: 10px; left: 10px; display: flex; gap: 6px; align-items: center; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.55); font-weight: 600; font-size: 12px; }
+.webcam__badge[data-live="true"]::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 0 3px rgba(255,59,48,.3); }
+.webcam__chips { position: absolute; left: 10px; right: 10px; bottom: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.webcam__chip { padding: 3px 8px; border-radius: 6px; background: rgba(0,0,0,.5); font-size: 12px; }
+.webcam__bar { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: #ff3b30; }
+.webcam__btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 10px 16px; border: 0; border-radius: 999px; background: rgba(255,255,255,.92); color: #111; font: 600 13px system-ui, sans-serif; cursor: pointer; }
+.webcam__btn:disabled { opacity: .55; cursor: default; }
+.webcam__btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.webcam__card { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 20px; text-align: center; font-size: 14px; }
+.webcam__card b { font-size: 17px; }
+.webcam__card--offline { background: #1c1f1d; color: #cfd6d1; }
+.webcam__note { position: absolute; left: 10px; right: 10px; bottom: 44px; text-align: center; font-size: 12px; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+.webcam [hidden] { display: none !important; }
+</style>
+<script>
+(function () {
+  var root = document.querySelector('.webcam');
+  if (!root) return;
+  var CAM = root.getAttribute('data-cam');
+  var COND = root.getAttribute('data-conditions');
+  function L(k) { return root.getAttribute('data-l-' + k) || ''; }
+  function el(n) { return root.querySelector('[data-el="' + n + '"]'); }
+  var frame = root.querySelector('.webcam__frame');
+  var img = root.querySelector('.webcam__img');
+  var badge = el('badge'), btn = el('btn'), priv = el('private'), off = el('offline');
+  var note = el('note'), chips = el('chips'), bar = el('bar');
+
+  var LIVE_MS = 30000, STILL_MS = 180000, POLL_MS = 10000, SLOW_MS = 60000;
+  var COOLDOWN_S = 60, BUSY_DEFAULT_S = 30;
+
+  var state = 'loading';       // loading | live | still | private | offline
+  var status = null;           // last good status.json
+  var statusOk = true;
+  var liveEnd = 0, tickTimer = 0, liveTimer = 0, pollTimer = 0, stillTimer = 0;
+  var btnReadyAt = 0;          // epoch ms when "watch again" is allowed
+  var busyNote = false;
+  var cond = null;
+  var started = false;         // live has been attempted at least once
+  var session = 0;             // invalidates stale async results
+
+  function visible() { return document.visibilityState !== 'hidden'; }
+  function url(name) { return CAM + name; }
+  function bust(name) { return url(name) + '?t=' + Date.now(); }
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+  function setState(s) { state = s; frame.setAttribute('data-state', s); }
+
+  function showStill() {
+    img.hidden = false;
+    img.src = bust('still.jpg');
+  }
+
+  function updateBadge() {
+    if (state === 'live') {
+      var left = Math.max(0, Math.ceil((liveEnd - Date.now()) / 1000));
+      badge.setAttribute('data-live', 'true');
+      badge.textContent = L('live') + ' · 0:' + pad(left) + ' ' + L('left');
+      badge.hidden = false;
+      bar.hidden = false;
+      bar.style.width = Math.max(0, Math.min(100, (liveEnd - Date.now()) / LIVE_MS * 100)) + '%';
+    } else if (state === 'still' && status && status.still_taken_at) {
+      var t = Date.parse(status.still_taken_at);
+      badge.setAttribute('data-live', 'false');
+      if (isNaN(t)) { badge.hidden = true; }
+      else {
+        var m = Math.floor((Date.now() - t) / 60000);
+        badge.textContent = '📷 ' + (m < 1 ? L('updated-now') : L('updated').replace('{n}', m));
+        badge.hidden = false;
+      }
+      bar.hidden = true;
+    } else {
+      badge.hidden = true;
+      bar.hidden = true;
+    }
+    updateButton();
+  }
+
+  function updateButton() {
+    var show = state === 'still';
+    btn.hidden = !show;
+    if (!show) return;
+    var wait = Math.ceil((btnReadyAt - Date.now()) / 1000);
+    btn.disabled = wait > 0;
+    btn.textContent = L('watch') + (wait > 0 ? ' (' + wait + ')' : '');
+    note.hidden = !(busyNote && wait > 0);
+  }
+
+  function renderChips() {
+    chips.textContent = '';
+    if (!cond || state === 'offline' || state === 'private') return;
+    function add(txt) {
+      var s = document.createElement('span');
+      s.className = 'webcam__chip';
+      s.textContent = txt;
+      chips.appendChild(s);
+    }
+    if (typeof cond.temperature_c === 'number') add(cond.temperature_c.toFixed(1) + ' °C');
+    if (typeof cond.humidity_rh === 'number') add(cond.humidity_rh.toFixed(0) + ' % RH');
+    if (typeof cond.lights === 'boolean') {
+      add(cond.lights ? L('on') : L('off'));
+      if (!cond.lights) add('🌙 ' + L('night'));
+    }
+  }
+
+  function clearTimers() {
+    clearInterval(tickTimer); clearTimeout(liveTimer); clearTimeout(stillTimer);
+    tickTimer = liveTimer = stillTimer = 0;
+  }
+
+  function enterPrivate() {
+    clearTimers(); session++;
+    setState('private');
+    priv.hidden = false; off.hidden = true; note.hidden = true;
+    showStill();   // server returns a blurred still while private
+    renderChips(); updateBadge();
+  }
+
+  function enterOffline() {
+    clearTimers(); session++;
+    setState('offline');
+    priv.hidden = true; off.hidden = false; note.hidden = true;
+    img.removeAttribute('src'); img.hidden = true;
+    renderChips(); updateBadge();
+  }
+
+  // cooldownS: seconds before "watch again" is allowed; busy: show the busy note
+  function enterStill(cooldownS, busy) {
+    clearTimers(); session++;
+    setState('still');
+    priv.hidden = true; off.hidden = true;
+    busyNote = !!busy;
+    btnReadyAt = Date.now() + (cooldownS || 0) * 1000;
+    showStill();   // replacing img.src also drops any MJPEG connection
+    tickTimer = setInterval(updateBadge, 1000);
+    stillTimer = setTimeout(function again() {
+      if (state !== 'still') return;
+      if (visible()) showStill();
+      stillTimer = setTimeout(again, STILL_MS);
+    }, STILL_MS);
+    renderChips(); updateBadge();
+  }
+
+  function startLive() {
+    if (!visible()) return;                 // never start live in a hidden tab
+    started = true;
+    var my = ++session;
+    clearTimers();
+    fetch(url('live.mjpg'), { method: 'HEAD', cache: 'no-store' }).then(function (r) {
+      if (my !== session) return;
+      if (r.status === 403) { enterPrivate(); return; }
+      if (r.status === 429) {
+        var ra = parseInt(r.headers.get('Retry-After'), 10);
+        enterStill(isNaN(ra) ? BUSY_DEFAULT_S : ra, true);
+        return;
+      }
+      if (!r.ok) { enterStill(COOLDOWN_S, false); return; }
+      beginStream(my);
+    }, function () {
+      if (my !== session) return;
+      enterOffline();
+    });
+  }
+
+  function beginStream(my) {
+    setState('live');
+    priv.hidden = true; off.hidden = true; note.hidden = true; busyNote = false;
+    liveEnd = Date.now() + LIVE_MS;
+    img.hidden = false;
+    img.src = bust('live.mjpg');
+    renderChips(); updateBadge();
+    tickTimer = setInterval(updateBadge, 250);
+    liveTimer = setTimeout(function () {
+      if (my === session) enterStill(COOLDOWN_S, false);
+    }, LIVE_MS);
+  }
+
+  img.addEventListener('error', function () {
+    if (state !== 'live') return;
+    var my = session;
+    // The stream failed (4xx or dropped). Find out why.
+    fetch(url('status.json'), { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (s) {
+      if (my !== session) return;
+      status = s;
+      if (!s.public) enterPrivate(); else enterStill(COOLDOWN_S, true);
+    }, function () {
+      if (my === session) enterOffline();
+    });
+  });
+
+  btn.addEventListener('click', function () {
+    if (Date.now() < btnReadyAt) return;
+    startLive();
+  });
+
+  function poll() {
+    clearTimeout(pollTimer);
+    if (!visible()) return;                 // resumed by visibilitychange
+    fetch(url('status.json'), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('status ' + r.status);
+      return r.json();
+    }).then(function (s) {
+      var wasOffline = !statusOk;
+      statusOk = true; status = s;
+      if (!s.public) {
+        if (state !== 'private') enterPrivate();
+      } else if (state === 'private' || state === 'offline' || state === 'loading') {
+        if (!started) startLive(); else enterStill(0, false);
+      } else if (state === 'still') {
+        updateBadge();
+      }
+      pollTimer = setTimeout(poll, POLL_MS);
+    }).catch(function () {
+      statusOk = false;
+      if (state !== 'offline') enterOffline();
+      pollTimer = setTimeout(poll, SLOW_MS);
+    });
+  }
+
+  function loadConditions() {
+    if (!COND || !visible()) return;
+    fetch(COND, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d) { cond = d; renderChips(); } }, function () {});
+  }
+
+  document.addEventListener('visibilitychange', function () {
+    if (!visible()) {
+      clearTimeout(pollTimer);
+      if (state === 'live') enterStill(COOLDOWN_S, false);   // free the Pi's slot
+    } else {
+      loadConditions();
+      poll();
+    }
+  });
+
+  loadConditions();
+  setInterval(loadConditions, SLOW_MS);
+  if (visible()) poll();
+})();
+</script>
+{{- end -}}
