@@ -1,6 +1,7 @@
 import http.client
 import io
 import json
+import logging
 import os
 import socket
 import threading
@@ -17,6 +18,8 @@ from camgate.live import LiveHub
 from camgate.policy import Decision, DoorSignal, ShowMe
 from camgate.server import make_server
 from camgate.signals import SignalStore
+
+logging.getLogger("camgate").addHandler(logging.NullHandler())
 
 PUBLIC = Decision(True, "ok")
 PRIVATE = Decision(False, "doors_open")
@@ -178,6 +181,39 @@ class ServerTest(unittest.TestCase):
         r, body = self.env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9"})
         self.assertEqual(r.status, 429)
         self.assertEqual(json.loads(body)["error"], "cooldown")
+
+    def test_three_concurrent_live_clients_stream_and_fourth_is_busy(self):
+        """Regression for the deploy test: 3 viewers each got 1 part and then the stream ended."""
+        env = Env(stream_frames=FRAMES)
+        self.addCleanup(env.close)
+        counts = [0, 0, 0]
+        stop = time.monotonic() + 2.5
+
+        def viewer(i):
+            c = env.conn()
+            c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": f"10.9.7.{i}"})
+            r = c.getresponse()
+            if r.status != 200:
+                return
+            try:
+                while time.monotonic() < stop:
+                    self.assertEqual(size(read_part(r)), (1344, 1080))
+                    counts[i] += 1
+            finally:
+                r.close()
+                c.close()
+
+        threads = [threading.Thread(target=viewer, args=(i,)) for i in range(3)]
+        for t in threads:
+            t.start()
+        time.sleep(1.5)
+        r, body = env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "10.9.7.99"})
+        self.assertEqual(r.status, 429)
+        self.assertEqual(json.loads(body)["error"], "busy")
+        for t in threads:
+            t.join(5)
+        for n in counts:
+            self.assertGreaterEqual(n, 5, counts)
 
     def test_live_camera_unavailable_is_503(self):
         env = Env(fail_stream=True)

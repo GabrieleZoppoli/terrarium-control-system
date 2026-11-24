@@ -8,6 +8,7 @@ re-checks the privacy
 decision and the crop before yielding every frame and on every wait timeout,
 so a door opening or a stalled camera ends the stream within about 0.5 s.
 """
+import logging
 import math
 import threading
 import time
@@ -16,6 +17,8 @@ from typing import Callable, Iterator, NamedTuple, Optional
 from .camera import CameraError
 from .config import LIVE_COOLDOWN_S, LIVE_FPS, LIVE_MAX_VIEWERS, LIVE_SESSION_S
 from .frames import crop_jpeg
+
+log = logging.getLogger("camgate.live")
 
 WAIT_S = 0.5  # longest real-time wait before re-checking privacy and deadline
 STARTUP_TIMEOUT_S = 5.0
@@ -71,14 +74,22 @@ class Session:
         last_seq = 0
         last_yield = None
         got_any = False
+        sent = 0
+        reason = "closed"
         try:
             while True:
-                if self._expired() or hub._allowed_crop() is None:
+                if self._expired():
+                    reason = "session_time_up"
+                    return
+                if hub._allowed_crop() is None:
+                    reason = "private"
                     return
                 with cond:
                     if self._ended:
-                        if self._failed and not got_any:
-                            raise CameraError("camera stream failed")
+                        if self._failed:
+                            reason = "camera_failed"
+                            if not got_any:
+                                raise CameraError("camera stream failed")
                         return
                     now_m = time.monotonic()
                     if last_yield is not None and now_m < last_yield + interval:
@@ -89,6 +100,7 @@ class Session:
                         if not got_any:
                             left = startup_deadline - now_m
                             if left <= 0:
+                                reason = "startup_timeout"
                                 raise CameraError("no camera frame within startup timeout")
                             cond.wait(min(WAIT_S, left))
                         else:
@@ -97,19 +109,24 @@ class Session:
                     last_seq = f.seq
                 crop = hub._allowed_crop()
                 if crop is None or self._expired():
+                    reason = "private_or_time_up"
                     return
                 jpeg = hub._cropped(f, crop)
                 if jpeg is None:
-                    return  # crop failed: fail closed
+                    reason = "crop_failed"
+                    return  # fail closed
                 now_crop = hub._allowed_crop()
                 if now_crop is None or self._expired():
+                    reason = "private_or_time_up"
                     return
                 if now_crop != crop:
                     continue  # crop changed while cropping; never serve a stale crop
                 yield jpeg
                 got_any = True
+                sent += 1
                 last_yield = time.monotonic()
         finally:
+            log.info("live session ended: %s after %d frames", reason, sent)
             hub._end(self)
 
     def close(self) -> None:
@@ -226,6 +243,7 @@ class LiveHub:
 
     def _run(self, gen: int, stop: threading.Event) -> None:
         it = None
+        why = "source ended"
         try:
             it = iter(self._source.frames())
             for raw in it:
@@ -237,8 +255,8 @@ class LiveHub:
                     self._seq += 1
                     self._frame = _Frame(gen, self._seq, raw)
                     self._cond.notify_all()
-        except Exception:
-            pass
+        except Exception as e:
+            why = f"source raised {e!r}"
         finally:
             if it is not None and hasattr(it, "close"):
                 try:
@@ -246,6 +264,7 @@ class LiveHub:
                 except Exception:
                     pass
             if not stop.is_set():
+                log.warning("live reader failed (%s); ending its sessions", why)
                 self._fail(gen)
 
     def _fail(self, gen: int) -> None:

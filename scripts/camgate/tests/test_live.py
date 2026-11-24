@@ -1,4 +1,5 @@
 import io
+import logging
 import threading
 import time
 import unittest
@@ -11,6 +12,8 @@ from camgate import live
 from camgate.config import LIVE_COOLDOWN_S, LIVE_MAX_VIEWERS, Crop
 from camgate.live import Busy, Cooldown, LiveHub, Private
 from camgate.policy import Decision
+
+logging.getLogger("camgate").addHandler(logging.NullHandler())
 
 PUBLIC = Decision(True, "ok")
 PRIVATE = Decision(False, "doors_open")
@@ -259,12 +262,14 @@ class LiveHubTest(unittest.TestCase):
 
     def test_source_failure_ends_sessions(self):
         h = self.make(source=FakeSource(fail_after=2))
-        sessions = [h.hub.open_session(v) for v in ("a", "b")]
-        it = sessions[0].frames()
-        next(it)
-        with self.assertRaises(StopIteration):
-            while True:
-                next(it)
+        with self.assertLogs("camgate.live", "WARNING") as logs:
+            sessions = [h.hub.open_session(v) for v in ("a", "b")]
+            it = sessions[0].frames()
+            next(it)
+            with self.assertRaises(StopIteration):
+                while True:
+                    next(it)
+        self.assertIn("fake stream broke", "\n".join(logs.output))
         self.assertEqual(h.hub.slots_free(), LIVE_MAX_VIEWERS)
         with self.assertRaises(CameraError):
             next(sessions[1].frames())
@@ -340,6 +345,32 @@ class LiveHubTest(unittest.TestCase):
             it = h.hub.open_session("a").frames()
             self.assertEqual(size(next(it)), (1000, 800))
         self.assertEqual(crops[0], CROP)
+
+    def test_three_concurrent_viewers_each_stream(self):
+        """Regression: with 3 viewers in their own threads each got 1 frame, then the stream ended."""
+        h = self.make(source=FakeSource(period=0.125))  # ~8 fps like ustreamer
+        sessions = [h.hub.open_session(v) for v in ("a", "b", "c")]
+        counts = [0, 0, 0]
+        stop = time.monotonic() + 2.5
+
+        def consume(i):
+            for jpeg in sessions[i].frames():
+                self.assertEqual(size(jpeg), (1344, 1080))
+                counts[i] += 1
+                if time.monotonic() >= stop:
+                    break
+
+        threads = [threading.Thread(target=consume, args=(i,)) for i in range(3)]
+        for t in threads:
+            t.start()
+        time.sleep(1.5)
+        self.assertEqual(h.hub.slots_free(), 0)  # all three still streaming
+        with self.assertRaises(Busy):
+            h.hub.open_session("d")
+        for t in threads:
+            t.join(5)
+        for c in counts:
+            self.assertGreaterEqual(c, 5, counts)
 
 
 if __name__ == "__main__":
