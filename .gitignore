@@ -32,3 +32,4 @@ flows_cred.json
 nodered/flows_cred.json
 *.cred
 secrets/
+.superpowers/
