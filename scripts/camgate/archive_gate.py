@@ -15,15 +15,19 @@ class ArchiveGate:
     def __init__(self, clock=time.time):
         self._lock = threading.Lock()
         # The state before start is unknown, so it counts as not ok.
-        self._last_not_ok_at = clock()
+        self._started_at = clock()
+        self._last_not_ok_at = self._started_at
         self._seen_at = None
         self._reason = "no_observation"
 
     def observe(self, now: float, decision: Decision) -> None:
         with self._lock:
+            # A gap in observation is unknown state, so it counts as not-ok time.
+            prev = self._started_at if self._seen_at is None else self._seen_at
+            gap = not (now - prev <= OBSERVATION_MAX_AGE_S)
             self._seen_at = now
             self._reason = decision.reason
-            if decision.reason != "ok":
+            if gap or decision.reason != "ok":
                 self._last_not_ok_at = now
 
     def state(self, now: float) -> dict:
