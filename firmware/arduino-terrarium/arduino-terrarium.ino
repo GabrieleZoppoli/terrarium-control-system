@@ -80,6 +80,11 @@ void isrTachImpeller() { tachCount[3]++; }
 unsigned long lastHeartbeat = 0;
 unsigned long lastDoorPoll  = 0;
 unsigned long lastDoorReport = 0;
+// A door change that could not be sent (TX buffer full) stays pending and is
+// retried on the next 100 ms poll instead of waiting for the 10 s report.
+// The camera privacy gate depends on door changes arriving within ~1 s.
+bool doorLeftPending  = false;
+bool doorRightPending = false;
 unsigned long lastRpmCalc   = 0;
 unsigned long lastRpmReport = 0;
 const unsigned long HEARTBEAT_INTERVAL = 2000;   // 2s
@@ -519,19 +524,23 @@ void checkDoors() {
 
     if (left != lastDoorLeft) {
       lastDoorLeft = left;
-      if (txReady()) {
-        Serial.print("D22,");
-        Serial.println(left);
-      }
-      changed = true;
+      doorLeftPending = true;
     }
-
     if (right != lastDoorRight) {
       lastDoorRight = right;
-      if (txReady()) {
-        Serial.print("D24,");
-        Serial.println(right);
-      }
+      doorRightPending = true;
+    }
+
+    if (doorLeftPending && txReady()) {
+      Serial.print("D22,");
+      Serial.println(lastDoorLeft);
+      doorLeftPending = false;
+      changed = true;
+    }
+    if (doorRightPending && txReady()) {
+      Serial.print("D24,");
+      Serial.println(lastDoorRight);
+      doorRightPending = false;
       changed = true;
     }
 
