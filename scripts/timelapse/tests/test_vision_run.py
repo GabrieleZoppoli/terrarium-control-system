@@ -59,8 +59,24 @@ class TestDaily(unittest.TestCase):
             on_disk = json.loads((Path(t) / "status" / "vision-2026-11-24.json").read_text())
             self.assertEqual(on_disk["status"], "ok")
             self.assertEqual(list((Path(t) / "tmp").iterdir()), [])
+            sp = Path(t) / "status" / "vision-2026-11-24.json"
+            before = sp.read_bytes()
             st2 = vision.daily(D, t, runner=lambda p, w: _ans(GOOD))
-            self.assertEqual(st2["status"], "already_done")
+            self.assertEqual(st2["status"], "ok")
+            self.assertEqual(sp.read_bytes(), before)
+            self.assertEqual(json.loads(sp.read_text())["status"], "ok")
+            self.assertTrue((Path(t) / "status" / "checkin-2026-11-24.jpg").exists())
+
+    def test_float_and_out_of_frame_coords(self):
+        with tempfile.TemporaryDirectory() as t:
+            rp = _setup(t)   # frame is 800x700
+            ans = [{"id": "f1", "state": "opening", "confidence": 0.92, "x": 470.0, "y": 317.6},
+                   {"id": "f2", "state": "open", "confidence": 0.9, "x": 5000, "y": -3.2}]
+            st = vision.daily(D, t, runner=lambda p, w: _ans(ans))
+            self.assertEqual(st["status"], "ok", st)
+            items = registry.load(rp)["items"]
+            self.assertEqual((items["f1"]["x"], items["f1"]["y"]), (470, 318))
+            self.assertEqual((items["f2"]["x"], items["f2"]["y"]), (799, 0))
 
     def test_checkin_failure_keeps_ok(self):
         with tempfile.TemporaryDirectory() as t:
@@ -143,7 +159,8 @@ class TestRunClaude(unittest.TestCase):
         self.assertEqual(cmd[1:], ["-p", "p", "--output-format", "json",
                                    "--tools", "Read", "--allowedTools", "Read(./**)",
                                    "--permission-mode", "dontAsk",
-                                   "--strict-mcp-config", "--disable-slash-commands"])
+                                   "--strict-mcp-config", "--disable-slash-commands",
+                                   "--setting-sources", "", "--no-session-persistence"])
 
     def test_failures(self):
         for cp in (subprocess.CompletedProcess([], 1, stdout="", stderr="e"),
@@ -163,6 +180,19 @@ class TestParse(unittest.TestCase):
     def test_prose_around_and_braces_in_strings(self):
         txt = 'ok {"items":[{"id":"f1","note":"a } b"}],"new":[]} done'
         self.assertEqual(vision.parse_result(txt, {"f1"})["items"][0]["id"], "f1")
+
+    def test_float_rounded_and_clamped(self):
+        txt = ('{"items":[{"id":"f1","x":470.4,"y":9999.0}],'
+               '"new":[{"x":-5.0,"y":10.5}]}')
+        r = vision.parse_result(txt, {"f1"}, (800, 700))
+        self.assertEqual((r["items"][0]["x"], r["items"][0]["y"]), (470, 699))
+        self.assertEqual((r["new"][0]["x"], r["new"][0]["y"]), (0, 10))
+        self.assertIsInstance(r["items"][0]["x"], int)
+
+    def test_prompt_demands_integers(self):
+        p = vision.build_prompt({"items": {}}, [])
+        self.assertIn("integer pixel", p)
+        self.assertIn('"x":470,"y":318', p)
 
     def test_missing_keys(self):
         with self.assertRaises(vision.VisionError):

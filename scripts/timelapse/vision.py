@@ -1,6 +1,7 @@
 """Vision inputs: best frame pick, overview/crops, prompt."""
 import io
 import json
+import math
 import os
 import shutil
 import subprocess
@@ -165,12 +166,14 @@ def build_prompt(reg: dict, files: list) -> str:
         "hidden.\n"
         "Colour is unreliable under the pink LEDs, and pink does NOT mean old. "
         "Bends and joints on a stalk are not buds.\n"
-        "Report a confidence between 0 and 1 for every item. x and y are full-resolution "
-        "pixel coordinates of the item in today's frame.\n"
+        "Report a confidence between 0 and 1 for every item. x and y are integer pixel "
+        "coordinates in the full-resolution frame (today's frame), never fractions.\n"
         "List new flower candidates only if they are clearly a Heliamphora flower or bud.\n\n"
         "Answer ONLY with JSON of exactly this shape, no other text:\n"
         '{"items":[{"id","state","confidence","x","y"}],'
-        '"new":[{"state","confidence","x","y","note"}]}\n')
+        '"new":[{"state","confidence","x","y","note"}]}\n'
+        'Example answer: {"items":[{"id":"f1","state":"bud","confidence":0.9,'
+        '"x":470,"y":318}],"new":[]}\n')
 
 
 class VisionError(Exception):
@@ -186,7 +189,10 @@ def run_claude(prompt: str, workdir, timeout=config.VISION_TIMEOUT_S) -> str:
            # Read(./**) scopes reads to the workdir (cwd); unscoped Read reads anywhere
            "--allowedTools", "Read(./**)",
            "--permission-mode", "dontAsk", "--strict-mcp-config",
-           "--disable-slash-commands"]
+           "--disable-slash-commands",
+           # no user/project/local settings: ~/.claude/settings.json allows Read of
+           # /home/pi/** and carries a Stop hook; no transcript left behind either
+           "--setting-sources", "", "--no-session-persistence"]
     try:
         p = subprocess.run(cmd, cwd=str(workdir), env=env, capture_output=True,
                            text=True, timeout=timeout)
@@ -236,7 +242,22 @@ def _first_object(text: str):
     return None
 
 
-def parse_result(text, known_ids) -> dict:
+def _fix_coords(entries, frame):
+    """Round finite float x/y to int; clamp into the frame when its size is known."""
+    for e in entries:
+        if not isinstance(e, dict):
+            continue
+        for k, lim in (("x", 0), ("y", 1)):
+            v = e.get(k)
+            if isinstance(v, bool) or not isinstance(v, (int, float)) or not math.isfinite(v):
+                continue
+            v = int(round(v))
+            if frame is not None:
+                v = max(0, min(v, frame[lim] - 1))
+            e[k] = v
+
+
+def parse_result(text, known_ids, frame=None) -> dict:
     if not isinstance(text, str):
         raise VisionError("no text")
     obj = _first_object(text.replace("```json", " ").replace("```", " "))
@@ -246,6 +267,8 @@ def parse_result(text, known_ids) -> dict:
     if not isinstance(items, list) or not isinstance(new, list):
         raise VisionError("items/new missing")
     items = [i for i in items if isinstance(i, dict) and i.get("id") in known_ids]
+    _fix_coords(items, frame)
+    _fix_coords(new, frame)
     return {"items": items, "new": new}
 
 
@@ -328,12 +351,22 @@ def daily(date, root, runner=run_claude, registry_path=None) -> dict:
         files = build_inputs(today, yest, reg, work)
         prompt = build_prompt(reg, files)
         text = runner(prompt, work)
-        result = parse_result(text, set(reg.get("items", {})))
+        try:
+            with Image.open(today) as _im:
+                fsize = _im.size
+        except Exception:
+            fsize = None
+        result = parse_result(text, set(reg.get("items", {})), fsize)
         try:
             after = registry.apply_vision(reg, ds, result, geom)
         except ValueError as e:
             if "already applied" in str(e):
-                return finish("already_done", "already applied for %s" % ds)
+                # never overwrite the daily status (summary + check-in) on a re-run
+                try:
+                    return json.loads(status_path.read_text())
+                except (OSError, ValueError):
+                    return {"status": "already_done", "why": "already applied for %s" % ds,
+                            "summary": [], "pending": []}
             raise VisionError("apply_vision: %s" % e)
         except TypeError as e:
             raise VisionError("apply_vision: %s" % e)
