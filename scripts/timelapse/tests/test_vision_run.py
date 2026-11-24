@@ -141,7 +141,7 @@ class TestRunClaude(unittest.TestCase):
         self.assertEqual(kw["cwd"], "/tmp")
         cmd = m.call_args.args[0]
         self.assertEqual(cmd[1:], ["-p", "p", "--output-format", "json",
-                                   "--tools", "Read", "--allowedTools", "Read",
+                                   "--tools", "Read", "--allowedTools", "Read(./**)",
                                    "--permission-mode", "dontAsk",
                                    "--strict-mcp-config", "--disable-slash-commands"])
 

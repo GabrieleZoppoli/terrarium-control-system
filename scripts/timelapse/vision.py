@@ -182,7 +182,9 @@ def run_claude(prompt: str, workdir, timeout=config.VISION_TIMEOUT_S) -> str:
     for k in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN"):
         env.pop(k, None)
     cmd = [config.CLAUDE_BIN, "-p", prompt, "--output-format", "json",
-           "--tools", "Read", "--allowedTools", "Read",
+           "--tools", "Read",
+           # Read(./**) scopes reads to the workdir (cwd); unscoped Read reads anywhere
+           "--allowedTools", "Read(./**)",
            "--permission-mode", "dontAsk", "--strict-mcp-config",
            "--disable-slash-commands"]
     try:
