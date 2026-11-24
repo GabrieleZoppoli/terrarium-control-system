@@ -6,6 +6,7 @@ Contains coordinates and labels only, never pixels.
 import argparse
 import copy
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -31,9 +32,49 @@ def save(path, reg) -> None:
     storage.write_atomic(path, (json.dumps(reg, indent=2, sort_keys=True) + "\n").encode())
 
 
-def _next_id(reg) -> str:
-    nums = [int(i[1:]) for i in reg["items"] if i[:1] == "f" and i[1:].isdigit()]
-    return "f%d" % (max(nums, default=0) + 1)
+def _ensure_next(reg) -> None:
+    """Old registries lack next_id: start it at max existing id + 1."""
+    if "next_id" not in reg:
+        nums = [int(i[1:]) for i in reg["items"] if i[:1] == "f" and i[1:].isdigit()]
+        reg["next_id"] = max(nums, default=0) + 1
+
+
+def _alloc_id(reg) -> str:
+    """Allocate a never-reused id from the persistent counter."""
+    _ensure_next(reg)
+    iid = "f%d" % reg["next_id"]
+    reg["next_id"] += 1
+    return iid
+
+
+def _num(v):
+    return isinstance(v, (int, float)) and not isinstance(v, bool)
+
+
+def _check(cond, msg):
+    if not cond:
+        raise ValueError("invalid vision result: " + msg)
+
+
+def _validate_entry(e, need_id):
+    _check(isinstance(e, dict), "entry is not an object")
+    keys = ("state", "confidence", "x", "y") + (("id",) if need_id else ())
+    for k in keys:
+        _check(k in e, "missing key %r" % k)
+    _check(e["state"] in STATES, "bad state %r" % (e["state"],))
+    c = e["confidence"]
+    _check(_num(c) and math.isfinite(c) and 0 <= c <= 1, "bad confidence %r" % (c,))
+    for k in ("x", "y"):
+        _check(isinstance(e[k], int) and not isinstance(e[k], bool) and e[k] >= 0,
+               "bad %s %r" % (k, e[k]))
+
+
+def _validate(result):
+    _check(isinstance(result, dict), "result is not an object")
+    for e in result.get("items", []):
+        _validate_entry(e, True)
+    for e in result.get("new", []):
+        _validate_entry(e, False)
 
 
 def _new_item(iid, kind, label, stalk, state, x, y, date, confirmed, needs_owner,
@@ -57,13 +98,17 @@ def _set_state(item, state, date):
 
 def apply_vision(reg, date, result, geometry) -> dict:
     """Merge one day's vision result into a copy of reg (input is not mutated)."""
-    if any(r.get("date") == date for r in reg.get("runs", [])):
+    _validate(result)
+    if any(r.get("date") == date and r.get("status") == "ok"
+           for r in reg.get("runs", [])):
         raise ValueError("already applied for %s" % date)
     out = copy.deepcopy(reg)
+    _ensure_next(out)
     if out.get("geometry") and out["geometry"] != geometry:
         for item in out["items"].values():
             item["needs_owner"] = True
-        out["runs"].append({"date": date, "status": "ok", "note": "geometry changed"})
+        out["runs"].append({"date": date, "status": "geometry_changed",
+                            "note": "%s -> %s" % (out["geometry"], geometry)})
         return out
     out["geometry"] = geometry
     for r in result.get("items", []):
@@ -81,7 +126,7 @@ def apply_vision(reg, date, result, geometry) -> dict:
             item["needs_owner"] = True
             item["streak"] = 0
     for c in result.get("new", []):
-        iid = _next_id(out)
+        iid = _alloc_id(out)
         out["items"][iid] = _new_item(iid, "flower", "Heliamphora", "", c["state"],
                                       c["x"], c["y"], date, False, True,
                                       c["confidence"], "vision")
@@ -123,6 +168,7 @@ def main(argv=None) -> int:
     m.add_argument("id")
     m.add_argument("x", type=int)
     m.add_argument("y", type=int)
+    sub.add_parser("geometry").add_argument("geometry")
     a = sub.add_parser("add")
     a.add_argument("kind")
     a.add_argument("state", choices=STATES)
@@ -137,6 +183,7 @@ def main(argv=None) -> int:
 
     reg = load(args.path)
     items = reg["items"]
+    _ensure_next(reg)
     if args.cmd == "list":
         for i, v in sorted(items.items(), key=lambda kv: int(kv[0][1:]) if kv[0][1:].isdigit() else 0):
             print("%s %s (%d,%d) %s %s%s" % (
@@ -150,8 +197,12 @@ def main(argv=None) -> int:
             return 1
         save(args.path, json.loads(Path(args.file).read_text()))
         return 0
-    if args.cmd == "add":
-        iid = _next_id(reg)
+    if args.cmd == "geometry":
+        reg["runs"].append({"date": _today(), "status": "owner",
+                            "note": "geometry set: %s -> %s" % (reg.get("geometry", ""), args.geometry)})
+        reg["geometry"] = args.geometry
+    elif args.cmd == "add":
+        iid = _alloc_id(reg)
         items[iid] = _new_item(iid, args.kind, args.label, args.stalk, args.state,
                                args.x, args.y, _today(), True, False, 1.0, "owner")
         print(iid)

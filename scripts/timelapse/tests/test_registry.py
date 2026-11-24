@@ -102,6 +102,83 @@ class ApplyVision(unittest.TestCase):
             registry.apply_vision(out, "2026-11-25", vis(), GEO)
 
 
+class Validation(unittest.TestCase):
+    def bad(self, result):
+        reg = seeded()
+        before = json.dumps(reg, sort_keys=True)
+        with self.assertRaises(ValueError):
+            registry.apply_vision(reg, "2026-11-25", result, GEO)
+        self.assertEqual(json.dumps(reg, sort_keys=True), before)
+
+    def test_bad_state(self):
+        self.bad(vis([it("f1", "blooming", 0.9)]))
+
+    def test_nan_confidence(self):
+        self.bad(vis([it("f1", "open", float("nan"))]))
+
+    def test_out_of_range_confidence(self):
+        self.bad(vis([it("f1", "open", 1.5)]))
+        self.bad(vis([it("f1", "open", -0.1)]))
+
+    def test_bool_rejected(self):
+        self.bad(vis([it("f1", "open", True)]))
+        self.bad(vis([it("f1", "open", 0.9, True, 2)]))
+
+    def test_bad_coords(self):
+        self.bad(vis([it("f1", "open", 0.9, -1, 2)]))
+        self.bad(vis([it("f1", "open", 0.9, 1.5, 2)]))
+
+    def test_missing_key(self):
+        e = it("f1", "open", 0.9)
+        del e["confidence"]
+        self.bad(vis([e]))
+
+    def test_bad_new_candidate(self):
+        self.bad(vis([it("f1", "opening", 0.9)],
+                     new=[{"state": "bud", "confidence": float("nan"), "x": 1, "y": 2}]))
+        self.bad(vis(new=[{"state": "weird", "confidence": 0.9, "x": 1, "y": 2}]))
+        self.bad(vis(new=[{"state": "bud", "confidence": 0.9, "x": 1}]))
+
+
+class IdsAndGeometry(unittest.TestCase):
+    def test_ids_never_reused_vision(self):
+        reg = seeded()
+        reg["next_id"] = 6
+        del reg["items"]["f5"]
+        out = registry.apply_vision(reg, "2026-11-25", vis(new=[
+            {"state": "bud", "confidence": 0.9, "x": 5, "y": 6}]), GEO)
+        self.assertIn("f6", out["items"])
+        self.assertNotIn("f5", out["items"])
+        self.assertEqual(out["next_id"], 7)
+
+    def test_drop_then_add_cli_new_id(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "r.json")
+            registry.save(p, seeded())  # old-style: no next_id
+            Cli().run_cli(p, "drop", "f5")
+            _, out = Cli().run_cli(p, "add", "flower", "bud", "1", "2", "H")
+            self.assertEqual(out.strip(), "f6")
+            self.assertEqual(registry.load(p)["next_id"], 7)
+
+    def test_mismatch_run_record_and_retry(self):
+        out = registry.apply_vision(seeded(), "2026-11-25", vis(), "new/geom")
+        self.assertEqual(out["runs"][-1], {"date": "2026-11-25",
+                         "status": "geometry_changed", "note": GEO + " -> new/geom"})
+        self.assertEqual(out["geometry"], GEO)
+        again = registry.apply_vision(out, "2026-11-25", vis(), GEO)
+        self.assertEqual(again["runs"][-1]["status"], "ok")
+
+    def test_geometry_cli(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "r.json")
+            registry.save(p, seeded())
+            Cli().run_cli(p, "geometry", "1000x900+0+0/rot180")
+            r = registry.load(p)
+            self.assertEqual(r["geometry"], "1000x900+0+0/rot180")
+            self.assertEqual(len(r["items"]), 5)
+            self.assertEqual(r["runs"][-1]["status"], "owner")
+
+
 class Public(unittest.TestCase):
     def test_rules(self):
         b = {"confirmed": False, "needs_owner": False, "streak": 0}
