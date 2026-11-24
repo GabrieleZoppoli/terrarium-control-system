@@ -192,6 +192,22 @@ class LiveHub:
             self._sessions.add(session)
             return session
 
+    def cooldown_retry_s(self, visitor: str) -> Optional[int]:
+        """Seconds left on visitor's cooldown, or None. Read-only: never prunes or extends."""
+        with self._cond:
+            until = self._cooldowns.get(visitor)
+            now = self._clock()
+            if until is None or not (now < until):
+                return None
+            return _retry_s(until - now)
+
+    def busy_retry_s(self) -> int:
+        """Seconds until the soonest live session ends (at least 1). Read-only."""
+        with self._cond:
+            now = self._clock()
+            soonest = min((s.deadline for s in self._sessions), default=now)
+            return _retry_s(soonest - now)
+
     def slots_free(self) -> int:
         with self._cond:
             return max(0, self._max_viewers - len(self._sessions))

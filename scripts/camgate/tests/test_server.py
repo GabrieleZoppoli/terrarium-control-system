@@ -16,7 +16,7 @@ from camgate.config import Crop, NO_CROP
 from camgate.frames import placeholder_jpeg
 from camgate.live import LiveHub
 from camgate.policy import Decision, DoorSignal, ShowMe
-from camgate.server import make_server
+from camgate.server import _visitor, make_server
 from camgate.signals import SignalStore
 
 logging.getLogger("camgate").addHandler(logging.NullHandler())
@@ -169,7 +169,7 @@ class ServerTest(unittest.TestCase):
 
     def test_live_cooldown_is_429(self):
         c = self.env.conn()
-        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9, 10.0.0.1"})
+        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": "6.6.6.6, 9.9.9.9"})
         resp = c.getresponse()
         read_part(resp)
         resp.close()
@@ -179,6 +179,73 @@ class ServerTest(unittest.TestCase):
                 break
             time.sleep(0.1)
         r, body = self.env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9"})
+        self.assertEqual(r.status, 429)
+        self.assertEqual(json.loads(body)["error"], "cooldown")
+
+    def _watch_once(self, env, xff):
+        c = env.conn()
+        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": xff})
+        resp = c.getresponse()
+        read_part(resp)
+        resp.close()
+        c.close()
+        for _ in range(50):
+            if env.hub.slots_free() == env.hub._max_viewers:
+                break
+            time.sleep(0.1)
+
+    def test_live_head_cooldown_is_429_with_retry_after_and_not_consumed(self):
+        self._watch_once(self.env, "9.9.9.9")
+        for _ in range(2):
+            r, body = self.env.get("/cam/live.mjpg", method="HEAD", headers={"X-Forwarded-For": "9.9.9.9"})
+            self.assertEqual((r.status, body), (429, b""))
+            self.assertEqual(r.getheader("X-Live-Refusal"), "cooldown")
+            ra = int(r.getheader("Retry-After"))
+            self.assertTrue(55 <= ra <= 60, ra)
+        r, _ = self.env.get("/cam/live.mjpg", method="HEAD", headers={"X-Forwarded-For": "8.8.8.8"})
+        self.assertEqual(r.status, 200)  # other visitors unaffected
+        before = dict(self.env.hub._cooldowns)
+        self.env.get("/cam/live.mjpg", method="HEAD", headers={"X-Forwarded-For": "9.9.9.9"})
+        self.assertEqual(self.env.hub._cooldowns, before)  # HEAD never alters the cooldown
+        r, body = self.env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "9.9.9.9"})
+        self.assertEqual(r.status, 429)
+        self.assertEqual(json.loads(body)["error"], "cooldown")
+
+    def test_live_head_busy_has_retry_after_soonest_end(self):
+        env = Env(max_viewers=1)
+        self.addCleanup(env.close)
+        c = env.conn()
+        c.request("GET", "/cam/live.mjpg", headers={"X-Forwarded-For": "1.1.1.1"})
+        first = c.getresponse()
+        self.assertEqual(first.status, 200)
+        self.addCleanup(c.close)
+        self.addCleanup(first.close)
+        r, body = env.get("/cam/live.mjpg", method="HEAD", headers={"X-Forwarded-For": "2.2.2.2"})
+        self.assertEqual((r.status, body), (429, b""))
+        self.assertEqual(r.getheader("X-Live-Refusal"), "busy")
+        ra = int(r.getheader("Retry-After"))
+        self.assertTrue(25 <= ra <= 30, ra)
+        self.assertEqual(env.hub.slots_free(), 0)
+
+    def test_retry_after_exposed_to_cors_on_every_response(self):
+        self.env.keeper.tick()
+        for method, path in [("GET", "/cam/status.json"), ("GET", "/cam/still.jpg"),
+                             ("HEAD", "/cam/live.mjpg"), ("GET", "/nope")]:
+            r, _ = self.env.get(path, method=method)
+            exposed = [h.strip() for h in (r.getheader("Access-Control-Expose-Headers") or "").split(",")]
+            self.assertIn("Retry-After", exposed, path)
+            self.assertIn("X-Live-Refusal", exposed, path)
+
+    def test_visitor_is_rightmost_forwarded_for(self):
+        self.assertEqual(_visitor({"X-Forwarded-For": "6.6.6.6, 9.9.9.9"}), "9.9.9.9")
+        self.assertEqual(_visitor({"X-Forwarded-For": " 9.9.9.9 "}), "9.9.9.9")
+        self.assertEqual(_visitor({"X-Forwarded-For": "1.1.1.1, 2.2.2.2 , , "}), "2.2.2.2")
+        self.assertEqual(_visitor({"X-Forwarded-For": " , "}), "anon")
+        self.assertEqual(_visitor({}), "anon")
+
+    def test_spoofed_leftmost_forwarded_for_does_not_dodge_cooldown(self):
+        self._watch_once(self.env, "9.9.9.9")
+        r, body = self.env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "1.2.3.4, 9.9.9.9"})
         self.assertEqual(r.status, 429)
         self.assertEqual(json.loads(body)["error"], "cooldown")
 

@@ -218,6 +218,39 @@ class LiveHubTest(unittest.TestCase):
         with self.assertRaises(Cooldown):
             h.hub.open_session("a")
 
+    def test_cooldown_retry_s_is_read_only(self):
+        h = self.make()
+        self.assertIsNone(h.hub.cooldown_retry_s("a"))
+        s = h.hub.open_session("a")
+        h.now = 5.0
+        s.close()
+        h.now = 15.5
+        for _ in range(3):  # repeated reads neither consume nor extend it
+            self.assertEqual(h.hub.cooldown_retry_s("a"), LIVE_COOLDOWN_S - 10)
+        self.assertIsNone(h.hub.cooldown_retry_s("b"))
+        with self.assertRaises(Cooldown) as cm:
+            h.hub.open_session("a")
+        self.assertEqual(cm.exception.retry_after_s, LIVE_COOLDOWN_S - 10)
+        h.now = 5.0 + LIVE_COOLDOWN_S
+        self.assertIsNone(h.hub.cooldown_retry_s("a"))
+        h.hub.open_session("a")
+
+    def test_busy_retry_s_is_soonest_session_end(self):
+        h = self.make(max_viewers=2)
+        h.hub.open_session("a")
+        h.now = 10.0
+        h.hub.open_session("b")
+        h.now = 12.0
+        self.assertEqual(h.hub.busy_retry_s(), 18)  # "a" ends at 30
+        self.assertEqual(h.hub.slots_free(), 0)  # read-only: nothing opened or ended
+        with self.assertRaises(Busy) as cm:
+            h.hub.open_session("c")
+        self.assertEqual(cm.exception.retry_after_s, 18)
+
+    def test_busy_retry_s_floor_without_sessions(self):
+        h = self.make()
+        self.assertEqual(h.hub.busy_retry_s(), 1)
+
     def test_private_rejects_open(self):
         h = self.make()
         h.decision = PRIVATE

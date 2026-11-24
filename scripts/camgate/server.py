@@ -14,8 +14,12 @@ BOUNDARY = "frame"
 
 
 def _visitor(headers) -> str:
-    first = (headers.get("X-Forwarded-For") or "").split(",")[0].strip()
-    return first or "anon"
+    """Rightmost non-empty X-Forwarded-For entry (the one our proxy chain appended)."""
+    for part in reversed((headers.get("X-Forwarded-For") or "").split(",")):
+        part = part.strip()
+        if part:
+            return part
+    return "anon"
 
 
 class _Handler(http.server.BaseHTTPRequestHandler):
@@ -29,6 +33,7 @@ class _Handler(http.server.BaseHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Expose-Headers", "Retry-After, X-Live-Refusal")
         if self.path.startswith("/cam/"):
             self.send_header("Cache-Control", "no-store")
         super().end_headers()
@@ -87,14 +92,29 @@ class _Handler(http.server.BaseHTTPRequestHandler):
     def _live_headers(self):
         return [("X-Accel-Buffering", "no"), ("Connection", "close")]
 
+    def _refusal(self, kind, retry_s, body=True):
+        retry_s = int(retry_s)
+        self._json(
+            429,
+            {"error": kind, "retry_after_s": retry_s},
+            self._live_headers() + [("Retry-After", str(retry_s)), ("X-Live-Refusal", kind)],
+            body=body,
+        )
+
     def _live_head(self):
-        # Judged from the current decision and free slots; never opens a session.
+        # Judged from the current decision, this visitor's cooldown and free slots,
+        # in the same order as open_session; read-only, never opens a session.
         st = self.server.status_fn()
+        hub = self.server.hub
         self.close_connection = True
         if not st.get("public"):
             self._json(403, {"error": "private"}, self._live_headers(), body=False)
+            return
+        cooldown = hub.cooldown_retry_s(_visitor(self.headers))
+        if cooldown is not None:
+            self._refusal("cooldown", cooldown, body=False)
         elif st.get("live_slots_free", 0) <= 0:
-            self._json(429, {"error": "busy"}, self._live_headers(), body=False)
+            self._refusal("busy", hub.busy_retry_s(), body=False)
         else:
             self._live_ok_headers()
 
@@ -114,12 +134,7 @@ class _Handler(http.server.BaseHTTPRequestHandler):
         except Private:
             return self._json(403, {"error": "private"}, hdrs)
         except (Busy, Cooldown) as e:
-            kind = "busy" if isinstance(e, Busy) else "cooldown"
-            return self._json(
-                429,
-                {"error": kind, "retry_after_s": int(e.retry_after_s)},
-                hdrs + [("Retry-After", str(int(e.retry_after_s)))],
-            )
+            return self._refusal("busy" if isinstance(e, Busy) else "cooldown", e.retry_after_s)
         try:
             frames = session.frames()
             try:
