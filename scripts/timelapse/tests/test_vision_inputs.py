@@ -134,13 +134,22 @@ class TestInputs(unittest.TestCase):
             self.assertTrue(self._near(e.getpixel((1590, 790)), r))
 
     def test_overview_dot_position(self):
-        reg = {"items": {"1": {"id": "1", "state": "open", "stalk": "A", "x": 400, "y": 300}}}
+        reg = {"items": {"1": {"id": "1", "state": "open", "stalk": "A", "x": 430, "y": 310}}}
+        empty = {"items": {}}
         with tempfile.TemporaryDirectory() as t:
             a, b = self._pair(t)
             vision.build_inputs(a, b, reg, Path(t) / "w")
+            vision.build_inputs(a, b, empty, Path(t) / "e")
             ov = Image.open(Path(t) / "w" / "overview.jpg").convert("RGB")
-            self.assertTrue(min(ov.getpixel((200, 150))) > 220)
-            self.assertFalse(min(ov.getpixel((200, 170))) > 220)
+            base = Image.open(Path(t) / "e" / "overview.jpg").convert("RGB")
+            # dot centre at (215,155): off the 50 px grid lines in the overview
+            self.assertTrue(min(ov.getpixel((215, 155))) > 220)
+            self.assertFalse(min(base.getpixel((215, 155))) > 220)
+            # dark ring just inside radius 9
+            self.assertTrue(max(ov.getpixel((223, 155))) < 120)
+            self.assertTrue(max(ov.getpixel((207, 155))) < 120)
+            # not drawn at the unscaled position
+            self.assertFalse(min(ov.getpixel((430, 310))) > 220)
 
     def test_prompt_content(self):
         s = vision.build_prompt(REG, ["overview.jpg", "item-1.jpg", "item-2.jpg"])
