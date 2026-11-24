@@ -19,3 +19,7 @@ CONDITIONS_URL = "http://127.0.0.1:8787/api/conditions.json"
 SNAPSHOT_URL = "http://127.0.0.1:8080/snapshot"
 INFLUX_URL = "http://127.0.0.1:8086/query"
 INFLUX_DB = "highland"
+
+REGISTRY_PATH = ARCHIVE_ROOT + "/registry.json"
+CONFIDENT = 0.8            # vision confidence needed to change an item
+PUBLIC_STREAK = 3          # consecutive confident days before unconfirmed goes public
