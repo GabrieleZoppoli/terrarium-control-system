@@ -62,6 +62,22 @@ class TestDaily(unittest.TestCase):
             st2 = vision.daily(D, t, runner=lambda p, w: _ans(GOOD))
             self.assertEqual(st2["status"], "already_done")
 
+    def test_checkin_failure_keeps_ok(self):
+        with tempfile.TemporaryDirectory() as t:
+            rp = _setup(t)
+            from timelapse import annotate
+            real = annotate.draw_dots
+
+            def flaky(jpeg, items, show_pending=True):
+                if show_pending is True and any(i.get("needs_owner") for i in items):
+                    raise RuntimeError("boom")
+                return real(jpeg, items, show_pending)
+            with mock.patch("timelapse.annotate.draw_dots", side_effect=flaky):
+                st = vision.daily(D, t, runner=lambda p, w: _ans(GOOD))
+            self.assertEqual(st["status"], "ok")
+            self.assertIn("checkin image failed", st["why"])
+            self.assertEqual(registry.load(rp)["items"]["f1"]["state"], "opening")
+
     def test_prose_fails_registry_unchanged(self):
         with tempfile.TemporaryDirectory() as t:
             rp = _setup(t)
@@ -125,7 +141,9 @@ class TestRunClaude(unittest.TestCase):
         self.assertEqual(kw["cwd"], "/tmp")
         cmd = m.call_args.args[0]
         self.assertEqual(cmd[1:], ["-p", "p", "--output-format", "json",
-                                   "--allowedTools", "Read"])
+                                   "--tools", "Read", "--allowedTools", "Read",
+                                   "--permission-mode", "dontAsk",
+                                   "--strict-mcp-config", "--disable-slash-commands"])
 
     def test_failures(self):
         for cp in (subprocess.CompletedProcess([], 1, stdout="", stderr="e"),

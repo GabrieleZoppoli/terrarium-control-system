@@ -182,7 +182,9 @@ def run_claude(prompt: str, workdir, timeout=config.VISION_TIMEOUT_S) -> str:
     for k in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN"):
         env.pop(k, None)
     cmd = [config.CLAUDE_BIN, "-p", prompt, "--output-format", "json",
-           "--allowedTools", "Read"]
+           "--tools", "Read", "--allowedTools", "Read",
+           "--permission-mode", "dontAsk", "--strict-mcp-config",
+           "--disable-slash-commands"]
     try:
         p = subprocess.run(cmd, cwd=str(workdir), env=env, capture_output=True,
                            text=True, timeout=timeout)
@@ -259,6 +261,13 @@ def _day_dir(root, d):
     return Path(root) / "frames" / d.strftime("%Y/%m/%d")
 
 
+def _hconf(it):
+    try:
+        return float(it["history"][-1]["confidence"])
+    except (KeyError, IndexError, TypeError, ValueError):
+        return 0.0
+
+
 def _summary(before, after, result):
     lines = []
     for r in result["items"]:
@@ -270,6 +279,7 @@ def _summary(before, after, result):
         if b.get("stalk"):
             who += " (%s)" % b["stalk"]
         conf = r.get("confidence")
+        conf = float(conf) if isinstance(conf, (int, float)) else 0.0
         if a.get("needs_owner") and not b.get("needs_owner") or \
                 (isinstance(conf, (int, float)) and conf < config.CONFIDENT):
             lines.append("%s: unsure (%.2f) \u2014 needs you" % (iid, float(conf)))
@@ -279,7 +289,7 @@ def _summary(before, after, result):
     for iid in sorted(set(after["items"]) - set(before["items"])):
         it = after["items"][iid]
         lines.append("%s: new %s candidate (%.2f) \u2014 needs you" % (
-            iid, it.get("state"), float(it["history"][-1]["confidence"])))
+            iid, it.get("state"), _hconf(it)))
     return lines
 
 
@@ -325,17 +335,24 @@ def daily(date, root, runner=run_claude, registry_path=None) -> dict:
             raise VisionError("apply_vision: %s" % e)
         except TypeError as e:
             raise VisionError("apply_vision: %s" % e)
-        registry.save(regp, after)
         pending = [i for i, it in sorted(after["items"].items())
                    if it.get("needs_owner")]
-        summ = _summary(reg, after, result)
+        try:
+            summ = _summary(reg, after, result)
+        except Exception as e:
+            summ = ["summary unavailable: %s" % type(e).__name__]
         if after.get("runs") and after["runs"][-1].get("status") == "geometry_changed":
             summ.insert(0, "camera geometry changed \u2014 every item needs you")
+        registry.save(regp, after)
+        note = ""
         if pending:
-            dots = [it for it in after["items"].values() if it.get("state") != "gone"]
-            img = annotate.draw_dots(today.read_bytes(), dots, show_pending=True)
-            storage.write_atomic(root / "status" / ("checkin-%s.jpg" % ds), img)
-        return finish("ok", "", summ, pending)
+            try:
+                dots = [it for it in after["items"].values() if it.get("state") != "gone"]
+                img = annotate.draw_dots(today.read_bytes(), dots, show_pending=True)
+                storage.write_atomic(root / "status" / ("checkin-%s.jpg" % ds), img)
+            except Exception as e:
+                note = "checkin image failed: %s" % str(e)[:150]
+        return finish("ok", note, summ, pending)
     except VisionError as e:
         return finish("vision_failed", str(e)[:200])
     except Exception as e:  # never leave the registry half-written
