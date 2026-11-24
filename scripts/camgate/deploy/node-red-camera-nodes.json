@@ -124,12 +124,12 @@
       "type": "ui_switch",
       "z": "0ff01249801c9e0e",
       "name": "Camera show-me",
-      "label": "Camera show-me (30 min)",
+      "label": "Camera show-me",
       "tooltip": "Show the website camera regardless of doors; auto-off after 30 min",
       "group": "ea1ace4c9b8c8e61",
-      "order": 15,
-      "width": "3",
-      "height": "1",
+      "order": 12,
+      "width": "4",
+      "height": "2",
       "passthru": false,
       "decouple": "false",
       "topic": "showme",
@@ -202,9 +202,9 @@
       "type": "ui_text",
       "z": "0ff01249801c9e0e",
       "group": "ea1ace4c9b8c8e61",
-      "order": 16,
-      "width": "3",
-      "height": "1",
+      "order": 13,
+      "width": "2",
+      "height": "2",
       "name": "Show-me countdown",
       "label": "",
       "format": "{{msg.payload}}",
@@ -218,5 +218,12 @@
       "y": 2600,
       "wires": []
     }
-  ]
+  ],
+  "layout_changes_2026_11_24": {
+    "9b09e7541638c6cd (Left door)": "width 6->3",
+    "2daf6b78b67eeb9b (Right door)": "width 6->3",
+    "9316633adda3bdd3 (Power consumption)": "order 12->14",
+    "aa755e17f5cfc847 (panic button)": "order 13->15",
+    "panic_css_001": "order 14->16"
+  }
 }
