@@ -1020,7 +1020,10 @@
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-5.jpg",
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-6.jpg",
                         "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-7.jpg",
-                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-8.jpg"
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-8.jpg",
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-9.jpg",
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-10.jpg",
+                        "../img/collection/dendrobium/dendrobium-cuthbertsonii-yellow-11.jpg"
                       ]
                     },
                     {
@@ -1355,7 +1358,8 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/oncidium/oncidium-cheirophorum.jpg",
-                        "../img/collection/oncidium/oncidium-cheirophorum-2.jpg"
+                        "../img/collection/oncidium/oncidium-cheirophorum-2.jpg",
+                        "../img/collection/oncidium/oncidium-cheirophorum-3.jpg"
                       ]
                     },
                     {
@@ -1511,7 +1515,8 @@
                       "vendor": "Orchids & more",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/maxillaria/maxillaria-sophronitis.jpg"
+                        "../img/collection/maxillaria/maxillaria-sophronitis.jpg",
+                        "../img/collection/maxillaria/maxillaria-sophronitis-2.jpg"
                       ]
                     },
                     {
@@ -1665,7 +1670,9 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/dracula/dracula-simia.jpg",
-                        "../img/collection/dracula/dracula-simia-2.jpg"
+                        "../img/collection/dracula/dracula-simia-2.jpg",
+                        "../img/collection/dracula/dracula-simia-3.jpg",
+                        "../img/collection/dracula/dracula-simia-4.jpg"
                       ]
                     },
                     {
@@ -1844,7 +1851,9 @@
                       "vendor": "Claessen Orchids & Plants",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/vanda/vanda-nana.jpg"
+                        "../img/collection/vanda/vanda-nana.jpg",
+                        "../img/collection/vanda/vanda-nana-2.jpg",
+                        "../img/collection/vanda/vanda-nana-3.jpg"
                       ]
                     }
                   ]
@@ -2175,7 +2184,8 @@
                       "status": "alive",
                       "photos": [
                         "../img/collection/restrepia/restrepia-sanguinea.jpg",
-                        "../img/collection/restrepia/restrepia-sanguinea-2.jpg"
+                        "../img/collection/restrepia/restrepia-sanguinea-2.jpg",
+                        "../img/collection/restrepia/restrepia-sanguinea-3.jpg"
                       ]
                     },
                     {
@@ -2487,7 +2497,11 @@
                       "name": "muscipula 'Petite Dragon'",
                       "size": 1,
                       "vendor": "Klein Carnivors",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/dionaea/dionaea-muscipula-petite-dragon.jpg",
+                        "../img/collection/dionaea/dionaea-muscipula-petite-dragon-2.jpg"
+                      ]
                     },
                     {
                       "name": "muscipula 'Phalanx'",
@@ -2705,7 +2719,13 @@
                       "vendor": "Giardino Carnivoro",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/nepenthes/nepenthes-argentii.jpg"
+                        "../img/collection/nepenthes/nepenthes-argentii.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-2.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-3.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-4.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-5.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-6.jpg",
+                        "../img/collection/nepenthes/nepenthes-argentii-7.jpg"
                       ]
                     },
                     {
@@ -2839,7 +2859,8 @@
                       "vendor": "Giardino Carnivoro",
                       "status": "alive",
                       "photos": [
-                        "../img/collection/cephalotus/cephalotus-follicularis.jpg"
+                        "../img/collection/cephalotus/cephalotus-follicularis.jpg",
+                        "../img/collection/cephalotus/cephalotus-follicularis-2.jpg"
                       ]
                     }
                   ]
@@ -3686,7 +3707,10 @@
                       "name": "longifolia",
                       "size": 1,
                       "vendor": "From growlist (May 2020)",
-                      "status": "alive"
+                      "status": "alive",
+                      "photos": [
+                        "../img/collection/utricularia/utricularia-longifolia.jpg"
+                      ]
                     },
                     {
                       "name": "prehensilis",
