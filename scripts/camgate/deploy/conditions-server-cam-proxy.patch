@@ -1,0 +1,59 @@
+--- /home/pi/snap-renderer/conditions-server.py.bak_20261124-113203	2026-05-18 18:13:32.642500501 +0200
++++ /home/pi/snap-renderer/conditions-server.py	2026-11-24 11:32:08.638764710 +0100
+@@ -9,6 +9,7 @@
+   /highland/grafana-latest-mobile.png      → Grafana mobile snapshot PNG
+ """
+ import datetime as _dt
++import http.client
+ import http.server
+ import json
+ import os
+@@ -322,8 +323,48 @@
+         # don't HEAD this endpoint, and the extra bytes are small.
+         self.do_GET()
+ 
++    _HOP = {"connection", "keep-alive", "transfer-encoding", "te", "trailer",
++            "upgrade", "proxy-authenticate", "proxy-authorization"}
++
++    def _proxy_cam(self):
++        """Reverse-proxy /cam/* to camgate (127.0.0.1:8788), streaming the body."""
++        xff = self.headers.get("X-Forwarded-For") or self.client_address[0]
++        conn = http.client.HTTPConnection("127.0.0.1", 8788, timeout=15)
++        try:
++            try:
++                conn.request(self.command, self.path,
++                             headers={"X-Forwarded-For": xff, "Accept": "*/*"})
++                resp = conn.getresponse()
++            except Exception:
++                self.send_response(502)
++                self._cors()
++                self.send_header("Content-Length", "0")
++                self.end_headers()
++                return
++            self.send_response(resp.status)
++            for k, v in resp.getheaders():
++                if k.lower() not in self._HOP:
++                    self.send_header(k, v)
++            self.end_headers()
++            if self.command == "HEAD":
++                return
++            while True:
++                chunk = resp.read1(65536)
++                if not chunk:
++                    break
++                self.wfile.write(chunk)
++                self.wfile.flush()
++        except (BrokenPipeError, ConnectionResetError, TimeoutError, OSError):
++            pass
++        finally:
++            conn.close()
++            self.close_connection = True
++
+     def do_GET(self):
+         path = self.path.split("?", 1)[0]
++        if path.startswith("/cam/"):
++            self._proxy_cam()
++            return
+         if path in ("/", "/api/conditions.json", "/conditions.json"):
+             body = json.dumps(cached_payload(), separators=(",", ":")).encode()
+             self.send_response(200)

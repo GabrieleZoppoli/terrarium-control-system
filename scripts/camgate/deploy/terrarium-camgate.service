@@ -1,0 +1,19 @@
+[Unit]
+Description=Terrarium camera privacy gatekeeper (camgate, 127.0.0.1:8788)
+After=mosquitto.service terrarium-cam.service network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/opt/terrarium-camgate
+ExecStart=/usr/bin/python3 -m camgate
+Restart=always
+RestartSec=3
+Nice=10
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
