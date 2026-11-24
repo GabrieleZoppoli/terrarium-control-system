@@ -2,10 +2,12 @@ import io
 import threading
 import time
 import unittest
+from unittest import mock
 
 from PIL import Image
 
 from camgate.camera import CameraError
+from camgate import live
 from camgate.config import LIVE_COOLDOWN_S, LIVE_MAX_VIEWERS, Crop
 from camgate.live import Busy, Cooldown, LiveHub, Private
 from camgate.policy import Decision
@@ -37,6 +39,7 @@ class FakeSource:
 
     def __init__(self, fail_after=None, stall_after=None, period=0.01):
         self.calls = 0
+        self.yielded = 0
         self.fail_after = fail_after
         self.stall_after = stall_after
         self.period = period
@@ -54,6 +57,7 @@ class FakeSource:
                     self.release.wait()
                     return
                 yield FRAMES[n % len(FRAMES)]
+                self.yielded += 1
                 n += 1
                 time.sleep(self.period)
         finally:
@@ -285,6 +289,57 @@ class LiveHubTest(unittest.TestCase):
         next(it)
         h.crop = Crop(1000, 800, 0, 0)
         self.assertEqual(size(next(it)), (1000, 800))
+
+    def _counting_crop(self):
+        calls = []
+        real = live.crop_jpeg
+
+        def counting(jpeg, crop):
+            calls.append(crop)
+            return real(jpeg, crop)
+
+        return calls, mock.patch.object(live, "crop_jpeg", counting)
+
+    def test_crop_work_bounded_by_frames_sent(self):
+        calls, patch = self._counting_crop()
+        with patch:
+            h = self.make(source=FakeSource(period=0.002))
+            its = [h.hub.open_session(v).frames() for v in ("a", "b", "c")]
+            sent = 0
+            for _ in range(3):
+                for it in its:
+                    next(it)
+                    sent += 1
+        self.assertGreater(h.source.yielded, 3 * len(calls))
+        self.assertLessEqual(len(calls), sent)
+
+    def test_no_crop_work_for_idle_session(self):
+        calls, patch = self._counting_crop()
+        with patch:
+            h = self.make(source=FakeSource(period=0.002))
+            h.hub.open_session("a")
+            deadline = time.monotonic() + 2
+            while h.source.yielded < 50 and time.monotonic() < deadline:
+                time.sleep(0.01)
+        self.assertGreaterEqual(h.source.yielded, 50)
+        self.assertEqual(calls, [])
+
+    def test_crop_changed_during_cropping_is_not_served(self):
+        h = self.make()
+        real = live.crop_jpeg
+        new = Crop(1000, 800, 0, 0)
+        crops = []
+
+        def flipping(jpeg, crop):
+            crops.append(crop)
+            out = real(jpeg, crop)
+            h.crop = new  # crop_fn changes while the old crop is being applied
+            return out
+
+        with mock.patch.object(live, "crop_jpeg", flipping):
+            it = h.hub.open_session("a").frames()
+            self.assertEqual(size(next(it)), (1000, 800))
+        self.assertEqual(crops[0], CROP)
 
 
 if __name__ == "__main__":

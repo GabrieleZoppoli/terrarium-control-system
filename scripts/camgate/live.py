@@ -1,7 +1,10 @@
 """Live hub: one shared camera reader fanned out to a few short, fail-closed sessions.
 
-The reader thread keeps only the latest frame, cropped once with the crop
-read from crop_fn() at that moment. Each session re-checks the privacy
+The reader thread keeps only the latest raw frame and does no image work.
+A frame is cropped lazily, once per (frame, crop), when the first session
+takes it, so crop work is bounded by what sessions actually send (at most
+LIVE_FPS per session) and is zero for sessions nobody iterates. Each session
+re-checks the privacy
 decision and the crop before yielding every frame and on every wait timeout,
 so a door opening or a stalled camera ends the stream within about 0.5 s.
 """
@@ -45,8 +48,7 @@ def _retry_s(seconds: float) -> int:
 class _Frame(NamedTuple):
     gen: int
     seq: int
-    jpeg: Optional[bytes]  # None when cropping failed
-    crop: object
+    raw: bytes
 
 
 class Session:
@@ -93,14 +95,18 @@ class Session:
                             cond.wait(WAIT_S)
                         continue
                     last_seq = f.seq
-                if f.jpeg is None:
-                    return  # the reader could not crop this frame: fail closed
                 crop = hub._allowed_crop()
                 if crop is None or self._expired():
                     return
-                if crop != f.crop:
-                    continue  # cropped with an older crop; wait for the next frame
-                yield f.jpeg
+                jpeg = hub._cropped(f, crop)
+                if jpeg is None:
+                    return  # crop failed: fail closed
+                now_crop = hub._allowed_crop()
+                if now_crop is None or self._expired():
+                    return
+                if now_crop != crop:
+                    continue  # crop changed while cropping; never serve a stale crop
+                yield jpeg
                 got_any = True
                 last_yield = time.monotonic()
         finally:
@@ -132,6 +138,8 @@ class LiveHub:
         self._gen = 0
         self._seq = 0
         self._frame: Optional[_Frame] = None
+        self._crop_lock = threading.Lock()
+        self._crop_cache = None  # (gen, seq, crop, jpeg or None)
         self._thread: Optional[threading.Thread] = None
         self._stop: Optional[threading.Event] = None
 
@@ -186,6 +194,19 @@ class LiveHub:
             self._stop_reader_locked()
         self._cond.notify_all()
 
+    def _cropped(self, f: _Frame, crop) -> Optional[bytes]:
+        """Crop frame f with crop, once per (frame, crop); None if cropping fails."""
+        with self._crop_lock:
+            c = self._crop_cache
+            if c is not None and c[0] == f.gen and c[1] == f.seq and c[2] == crop:
+                return c[3]
+            try:
+                jpeg = crop_jpeg(f.raw, crop)
+            except Exception:
+                jpeg = None
+            self._crop_cache = (f.gen, f.seq, crop, jpeg)
+            return jpeg
+
     # -- reader --------------------------------------------------------------
     def _start_reader_locked(self) -> None:
         self._gen += 1
@@ -201,6 +222,7 @@ class LiveHub:
             self._stop.set()
         self._stop = None
         self._frame = None
+        self._crop_cache = None
 
     def _run(self, gen: int, stop: threading.Event) -> None:
         it = None
@@ -209,16 +231,11 @@ class LiveHub:
             for raw in it:
                 if stop.is_set():
                     return
-                try:
-                    crop = self._crop()
-                    jpeg = crop_jpeg(raw, crop)
-                except Exception:
-                    crop, jpeg = None, None
                 with self._cond:
                     if stop.is_set():
                         return
                     self._seq += 1
-                    self._frame = _Frame(gen, self._seq, jpeg, crop)
+                    self._frame = _Frame(gen, self._seq, raw)
                     self._cond.notify_all()
         except Exception:
             pass
