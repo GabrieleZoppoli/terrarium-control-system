@@ -15,7 +15,7 @@ from .signals import SignalStore, start_mqtt
 log = logging.getLogger("camgate")
 
 CROP_TTL_S = 10.0
-TICK_S = 5.0
+TICK_S = 1.0  # still-keeper tick (R16); captures stay at STILL_REFRESH_S
 
 
 def make_cached_crop_fn(conf_path, ttl=CROP_TTL_S, clock=time.monotonic, loader=load_crop):

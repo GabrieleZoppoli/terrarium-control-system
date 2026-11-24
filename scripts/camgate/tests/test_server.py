@@ -10,7 +10,9 @@ import unittest
 
 from PIL import Image
 
-from camgate.__main__ import make_cached_crop_fn, make_status_fn, tick_loop
+import inspect
+
+from camgate.__main__ import TICK_S, make_cached_crop_fn, make_status_fn, tick_loop
 from camgate.camera import StillKeeper
 from camgate.config import Crop, NO_CROP
 from camgate.frames import placeholder_jpeg
@@ -466,6 +468,12 @@ class MainHelpersTest(unittest.TestCase):
         t[0] = 20.0
         with self.assertLogs("camgate", level="ERROR"):
             self.assertIsNone(fn())
+
+    def test_tick_interval_is_1s(self):
+        # Ruling R16: a 1 s tick sees any private period of 1 s or longer, so the
+        # held still is marked suspect; captures stay at STILL_REFRESH_S.
+        self.assertEqual(TICK_S, 1.0)
+        self.assertEqual(inspect.signature(tick_loop).parameters["interval"].default, TICK_S)
 
     def test_tick_loop_survives_exceptions(self):
         stop = threading.Event()
