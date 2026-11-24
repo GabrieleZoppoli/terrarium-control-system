@@ -5,7 +5,7 @@ from unittest import mock
 from PIL import Image
 
 from camgate.camera import CameraError, StillKeeper
-from camgate.config import Crop
+from camgate.config import STILL_REFRESH_S, Crop
 from camgate.frames import placeholder_jpeg
 from camgate.policy import Decision
 
@@ -77,10 +77,10 @@ class StillKeeperTest(unittest.TestCase):
     def test_refresh_interval(self):
         h = Harness()
         h.keeper.tick()
-        h.now = 100
+        h.now = STILL_REFRESH_S - 1
         h.keeper.tick()
         self.assertEqual(h.source.calls, 1)
-        h.now = 181
+        h.now = STILL_REFRESH_S + 1
         h.keeper.tick()
         self.assertEqual(h.source.calls, 2)
 

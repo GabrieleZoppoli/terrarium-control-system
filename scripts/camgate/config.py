@@ -12,11 +12,11 @@ TOPIC_SHOWME = "terrarium/camera/showme"
 DOOR_STALE_S = 3.0
 SERIAL_STALE_S = 10.0
 SHOWME_MAX_S = 1800
-LIVE_SESSION_S = 1800   # owner 2026-11-24: stay live until a door opens; 30 min backstop for forgotten tabs
+LIVE_SESSION_S = 30
 LIVE_FPS = 3
 LIVE_MAX_VIEWERS = 3
-LIVE_COOLDOWN_S = 5
-STILL_REFRESH_S = 180
+LIVE_COOLDOWN_S = 60
+STILL_REFRESH_S = 5   # owner 2026-11-24: after 30 s live, refresh every few seconds
 JPEG_QUALITY = 85
 BLUR_RADIUS = 24
 
