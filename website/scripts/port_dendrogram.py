@@ -3,7 +3,10 @@
 - Rewrites photo paths in the embedded `const data = {...}` JSON from
   `photos/{Genus species}/N.jpg` → `../img/collection/{genus-slug}/{taxon-slug}{-N?}.jpg`
   so photos resolve to the copies already copied by copy_collection_photos.py.
-- Writes the rewritten HTML to `static/dendrogram/index.html`.
+- Splices the rewritten data into the site's OWN viewer at
+  `static/dendrogram/index.html` (collapsible radial tree, Nov 2026). Only the
+  `const data = {...}` line is replaced; the viewer code is never overwritten
+  by the source page. If the site viewer is missing, the source HTML is used.
 - Also exports the transformed tree to `static/data/dendrogram.json` for any
   future bespoke viewer.
 """
@@ -62,18 +65,26 @@ def walk_rewrite(node: dict) -> None:
 
 
 def main() -> int:
-    html = SRC.read_text(encoding="utf-8")
-    m = re.search(r"const data = (\{.*?\});\s", html, re.DOTALL)
-    if not m:
-        m = re.search(r"const data = (\{.*\});", html)
+    def find_data(text: str):
+        m = re.search(r"const data = (\{.*?\});\s", text, re.DOTALL)
+        return m or re.search(r"const data = (\{.*\});", text)
+
+    src_html = SRC.read_text(encoding="utf-8")
+    m = find_data(src_html)
     if not m:
         print("couldn't find `const data = ...` in source HTML", file=sys.stderr)
         return 1
-
     data = json.loads(m.group(1))
     walk_rewrite(data)
     new_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
-    new_html = html[: m.start(1)] + new_json + html[m.end(1) :]
+
+    # Template = the site's viewer if present, so viewer improvements survive re-ports.
+    template = DST_HTML.read_text(encoding="utf-8") if DST_HTML.exists() else src_html
+    t = find_data(template)
+    if not t:
+        print(f"couldn't find `const data = ...` in {DST_HTML}", file=sys.stderr)
+        return 1
+    new_html = template[: t.start(1)] + new_json + template[t.end(1) :]
 
     DST_HTML.parent.mkdir(parents=True, exist_ok=True)
     DST_HTML.write_text(new_html, encoding="utf-8")
