@@ -2029,9 +2029,9 @@ figure.moment figcaption {
   padding: 1rem;
 }
 .highland-hero__dashboard img {
-  object-fit: cover;
+  object-fit: contain;          /* the chart is 4:3; never crop its labels */
   object-position: center;
-  background: var(--bg-1);
+  background: #111217;          /* the chart's own background */
 }
 .highland-hero figcaption {
   /* Caption now sits BELOW the image, matching the home mosaic style

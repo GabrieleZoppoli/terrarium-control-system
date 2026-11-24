@@ -83,9 +83,27 @@
 
   function setState(s) { state = s; frame.setAttribute('data-state', s); }
 
+  // Load the still in the background and swap it in only when complete, so a
+  // refresh never paints half an image. Leaving live or going private drops
+  // the current picture (and any MJPEG connection) at once.
+  var stillUrl = '';
   function showStill() {
     img.hidden = false;
-    img.src = bust('still.jpg');
+    if (state === 'private' || img.src.indexOf('live.mjpg') >= 0) {
+      img.removeAttribute('src');
+      if (stillUrl) { URL.revokeObjectURL(stillUrl); stillUrl = ''; }
+    }
+    var my = session;
+    fetch(bust('still.jpg'), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('still ' + r.status);
+      return r.blob();
+    }).then(function (b) {
+      if (my !== session || state === 'live' || state === 'offline') return;
+      var old = stillUrl;
+      stillUrl = URL.createObjectURL(b);
+      img.src = stillUrl;
+      if (old) URL.revokeObjectURL(old);
+    }).catch(function () {});
   }
 
   function updateBadge() {
