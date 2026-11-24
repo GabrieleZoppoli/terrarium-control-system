@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Archive lossless, privacy-cropped terrarium photos every 10 minutes while the lights are on, and run a daily Claude vision check that keeps a registry of Heliamphora flowers/buds up to date, with the owner confirming doubtful calls through the 07:00 report email.
+**Goal:** Archive lossless, privacy-cropped terrarium photos every 10 minutes day and night (the camera's infrared at night), and run a daily Claude vision check that keeps a registry of Heliamphora flowers/buds up to date, with the owner confirming doubtful calls through the 07:00 report email.
 
 **Architecture:** A cron job (`timelapse.capture`) asks camgate's new loopback-only gate endpoint whether the doors have been closed long enough, grabs the camera's own JPEG from ustreamer, and crops and rotates it **losslessly** with `jpegtran`, using the CROP from `/etc/surveil/surveil.conf` snapped inward to the JPEG block grid. A daily job (`timelapse.vision`) picks the sharpest plateau photo and compares close-up crops of today against yesterday for each item in an owner-seeded registry. It calls `claude -p` and updates `registry.json`. The 07:00 report shows the flower status and attaches a numbered-dot image when something needs the owner.
 
@@ -11,7 +11,7 @@
 **Spec:** `docs/superpowers/specs/2026-11-24-live-camera-and-flowering-timelapse-design.md` §7 (Part B), as amended by owner decisions on 2026-11-24 (listed below). Part B2 (films, website gallery, live overlay dots) is a separate later plan.
 
 **Amendments to the spec (owner, 2026-11-24 conversation — these win over the spec text):**
-- Capture every **10 min while the lights are on** (not only the plateau), so leaf/pitcher growth is archived too. The 60 % plateau frames are flagged, and films use them by default to avoid flicker. During the plateau each capture is a **burst of 3** frames, kept for multi-frame work on the owner's GPU workstation.
+- Capture every **10 min, day and night** (not only the plateau), so leaf/pitcher growth is archived too. At night the camera switches to infrared (black and white), and the owner wants those frames for night-movement time-lapses. Night frames are flagged `phase: night` and the daily vision check never uses them. The 60 % plateau frames are flagged, and films use them by default to avoid flicker. During the plateau each capture is a **burst of 3** frames, kept for multi-frame work on the owner's GPU workstation.
 - Archive = the camera's own JPEG, **losslessly** cropped and rotated (no re-encode). Plain dated folders with a per-day JSON sidecar, easy to `rsync` to the workstation.
 - Detection is **not** "no human involvement": the owner's corrections showed single-frame judging is unreliable (pink LEDs make colour useless for age, and stalk joints look like buds). So the registry is **seeded and corrected by the owner**, vision **tracks changes** day to day by **shape, not colour**, low-confidence calls become "?" items shown to the owner in the report, and nothing doubtful is ever public.
 - Website overlay (B2) must be **simple**: small dots, labels on hover/tap, hide button, only confirmed/confident items.
@@ -132,13 +132,13 @@ def test_misaligned_crop_raises(self):  # crop_rotate(jpeg, Crop(1180,1080,164,0
 - Produces:
   - `LightWindow(on, off, plateau_start, plateau_end)`, in minutes from local midnight.
   - `light_window(globals_path: str) -> LightWindow | None`, from `payload.photo_light_on`, `payload.photo_light_off`, `payload.photo_midday_up`, `payload.photo_midday_down` in `/home/pi/.node-red/context/global/global.json`. `plateau_start = midday_up + 30`, `plateau_end = midday_down`. Returns None if the file is missing or unparseable, a value is missing or non-numeric, the order is not `on < plateau_start < plateau_end < off`, or the file mtime is > 1 h old.
-  - `phase(now_local: datetime, w: LightWindow) -> str` in `{"dark", "lit", "plateau"}`.
+  - `phase(now_local: datetime, w: LightWindow) -> str` in `{"night", "lit", "plateau"}`.
   - `gate_check(gate: dict | None, now: float) -> str | None`: None means OK; otherwise a reason (`gate_unreachable`, `gate_<reason>`, `after_private`).
   - `mist_check(conditions: dict | None, last_mist_ts: float | None, now: float) -> str | None`: reasons `conditions_unreachable`, `misting`, `mist_recent`.
 
 - [ ] **Step 1: Write failing tests.**
   - Today's real values give `LightWindow(408, 1182, 737, 883)`.
-  - Phases are correct at 06:47 (dark), 06:48 (lit), 12:17 (plateau) and 14:43 (lit).
+  - Phases are correct at 06:47 (night), 06:48 (lit), 12:17 (plateau) and 14:43 (lit).
   - `light_window` returns None for a missing file, garbage, a missing key, a string value, bad ordering, and an mtime older than 2 h. Use `os.utime` for the last one.
   - `gate_check`:
     - `{"ok":True,"last_not_ok_at":0,"now":1000,...}` at now=1000 → None;
@@ -171,7 +171,7 @@ def test_misaligned_crop_raises(self):  # crop_rotate(jpeg, Crop(1180,1080,164,0
     - `Deps` is a NamedTuple of callables: `read_gate`, `read_conditions`, `read_last_mist`, `fetch_snapshot`, `light_window`, `load_crop`, `root`.
     - Order:
       1. space check;
-      2. light phase (`dark` → `skipped="dark"`);
+      2. light phase (recorded, not a skip reason: night frames are archived too);
       3. crop valid and not NO_CROP;
       4. gate;
       5. mist;
@@ -183,6 +183,7 @@ def test_misaligned_crop_raises(self):  # crop_rotate(jpeg, Crop(1180,1080,164,0
 
 - [ ] **Step 1: Write failing tests** with fake deps:
   - happy lit path (1 file, sidecar entry, geometry `1168x1080+176+0/rot180`);
+  - night path (1 file, `phase: "night"`);
   - plateau path (3 files);
   - dark;
   - each gate/mist/crop/space reason;
@@ -312,11 +313,11 @@ def test_misaligned_crop_raises(self):  # crop_rotate(jpeg, Crop(1180,1080,164,0
   - With no time-lapse data the report is unchanged. Wrap all time-lapse code in try/except so the report never fails because of it.
 
 - [ ] **Step 1:** Run `install.sh`. Then `python3 -m timelapse.registry seed timelapse/seed_2026-11-24.json`, and `list` shows f1–f5.
-- [ ] **Step 2:** Run the capture once by hand while the lights are on and the doors are closed. A frame appears and the sidecar has the geometry. Open the frame yourself (Read tool): the right edge must stop at the white cabinet frame, exactly like the public still. **Never commit or send it anywhere.**
+- [ ] **Step 2:** Run the capture once by hand with the lights on and the doors closed, and once after lights-off (a night infrared frame, with the right edge checked the same way). A frame appears and the sidecar has the geometry. Open the frame yourself (Read tool): the right edge must stop at the white cabinet frame, exactly like the public still. **Never commit or send it anywhere.**
 - [ ] **Step 3:** Run the report's dry-run/print mode (check `main()` for the flag; if there is none, call `render_text(make_report(...))` from a Python one-liner). The Flowers section shows "no vision run yet", and nothing else changes.
 - [ ] **Step 4:** Next day after 16:30, check that `status/vision-<date>.json` exists with `status: ok`. A manual run is allowed once: `python3 -m timelapse.vision`.
 - [ ] **Step 5: Commit** `timelapse: installer, cron and report section`. Update memory `camgate-live-camera-2026-11-24.md` (Part B1 live, paths, CLI), and note in `website/HANDOFF.md` that B2 (gallery + dots) is coming.
 
 ## Out of scope (Part B2, separate plan after a few weeks of data)
 
-Film rendering with arrow/counters/inset, the Flowerings gallery JSON served through camgate, the simple dot overlay on the live page and still, exposure locking (the white flower clips; the UVC controls may be fake, as the zoom is), and pitcher tracking.
+Film rendering with arrow/counters/inset (a day film from plateau frames, and a separate night film from infrared frames), the Flowerings gallery JSON served through camgate, the simple dot overlay on the live page and still, exposure locking (the white flower clips; the UVC controls may be fake, as the zoom is), and pitcher tracking.
