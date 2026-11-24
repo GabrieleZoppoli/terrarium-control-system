@@ -9,7 +9,7 @@ from PIL import Image
 
 from camgate.camera import CameraError
 from camgate import live
-from camgate.config import LIVE_COOLDOWN_S, LIVE_MAX_VIEWERS, LIVE_SESSION_S, Crop
+from camgate.config import LIVE_COOLDOWN_S, LIVE_FPS, LIVE_MAX_VIEWERS, LIVE_SESSION_S, Crop
 from camgate.live import Busy, Cooldown, LiveHub, Private
 from camgate.policy import Decision
 
@@ -167,9 +167,9 @@ class LiveHubTest(unittest.TestCase):
         it = h.hub.open_session("a").frames()
         next(it)
         t0 = time.monotonic()
-        for _ in range(3):
+        for _ in range(LIVE_FPS):
             next(it)
-        self.assertGreaterEqual(time.monotonic() - t0, 0.95)
+        self.assertGreaterEqual(time.monotonic() - t0, 0.95)  # at most LIVE_FPS per second
 
     def test_cap_rejects_extra_viewer(self):
         h = self.make()
