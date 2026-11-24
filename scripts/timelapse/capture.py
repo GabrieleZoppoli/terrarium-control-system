@@ -96,11 +96,21 @@ def capture_once(now: datetime, deps: Deps) -> dict:
     try:
         with Image.open(io.BytesIO(shots[0])) as im:
             frame = im.size
-        snapped = lossless.snap_inward(crop, lossless.mcu_size(shots[0]), frame)
+        mcu = lossless.mcu_size(shots[0])
+        snapped = lossless.snap_inward(crop, mcu, frame)
     except Exception:
         snapped = None
+        frame = mcu = None
     if snapped is None:
         return _skip("crop_invalid")
+    try:
+        for s in shots[1:]:
+            with Image.open(io.BytesIO(s)) as im:
+                size = im.size
+            if size != frame or lossless.mcu_size(s) != mcu:
+                return _skip("frame_mismatch")
+    except Exception:
+        return _skip("frame_mismatch")
     try:
         outs = [lossless.crop_rotate(s, snapped) for s in shots]
         sharp = [sharpness(o) for o in outs]

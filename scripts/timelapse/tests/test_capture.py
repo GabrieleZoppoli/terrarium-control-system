@@ -205,6 +205,22 @@ class CaptureTest(unittest.TestCase):
         self.assertEqual(r["saved"], [])
         self.assertEqual(list(self.root.rglob("*.jpg")), [])
 
+    def test_mixed_size_burst(self):
+        buf = io.BytesIO()
+        Image.fromarray(np.zeros((1440, 2560, 3), "uint8")).save(buf, format="JPEG", subsampling=1)
+        big = buf.getvalue()
+        shots = iter([self.jpeg, big, self.jpeg])
+        r = self.run_at(12, fetch_snapshot=lambda: next(shots))
+        self.assertEqual(r["skipped"], "frame_mismatch")
+        self.assertEqual(r["saved"], [])
+        self.assertEqual(list(self.root.rglob("*")), [])
+
+    def test_undecodable_later_shot(self):
+        shots = iter([self.jpeg, b"junk", self.jpeg])
+        r = self.run_at(12, fetch_snapshot=lambda: next(shots))
+        self.assertEqual(r["skipped"], "frame_mismatch")
+        self.assertEqual(list(self.root.rglob("*")), [])
+
     def test_two_runs_two_entries(self):
         self.run_at(8, 0)
         self.run_at(8, 5)
