@@ -21,6 +21,7 @@ def _visitor(headers) -> str:
 class _Handler(http.server.BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
     server_version = "camgate"
+    timeout = 10  # seconds; overridden per server by make_server. Bounds stalled/idle clients.
 
     # -- plumbing ------------------------------------------------------------
     def log_message(self, fmt, *args):
@@ -63,7 +64,7 @@ class _Handler(http.server.BaseHTTPRequestHandler):
                 self._live_head() if head else self._live()
             else:
                 self._json(404, {"error": "not_found"}, body=not head)
-        except (BrokenPipeError, ConnectionResetError):
+        except OSError:  # timeout, broken pipe, reset: nothing more to say to this client
             self.close_connection = True
         except Exception:
             log.exception("request failed: %s", self.path)
@@ -131,7 +132,9 @@ class _Handler(http.server.BaseHTTPRequestHandler):
             self._send_part(first)
             for jpeg in frames:
                 self._send_part(jpeg)
-        except (BrokenPipeError, ConnectionResetError):
+        except OSError:
+            # Timeout, broken pipe or reset. Headers may already be sent, so never
+            # write an error into the multipart body; just drop the connection.
             pass
         finally:
             session.close()
@@ -150,7 +153,8 @@ class _Server(http.server.ThreadingHTTPServer):
     allow_reuse_address = True
 
 
-def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT):
-    srv = _Server((host, port), _Handler)
+def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT, timeout=10):
+    handler = type("Handler", (_Handler,), {"timeout": timeout})
+    srv = _Server((host, port), handler)
     srv.keeper, srv.hub, srv.status_fn = keeper, hub, status_fn
     return srv

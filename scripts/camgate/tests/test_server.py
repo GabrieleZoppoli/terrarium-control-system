@@ -1,6 +1,8 @@
 import http.client
 import io
 import json
+import os
+import socket
 import threading
 import time
 import unittest
@@ -42,9 +44,17 @@ class FakeSnap:
         return FRAMES[0]
 
 
+def _noisy_frame():
+    img = Image.frombytes("RGB", (1920, 1080), os.urandom(1920 * 1080 * 3))
+    buf = io.BytesIO()
+    img.save(buf, format="JPEG", quality=95)
+    return buf.getvalue()
+
+
 class FakeStream:
-    def __init__(self, fail=False):
+    def __init__(self, fail=False, frames=None):
         self.fail = fail
+        self._frames = frames or FRAMES
 
     def frames(self):
         if self.fail:
@@ -53,19 +63,19 @@ class FakeStream:
             raise CameraError("down")
         n = 0
         while True:
-            yield FRAMES[n % 3]
+            yield self._frames[n % len(self._frames)]
             n += 1
             time.sleep(0.02)
 
 
 class Env:
-    def __init__(self, max_viewers=3, fail_stream=False, status_fn=None):
+    def __init__(self, max_viewers=3, fail_stream=False, status_fn=None, timeout=10, stream_frames=None):
         self.decision = PUBLIC
         self.crop = CROP
         dec = lambda t: self.decision
         crop = lambda: self.crop
         self.keeper = StillKeeper(FakeSnap(), dec, crop)
-        self.hub = LiveHub(FakeStream(fail_stream), dec, crop, max_viewers=max_viewers, startup_timeout_s=1.0)
+        self.hub = LiveHub(FakeStream(fail_stream, stream_frames), dec, crop, max_viewers=max_viewers, startup_timeout_s=1.0)
         self.status = status_fn or (
             lambda: {
                 "public": self.decision.public,
@@ -75,7 +85,7 @@ class Env:
                 "still_taken_at": None,
             }
         )
-        self.srv = make_server(self.keeper, self.hub, self.status, port=0)
+        self.srv = make_server(self.keeper, self.hub, self.status, port=0, timeout=timeout)
         self.port = self.srv.server_address[1]
         threading.Thread(target=self.srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
 
@@ -146,6 +156,7 @@ class ServerTest(unittest.TestCase):
         first = c.getresponse()
         self.assertEqual(first.status, 200)
         self.addCleanup(c.close)
+        self.addCleanup(first.close)
         r, body = env.get("/cam/live.mjpg", headers={"X-Forwarded-For": "2.2.2.2"})
         self.assertEqual(r.status, 429)
         obj = json.loads(body)
@@ -195,6 +206,32 @@ class ServerTest(unittest.TestCase):
             time.sleep(0.1)
         self.assertEqual(self.env.hub.slots_free(), 3)
 
+    def test_stalled_live_client_is_dropped_and_slot_freed(self):
+        env = Env(timeout=1, stream_frames=[_noisy_frame()])
+        self.addCleanup(env.close)
+        sock = socket.socket()
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 4096)
+        sock.connect(("127.0.0.1", env.port))
+        self.addCleanup(sock.close)
+        sock.sendall(b"GET /cam/live.mjpg HTTP/1.1\r\nHost: x\r\n\r\n")  # then never read
+        for _ in range(30):
+            if env.hub.slots_free() < 3:
+                break
+            time.sleep(0.05)
+        self.assertEqual(env.hub.slots_free(), 2)
+        t0 = time.monotonic()
+        while env.hub.slots_free() < 3 and time.monotonic() - t0 < 6:
+            time.sleep(0.05)
+        self.assertEqual(env.hub.slots_free(), 3)
+
+    def test_idle_keepalive_connection_is_dropped(self):
+        env = Env(timeout=0.5)
+        self.addCleanup(env.close)
+        sock = socket.create_connection(("127.0.0.1", env.port))
+        self.addCleanup(sock.close)
+        sock.settimeout(4)
+        self.assertEqual(sock.recv(10), b"")  # server closed the idle connection
+
     def test_live_head_does_not_open_session(self):
         r, body = self.env.get("/cam/live.mjpg", method="HEAD")
         self.assertEqual((r.status, body), (200, b""))
@@ -219,6 +256,7 @@ class ServerTest(unittest.TestCase):
         except Exception:
             pass
         self.assertLess(time.monotonic() - t0, 1.5)
+        r.close()
         c.close()
 
     def test_every_route_is_cropped(self):
@@ -230,6 +268,7 @@ class ServerTest(unittest.TestCase):
         r = c.getresponse()
         for _ in range(3):
             self.assertEqual(size(read_part(r)), (1344, 1080))
+        r.close()
         c.close()
 
     def test_startup_without_signals_serves_placeholder(self):
