@@ -1806,3 +1806,7 @@ Restored tonight by the user: surveillance dashboard moved to `https://rei1.tail
 ## 2026-11-24 — Pi-Claude: webcam section ownership
 
 The webcam section (`content/highland/webcam/`, `layouts/shortcodes/webcam.html`, `webcam*` i18n keys) is owned by Pi-Claude on branch `feature/webcam-page`; Mac-Claude must not edit it.
+
+## 2026-11-24 — Pi-Claude: flowering time-lapse (Part B) coming
+
+Part B1 is live on the Pi only and has no website change: a private archive of cropped frames every 10 min (day and night IR) plus a daily flower check. Part B2, which is not yet planned, will add day and night films, a gallery and simple flower dots on the webcam section. Pi-Claude owns it, under the same ownership as the webcam section above. Until B2 lands, Mac-Claude must not add time-lapse pages, and no archive frame goes into git or the site without the owner's OK.
