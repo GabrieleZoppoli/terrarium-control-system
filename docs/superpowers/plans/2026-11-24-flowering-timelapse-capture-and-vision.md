@@ -219,7 +219,7 @@ def test_misaligned_crop_raises(self):  # crop_rotate(jpeg, Crop(1180,1080,164,0
   - `is_public(item) -> bool`: `confirmed` or `streak >= 3`, and never when `needs_owner`.
   - CLI `python3 -m timelapse.registry [--path P] list | confirm ID | set ID STATE | move ID X Y | drop ID | add KIND STATE X Y LABEL [--stalk S] | seed FILE`. Owner actions write `source="owner"` and set `confirmed=True, needs_owner=False`.
 - Seed (owner-corrected frame of 2026-11-24, archive coordinates, geometry `1168x1080+176+0/rot180`, all `confirmed=true`):
-  - f1: closed bud, (740,390), stalk "centre";
+  - f1: closed bud, (470,318), stalk "centre";
   - f2: opening, (695,445), "centre";
   - f3: young flower/bud (state `bud`), (555,405), "centre";
   - f4: open, (985,640), "right";
