@@ -7,7 +7,8 @@ import time
 
 from .camera import SnapshotSource, StillKeeper, StreamSource
 from .archive_gate import ArchiveGate
-from .config import LIVE_MAX_VIEWERS, PORT, SURVEIL_CONF, load_crop
+from . import flowers
+from .config import LIVE_MAX_VIEWERS, PORT, PUBLIC_FLOWERS, SURVEIL_CONF, load_crop
 from .live import LiveHub
 from .policy import decide, showme_active
 from .server import make_server
@@ -95,7 +96,8 @@ def main():
         daemon=True,
     ).start()
     srv = make_server(
-        keeper, hub, make_status_fn(store, keeper, hub, crop_fn), port=port, archive_gate_fn=lambda: gate.state(time.time())
+        keeper, hub, make_status_fn(store, keeper, hub, crop_fn), port=port, archive_gate_fn=lambda: gate.state(time.time()),
+        flowers_fn=lambda: flowers.load(PUBLIC_FLOWERS, crop_fn()),
     )
     log.info("camgate listening on 127.0.0.1:%d", port)
     try:

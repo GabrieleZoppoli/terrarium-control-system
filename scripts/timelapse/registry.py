@@ -10,7 +10,7 @@ import math
 import sys
 from pathlib import Path
 
-from timelapse import config, storage
+from timelapse import config, public, storage
 
 STATES = ("bud", "opening", "open", "fading", "gone", "hidden")
 
@@ -28,8 +28,12 @@ def load(path) -> dict:
 
 
 def save(path, reg) -> None:
-    """Atomically write the registry."""
+    """Atomically write the registry, then refresh the public flower list beside it."""
     storage.write_atomic(path, (json.dumps(reg, indent=2, sort_keys=True) + "\n").encode())
+    try:
+        public.write(path, reg)
+    except Exception as e:  # public.write already removed the file: overlay goes empty
+        print("public flower list not written: %s" % e, file=sys.stderr)
 
 
 def _ensure_next(reg) -> None:

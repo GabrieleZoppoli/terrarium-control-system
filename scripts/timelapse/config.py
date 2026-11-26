@@ -24,6 +24,7 @@ INFLUX_DB = "highland"
 REGISTRY_PATH = ARCHIVE_ROOT + "/registry.json"
 CONFIDENT = 0.8            # vision confidence needed to change an item
 PUBLIC_STREAK = 3          # consecutive confident days before unconfirmed goes public
+PUBLIC_FLOWERS_NAME = "public-flowers.json"  # next to the registry; camgate serves it
 
 CLAUDE_BIN = "/home/pi/.local/bin/claude"
 VISION_TIMEOUT_S = 900

@@ -164,3 +164,4 @@ webcamPrivateBody:     "The camera is paused while the terrarium is being tended
 webcamNight:           "night, lights off"
 webcamLightsOn:        "lights on"
 webcamBusyRetry:       "Live view is busy right now. Trying again automatically in a moment."
+webcamFlowers:         "Flowers"

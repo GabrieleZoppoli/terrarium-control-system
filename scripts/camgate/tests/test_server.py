@@ -90,9 +90,11 @@ class Env:
                 "still_taken_at": None,
             }
         )
+        self.flowers = {"w": 1344, "h": 1080, "items": [{"num": 1, "state": "bud", "x": 5, "y": 6}]}
         self.gate_state = {"ok": True, "reason": "ok", "last_not_ok_at": 1.0, "now": 2.0}
         self.srv = make_server(
-            self.keeper, self.hub, self.status, port=0, timeout=timeout, archive_gate_fn=lambda: self.gate_state
+            self.keeper, self.hub, self.status, port=0, timeout=timeout, archive_gate_fn=lambda: self.gate_state,
+            flowers_fn=lambda: self.flowers,
         )
         self.port = self.srv.server_address[1]
         threading.Thread(target=self.srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
@@ -137,6 +139,21 @@ class ServerTest(unittest.TestCase):
     def test_archive_gate_not_under_cam(self):
         r, _ = self.env.get("/cam/internal/archive-gate.json")
         self.assertEqual(r.status, 404)
+
+    def test_flowers_route(self):
+        r, body = self.env.get("/cam/flowers.json")
+        self.assertEqual(r.status, 200)
+        self.assertEqual(json.loads(body), self.env.flowers)
+        self.assertEqual(r.getheader("Access-Control-Allow-Origin"), "*")
+
+    def test_flowers_route_without_source_is_empty(self):
+        srv = make_server(self.env.keeper, self.env.hub, self.env.status, port=0)
+        self.addCleanup(srv.server_close)
+        threading.Thread(target=srv.handle_request, daemon=True).start()
+        c = http.client.HTTPConnection("127.0.0.1", srv.server_address[1], timeout=5)
+        c.request("GET", "/cam/flowers.json")
+        self.assertEqual(json.loads(c.getresponse().read()), {"w": 0, "h": 0, "items": []})
+        c.close()
 
     def test_status_json_shape(self):
         r, body = self.env.get("/cam/status.json")

@@ -67,6 +67,9 @@ class _Handler(http.server.BaseHTTPRequestHandler):
                 self._still(head)
             elif route == "/cam/live.mjpg":
                 self._live_head() if head else self._live()
+            elif route == "/cam/flowers.json":
+                fn = self.server.flowers_fn
+                self._json(200, fn() if fn else {"w": 0, "h": 0, "items": []}, body=not head)
             elif route == "/internal/archive-gate.json":  # outside /cam/: loopback-only
                 fn = self.server.archive_gate_fn
                 if fn is None:
@@ -174,9 +177,11 @@ class _Server(http.server.ThreadingHTTPServer):
     allow_reuse_address = True
 
 
-def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT, timeout=10, archive_gate_fn=None):
+def make_server(keeper, hub, status_fn: Callable[[], dict], host="127.0.0.1", port=PORT, timeout=10, archive_gate_fn=None,
+                flowers_fn=None):
     handler = type("Handler", (_Handler,), {"timeout": timeout})
     srv = _Server((host, port), handler)
     srv.keeper, srv.hub, srv.status_fn = keeper, hub, status_fn
     srv.archive_gate_fn = archive_gate_fn
+    srv.flowers_fn = flowers_fn
     return srv

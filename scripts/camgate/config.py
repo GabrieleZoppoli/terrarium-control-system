@@ -19,6 +19,7 @@ LIVE_COOLDOWN_S = 60
 STILL_REFRESH_S = 5   # owner 2026-11-24: after 30 s live, refresh every few seconds
 JPEG_QUALITY = 85
 BLUR_RADIUS = 24
+PUBLIC_FLOWERS = "/var/lib/terrarium-timelapse/public-flowers.json"  # written by the time-lapse
 
 
 class Crop(NamedTuple):
