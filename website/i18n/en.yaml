@@ -56,12 +56,12 @@ lang_it:               "Italiano"
 
 # Dendrogram mobile CTA
 dendro_mobile_title:   "Pinch to zoom · tap the button for full-screen."
-dendro_mobile_body:    "Four hundred leaf labels around a radial tree do not fit a phone screen. Open it full-screen: pinch to zoom, tap a node to focus, tap the centre to reset."
+dendro_mobile_body:    "The tree has more room full-screen. Tap a genus to open its species, pinch to zoom, Esc or Recentre to go back."
 dendro_mobile_button:  "Full screen"
 dendro_mobile_meta_1:  "Or browse the collection"
 dendro_mobile_meta_2:  "by genus"
 dendro_mobile_meta_3:  "on a phone."
-dendro_hint:           "Best explored on desktop · scroll to zoom, drag to pan, hover a tip for photos · "
+dendro_hint:           "Click a genus to open its species · scroll to zoom, drag to pan, hover for photos · "
 dendro_hint_open:      "open in its own tab"
 
 # Highland live sensor block

@@ -56,12 +56,12 @@ lang_it:               "Italiano"
 
 # Dendrogram mobile CTA
 dendro_mobile_title:   "Avvicina due dita per ingrandire · tocca il pulsante per schermo intero."
-dendro_mobile_body:    "Quattrocento etichette attorno a un albero radiale non entrano in uno schermo da telefono. Aprilo a tutto schermo: zoom con due dita, tocca un nodo per centrarlo, tocca il centro per tornare alla vista d'insieme."
+dendro_mobile_body:    "A tutto schermo l'albero ha più spazio. Tocca un genere per aprirne le specie, zoom con due dita, Recentre per tornare alla vista d'insieme."
 dendro_mobile_button:  "Schermo intero"
 dendro_mobile_meta_1:  "Oppure sfoglia la collezione"
 dendro_mobile_meta_2:  "per genere"
 dendro_mobile_meta_3:  "anche da telefono."
-dendro_hint:           "Al meglio su desktop · rotella per lo zoom, trascina per muoverti, scorri su un nodo per le foto · "
+dendro_hint:           "Clicca un genere per aprirne le specie · rotella per lo zoom, trascina per muoverti, passa sopra un nodo per le foto · "
 dendro_hint_open:      "apri in una scheda dedicata"
 
 # Highland live sensor block
