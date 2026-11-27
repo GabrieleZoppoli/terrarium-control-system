@@ -307,7 +307,10 @@ def _summary(before, after, result):
         conf = float(conf) if isinstance(conf, (int, float)) else 0.0
         if a.get("needs_owner") and not b.get("needs_owner") or \
                 (isinstance(conf, (int, float)) and conf < config.CONFIDENT):
-            lines.append("%s: unsure (%.2f) \u2014 needs you" % (iid, float(conf)))
+            if a.get("needs_owner"):
+                lines.append("%s: unsure (%.2f) \u2014 needs you" % (iid, float(conf)))
+            else:
+                lines.append("%s: unsure (%.2f) \u2014 kept as you set it" % (iid, float(conf)))
         else:
             lines.append("%s: %s \u2192 %s (%.2f)" % (who.strip(), b.get("state"),
                                                        a.get("state"), float(conf)))

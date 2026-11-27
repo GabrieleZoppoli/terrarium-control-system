@@ -31,7 +31,7 @@ def _setup(root, geom="g", reg_geom="g", frame=True):
             {"time": "12:00", "files": ["frames/2026/11/24/1200.jpg"], "phase": "plateau",
              "geometry": geom, "sharpness": [5.0]}]}))
     reg = {"geometry": reg_geom, "next_id": 4, "runs": [],
-           "items": {"f1": _item("f1"), "f2": _item("f2", x=500, y=400)}}
+           "items": {"f1": _item("f1"), "f2": {**_item("f2", x=500, y=400), "confirmed": False}}}
     registry.save(root / "registry.json", reg)
     return root / "registry.json"
 
@@ -66,6 +66,16 @@ class TestDaily(unittest.TestCase):
             self.assertEqual(sp.read_bytes(), before)
             self.assertEqual(json.loads(sp.read_text())["status"], "ok")
             self.assertTrue((Path(t) / "status" / "checkin-2026-11-24.jpg").exists())
+
+    def test_unsure_confirmed_item_kept(self):
+        with tempfile.TemporaryDirectory() as t:
+            rp = _setup(t)
+            ans = [{"id": "f1", "state": "open", "confidence": 0.5, "x": 9, "y": 9}]
+            st = vision.daily(D, t, runner=lambda p, w: _ans(ans))
+            self.assertEqual(st["pending"], [])
+            self.assertIn("f1: unsure (0.50) \u2014 kept as you set it", st["summary"])
+            f1 = registry.load(rp)["items"]["f1"]
+            self.assertEqual((f1["state"], f1["x"], f1["needs_owner"]), ("bud", 300, False))
 
     def test_float_and_out_of_frame_coords(self):
         with tempfile.TemporaryDirectory() as t:

@@ -127,7 +127,10 @@ def apply_vision(reg, date, result, geometry) -> dict:
             item["history"].append({"date": date, "state": r["state"],
                                     "confidence": conf, "source": "vision"})
         else:
-            item["needs_owner"] = True
+            # An unsure look is no reason to doubt the owner: a confirmed item
+            # keeps its place and stays public; anything else waits for them.
+            if not item.get("confirmed"):
+                item["needs_owner"] = True
             item["streak"] = 0
     for c in result.get("new", []):
         iid = _alloc_id(out)

@@ -68,9 +68,17 @@ class ApplyVision(unittest.TestCase):
         out = registry.apply_vision(seeded(), "2026-11-25", vis([it("f4", "gone", 0.95)]), GEO)
         self.assertEqual(out["items"]["f4"]["ended_on"], "2026-11-25")
 
+    def test_low_confidence_keeps_confirmed_item_public(self):
+        reg = seeded()
+        reg["items"]["f1"].update(confirmed=True, needs_owner=False, streak=2)
+        out = registry.apply_vision(reg, "2026-11-25", vis([it("f1", "open", 0.5, 9, 9)]), GEO)
+        f = out["items"]["f1"]
+        self.assertEqual((f["state"], f["x"], f["needs_owner"], f["streak"]), ("bud", 470, False, 0))
+        self.assertTrue(registry.is_public(f))
+
     def test_low_confidence_keeps_state_flags_owner(self):
         reg = seeded()
-        reg["items"]["f1"]["streak"] = 2
+        reg["items"]["f1"].update(confirmed=False, streak=2)
         out = registry.apply_vision(reg, "2026-11-25", vis([it("f1", "open", 0.5, 9, 9)]), GEO)
         f = out["items"]["f1"]
         self.assertEqual((f["state"], f["x"], f["needs_owner"], f["streak"]), ("bud", 470, True, 0))
